@@ -22,3 +22,11 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 
 - Corridor-only IA and copy.
 - cPanel cron PHP scripts — use Vercel Cron or queue worker when needed.
+
+## Implementation status (this repo)
+
+| Area | Status |
+|------|--------|
+| Infra docs + CI + Auth.js + analytics instrumentation | Done — see [DEPLOY.md](DEPLOY.md), [EXECUTION_ROADMAP.md](EXECUTION_ROADMAP.md) |
+| GitHub remote / Vercel project / Neon / DNS / GA property / GSC | **You** complete using DEPLOY.md (browser steps) |
+| Articles MVP, events, jobs, directory UI | Not started — Phase 1+ in EXECUTION_ROADMAP |
