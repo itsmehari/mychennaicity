@@ -2,12 +2,38 @@
 
 Follow this after the code is in GitHub. **Do not commit secrets.** Use Vercel / Neon / Google UIs for credentials.
 
-## 1. GitHub
+## 1. GitHub (account + empty repo + first push)
 
-1. Create a new repository (private recommended).
-2. From the project root: `git remote add origin https://github.com/<org>/<repo>.git`
-3. `git push -u origin main` (rename branch with `git branch -M main` if needed).
-4. Optional: branch protection on `main`, require CI to pass.
+### A. Create a GitHub account (if needed)
+
+1. Open [https://github.com/signup](https://github.com/signup) and complete signup; verify your email.
+
+### B. Create an empty repository
+
+1. Go to [https://github.com/new](https://github.com/new).
+2. **Repository name:** e.g. `mychennaicity` or `mychennaicity-web`.
+3. Choose **Private** (recommended) or Public.
+4. **Do not** initialize with README, .gitignore, or license (this repo already has them).
+5. Click **Create repository**.
+
+### C. Push this project from your PC
+
+From the project folder (`E:\OneDrive\_mychennaicity`), run (replace `YOUR_USER` and `YOUR_REPO`):
+
+```powershell
+cd E:\OneDrive\_mychennaicity
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+git push -u origin main
+```
+
+- If Git asks for a password, use a **Personal Access Token** (PAT) with `repo` scope:  
+  [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).
+- Or use the **SSH** URL from the empty repo page if you use SSH keys.
+
+### D. Optional
+
+- Branch protection on `main` (require PR + CI).
+- Create a **GitHub Organization** later and transfer the repo if you want org-owned `mychennaicity`.
 
 ## 2. Vercel
 
