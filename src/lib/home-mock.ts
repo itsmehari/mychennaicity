@@ -6,6 +6,10 @@ export type MockArticle = {
   date: string;
   href: string;
   excerpt?: string;
+  /** Original publisher (homepage shows curated links until Articles MVP). */
+  source?: string;
+  /** When true, `href` opens in a new tab. */
+  external?: boolean;
 };
 
 export type MockEvent = {
@@ -110,66 +114,127 @@ export const mockListings: MockListing[] = [
   },
 ];
 
+/**
+ * Curated from Chennai / TN press (web research, Mar 22–23 2026).
+ * Headlines paraphrased; links go to publishers. Verify before treating as legal record.
+ */
 export const mockArticles: MockArticle[] = [
   {
     title:
-      "GCC stormwater audit: which zones cleared desilting targets before monsoon?",
-    category: "Civic",
-    date: "Mar 21, 2026",
-    href: "/news",
+      "BJP: Piyush Goyal to finalise Tamil Nadu NDA seat-sharing (state polls 2026)",
+    category: "Politics",
+    date: "Mar 23, 2026 · Today",
+    href: "https://www.hindustantimes.com/india-news/union-minister-piyush-goyal-to-finalise-seat-sharing-for-tamil-nadu-elections-today-bjp-101774229351188.html",
+    source: "Hindustan Times",
+    external: true,
     excerpt:
-      "A ward-level look at readiness signals — without the corridor-only lens.",
+      "Alliance arithmetic ahead of the April 23 Assembly poll — watch Chennai constituencies in the mix.",
   },
   {
-    title: "Chennai Metro Phase II: commuter pulse from Anna Nagar to OMR",
-    category: "Mobility",
-    date: "Mar 20, 2026",
-    href: "/news",
+    title:
+      "Tamil Nadu polls: carrying large cash or valuables in Chennai? Officials may ask for proof",
+    category: "Chennai",
+    date: "Mar 23, 2026 · Today",
+    href: "https://timesofindia.indiatimes.com/city/chennai/tamil-nadu-polls-carrying-cash-or-valuables-be-ready-to-show-proof/articleshow/129626287.cms",
+    source: "The Times of India",
+    external: true,
+    excerpt:
+      "Model code vigilance on city roads — know the thresholds squads cite during checks.",
   },
   {
-    title: "North Chennai heat islands: tree cover vs built density in 2026",
-    category: "Environment",
-    date: "Mar 19, 2026",
-    href: "/news",
+    title:
+      "Thousand Lights DMK MLA Ezhilan on field work, flood mitigation and the 2026 contest",
+    category: "Elections",
+    date: "Mar 23, 2026 · Today",
+    href: "https://www.thehindu.com/elections/tamil-nadu-assembly/only-structured-party-machinery-with-popularity-can-ensure-success-says-thousand-lights-dmk-mla-n-ezhilan/article70771692.ece",
+    source: "The Hindu",
+    external: true,
+    excerpt:
+      "Central Chennai constituency lens: party machinery vs. local issues on the ground.",
   },
   {
-    title: "OMR office leasing: small floors see faster fill than large blocks",
+    title:
+      "Mappedu multi-modal logistics park near Chennai: Phase I nears opening next month",
     category: "Economy",
-    date: "Mar 18, 2026",
-    href: "/news",
+    date: "Mar 23, 2026 · Today",
+    href: "https://www.thehindu.com/news/cities/chennai/first-phase-of-multi-modal-logistics-park-near-chennai-to-be-ready-next-month/article70770006.ece",
+    source: "The Hindu",
+    external: true,
+    excerpt:
+      "Tiruvallur belt freight hub (~₹1,424 crore scope) — warehouses, cold chain, rail link.",
   },
   {
-    title: "Marina to Besant: weekend safety pilots and lighting upgrades",
-    category: "Public safety",
-    date: "Mar 17, 2026",
-    href: "/news",
+    title: "Petrol and diesel prices in Chennai on March 22, 2026",
+    category: "Consumer",
+    date: "Mar 22, 2026 · Yesterday",
+    href: "https://www.dtnext.in/news/chennai/check-out-petrol-and-diesel-prices-in-chennai-on-march-22-2026",
+    source: "DT Next",
+    external: true,
+    excerpt:
+      "City pump rates — check the bulletin before you fill across neighbourhoods.",
   },
   {
-    title: "GCC budget takeaway: what changed for solid waste in 2026–27",
-    category: "Civic",
-    date: "Mar 16, 2026",
-    href: "/news",
+    title:
+      "128 vehicles deployed for election monitoring across Chennai’s 16 constituencies",
+    category: "Elections",
+    date: "Mar 22, 2026 · Yesterday",
+    href: "https://www.thehindu.com/elections/tamil-nadu-assembly/128-vehicles-deployed-for-election-monitoring-in-chennai-as-eci-announces-poll-dates/article70746956.ece",
+    source: "The Hindu",
+    external: true,
+    excerpt:
+      "Flying squads, static teams and video surveillance — plus a toll-free complaint line.",
+  },
+  {
+    title:
+      "₹60.63 lakh in cash, liquor and narcotics seized in Chennai district amid poll surveillance",
+    category: "Chennai",
+    date: "Mar 22, 2026 · Yesterday",
+    href: "https://www.thehindu.com/news/cities/chennai/6063-lakh-in-cash-liquor-and-narcotics-seized-in-chennai-district/article70773164.ece",
+    source: "The Hindu",
+    external: true,
+    excerpt:
+      "Intensified checks as the model code stays in force across city constituencies.",
+  },
+  {
+    title:
+      "Narrow stretches of arterial roads across Chennai to be widened soon, GCC told",
+    category: "Mobility",
+    date: "Mar 22, 2026 · Yesterday",
+    href: "https://www.thehindu.com/news/cities/chennai/narrow-stretches-of-arterials-roads-across-chennai-to-be-widened-soon/article70727353.ece",
+    source: "The Hindu",
+    external: true,
+    excerpt:
+      "Traffic relief on key corridors — corporation lists priority pinch points.",
   },
 ];
 
 export const editorsPicks: MockArticle[] = [
   {
-    title: "Velachery–St Thomas Mount MRTS: what the new link changes for south commutes",
-    category: "Mobility",
-    date: "Mar 15, 2026",
-    href: "/news",
+    title:
+      "Tamil Nadu polls: carrying cash in Chennai — what officials can ask you to prove",
+    category: "Explainer",
+    date: "Mar 23, 2026",
+    href: "https://timesofindia.indiatimes.com/city/chennai/tamil-nadu-polls-carrying-cash-or-valuables-be-ready-to-show-proof/articleshow/129626287.cms",
+    source: "The Times of India",
+    external: true,
   },
   {
-    title: "Elections 2026 desk: Chennai rolls, vulnerable booths, and what voters asked us",
-    category: "Politics",
-    date: "Mar 14, 2026",
-    href: "/news",
+    title:
+      "How Chennai is staffing election squads: 128 vehicles across 16 constituencies",
+    category: "Civic",
+    date: "Mar 22, 2026",
+    href: "https://www.thehindu.com/elections/tamil-nadu-assembly/128-vehicles-deployed-for-election-monitoring-in-chennai-as-eci-announces-poll-dates/article70746956.ece",
+    source: "The Hindu",
+    external: true,
   },
   {
-    title: "Food scene: home kitchens that became Chennai’s quiet supper clubs",
-    category: "Culture",
-    date: "Mar 12, 2026",
-    href: "/news",
+    title:
+      "Mappedu logistics hub: what the first phase means for Chennai–Tiruvallur freight",
+    category: "Economy",
+    date: "Mar 23, 2026",
+    href: "https://www.thehindu.com/news/cities/chennai/first-phase-of-multi-modal-logistics-park-near-chennai-to-be-ready-next-month/article70770006.ece",
+    source: "The Hindu",
+    external: true,
   },
 ];
 

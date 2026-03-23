@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   text,
@@ -50,7 +51,15 @@ export const articles = pgTable(
     slug: text("slug").notNull(),
     title: text("title").notNull(),
     summary: text("summary"),
+    /** Legacy / RSS plain fallback; prefer reportBody + analysisBody when set. */
     body: text("body").notNull(),
+    reportBody: text("report_body"),
+    analysisBody: text("analysis_body"),
+    interactiveJson: jsonb("interactive_json").$type<Record<string, unknown> | null>(),
+    sourceUrl: text("source_url"),
+    sourceName: text("source_name"),
+    category: text("category"),
+    dek: text("dek"),
     status: articleStatusEnum("status").notNull().default("draft"),
     publishedAt: timestamp("published_at", { withTimezone: true }),
     featured: boolean("featured").notNull().default(false),

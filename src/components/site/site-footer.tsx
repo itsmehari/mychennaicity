@@ -2,12 +2,12 @@ import Link from "next/link";
 import { chennaiZones } from "@/lib/chennai-zones";
 
 const newsLinks = [
-  { href: "/news", label: "Latest stories" },
-  { href: "/news", label: "Civic & GCC" },
-  { href: "/news", label: "Mobility & Metro" },
-  { href: "/news", label: "Environment" },
-  { href: "/news", label: "Elections desk" },
-  { href: "/news", label: "Editor’s picks" },
+  { href: "/chennai-local-news", label: "Chennai local news" },
+  { href: "/chennai-local-news/topic/chennai", label: "Civic & GCC" },
+  { href: "/chennai-local-news/topic/mobility", label: "Mobility & Metro" },
+  { href: "/chennai-local-news/topic/consumer", label: "Consumer" },
+  { href: "/chennai-local-news/topic/elections", label: "Elections desk" },
+  { href: "/chennai-local-news", label: "Editor’s picks" },
 ];
 
 const discoverLinks = [
@@ -114,7 +114,7 @@ export function SiteFooter() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3 lg:mt-0 lg:flex-shrink-0">
             <Link
-              href="/news"
+              href="/chennai-local-news"
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-fg)] shadow-sm transition hover:bg-[var(--accent-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               Open news desk

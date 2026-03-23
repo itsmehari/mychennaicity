@@ -3,9 +3,7 @@ import { Section } from "@/components/home/section";
 import {
   categoryTiles,
   cityPulseBullets,
-  editorsPicks,
   homeStats,
-  mockArticles,
   mockEvents,
   mockJobs,
   mockListings,
@@ -34,7 +32,7 @@ export function HomeHero() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/news"
+            href="/chennai-local-news"
             className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-fg)] shadow-sm transition hover:bg-[var(--accent-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             Read the news desk
@@ -272,75 +270,12 @@ export function HomeTrendingTags() {
   );
 }
 
-export function HomeNewsBulletin() {
-  return (
-    <Section
-      title="News bulletin"
-      subtitle="Latest stories — replace with Drizzle queries when Articles MVP merges."
-      action={{ href: "/news", label: "View all stories" }}
-    >
-      <ul className="grid gap-4 lg:grid-cols-2">
-        {mockArticles.map((a) => (
-          <li key={a.title}>
-            <Link
-              href={a.href}
-              className="block rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition hover:border-[var(--accent)] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
-                {a.category}
-              </p>
-              <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
-                {a.title}
-              </p>
-              <p className="mt-2 text-xs text-[var(--muted)]">{a.date}</p>
-              {a.excerpt ? (
-                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  {a.excerpt}
-                </p>
-              ) : null}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
-}
-
-export function HomeEditorsPicks() {
-  return (
-    <Section
-      title="Editor’s picks"
-      subtitle="Human-curated spotlight — three stories we’d put on a print fold."
-      action={{ href: "/news", label: "More features" }}
-    >
-      <ul className="grid gap-4 lg:grid-cols-3">
-        {editorsPicks.map((a) => (
-          <li key={a.title}>
-            <Link
-              href={a.href}
-              className="flex h-full flex-col rounded-2xl bg-[var(--foreground)] p-5 text-[var(--background)] transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-[color-mix(in_srgb,var(--background)_65%,transparent)]">
-                {a.category}
-              </p>
-              <p className="mt-3 text-sm font-semibold leading-snug">{a.title}</p>
-              <p className="mt-auto pt-4 text-xs text-[color-mix(in_srgb,var(--background)_70%,transparent)]">
-                {a.date}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
-}
-
 export function HomeCityPulse() {
   return (
     <Section
       title="City pulse"
       subtitle="Infra, water, and mobility — a distinct lane from the main news river."
-      action={{ href: "/news", label: "Civic desk" }}
+      action={{ href: "/chennai-local-news", label: "Civic desk" }}
     >
       <ul className="divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
         {cityPulseBullets.map((b) => (
@@ -377,7 +312,7 @@ export function HomeSeasonalHub() {
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
-          href="/news"
+          href="/chennai-local-news/topic/elections"
           className="inline-flex rounded-full bg-[var(--foreground)] px-5 py-2.5 text-sm font-semibold text-[var(--background)] transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         >
           Open election desk

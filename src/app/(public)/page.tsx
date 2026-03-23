@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/home/section";
 import { HomeAreaMap } from "@/components/home/home-area-map";
+import { HomeDbNewsSections } from "@/components/home/db-news-sections";
 import {
   HomeCategoryMosaic,
   HomeCityPulse,
-  HomeEditorsPicks,
   HomeEventsFeatured,
   HomeHero,
   HomeJobsSpotlight,
   HomeMarketplaceTeaser,
-  HomeNewsBulletin,
   HomeSeasonalHub,
   HomeSponsoredRow,
   HomeStatsRibbon,
@@ -19,6 +18,10 @@ import {
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
+import {
+  featuredArticlesForHome,
+  latestArticlesForHome,
+} from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
 
 export const metadata: Metadata = {
@@ -37,7 +40,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  let featured: Awaited<ReturnType<typeof featuredArticlesForHome>> = [];
+  let latest: Awaited<ReturnType<typeof latestArticlesForHome>> = [];
+  try {
+    featured = await featuredArticlesForHome(3);
+    latest = await latestArticlesForHome(8);
+  } catch {
+    /* DATABASE_URL unset or DB unreachable — home still renders */
+  }
+
+  const editorPicks =
+    featured.length > 0 ? featured : latest.slice(0, 3);
+
   return (
     <>
       <HomeJsonLd />
@@ -65,8 +80,7 @@ export default function Home() {
         <HomeMarketplaceTeaser />
 
         <HomeTrendingTags />
-        <HomeNewsBulletin />
-        <HomeEditorsPicks />
+        <HomeDbNewsSections latest={latest} featured={editorPicks} />
         <HomeCityPulse />
 
         <HomeSeasonalHub />
