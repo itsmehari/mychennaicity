@@ -138,3 +138,113 @@ body {
   outline: 2px solid color-mix(in srgb, var(--footer-link-hover) 85%, white);
   outline-offset: 3px;
 }
+
+/* Megamenu: editorial slab + motion (respect reduced motion) */
+.mega-nav-surface {
+  background-color: var(--surface);
+}
+
+.mega-nav-mesh {
+  background-image:
+    radial-gradient(
+      ellipse 90% 80% at 100% 0%,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 0% 100%,
+      color-mix(in srgb, var(--accent-warm) 10%, transparent),
+      transparent 52%
+    );
+}
+
+/* Home hero carousel (sans-serif marketing slides) */
+@keyframes home-hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes home-hero-mono-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@keyframes home-hero-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes home-hero-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero-copy-enter {
+    animation: home-hero-copy-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .home-hero-monogram {
+    animation: home-hero-mono-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .home-hero-stat-card {
+    animation: home-hero-card-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+  }
+
+  .home-hero-float-tag {
+    animation: home-hero-float-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes mega-nav-dropdown-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes mega-nav-mobile-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .mega-nav-dropdown {
+    animation: mega-nav-dropdown-in 0.22s ease-out both;
+  }
+
+  .mega-nav-mobile-enter {
+    animation: mega-nav-mobile-in 0.2s ease-out both;
+  }
+}

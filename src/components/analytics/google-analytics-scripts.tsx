@@ -1,15 +1,15 @@
 import Script from "next/script";
 
-const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+type Props = {
+  measurementId: string;
+};
 
-export function GoogleAnalytics() {
-  if (!gaId) {
-    return null;
-  }
+/** Loads gtag.js once; runs on every document (via root layout). */
+export function GoogleAnalyticsScripts({ measurementId }: Props) {
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="afterInteractive"
       />
       <Script id="ga4-config" strategy="afterInteractive">
@@ -17,7 +17,7 @@ export function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${gaId}');
+          gtag('config', '${measurementId}');
         `}
       </Script>
     </>

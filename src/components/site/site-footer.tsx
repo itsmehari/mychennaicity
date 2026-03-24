@@ -15,7 +15,7 @@ const discoverLinks = [
   { href: "/directory", label: "Schools & colleges" },
   { href: "/directory", label: "Hospitals" },
   { href: "/directory", label: "Food & dining" },
-  { href: "/events", label: "Events calendar" },
+  { href: "/chennai-local-events", label: "Chennai local events" },
   { href: "/jobs", label: "Jobs board" },
   { href: "/#areas", label: "Area map (home)" },
 ];
@@ -24,7 +24,7 @@ const workLinks = [
   { href: "/jobs", label: "Browse jobs" },
   { href: "/jobs", label: "Post a job (soon)" },
   { href: "/directory", label: "List your business" },
-  { href: "/events", label: "Submit an event (soon)" },
+  { href: "/chennai-local-events", label: "Submit an event (soon)" },
 ];
 
 const companyLinks = [
@@ -49,7 +49,7 @@ const tagLinks = [
   { href: "/areas/omr-perungudi-sholinganallur", label: "OMR" },
   { href: "/chennai-local-news/topic/chennai", label: "Marina" },
   { href: "/jobs", label: "Startups" },
-  { href: "/events", label: "Weekend" },
+  { href: "/chennai-local-events", label: "Weekend" },
   { href: "/jobs", label: "Remote" },
 ];
 

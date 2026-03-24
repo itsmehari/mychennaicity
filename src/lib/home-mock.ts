@@ -71,25 +71,25 @@ export const mockEvents: MockEvent[] = [
     title: "Beach clean-up — Thiruvanmiyur to Besant Nagar",
     when: "Sun · 6:30 am",
     where: "Karl Schmidt Memorial",
-    href: "/events",
+    href: "/chennai-local-events",
   },
   {
     title: "Metro corridor photography walk",
     when: "Sat · 5:00 pm",
     where: "Anna Nagar Tower",
-    href: "/events",
+    href: "/chennai-local-events",
   },
   {
     title: "Startup pitch open mic",
     when: "Fri · 7:00 pm",
     where: "OMR coworking hub",
-    href: "/events",
+    href: "/chennai-local-events",
   },
   {
     title: "Carnatic fusion — monsoon edition",
     when: "Next Thu · 6:45 pm",
     where: "Mylapore Sabha",
-    href: "/events",
+    href: "/chennai-local-events",
   },
 ];
 
@@ -259,7 +259,7 @@ export const trendingTags = [
   { label: "Monsoon ready", href: "/news" },
   { label: "Elections 2026", href: "/news" },
   { label: "Startups", href: "/jobs" },
-  { label: "Heritage walks", href: "/events" },
+  { label: "Heritage walks", href: "/chennai-local-events" },
 ];
 
 export const categoryTiles = [

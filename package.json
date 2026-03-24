@@ -13,7 +13,9 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx scripts/seed-articles.ts",
     "db:seed:live": "tsx scripts/seed-articles.ts --live",
-    "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push"
+    "db:seed:event:panguni:live": "tsx scripts/seed-event-panguni.ts --live",
+    "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
+    "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
@@ -35,6 +37,7 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
+    "googleapis": "^169.0.0",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"

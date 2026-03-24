@@ -49,7 +49,7 @@ export default async function AreaPage({ params }: Props) {
       <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { href: "/chennai-local-news", label: "Chennai local news" },
-          { href: "/events", label: "Upcoming events" },
+          { href: "/chennai-local-events", label: "Chennai local events" },
           { href: "/jobs", label: "Jobs nearby" },
           { href: "/directory", label: "Directory near you" },
         ].map((c) => (

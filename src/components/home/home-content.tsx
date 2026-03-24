@@ -12,41 +12,7 @@ import {
   zoneShortcuts,
 } from "@/lib/home-mock";
 
-function IconNews({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width={22}
-      height={22}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      aria-hidden
-    >
-      <path d="M4 5h16v14H4z" />
-      <path d="M8 9h8M8 13h5" />
-    </svg>
-  );
-}
-
-function IconMap({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width={22}
-      height={22}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      aria-hidden
-    >
-      <path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Z" />
-      <path d="m9 5 6 2v14" />
-    </svg>
-  );
-}
+export { HomeHero } from "./home-hero";
 
 function IconBriefcase({ className }: { className?: string }) {
   return (
@@ -96,123 +62,6 @@ function IconSpark({ className }: { className?: string }) {
     >
       <path d="M12 2l1.8 5.5h5.7l-4.6 3.3 1.8 5.5L12 14.5 7.3 16.3l1.8-5.5L4.5 7.5h5.7L12 2z" />
     </svg>
-  );
-}
-
-export function HomeHero() {
-  const bentoLinks = [
-    {
-      href: "/chennai-local-news",
-      label: "Local news",
-      sub: "Report + analysis",
-      Icon: IconNews,
-    },
-    {
-      href: "/directory",
-      label: "Directory",
-      sub: "Places & services",
-      Icon: IconMap,
-    },
-    {
-      href: "/jobs",
-      label: "Jobs",
-      sub: "Hiring signals",
-      Icon: IconBriefcase,
-    },
-    {
-      href: "/events",
-      label: "Events",
-      sub: "This week",
-      Icon: IconCalendar,
-    },
-  ] as const;
-
-  return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm">
-      <div className="home-hero-mesh pointer-events-none absolute inset-0 opacity-90" />
-      <div className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-[var(--accent)] opacity-[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[var(--accent-warm)] opacity-[0.07] blur-3xl" />
-      <div className="relative grid gap-12 px-6 py-12 sm:px-10 sm:py-14 lg:grid-cols-2 lg:items-center lg:gap-14">
-        <div className="max-w-xl animate-home-fade-up">
-          <p className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_85%,var(--background))] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
-            <IconSpark className="text-[var(--accent-warm)]" />
-            Chennai-wide · not corridor-only
-          </p>
-          <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-[2.65rem] lg:leading-[1.08]">
-            News, places, jobs, and events — mapped to how you actually move
-            through the city.
-          </h1>
-          <p className="mt-4 text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-            mychennaicity.in is the home page for Greater Chennai: from
-            Tiruvottiyur to Sholinganallur, Ambattur to Adyar — with hyperlocal
-            hubs you can click on a living map.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/chennai-local-news"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-fg)] shadow-md transition hover:bg-[var(--accent-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              Read the news desk
-            </Link>
-            <Link
-              href="/directory"
-              className="inline-flex items-center justify-center rounded-full border-2 border-[var(--border)] bg-[var(--surface)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              Explore listings
-            </Link>
-            <Link
-              href="/jobs"
-              className="inline-flex items-center justify-center rounded-full px-4 py-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              Find jobs
-            </Link>
-            <Link
-              href="/events"
-              className="inline-flex items-center justify-center rounded-full px-4 py-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              Browse events
-            </Link>
-          </div>
-        </div>
-
-        <aside
-          className="animate-home-fade-up lg:justify-self-end"
-          style={{ animationDelay: "80ms" }}
-          aria-label="Quick links"
-        >
-          <div className="mx-auto w-full max-w-md rounded-3xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_92%,transparent)] p-4 shadow-[0_20px_50px_-20px_color-mix(in_srgb,var(--foreground)_25%,transparent)] backdrop-blur-sm sm:p-5">
-            <p className="px-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Start here
-            </p>
-            <div className="mt-3 grid grid-cols-2 gap-3">
-              {bentoLinks.map(({ href, label, sub, Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="home-bento-tile group flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-                >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--accent)_12%,var(--surface))] text-[var(--accent)] transition group-hover:bg-[color-mix(in_srgb,var(--accent)_20%,var(--surface))]">
-                    <Icon />
-                  </span>
-                  <span className="mt-3 text-sm font-bold text-[var(--foreground)]">
-                    {label}
-                  </span>
-                  <span className="mt-0.5 text-xs text-[var(--muted)]">
-                    {sub}
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <Link
-              href="#areas"
-              className="mt-4 flex items-center justify-center rounded-2xl border border-dashed border-[var(--border)] px-4 py-3 text-center text-xs font-semibold text-[var(--accent)] transition hover:border-[var(--accent)] hover:bg-[color-mix(in_srgb,var(--accent)_6%,var(--surface))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              Jump to the Greater Chennai map →
-            </Link>
-          </div>
-        </aside>
-      </div>
-    </div>
   );
 }
 
@@ -415,7 +264,7 @@ export function HomeEventsFeatured() {
       eyebrow="Calendar"
       title="Featured events"
       subtitle="Community calendars, workshops, and civic meets — filtered by area soon."
-      action={{ href: "/events", label: "All events" }}
+      action={{ href: "/chennai-local-events", label: "All local events" }}
     >
       <ul className="grid gap-4 lg:grid-cols-2">
         {mockEvents.map((e, i) => (
@@ -567,7 +416,7 @@ export function HomeSeasonalHub() {
             Open election desk
           </Link>
           <Link
-            href="/events"
+            href="/chennai-local-events"
             className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,var(--foreground)_25%,transparent)] bg-[var(--surface)] px-8 py-3 text-center text-sm font-bold text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             Town-hall events
