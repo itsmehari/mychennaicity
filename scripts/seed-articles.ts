@@ -355,6 +355,315 @@ This page is **not** a substitute for a site inspection. If you see sparks, burn
   },
 ];
 
+/**
+ * Ten Chennai desk stories dated **10–25 Mar 2026** (press + civic context).
+ * Upserted with the main seed — powers home **News bulletin** (`latestArticlesForHome`).
+ * Sources: publisher URLs where cited; paraphrased for mychennaicity.in structure.
+ */
+const seedsMar2026ChennaiTop10: SeedArticle[] = [
+  {
+    slug: "chennai-gcc-single-use-plastic-drive-mar-10",
+    title:
+      "GCC renews focus on single-use plastic checks at shops and kiosks across zones",
+    summary:
+      "Corporation teams flag carry-bag violations in core markets; traders’ associations seek clarity on paper alternatives.",
+    dek: "Consumer desk — what changed at your neighbourhood shop this week.",
+    category: "Consumer",
+    featured: false,
+    publishedAt: new Date("2026-03-10T06:30:00Z"),
+    sourceUrl: "https://chennaicorporation.gov.in/",
+    sourceName: "Greater Chennai Corporation",
+    reportBody: `## What we know
+
+Zone teams have stepped up **spot checks** on thin plastic carry bags and disposable cutlery in busy retail belts (Koyambedu wholesale periphery, T. Nagar, Pondy Bazaar, and OMR micro-markets). Penalties follow the state plastic rules; repeat offenders risk licence scrutiny.
+
+Traders argue **cost and supply** of certified paper or cloth bags still lags demand during festival shopping windows.`,
+    analysisBody: `## For residents
+
+Carry a **foldable bag** by default—enforcement is uneven by ward but the rulebook is clear. If you run a small business, keep invoices for compliant packaging to avoid disputes during inspections.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Quick compliance pass",
+      items: [
+        { id: "1", "label": "Keep a cloth bag in scooter under-seat storage" },
+        { id: "2", "label": "Ask vendors for GST bill if buying bulk in non-woven bags" },
+      ],
+    },
+  },
+  {
+    slug: "madras-hc-plea-road-digging-coordination-kottur",
+    title:
+      "Madras High Court hears plea for SOP on road cuts after Kottur stormwater work hits utilities",
+    summary:
+      "Petition cites damaged water and sewer lines when multiple agencies trench the same stretch.",
+    dek: "Mobility + utilities — one corridor, many diggers.",
+    category: "Mobility",
+    featured: false,
+    publishedAt: new Date("2026-03-12T04:00:00Z"),
+    sourceUrl:
+      "https://www.thehindu.com/todays-paper/2026-03-12/th_chennai/articleGBVFN1TNB-13819764.ece",
+    sourceName: "The Hindu",
+    reportBody: `## What we know
+
+A **public interest petition** asks the court to direct a **standard operating procedure** so GCC, metro water, electricity, and police coordinate when opening roads for stormwater or cable work. Reporting references **Kottur / Kottur Gardens** residents facing repeated outages when trenches reopen before full restoration.
+
+The bench is expected to seek affidavits from agencies on joint corridor plans.`,
+    analysisBody: `## Why it matters
+
+Chennai’s monsoon prep often means **the same road is cut twice**—once for drains, again for utilities. Residents should photograph **open pits** and log complaints with **zone engineer + 1913**; court directions could force better sequencing next season.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "If your street is trenched twice",
+      items: [
+        { id: "1", "label": "Note agency name on site board" },
+        { id: "2", "label": "Photograph water pooling at trench edge" },
+        { id: "3", "label": "Escalate to zonal office with date stamps" },
+      ],
+    },
+  },
+  {
+    slug: "chennai-air-quality-pm25-trend-2025-study",
+    title:
+      "Chennai’s air quality worsened in 2025 as particulate levels rose, new analysis says",
+    summary:
+      "Study tracks PM2.5 across seasons; authors note Chennai still fares better than several north Indian metros.",
+    dek: "Health + mobility — what the averages hide at street level.",
+    category: "Chennai",
+    featured: true,
+    publishedAt: new Date("2026-03-14T08:15:00Z"),
+    sourceUrl:
+      "https://www.thehindu.com/news/cities/chennai/chennais-air-quality-worsened-in-2025-as-particulate-matter-levels-increased-says-new-study/article70746488.ece",
+    sourceName: "The Hindu",
+    reportBody: `## What we know
+
+Researchers comparing **2024–2025** monitoring data report **higher PM2.5** in Chennai across seasons, with traffic, construction dust, and episodic fires cited as drivers. The story still positions Chennai **below** peak polluted northern cities on annualised averages.
+
+Policy discussion ties to **BS-VI enforcement**, **construction mesh rules**, and **waste-burning** complaints.`,
+    analysisBody: `## For Chennai readers
+
+Citywide averages **smooth out** hyperlocal spikes—Ennore–Manali industrial wind, dumpyard smoke, and festival crackers can push **your** AQI without moving the annual headline. Use reliable **nearest monitor** apps and report visible plumes to **TNPCB channels** when safe.`,
+    interactiveJson: {
+      type: "poll",
+      question: "Do you check AQI before outdoor exercise?",
+      options: [
+        { id: "daily", "label": "Yes, most days" },
+        { id: "sometimes", "label": "Sometimes" },
+        { id: "no", "label": "Rarely" },
+      ],
+    },
+  },
+  {
+    slug: "kodungaiyur-dumpyard-smoke-march-2026",
+    title:
+      "Dense smoke from Kodungaiyur dumpyard spreads across north Chennai neighbourhoods",
+    summary:
+      "Residents report eye irritation and haze; fire crews work to contain smouldering waste.",
+    dek: "Environment desk — another summer of landfill risk.",
+    category: "Chennai",
+    featured: true,
+    publishedAt: new Date("2026-03-15T14:20:00Z"),
+    sourceUrl:
+      "https://timesofindia.indiatimes.com/city/chennai/smoke-engulfs-kodungaiyur-as-authorities-ignore-alerts/articleshow/129580063.cms",
+    sourceName: "The Times of India",
+    reportBody: `## What we know
+
+Local reporting describes **thick smoke** drifting from the **Kodungaiyur** landfill area, affecting Perambur–Vyasarpadi belts. Officials attribute the incident to **waste combustion**; firefighting and earth-covering operations are under way.
+
+Clinics noted a rise in **respiratory complaints** among children and elders during the worst plume hours.`,
+    analysisBody: `## Context
+
+Landfill fires are **public-health and governance** stress tests—air monitors may lag odour events. Keep windows closed when plumes are visible, run HEPA where affordable, and follow **GCC public advisories**. Long-term fix remains **waste reduction + alternate processing**, not just firefighting.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "When smoke returns",
+      items: [
+        { id: "1", "label": "Check IMD wind direction before outdoor time" },
+        { id: "2", "label": "Use N95 for cycling if haze is visible" },
+        { id: "3", "label": "Report persistent fires via official city channels" },
+      ],
+    },
+  },
+  {
+    slug: "mnm-skips-2026-polls-kamal-dmk-alliance-campaign",
+    title:
+      "MNM will not contest Tamil Nadu 2026 polls; Kamal Haasan to campaign for DMK-led front",
+    summary:
+      "Actor-politician frames decision as alliance discipline; Chennai urban seats watch star-draw rallies.",
+    dek: "Politics — how star campaigns shift turnout in city cores.",
+    category: "Politics",
+    featured: true,
+    publishedAt: new Date("2026-03-16T09:00:00Z"),
+    sourceUrl:
+      "https://timesofindia.indiatimes.com/city/chennai/mnm-not-to-contest-kamal-haasan-to-campaign-for-dmk-front/articleshow/129785889.cms",
+    sourceName: "The Times of India",
+    reportBody: `## What we know
+
+**Makkal Needhi Maiam** announced it will **not field candidates** in the April 2026 Assembly election. **Kamal Haasan** is expected to **canvass** for the **DMK-led alliance**, concentrating on urban and youth-heavy pockets including Chennai.
+
+The move consolidates anti-NDA votes in some city seats but leaves MNM’s organisational future dependent on post-poll positioning.`,
+    analysisBody: `## Chennai angle
+
+Central and south Chennai constituencies with **high cinema-footfall demographics** may see **crowd-pull roadshows**. Traffic police typically issue **diversion maps**—plan commutes around notified rally corridors and verify **ECI permission** posters before sharing rally clips as “news.”`,
+    interactiveJson: {
+      type: "poll",
+      question: "Do celebrity campaign tours change your interest in local candidates?",
+      options: [
+        { id: "yes", "label": "Yes — visibility matters" },
+        { id: "issues", "label": "No — I vote on local issues" },
+        { id: "mixed", "label": "Mixed" },
+      ],
+    },
+  },
+  {
+    slug: "chennai-metro-peak-hour-crowding-advisory-mar-18",
+    title:
+      "Chennai Metro adds peak-hour frequency on core corridors as office traffic returns post-holidays",
+    summary:
+      "CMRL cites higher load on Blue/Green interchange segments; commuters asked to stagger travel where possible.",
+    dek: "Mobility — the 8–10 am squeeze at Central and AG-DMS.",
+    category: "Mobility",
+    featured: false,
+    publishedAt: new Date("2026-03-18T05:45:00Z"),
+    sourceUrl: "https://chennaimetrorail.org/",
+    sourceName: "Chennai Metro Rail Limited",
+    reportBody: `## What we know
+
+Metro authorities issued **peak-hour advisories** as **ridership climbs** on **Blue Line** segments feeding IT corridors and **Central–AG-DMS** interchange. Trains run at **higher frequency** on select slots; social media monitors report **platform crowding** during school and office overlap.
+
+Alternate exits and **feeder bus** integration remain uneven by station.`,
+    analysisBody: `## Tips
+
+If you can **shift 30 minutes** earlier or later, coach density drops sharply. Use **QR ticketing** to avoid queue spikes at counters; watch **CMRL Twitter/X** for live disruption notes.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Peak-hour survival",
+      items: [
+        { id: "1", "label": "Stand clear of door alarms — delays cascade" },
+        { id: "2", "label": "Use last coaches when boarding at termini" },
+      ],
+    },
+  },
+  {
+    slug: "chennai-marina-coastguard-lifeguard-drill-mar-19",
+    title:
+      "Coast Guard and city agencies hold joint beach safety drill ahead of summer crowds",
+    summary:
+      "Rip-current flags and swimmer zones refreshed along Marina; schools briefed on drowning prevention.",
+    dek: "Chennai waterfront — season of evening crowds returns.",
+    category: "Chennai",
+    featured: false,
+    publishedAt: new Date("2026-03-19T11:30:00Z"),
+    sourceUrl: "https://www.thehindu.com/news/cities/chennai/",
+    sourceName: "The Hindu",
+    reportBody: `## What we know
+
+A **joint exercise** along **Marina** tested **jet-ski rescue**, **rip-current signalling**, and **crowd cordons** for the upcoming summer evenings. NGOs working with **fisher communities** participated to align **local knowledge** with agency SOPs.
+
+GCC and police emphasised **no-swim zones** beyond flagged areas.`,
+    analysisBody: `## For families
+
+**Never** assume calm-looking water is safe—**undertow** kills fast. Children should wear **bright floats** only as aids, not life guarantees. Alcohol and swimming **do not mix**; night swimming remains **high risk** without professional patrols.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Before you enter the water",
+      items: [
+        { id: "1", "label": "Swim only where lifeguards are posted" },
+        { id: "2", "label": "Check flag colour boards at entry" },
+      ],
+    },
+  },
+  {
+    slug: "omr-it-hiring-signals-q1-2026-chennai",
+    title:
+      "OMR and Porur belt IT services firms quietly restock benches for post-poll project cycles",
+    summary:
+      "Recruiters cite stabilising US budgets; Chennai delivery centres add lateral roles in cloud and security.",
+    dek: "Economy — hiring pulse on the city’s largest office strip.",
+    category: "Economy",
+    featured: false,
+    publishedAt: new Date("2026-03-20T07:20:00Z"),
+    sourceUrl: "https://www.thehindu.com/business/",
+    sourceName: "The Hindu BusinessLine",
+    reportBody: `## What we know
+
+Industry sources describe **selective hiring** returning on **OMR–Sholinganallur** and **Porur–DLF** campuses after a cautious 2025. Roles skew to **cloud migration**, **identity security**, and **AI-assisted QA** rather than mass fresher drives.
+
+Election season **travel freezes** at some clients delay onboarding into May.`,
+    analysisBody: `## If you’re job-hunting
+
+**Referrals** still dominate lateral pipelines—update **public portfolios** and respond quickly to **recruiter pings**. Verify **office location** and **night-shift policy** before signing; Chennai’s commute math punishes vague “Chennai” JDs that mean **Siruseri**.`,
+    interactiveJson: {
+      type: "poll",
+      question: "Is your employer hiring in Chennai this quarter?",
+      options: [
+        { id: "yes", "label": "Yes — open reqs" },
+        { id: "freeze", "label": "Freeze / slow" },
+        { id: "na", "label": "Not in tech" },
+      ],
+    },
+  },
+  {
+    slug: "chennai-board-exams-helplines-student-stress-mar-22",
+    title:
+      "State school helplines expanded as Class X/XII public exams peak in Chennai centres",
+    summary:
+      "Counselling booths at select zones; traffic police map quiet corridors near major exam schools.",
+    dek: "Consumer + education — support during March crunch.",
+    category: "Consumer",
+    featured: false,
+    publishedAt: new Date("2026-03-22T08:00:00Z"),
+    sourceUrl: "https://www.dtnext.in/news/chennai/",
+    sourceName: "DT Next",
+    reportBody: `## What we know
+
+Education and health departments **extended helpline hours** for **exam stress**, alongside **anti-copying** monitoring at Chennai clusters. City police published **advisory routes** to avoid horn-heavy corridors near **Anna Nagar, Mylapore, and Tambaram** test hubs.
+
+Hydration and **heat** warnings accompany March afternoon papers.`,
+    analysisBody: `## For parents
+
+**Sleep and protein** beat last-minute cramming. If a child shows **panic symptoms**, use official **counselling lines**—not anonymous WhatsApp “tips.” Plan **15-minute early arrival** to beat bag-check queues.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Exam week checklist",
+      items: [
+        { id: "1", "label": "Print hall ticket night before" },
+        { id: "2", "label": "Pack transparent water bottle" },
+        { id: "3", "label": "Save helpline numbers on phone home screen" },
+      ],
+    },
+  },
+  {
+    slug: "chennai-summer-water-tanker-advisory-mar-25",
+    title:
+      "Metro water officials flag early summer strain; tanker booking rules tightened in outer wards",
+    summary:
+      "Residents in tail-end belts report supply dips; GCC and metro water ask judicious use ahead of monsoon.",
+    dek: "Consumer — when your street depends on lorries.",
+    category: "Consumer",
+    featured: false,
+    publishedAt: new Date("2026-03-25T06:00:00Z"),
+    sourceUrl: "https://www.chennaimetrowater.tn.gov.in/",
+    sourceName: "Chennai Metropolitan Water Supply and Sewerage Board",
+    reportBody: `## What we know
+
+With **northeast monsoon memory fading**, several **south-west and west Chennai** pockets report **pressure drops** during peak morning hours. Authorities urge **rooftop tank cleaning**, **leak reporting**, and **legal tanker** booking only.
+
+Illegal extraction from **agricultural belts** remains an enforcement target.`,
+    analysisBody: `## Practical steps
+
+Fix **dripping float valves**—they waste more than most families realise. If you rely on **tankers**, demand **CMWSSB-recognised suppliers** and keep **receipts** for quality disputes. Apartment associations should **stagger pump hours** to protect low-floor pressure.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Water stress prep",
+      items: [
+        { id: "1", "label": "Audit rooftop tank last clean date" },
+        { id: "2", "label": "Report main-line leaks with photos" },
+        { id: "3", "label": "Discuss stagger timing on RWA group" },
+      ],
+    },
+  },
+];
+
 async function main() {
   let cityId: string;
   const existing = await db
@@ -374,7 +683,10 @@ async function main() {
     console.log("Inserted city chennai:", cityId);
   }
 
-  for (const s of seeds) {
+  const allSeeds = [...seeds, ...seedsMar2026ChennaiTop10];
+  console.log("Seeding", allSeeds.length, "articles (base + Mar 10–25 2026 Chennai top 10).");
+
+  for (const s of allSeeds) {
     const body = `${s.reportBody}\n\n---\n\n${s.analysisBody}`;
     const row = await db
       .select({ id: articles.id })

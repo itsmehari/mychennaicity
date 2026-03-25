@@ -45,7 +45,7 @@ export default async function Home() {
   let latest: Awaited<ReturnType<typeof latestArticlesForHome>> = [];
   try {
     featured = await featuredArticlesForHome(3);
-    latest = await latestArticlesForHome(8);
+    latest = await latestArticlesForHome(10);
   } catch {
     /* DATABASE_URL unset or DB unreachable — home still renders */
   }
