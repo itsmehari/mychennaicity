@@ -8,6 +8,16 @@ export const TOPIC_SLUG_TO_CATEGORY: Record<string, string> = {
   mobility: "Mobility",
 };
 
+/** Stable nav order for topic hub links (interior pages + empty states). */
+export const CHENNAI_NEWS_TOPIC_NAV: { slug: string; label: string }[] = [
+  { slug: "chennai", label: "Chennai" },
+  { slug: "politics", label: "Politics" },
+  { slug: "elections", label: "Elections" },
+  { slug: "economy", label: "Economy" },
+  { slug: "consumer", label: "Consumer" },
+  { slug: "mobility", label: "Mobility" },
+];
+
 export function categoryToTopicSlug(category: string): string {
   return category
     .trim()

@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { StoryCardCompact } from "@/components/news/newspaper-layout";
+import {
+  InteriorCrossNav,
+  PageBreadcrumbs,
+  TopicDeskNav,
+  interiorMainClassName,
+} from "@/components/site/interior-chrome";
 import { listArticlesByCategoryForChennai } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
-import { topicSlugToCategory } from "@/lib/news-topics";
+import { CHENNAI_NEWS_TOPIC_NAV, topicSlugToCategory } from "@/lib/news-topics";
 
 type Props = { params: Promise<{ topic: string }> };
 
@@ -20,8 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `${base}/chennai-local-news/topic/${topic}`;
   return {
     title: `${category} — Chennai local news`,
-    description: `Latest ${category} coverage and analysis for Greater Chennai.`,
+    description: `Latest ${category} coverage and analysis for Greater Chennai — desk hub on mychennaicity.in.`,
     alternates: { canonical: url },
+    openGraph: {
+      title: `${category} | Chennai local news`,
+      url,
+    },
   };
 }
 
@@ -37,43 +47,73 @@ export default async function TopicPage({ params }: Props) {
   } catch {
     items = [];
   }
+
   if (!items.length) {
     return (
-      <div className="mx-auto max-w-[1280px] px-4 py-14">
-        <h1 className="type-display text-3xl text-[var(--foreground)]">
+      <div className={interiorMainClassName}>
+        <PageBreadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Chennai local news", href: "/chennai-local-news" },
+            { label: category },
+          ]}
+        />
+        <TopicDeskNav currentSlug={topic} />
+        <h1 className="type-display text-3xl text-[var(--foreground)] sm:text-4xl">
           {category}
         </h1>
-        <p className="type-lede mt-4 text-sm">
-          No published stories in this desk yet.
+        <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
+          No published stories in this desk yet. Browse another desk below, open
+          the front page, or wire the database and seed articles so analysis
+          pieces appear here automatically.
         </p>
-        <Link href="/chennai-local-news" className="mt-6 text-[var(--accent)]">
-          Back to front page
-        </Link>
+        <div className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--accent)]">
+            Other desks
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {CHENNAI_NEWS_TOPIC_NAV.filter((t) => t.slug !== topic).map((t) => (
+              <li key={t.slug}>
+                <Link
+                  href={`/chennai-local-news/topic/${t.slug}`}
+                  className="inline-block rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-semibold text-[var(--foreground)] hover:border-[var(--accent)]"
+                >
+                  {t.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <InteriorCrossNav />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
-      <p className="type-eyebrow text-[var(--accent)]">Topic</p>
-      <h1 className="type-display mt-2 text-4xl text-[var(--foreground)]">
+    <div className={interiorMainClassName}>
+      <PageBreadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Chennai local news", href: "/chennai-local-news" },
+          { label: category },
+        ]}
+      />
+      <TopicDeskNav currentSlug={topic} />
+      <p className="type-eyebrow text-[var(--accent)]">Topic desk</p>
+      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl lg:text-5xl">
         {category}
       </h1>
-      <p className="type-lede mt-3 max-w-2xl text-sm">
-        Reverse-chronological feed for this desk. Each story includes a factual
-        summary, Chennai-focused analysis, and a small interactive.
+      <p className="type-lede mt-3 max-w-2xl text-sm leading-relaxed">
+        Reverse-chronological feed for this desk. Each on-site story includes a
+        factual summary, Chennai-focused analysis, and a small interactive.
+        Switch desks any time — links stay in the row above.
       </p>
       <div className="mt-10 max-w-2xl">
         {items.map((a) => (
           <StoryCardCompact key={a.id} article={a} />
         ))}
       </div>
-      <Link
-        href="/chennai-local-news"
-        className="mt-10 inline-block text-sm font-semibold text-[var(--accent)]"
-      >
-        Back to front page
-      </Link>
+      <InteriorCrossNav />
     </div>
   );
 }

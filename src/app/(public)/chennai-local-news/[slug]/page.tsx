@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/news/editorial-article";
 import {
+  InteriorCrossNav,
+  PageBreadcrumbs,
+  clipCrumbTitle,
+  interiorMainClassName,
+} from "@/components/site/interior-chrome";
+import {
   getPublishedArticleBySlug,
   getPublishedSlugsForChennai,
 } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
+import { categoryToTopicSlug } from "@/lib/news-topics";
 import {
   buildBreadcrumbJsonLd,
   buildNewsArticleJsonLd,
@@ -80,6 +87,18 @@ export default async function ArticlePage({ params }: Props) {
   const newsLd = buildNewsArticleJsonLd(article);
   const crumbLd = buildBreadcrumbJsonLd(article.slug, article.title);
 
+  const crumbs: { label: string; href?: string }[] = [
+    { label: "Home", href: "/" },
+    { label: "Chennai local news", href: "/chennai-local-news" },
+  ];
+  if (article.category) {
+    crumbs.push({
+      label: article.category,
+      href: `/chennai-local-news/topic/${categoryToTopicSlug(article.category)}`,
+    });
+  }
+  crumbs.push({ label: clipCrumbTitle(article.title) });
+
   return (
     <>
       <script
@@ -90,8 +109,10 @@ export default async function ArticlePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbLd) }}
       />
-      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
+      <div className={interiorMainClassName}>
+        <PageBreadcrumbs items={crumbs} />
         <EditorialArticle article={article} />
+        <InteriorCrossNav />
       </div>
     </>
   );
