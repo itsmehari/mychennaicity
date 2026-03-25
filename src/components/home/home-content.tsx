@@ -419,47 +419,7 @@ export function HomeCityPulse() {
   );
 }
 
-export function HomeSeasonalHub() {
-  return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent-warm)_14%,var(--surface))] p-6 shadow-md sm:p-10">
-      <div
-        className="pointer-events-none absolute -right-16 top-0 h-48 w-48 rounded-full opacity-40 blur-2xl"
-        style={{
-          background: `radial-gradient(circle, var(--accent-warm), transparent 70%)`,
-        }}
-      />
-      <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent-warm)]">
-            Seasonal hub
-          </p>
-          <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
-            Tamil Nadu Assembly Election 2026 — Chennai voter desk
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)] sm:text-base">
-            Constituency explainers, roll updates, and polling-day checklists —
-            we’ll host a dedicated guide path; this band is the home-page slot
-            for timely campaigns.
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-          <Link
-            href="/chennai-local-news/topic/elections"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--foreground)] px-8 py-3 text-center text-sm font-bold text-[var(--background)] shadow-lg transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-          >
-            Open election desk
-          </Link>
-          <Link
-            href="/chennai-local-events"
-            className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,var(--foreground)_25%,transparent)] bg-[var(--surface)] px-8 py-3 text-center text-sm font-bold text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-          >
-            Town-hall events
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
+export { HomeSeasonalHub } from "./home-seasonal-hub";
 
 export function HomeSponsoredRow() {
   return (
