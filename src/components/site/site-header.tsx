@@ -26,10 +26,10 @@ export function SiteHeader() {
             MC
           </span>
           <span className="hidden min-w-0 flex-col leading-tight sm:flex">
-            <span className="font-serif text-base font-bold tracking-tight text-[var(--foreground)] md:text-lg">
+            <span className="type-display text-base text-[var(--foreground)] md:text-lg">
               mychennaicity
             </span>
-            <span className="text-[11px] text-[var(--muted)] md:text-xs">
+            <span className="text-[11px] font-light text-[var(--muted)] md:text-xs">
               News · directory · jobs · local events
             </span>
           </span>

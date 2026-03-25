@@ -38,7 +38,7 @@ function ZoneCard({
           </p>
         ) : null}
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
+      <p className="type-lede mt-3 text-xs leading-relaxed">
         {zone.blurb}
       </p>
       <span className="mt-4 inline-flex items-center text-xs font-semibold text-[var(--accent)]">

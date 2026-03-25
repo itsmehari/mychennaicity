@@ -40,10 +40,10 @@ export default async function TopicPage({ params }: Props) {
   if (!items.length) {
     return (
       <div className="mx-auto max-w-[1280px] px-4 py-14">
-        <h1 className="font-serif text-3xl font-bold text-[var(--foreground)]">
+        <h1 className="type-display text-3xl text-[var(--foreground)]">
           {category}
         </h1>
-        <p className="mt-4 text-[var(--muted)]">
+        <p className="type-lede mt-4 text-sm">
           No published stories in this desk yet.
         </p>
         <Link href="/chennai-local-news" className="mt-6 text-[var(--accent)]">
@@ -55,13 +55,11 @@ export default async function TopicPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
-      <p className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
-        Topic
-      </p>
-      <h1 className="mt-2 font-serif text-4xl font-bold text-[var(--foreground)]">
+      <p className="type-eyebrow text-[var(--accent)]">Topic</p>
+      <h1 className="type-display mt-2 text-4xl text-[var(--foreground)]">
         {category}
       </h1>
-      <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+      <p className="type-lede mt-3 max-w-2xl text-sm">
         Reverse-chronological feed for this desk. Each story includes a factual
         summary, Chennai-focused analysis, and a small interactive.
       </p>

@@ -15,7 +15,7 @@ export function HomeCommunityBand() {
           <p className="text-sm font-semibold text-[var(--foreground)]">
             Weekly Chennai digest
           </p>
-          <p className="mt-1 text-sm text-[var(--muted)]">
+          <p className="type-lede mt-1 text-sm">
             Jobs, civic deadlines, weekend events — one concise email. No spam.
           </p>
           <form

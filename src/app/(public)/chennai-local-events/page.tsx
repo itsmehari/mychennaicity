@@ -20,13 +20,11 @@ export const metadata: Metadata = {
 export default function ChennaiLocalEventsPage() {
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-14">
-      <p className="text-sm font-medium text-[var(--accent-warm)]">
-        Chennai local events
-      </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--foreground)]">
+      <p className="type-eyebrow text-[var(--accent-warm)]">Chennai local events</p>
+      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)]">
         What&apos;s on in Chennai
       </h1>
-      <p className="mt-4 max-w-2xl text-[var(--muted)]">
+      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
         Temple utsavams, concerts, theatre, and neighbourhood gatherings across
         Greater Chennai. Below is a{" "}
         <strong className="font-medium text-[var(--foreground)]">

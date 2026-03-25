@@ -30,18 +30,16 @@ export function Section({
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           {eyebrow ? (
-            <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--accent)]">
-              {eyebrow}
-            </p>
+            <p className="type-eyebrow mb-1">{eyebrow}</p>
           ) : null}
           <h2
             id={id ? `${id}-heading` : undefined}
-            className="font-serif text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl"
+            className="type-display text-2xl text-[var(--foreground)] sm:text-3xl"
           >
             {title}
           </h2>
           {subtitle ? (
-            <p className="mt-1 max-w-2xl text-sm text-[var(--muted)]">
+            <p className="type-lede mt-1 max-w-2xl text-sm leading-relaxed">
               {subtitle}
             </p>
           ) : null}

@@ -34,7 +34,7 @@ export async function EditorialArticle({
             {article.category}
           </Link>
         ) : null}
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--foreground)] sm:text-4xl">
+        <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
           {article.title}
         </h1>
         {article.dek ? (

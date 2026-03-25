@@ -24,10 +24,10 @@ export function NewspaperMasthead({
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--muted)]">
             mychennaicity.in
           </p>
-          <h1 className="mt-1 font-serif text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl">
+          <h1 className="type-display mt-1 text-4xl text-[var(--foreground)] sm:text-5xl">
             {title}
           </h1>
-          <p className="mt-2 max-w-xl text-sm text-[var(--muted)]">{tagline}</p>
+          <p className="type-lede mt-2 max-w-xl text-sm">{tagline}</p>
         </div>
         <p className="font-mono text-sm text-[var(--muted)]">{today}</p>
       </div>
@@ -70,7 +70,7 @@ export function LeadStory({
             {article.category}
           </span>
         ) : null}
-        <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-[var(--foreground)] group-hover:underline sm:text-3xl">
+        <h2 className="type-display mt-2 text-2xl leading-tight text-[var(--foreground)] group-hover:underline sm:text-3xl">
           {article.title}
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
@@ -101,7 +101,7 @@ export function StoryCardCompact({ article }: { article: PublicArticleRow }) {
             {article.category}
           </span>
         ) : null}
-        <h3 className="mt-1 font-serif text-base font-semibold leading-snug text-[var(--foreground)] group-hover:underline">
+        <h3 className="mt-1 text-base font-semibold leading-snug tracking-tight text-[var(--foreground)] group-hover:underline">
           {article.title}
         </h3>
         <p className="mt-1 line-clamp-2 text-xs text-[var(--muted)]">

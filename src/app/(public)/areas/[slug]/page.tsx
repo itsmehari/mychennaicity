@@ -29,17 +29,19 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-14">
-      <p className="text-sm font-medium text-[var(--accent)]">Area hub</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--foreground)]">
+      <p className="type-eyebrow text-[var(--accent)]">Area hub</p>
+      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)]">
         {zone.label}
       </h1>
       {zone.gccZoneNumber ? (
-        <p className="mt-2 text-sm text-[var(--muted)]">
+        <p className="type-lede mt-2 text-sm">
           Reference GCC zone index {zone.gccZoneNumber} (verify against official
           notifications before hard-coding services copy).
         </p>
       ) : null}
-      <p className="mt-4 max-w-2xl text-[var(--muted)]">{zone.blurb}</p>
+      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
+        {zone.blurb}
+      </p>
       <p className="mt-6 text-xs text-[var(--muted)]">
         Geo version:{" "}
         <code className="rounded bg-[var(--surface)] px-1.5 py-0.5 ring-1 ring-[var(--border)]">

@@ -114,19 +114,19 @@ export function HomeSeasonalHub() {
         <div>
           <p
             ref={eyebrowRef}
-            className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent-warm)]"
+            className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--accent-warm)]"
           >
             Seasonal hub
           </p>
           <h2
             ref={titleRef}
-            className="mt-3 font-serif text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl"
+            className="type-display mt-3 text-2xl text-[var(--foreground)] sm:text-3xl"
           >
             Tamil Nadu Assembly Election 2026 — Chennai voter desk
           </h2>
           <p
             ref={bodyRef}
-            className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)] sm:text-base"
+            className="type-lede mt-3 max-w-2xl text-sm leading-relaxed sm:text-base"
           >
             Constituency explainers, roll updates, and polling-day checklists —
             we’ll host a dedicated guide path; this band is the home-page slot

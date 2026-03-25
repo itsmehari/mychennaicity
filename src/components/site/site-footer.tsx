@@ -101,14 +101,14 @@ export function SiteFooter() {
         {/* Primary CTA — elevated card on the dark slab (classic fat-footer pattern) */}
         <div className="rounded-2xl border border-[var(--footer-border)] bg-[var(--footer-elevated)] p-6 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)] sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-12">
           <div className="max-w-xl">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
               Backup navigation
             </p>
-            <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-[var(--footer-fg)] sm:text-3xl">
+            <h2 className="type-display mt-3 text-2xl text-[var(--footer-fg)] sm:text-3xl">
               Everything worth a second click — without scrolling the home page
               again.
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--footer-muted)]">
+            <p className="mt-3 text-sm font-light leading-relaxed text-[var(--footer-muted)]">
               News desk, jobs, events, directory, and neighbourhood hubs in one
               fat footer. Same idea as multi-column footers on editorial and
               product sites.
@@ -143,7 +143,7 @@ export function SiteFooter() {
               >
                 MC
               </span>
-              <span className="font-serif text-xl font-bold tracking-tight text-[var(--footer-fg)]">
+              <span className="type-display text-xl text-[var(--footer-fg)]">
                 mychennaicity.in
               </span>
             </Link>

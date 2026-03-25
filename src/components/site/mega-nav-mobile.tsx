@@ -41,7 +41,7 @@ export function MegaNavMobile({ open, onClose }: Props) {
       aria-label="Site menu"
     >
       <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-4">
-        <p className="font-serif text-lg font-bold text-[var(--foreground)]">Menu</p>
+        <p className="type-display text-lg text-[var(--foreground)]">Menu</p>
         <button
           type="button"
           className="focus-ring flex min-h-11 min-w-11 items-center justify-center rounded-xl text-[var(--foreground)]"
@@ -84,7 +84,7 @@ export function MegaNavMobile({ open, onClose }: Props) {
                     setExpanded((v) => (v === section.id ? null : section.id))
                   }
                 >
-                  <span className="font-serif text-base font-bold text-[var(--foreground)]">
+                  <span className="type-display text-base text-[var(--foreground)]">
                     {section.label}
                   </span>
                   <svg
@@ -116,7 +116,7 @@ export function MegaNavMobile({ open, onClose }: Props) {
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
                         Featured
                       </p>
-                      <p className="mt-1 font-serif text-base font-bold text-[var(--foreground)]">
+                      <p className="type-display mt-1 text-base text-[var(--foreground)]">
                         {section.featured.title}
                       </p>
                       <p className="mt-1 text-sm text-[var(--muted)]">

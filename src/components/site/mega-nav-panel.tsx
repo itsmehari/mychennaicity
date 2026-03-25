@@ -20,7 +20,7 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
     >
       {section.columns.map((col) => (
         <div key={col.heading}>
-          <p className="font-serif text-lg font-bold tracking-tight text-[var(--foreground)]">
+          <p className="type-display text-lg text-[var(--foreground)]">
             {col.heading}
           </p>
           <ul className="mt-4 space-y-1">
@@ -58,7 +58,7 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
             Featured
           </p>
-          <h3 className="mt-2 font-serif text-xl font-bold tracking-tight text-[var(--foreground)]">
+          <h3 className="type-display mt-2 text-xl text-[var(--foreground)]">
             {section.featured.title}
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">

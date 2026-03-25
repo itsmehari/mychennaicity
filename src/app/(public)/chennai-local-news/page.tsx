@@ -66,10 +66,10 @@ export default async function ChennaiLocalNewsPage() {
         rest={rest}
         sidebar={
           <>
-            <h2 className="font-serif text-lg font-bold text-[var(--foreground)]">
+            <h2 className="type-display text-lg text-[var(--foreground)]">
               Editor&apos;s notebook
             </h2>
-            <p className="mt-2 text-xs text-[var(--muted)]">
+            <p className="type-lede mt-2 text-xs">
               Quick links to featured pieces. Full list in the main columns.
             </p>
             <ul className="mt-4 space-y-3">
