@@ -39,7 +39,14 @@ Direct link (team slug may vary):
 
 1. Push schema: `npm run db:push` (against dev DB) or `npm run db:push:live` (production `.env.production.local`).
 2. Seed content: `npm run db:seed` or `npm run db:seed:live`.
-3. Confirm the home **News bulletin** and `/chennai-local-news` show articles.
+3. **Verify DB:** `npm run db:check` — prints Chennai article counts and latest slugs (uses same env files as `db:seed`).
+4. Confirm the home **News bulletin** and `/chennai-local-news` show articles.
+
+### Home page was empty on Vercel while DB had data
+
+The app used **static generation** for `/` at build time. If `DATABASE_URL` was missing during the Vercel build (or the DB was empty then), Next.js shipped **HTML with zero articles** until the next change.
+
+**Fix (in repo):** `/`, `/chennai-local-news`, topic pages, article `[slug]`, and `feed.xml` use **`export const dynamic = "force-dynamic"`** so each request loads articles from Neon using **runtime** env vars. After setting `DATABASE_URL` on Vercel, **redeploy** once.
 
 ## Security learnings
 

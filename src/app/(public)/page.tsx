@@ -28,6 +28,9 @@ import {
 } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
 
+/** Load news from Neon on every request — build-time static HTML had empty bulletin when DATABASE_URL was missing at Vercel build. */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Home",
   description:

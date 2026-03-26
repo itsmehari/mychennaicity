@@ -14,7 +14,7 @@ import { CHENNAI_NEWS_TOPIC_NAV, topicSlugToCategory } from "@/lib/news-topics";
 
 type Props = { params: Promise<{ topic: string }> };
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { topic } = await params;

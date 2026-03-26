@@ -20,13 +20,13 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamic = "force-dynamic";
+
 function clipMetaDescription(raw: string, max = 155): string {
   const t = raw.trim();
   if (t.length <= max) return t;
   return `${t.slice(0, max - 1).trimEnd()}…`;
 }
-
-export const revalidate = 120;
 
 export async function generateStaticParams() {
   try {

@@ -28,7 +28,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 120;
+/** Same as home: avoid shipping HTML baked at build without DATABASE_URL. */
+export const dynamic = "force-dynamic";
 
 export default async function ChennaiLocalNewsPage() {
   let all: Awaited<ReturnType<typeof listPublishedArticlesForChennai>> = [];
