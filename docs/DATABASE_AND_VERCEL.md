@@ -35,6 +35,16 @@ Direct link (team slug may vary):
   - **Override** `DATABASE_URL` manually to the new URI and accept that other `POSTGRES_*` vars may still describe the old project until you fix the integration.
 - The app code used in this repo reads **`DATABASE_URL`** for Drizzle (`src/db/client.ts`). Align that variable with the database you actually migrated and seeded.
 
+### Vercel “Connect Project” modal — common mistakes
+
+- **“Already connected to the target store”:** The **mychennaicity** project is already linked to a Neon database. You do **not** need a second connection for the same store. **Cancel** the modal. Use **Settings → Environment Variables** to confirm **`DATABASE_URL`** (and related `POSTGRES_*` vars) are present.
+- **Custom prefix `STORAGE`:** That creates variables like **`STORAGE_URL`**, not **`DATABASE_URL`**. This app **does not** read `STORAGE_URL`. Leave the prefix **empty** (default) when connecting Neon so Vercel injects **`DATABASE_URL`**, or set **`DATABASE_URL` manually** to the pooled connection string from Neon **Connect**.
+
+### Two Neon projects (easy to confuse)
+
+- **Vercel-created Neon** (e.g. project id `super-lake-…` under “Vercel: …” org) is what **`DATABASE_URL` on Vercel** usually points at.
+- A **separately created** Neon project (e.g. `ep-misty-mountain-…`) is a **different database**. Seeding locally with `secrets/database.local.env` fills **that** DB only. Production will stay empty until you run **`npm run db:push:live`** and **`npm run db:seed:live`** against the URI in **Vercel’s** `DATABASE_URL`, or until you point **`DATABASE_URL`** on Vercel at the same project you seeded locally.
+
 ## After `DATABASE_URL` is live
 
 1. Push schema: `npm run db:push` (against dev DB) or `npm run db:push:live` (production `.env.production.local`).
