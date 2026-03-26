@@ -1,7 +1,7 @@
 /**
  * Seeds Chennai city + published local-news articles.
  *
- * Dev: `npm run db:seed` — uses `.env.local` then `.env` (DATABASE_URL).
+ * Dev: `npm run db:seed` — uses `secrets/database.local.env` then `.env.local` then `.env`.
  * Live: `npm run db:seed:live` — uses **only** `.env.production.local` (pull from Vercel or paste Neon URL).
  */
 import { config as loadEnv } from "dotenv";
@@ -17,6 +17,7 @@ const live =
 if (live) {
   loadEnv({ path: ".env.production.local" });
 } else {
+  loadEnv({ path: "secrets/database.local.env" });
   loadEnv({ path: ".env.local" });
   loadEnv({ path: ".env" });
 }

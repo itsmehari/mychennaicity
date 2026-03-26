@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Local Neon URI backup (see secrets/README.md)
+/secrets/database.local.env
+
 # vercel
 .vercel
 

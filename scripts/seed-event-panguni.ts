@@ -2,7 +2,7 @@
  * Inserts the Sholinganallur Panguni Uthiram event (idempotent by city + slug).
  *
  * Live: `tsx scripts/seed-event-panguni.ts --live` — uses `.env.production.local`
- * Dev:  `tsx scripts/seed-event-panguni.ts` — uses `.env.local` then `.env`
+ * Dev:  `tsx scripts/seed-event-panguni.ts` — uses `secrets/database.local.env` then `.env.local` then `.env`
  */
 import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
@@ -17,6 +17,7 @@ const live =
 if (live) {
   loadEnv({ path: ".env.production.local" });
 } else {
+  loadEnv({ path: "secrets/database.local.env" });
   loadEnv({ path: ".env.local" });
   loadEnv({ path: ".env" });
 }

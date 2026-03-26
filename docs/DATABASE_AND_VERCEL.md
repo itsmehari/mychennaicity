@@ -1,0 +1,48 @@
+# Neon `DATABASE_URL` — learnings and Vercel setup
+
+## What this app expects
+
+- **Single variable:** `DATABASE_URL` — full Postgres URI from Neon (pooled connection string is recommended for serverless / Vercel).
+- **Runtime:** Next.js reads **`.env.local`** in development and **Vercel Environment Variables** in production. It does **not** read `secrets/database.local.env` automatically.
+- **Tooling:** `drizzle.config.ts` and seed scripts load, in order:
+  1. `secrets/database.local.env` (optional team-local backup)
+  2. `.env.local`
+  3. `.env`  
+  Live seed: **only** `.env.production.local` (e.g. after `vercel env pull`).
+
+## Neon checklist
+
+1. Create project in [Neon Console](https://console.neon.tech).
+2. Use **Connection details** → copy the **pooled** URI if you deploy to Vercel (host often contains `-pooler`).
+3. Query params `sslmode=require` (and Neon’s `channel_binding=require` if shown) are normal; keep them unless a client library errors—in that case try Neon’s “no channel binding” URI from the dashboard.
+
+## Vercel procedure (manual)
+
+Direct link (team slug may vary):  
+`https://vercel.com/<your-team>/mychennaicity/settings/environment-variables`
+
+1. Open [Vercel Dashboard](https://vercel.com/dashboard) → select the **mychennaicity** project.
+2. **Settings** → **Environment Variables**.
+3. **If `DATABASE_URL` already exists** (common when **Vercel ↔ Neon** integration is connected): open the row **⋯ menu** → **Edit**, paste the new pooled URI from the **`mychennaicity`** Neon project, save. Do **not** add a duplicate key.
+4. **If there is no `DATABASE_URL`:** **Add Environment Variable** → name `DATABASE_URL` → paste the Neon URI → apply to **Production** (and **Preview** / **Development** if you want).
+5. **Save**. Trigger a **Redeploy** so serverless functions and SSR see the new value.
+6. Optional: `vercel env pull .env.production.local --environment=production --yes` then `npm run db:push:live` / `npm run db:seed:live`.
+
+### Learnings (Neon integration vs manual URI)
+
+- Vercel can inject many vars at once (`POSTGRES_*`, `DATABASE_URL_UNPOOLED`, `NEON_PROJECT_ID`, etc.) from the **Integrations → Neon** link. Those refer to **one** Neon project. If you create a **new** Neon project (e.g. `mychennaicity` in Singapore), either:
+  - **Reconnect** the integration to that project (recommended), or  
+  - **Override** `DATABASE_URL` manually to the new URI and accept that other `POSTGRES_*` vars may still describe the old project until you fix the integration.
+- The app code used in this repo reads **`DATABASE_URL`** for Drizzle (`src/db/client.ts`). Align that variable with the database you actually migrated and seeded.
+
+## After `DATABASE_URL` is live
+
+1. Push schema: `npm run db:push` (against dev DB) or `npm run db:push:live` (production `.env.production.local`).
+2. Seed content: `npm run db:seed` or `npm run db:seed:live`.
+3. Confirm the home **News bulletin** and `/chennai-local-news` show articles.
+
+## Security learnings
+
+- Treat `DATABASE_URL` like a password: **no commits**, no Slack/Discord, no chat logs.
+- If leaked: **rotate** credentials in Neon and update Vercel + `secrets/database.local.env` + `.env.local`.
+- The `secrets/` copy is for **your machine and trusted backups** only; CI should use Vercel/GitHub **encrypted secrets**, not files in the repo.
