@@ -665,6 +665,200 @@ Fix **dripping float valves**—they waste more than most families realise. If y
   },
 ];
 
+/**
+ * Tamil Nadu 2026 Assembly cycle — manifesto framing with a Chennai electoral lens.
+ * Original analysis for mychennaicity.in (not a verbatim reproduction of party documents).
+ */
+const seedsManifesto2026Chennai: SeedArticle[] = [
+  {
+    slug: "aiadmk-2026-manifesto-welfare-chennai-cost-of-living",
+    title:
+      "AIADMK 2026 manifesto: welfare-first pitch and cost-of-living relief — what it means for Chennai",
+    summary:
+      "Direct household relief dominates AIADMK’s 2026 messaging; Chennai’s commuter and renter-heavy electorate is a natural audience for cash and mobility promises.",
+    dek: "Elections desk — affordability as the headline promise.",
+    category: "Elections",
+    featured: true,
+    publishedAt: new Date("2026-03-26T10:00:00Z"),
+    sourceUrl: "https://mychennaicity.in/chennai-local-news/topic/elections",
+    sourceName: "mychennaicity.in analysis",
+    reportBody: `## What AIADMK is signalling
+
+The party has framed its **2026 campaign** around **direct household relief**, putting **immediate affordability** at the centre of manifesto messaging.
+
+Publicly discussed highlights include:
+
+- **Monthly financial assistance** for women
+- **One-time relief** support for families
+- **Consumer support** measures (including appliance and fuel-linked assistance, as described in campaign briefings)
+- **Expansion of free or subsidised bus mobility**
+- **Pension enhancement** for senior citizens
+
+The underlying model matches a long-standing **AIADMK** approach: **visible, household-level transfers** rather than complex institutional-reform narratives in the headline pitch.`,
+    analysisBody: `## Chennai angle
+
+Chennai combines **dense working- and middle-class wards**, **high dependence on public transport**, overlap of **formal, industrial and informal work**, and **acute cost-of-living sensitivity**. Welfare-first messaging can land quickly when discourse is driven by **inflation fatigue** and **cash-flow stress**.
+
+**Immediate voter dynamics:** better short-term liquidity for eligible households; high recall for **direct-benefit** politics; emotionally legible campaign lines.
+
+**Structural limits in the headline offer:** little rethinking of Chennai’s **long-term growth model**, limited **decentralisation** or **city-specific institutional redesign** language in what has been aired so far.
+
+**Editorial read (neutral):** the line is disciplined—**reduce financial stress quickly**. For Chennai that is a practical proposition on **day-to-day affordability**; it does not by itself answer questions on **metropolitan competitiveness**, **governance architecture**, or **structural growth strategy**. The pitch is about making life more manageable **within the current system**, not remaking it.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "Evaluating welfare promises during MCC",
+      items: [
+        {
+          id: "1",
+          label:
+            "Verify scheme details on official party / govt portals—not forwards alone",
+        },
+        {
+          id: "2",
+          label:
+            "Ask who is eligible, funding source, and rollout agency before assuming benefit",
+        },
+        {
+          id: "3",
+          label:
+            "Separate campaign pledge from budget line item until notified after polls",
+        },
+      ],
+    },
+  },
+  {
+    slug: "dmk-2026-manifesto-consultation-chennai-stability",
+    title:
+      "DMK 2026 manifesto strategy: consultation-led continuity — Chennai reads it as stability",
+    summary:
+      "DMK foregrounds public consultation before a fixed promise basket; Chennai-centric policy pressure still centres on mobility, floods, housing and jobs.",
+    dek: "Elections desk — continuity with correction, not rupture.",
+    category: "Elections",
+    featured: true,
+    publishedAt: new Date("2026-03-26T11:30:00Z"),
+    sourceUrl: "https://mychennaicity.in/chennai-local-news/topic/elections",
+    sourceName: "mychennaicity.in analysis",
+    reportBody: `## What DMK is doing differently
+
+Rather than opening with a **fully locked** manifesto list, the party has emphasised:
+
+- **Public consultation** drives
+- **Citizen and stakeholder** input channels
+- **Sector-wise outreach** and feedback capture
+
+That projects **incremental governance** built on existing administrative direction—not a reset narrative in the first beat.`,
+    analysisBody: `## Chennai relevance
+
+As Tamil Nadu’s largest metro and policy nerve centre, Chennai sits at the core of **consultation politics**. Likely city-side pressure points include **mobility integration**, **flood resilience**, **housing and service access**, and **jobs, skilling and investment continuity**.
+
+**Supporter read:** continuity-first governance; infrastructure progression; policy updated through **feedback loops**.
+
+**Critic read:** less dramatic **structural repositioning**; fewer high-visibility “system redesign” markers; slower perceived momentum for voters wanting sharper institutional change.
+
+**Strategic signal:** governance is **on track**; the next phase is **iterative** and consultation-driven.
+
+**Editorial read (neutral):** in Chennai terms this is **continuity with correction**, not rupture—**predictability** and **administrative stability** for risk-averse voters; less foregrounded **large structural ambition** than execution continuity.`,
+    interactiveJson: {
+      type: "poll",
+      question: "For Chennai this cycle, what tone matters more to you?",
+      options: [
+        { id: "stability", label: "Stability and incremental fixes" },
+        { id: "bold", label: "Bold structural change" },
+        { id: "undecided", label: "Still weighing manifestos" },
+      ],
+    },
+  },
+  {
+    slug: "tvk-2026-youth-education-chennai-first-time-voters",
+    title:
+      "TVK 2026: youth and education-led messaging in Chennai — high aspiration, emerging policy depth",
+    summary:
+      "TVK centres students, welfare-linked support and mobility themes; Chennai’s student density and digital campaign culture make it a high-leverage test market.",
+    dek: "Elections desk — generational opportunity framing.",
+    category: "Elections",
+    featured: false,
+    publishedAt: new Date("2026-03-26T13:00:00Z"),
+    sourceUrl: "https://mychennaicity.in/chennai-local-news/topic/elections",
+    sourceName: "mychennaicity.in analysis",
+    reportBody: `## What TVK is promising
+
+Manifesto-facing narrative has highlighted:
+
+- **Education access support** for economically weaker students
+- **Welfare-linked support** for vulnerable segments, including farming-linked households in statewide messaging
+- **Youth opportunity** and **social mobility** themes
+
+The core proposition is **generational**: future-focused politics around **opportunity and inclusion**.`,
+    analysisBody: `## Why Chennai matters
+
+The city holds a large **student and exam-facing** population, a strong **private higher-education** ecosystem, a growing **tech and services** youth workforce, and **high digital responsiveness** among first-time and young voters.
+
+**Strengths:** engagement with **aspiration**; education-first communication; narrative freshness in a **legacy-heavy** landscape.
+
+**Open questions:** depth on **metro-scale execution**; limited fully elaborated **Chennai-specific administrative blueprint** so far; **funding and implementation** detail still under scrutiny.
+
+**Strategic lane:** not primarily legacy **welfare scale** or incumbent **continuity**—competition on **aspiration**, **identity**, and **youth connection**.
+
+**Editorial read (neutral):** a significant channel for **student and first-time voter** sentiment; resonance on **opportunity** is clear—the open question is whether **governance architecture** matures at the speed of **campaign momentum**.`,
+    interactiveJson: {
+      type: "checklist",
+      title: "First-time voter checklist (Chennai)",
+      items: [
+        { id: "1", label: "Confirm name on electoral roll (ECI portal / booth app)" },
+        { id: "2", label: "Note polling station and document to carry" },
+        {
+          id: "3",
+          label: "Compare manifestos on education & jobs, not memes alone",
+        },
+      ],
+    },
+  },
+  {
+    slug: "ntk-2026-five-capital-model-chennai-technology-capital",
+    title:
+      "NTK 2026 five-capital model: what it means for Chennai as proposed technology capital",
+    summary:
+      "NTK distributes state functions across five cities; Chennai would be framed as technology capital rather than the sole administrative core—opportunity and adjustment both apply.",
+    dek: "Elections desk — decentralisation at manifesto scale.",
+    category: "Elections",
+    featured: false,
+    publishedAt: new Date("2026-03-26T15:00:00Z"),
+    sourceUrl: "https://mychennaicity.in/chennai-local-news/topic/elections",
+    sourceName: "mychennaicity.in analysis",
+    reportBody: `## What the model proposes
+
+As publicly described, a **five-capital** framework assigns functional roles across major centres, including:
+
+- **Chennai** — technology hub / capital
+- **Coimbatore** — industrial and business capital
+- **Tiruchirappalli** — administrative capital
+- **Madurai** — cultural centre
+- **Kanyakumari** — philosophical centre
+
+The pitch is **decentralisation architecture**, not cosmetic branding.`,
+    analysisBody: `## Chennai: upside and risk
+
+**Possible advantages:** formal recognition of Chennai’s **technology depth**; potential easing of **single-node administrative overload** over time; **statewide balance** could reduce one-city pressure.
+
+**Stakeholder concerns:** redistribution of some **institutional centrality**; **transition** risk on coordination and service delivery; unclear **sequencing** of what stays in Chennai versus what moves.
+
+**If implemented seriously:** Chennai’s role might **specialise** around tech, innovation and high-value services while **administrative concentration** shifts partly elsewhere—**power geography** becomes more networked.
+
+**Reality check:** implementation hinges on **legal pathway**, **budget**, **department sequencing**, **political continuity**, and often **Union-state** cooperation.
+
+**Editorial read (neutral):** structurally ambitious; forces debate on **concentration of power**. For Chennai it is not a simple gain/loss—it is a potential **redefinition** from all-purpose capital to **technology anchor** in a distributed system. Without **sequencing, legal clarity and financing detail**, the model remains a **vision** more than an immediately deployable programme.`,
+    interactiveJson: {
+      type: "poll",
+      question: "How do you read multi-capital proposals for Tamil Nadu?",
+      options: [
+        { id: "good", label: "Needed decentralisation" },
+        { id: "risky", label: "Too risky without a clear roadmap" },
+        { id: "learn", label: "Want more detail before judging" },
+      ],
+    },
+  },
+];
+
 async function main() {
   let cityId: string;
   const existing = await db
@@ -684,8 +878,16 @@ async function main() {
     console.log("Inserted city chennai:", cityId);
   }
 
-  const allSeeds = [...seeds, ...seedsMar2026ChennaiTop10];
-  console.log("Seeding", allSeeds.length, "articles (base + Mar 10–25 2026 Chennai top 10).");
+  const allSeeds = [
+    ...seeds,
+    ...seedsMar2026ChennaiTop10,
+    ...seedsManifesto2026Chennai,
+  ];
+  console.log(
+    "Seeding",
+    allSeeds.length,
+    "articles (base + Mar 2026 Chennai + 2026 manifesto desk).",
+  );
 
   for (const s of allSeeds) {
     const body = `${s.reportBody}\n\n---\n\n${s.analysisBody}`;
