@@ -1,8 +1,8 @@
 /**
  * Sanity-check Neon: Chennai city row + published article counts.
- * Uses same env order as db:seed (secrets/database.local.env → .env.local → .env).
  *
- *   npm run db:check
+ *   npm run db:check       — secrets/database.local.env → .env.local → .env
+ *   npm run db:check:live  — .env.production.local only (after vercel env pull)
  */
 import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
@@ -11,14 +11,23 @@ import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 
-loadEnv({ path: "secrets/database.local.env" });
-loadEnv({ path: ".env.local" });
-loadEnv({ path: ".env" });
+const live = process.argv.includes("--live");
+if (live) {
+  loadEnv({ path: ".env.production.local" });
+} else {
+  loadEnv({ path: "secrets/database.local.env" });
+  loadEnv({ path: ".env.local" });
+  loadEnv({ path: ".env" });
+}
 
 function requireDatabaseUrl(): string {
   const v = process.env.DATABASE_URL;
   if (!v) {
-    console.error("DATABASE_URL missing — add secrets/database.local.env or .env.local");
+    console.error(
+      live
+        ? "DATABASE_URL missing — run: vercel env pull .env.production.local --environment=production --yes"
+        : "DATABASE_URL missing — add secrets/database.local.env or .env.local",
+    );
     process.exit(1);
   }
   return v;

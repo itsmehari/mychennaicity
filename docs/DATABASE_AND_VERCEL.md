@@ -49,7 +49,7 @@ Direct link (team slug may vary):
 
 1. Push schema: `npm run db:push` (against dev DB) or `npm run db:push:live` (production `.env.production.local`).
 2. Seed content: `npm run db:seed` or `npm run db:seed:live`.
-3. **Verify DB:** `npm run db:check` — prints Chennai article counts and latest slugs (uses same env files as `db:seed`).
+3. **Verify DB:** `npm run db:check` (local env) or **`npm run db:check:live`** after `vercel env pull …` — prints Chennai article counts against the **production** `DATABASE_URL`.
 4. Confirm the home **News bulletin** and `/chennai-local-news` show articles.
 
 ### Home page was empty on Vercel while DB had data
