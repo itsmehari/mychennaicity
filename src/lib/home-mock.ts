@@ -259,23 +259,23 @@ export const editorsPicks: MockArticle[] = [
 export const cityPulseBullets = [
   {
     title: "Water: desal + lake recharge projects to watch this quarter",
-    href: "/news",
+    href: "/chennai-local-news/topic/chennai",
   },
   {
     title: "Roads: GCC’s termini upgrades — who gets paved first?",
-    href: "/news",
+    href: "/chennai-local-news/topic/chennai",
   },
   {
     title: "Transit: bus lane pilots and last-mile gaps at major hubs",
-    href: "/news",
+    href: "/chennai-local-news/topic/mobility",
   },
 ];
 
 export const trendingTags = [
-  { label: "Metro", href: "/news" },
-  { label: "GCC", href: "/news" },
-  { label: "Monsoon ready", href: "/news" },
-  { label: "Elections 2026", href: "/news" },
+  { label: "Metro", href: "/chennai-local-news/topic/mobility" },
+  { label: "GCC", href: "/chennai-local-news/topic/chennai" },
+  { label: "Monsoon ready", href: "/chennai-local-news/topic/chennai" },
+  { label: "Elections 2026", href: "/chennai-local-news/topic/elections" },
   { label: "Startups", href: "/jobs" },
   { label: "Heritage walks", href: "/chennai-local-events" },
 ];
@@ -310,7 +310,7 @@ export const sponsors = [
   {
     name: "Community signal",
     blurb: "Tip lines + neighbourhood WhatsApp groups — coming soon on mychennaicity.in.",
-    href: "/news",
+    href: "/chennai-local-news",
     external: false,
   },
 ];

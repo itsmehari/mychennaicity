@@ -7,6 +7,8 @@
   --surface: #ffffff;
   --surface-elevated: #ffffff;
   --border: #e8e4dc;
+  /* Home page: section dividers slightly stronger than generic borders */
+  --home-section-border: color-mix(in srgb, var(--foreground) 14%, var(--border));
   --accent: #0d6e6e;
   --accent-hover: #0a5757;
   --accent-fg: #f4fffe;
@@ -45,6 +47,7 @@
     --surface: #15141c;
     --surface-elevated: #1b1a24;
     --border: #2a2836;
+    --home-section-border: color-mix(in srgb, var(--foreground) 18%, var(--border));
     --accent: #3ec9c0;
     --accent-hover: #5fd9d0;
     --accent-fg: #051312;

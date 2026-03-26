@@ -27,7 +27,7 @@ export function Section({
       className={`scroll-mt-28 ${className}`}
       aria-labelledby={id ? `${id}-heading` : undefined}
     >
-      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           {eyebrow ? (
             <p className="type-eyebrow mb-1">{eyebrow}</p>

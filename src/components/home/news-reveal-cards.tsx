@@ -170,7 +170,21 @@ export function NewsRevealGrid({
 }
 
 export function EditorsRevealGrid({ articles }: { articles: PublicArticleRow[] }) {
-  if (!articles.length) return null;
+  if (!articles.length) {
+    return (
+      <p className="rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_65%,var(--surface))] p-6 text-sm leading-relaxed text-[var(--muted)]">
+        No featured picks loaded yet (same data source as the bulletin). Connect
+        the database and seed articles, or{" "}
+        <Link
+          href="/chennai-local-news"
+          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          browse the news front page
+        </Link>
+        .
+      </p>
+    );
+  }
   return (
     <ul className="grid gap-4 lg:grid-cols-3">
       {articles.map((a) => (

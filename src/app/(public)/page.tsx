@@ -3,6 +3,10 @@ import { Section } from "@/components/home/section";
 import { HomeAreaMap } from "@/components/home/home-area-map";
 import { HomeDbNewsSections } from "@/components/home/db-news-sections";
 import {
+  HomeSectionFrame,
+  HomeSectionInnerRule,
+} from "@/components/home/home-section-frame";
+import {
   HomeCategoryMosaic,
   HomeCityPulse,
   HomeEventsFeatured,
@@ -56,37 +60,57 @@ export default async function Home() {
   return (
     <>
       <HomeJsonLd />
-      <div className="mx-auto max-w-[1280px] space-y-16 px-4 py-10 sm:py-14">
+      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
         <HomeHero />
-        <HomeTrustStrip />
-
-        <HomeCategoryMosaic />
-
-        <HomeZoneShortcuts />
-
-        <Section
-          id="areas"
-          eyebrow="Neighbourhoods"
-          title="Greater Chennai area map"
-          subtitle="Click a tile to open its hub — listings and filters wire in as the database goes live."
-          action={{ href: "/directory", label: "Browse all listings" }}
-        >
-          <HomeAreaMap />
-        </Section>
-
-        <HomeStatsRibbon />
-
-        <HomeJobsSpotlight />
-        <HomeEventsFeatured />
-        <HomeMarketplaceTeaser />
-
-        <HomeTrendingTags />
-        <HomeDbNewsSections latest={latest} featured={editorPicks} />
-        <HomeCityPulse />
-
-        <HomeSeasonalHub />
-        <HomeSponsoredRow />
-        <HomeCommunityBand />
+        <HomeSectionFrame>
+          <HomeTrustStrip />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <div className="flex flex-col gap-12 sm:gap-14">
+            <HomeCategoryMosaic />
+            <HomeZoneShortcuts />
+          </div>
+        </HomeSectionFrame>
+        <HomeSectionFrame id="areas">
+          <Section
+            eyebrow="Neighbourhoods"
+            title="Greater Chennai area map"
+            subtitle="Click a tile to open its hub — listings and filters wire in as the database goes live."
+            action={{ href: "/directory", label: "Browse all listings" }}
+          >
+            <HomeAreaMap />
+          </Section>
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeStatsRibbon />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeJobsSpotlight />
+          <HomeSectionInnerRule>
+            <HomeEventsFeatured />
+          </HomeSectionInnerRule>
+          <HomeSectionInnerRule>
+            <HomeMarketplaceTeaser />
+          </HomeSectionInnerRule>
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeTrendingTags />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeDbNewsSections latest={latest} featured={editorPicks} />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeCityPulse />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeSeasonalHub />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeSponsoredRow />
+        </HomeSectionFrame>
+        <HomeSectionFrame className="border-b border-[var(--home-section-border)] pb-12 sm:pb-16">
+          <HomeCommunityBand />
+        </HomeSectionFrame>
       </div>
     </>
   );
