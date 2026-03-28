@@ -1,7 +1,45 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { PublicArticleRow } from "@/domains/news";
+import {
+  articleHeroUsesNextImage,
+  resolveArticleHeroSrc,
+} from "@/lib/article-hero-image";
 import { categoryToTopicSlug } from "@/lib/news-topics";
+
+function ArticleListThumbnail({
+  article,
+}: {
+  article: Pick<PublicArticleRow, "slug" | "heroImageUrl" | "title">;
+}) {
+  const src = resolveArticleHeroSrc(article);
+  const useNext = articleHeroUsesNextImage(src);
+  return (
+    <div
+      className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-md bg-[var(--border)] ring-1 ring-[color-mix(in_srgb,var(--foreground)_8%,transparent)] sm:h-16 sm:w-24"
+      aria-hidden
+    >
+      {useNext ? (
+        <Image
+          src={src}
+          alt=""
+          fill
+          className="object-cover transition duration-200 group-hover:scale-[1.04]"
+          sizes="(max-width: 640px) 72px, 96px"
+        />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element -- arbitrary editorial CDNs not in remotePatterns
+        <img
+          src={src}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition duration-200 group-hover:scale-[1.04]"
+          loading="lazy"
+        />
+      )}
+    </div>
+  );
+}
 
 export function NewspaperMasthead({
   title = "Chennai local news",
@@ -94,19 +132,25 @@ export function LeadStory({
 
 export function StoryCardCompact({ article }: { article: PublicArticleRow }) {
   return (
-    <article className="group border-b border-[var(--border)] py-4 last:border-0">
-      <Link href={`/chennai-local-news/${article.slug}`} className="block">
-        {article.category ? (
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-            {article.category}
-          </span>
-        ) : null}
-        <h3 className="mt-1 text-base font-semibold leading-snug tracking-tight text-[var(--foreground)] group-hover:underline">
-          {article.title}
-        </h3>
-        <p className="mt-1 line-clamp-2 text-xs text-[var(--muted)]">
-          {article.dek ?? article.summary ?? ""}
-        </p>
+    <article className="group break-inside-avoid border-b border-[var(--border)] py-4 last:border-0">
+      <Link
+        href={`/chennai-local-news/${article.slug}`}
+        className="flex gap-3 sm:gap-4"
+      >
+        <ArticleListThumbnail article={article} />
+        <div className="min-w-0 flex-1">
+          {article.category ? (
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
+              {article.category}
+            </span>
+          ) : null}
+          <h3 className="mt-1 text-base font-semibold leading-snug tracking-tight text-[var(--foreground)] group-hover:underline">
+            {article.title}
+          </h3>
+          <p className="mt-1 line-clamp-2 text-xs text-[var(--muted)]">
+            {article.dek ?? article.summary ?? ""}
+          </p>
+        </div>
       </Link>
     </article>
   );

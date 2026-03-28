@@ -860,6 +860,56 @@ The pitch is **decentralisation architecture**, not cosmetic branding.`,
   },
 ];
 
+/** Editorial hero images (stored in hero_image_url). Unlisted slugs keep Picsum placeholders. */
+const ARTICLE_HERO_IMAGE_URLS: Record<string, string> = {
+  "bjp-goyal-tn-nda-seat-sharing":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/ed35b582edba400b53bc071e3b6a7f810adaaff2.jpg",
+  "thousand-lights-ezhilan-field-work":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/3de969c7067a52b06ea130e3c1b5f13d9cebfc39.jpg",
+  "mnm-skips-2026-polls-kamal-dmk-alliance-campaign":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/021af892858eac81456b2e8bfd4ea3ec69e40156.jpg",
+  "aiadmk-2026-manifesto-welfare-chennai-cost-of-living":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e2f5a128e521f7c29d528573b9e6bc58e95139ed.jpg",
+  "dmk-2026-manifesto-consultation-chennai-stability":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/dddc0d44209a90c43a1d0b0ee2d38fb22fc989d9.jpg",
+  "tvk-2026-youth-education-chennai-first-time-voters":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/202c963c28f295d3453c6f59d209d1721d484891.jpg",
+  "ntk-2026-five-capital-model-chennai-technology-capital":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2b6f694f600a28b7184addcf5d17557324177d08.jpg",
+  "chennai-polls-cash-valuables-proof":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/bcd00e602103fb7356c226162e759953660c3920.jpg",
+  "chennai-128-election-surveillance-vehicles":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/2872a4fcb30961d4b810335147c254d413be8055.jpg",
+  "chennai-poll-surveillance-seizures":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/3041df03f97e915e4c20702e7e701f6e77c222ea.jpg",
+  "mapedu-multimodal-logistics-phase-one":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6dc8c82df482b852d9ffb5e2a6e727cc6f0fd155.jpg",
+  "chennai-arterial-road-widening-gcc":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/234008a0aa3250e6cb31ecd02e5bbc61d9deeb36.jpg",
+  "chennai-pre-monsoon-electrical-safety-advisory":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/25c8982123f22b653975270b780edc4b3b475622.jpg",
+  "chennai-gcc-single-use-plastic-drive-mar-10":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6ecdca88908f7f5c16c49406880ade7618aa6d6b.jpg",
+  "kodungaiyur-dumpyard-smoke-march-2026":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/50cb39eea205a93ddd90632f4218fdbadf235421.jpg",
+  "chennai-fuel-prices-march-22-2026":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e090635a0435b51a55af49c956940ff1b3a191a8.jpg",
+  "chennai-metro-peak-hour-crowding-advisory-mar-18":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/ea6798c899620250a5b64275b54a4f4c542608cc.jpg",
+  "chennai-marina-coastguard-lifeguard-drill-mar-19":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/f5b0a84b952e1ae7a8a9d9bb7aaea48882321ccb.jpg",
+  "omr-it-hiring-signals-q1-2026-chennai":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a7c12d7c4cbce9aa5888b110399e10207f63ccd0.jpg",
+  "chennai-board-exams-helplines-student-stress-mar-22":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/38362108b2aac04c294c2acd382e10db601d73fb.jpg",
+  "chennai-summer-water-tanker-advisory-mar-25":
+    "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/cfaefb28f01ecb65b3d27b7f99edc799cd6d7713.jpg",
+};
+
+function heroUrlForSlug(slug: string): string {
+  return ARTICLE_HERO_IMAGE_URLS[slug] ?? picsumHeroUrlForSlug(slug);
+}
+
 async function main() {
   let cityId: string;
   const existing = await db
@@ -899,7 +949,7 @@ async function main() {
         and(eq(articles.cityId, cityId), eq(articles.slug, s.slug)),
       )
       .limit(1);
-    const heroImageUrl = picsumHeroUrlForSlug(s.slug);
+    const heroImageUrl = heroUrlForSlug(s.slug);
     const values = {
       cityId,
       slug: s.slug,
