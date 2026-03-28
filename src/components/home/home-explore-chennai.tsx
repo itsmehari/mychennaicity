@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const EXPLORE_MAIN_IMAGE =
-  "https://nobroker.in/blog/wp-content/uploads/2025/09/upcoming-infrastructure-projects-in-chennai.webp";
+const EXPLORE_MAIN_IMAGE = "/images/explore-chennai-madras-high-court.jpg";
+
+const EXPLORE_INSET_IMAGE = "/images/explore-chennai-kapaleeshwar-temple.jpg";
 
 const FEATURES = [
   "Schools, colleges & learning hubs",
@@ -47,7 +48,7 @@ export function HomeExploreChennai() {
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm border-[3px] border-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] dark:border-[color-mix(in_srgb,var(--border)_70%,white)]">
             <Image
               src={EXPLORE_MAIN_IMAGE}
-              alt="Upcoming infrastructure projects in Chennai — roads, transit, and city development"
+              alt="Madras High Court building, Chennai"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 45vw"
@@ -59,12 +60,11 @@ export function HomeExploreChennai() {
             style={{ aspectRatio: "1" }}
           >
             <Image
-              src={EXPLORE_MAIN_IMAGE}
-              alt=""
+              src={EXPLORE_INSET_IMAGE}
+              alt="Kapaleeshwarar Temple gopuram, Chennai"
               fill
-              className="object-cover object-[78%_35%]"
+              className="object-cover object-[center_25%]"
               sizes="220px"
-              aria-hidden
             />
           </div>
         </div>

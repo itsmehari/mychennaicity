@@ -6,8 +6,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "picsum.photos", pathname: "/**" },
       { protocol: "https", hostname: "fastly.picsum.photos", pathname: "/**" },
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
-      { protocol: "https", hostname: "nobroker.in", pathname: "/blog/wp-content/uploads/**" },
-      { protocol: "https", hostname: "www.nobroker.in", pathname: "/blog/wp-content/uploads/**" },
     ],
   },
   async redirects() {
