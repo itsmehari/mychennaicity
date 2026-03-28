@@ -63,3 +63,59 @@ The app used **static generation** for `/` at build time. If `DATABASE_URL` was 
 - Treat `DATABASE_URL` like a password: **no commits**, no Slack/Discord, no chat logs.
 - If leaked: **rotate** credentials in Neon and update Vercel + `secrets/database.local.env` + `.env.local`.
 - The `secrets/` copy is for **your machine and trusted backups** only; CI should use Vercel/GitHub **encrypted secrets**, not files in the repo.
+
+---
+
+## Production data: ways to add or update content (avoid local-only pain)
+
+Local `vercel login` + `.env.production.local` works but breaks easily (new machine, no CLI session, OneDrive paths). Anything below uses **the same `DATABASE_URL` production already has**, without copying secrets into chat.
+
+### 1. **CI job (recommended for seeds and migrations)**
+
+Store **`DATABASE_URL`** (production pooled URI) as a **GitHub Actions secret** (e.g. `PRODUCTION_DATABASE_URL`). Add a **manual** workflow (`workflow_dispatch`) that checks out the repo, runs `npm ci`, then:
+
+- `npx drizzle-kit push` (or migrate) with `DATABASE_URL` set from the secret, and  
+- `npm run db:seed` **or** a dedicated `tsx scripts/your-seed.ts` that only upserts what you need.
+
+**Why it helps:** One place to run “push schema + seed”; no Vercel CLI on your laptop; audit log in GitHub; you can require branch protection / approvals later.
+
+**Caveat:** Rotating the Neon password means updating **both** Vercel env and the GitHub secret.
+
+### 2. **Protected API route on Vercel (good for “run seed from production”)**
+
+Add something like `POST /api/admin/reseed` (name it clearly) that:
+
+- Checks a shared secret: `Authorization: Bearer <ADMIN_SEED_SECRET>` (value only in **Vercel env**, never committed).  
+- Runs the same **idempotent** upsert logic your seed script uses (import shared functions or call a small internal module).  
+- Returns JSON with row counts / errors.
+
+**Why it helps:** `DATABASE_URL` is already injected on Vercel — **no env pull**. You trigger from curl, Postman, or a private admin page.
+
+**Caveats:** Serverless **timeouts** (keep work under the limit or split into steps); **never** expose the route without the secret; rate-limit / IP allowlist if you can.
+
+### 3. **Vercel Cron + tiny endpoint (optional)**
+
+Same as (2) but triggered on a schedule — only if you truly need periodic sync from an external source. Usually unnecessary for editorial seed data.
+
+### 4. **Admin UI (longer term)**
+
+Use **Auth.js** (or similar) with an **admin role**, then build forms or “import JSON” that insert/update rows via Drizzle. Production DB is touched only by **logged-in admins**. Best for day-to-day content; seeds remain for bulk bootstrap.
+
+### 5. **Keep the local path as a backup**
+
+`vercel env pull .env.production.local --environment=production` + `npm run db:push:live` / `db:seed:live` / `db:check:live` stays valid for debugging from a trusted machine.
+
+### Practical rule
+
+| Situation | Prefer |
+|-----------|--------|
+| Bulk seed / schema sync after deploy | **GitHub Action** with `PRODUCTION_DATABASE_URL` |
+| “I’m on a random PC, no CLI” | **Protected reseed route** + secret header |
+| Daily editorial work | **Admin UI** (when you build it) |
+| One-off SQL | **Neon SQL Editor** (small, careful changes) |
+
+**Single source of truth:** Put upsert logic in **one module** (e.g. shared between `scripts/seed-articles.ts` and a future `app/api/admin/reseed/route.ts`) so production and local never drift.
+
+### 6. **Cursor MCP server (local)**
+
+This repo includes **`mcp/production-data`**: a small **stdio MCP** that runs `db:check:live`, `db:seed:live`, and `db:push:live` against **`MYCITY_DATABASE_URL`** (or `DATABASE_URL`) configured in **Cursor MCP settings** — no `vercel env pull` required for those commands. See **`mcp/production-data/README.md`** for install and JSON config. Destructive actions require explicit acknowledgement strings in the tool arguments.

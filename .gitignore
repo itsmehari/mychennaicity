@@ -43,6 +43,9 @@ yarn-error.log*
 # Cursor IDE (local skills; do not ship in app repo)
 .cursor/
 
+# MCP server dependencies (run npm install in mcp/production-data)
+mcp/production-data/node_modules/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

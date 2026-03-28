@@ -5,7 +5,6 @@ import {
   JobsSpotlightList,
 } from "@/components/home/home-spotlights";
 import {
-  categoryTiles,
   cityPulseBullets,
   homeStats,
   mockListings,
@@ -13,6 +12,7 @@ import {
   trendingTags,
   zoneShortcuts,
 } from "@/lib/home-mock";
+import { HomeExploreChennai } from "./home-explore-chennai";
 
 export { HomeHero } from "./home-hero";
 
@@ -101,39 +101,9 @@ export function HomeTrustStrip() {
   );
 }
 
+/** Two-column “Explore Chennai” editorial block (directory CTA + feature list). */
 export function HomeCategoryMosaic() {
-  return (
-    <Section
-      eyebrow="Directory"
-      title="Explore Chennai"
-      subtitle="Directory tiles pick up live counts once the unified listings API lands."
-      action={{ href: "/directory", label: "Full directory" }}
-    >
-      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {categoryTiles.map((c) => (
-          <li key={c.label}>
-            <Link
-              href={c.href}
-              className="home-bento-tile flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] border-t-4 border-t-[var(--accent)] bg-[var(--surface)] p-4 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              <span
-                className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] text-2xl"
-                aria-hidden
-              >
-                {c.emoji}
-              </span>
-              <span className="mt-3 text-sm font-bold text-[var(--foreground)]">
-                {c.label}
-              </span>
-              <span className="mt-1 text-xs font-medium text-[var(--muted)]">
-                {c.count} listings
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
+  return <HomeExploreChennai />;
 }
 
 export function HomeZoneShortcuts() {

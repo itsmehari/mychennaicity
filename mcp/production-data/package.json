@@ -1,0 +1,21 @@
+{
+  "name": "@mychennaicity/mcp-production-data",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MCP tools to check/seed/push schema against production Neon using DATABASE_URL from MCP env",
+  "type": "module",
+  "bin": {
+    "mychennaicity-mcp-production-data": "./src/server.mjs"
+  },
+  "scripts": {
+    "start": "node src/server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@neondatabase/serverless": "^1.0.2",
+    "zod": "^4.3.6"
+  }
+}

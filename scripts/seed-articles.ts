@@ -10,6 +10,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
+import { picsumHeroUrlForSlug } from "../src/lib/article-hero-image";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -898,6 +899,7 @@ async function main() {
         and(eq(articles.cityId, cityId), eq(articles.slug, s.slug)),
       )
       .limit(1);
+    const heroImageUrl = picsumHeroUrlForSlug(s.slug);
     const values = {
       cityId,
       slug: s.slug,
@@ -914,6 +916,7 @@ async function main() {
       status: "published" as const,
       publishedAt: s.publishedAt,
       featured: s.featured,
+      heroImageUrl,
     };
     if (row[0]) {
       await db
@@ -932,6 +935,7 @@ async function main() {
           status: "published",
           publishedAt: s.publishedAt,
           featured: s.featured,
+          heroImageUrl,
           updatedAt: new Date(),
         })
         .where(eq(articles.id, row[0].id));

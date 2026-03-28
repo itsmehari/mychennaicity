@@ -1,8 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { PublicArticleRow } from "@/domains/news";
+import {
+  articleHeroUsesNextImage,
+  resolveArticleHeroSrc,
+} from "@/lib/article-hero-image";
 
 function formatDate(d: Date | null) {
   if (!d) return "";
@@ -12,25 +17,74 @@ function formatDate(d: Date | null) {
   });
 }
 
+function CardHeroImage({
+  src,
+  alt,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  priority?: boolean;
+}) {
+  const useNext = articleHeroUsesNextImage(src);
+
+  return (
+    <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[var(--border)]">
+      {useNext ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover transition duration-300 group-hover:scale-[1.03]"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          priority={priority}
+        />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element -- arbitrary editorial CDNs not in remotePatterns
+        <img
+          src={src}
+          alt={alt}
+          className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+          loading={priority ? "eager" : "lazy"}
+        />
+      )}
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"
+        aria-hidden
+      />
+    </div>
+  );
+}
+
 export function NewsRevealCard({
   article,
   variant = "bulletin",
+  imagePriority = false,
 }: {
   article: PublicArticleRow;
   variant?: "bulletin" | "pick";
+  imagePriority?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const href = `/chennai-local-news/${article.slug}`;
   const isPick = variant === "pick";
+  const heroSrc = resolveArticleHeroSrc(article);
 
   return (
     <div
-      className={`rounded-2xl border transition ${
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl border shadow-sm transition hover:shadow-md ${
         isPick
-          ? "border-[var(--border)] bg-[var(--foreground)] text-[var(--background)]"
-          : "border-[var(--border)] bg-[var(--surface)]"
-      } ${open ? "border-[var(--accent)] shadow-md ring-1 ring-[var(--accent)]/20" : ""}`}
+          ? "border-[var(--border)] bg-[var(--foreground)] text-[var(--background)] ring-1 ring-[color-mix(in_srgb,var(--foreground)_12%,transparent)]"
+          : "border-[var(--border)] bg-[var(--surface)] ring-1 ring-[color-mix(in_srgb,var(--foreground)_4%,transparent)]"
+      } ${open ? "border-[var(--accent)] shadow-md ring-2 ring-[var(--accent)]/25" : ""}`}
     >
+      <Link
+        href={href}
+        className="relative block shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)]"
+      >
+        <CardHeroImage src={heroSrc} alt={article.title} priority={imagePriority} />
+      </Link>
+
       <button
         type="button"
         className="flex w-full flex-col p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] md:hidden"
@@ -47,7 +101,7 @@ export function NewsRevealCard({
           {article.category ?? "Chennai"}
         </span>
         <span
-          className={`mt-2 text-sm font-semibold leading-snug ${
+          className={`mt-2 text-base font-semibold leading-snug ${
             isPick ? "" : "text-[var(--foreground)]"
           }`}
         >
@@ -80,9 +134,9 @@ export function NewsRevealCard({
         ) : null}
       </button>
 
-      <div className="hidden md:block">
+      <div className="hidden min-h-0 flex-1 flex-col md:flex">
         <div
-          className="p-5"
+          className="flex flex-1 flex-col p-5 pt-4"
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
         >
@@ -97,7 +151,7 @@ export function NewsRevealCard({
           </span>
           <Link href={href}>
             <h3
-              className={`mt-2 text-sm font-semibold leading-snug ${
+              className={`mt-2 text-base font-semibold leading-snug tracking-tight ${
                 isPick ? "" : "text-[var(--foreground)]"
               } hover:underline`}
             >
@@ -114,13 +168,13 @@ export function NewsRevealCard({
             {formatDate(article.publishedAt)}
           </p>
           <div
-            className={`grid transition-all duration-200 ${
+            className={`grid flex-1 transition-all duration-200 ${
               open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
             }`}
           >
-            <div className="overflow-hidden">
+            <div className="min-h-0 overflow-hidden">
               <p
-                className={`mt-3 text-sm ${
+                className={`mt-3 text-sm leading-relaxed ${
                   isPick ? "opacity-90" : "text-[var(--muted)]"
                 }`}
               >
@@ -159,10 +213,10 @@ export function NewsRevealGrid({
     );
   }
   return (
-    <ul className="grid gap-4 lg:grid-cols-2">
-      {articles.map((a) => (
-        <li key={a.id}>
-          <NewsRevealCard article={a} variant={variant} />
+    <ul className="grid gap-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2 lg:gap-6">
+      {articles.map((a, i) => (
+        <li key={a.id} className="flex min-h-0">
+          <NewsRevealCard article={a} variant={variant} imagePriority={i < 2} />
         </li>
       ))}
     </ul>
@@ -186,10 +240,10 @@ export function EditorsRevealGrid({ articles }: { articles: PublicArticleRow[] }
     );
   }
   return (
-    <ul className="grid gap-4 lg:grid-cols-3">
-      {articles.map((a) => (
-        <li key={a.id}>
-          <NewsRevealCard article={a} variant="pick" />
+    <ul className="grid gap-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+      {articles.map((a, i) => (
+        <li key={a.id} className="flex min-h-0">
+          <NewsRevealCard article={a} variant="pick" imagePriority={i < 3} />
         </li>
       ))}
     </ul>
