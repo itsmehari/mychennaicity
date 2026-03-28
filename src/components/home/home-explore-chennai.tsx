@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const EXPLORE_MAIN_IMAGE =
+  "https://nobroker.in/blog/wp-content/uploads/2025/09/upcoming-infrastructure-projects-in-chennai.webp";
+
 const FEATURES = [
   "Schools, colleges & learning hubs",
   "Hospitals & neighbourhood clinics",
@@ -43,8 +46,8 @@ export function HomeExploreChennai() {
         <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm border-[3px] border-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] dark:border-[color-mix(in_srgb,var(--border)_70%,white)]">
             <Image
-              src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1200&q=80&auto=format&fit=crop"
-              alt="Chennai skyline and Bay of Bengal shoreline"
+              src={EXPLORE_MAIN_IMAGE}
+              alt="Upcoming infrastructure projects in Chennai — roads, transit, and city development"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 45vw"
@@ -56,11 +59,12 @@ export function HomeExploreChennai() {
             style={{ aspectRatio: "1" }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1561361058-ed9dadc8e7ff?w=600&q=80&auto=format&fit=crop"
-              alt="Historic architecture and streets in South India"
+              src={EXPLORE_MAIN_IMAGE}
+              alt=""
               fill
-              className="object-cover"
+              className="object-cover object-[78%_35%]"
               sizes="220px"
+              aria-hidden
             />
           </div>
         </div>
