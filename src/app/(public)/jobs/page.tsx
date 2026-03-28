@@ -6,8 +6,10 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
-import { homeStats, mockJobs } from "@/lib/home-mock";
+import { listOpenJobPostingsForChennaiHub } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
+import { homeStats, mockJobs } from "@/lib/home-mock";
+import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 
 export const metadata: Metadata = {
   title: "Jobs",
@@ -19,27 +21,70 @@ export const metadata: Metadata = {
     description:
       "Hand-picked roles — open employer sites for full job descriptions.",
     url: `${getSiteUrl()}/jobs`,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chennai jobs | mychennaicity.in",
+    description:
+      "Hand-picked Greater Chennai roles — verify on employer career sites.",
+    images: ["/twitter-image"],
   },
 };
 
-export default function JobsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function JobsPage() {
+  let dbJobs: Awaited<ReturnType<typeof listOpenJobPostingsForChennaiHub>> = [];
+  try {
+    dbJobs = await listOpenJobPostingsForChennaiHub(40);
+  } catch {
+    dbJobs = [];
+  }
+  const useDb = dbJobs.length > 0;
+  const hubLd = useDb ? buildJobsHubJsonLd(dbJobs) : null;
+
   return (
     <div className={interiorMainClassName}>
+      {hubLd ? (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(hubLd.collectionPage),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd.itemList) }}
+          />
+        </>
+      ) : null}
       <PageBreadcrumbs items={[{ label: "Home", href: "/" }, { label: "Jobs" }]} />
       <p className="type-eyebrow text-[var(--accent)]">Jobs</p>
       <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
         Work in Greater Chennai
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-        This page highlights roles that anchor in Chennai or the wider
-        metro — especially tech product, platform, and editorial work we watch
-        for the city. Each external row opens the employer&apos;s careers site;
-        always read the full JD and confirm location before you apply. Snapshot
-        refreshed{" "}
-        <strong className="font-medium text-[var(--foreground)]">
-          25 Mar 2026
-        </strong>
-        .
+        This page highlights roles that anchor in Chennai or the wider metro —
+        especially tech product, platform, and editorial work we watch for the
+        city.
+        {useDb ? (
+          <>
+            {" "}
+            Open roles below link to <strong className="font-medium text-[var(--foreground)]">full listings on this site</strong>; confirm details before you apply.
+          </>
+        ) : (
+          <>
+            {" "}
+            Each external row opens the employer&apos;s careers site; always read
+            the full JD and confirm location before you apply. Snapshot refreshed{" "}
+            <strong className="font-medium text-[var(--foreground)]">
+              25 Mar 2026
+            </strong>
+            .
+          </>
+        )}
       </p>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -79,33 +124,51 @@ export default function JobsPage() {
       </div>
 
       <ul className="mt-10 space-y-4">
-        {mockJobs.map((j) => (
-          <li
-            key={`${j.href}-${j.title}`}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-          >
-            {j.external ? (
-              <a
-                href={j.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+        {useDb
+          ? dbJobs.map(({ job, employer }) => (
+              <li
+                key={job.id}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
               >
-                <span className="text-sm font-semibold">{j.title}</span>
-                <span className="mt-1 block text-xs text-[var(--muted)]">
-                  {j.company} · {j.location} · opens in new tab
-                </span>
-              </a>
-            ) : (
-              <div className="text-[var(--foreground)]">
-                <span className="text-sm font-semibold">{j.title}</span>
-                <span className="mt-1 block text-xs text-[var(--muted)]">
-                  {j.company} · {j.location} · apply on site (soon)
-                </span>
-              </div>
-            )}
-          </li>
-        ))}
+                <Link
+                  href={`/jobs/${job.slug}`}
+                  className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+                >
+                  <span className="text-sm font-semibold">{job.title}</span>
+                  <span className="mt-1 block text-xs text-[var(--muted)]">
+                    {employer.name} · {job.locationLabel ?? "Chennai"} · full
+                    listing on site
+                  </span>
+                </Link>
+              </li>
+            ))
+          : mockJobs.map((j) => (
+              <li
+                key={`${j.href}-${j.title}`}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
+              >
+                {j.external ? (
+                  <a
+                    href={j.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+                  >
+                    <span className="text-sm font-semibold">{j.title}</span>
+                    <span className="mt-1 block text-xs text-[var(--muted)]">
+                      {j.company} · {j.location} · opens in new tab
+                    </span>
+                  </a>
+                ) : (
+                  <div className="text-[var(--foreground)]">
+                    <span className="text-sm font-semibold">{j.title}</span>
+                    <span className="mt-1 block text-xs text-[var(--muted)]">
+                      {j.company} · {j.location} · apply on site (soon)
+                    </span>
+                  </div>
+                )}
+              </li>
+            ))}
       </ul>
 
       <Section

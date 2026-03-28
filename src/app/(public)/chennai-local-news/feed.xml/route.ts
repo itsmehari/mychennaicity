@@ -3,6 +3,10 @@ import { getSiteUrl } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * RSS 2.0 — item `description` uses excerpt only (summary → dek → title).
+ * See docs/CONTENT_ARCHITECTURE.md → RSS.
+ */
 export async function GET() {
   const base = getSiteUrl();
   let items: Awaited<ReturnType<typeof listPublishedArticlesForChennai>> = [];

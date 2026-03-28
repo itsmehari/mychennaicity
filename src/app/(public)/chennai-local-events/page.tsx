@@ -6,8 +6,10 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
-import { homeStats, mockEvents } from "@/lib/home-mock";
+import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
+import { homeStats, mockEvents } from "@/lib/home-mock";
+import { buildEventsHubJsonLd } from "@/lib/seo/events-hub-jsonld";
 
 const canonicalPath = "/chennai-local-events";
 
@@ -21,12 +23,54 @@ export const metadata: Metadata = {
     description:
       "Festivals, meetups, and civic calendars for Greater Chennai — from core city to OMR and suburbs.",
     url: `${getSiteUrl()}${canonicalPath}`,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chennai local events | mychennaicity.in",
+    description:
+      "Temple festivals, culture, meetups, and civic dates across Greater Chennai.",
+    images: ["/twitter-image"],
   },
 };
 
-export default function ChennaiLocalEventsPage() {
+export const dynamic = "force-dynamic";
+
+function formatEventWhen(startsAt: Date, endsAt: Date | null, allDay: boolean) {
+  const opts: Intl.DateTimeFormatOptions = allDay
+    ? { dateStyle: "medium", timeZone: "Asia/Kolkata" }
+    : { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Kolkata" };
+  const a = startsAt.toLocaleString("en-IN", opts);
+  if (!endsAt || +endsAt === +startsAt) return a;
+  return `${a} – ${endsAt.toLocaleString("en-IN", opts)}`;
+}
+
+export default async function ChennaiLocalEventsPage() {
+  let dbEvents: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
+  try {
+    dbEvents = await listPublicEventsForChennaiHub(40);
+  } catch {
+    dbEvents = [];
+  }
+  const useDb = dbEvents.length > 0;
+  const hubLd = useDb ? buildEventsHubJsonLd(dbEvents) : null;
+
   return (
     <div className={interiorMainClassName}>
+      {hubLd ? (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(hubLd.collectionPage),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd.itemList) }}
+          />
+        </>
+      ) : null}
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -39,12 +83,23 @@ export default function ChennaiLocalEventsPage() {
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
         Temple utsavams, concerts, theatre, lit fests, and neighbourhood
-        gatherings across Greater Chennai. Below is a{" "}
-        <strong className="font-medium text-[var(--foreground)]">
-          curated snapshot (updated 25 Mar 2026)
-        </strong>
-        — always confirm dates, venue gates, and tickets on the organiser or
-        ticket site before you travel.
+        gatherings across Greater Chennai.
+        {useDb ? (
+          <>
+            {" "}
+            Below lists <strong className="font-medium text-[var(--foreground)]">upcoming on-site events</strong> from our database — confirm on the organiser before you travel.
+          </>
+        ) : (
+          <>
+            {" "}
+            Below is a{" "}
+            <strong className="font-medium text-[var(--foreground)]">
+              curated snapshot (updated 25 Mar 2026)
+            </strong>
+            — always confirm dates, venue gates, and tickets on the organiser or
+            ticket site before you travel.
+          </>
+        )}
       </p>
 
       <div className="mt-8 flex flex-wrap gap-3">
@@ -80,33 +135,54 @@ export default function ChennaiLocalEventsPage() {
       </div>
 
       <ul className="mt-10 space-y-4">
-        {mockEvents.map((e) => (
-          <li
-            key={`${e.href}-${e.title}`}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-          >
-            {e.external ? (
-              <a
-                href={e.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+        {useDb
+          ? dbEvents.map((e) => (
+              <li
+                key={e.id}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
               >
-                <span className="text-sm font-semibold">{e.title}</span>
-                <span className="mt-1 block text-xs text-[var(--muted)]">
-                  {e.when} · {e.where} · opens in new tab
-                </span>
-              </a>
-            ) : (
-              <div className="text-[var(--foreground)]">
-                <span className="text-sm font-semibold">{e.title}</span>
-                <span className="mt-1 block text-xs text-[var(--muted)]">
-                  {e.when} · {e.where}
-                </span>
-              </div>
-            )}
-          </li>
-        ))}
+                <Link
+                  href={`/chennai-local-events/${e.slug}`}
+                  className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+                >
+                  <span className="text-sm font-semibold">{e.title}</span>
+                  <span className="mt-1 block text-xs text-[var(--muted)]">
+                    {formatEventWhen(e.startsAt, e.endsAt, e.allDay)}
+                    {e.venueName ? ` · ${e.venueName}` : null}
+                    {e.localityLabel ? ` · ${e.localityLabel}` : null}
+                    {" · "}
+                    Full detail on site
+                  </span>
+                </Link>
+              </li>
+            ))
+          : mockEvents.map((e) => (
+              <li
+                key={`${e.href}-${e.title}`}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
+              >
+                {e.external ? (
+                  <a
+                    href={e.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+                  >
+                    <span className="text-sm font-semibold">{e.title}</span>
+                    <span className="mt-1 block text-xs text-[var(--muted)]">
+                      {e.when} · {e.where} · opens in new tab
+                    </span>
+                  </a>
+                ) : (
+                  <div className="text-[var(--foreground)]">
+                    <span className="text-sm font-semibold">{e.title}</span>
+                    <span className="mt-1 block text-xs text-[var(--muted)]">
+                      {e.when} · {e.where}
+                    </span>
+                  </div>
+                )}
+              </li>
+            ))}
       </ul>
 
       <Section

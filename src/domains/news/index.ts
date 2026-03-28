@@ -11,4 +11,5 @@ export {
   listTopicKeysForChennai,
   relatedArticlesForChennai,
   type PublicArticleRow,
+  type SitemapArticleRow,
 } from "./queries";

@@ -1,4 +1,10 @@
 /** Minimal markdown-like rendering for seeded article bodies (## headings, **bold**, lists). */
+
+export type ArticleHeadingAnchor = {
+  level: 2 | 3;
+  id: string;
+};
+
 function formatInline(text: string) {
   const parts = text.split(/(\*\*.+?\*\*)/g);
   return parts.map((part, i) => {
@@ -10,16 +16,35 @@ function formatInline(text: string) {
   });
 }
 
-export function ArticleProse({ content }: { content: string }) {
+export function ArticleProse({
+  content,
+  headingAnchors,
+}: {
+  content: string;
+  /** In document order for ## then ### only; consumes sequentially. */
+  headingAnchors?: ArticleHeadingAnchor[];
+}) {
+  let anchorIdx = 0;
+  const nextAnchor = (level: 2 | 3) => {
+    const a = headingAnchors?.[anchorIdx];
+    if (a && a.level === level) {
+      anchorIdx += 1;
+      return a.id;
+    }
+    return undefined;
+  };
+
   const blocks = content.split(/\n\n+/);
   return (
     <div className="space-y-4 text-[15px] leading-relaxed text-[var(--foreground)]">
       {blocks.map((block, i) => {
         const line = block.trim();
         if (line.startsWith("## ")) {
+          const id = nextAnchor(2);
           return (
             <h2
               key={i}
+              id={id}
               className="mt-8 scroll-mt-28 text-xl font-semibold tracking-tight text-[var(--foreground)] first:mt-0"
             >
               {formatInline(line.slice(3).trim())}
@@ -27,10 +52,12 @@ export function ArticleProse({ content }: { content: string }) {
           );
         }
         if (line.startsWith("### ")) {
+          const id = nextAnchor(3);
           return (
             <h3
               key={i}
-              className="mt-6 text-lg font-semibold text-[var(--foreground)]"
+              id={id}
+              className="mt-6 scroll-mt-28 text-lg font-semibold text-[var(--foreground)]"
             >
               {formatInline(line.slice(4).trim())}
             </h3>

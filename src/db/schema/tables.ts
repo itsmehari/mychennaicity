@@ -64,6 +64,11 @@ export const articles = pgTable(
     publishedAt: timestamp("published_at", { withTimezone: true }),
     featured: boolean("featured").notNull().default(false),
     heroImageUrl: text("hero_image_url"),
+    /** Optional macro hub slug; must match `chennaiZones` when set. */
+    areaHubSlug: text("area_hub_slug"),
+    authorByline: text("author_byline"),
+    /** Comma-separated profile URLs for JSON-LD Person.sameAs */
+    authorSameAs: text("author_same_as"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -128,6 +133,9 @@ export const jobPostings = pgTable(
     remotePolicy: text("remote_policy").notNull().default("onsite"),
     openingsCount: integer("openings_count").notNull().default(1),
     status: jobPostingStatusEnum("status").notNull().default("draft"),
+    validThrough: timestamp("valid_through", { withTimezone: true }),
+    /** e.g. FULL_TIME, PART_TIME, CONTRACTOR */
+    employmentType: text("employment_type"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },

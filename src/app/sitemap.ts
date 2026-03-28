@@ -1,5 +1,11 @@
 import type { MetadataRoute } from "next";
-import { listArticlesForSitemap, listTopicKeysForChennai } from "@/domains/news";
+import { listEventsForSitemap } from "@/domains/events";
+import { listJobsForSitemap } from "@/domains/jobs";
+import {
+  listArticlesForSitemap,
+  listTopicKeysForChennai,
+  type SitemapArticleRow,
+} from "@/domains/news";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 
@@ -8,11 +14,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://mychennaicity.in";
   const now = new Date();
 
-  let articleRows: { slug: string; lastModified: Date }[] = [];
+  let articleRows: SitemapArticleRow[] = [];
   let topicKeys: string[] = [];
+  let eventRows: { slug: string; lastModified: Date }[] = [];
+  let jobRows: { slug: string; lastModified: Date }[] = [];
   try {
     articleRows = await listArticlesForSitemap();
     topicKeys = await listTopicKeysForChennai();
+    eventRows = await listEventsForSitemap();
+    jobRows = await listJobsForSitemap();
   } catch {
     /* DATABASE_URL unset or DB unreachable */
   }
@@ -57,6 +67,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${base}/about`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${base}/contact`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${base}/editorial-standards`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${base}/glossary`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.35,
+    },
   ];
 
   const areaEntries: MetadataRoute.Sitemap = chennaiZones.map((z) => ({
@@ -71,6 +105,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: a.lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.75,
+    ...(a.heroImageUrl
+      ? { images: [a.heroImageUrl] }
+      : {}),
   }));
 
   const topicEntries: MetadataRoute.Sitemap = topicKeys.map((cat) => ({
@@ -80,10 +117,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.55,
   }));
 
+  const eventEntries: MetadataRoute.Sitemap = eventRows.map((e) => ({
+    url: `${base}/chennai-local-events/${e.slug}`,
+    lastModified: e.lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
+  const jobEntries: MetadataRoute.Sitemap = jobRows.map((j) => ({
+    url: `${base}/jobs/${j.slug}`,
+    lastModified: j.lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
   return [
     ...staticEntries,
     ...areaEntries,
     ...articleEntries,
     ...topicEntries,
+    ...eventEntries,
+    ...jobEntries,
   ];
 }

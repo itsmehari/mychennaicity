@@ -8,6 +8,7 @@ import {
 } from "@/components/site/interior-chrome";
 import { CHENNAI_GEO_VERSION, chennaiZones } from "@/lib/chennai-zones";
 import { getSiteUrl } from "@/lib/env";
+import { buildAreaHubJsonLd } from "@/lib/seo/area-hub-jsonld";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,6 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${zone.label} | Chennai area hub`,
       description: zone.blurb,
       url: `${base}/areas/${zone.slug}`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["/twitter-image"],
     },
   };
 }
@@ -36,6 +42,8 @@ export default async function AreaPage({ params }: Props) {
   const { slug } = await params;
   const zone = chennaiZones.find((z) => z.slug === slug);
   if (!zone) notFound();
+
+  const { webPage, breadcrumbs, itemList } = buildAreaHubJsonLd(zone);
 
   const quickLinks: {
     href: string;
@@ -66,6 +74,18 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <div className={interiorMainClassName}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
+      />
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },

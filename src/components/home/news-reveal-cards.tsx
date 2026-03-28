@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { PublicArticleRow } from "@/domains/news";
 import {
+  articleHeroAlt,
   articleHeroUsesNextImage,
   resolveArticleHeroSrc,
 } from "@/lib/article-hero-image";
@@ -82,7 +83,11 @@ export function NewsRevealCard({
         href={href}
         className="relative block shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)]"
       >
-        <CardHeroImage src={heroSrc} alt={article.title} priority={imagePriority} />
+        <CardHeroImage
+          src={heroSrc}
+          alt={articleHeroAlt(article)}
+          priority={imagePriority}
+        />
       </Link>
 
       <button

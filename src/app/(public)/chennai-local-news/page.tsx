@@ -23,8 +23,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Chennai local news · mychennaicity.in",
+    description:
+      "Greater Chennai news with editorial analysis — newspaper-style front page from mychennaicity.in.",
     url: `${getSiteUrl()}/chennai-local-news`,
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chennai local news · mychennaicity.in",
+    description:
+      "Greater Chennai news with editorial analysis — newspaper-style front page.",
+    images: ["/twitter-image"],
   },
 };
 

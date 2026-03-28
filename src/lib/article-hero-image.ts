@@ -17,6 +17,15 @@ export function resolveArticleHeroSrc(article: Pick<PublicArticleRow, "slug" | "
 }
 
 /** Hosts allowed in `next.config` `images.remotePatterns` — else use `<img>`. */
+/** Accessible hero / thumbnail copy: title + desk + place (not decorative). */
+export function articleHeroAlt(article: {
+  title: string;
+  category?: string | null;
+}): string {
+  const desk = article.category?.trim() || "Chennai";
+  return `${article.title} — ${desk}, Greater Chennai local news`;
+}
+
 export function articleHeroUsesNextImage(src: string): boolean {
   if (src.startsWith("/")) return true;
   try {

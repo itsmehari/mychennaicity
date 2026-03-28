@@ -11,6 +11,7 @@ const newsLinks = [
 ];
 
 const discoverLinks = [
+  { href: "/glossary", label: "Chennai & GCC glossary" },
   { href: "/directory", label: "Full directory" },
   { href: "/directory", label: "Schools & colleges" },
   { href: "/directory", label: "Hospitals" },
@@ -28,11 +29,11 @@ const workLinks = [
 ];
 
 const companyLinks = [
-  { href: "/news", label: "About us" },
-  { href: "/news", label: "Contact & tips" },
+  { href: "/about", label: "About us" },
+  { href: "/contact", label: "Contact & tips" },
+  { href: "/editorial-standards", label: "Editorial standards" },
   { href: "/news", label: "Advertise" },
   { href: "/news", label: "Careers" },
-  { href: "/news", label: "Corrections policy" },
 ];
 
 const legalLinks = [

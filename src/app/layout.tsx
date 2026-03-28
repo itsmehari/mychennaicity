@@ -23,6 +23,23 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://mychennaicity.in",
   ),
+  openGraph: {
+    type: "website",
+    siteName: "mychennaicity.in",
+    locale: "en_IN",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "mychennaicity.in — Greater Chennai local platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/twitter-image"],
+  },
 };
 
 export default function RootLayout({
@@ -32,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">

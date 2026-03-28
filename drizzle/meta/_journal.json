@@ -15,6 +15,13 @@
       "when": 1774208000000,
       "tag": "0001_articles_editorial",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743187200000,
+      "tag": "0002_article_area_author_job_valid",
+      "breakpoints": true
     }
   ]
 }

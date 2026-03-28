@@ -94,9 +94,13 @@ export async function getPublishedSlugsForChennai(): Promise<string[]> {
   return rows.map((r) => r.slug);
 }
 
-export async function listArticlesForSitemap(): Promise<
-  { slug: string; lastModified: Date }[]
-> {
+export type SitemapArticleRow = {
+  slug: string;
+  lastModified: Date;
+  heroImageUrl: string | null;
+};
+
+export async function listArticlesForSitemap(): Promise<SitemapArticleRow[]> {
   const cityId = await getChennaiCityId();
   if (!cityId) return [];
   const db = getDb();
@@ -105,12 +109,14 @@ export async function listArticlesForSitemap(): Promise<
       slug: articles.slug,
       updatedAt: articles.updatedAt,
       publishedAt: articles.publishedAt,
+      heroImageUrl: articles.heroImageUrl,
     })
     .from(articles)
     .where(and(eq(articles.cityId, cityId), publishedCond));
   return rows.map((r) => ({
     slug: r.slug,
     lastModified: r.updatedAt ?? r.publishedAt ?? new Date(),
+    heroImageUrl: r.heroImageUrl,
   }));
 }
 

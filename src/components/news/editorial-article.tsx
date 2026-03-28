@@ -1,14 +1,29 @@
 import Link from "next/link";
 import type { PublicArticleRow } from "@/domains/news";
 import { relatedArticlesForChennai } from "@/domains/news";
+import { chennaiZones } from "@/lib/chennai-zones";
+import type { ArticleTocEntry } from "@/lib/markdown-outline";
+import { areaHubSlugForArticle } from "@/lib/news-area-hint";
 import { categoryToTopicSlug } from "@/lib/news-topics";
+import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
 import { InteractiveBlock } from "./interactive-block";
 
+function tocLinkLabel(text: string): string {
+  return text.replace(/\*\*(.+?)\*\*/g, "$1");
+}
+
 export async function EditorialArticle({
   article,
+  onThisPage,
+  reportHeadingAnchors,
+  analysisHeadingAnchors,
 }: {
   article: PublicArticleRow;
+  /** When set, shows “On this page” and uses anchors on ##/### inside report/analysis. */
+  onThisPage?: ArticleTocEntry[] | null;
+  reportHeadingAnchors?: ArticleHeadingAnchor[];
+  analysisHeadingAnchors?: ArticleHeadingAnchor[];
 }) {
   let related: Awaited<ReturnType<typeof relatedArticlesForChennai>> = [];
   try {
@@ -22,6 +37,21 @@ export async function EditorialArticle({
   }
   const report = article.reportBody ?? article.body;
   const analysis = article.analysisBody ?? "";
+  const summaryLead = article.summary?.trim();
+  const dek = article.dek?.trim();
+  const showSummaryLead = Boolean(summaryLead && summaryLead !== dek);
+  const rawInteractive = article.interactiveJson;
+  const interactiveType =
+    rawInteractive &&
+    typeof rawInteractive === "object" &&
+    "type" in rawInteractive
+      ? String((rawInteractive as { type: unknown }).type)
+      : null;
+  const takeawaysAtTop = interactiveType === "takeaways";
+  const areaSlug = areaHubSlugForArticle(article);
+  const areaZone = areaSlug
+    ? chennaiZones.find((z) => z.slug === areaSlug)
+    : undefined;
 
   return (
     <article className="mx-auto max-w-[720px]">
@@ -34,11 +64,39 @@ export async function EditorialArticle({
             {article.category}
           </Link>
         ) : null}
-        <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
+        <h1
+          className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl"
+          data-speakable="article-title"
+        >
           {article.title}
         </h1>
         {article.dek ? (
           <p className="mt-4 text-lg text-[var(--muted)]">{article.dek}</p>
+        ) : null}
+        {showSummaryLead ? (
+          <p
+            className="type-lede mt-4 border-l-2 border-[var(--accent)] pl-4 text-base leading-relaxed text-[var(--foreground)]"
+            data-speakable="article-lead"
+          >
+            {summaryLead}
+          </p>
+        ) : null}
+        {takeawaysAtTop ? (
+          <div className="mt-6">
+            <InteractiveBlock data={rawInteractive ?? undefined} />
+          </div>
+        ) : null}
+        {areaZone ? (
+          <p className="type-lede mt-4 text-sm text-[var(--muted)]">
+            <span className="text-[var(--foreground)]">Neighbourhood desk: </span>
+            <Link
+              href={`/areas/${areaZone.slug}`}
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              More in {areaZone.label}
+            </Link>
+            <span> — macro hub for GCC-adjacent coverage in this belt.</span>
+          </p>
         ) : null}
         <div className="mt-4 flex flex-wrap gap-3 text-xs text-[var(--muted)]">
           {article.publishedAt ? (
@@ -62,6 +120,32 @@ export async function EditorialArticle({
         </div>
       </header>
 
+      {onThisPage && onThisPage.length > 0 ? (
+        <nav
+          className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_6%,transparent)]"
+          aria-label="On this page"
+        >
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--accent)]">
+            On this page
+          </p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-[var(--foreground)]">
+            {onThisPage.map((e) => (
+              <li
+                key={e.domId}
+                className={e.level === 3 ? "ml-5 list-[lower-alpha]" : ""}
+              >
+                <a
+                  href={`#${e.domId}`}
+                  className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+                >
+                  {tocLinkLabel(e.text)}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      ) : null}
+
       <section className="mt-10" aria-labelledby="report-heading">
         <h2
           id="report-heading"
@@ -70,7 +154,10 @@ export async function EditorialArticle({
           The news
         </h2>
         <div className="mt-4">
-          <ArticleProse content={report} />
+          <ArticleProse
+            content={report}
+            headingAnchors={reportHeadingAnchors}
+          />
         </div>
       </section>
 
@@ -86,28 +173,33 @@ export async function EditorialArticle({
             Analysis: what this means in Chennai
           </h2>
           <div className="mt-4">
-            <ArticleProse content={analysis} />
+            <ArticleProse
+              content={analysis}
+              headingAnchors={analysisHeadingAnchors}
+            />
           </div>
         </section>
       ) : null}
 
-      <section
-        className="mt-12 border-t border-[var(--border)] pt-10"
-        aria-labelledby="interactive-heading"
-      >
-        <h2
-          id="interactive-heading"
-          className="text-lg font-semibold text-[var(--foreground)]"
+      {!takeawaysAtTop ? (
+        <section
+          className="mt-12 border-t border-[var(--border)] pt-10"
+          aria-labelledby="interactive-heading"
         >
-          Your move
-        </h2>
-        <p className="mt-1 text-sm text-[var(--muted)]">
-          A lightweight interactive tied to this story.
-        </p>
-        <div className="mt-6">
-          <InteractiveBlock data={article.interactiveJson ?? undefined} />
-        </div>
-      </section>
+          <h2
+            id="interactive-heading"
+            className="text-lg font-semibold text-[var(--foreground)]"
+          >
+            Your move
+          </h2>
+          <p className="mt-1 text-sm text-[var(--muted)]">
+            A lightweight interactive tied to this story.
+          </p>
+          <div className="mt-6">
+            <InteractiveBlock data={article.interactiveJson ?? undefined} />
+          </div>
+        </section>
+      ) : null}
 
       <footer className="mt-12 border-t border-[var(--border)] pt-8">
         <h2 className="text-sm font-semibold text-[var(--foreground)]">
@@ -120,14 +212,18 @@ export async function EditorialArticle({
         </p>
         {article.sourceUrl && article.sourceName ? (
           <p className="mt-3 text-sm">
+            <span className="font-semibold text-[var(--foreground)]">
+              Primary source:{" "}
+            </span>
             <a
               href={article.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
             >
-              Original reporting: {article.sourceName}
+              {article.sourceName}
             </a>
+            <span className="text-[var(--muted)]"> — open the original for full context.</span>
           </p>
         ) : null}
       </footer>
