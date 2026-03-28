@@ -3,7 +3,8 @@
  * Slugs are stable; gccZoneNumber is optional until official mapping is locked.
  * geoVersion: bump when boundaries or grouping changes.
  */
-export const CHENNAI_GEO_VERSION = "gcc-macro-v1";
+/** Macro hub grouping version (ward SVG uses public/data/chennai-map/manifest.json). */
+export const CHENNAI_GEO_VERSION = "gcc-macro-v2-ward-explorer";
 
 export type ChennaiZone = {
   slug: string;

@@ -18,7 +18,8 @@
     "db:seed:event:panguni:live": "tsx scripts/seed-event-panguni.ts --live",
     "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:push:production-env": "drizzle-kit push --force",
-    "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts"
+    "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts",
+    "geo:build": "tsx scripts/build-chennai-map-data.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
@@ -34,6 +35,10 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@turf/bbox": "^7.3.4",
+    "@turf/helpers": "^7.3.4",
+    "@turf/simplify": "^7.3.4",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

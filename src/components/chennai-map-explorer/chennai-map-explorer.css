@@ -1,0 +1,403 @@
+/**
+ * Interactive Chennai Map Explorer — scoped with ccmap- prefix.
+ *
+ * State classes:
+ * - .ccmap-area base ward path
+ * - .ccmap-area.is-hover / .is-active / .is-dimmed
+ * - .ccmap-svg.overlay-* toggles (IT, metro, industrial, flood, growth)
+ * - .overlay-hit-* on paths when ward matches active overlay data
+ */
+
+.ccmap-root {
+  --ccmap-stroke: color-mix(in srgb, var(--foreground) 22%, var(--border));
+  --ccmap-fill: color-mix(in srgb, var(--wave) 55%, var(--surface));
+  --ccmap-fill-hover: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  --ccmap-fill-active: color-mix(in srgb, var(--accent) 28%, var(--surface));
+  --ccmap-dim-opacity: 0.38;
+}
+
+.ccmap-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.ccmap-toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.ccmap-toolbar-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ccmap-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ccmap-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.ccmap-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.ccmap-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ccmap-btn[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.ccmap-search {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.ccmap-search input {
+  min-width: 10rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.ccmap-search input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.ccmap-layout {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .ccmap-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+  }
+}
+
+.ccmap-map-wrap {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--wave) 22%, var(--surface));
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.ccmap-map-wrap .ccmap-map-inner {
+  position: relative;
+  z-index: 0;
+}
+
+.ccmap-map-inner {
+  position: relative;
+  aspect-ratio: 1000 / 780;
+  max-height: min(72vh, 640px);
+}
+
+.ccmap-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ccmap-svg.ccmap-reduced-motion .ccmap-area {
+  transition: none;
+}
+
+/* Base ward paths */
+.ccmap-area {
+  fill: var(--ccmap-fill);
+  stroke: var(--ccmap-stroke);
+  stroke-width: 0.35;
+  cursor: pointer;
+  transition:
+    fill 0.18s ease,
+    opacity 0.18s ease,
+    stroke 0.18s ease;
+}
+
+.ccmap-area:hover,
+.ccmap-area.is-hover {
+  fill: var(--ccmap-fill-hover);
+  stroke: color-mix(in srgb, var(--accent) 55%, var(--ccmap-stroke));
+}
+
+.ccmap-area.is-active {
+  fill: var(--ccmap-fill-active);
+  stroke: var(--accent);
+  stroke-width: 0.55;
+}
+
+.ccmap-area.is-dimmed {
+  opacity: var(--ccmap-dim-opacity);
+}
+
+/* Overlay emphasis (global toggles on svg + per-path hits) */
+.ccmap-svg.overlay-it .ccmap-area.overlay-hit-it {
+  fill: color-mix(in srgb, #2563eb 35%, var(--ccmap-fill));
+}
+
+.ccmap-svg.overlay-metro .ccmap-area.overlay-hit-metro {
+  fill: color-mix(in srgb, #7c3aed 32%, var(--ccmap-fill));
+}
+
+.ccmap-svg.overlay-industrial .ccmap-area.overlay-hit-industrial {
+  fill: color-mix(in srgb, #b45309 38%, var(--ccmap-fill));
+}
+
+.ccmap-svg.overlay-flood .ccmap-area.overlay-hit-flood {
+  fill: color-mix(in srgb, #0ea5e9 30%, var(--ccmap-fill));
+}
+
+.ccmap-svg.overlay-growth .ccmap-area.overlay-hit-growth {
+  fill: color-mix(in srgb, #059669 30%, var(--ccmap-fill));
+}
+
+.ccmap-svg.ccmap-view--corridor .ccmap-area.corridor-hit {
+  fill: color-mix(in srgb, var(--accent-warm) 28%, var(--ccmap-fill));
+  opacity: 1;
+}
+
+.ccmap-tooltip {
+  position: fixed;
+  z-index: 50;
+  max-width: 16rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--foreground) 12%, transparent);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.ccmap-tooltip h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.ccmap-tooltip p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.ccmap-panel {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1rem 1.1rem;
+}
+
+.ccmap-panel h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.ccmap-panel .ccmap-meta {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.ccmap-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.5rem 0;
+}
+
+.ccmap-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.ccmap-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.ccmap-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.ccmap-cta:hover {
+  text-decoration: underline;
+}
+
+.ccmap-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.ccmap-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.ccmap-stat {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.ccmap-stat strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--foreground);
+}
+
+.ccmap-legend {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px dashed var(--border);
+  background: color-mix(in srgb, var(--background) 80%, var(--surface));
+}
+
+.ccmap-legend h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ccmap-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.35rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--foreground);
+}
+
+.ccmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ccmap-swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.ccmap-swatch.it {
+  background: color-mix(in srgb, #2563eb 55%, var(--surface));
+}
+.ccmap-swatch.metro {
+  background: color-mix(in srgb, #7c3aed 55%, var(--surface));
+}
+.ccmap-swatch.industrial {
+  background: color-mix(in srgb, #b45309 55%, var(--surface));
+}
+.ccmap-swatch.flood {
+  background: color-mix(in srgb, #0ea5e9 55%, var(--surface));
+}
+.ccmap-swatch.growth {
+  background: color-mix(in srgb, #059669 55%, var(--surface));
+}
+
+.ccmap-attribution {
+  margin-top: 0.75rem;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.ccmap-error {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ccmap-error button {
+  margin-top: 0.75rem;
+}
+
+.ccmap-select {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.ccmap-crumb {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 1023px) {
+  .ccmap-panel {
+    order: 3;
+  }
+}

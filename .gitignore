@@ -46,6 +46,9 @@ yarn-error.log*
 # MCP server dependencies (run npm install in mcp/production-data)
 mcp/production-data/node_modules/
 
+# Chennai ward GeoJSON source (large); build outputs live in public/data/chennai-map
+/data/chennai/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

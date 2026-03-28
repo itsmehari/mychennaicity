@@ -76,9 +76,9 @@ export default async function Home() {
         </HomeSectionFrame>
         <HomeSectionFrame id="areas">
           <Section
-            eyebrow="Neighbourhoods"
-            title="Greater Chennai area map"
-            subtitle="Click a tile to open its hub — listings and filters wire in as the database goes live."
+            eyebrow="Explore"
+            title="Interactive Chennai Map Explorer"
+            subtitle="Real GCC ward boundaries from open civic data — hover wards, toggle overlays, and jump to macro area hubs. Replace or refresh geometry anytime with npm run geo:build."
             action={{ href: "/directory", label: "Browse all listings" }}
           >
             <HomeAreaMap />
