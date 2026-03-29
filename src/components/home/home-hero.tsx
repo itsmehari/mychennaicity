@@ -272,12 +272,12 @@ function BadgeArrow({ className }: { className?: string }) {
 
 function HeroImageBlock({ slide }: { slide: Slide }) {
   return (
-    <div className="relative mx-auto mt-10 w-full max-w-[min(100%,720px)]">
+    <div className="relative w-full max-w-xl mx-auto lg:mx-0 lg:max-w-none">
       <div
-        className="relative aspect-[16/10] w-full overflow-hidden shadow-[0_40px_80px_-32px_rgba(0,0,0,0.55)]"
+        className="relative aspect-[2/1] w-full max-h-[200px] overflow-hidden shadow-[0_28px_56px_-28px_rgba(0,0,0,0.5)] sm:max-h-[220px] lg:max-h-[min(232px,26svh)]"
         style={{
           borderRadius:
-            "clamp(2rem, 7vw, 4.5rem) 0 clamp(2rem, 7vw, 4.5rem) 0",
+            "clamp(1.25rem, 4vw, 3rem) 0 clamp(1.25rem, 4vw, 3rem) 0",
         }}
       >
         <Image
@@ -286,7 +286,7 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
           alt={slide.heroImageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 720px"
+          sizes="(max-width: 1024px) min(100vw, 36rem) 420px"
           priority={slide.key === "news"}
         />
         <div
@@ -296,21 +296,21 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
       </div>
 
       <div
-        className="absolute bottom-[12%] left-0 z-[2] max-w-[11.5rem] -translate-x-2 translate-y-1/4 sm:bottom-[18%] sm:left-2 sm:max-w-[13rem] sm:translate-x-0 sm:translate-y-0 md:-left-4 md:bottom-1/2 md:translate-y-1/2"
-        style={{ borderRadius: "0 clamp(1rem,3vw,1.5rem) 0 0" }}
+        className="absolute bottom-[10%] left-0 z-[2] max-w-[10.5rem] -translate-x-1 sm:max-w-[11.5rem] sm:translate-x-0 lg:-left-2 lg:bottom-[14%] lg:max-w-[12rem]"
+        style={{ borderRadius: "0 clamp(0.75rem,2vw,1.25rem) 0 0" }}
       >
         <div
-          className="relative bg-[var(--hero-mustard)] px-4 py-4 pr-10 text-white shadow-lg"
-          style={{ borderRadius: "0 clamp(1rem,3vw,1.5rem) 0 0" }}
+          className="relative bg-[var(--hero-mustard)] px-3 py-3 pr-9 text-white shadow-lg sm:px-4 sm:py-3.5 sm:pr-10"
+          style={{ borderRadius: "0 clamp(0.75rem,2vw,1.25rem) 0 0" }}
         >
-          <BadgeArrow className="absolute right-3 top-3 opacity-90" />
-          <p className="text-[10px] font-bold uppercase leading-tight tracking-[0.14em]">
+          <BadgeArrow className="absolute right-2.5 top-2.5 h-4 w-4 opacity-90 sm:right-3 sm:top-3 sm:h-5 sm:w-5" />
+          <p className="text-[9px] font-bold uppercase leading-tight tracking-[0.12em] sm:text-[10px] sm:tracking-[0.14em]">
             {slide.statLabel}
           </p>
-          <p className="mt-1.5 text-2xl font-bold tabular-nums tracking-tight sm:text-3xl">
+          <p className="mt-1 text-xl font-bold tabular-nums tracking-tight sm:mt-1.5 sm:text-2xl lg:text-[1.65rem]">
             {slide.statValue}
           </p>
-          <p className="mt-2 text-[11px] font-medium leading-snug text-white/90">
+          <p className="mt-1.5 text-[10px] font-medium leading-snug text-white/90 sm:mt-2 sm:text-[11px]">
             {slide.statHint}
           </p>
         </div>
@@ -386,7 +386,7 @@ export function HomeHero() {
     >
       <div
         key={slide.key}
-        className="relative px-5 pb-8 pt-10 sm:px-8 sm:pb-10 sm:pt-12 lg:px-12 lg:pb-12 lg:pt-14"
+        className="relative px-5 pb-5 pt-6 sm:px-6 sm:pb-6 sm:pt-7 lg:px-10 lg:pb-6 lg:pt-8"
       >
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-[0.12]"
@@ -397,102 +397,106 @@ export function HomeHero() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-3xl text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
-            {slide.eyebrow}
-          </p>
-          <h1
-            id={labelId}
-            className="mt-4 font-sans text-[clamp(1.6rem,4.2vw,2.85rem)] font-bold leading-[1.12] tracking-tight text-white"
-          >
-            <span className="font-light text-white/75">{slide.lineBefore} </span>
-            <span className="text-white">{slide.lineBold}</span>
-            <span className="font-light text-white/75">
-              {" "}
-              {slide.lineAfter}
-            </span>
-            {slide.brandInHeadline ? (
-              <>
-                {" "}
-                <span className="text-[var(--hero-mustard)]">mychennaicity.in</span>
-              </>
-            ) : null}
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base font-light leading-relaxed text-white/70 sm:text-[1.05rem]">
-            {slide.sub}
-          </p>
-        </div>
-
-        <form
-          onSubmit={onSubmit}
-          className="relative mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-stretch sm:justify-center"
-        >
-          <label className="sr-only" htmlFor="hero-q">
-            Search
-          </label>
-          <input
-            id="hero-q"
-            name="q"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={slide.searchPlaceholder}
-            className="min-h-12 min-w-0 flex-1 rounded-full border border-white/20 bg-white/10 px-5 text-sm font-normal text-white shadow-inner outline-none ring-[var(--hero-mustard)] backdrop-blur-sm transition placeholder:text-white/45 focus:border-[var(--hero-mustard)] focus:ring-2 sm:max-w-md"
-          />
-          <div className="flex min-h-12 flex-1 gap-0 overflow-hidden rounded-full border border-white/20 bg-white/10 shadow-inner backdrop-blur-sm sm:max-w-[200px]">
-            <label className="sr-only" htmlFor="hero-filter">
-              {slide.filterLabel}
-            </label>
-            <select
-              id="hero-filter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="min-w-0 flex-1 cursor-pointer border-0 bg-transparent px-4 text-sm font-medium text-white outline-none [&>option]:bg-[var(--hero-bg)] [&>option]:text-white"
+        <div className="relative mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(260px,38%)] lg:items-start lg:gap-8 xl:gap-10">
+          <div className="min-w-0 text-center lg:text-left">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 sm:text-[11px] sm:tracking-[0.22em]">
+              {slide.eyebrow}
+            </p>
+            <h1
+              id={labelId}
+              className="mt-2 font-sans text-[clamp(1.45rem,3.6vw,2.5rem)] font-bold leading-[1.14] tracking-tight text-white sm:mt-3"
             >
-              {slide.filterOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
+              <span className="font-light text-white/75">{slide.lineBefore} </span>
+              <span className="text-white">{slide.lineBold}</span>
+              <span className="font-light text-white/75">
+                {" "}
+                {slide.lineAfter}
+              </span>
+              {slide.brandInHeadline ? (
+                <>
+                  {" "}
+                  <span className="text-[var(--hero-mustard)]">mychennaicity.in</span>
+                </>
+              ) : null}
+            </h1>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-light leading-relaxed text-white/70 sm:mt-3 sm:text-base lg:mx-0">
+              {slide.sub}
+            </p>
+
+            <form
+              onSubmit={onSubmit}
+              className="relative mx-auto mt-4 flex max-w-3xl flex-col gap-2.5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-3 lg:mx-0 lg:mt-5 lg:max-w-none"
+            >
+              <label className="sr-only" htmlFor="hero-q">
+                Search
+              </label>
+              <input
+                id="hero-q"
+                name="q"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={slide.searchPlaceholder}
+                className="min-h-11 min-w-0 flex-1 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-normal text-white shadow-inner outline-none ring-[var(--hero-mustard)] backdrop-blur-sm transition placeholder:text-white/45 focus:border-[var(--hero-mustard)] focus:ring-2 sm:min-h-12 sm:px-5 sm:max-w-md lg:max-w-md"
+              />
+              <div className="flex min-h-11 flex-1 gap-0 overflow-hidden rounded-full border border-white/20 bg-white/10 shadow-inner backdrop-blur-sm sm:min-h-12 sm:max-w-[200px]">
+                <label className="sr-only" htmlFor="hero-filter">
+                  {slide.filterLabel}
+                </label>
+                <select
+                  id="hero-filter"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className="min-w-0 flex-1 cursor-pointer border-0 bg-transparent px-4 text-sm font-medium text-white outline-none [&>option]:bg-[var(--hero-bg)] [&>option]:text-white"
+                >
+                  {slide.filterOptions.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="min-h-11 shrink-0 rounded-full bg-[var(--hero-mustard)] px-6 text-sm font-bold text-[#1a1a1a] shadow-md transition hover:bg-[color-mix(in_srgb,var(--hero-mustard)_88%,white)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)] sm:min-h-12 sm:px-7"
+              >
+                {slide.submitLabel}
+              </button>
+            </form>
+
+            <div className="relative mx-auto mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:mx-0 lg:justify-start">
+              <Link
+                href={slide.primaryCta.href}
+                className="text-sm font-semibold text-[var(--hero-mustard)] underline-offset-4 hover:underline"
+              >
+                {slide.primaryCta.label}
+              </Link>
+              <span className="hidden text-white/25 sm:inline">|</span>
+              <Link
+                href={slide.secondaryCta.href}
+                className="text-sm font-light text-white/60 underline-offset-4 hover:text-white hover:underline"
+              >
+                {slide.secondaryCta.label}
+              </Link>
+            </div>
+
+            <p className="relative mx-auto mt-3 max-w-2xl text-center text-xs font-light leading-snug text-white/55 sm:text-sm lg:mx-0 lg:text-left">
+              <strong className="font-semibold text-white/80">Tip:</strong>{" "}
+              {slide.footerNote}
+            </p>
           </div>
-          <button
-            type="submit"
-            className="min-h-12 shrink-0 rounded-full bg-[var(--hero-mustard)] px-7 text-sm font-bold text-[#1a1a1a] shadow-md transition hover:bg-[color-mix(in_srgb,var(--hero-mustard)_88%,white)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)]"
-          >
-            {slide.submitLabel}
-          </button>
-        </form>
 
-        <div className="relative mt-5 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href={slide.primaryCta.href}
-            className="text-sm font-semibold text-[var(--hero-mustard)] underline-offset-4 hover:underline"
-          >
-            {slide.primaryCta.label}
-          </Link>
-          <span className="hidden text-white/25 sm:inline">|</span>
-          <Link
-            href={slide.secondaryCta.href}
-            className="text-sm font-light text-white/60 underline-offset-4 hover:text-white hover:underline"
-          >
-            {slide.secondaryCta.label}
-          </Link>
+          <div className="min-w-0 lg:pt-1">
+            <HeroImageBlock slide={slide} />
+          </div>
         </div>
-
-        <p className="relative mx-auto mt-6 max-w-2xl text-center text-sm font-light leading-relaxed text-white/55">
-          <strong className="font-semibold text-white/80">Tip:</strong>{" "}
-          {slide.footerNote}
-        </p>
-
-        <HeroImageBlock slide={slide} />
       </div>
 
       <div
-        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-8 pt-6 sm:px-6 lg:px-10"
+        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5 lg:px-10"
         role="tablist"
         aria-label="What do you want to explore?"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
           {SLIDES.map((s, i) => {
             const selected = i === index;
             return (
@@ -501,25 +505,21 @@ export function HomeHero() {
                 type="button"
                 role="tab"
                 aria-selected={selected}
-                className={`flex flex-col gap-3 rounded-bl-[1.35rem] rounded-tr-[1.35rem] border px-5 py-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)] ${
+                className={`flex flex-col gap-2 rounded-bl-[1.1rem] rounded-tr-[1.1rem] border px-4 py-3.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)] sm:gap-2.5 sm:px-4 sm:py-4 ${
                   selected
-                    ? "border-[var(--hero-mustard)] bg-white shadow-[0_20px_40px_-24px_rgba(0,0,0,0.35)] ring-1 ring-[var(--hero-mustard-dim)]"
+                    ? "border-[var(--hero-mustard)] bg-white shadow-[0_16px_36px_-22px_rgba(0,0,0,0.35)] ring-1 ring-[var(--hero-mustard-dim)]"
                     : "border-white/12 bg-white/95 hover:border-[var(--hero-mustard-dim)]/50"
                 }`}
                 onClick={() => go(i)}
               >
                 <CardIcon slideKey={s.key} />
-                <p
-                  className={`text-base font-bold leading-snug ${
-                    selected ? "text-[#111]" : "text-[#111]"
-                  }`}
-                >
+                <p className="text-[0.95rem] font-bold leading-snug text-[#111] sm:text-base">
                   {s.cardTitle}
                 </p>
-                <p className="line-clamp-2 text-sm leading-relaxed text-neutral-600">
+                <p className="line-clamp-2 text-xs leading-relaxed text-neutral-600 sm:text-sm">
                   {s.sub}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#111]">
+                <span className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#111] sm:mt-auto sm:text-xs">
                   <span className="border-b-2 border-[var(--hero-mustard)] pb-0.5">
                     More
                   </span>
@@ -530,7 +530,7 @@ export function HomeHero() {
         </div>
 
         {reduceMotion ? null : (
-          <p className="mt-4 text-center text-[11px] font-medium text-white/40">
+          <p className="mt-2 text-center text-[10px] font-medium text-white/40 sm:text-[11px]">
             {paused ? "Rotation paused while you hover" : "Highlights rotate every few seconds"}
           </p>
         )}
