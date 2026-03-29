@@ -10,16 +10,18 @@
 
 | Area | Route(s) | What it does today |
 |------|----------|-------------------|
-| **Home** | `/` | City positioning, “explore Chennai” map/bento, stat ribbon (includes jobs signal), jobs spotlight, events spotlight, peer listings preview, zone shortcuts, sponsors/trending (mock-backed sections as documented in code). |
-| **Chennai local news — hub** | `/chennai-local-news` | Newspaper-style listing; loads **published articles from Neon** when `DATABASE_URL` is available, otherwise falls back to mock articles. Dynamic rendering to avoid empty builds without DB at deploy time. |
-| **Article detail** | `/chennai-local-news/[slug]` | Single story page with metadata and layout from the news domain. |
-| **Topic desks** | `/chennai-local-news/topic/[topic]` | Topic-filtered news views driven by `TOPIC_SLUG_TO_CATEGORY` / DB topic keys. |
-| **RSS** | `/chennai-local-news/feed.xml` | XML feed for the news hub. |
-| **Legacy news path** | `/news` | **301** to `/chennai-local-news`. |
-| **Chennai local events** | `/chennai-local-events` | Curated **mock** event cards (external links); copy asks users to confirm on organiser sites. |
-| **Jobs** | `/jobs` | Curated **mock** job list; many rows link out to **employer career sites**; on-site apply described as “soon”. |
-| **Directory** | `/directory` | Vertical tiles (schools, hospitals, food, etc.) and sample **mock** listings; trust strip; cross-links to area explorer. |
-| **Area (macro) pages** | `/areas/[slug]` | Greater Chennai zone hubs: blurb, deep links toward news, jobs, directory (filters “will arrive” with listings API per page copy). |
+| **Home** | `/` | City positioning, interactive **Explore Chennai** map, stat ribbon, DB-backed **news** sections when Neon has published articles, plus mock-backed jobs/events/directory spotlights when those hubs have no DB rows (see hub pages). |
+| **Chennai local news — hub** | `/chennai-local-news` | Newspaper-style listing; **published articles from Neon** when `DATABASE_URL` is available, otherwise mock articles. `force-dynamic` so production sees live DB without a rebuild. |
+| **Article detail** | `/chennai-local-news/[slug]` | Story page with metadata, **layout variants** (`src/lib/news-article-layout.ts`, `article-detail-layouts.tsx`), hero image handling, and news JSON-LD. |
+| **Topic desks** | `/chennai-local-news/topic/[topic]` | Topic-filtered views via `TOPIC_SLUG_TO_CATEGORY` / DB categories. |
+| **RSS** | `/chennai-local-news/feed.xml` | XML feed for the news hub (excerpt default — see [CONTENT_ARCHITECTURE.md](CONTENT_ARCHITECTURE.md)). |
+| **Legacy news path** | `/news` | **Permanent redirect** to `/chennai-local-news`. |
+| **Chennai local events** | `/chennai-local-events`, `/chennai-local-events/[slug]` | Hub lists **`scheduled`** future events from DB when present; otherwise **mock** cards. Detail page resolves a DB slug or `notFound`. Hub uses **events JSON-LD** only when the list is DB-backed. |
+| **Jobs** | `/jobs`, `/jobs/[slug]` | Hub lists **`open`** postings from DB when present; otherwise **mock** rows (often outbound to career sites). Detail page for DB slugs; on-site apply still roadmap. Hub **JobPosting** / collection JSON-LD only when DB-backed. |
+| **Directory** | `/directory` | Vertical tiles and **mock** sample listings; `directory_entries` exists in schema for a future unified API. |
+| **Area (macro) pages** | `/areas/[slug]` | Greater Chennai zone hubs (`chennaiZones`): blurb, cross-links; area-scoped listing filters still planned. |
+| **About / contact / trust** | `/about`, `/contact`, `/editorial-standards` | Static pages for editorial positioning, contact, and standards. |
+| **Glossary** | `/glossary` | Chennai-focused glossary content and related SEO helpers. |
 
 ---
 
@@ -35,9 +37,10 @@
 
 ## 3. Discovery, SEO, and measurement
 
-- **Sitemap** — `sitemap.ts`: home, news hub, events, jobs, directory, all area pages, article URLs, topic URLs (articles/topics require DB).
+- **Sitemap** — `sitemap.ts`: static hubs (including about, contact, editorial-standards, glossary), areas, **article** and **topic** URLs, plus **eligible events and jobs** from DB when queryable.
+- **News sitemap** — `/news-sitemap.xml` for article URLs that meet the route’s rules.
 - **Robots** — `robots.ts` policy for crawlers.
-- **Metadata** — Page titles, descriptions, Open Graph, canonical URLs where implemented.
+- **Metadata** — Page titles, descriptions, Open Graph, canonical URLs where implemented; JSON-LD modules under `src/lib/seo/`.
 - **Analytics** — Optional **GA4** (`NEXT_PUBLIC_GA_MEASUREMENT_ID`), **Vercel Analytics**, **Vercel Speed Insights** (`SiteAnalytics`).
 
 ---
@@ -52,8 +55,9 @@
 
 ## 5. Data and backend (supporting features)
 
-- **Neon + Drizzle** — Articles (and related news queries) when `DATABASE_URL` is set; seeds/scripts for content exist under `scripts/`.
-- **CI** — GitHub Actions workflow for checks (see repo `.github/workflows`).
+- **Neon + Drizzle** — `articles`, `events`, `job_postings`, `employers`, `directory_entries`, `cities`, and Auth.js tables; domain access in `src/domains/*`. Seeds and checks under `scripts/` (`db:seed`, `db:check`, live variants).
+- **CI** — GitHub Actions workflow `.github/workflows/ci.yml`.
+- **Newsletter UI** — Modal + host components and `src/config/newsletter-modal.ts` (wire to ESP/API when ready).
 
 ---
 
@@ -64,7 +68,7 @@ From jobs page and roadmap docs:
 - Jobs: **saved searches**, **email alerts**, **authenticated listings in DB**, **apply on-site**.
 - Directory / listings: **unified listings API**, area-scoped filters, verified detail pages.
 - Events: **DB-backed calendar**, submission + moderation (per `docs/EXECUTION_ROADMAP.md`).
-- Trust: **editorial standards & corrections** page (“publishing soon” on home trust strip).
+- Trust: home copy may still say “publishing soon” in places; **`/editorial-standards`** is live for the standards page.
 
 ---
 

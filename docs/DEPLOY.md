@@ -64,8 +64,8 @@ git push -u origin main
 **Option A — Vercel nameservers (simplest)**  
 In Vercel → Project → Domains → add `mychennaicity.in` and `www.mychennaicity.in`. Set BigRock nameservers to the values Vercel shows.
 
-**Option A records at BigRock**  
-Point `@` to Vercel’s apex IPs and `www` CNAME to `cname.vercel-dns.com` (exact values from Vercel’s domain UI).
+**Option B — Keep BigRock DNS; point records to Vercel**  
+Point `@` to Vercel’s apex IPs and `www` as a CNAME to `cname.vercel-dns.com` (exact values from Vercel’s domain UI).
 
 Wait for DNS propagation; HTTPS certificates are issued by Vercel.
 

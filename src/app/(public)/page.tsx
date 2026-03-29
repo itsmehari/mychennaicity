@@ -26,6 +26,7 @@ import {
   featuredArticlesForHome,
   latestArticlesForHome,
 } from "@/domains/news";
+import { AdSlot } from "@/ads/render-ad-slot";
 import { getSiteUrl } from "@/lib/env";
 
 /** Load news from Neon on every request — build-time static HTML had empty bulletin when DATABASE_URL was missing at Vercel build. */
@@ -61,8 +62,9 @@ export default async function Home() {
   try {
     featured = await featuredArticlesForHome(3);
     latest = await latestArticlesForHome(10);
-  } catch {
-    /* DATABASE_URL unset or DB unreachable — home still renders */
+  } catch (err) {
+    /* DATABASE_URL unset, schema drift (run db:migrate / db:push), or DB unreachable */
+    console.error("[home] News query failed:", err);
   }
 
   const editorPicks =
@@ -74,6 +76,9 @@ export default async function Home() {
       <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
         <HomeHero />
         <HomeSectionFrame>
+          <div className="mb-8 flex justify-center sm:mb-10">
+            <AdSlot slotId="homepage-top" size="728x90" />
+          </div>
           <HomeTrustStrip />
         </HomeSectionFrame>
         <HomeSectionFrame>

@@ -18,6 +18,7 @@ import {
   extractMarkdownOutline,
   shouldShowArticleToc,
 } from "@/lib/markdown-outline";
+import { articleLayoutVariantForSlug } from "@/lib/news-article-layout";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { buildInteractiveExtraJsonLd } from "@/lib/seo/article-interactive-jsonld";
 import {
@@ -181,6 +182,7 @@ export default async function ArticlePage({ params }: Props) {
         <PageBreadcrumbs items={crumbs} />
         <EditorialArticle
           article={article}
+          layoutVariant={articleLayoutVariantForSlug(article.slug)}
           onThisPage={showToc ? tocEntries : null}
           reportHeadingAnchors={showToc ? reportAnchors : undefined}
           analysisHeadingAnchors={showToc ? analysisAnchors : undefined}

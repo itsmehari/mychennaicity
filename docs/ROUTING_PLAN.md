@@ -2,38 +2,41 @@
 
 ## Principles
 
-- **City-first URLs** for public content: prefix with `/chennai` (or use subdomain later). v1 may use **single city** with implicit Chennai and add prefix when second city launches.
-- **No legacy paths** — do not mirror `/omr-*` or `/local-news/` structure.
-- **Stable slugs** — unique within scope (city + type).
+- **Chennai-first URLs** for public content; the product is **single-city** (Greater Chennai) with `city_id` in the data model for a future multi-city URL scheme.
+- **No legacy MyOMR paths** — do not mirror `/omr-*` or old PHP URL shapes.
+- **Stable slugs** — unique per city + content type (enforced in Drizzle with composite uniques).
 
-## Suggested public routes
+## Public routes (implemented)
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Home — city switcher later |
-| `/news` | Article index |
-| `/news/[slug]` | Article detail |
-| `/events` | Events index |
-| `/events/[slug]` | Event detail |
-| `/jobs` | Job list |
-| `/jobs/[slug]` | Job detail (slug-only URLs preferred over numeric) |
-| `/directory` or `/places` | Directory hub |
-| `/directory/[type]` | Vertical hub |
-| `/directory/[type]/[slug]` | Detail |
+| `/` | Home — map/explore, DB-backed news sections when `DATABASE_URL` is set, mock-backed spotlights for jobs/events/directory where noted in code |
+| `/chennai-local-news` | News hub — DB articles when available, else mock fallback |
+| `/chennai-local-news/[slug]` | Article detail — layouts, hero image, JSON-LD, `notFound` when missing |
+| `/chennai-local-news/topic/[topic]` | Topic desk — category ↔ slug via `TOPIC_SLUG_TO_CATEGORY` |
+| `/chennai-local-news/feed.xml` | RSS (excerpt policy: see [CONTENT_ARCHITECTURE.md](CONTENT_ARCHITECTURE.md)) |
+| `/news` | **308/301** permanent redirect to `/chennai-local-news` |
+| `/chennai-local-events` | Events hub — open **scheduled** events from DB when present; else mock list (no fake `ItemList` JSON-LD when on mock) |
+| `/chennai-local-events/[slug]` | Event detail — DB row or `notFound` |
+| `/jobs` | Jobs hub — open postings from DB when present; else mock list |
+| `/jobs/[slug]` | Job posting detail — DB or `notFound` |
+| `/directory` | Directory hub — primarily mock/sample tiles until listings API is wired |
+| `/areas/[slug]` | Macro zone hubs (`chennaiZones`) |
+| `/about`, `/contact`, `/editorial-standards` | Static trust and info pages |
+| `/glossary` | Chennai entity glossary + SEO helpers (`src/lib/seo/chennai-glossary.ts`) |
+
+## SEO / feeds
+
+- **`/sitemap.xml`** — `src/app/sitemap.ts`: static hubs, areas, articles, topics, eligible events/jobs from DB (best-effort if DB unavailable).
+- **`/news-sitemap.xml`** — news sitemap route for eligible article URLs.
+- **`/robots.ts`** — crawler policy and sitemap reference.
 
 ## Admin
 
-- `/admin` — dashboard (auth-gated layout); implemented as `src/app/admin/` (not a route group, to avoid colliding with `/`).
-- Nested resources under `/admin/...` for CRUD (exact structure when implementing)
+- **`/admin`** — Auth-gated shell (`middleware` + session); placeholder dashboard (sign-in/out, role display). CRUD UIs: see [ADMIN_SYSTEM_PLAN.md](ADMIN_SYSTEM_PLAN.md).
+- **`/api/auth/[...nextauth]`** — Auth.js route handler.
 
 ## Technical
 
-- **`sitemap.ts`** at `src/app/sitemap.ts` — composes URLs from DB or static config.
-- **`robots.ts`** — allow crawl; point to sitemap index.
-- **Middleware** — optional locale or city segment normalization; auth for `/admin`.
-
-## Multi-city (future)
-
-- Option A: `/{citySlug}/news/...`
-- Option B: subdomain `chennai.mychennaicity.in`
-- Persist `city_id` on all scoped entities regardless of URL choice.
+- **Middleware** — protects `/admin` routes; extend for locale or city segment normalization if needed later.
+- **Multi-city (future)** — e.g. `/{citySlug}/chennai-local-news/...` or subdomain `chennai.mychennaicity.in`; keep `city_id` on all scoped entities regardless of URL choice.

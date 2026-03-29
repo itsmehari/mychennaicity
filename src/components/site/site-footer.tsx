@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-footer-trigger";
 import { chennaiZones } from "@/lib/chennai-zones";
 
 const newsLinks = [
@@ -122,12 +123,9 @@ export function SiteFooter() {
             >
               Open news desk
             </Link>
-            <Link
-              href="/#newsletter"
-              className="inline-flex items-center justify-center rounded-full border-2 border-[var(--footer-border)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--footer-fg)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]"
-            >
+            <NewsletterFooterTrigger className="inline-flex items-center justify-center rounded-full border-2 border-[var(--footer-border)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--footer-fg)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]">
               Email digest
-            </Link>
+            </NewsletterFooterTrigger>
           </div>
         </div>
 

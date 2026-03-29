@@ -11,7 +11,7 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Jobs browse + detail | `job_postings`, employers | **P0** | Structured salary, experience, remote. |
 | Employer accounts | Employers table + plans | **P1** | Auth + plan caps in Postgres. |
 | Job applications | `job_applications` uniqueness | **P1** | Dedupe by user + job. |
-| Unified directory | Multiple `omr_*` tables | **P1** | One extensible model (`directory_entries` or typed tables). |
+| Unified directory | Multiple `omr_*` tables | **P1** | `directory_entries` (+ typed enum) in schema; public UI still mock-first. |
 | Buy/sell | `omr_buy_sell_*` | **P1** | Images JSON → structured media table preferred. |
 | Classifieds | `omr_classified_ads_*` | **Later** | Expiry + reports + optional OTP. |
 | Property (hostels / rent / coworking) | Module pattern | **Later** | Same listing core with `vertical` enum. |
@@ -21,12 +21,19 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 ## Explicitly out of v1
 
 - Corridor-only IA and copy.
-- cPanel cron PHP scripts — use Vercel Cron or queue worker when needed.
+- cPanel cron PHP scripts — use Vercel Cron or a queue worker when needed.
 
 ## Implementation status (this repo)
 
 | Area | Status |
 |------|--------|
-| Infra docs + CI + Auth.js + analytics instrumentation | Done — see [DEPLOY.md](DEPLOY.md), [EXECUTION_ROADMAP.md](EXECUTION_ROADMAP.md) |
-| GitHub remote / Vercel project / Neon / DNS / GA property / GSC | **You** complete using DEPLOY.md (browser steps) |
-| Articles MVP, events, jobs, directory UI | Not started — Phase 1+ in EXECUTION_ROADMAP |
+| Infra, CI, Auth.js shell, analytics, env docs | **Done** — [DEPLOY.md](DEPLOY.md), [DATABASE_AND_VERCEL.md](DATABASE_AND_VERCEL.md), [EXECUTION_ROADMAP.md](EXECUTION_ROADMAP.md) |
+| Drizzle schema: `articles`, `events`, `job_postings`, `employers`, `directory_entries`, `cities`, auth tables | **Done** — `src/db/schema/` |
+| Public news: hub, topic desks, detail, RSS, dynamic rendering, JSON-LD | **Done** — `src/app/(public)/chennai-local-news/`, `src/domains/news/` |
+| Home: DB news sections + map/explore + mock-backed jobs/events/directory previews | **Done** — `src/app/(public)/page.tsx`, `src/components/home/` |
+| Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, matching routes |
+| Sitemap / news sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/robots.ts` |
+| Static pages: about, contact, editorial standards, glossary | **Done** — under `src/app/(public)/` |
+| Newsletter signup UI | **Partial** — modal + config (`src/components/newsletter/`, `src/config/newsletter-modal.ts`); wire to provider when chosen |
+| Admin CRUD (articles, events, jobs, directory) | **Not started** — `/admin` placeholder; see [ADMIN_SYSTEM_PLAN.md](ADMIN_SYSTEM_PLAN.md) |
+| GitHub remote / Vercel / Neon / DNS / GA / GSC | **Operator** completes using [DEPLOY.md](DEPLOY.md) |

@@ -32,5 +32,5 @@ A **city-scale** discovery and information platform for **Chennai**, combining e
 
 ## Constraints
 
-- Stack: Next.js App Router, Neon Postgres, Vercel.
+- Stack: Next.js 16 (App Router), React 19, Tailwind CSS 4, Neon Postgres, Drizzle ORM, Vercel. Details: [TECH_ARCHITECTURE.md](TECH_ARCHITECTURE.md).
 - No legacy branding, OMR-specific copy, or imported media without explicit editorial choice.
