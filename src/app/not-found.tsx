@@ -22,7 +22,7 @@ export default function NotFound() {
           </h1>
           <p className="type-lede mt-4 text-sm leading-relaxed text-[var(--muted)]">
             The URL may have changed or the story may have moved. Try the news
-            desk, the area map on the home page, or open a topic hub below.
+            news section, the area map on the home page, or a topic below.
           </p>
           <ul className="mt-10 space-y-3 text-sm font-medium">
             <li>
@@ -43,7 +43,7 @@ export default function NotFound() {
             </li>
             <li>
               <Link
-                href="/jobs"
+                href="/chennai-jobs"
                 className="text-[var(--accent)] underline-offset-4 hover:underline"
               >
                 Jobs

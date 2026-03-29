@@ -9,14 +9,18 @@ import {
 import { HomeTrustStrip } from "@/components/home/home-content";
 import { categoryTiles, mockListings } from "@/lib/home-mock";
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
+
+const titleSegment = "Chennai directory — schools, services & places";
 
 export const metadata: Metadata = {
-  title: "Directory",
+  title: titleSegment,
   description:
-    "Schools, hospitals, food, transit, and civic desks across Greater Chennai — browse verticals and sample listings on mychennaicity.in.",
+    "Schools, hospitals, food, transit, and civic listings across Chennai and nearby — browse categories and samples on mychennaicity.in.",
   alternates: { canonical: `${getSiteUrl()}/directory` },
   openGraph: {
-    title: "Chennai directory | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
       "Places, services, and neighbourhood listings — organised by vertical.",
     url: `${getSiteUrl()}/directory`,
@@ -24,9 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chennai directory | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Browse schools, services, food, transit, and civic verticals for Greater Chennai.",
+      "Browse schools, services, food, transit, and civic categories for Chennai and nearby.",
     images: ["/twitter-image"],
   },
 };
@@ -42,11 +46,34 @@ export default function DirectoryPage() {
         Explore places and services
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-        We are wiring a single Chennai-wide directory so schools, hospitals,
-        food, parks, transit, and civic desks no longer live in separate
-        silos. Below is how browsing will work: pick a vertical, filter by
-        area, then open verified detail pages. Live counts appear once the
-        listings API connects.
+        We are building one Chennai-wide directory so schools, hospitals,
+        food, parks, transit, and civic listings are not scattered across
+        different corners of the site. Pick a category, filter by area, then open
+        detail pages. Live counts will show once listings are connected.
+      </p>
+      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        Also on this site:{" "}
+        <Link
+          href={CHENNAI_JOBS_HUB_PATH}
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          jobs in Chennai
+        </Link>
+        ,{" "}
+        <Link
+          href="/guides/chennai-tech-careers"
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          tips for reading job ads
+        </Link>
+        , and{" "}
+        <Link
+          href="/chennai-local-news"
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          Chennai local news
+        </Link>
+        .
       </p>
 
       <Section
@@ -112,7 +139,7 @@ export default function DirectoryPage() {
         >
           <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_96%,var(--accent))] px-5 py-6 text-sm text-[var(--muted)]">
             <p>
-              Planning a launch queue: GCC-adjacent civic desks first, then
+              We plan to open civic and GCC-related listings first, then
               food and health, then retail and services. Follow{" "}
               <Link
                 href="/chennai-local-news"

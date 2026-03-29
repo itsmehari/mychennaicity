@@ -7,7 +7,7 @@ export default function ArticleNotFound() {
         Story not found
       </h1>
       <p className="mt-2 text-[var(--muted)]">
-        That slug is not in our published Chennai desk.
+        We do not have a published story at this link.
       </p>
       <Link
         href="/chennai-local-news"

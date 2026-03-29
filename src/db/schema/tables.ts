@@ -83,6 +83,8 @@ export const employers = pgTable("employers", {
   slug: text("slug").notNull().unique(),
   websiteUrl: text("website_url"),
   logoUrl: text("logo_url"),
+  /** Editorial: employer vetted before prominent placement. */
+  verified: boolean("verified").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
@@ -134,6 +136,10 @@ export const jobPostings = pgTable(
     openingsCount: integer("openings_count").notNull().default(1),
     status: jobPostingStatusEnum("status").notNull().default("draft"),
     validThrough: timestamp("valid_through", { withTimezone: true }),
+    /** When the role first went live as `open` — used for JobPosting `datePosted` when set. */
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    /** Official apply URL (employer ATS or careers page). */
+    applicationUrl: text("application_url"),
     /** e.g. FULL_TIME, PART_TIME, CONTRACTOR */
     employmentType: text("employment_type"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

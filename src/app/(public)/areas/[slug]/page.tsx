@@ -9,6 +9,7 @@ import {
 import { CHENNAI_GEO_VERSION, chennaiZones } from "@/lib/chennai-zones";
 import { getSiteUrl } from "@/lib/env";
 import { buildAreaHubJsonLd } from "@/lib/seo/area-hub-jsonld";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,20 +20,25 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const zone = chennaiZones.find((z) => z.slug === slug);
-  if (!zone) return { title: "Area" };
+  if (!zone) {
+    return { title: { absolute: fullSiteTitle("Chennai area not found") } };
+  }
   const base = getSiteUrl();
+  const titleSegment = `${zone.label} — Chennai area`;
+  const docTitle = fullSiteTitle(titleSegment);
   return {
-    title: `${zone.label} — Chennai area hub`,
-    description: `${zone.blurb} News, events, jobs, and directory entry points for this Greater Chennai macro hub.`,
+    title: titleSegment,
+    description: `${zone.blurb} News, events, jobs, and directory links for this part of Chennai.`,
     alternates: { canonical: `${base}/areas/${zone.slug}` },
     openGraph: {
-      title: `${zone.label} | Chennai area hub`,
+      title: docTitle,
       description: zone.blurb,
       url: `${base}/areas/${zone.slug}`,
       images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
+      title: docTitle,
       images: ["/twitter-image"],
     },
   };
@@ -53,7 +59,7 @@ export default async function AreaPage({ params }: Props) {
     {
       href: "/chennai-local-news",
       label: "Chennai local news",
-      hint: "City-wide front page and desks",
+      hint: "City-wide news and topics",
     },
     {
       href: "/chennai-local-events",
@@ -61,14 +67,14 @@ export default async function AreaPage({ params }: Props) {
       hint: "Concerts, utsavams, and civic dates",
     },
     {
-      href: "/jobs",
+      href: "/chennai-jobs",
       label: "Jobs nearby",
-      hint: "Curated roles anchored in the metro",
+      hint: "Jobs in Chennai and nearby",
     },
     {
       href: "/directory",
       label: "Directory",
-      hint: "Places and services — vertical browse",
+      hint: "Places and services by category",
     },
   ];
 

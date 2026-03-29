@@ -10,26 +10,30 @@ import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
 import { homeStats, mockEvents } from "@/lib/home-mock";
 import { buildEventsHubJsonLd } from "@/lib/seo/events-hub-jsonld";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const canonicalPath = "/chennai-local-events";
 
+const titleSegment = "Chennai events calendar — what’s on";
+
 export const metadata: Metadata = {
-  title: "Chennai local events — festivals, culture & civic calendar",
+  title: titleSegment,
   description:
-    "Chennai local events: temple festivals, neighbourhood meetups, culture, and civic dates across Greater Chennai. Browse what’s on and plan your week.",
+    "Chennai local events: temple festivals, neighbourhood meetups, culture, and civic dates across the city and suburbs. See what is on and plan your week.",
   alternates: { canonical: `${getSiteUrl()}${canonicalPath}` },
   openGraph: {
-    title: "Chennai local events | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Festivals, meetups, and civic calendars for Greater Chennai — from core city to OMR and suburbs.",
+      "Festivals, meetups, and civic dates for Chennai — from the core city to OMR and suburbs.",
     url: `${getSiteUrl()}${canonicalPath}`,
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chennai local events | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Temple festivals, culture, meetups, and civic dates across Greater Chennai.",
+      "Temple festivals, culture, meetups, and civic dates across Chennai and nearby.",
     images: ["/twitter-image"],
   },
 };
@@ -83,7 +87,7 @@ export default async function ChennaiLocalEventsPage() {
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
         Temple utsavams, concerts, theatre, lit fests, and neighbourhood
-        gatherings across Greater Chennai.
+        gatherings across Chennai and nearby.
         {useDb ? (
           <>
             {" "}
@@ -94,7 +98,7 @@ export default async function ChennaiLocalEventsPage() {
             {" "}
             Below is a{" "}
             <strong className="font-medium text-[var(--foreground)]">
-              curated snapshot (updated 25 Mar 2026)
+              sample list (updated 25 Mar 2026)
             </strong>
             — always confirm dates, venue gates, and tickets on the organiser or
             ticket site before you travel.
@@ -215,6 +219,24 @@ export default async function ChennaiLocalEventsPage() {
           </li>
         </ul>
       </Section>
+
+      <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        Job hunting around the same dates? See{" "}
+        <Link
+          href={CHENNAI_JOBS_HUB_PATH}
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          jobs in Chennai
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="/guides/chennai-tech-careers"
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          how to read job ads
+        </Link>
+        .
+      </p>
 
       <InteriorCrossNav />
     </div>

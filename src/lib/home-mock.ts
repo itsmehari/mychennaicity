@@ -44,7 +44,7 @@ export const homeStats = {
 };
 
 /**
- * Curated Mar 25 2026 from public job boards and employer sites.
+ * Picked by hand 25 Mar 2026 from public job boards and employer sites.
  * Always confirm role and location on the employer’s careers page before applying.
  */
 export const mockJobs: MockJob[] = [
@@ -73,12 +73,12 @@ export const mockJobs: MockJob[] = [
     title: "Content editor — Tamil & English",
     company: "mychennaicity.in",
     location: "Remote · Chennai",
-    href: "/jobs",
+    href: "/chennai-jobs",
   },
 ];
 
 /**
- * Upcoming picks around Greater Chennai (Mar–Apr 2026).
+ * Upcoming picks around Chennai and nearby (Mar–Apr 2026).
  * Confirm dates, venue, and tickets on the organiser or ticket site.
  */
 export const mockEvents: MockEvent[] = [
@@ -276,7 +276,7 @@ export const trendingTags = [
   { label: "GCC", href: "/chennai-local-news/topic/chennai" },
   { label: "Monsoon ready", href: "/chennai-local-news/topic/chennai" },
   { label: "Elections 2026", href: "/chennai-local-news/topic/elections" },
-  { label: "Startups", href: "/jobs" },
+  { label: "Startups", href: "/chennai-jobs" },
   { label: "Heritage walks", href: "/chennai-local-events" },
 ];
 
@@ -285,7 +285,7 @@ export const categoryTiles = [
   { label: "Hospitals", count: "—", href: "/directory", emoji: "🏥" },
   { label: "Food & dining", count: "—", href: "/directory", emoji: "🍽️" },
   { label: "Parks & beaches", count: "—", href: "/directory", emoji: "🌴" },
-  { label: "Government desks", count: "—", href: "/directory", emoji: "🏛️" },
+  { label: "Government & civic", count: "—", href: "/directory", emoji: "🏛️" },
   { label: "Transit hubs", count: "—", href: "/directory", emoji: "🚇" },
   { label: "Banks & ATMs", count: "—", href: "/directory", emoji: "🏧" },
   { label: "Coworking", count: "—", href: "/directory", emoji: "💼" },

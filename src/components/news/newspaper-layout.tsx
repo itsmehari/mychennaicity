@@ -110,7 +110,7 @@ function LeadStoryHero({ article }: { article: HeroPick }) {
 
 export function NewspaperMasthead({
   title = "Chennai local news",
-  tagline = "Greater Chennai — report, analysis, and what to do next",
+  tagline = "Chennai and nearby — what happened and why it matters",
 }: {
   title?: string;
   tagline?: string;

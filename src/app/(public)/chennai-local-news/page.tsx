@@ -4,17 +4,21 @@ import { NewspaperGrid, NewspaperMasthead } from "@/components/news/newspaper-la
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
-  TopicDeskNav,
+  TopicSectionNav,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { listPublishedArticlesForChennai } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { mockArticles } from "@/lib/home-mock";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
+
+const titleSegment = "Chennai news today — local reporting";
 
 export const metadata: Metadata = {
-  title: "Chennai local news",
+  title: titleSegment,
   description:
-    "Greater Chennai news with editorial analysis — newspaper-style front page from mychennaicity.in.",
+    "Chennai-area news with short reports, local context, and what it means for you — from mychennaicity.in.",
   alternates: {
     canonical: `${getSiteUrl()}/chennai-local-news`,
     types: {
@@ -22,18 +26,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Chennai local news · mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Greater Chennai news with editorial analysis — newspaper-style front page from mychennaicity.in.",
+      "Chennai-area news with reports, local angle, and clear takeaways — mychennaicity.in.",
     url: `${getSiteUrl()}/chennai-local-news`,
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chennai local news · mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Greater Chennai news with editorial analysis — newspaper-style front page.",
+      "Chennai-area news — reports you can read in a few minutes.",
     images: ["/twitter-image"],
   },
 };
@@ -57,18 +61,17 @@ export default async function ChennaiLocalNewsPage() {
           items={[{ label: "Home", href: "/" }, { label: "Chennai local news" }]}
         />
         <NewspaperMasthead />
-        <TopicDeskNav />
+        <TopicSectionNav />
 
-        <p className="type-eyebrow mt-8 text-[var(--accent)]">Publisher wire</p>
+        <p className="type-eyebrow mt-8 text-[var(--accent)]">From other publishers</p>
         <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-          Chennai headlines while the edition syncs
+          Chennai headlines while we connect the database
         </h1>
         <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-          Our on-site analysis pages live in the database below this template.
-          Until that connection is live, here is a curated wire from trusted
-          publishers covering Greater Chennai — same themes we unpack with
-          local context, timelines, and small interactives once articles are
-          seeded.
+          Full stories from our team will show here once the site is hooked to
+          the database. For now, here are hand-picked links from trusted outlets
+          covering Chennai and nearby — the same kinds of topics we&apos;ll
+          explain in plain language on this site soon.
         </p>
 
         <ul className="mt-10 space-y-4">
@@ -113,6 +116,23 @@ export default async function ChennaiLocalNewsPage() {
           </p>
         </div>
 
+        <p className="mt-8 max-w-2xl text-sm text-[var(--muted)]">
+          Looking for work meanwhile?{" "}
+          <Link
+            href={CHENNAI_JOBS_HUB_PATH}
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            Jobs in Chennai
+          </Link>
+          {" · "}
+          <Link
+            href="/guides/chennai-tech-careers"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            How to read job ads
+          </Link>
+        </p>
+
         <InteriorCrossNav />
       </div>
     );
@@ -131,17 +151,17 @@ export default async function ChennaiLocalNewsPage() {
         items={[{ label: "Home", href: "/" }, { label: "Chennai local news" }]}
       />
       <NewspaperMasthead />
-      <TopicDeskNav />
+      <TopicSectionNav />
       <NewspaperGrid
         lead={lead}
         rest={rest}
         sidebar={
           <>
             <h2 className="type-display text-lg text-[var(--foreground)]">
-              Editor&apos;s notebook
+              Featured stories
             </h2>
             <p className="type-lede mt-2 text-xs">
-              Quick links to featured pieces. Full list in the main columns.
+              Stories we&apos;re highlighting. Scroll the main page for everything else.
             </p>
             <ul className="mt-4 space-y-3">
               {featuredSide.map((a) => (
@@ -161,6 +181,24 @@ export default async function ChennaiLocalNewsPage() {
             >
               Back to home
             </Link>
+            <p className="mt-6 border-t border-[var(--border)] pt-4 text-xs leading-relaxed text-[var(--muted)]">
+              <span className="font-semibold text-[var(--foreground)]">
+                Work in Chennai?
+              </span>{" "}
+              <Link
+                href={CHENNAI_JOBS_HUB_PATH}
+                className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+              >
+                Jobs in Chennai
+              </Link>
+              {" · "}
+              <Link
+                href="/guides/chennai-tech-careers"
+                className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+              >
+                Reading job ads
+              </Link>
+            </p>
           </>
         }
       />

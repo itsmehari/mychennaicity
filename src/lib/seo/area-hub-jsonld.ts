@@ -51,7 +51,7 @@ export function buildAreaHubJsonLd(zone: ChennaiZone) {
   const shortcuts = [
     { href: "/chennai-local-news", name: "Chennai local news" },
     { href: "/chennai-local-events", name: "Chennai local events" },
-    { href: "/jobs", name: "Jobs nearby" },
+    { href: "/chennai-jobs", name: "Jobs in Chennai" },
     { href: "/directory", name: "Directory" },
   ];
 

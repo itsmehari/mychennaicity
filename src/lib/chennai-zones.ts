@@ -49,7 +49,7 @@ export const chennaiZones: ChennaiZone[] = [
     highlights: [
       "Harbour-adjacent markets and heritage lanes reward early-morning visits — parking and hawker cycles shift fast on weekends.",
       "Tondiarpet and Royapuram see dense mixed-use blocks; small fires, waterlogging, and road cuts are hyperlocal — neighbourhood WhatsApp often leads official posts.",
-      "Connect here for north–central Chennai civic threads that do not fit the OMR or Adyar desks.",
+      "Use this page for north–central Chennai civic threads that are not mainly OMR or Adyar stories.",
     ],
   },
   {
@@ -71,7 +71,7 @@ export const chennaiZones: ChennaiZone[] = [
     highlights: [
       "Hospitals, hotels, and consulates cluster here — road closures for VIP movements and marathons hit this belt first.",
       "Evening culture at museums, halls, and galleries pairs with serious traffic on Mount–Cathedral routes; check events listings before you drive.",
-      "Central Chennai election and policy stories often cite these wards — use the Politics and Chennai desks for deeper context.",
+      "Central Chennai election and policy stories often cite these wards — open the Politics and Chennai news topics for more.",
     ],
   },
   {
@@ -82,7 +82,7 @@ export const chennaiZones: ChennaiZone[] = [
     highlights: [
       "T. Nagar’s retail peaks during festivals strain parking and pedestrian crossings — plan metro or last-mile walks when possible.",
       "Kodambakkam’s film-adjacent services mean irregular night shifts; job seekers should watch verified employer pages, not third-party reposts.",
-      "Consumer desk stories on gold, apparel, and electronics often trace back to this corridor’s pricing signals.",
+      "Stories on gold, apparel, and electronics prices often trace back to this corridor.",
     ],
   },
   {
@@ -126,7 +126,7 @@ export const chennaiZones: ChennaiZone[] = [
     highlights: [
       "Porur lake and western suburban sprawl mean mixed traffic from Poonamallee and Bengaluru highway feeders.",
       "Residential towers and colleges push peak-hour pressure on arc roads — detours during flyover work are common.",
-      "Mobility desk items on western bypasses and bus route rationalisation usually touch this belt first.",
+      "News on western bypasses and bus route changes usually touches this belt first.",
     ],
   },
 ];

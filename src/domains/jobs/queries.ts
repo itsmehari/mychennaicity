@@ -1,4 +1,4 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, count, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, employers, jobPostings } from "@/db/schema/tables";
 
@@ -22,7 +22,10 @@ async function getChennaiCityId(): Promise<string | null> {
   return row[0]?.id ?? null;
 }
 
-export async function listOpenJobPostingsForChennaiHub(limit = 40) {
+export async function listOpenJobPostingsForChennaiHub(
+  limit = 20,
+  offset = 0,
+) {
   const cityId = await getChennaiCityId();
   if (!cityId) return [] as JobPostingWithEmployer[];
   const db = getDb();
@@ -33,9 +36,23 @@ export async function listOpenJobPostingsForChennaiHub(limit = 40) {
     .where(
       and(eq(jobPostings.cityId, cityId), eq(jobPostings.status, "open")),
     )
-    .orderBy(desc(jobPostings.createdAt))
-    .limit(limit);
+    .orderBy(desc(employers.verified), desc(jobPostings.createdAt))
+    .limit(limit)
+    .offset(offset);
   return rows;
+}
+
+export async function countOpenJobPostingsForChennaiHub(): Promise<number> {
+  const cityId = await getChennaiCityId();
+  if (!cityId) return 0;
+  const db = getDb();
+  const [row] = await db
+    .select({ n: count() })
+    .from(jobPostings)
+    .where(
+      and(eq(jobPostings.cityId, cityId), eq(jobPostings.status, "open")),
+    );
+  return Number(row?.n ?? 0);
 }
 
 export async function getOpenJobPostingWithEmployerBySlug(

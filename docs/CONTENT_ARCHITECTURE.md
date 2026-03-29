@@ -38,6 +38,13 @@
 
 ## On-page SEO / AEO habits
 
+### Document titles (`<title>`), template, and social parity
+
+- **Root template:** [`src/app/layout.tsx`](../src/app/layout.tsx) sets `Metadata.title.template` via [`SITE_TITLE_TEMPLATE`](../src/lib/seo/site-titles.ts). Any page that exports a string `title: "Segment"` becomes **`Segment · mychennaicity.in`** in the HTML `<title>`.
+- **Do not** put `mychennaicity.in` (or the domain) in the page `title` string — that duplicates the brand after the template runs (see the historical About-page bug).
+- **Open Graph / Twitter:** set `openGraph.title` and `twitter.title` to the **same final string** as the browser title. Use [`fullSiteTitle(segment)`](../src/lib/seo/site-titles.ts) so hubs stay in sync with the template. For error-path metadata where the template would read oddly, use `title: { absolute: fullSiteTitle("…") }` (Next.js skips the template for `absolute`).
+- **Long news headlines:** article routes use [`clipArticleHeadlineForTitle`](../src/lib/seo/site-titles.ts) so the full title stays near a SERP-friendly length before appending ` · Chennai local news` and the site suffix.
+
 - **Summary vs dek:** `dek` is the short display line; `summary` is the factual lead — show both when they differ so the first screen matches meta description intent.
 - **Primary source:** keep `source_url` / `source_name` accurate; the article template surfaces them as the outbound citation.
 - **Interactives:** `interactive_json` supports `checklist`, `poll`, `takeaways`, `faq`, and `howto` shapes — use `faq` / `howto` only with real, non-thin Q&A or steps (avoid empty schema).
@@ -51,7 +58,7 @@
 
 - **Events:** Public hub and sitemap only include rows with `status = scheduled` and `COALESCE(ends_at, starts_at) >= now()`. Cancelled, draft, or ended events are excluded; a bookmarked URL to an ended event should **404** (`notFound`).
 - **Jobs:** Public hub and sitemap only include `status = open`. Closed or draft postings must not appear in `sitemap.xml` or list UIs.
-- **Hub fallback:** When the database has **no** eligible rows, `/chennai-local-events` and `/jobs` keep the **mock** editorial lists — **without** `CollectionPage` / `ItemList` JSON-LD (avoid thin or fake structured data).
+- **Hub fallback:** When the database has **no** eligible rows, `/chennai-local-events` and `/chennai-jobs` keep the **mock** editorial lists — **without** `CollectionPage` / `ItemList` JSON-LD (avoid thin or fake structured data). Legacy `/jobs` redirects (301) to `/chennai-jobs`.
 
 ## Article metadata (optional columns)
 
@@ -67,8 +74,8 @@
 
 ## Off-repo SEO / growth (not in this repo)
 
-- **Orphan URLs:** Quarterly pass: URLs in the sitemap with no internal inlinks except the sitemap — add contextual links from hubs or related articles.
-- **Backlinks / digital PR:** Pitch desks, partners, and community orgs for earned links to area hubs and explainers.
+- **Orphan URLs:** Quarterly pass: URLs in the sitemap with no internal inlinks except the sitemap — add contextual links from hubs or related articles. Jobs hub inlink patterns and GSC steps: [`SEO_ENGINE_PLAN.md`](SEO_ENGINE_PLAN.md).
+- **Backlinks / digital PR:** Pitch desks, partners, and community orgs for earned links to area hubs and explainers. Jobs-specific angles: [`CHENNAI_JOBS_OUTREACH.md`](CHENNAI_JOBS_OUTREACH.md).
 - **Tamil locale:** Strategy for Tamil titles or `ta` alternate pages (hreflang) when you have translated content — not enabled by default.
 - **Google Business Profile / NAP:** If you have a physical office, keep NAP consistent with the site and GBP.
 - **Entity glossary:** Only add Wikipedia/Wikidata `sameAs` in `chennai-glossary` after manual verification.

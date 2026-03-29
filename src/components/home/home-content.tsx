@@ -12,6 +12,7 @@ import {
   trendingTags,
   zoneShortcuts,
 } from "@/lib/home-mock";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { HomeExploreChennai } from "./home-explore-chennai";
 
 export { HomeHero } from "./home-hero";
@@ -185,8 +186,8 @@ export function HomeJobsSpotlight() {
     <Section
       eyebrow="Careers"
       title="Jobs spotlight"
-      subtitle="Curated Mar 25 2026 from Chennai tech employers and public listings — external cards open the company careers site. Always verify the role before you apply. On your phone, swipe the row sideways."
-      action={{ href: "/jobs", label: "Browse all jobs" }}
+      subtitle="Updated 25 Mar 2026 from Chennai tech employers and public listings. Links open the company’s own careers page — read the ad there before you apply. On your phone, swipe sideways to browse."
+      action={{ href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" }}
     >
       <JobsSpotlightList />
     </Section>
@@ -243,7 +244,7 @@ export function HomeTrendingTags() {
     <Section
       eyebrow="Discover"
       title="Trending topics"
-      subtitle="Tag pages wire to Elasticsearch or Postgres full-text later — links land on news for now."
+      subtitle="Tag links go to local news for now; search across tags may come later."
     >
       <div className="flex flex-wrap gap-2">
         {trendingTags.map((t) => (
@@ -266,7 +267,7 @@ export function HomeCityPulse() {
       eyebrow="Infra & civic"
       title="City pulse"
       subtitle="Infra, water, and mobility — a distinct lane from the main news river."
-      action={{ href: "/chennai-local-news", label: "Civic desk" }}
+      action={{ href: "/chennai-local-news", label: "Chennai news" }}
     >
       <ul className="divide-y divide-[var(--border)] overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm">
         {cityPulseBullets.map((b) => (

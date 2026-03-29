@@ -31,7 +31,7 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Drizzle schema: `articles`, `events`, `job_postings`, `employers`, `directory_entries`, `cities`, auth tables | **Done** — `src/db/schema/` |
 | Public news: hub, topic desks, detail, RSS, dynamic rendering, JSON-LD | **Done** — `src/app/(public)/chennai-local-news/`, `src/domains/news/` |
 | Home: DB news sections + map/explore + mock-backed jobs/events/directory previews | **Done** — `src/app/(public)/page.tsx`, `src/components/home/` |
-| Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, matching routes |
+| Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, `/chennai-jobs` routes (legacy `/jobs` → 301) |
 | Sitemap / news sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/robots.ts` |
 | Static pages: about, contact, editorial standards, glossary | **Done** — under `src/app/(public)/` |
 | Newsletter signup UI | **Partial** — modal + config (`src/components/newsletter/`, `src/config/newsletter-modal.ts`); wire to provider when chosen |

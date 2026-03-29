@@ -26,7 +26,7 @@ const OVERLAY_LABELS: { key: OverlayKey; label: string }[] = [
 ];
 
 const VIEW_LABELS: { mode: MapViewMode; label: string }[] = [
-  { mode: "greater", label: "Greater Chennai" },
+  { mode: "greater", label: "Full city wards" },
   { mode: "core", label: "Chennai core" },
   { mode: "region", label: "By region" },
   { mode: "corridor", label: "Corridor" },
@@ -326,7 +326,7 @@ export function InteractiveChennaiMapExplorer() {
           <div
             className="ccmap-map-wrap"
             role="img"
-            aria-label="Greater Chennai ward boundaries from open civic data. Each polygon is a GCC ward."
+            aria-label="Chennai ward map from open civic data. Each area is one GCC ward."
           >
             <div ref={mapHostRef} className="ccmap-map-inner" />
             {!shouldLoad ? (
@@ -458,10 +458,9 @@ export function InteractiveChennaiMapExplorer() {
             <>
               <h3 id="ccmap-panel-title">Pick a ward</h3>
               <p className="ccmap-desc">
-                Hover for a quick summary; tap or click a ward to load editorial
-                context and a link to the matching macro area hub. Data hooks
-                (listings, jobs, news counts) wire in from the CMS or API when
-                ready.
+                Hover for a short summary; tap or click a ward for local context
+                and a link to the matching area page. Listings, jobs, and news
+                counts will show here when we connect the data.
               </p>
             </>
           )}

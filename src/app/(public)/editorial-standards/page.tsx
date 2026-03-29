@@ -1,28 +1,33 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { getSiteUrl } from "@/lib/env";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/editorial-standards";
 
+const titleSegment = "Editorial standards & corrections";
+
 export const metadata: Metadata = {
-  title: "Editorial standards",
+  title: titleSegment,
   description:
     "How mychennaicity.in handles sourcing, analysis, updates, and corrections for Chennai local coverage.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   openGraph: {
-    title: "Editorial standards | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Sourcing, attribution, and correction practices for Greater Chennai news.",
+      "Sourcing, attribution, and correction practices for Chennai-area news.",
     url: `${getSiteUrl()}${path}`,
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Editorial standards | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     images: ["/twitter-image"],
   },
 };
@@ -74,6 +79,18 @@ export default function EditorialStandardsPage() {
           <strong className="text-[var(--foreground)]">YMYL topics.</strong>{" "}
           Health, legal, and money explainers carry stronger sourcing and review
           expectations; we avoid presenting opinion as clinical or legal advice.
+        </p>
+        <p>
+          <strong className="text-[var(--foreground)]">Job listings.</strong>{" "}
+          Roles on{" "}
+          <Link
+            href={CHENNAI_JOBS_HUB_PATH}
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            jobs in Chennai
+          </Link>{" "}
+          should link to the employer&apos;s official apply path; we mark
+          employers as checked only when we have done a basic verification pass.
         </p>
       </div>
       <InteriorCrossNav />

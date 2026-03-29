@@ -4,21 +4,26 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import Link from "next/link";
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import {
   CHENNAI_GLOSSARY,
   buildGlossaryDefinedTermSetJsonLd,
 } from "@/lib/seo/chennai-glossary";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/glossary";
 
+const titleSegment = "Chennai & GCC glossary";
+
 export const metadata: Metadata = {
-  title: "Glossary — Chennai & GCC",
+  title: titleSegment,
   description:
-    "Short definitions for Greater Chennai, GCC, OMR, CMRL, and planning terms used on mychennaicity.in.",
+    "Short definitions for Chennai, GCC, OMR, CMRL, and planning terms used on mychennaicity.in.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   openGraph: {
-    title: "Chennai & GCC glossary | mychennaicity.in",
+    title: fullSiteTitle(titleSegment),
     description:
       "Editorial definitions for local terms — verify official sources for legal boundaries.",
     url: `${getSiteUrl()}${path}`,
@@ -26,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chennai & GCC glossary",
+    title: fullSiteTitle(titleSegment),
     images: ["/twitter-image"],
   },
 };
@@ -54,6 +59,23 @@ export default function GlossaryPage() {
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
         We use these terms consistently across news and hubs. They are for reader
         orientation, not legal cadastral or jurisdictional advice.
+      </p>
+      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        Looking for work? See{" "}
+        <Link
+          href={CHENNAI_JOBS_HUB_PATH}
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          jobs in Chennai
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="/guides/chennai-tech-careers"
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          how to read a job ad
+        </Link>
+        .
       </p>
 
       <dl className="mt-10 max-w-2xl space-y-10">

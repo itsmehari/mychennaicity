@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-footer-trigger";
 import { chennaiZones } from "@/lib/chennai-zones";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
   { href: "/chennai-local-news/topic/chennai", label: "Civic & GCC" },
   { href: "/chennai-local-news/topic/mobility", label: "Mobility & Metro" },
   { href: "/chennai-local-news/topic/consumer", label: "Consumer" },
-  { href: "/chennai-local-news/topic/elections", label: "Elections desk" },
+  { href: "/chennai-local-news/topic/elections", label: "Elections" },
   { href: "/chennai-local-news", label: "Editor’s picks" },
 ];
 
@@ -18,13 +19,13 @@ const discoverLinks = [
   { href: "/directory", label: "Hospitals" },
   { href: "/directory", label: "Food & dining" },
   { href: "/chennai-local-events", label: "Chennai local events" },
-  { href: "/jobs", label: "Jobs board" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
   { href: "/#areas", label: "Area map (home)" },
 ];
 
 const workLinks = [
-  { href: "/jobs", label: "Browse jobs" },
-  { href: "/jobs", label: "Post a job (soon)" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Post a job (soon)" },
   { href: "/directory", label: "List your business" },
   { href: "/chennai-local-events", label: "Submit an event (soon)" },
 ];
@@ -50,9 +51,9 @@ const tagLinks = [
   { href: "/chennai-local-news/topic/chennai", label: "Monsoon" },
   { href: "/areas/omr-perungudi-sholinganallur", label: "OMR" },
   { href: "/chennai-local-news/topic/chennai", label: "Marina" },
-  { href: "/jobs", label: "Startups" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Startups" },
   { href: "/chennai-local-events", label: "Weekend" },
-  { href: "/jobs", label: "Remote" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Remote" },
 ];
 
 function FooterColumn({
@@ -111,7 +112,7 @@ export function SiteFooter() {
               again.
             </h2>
             <p className="mt-3 text-sm font-light leading-relaxed text-[var(--footer-muted)]">
-              News desk, jobs, events, directory, and neighbourhood hubs in one
+              Local news, jobs, events, directory, and neighbourhood pages in one
               fat footer. Same idea as multi-column footers on editorial and
               product sites.
             </p>
@@ -121,7 +122,7 @@ export function SiteFooter() {
               href="/chennai-local-news"
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[var(--accent-fg)] shadow-md transition hover:bg-[var(--accent-hover)]"
             >
-              Open news desk
+              Open local news
             </Link>
             <NewsletterFooterTrigger className="inline-flex items-center justify-center rounded-full border-2 border-[var(--footer-border)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--footer-fg)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]">
               Email digest

@@ -28,19 +28,22 @@ import {
 } from "@/domains/news";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { getSiteUrl } from "@/lib/env";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 /** Load news from Neon on every request — build-time static HTML had empty bulletin when DATABASE_URL was missing at Vercel build. */
 export const dynamic = "force-dynamic";
 
+const titleSegment = "Chennai news, jobs, events & directory";
+
 export const metadata: Metadata = {
-  title: "Home",
+  title: titleSegment,
   description:
-    "Chennai-wide local news, jobs, events, listings, and interactive Greater Chennai area hubs.",
+    "Chennai-area news, jobs, events, listings, and neighbourhood pages you can open from one home page.",
   alternates: { canonical: getSiteUrl() },
   openGraph: {
-    title: "mychennaicity.in — Chennai news, jobs, events & listings",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Discover Greater Chennai by area: news, directory, jobs, and events.",
+      "Explore Chennai by area: news, directory, jobs, and events.",
     url: getSiteUrl(),
     siteName: "mychennaicity.in",
     locale: "en_IN",
@@ -49,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "mychennaicity.in — Chennai news, jobs, events & listings",
+    title: fullSiteTitle(titleSegment),
     description:
-      "Greater Chennai local news, jobs, events, listings, and area hubs.",
+      "Chennai local news, jobs, events, listings, and area pages.",
     images: ["/twitter-image"],
   },
 };

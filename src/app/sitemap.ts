@@ -8,6 +8,7 @@ import {
 } from "@/domains/news";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
+import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base =
@@ -56,10 +57,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${base}/jobs`,
+      url: `${base}${CHENNAI_JOBS_HUB_PATH}`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${base}/guides/chennai-tech-careers`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.55,
     },
     {
       url: `${base}/directory`,
@@ -125,7 +132,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const jobEntries: MetadataRoute.Sitemap = jobRows.map((j) => ({
-    url: `${base}/jobs/${j.slug}`,
+    url: `${base}${chennaiJobsDetailPath(j.slug)}`,
     lastModified: j.lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.65,

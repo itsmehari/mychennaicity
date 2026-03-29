@@ -4,7 +4,7 @@ const ALERT = {
   message:
     "Northeast monsoon readiness: GCC desilting dashboards and ward helplines — guides coming soon.",
   href: "/chennai-local-news",
-  cta: "Read civic desk",
+  cta: "Read local news",
 };
 
 export function AlertBar() {

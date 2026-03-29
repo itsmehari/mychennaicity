@@ -17,7 +17,7 @@
 | **RSS** | `/chennai-local-news/feed.xml` | XML feed for the news hub (excerpt default — see [CONTENT_ARCHITECTURE.md](CONTENT_ARCHITECTURE.md)). |
 | **Legacy news path** | `/news` | **Permanent redirect** to `/chennai-local-news`. |
 | **Chennai local events** | `/chennai-local-events`, `/chennai-local-events/[slug]` | Hub lists **`scheduled`** future events from DB when present; otherwise **mock** cards. Detail page resolves a DB slug or `notFound`. Hub uses **events JSON-LD** only when the list is DB-backed. |
-| **Jobs** | `/jobs`, `/jobs/[slug]` | Hub lists **`open`** postings from DB when present; otherwise **mock** rows (often outbound to career sites). Detail page for DB slugs; on-site apply still roadmap. Hub **JobPosting** / collection JSON-LD only when DB-backed. |
+| **Jobs** | `/chennai-jobs`, `/chennai-jobs/[slug]` (legacy `/jobs` → 301) | Hub lists **`open`** postings from DB when present; otherwise **mock** rows (often outbound to career sites). Detail page for DB slugs; `application_url` + apply CTA; on-site apply still roadmap. Hub **JobPosting** / collection JSON-LD only when DB-backed. |
 | **Directory** | `/directory` | Vertical tiles and **mock** sample listings; `directory_entries` exists in schema for a future unified API. |
 | **Area (macro) pages** | `/areas/[slug]` | Greater Chennai zone hubs (`chennaiZones`): blurb, cross-links; area-scoped listing filters still planned. |
 | **About / contact / trust** | `/about`, `/contact`, `/editorial-standards` | Static pages for editorial positioning, contact, and standards. |
@@ -110,7 +110,7 @@ From jobs page and roadmap docs:
 | Layer | Awareness | Consideration | Action | Retention | Advocacy |
 |-------|------------|---------------|--------|-----------|----------|
 | **Experience** | Curious / scanning the market | Evaluating trust & relevance | Hopeful, time-pressed | Habitual (“check Chennai pulse”) | Proud / helpful |
-| **Evidence** | Social posts, search results, news cross-links (`/jobs`, Economy topic) | Job list UI, company names, salary/location cues, employer domains | Application form or external ATS, email receipts, saved-search UI (future) | Alert emails, “new matches” digest | Share link, referral message |
+| **Evidence** | Social posts, search results, news cross-links (`/chennai-jobs`, Economy topic) | Job list UI, company names, salary/location cues, employer domains | Application form or external ATS, email receipts, saved-search UI (future) | Alert emails, “new matches” digest | Share link, referral message |
 | **User actions** | Lands from home spotlight, nav, or Google | Reads cards, filters by area/role, opens employer site | Submits application or profile; answers recruiter follow-up | Toggles alerts; returns for new postings | Shares job or site with peers |
 | **Front-of-stage** | Editorial framing (“how we pick”), clear outbound-link labelling | FAQ on verifying URLs, location/hybrid notes | Confirmation screens, status messaging (when on-platform) | Preference centre for alerts | Testimonial prompts (optional) |
 | **Back-of-stage** | Editorial selection of featured roles | Normalise listing quality; hide stale jobs | Route applications to employer workflow; spam checks | Refresh curated picks; tune alert rules | Capture success stories with consent |
@@ -125,7 +125,7 @@ From jobs page and roadmap docs:
 | **Experience** | Opportunistic / recruiting under pressure | Weighing cost, reach, and admin effort | Busy; needs qualified pipeline | Wants reliable channel for next reqs | Will refer other hiring managers |
 | **Evidence** | Inbound email, sales one-pager, newsroom adjacency | “Post a job” flow, pricing/help, brand guidelines | Employer dashboard, applicant list or export, invoices (if paid) | Performance report (views, clicks, applies) | Logo on partner strip, case study |
 | **User actions** | Hears about Chennai audience on platform | Compares to other boards; reads T&Cs | Creates listing, pays (if any), responds to candidates | Reposts roles, upgrades bump | Refers another company |
-| **Front-of-stage** | Clear value prop on `/jobs` and hire CTA | Onboarding tips, verification steps | Published listing with consistent formatting | Check-in on listing health | Co-marketing where agreed |
+| **Front-of-stage** | Clear value prop on `/chennai-jobs` and hire CTA | Onboarding tips, verification steps | Published listing with consistent formatting | Check-in on listing health | Co-marketing where agreed |
 | **Back-of-stage** | Lead logging | KYC / company verification, fraud checks | Moderate copy; enforce salary clarity & EEO guidance | Account management touchpoints | Collect NPS / referral |
 | **Support** | CRM, ad ops | Legal (terms), payments (if any) | Admin tools, audit trail | Data warehouse / dashboards | Partner programme |
 
@@ -142,9 +142,9 @@ From jobs page and roadmap docs:
 
 ## D. How this maps to today’s codebase
 
-| Blueprint part | Today (`/jobs`) | Next implementation step |
+| Blueprint part | Today (`/chennai-jobs`) | Next implementation step |
 |----------------|-----------------|---------------------------|
-| Evidence | Static page + mock rows in `home-mock.ts` | Replace with DB-driven list + detail `/jobs/[slug]` |
+| Evidence | Static page + mock rows in `home-mock.ts` | DB-driven list + detail `/chennai-jobs/[slug]` (`npm run db:seed:chennai-jobs` for demos) |
 | User (seeker) | Click through to external careers pages | Optional native apply + application store |
 | User (employer) | Copy points to news topics for “submission openings” | Employer auth + post flow + admin moderation |
 | Support | Same stack as rest of site (Vercel, Neon) | Jobs tables, email for alerts, rate limits |

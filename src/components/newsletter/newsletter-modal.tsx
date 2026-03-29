@@ -85,7 +85,7 @@ export function NewsletterModal({
               id={titleId}
               className="type-display mt-2 text-xl font-bold leading-snug tracking-tight sm:text-2xl"
             >
-              Subscribe for weekly Greater Chennai updates
+              Subscribe for weekly Chennai updates
             </h2>
             <p
               id={descId}

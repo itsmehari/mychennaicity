@@ -9,9 +9,14 @@ import {
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
 import {
+  CHENNAI_JOBS_HUB_PATH,
+  chennaiJobsDetailPath,
+} from "@/lib/routes/chennai-jobs";
+import {
   buildJobBreadcrumbJsonLd,
   buildJobPostingJsonLd,
 } from "@/lib/seo/job-posting-jsonld";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -30,18 +35,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     row = await getOpenJobPostingWithEmployerBySlug(slug);
   } catch {
-    return { title: "Job" };
+    return { title: { absolute: fullSiteTitle("Job not found") } };
   }
-  if (!row) return { title: "Job" };
+  if (!row) return { title: { absolute: fullSiteTitle("Job not found") } };
   const base = getSiteUrl();
-  const url = `${base}/jobs/${row.job.slug}`;
+  const url = `${base}${chennaiJobsDetailPath(row.job.slug)}`;
   const desc = clipDesc(row.job.body) || row.job.title;
+  const titleSegment = `${row.job.title} · ${row.employer.name}`;
+  const docTitle = fullSiteTitle(titleSegment);
   return {
-    title: `${row.job.title} · ${row.employer.name}`,
+    title: titleSegment,
     description: desc,
     alternates: { canonical: url },
     openGraph: {
-      title: `${row.job.title} | Jobs`,
+      title: docTitle,
       description: desc,
       url,
       type: "website",
@@ -49,20 +56,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${row.job.title} | Jobs`,
+      title: docTitle,
       description: desc,
       images: ["/twitter-image"],
     },
   };
 }
 
-export default async function JobDetailPage({ params }: Props) {
+export default async function ChennaiJobDetailPage({ params }: Props) {
   const { slug } = await params;
   const row = await getOpenJobPostingWithEmployerBySlug(slug);
   if (!row) notFound();
 
   const jobLd = buildJobPostingJsonLd(row);
   const crumbLd = buildJobBreadcrumbJsonLd(row.job.slug, row.job.title);
+  const applyHref = row.job.applicationUrl?.trim();
 
   return (
     <>
@@ -78,16 +86,19 @@ export default async function JobDetailPage({ params }: Props) {
         <PageBreadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: "Jobs", href: "/jobs" },
+            { label: "Jobs in Chennai", href: CHENNAI_JOBS_HUB_PATH },
             { label: row.job.title },
           ]}
         />
-        <p className="type-eyebrow text-[var(--accent)]">Job</p>
+        <p className="type-eyebrow text-[var(--accent)]">Chennai job</p>
         <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
           {row.job.title}
         </h1>
         <p className="type-lede mt-2 text-sm text-[var(--muted)]">
           {row.employer.name}
+          {row.employer.verified ? (
+            <span className="text-[var(--accent)]"> · Checked by us</span>
+          ) : null}
           {row.job.locationLabel ? ` · ${row.job.locationLabel}` : " · Chennai"}
           {row.employer.websiteUrl ? (
             <>
@@ -103,6 +114,18 @@ export default async function JobDetailPage({ params }: Props) {
             </>
           ) : null}
         </p>
+        {applyHref ? (
+          <p className="mt-4">
+            <a
+              href={applyHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-fg)] transition hover:opacity-90"
+            >
+              Apply on employer / ATS
+            </a>
+          </p>
+        ) : null}
         <div className="mt-8">
           <ArticleProse content={row.job.body} />
         </div>

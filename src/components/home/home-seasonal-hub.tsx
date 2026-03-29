@@ -122,7 +122,7 @@ export function HomeSeasonalHub() {
             ref={titleRef}
             className="type-display mt-3 text-2xl text-[var(--foreground)] sm:text-3xl"
           >
-            Tamil Nadu Assembly Election 2026 — Chennai voter desk
+            Tamil Nadu Assembly Election 2026 — Chennai voter guide
           </h2>
           <p
             ref={bodyRef}
@@ -141,7 +141,7 @@ export function HomeSeasonalHub() {
             href="/chennai-local-news/topic/elections"
             className="inline-flex items-center justify-center rounded-full bg-[var(--foreground)] px-8 py-3 text-center text-sm font-bold text-[var(--background)] shadow-lg transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
-            Open election desk
+            Election news and explainers
           </Link>
           <Link
             href="/chennai-local-events"

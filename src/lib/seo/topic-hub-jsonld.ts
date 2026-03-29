@@ -17,7 +17,7 @@ export function buildTopicHubJsonLd(
     "@id": pageUrl,
     url: pageUrl,
     name: `${categoryLabel} — Chennai local news`,
-    description: `Latest ${categoryLabel} coverage and analysis for Greater Chennai on mychennaicity.in.`,
+    description: `Latest ${categoryLabel} news for Chennai and nearby on mychennaicity.in.`,
     isPartOf: { "@id": `${base}/#website` },
     inLanguage: "en-IN",
   };

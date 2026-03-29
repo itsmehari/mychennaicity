@@ -11,6 +11,21 @@ const nextConfig: NextConfig = {
         hostname: "pplx-res.cloudinary.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "metrorailnews.in",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "static.amazon.jobs",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "thumbs.dreamstime.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
@@ -23,6 +38,16 @@ const nextConfig: NextConfig = {
       {
         source: "/events/:path*",
         destination: "/chennai-local-events/:path*",
+        permanent: true,
+      },
+      {
+        source: "/jobs",
+        destination: "/chennai-jobs",
+        permanent: true,
+      },
+      {
+        source: "/jobs/:slug",
+        destination: "/chennai-jobs/:slug",
         permanent: true,
       },
     ];

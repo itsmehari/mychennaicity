@@ -1,5 +1,6 @@
 export {
   CHENNAI_CITY_SLUG,
+  countOpenJobPostingsForChennaiHub,
   getOpenJobPostingWithEmployerBySlug,
   listJobsForSitemap,
   listOpenJobPostingsForChennaiHub,

@@ -26,6 +26,10 @@ import {
   buildNewsArticleJsonLd,
 } from "@/lib/seo/news-article-jsonld";
 import { defaultOgImageAbsoluteUrl } from "@/lib/seo/site-defaults";
+import {
+  clipArticleHeadlineForTitle,
+  fullSiteTitle,
+} from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -52,10 +56,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     article = await getPublishedArticleBySlug(slug);
   } catch {
-    return { title: "Story" };
+    return { title: { absolute: fullSiteTitle("Article not found") } };
   }
   if (!article) {
-    return { title: "Story" };
+    return { title: { absolute: fullSiteTitle("Article not found") } };
   }
   const base = getSiteUrl();
   const url = `${base}/chennai-local-news/${article.slug}`;
@@ -64,8 +68,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       article.dek ??
       article.title,
   );
-  /** Root layout template adds " · mychennaicity.in" → full SERP title per SEO plan. */
-  const titleSegment = `${article.title} · Chennai local news`;
+  const headline = clipArticleHeadlineForTitle(article.title);
+  const titleSegment = `${headline} · Chennai local news`;
+  const docTitle = fullSiteTitle(titleSegment);
   const hero = article.heroImageUrl?.trim();
   const ogImage = hero
     ? [{ url: hero }]
@@ -79,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       googleBot: { "max-image-preview": "large" },
     },
     openGraph: {
-      title: `${article.title} · Chennai local news · mychennaicity.in`,
+      title: docTitle,
       description: desc,
       url,
       type: "article",
@@ -89,7 +94,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${article.title} · Chennai local news · mychennaicity.in`,
+      title: docTitle,
       description: desc,
       images: hero ? [hero] : [defaultOgImageAbsoluteUrl()],
     },

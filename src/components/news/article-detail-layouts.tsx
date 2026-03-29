@@ -59,7 +59,7 @@ function MetroColumnsLayout({ s }: { s: ArticleDetailSlots }) {
         aria-hidden
       >
         <p className="max-h-[min(420px,50vh)] text-[11px] font-bold uppercase tracking-[0.35em] text-[var(--accent)] [writing-mode:vertical-rl] rotate-180">
-          Chennai desk
+          Chennai news
         </p>
       </div>
       <div className="min-w-0">

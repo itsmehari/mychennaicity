@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export const alt =
-  "mychennaicity.in — Greater Chennai news, jobs, events, and neighbourhood hubs";
+  "mychennaicity.in — Chennai news, jobs, events, and neighbourhood pages";
 
 export const size = {
   width: 1200,
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
             lineHeight: 1.35,
           }}
         >
-          Greater Chennai — local news, jobs, events, directory, and area hubs
+          Chennai — local news, jobs, events, directory, and area pages
         </div>
         <div
           style={{

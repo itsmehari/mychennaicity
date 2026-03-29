@@ -12,6 +12,7 @@ import {
   buildEventBreadcrumbJsonLd,
   buildEventJsonLd,
 } from "@/lib/seo/event-jsonld";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,18 +24,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     ev = await getPublicEventBySlug(slug);
   } catch {
-    return { title: "Event" };
+    return { title: { absolute: fullSiteTitle("Event not found") } };
   }
-  if (!ev) return { title: "Event" };
+  if (!ev) return { title: { absolute: fullSiteTitle("Event not found") } };
   const base = getSiteUrl();
   const url = `${base}/chennai-local-events/${ev.slug}`;
   const desc = (ev.description ?? ev.title).slice(0, 155);
+  const titleSegment = `${ev.title} · Chennai local events`;
+  const docTitle = fullSiteTitle(titleSegment);
   return {
-    title: `${ev.title} · Chennai local events`,
+    title: titleSegment,
     description: desc,
     alternates: { canonical: url },
     openGraph: {
-      title: `${ev.title} | Chennai local events`,
+      title: docTitle,
       description: desc,
       url,
       type: "website",
@@ -42,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${ev.title} | Chennai local events`,
+      title: docTitle,
       description: desc,
       images: ["/twitter-image"],
     },

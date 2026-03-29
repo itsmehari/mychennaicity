@@ -1,5 +1,6 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
 const EMPLOYMENT_MAP: Record<string, string> = {
   FULL_TIME: "https://schema.org/FULL_TIME",
@@ -19,7 +20,8 @@ function plainBody(body: string, max = 8000): string {
 export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
   const base = getSiteUrl();
   const { job, employer } = data;
-  const url = `${base}/jobs/${job.slug}`;
+  const url = `${base}${chennaiJobsDetailPath(job.slug)}`;
+  const posted = job.publishedAt ?? job.createdAt;
 
   const hiringOrganization: Record<string, unknown> = {
     "@type": "Organization",
@@ -34,7 +36,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
     "@type": "JobPosting",
     title: job.title,
     description: plainBody(job.body),
-    datePosted: job.createdAt.toISOString(),
+    datePosted: posted.toISOString(),
     hiringOrganization,
     employmentType:
       job.employmentType?.trim() &&
@@ -51,7 +53,20 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
       },
     },
     url,
+    /** Google: true only when apply is frictionless on this URL; we usually send candidates to ATS. */
+    directApply: false,
   };
+
+  const apply = job.applicationUrl?.trim();
+  if (apply) {
+    jp.potentialAction = {
+      "@type": "ApplyAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: apply,
+      },
+    };
+  }
 
   if (job.validThrough) {
     jp.validThrough = job.validThrough.toISOString();
@@ -92,14 +107,14 @@ export function buildJobBreadcrumbJsonLd(slug: string, title: string) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Jobs",
-        item: `${base}/jobs`,
+        name: "Jobs in Chennai",
+        item: `${base}${CHENNAI_JOBS_HUB_PATH}`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: title,
-        item: `${base}/jobs/${slug}`,
+        item: `${base}${chennaiJobsDetailPath(slug)}`,
       },
     ],
   };

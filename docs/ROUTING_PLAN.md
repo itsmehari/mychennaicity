@@ -18,8 +18,10 @@
 | `/news` | **308/301** permanent redirect to `/chennai-local-news` |
 | `/chennai-local-events` | Events hub — open **scheduled** events from DB when present; else mock list (no fake `ItemList` JSON-LD when on mock) |
 | `/chennai-local-events/[slug]` | Event detail — DB row or `notFound` |
-| `/jobs` | Jobs hub — open postings from DB when present; else mock list |
-| `/jobs/[slug]` | Job posting detail — DB or `notFound` |
+| `/chennai-jobs` | Chennai jobs hub — open postings from DB when present; else mock list |
+| `/chennai-jobs/[slug]` | Job posting detail — DB or `notFound` |
+| `/jobs`, `/jobs/[slug]` | **301** → `/chennai-jobs` / `/chennai-jobs/[slug]` (`next.config.ts`) |
+| `/guides/chennai-tech-careers` | Evergreen careers / JD guide (internal links from hub + Economy desk) |
 | `/directory` | Directory hub — primarily mock/sample tiles until listings API is wired |
 | `/areas/[slug]` | Macro zone hubs (`chennaiZones`) |
 | `/about`, `/contact`, `/editorial-standards` | Static trust and info pages |

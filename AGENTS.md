@@ -11,3 +11,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Production:** set `DATABASE_URL` in **Vercel → Settings → Environment Variables** for Production (and Preview if desired), then redeploy.
 - **Full checklist:** `docs/DATABASE_AND_VERCEL.md`.
 - If a user pastes a live connection string in chat, advise **rotating** the Neon password and updating Vercel + local secrets.
+
+## Optional: Google site verification (Search Console)
+
+- **`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`** — paste the **content** value from GSC’s HTML tag method (not the full tag). Next.js `metadata.verification.google` in `src/app/layout.tsx` will emit the meta tag. Set in Vercel for Production (and Preview if you verify preview hosts separately).

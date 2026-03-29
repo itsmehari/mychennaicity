@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteAnalytics } from "@/components/analytics";
+import { SITE_TITLE_TEMPLATE } from "@/lib/seo/site-titles";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,13 +14,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const googleSiteVerification =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   title: {
     default: "mychennaicity.in — Chennai news, jobs, events & listings",
-    template: "%s · mychennaicity.in",
+    template: SITE_TITLE_TEMPLATE,
   },
   description:
-    "Greater Chennai local platform: news, directory, jobs, events, and neighbourhood hubs from Tiruvottiyur to OMR.",
+    "Chennai-area local site: news, directory, jobs, events, and neighbourhood pages from Tiruvottiyur to OMR.",
+  ...(googleSiteVerification
+    ? {
+        verification: {
+          google: googleSiteVerification,
+        },
+      }
+    : {}),
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://mychennaicity.in",
   ),
@@ -32,7 +43,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "mychennaicity.in — Greater Chennai local platform",
+        alt: "mychennaicity.in — Chennai local news and city life",
       },
     ],
   },

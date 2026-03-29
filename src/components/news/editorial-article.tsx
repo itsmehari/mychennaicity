@@ -207,14 +207,14 @@ export async function EditorialArticle({
 
   const areaBlock = areaZone ? (
     <p className="type-lede mt-4 text-sm text-[var(--muted)]">
-      <span className="text-[var(--foreground)]">Neighbourhood desk: </span>
+      <span className="text-[var(--foreground)]">Local area: </span>
       <Link
         href={`/areas/${areaZone.slug}`}
         className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
       >
         More in {areaZone.label}
       </Link>
-      <span> — macro hub for GCC-adjacent coverage in this belt.</span>
+      <span> — neighbourhood page with news and links for this part of Chennai.</span>
     </p>
   ) : null;
 

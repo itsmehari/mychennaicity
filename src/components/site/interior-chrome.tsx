@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 
 export const interiorMainClassName =
@@ -52,7 +53,7 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
   {
     href: "/chennai-local-news",
     label: "Chennai local news",
-    hint: "Front page and desks",
+    hint: "Front page and news topics",
   },
   {
     href: "/chennai-local-events",
@@ -60,9 +61,14 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     hint: "What’s on across the city",
   },
   {
-    href: "/jobs",
-    label: "Jobs",
-    hint: "Curated employer links",
+    href: CHENNAI_JOBS_HUB_PATH,
+    label: "Jobs in Chennai",
+    hint: "Open roles we list and check when we can",
+  },
+  {
+    href: "/guides/chennai-tech-careers",
+    label: "Reading job ads",
+    hint: "Plain tips on Chennai tech hiring",
   },
   {
     href: "/directory",
@@ -72,15 +78,15 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
   {
     href: "/#areas",
     label: "Area map",
-    hint: "Macro hubs around GCC",
+    hint: "Big zones around the city",
   },
 ];
 
-export function TopicDeskNav({ currentSlug }: { currentSlug?: string }) {
+export function TopicSectionNav({ currentSlug }: { currentSlug?: string }) {
   return (
     <div
       className="mb-8 flex flex-wrap gap-2"
-      aria-label="News desks"
+      aria-label="Browse news by topic"
     >
       {CHENNAI_NEWS_TOPIC_NAV.map((t) => {
         const active = t.slug === currentSlug;

@@ -120,9 +120,9 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
         heading: "Work",
         links: [
           {
-            href: "/jobs",
-            label: "Job board",
-            description: "Roles across Greater Chennai and OMR.",
+            href: "/chennai-jobs",
+            label: "Chennai jobs",
+            description: "Jobs in Chennai, OMR, and nearby tech areas.",
           },
         ],
       },

@@ -1,5 +1,8 @@
 import { getSiteUrl } from "@/lib/env";
-import { orgSameAsUrls } from "@/lib/seo/site-defaults";
+import {
+  orgPostalAddressJsonLd,
+  orgSameAsUrls,
+} from "@/lib/seo/site-defaults";
 
 export function HomeJsonLd() {
   const base = getSiteUrl();
@@ -17,6 +20,8 @@ export function HomeJsonLd() {
     },
   };
   if (sameAs.length) org.sameAs = sameAs;
+  const address = orgPostalAddressJsonLd();
+  if (address) org.address = address;
 
   const payload = {
     "@context": "https://schema.org",
@@ -27,7 +32,7 @@ export function HomeJsonLd() {
         url: base,
         name: "mychennaicity.in",
         description:
-          "Greater Chennai local news, directory, jobs, events, and neighbourhood hubs.",
+          "Chennai-area local news, directory, jobs, events, and neighbourhood pages.",
         publisher: { "@id": `${base}/#org` },
         inLanguage: "en-IN",
       },

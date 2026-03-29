@@ -21,7 +21,7 @@ export async function GET() {
   <channel>
     <title>mychennaicity.in — Chennai local news</title>
     <link>${base}/chennai-local-news</link>
-    <description>Greater Chennai news with editorial analysis.</description>
+    <description>Chennai-area local news — short reports and local context.</description>
     <language>en-in</language>
     ${items
       .map((a) => {

@@ -15,21 +15,21 @@ export function HomeDbNewsSections({
   return (
     <div className="rounded-[1.35rem] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm ring-1 ring-[color-mix(in_srgb,var(--foreground)_4%,transparent)] sm:p-8">
       <Section
-        eyebrow="Live desk"
+        eyebrow="Latest"
         title="News bulletin"
-        subtitle="Stories load from our Neon database — report, analysis, and one interactive per piece."
+        subtitle="Fresh stories from our database — each one has a short report, local angle, and a small on-page extra."
         action={{
           href: "/chennai-local-news",
-          label: "Newspaper layout",
+          label: "All news layout",
         }}
       >
         <NewsRevealGrid articles={latest} variant="bulletin" />
       </Section>
       <div className="mt-12 border-t border-[var(--home-section-border)] pt-12 sm:mt-14 sm:pt-14">
         <Section
-          eyebrow="Curated"
+          eyebrow="Picks"
           title="Editor's picks"
-          subtitle="Featured on the desk — hover a card on desktop, tap on mobile to reveal the deck."
+          subtitle="Stories we are highlighting — hover a card on desktop, tap on mobile to see more."
           action={{
             href: "/chennai-local-news",
             label: "All stories",

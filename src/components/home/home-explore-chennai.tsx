@@ -10,7 +10,7 @@ const FEATURES = [
   "Hospitals & neighbourhood clinics",
   "Filter coffee, dining & night markets",
   "Marina, beaches & city parks",
-  "Civic desks & government services",
+  "GCC services & civic info",
   "Metro, buses & corridor commutes",
 ] as const;
 
@@ -78,7 +78,7 @@ export function HomeExploreChennai() {
             id="explore-chennai-heading"
             className="mt-3 font-serif text-[1.65rem] font-bold leading-[1.15] tracking-tight text-[#0f2f28] sm:text-3xl lg:text-[2.15rem] dark:text-emerald-100"
           >
-            Your map to Greater Chennai — neighbourhoods, news, and everyday
+            Your map to Chennai and nearby — neighbourhoods, news, and everyday
             city life.
           </h2>
           <p className="mt-6 border-l-[3px] border-[var(--accent-warm)] pl-5 text-base font-medium leading-snug text-[#3d3a35] dark:text-[color-mix(in_srgb,var(--foreground)_92%,var(--muted))]">
@@ -86,9 +86,9 @@ export function HomeExploreChennai() {
             listings — tuned for how Chennai moves, works, and unwinds.
           </p>
           <p className="mt-5 text-sm leading-relaxed text-[#6b6560] dark:text-[var(--muted)]">
-            From Adyar to Ambattur, we are wiring area hubs, a living directory,
-            and local news so you can explore the city block by block — on
-            mobile first.
+            From Adyar to Ambattur, we are building area pages, a directory, and
+            local news so you can explore the city block by block — mobile
+            friendly.
           </p>
 
           <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-3.5 sm:grid-cols-2">
