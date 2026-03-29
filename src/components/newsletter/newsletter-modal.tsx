@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
 
+/** Same hero asset as `HomeExploreChennai` (Explore section). */
+const MODAL_HERO_IMAGE = "/images/explore-chennai-madras-high-court.jpg";
+
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -38,7 +41,7 @@ export function NewsletterModal({
   return (
     <dialog
       ref={dialogRef}
-      className="newsletter-modal max-h-[min(92vh,640px)] w-[min(calc(100vw-1.5rem),440px)] overflow-hidden rounded-3xl border-0 bg-[var(--surface)] p-0 text-[var(--foreground)] shadow-[0_32px_80px_-20px_rgba(0,0,0,0.45)] backdrop:bg-black/55 backdrop:backdrop-blur-[2px]"
+      className="newsletter-modal m-auto max-h-[min(92vh,640px)] w-[min(calc(100vw-1.5rem),440px)] overflow-hidden rounded-3xl border-0 bg-[var(--surface)] p-0 text-[var(--foreground)] shadow-[0_32px_80px_-20px_rgba(0,0,0,0.45)] backdrop:bg-black/55 backdrop:backdrop-blur-[2px]"
       aria-labelledby={titleId}
       aria-describedby={descId}
       onCancel={(e) => {
@@ -52,8 +55,8 @@ export function NewsletterModal({
       <div className="flex max-h-[inherit] flex-col">
         <div className="relative aspect-[5/3] w-full shrink-0 bg-[var(--border)]">
           <Image
-            src="/opengraph-image"
-            alt=""
+            src={MODAL_HERO_IMAGE}
+            alt="Madras High Court building, Chennai"
             fill
             className="object-cover"
             sizes="440px"
