@@ -272,9 +272,9 @@ function BadgeArrow({ className }: { className?: string }) {
 
 function HeroImageBlock({ slide }: { slide: Slide }) {
   return (
-    <div className="relative w-full max-w-xl mx-auto lg:mx-0 lg:max-w-none">
+    <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none">
       <div
-        className="relative aspect-[2/1] w-full max-h-[200px] overflow-hidden shadow-[0_28px_56px_-28px_rgba(0,0,0,0.5)] sm:max-h-[220px] lg:max-h-[min(232px,26svh)]"
+        className="relative w-full overflow-hidden shadow-[0_28px_56px_-28px_rgba(0,0,0,0.5)] max-lg:mx-auto max-lg:aspect-[2/1] max-lg:max-h-[210px] sm:max-lg:max-h-[230px] lg:aspect-auto lg:h-[min(480px,47svh)] lg:min-h-[280px] lg:max-h-[520px]"
         style={{
           borderRadius:
             "clamp(1.25rem, 4vw, 3rem) 0 clamp(1.25rem, 4vw, 3rem) 0",
@@ -285,8 +285,8 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
           src={slide.heroImageSrc}
           alt={slide.heroImageAlt}
           fill
-          className="object-cover"
-          sizes="(max-width: 1024px) min(100vw, 36rem) 420px"
+          className="object-cover object-center"
+          sizes="(max-width: 1023px) min(100vw, 36rem) 50vw"
           priority={slide.key === "news"}
         />
         <div
@@ -296,7 +296,7 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
       </div>
 
       <div
-        className="absolute bottom-[10%] left-0 z-[2] max-w-[10.5rem] -translate-x-1 sm:max-w-[11.5rem] sm:translate-x-0 lg:-left-2 lg:bottom-[14%] lg:max-w-[12rem]"
+        className="absolute bottom-[10%] left-0 z-[2] max-w-[10.5rem] -translate-x-1 sm:max-w-[11.5rem] sm:translate-x-0 lg:bottom-[8%] lg:left-2 lg:max-w-[11.5rem]"
         style={{ borderRadius: "0 clamp(0.75rem,2vw,1.25rem) 0 0" }}
       >
         <div
@@ -397,7 +397,7 @@ export function HomeHero() {
           aria-hidden
         />
 
-        <div className="relative mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(260px,38%)] lg:items-start lg:gap-8 xl:gap-10">
+        <div className="relative mx-auto grid max-w-6xl gap-6 lg:grid-cols-2 lg:items-start lg:gap-8 xl:gap-10">
           <div className="min-w-0 text-center lg:text-left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 sm:text-[11px] sm:tracking-[0.22em]">
               {slide.eyebrow}
@@ -485,18 +485,18 @@ export function HomeHero() {
             </p>
           </div>
 
-          <div className="min-w-0 lg:pt-1">
+          <div className="min-w-0">
             <HeroImageBlock slide={slide} />
           </div>
         </div>
       </div>
 
       <div
-        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5 lg:px-10"
+        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-4 pt-3 sm:px-6 sm:pb-4 sm:pt-3.5 lg:px-10"
         role="tablist"
         aria-label="What do you want to explore?"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-2 lg:grid-cols-4 lg:gap-2.5">
           {SLIDES.map((s, i) => {
             const selected = i === index;
             return (
@@ -505,22 +505,26 @@ export function HomeHero() {
                 type="button"
                 role="tab"
                 aria-selected={selected}
-                className={`flex flex-col gap-2 rounded-bl-[1.1rem] rounded-tr-[1.1rem] border px-4 py-3.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)] sm:gap-2.5 sm:px-4 sm:py-4 ${
+                className={`flex flex-col gap-1 rounded-bl-[0.85rem] rounded-tr-[0.85rem] border px-3 py-2.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--hero-mustard)] sm:px-3 sm:py-2.5 lg:flex-row lg:items-center lg:gap-2.5 lg:py-2 lg:pl-2.5 lg:pr-3 ${
                   selected
-                    ? "border-[var(--hero-mustard)] bg-white shadow-[0_16px_36px_-22px_rgba(0,0,0,0.35)] ring-1 ring-[var(--hero-mustard-dim)]"
+                    ? "border-[var(--hero-mustard)] bg-white shadow-[0_12px_28px_-18px_rgba(0,0,0,0.35)] ring-1 ring-[var(--hero-mustard-dim)]"
                     : "border-white/12 bg-white/95 hover:border-[var(--hero-mustard-dim)]/50"
-                }`}
+                } [&_svg]:h-[22px] [&_svg]:w-[22px] lg:[&_svg]:h-5 lg:[&_svg]:w-5`}
                 onClick={() => go(i)}
               >
-                <CardIcon slideKey={s.key} />
-                <p className="text-[0.95rem] font-bold leading-snug text-[#111] sm:text-base">
-                  {s.cardTitle}
-                </p>
-                <p className="line-clamp-2 text-xs leading-relaxed text-neutral-600 sm:text-sm">
-                  {s.sub}
-                </p>
-                <span className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#111] sm:mt-auto sm:text-xs">
-                  <span className="border-b-2 border-[var(--hero-mustard)] pb-0.5">
+                <span className="shrink-0 lg:pt-0.5">
+                  <CardIcon slideKey={s.key} />
+                </span>
+                <span className="min-w-0 flex-1 lg:min-w-0">
+                  <p className="text-sm font-bold leading-tight text-[#111]">
+                    {s.cardTitle}
+                  </p>
+                  <p className="mt-0.5 line-clamp-1 text-[11px] leading-snug text-neutral-600 sm:text-xs lg:mt-0">
+                    {s.sub}
+                  </p>
+                </span>
+                <span className="inline-flex shrink-0 items-center text-[10px] font-bold uppercase tracking-wider text-[#111] lg:self-center">
+                  <span className="border-b-2 border-[var(--hero-mustard)] pb-px">
                     More
                   </span>
                 </span>
@@ -530,7 +534,7 @@ export function HomeHero() {
         </div>
 
         {reduceMotion ? null : (
-          <p className="mt-2 text-center text-[10px] font-medium text-white/40 sm:text-[11px]">
+          <p className="mt-1.5 text-center text-[10px] font-medium text-white/40 sm:text-[11px]">
             {paused ? "Rotation paused while you hover" : "Highlights rotate every few seconds"}
           </p>
         )}
