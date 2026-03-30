@@ -15,3 +15,16 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Optional: Google site verification (Search Console)
 
 - **`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`** — paste the **content** value from GSC’s HTML tag method (not the full tag). Next.js `metadata.verification.google` in `src/app/layout.tsx` will emit the meta tag. Set in Vercel for Production (and Preview if you verify preview hosts separately).
+
+## Learnings from project chats (read before large tasks)
+
+Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/legal, seeds, browser handoffs): **`docs/AGENT_LEARNINGS_AND_SOPS.md`**.
+
+**Non-negotiables in short:**
+
+- Keep **plan todos** in `.cursor/plans/` aligned with reality when the user tracks work there.
+- **Plain, Chennai-first** copy on public hubs when the user asks to avoid “markety” internal labels.
+- **No fake JSON-LD** for mock data; match schema to real, stable rows.
+- **Production DB:** after env or schema changes, **redeploy Vercel**; use `docs/DATABASE_AND_VERCEL.md` for push/seed/check-live flows.
+- **Secrets:** never commit; rotate if exposed in chat.
+- **Browser steps** (GitHub/Vercel/registrar/Neon): coordinate with the user—they log in, then automate or guide the next clicks.

@@ -34,7 +34,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run db:check` / `db:check:live` | Article counts sanity check |
 | `npm run db:seed` / `db:seed:live` | Seed Chennai + articles (and related) |
 | `npm run gsc:submit-sitemap` | Search Console sitemap submit (requires GSC env — see `.env.example`) |
-| `npm run geo:build` | Build Chennai map bundle data |
+| `npm run geo:build` | Build Chennai ward map bundle data |
+| `npm run election-map:build` | Build Chennai metro+ assembly map (`public/data/election-map`) |
 
 ## Documentation
 
@@ -45,6 +46,7 @@ Open [http://localhost:3000](http://localhost:3000).
 - [docs/ROUTING_PLAN.md](docs/ROUTING_PLAN.md) — App Router URL map
 - [docs/FEATURE_MAP.md](docs/FEATURE_MAP.md) — legacy mapping and implementation status
 - [docs/SEARCH_CONSOLE.md](docs/SEARCH_CONSOLE.md) — GSC checklist
+- [docs/ADSENSE_PRE_FLIGHT.md](docs/ADSENSE_PRE_FLIGHT.md) — AdSense: content, Vercel env, GSC, mobile test, submit/review
 - [MIGRATION_ANALYSIS.md](MIGRATION_ANALYSIS.md) — legacy system intelligence extraction
 - [docs/](docs/) — PRD, content architecture, roadmap, admin plan
 

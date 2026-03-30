@@ -34,15 +34,15 @@ const companyLinks = [
   { href: "/about", label: "About us" },
   { href: "/contact", label: "Contact & tips" },
   { href: "/editorial-standards", label: "Editorial standards" },
-  { href: "/news", label: "Advertise" },
-  { href: "/news", label: "Careers" },
+  { href: "/contact", label: "Advertise" },
+  { href: "/contact", label: "Careers" },
 ];
 
 const legalLinks = [
-  { href: "/news", label: "Privacy" },
-  { href: "/news", label: "Terms of use" },
-  { href: "/news", label: "Cookies" },
-  { href: "/news", label: "Community guidelines" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms of use" },
+  { href: "/cookies", label: "Cookies" },
+  { href: "/community-guidelines", label: "Community guidelines" },
 ];
 
 const tagLinks = [

@@ -1,0 +1,417 @@
+/**
+ * Elections constituency map — elmap- prefix (separate from ccmap ward explorer).
+ */
+
+.elmap-root {
+  --elmap-stroke: color-mix(in srgb, var(--foreground) 22%, var(--border));
+  --elmap-fill: color-mix(in srgb, var(--wave) 55%, var(--surface));
+  --elmap-fill-hover: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  --elmap-fill-active: color-mix(in srgb, var(--accent) 28%, var(--surface));
+  --elmap-dim-opacity: 0.38;
+}
+
+.elmap-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.elmap-toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.elmap-toolbar-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.elmap-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.elmap-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.elmap-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.elmap-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.elmap-btn[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.elmap-search {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.elmap-search input {
+  min-width: 10rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.elmap-search input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.elmap-layout {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .elmap-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  }
+}
+
+.elmap-map-wrap {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--wave) 22%, var(--surface));
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.elmap-map-inner {
+  position: relative;
+  aspect-ratio: 1000 / 780;
+  max-height: min(72vh, 640px);
+  z-index: 0;
+}
+
+.elmap-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.elmap-svg.elmap-reduced-motion .elmap-area {
+  transition: none;
+}
+
+.elmap-area {
+  fill: var(--elmap-fill);
+  stroke: var(--elmap-stroke);
+  stroke-width: 0.35;
+  cursor: pointer;
+  transition:
+    fill 0.18s ease,
+    opacity 0.18s ease,
+    stroke 0.18s ease;
+}
+
+.elmap-area:hover,
+.elmap-area.is-hover {
+  fill: var(--elmap-fill-hover);
+  stroke: color-mix(in srgb, var(--accent) 55%, var(--elmap-stroke));
+}
+
+.elmap-area.is-active {
+  fill: var(--elmap-fill-active);
+  stroke: var(--accent);
+  stroke-width: 0.55;
+}
+
+.elmap-area.is-dimmed {
+  opacity: var(--elmap-dim-opacity);
+}
+
+.elmap-tooltip {
+  position: fixed;
+  z-index: 50;
+  max-width: 18rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--foreground) 12%, transparent);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.elmap-tooltip h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.elmap-tooltip p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.elmap-panel {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1rem 1.1rem;
+}
+
+.elmap-panel h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.elmap-crumb {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.elmap-meta {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.elmap-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.elmap-candidate-list {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.elmap-candidate {
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+}
+
+.elmap-candidate-party {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.elmap-candidate-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 0.15rem;
+}
+
+.elmap-candidate-alliance {
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.elmap-candidate a {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 0.35rem;
+  display: inline-block;
+}
+
+.elmap-candidate a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.elmap-hook {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  margin: 0 0 0.65rem;
+}
+
+.elmap-fact-line {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.elmap-past {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.elmap-past h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.elmap-past-row {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--foreground);
+  margin: 0.35rem 0 0;
+}
+
+.elmap-past-row span {
+  color: var(--muted);
+}
+
+.elmap-past a {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-block;
+  margin-top: 0.35rem;
+}
+
+.elmap-past-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.25rem;
+}
+
+.elmap-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+.elmap-cta:hover {
+  text-decoration: underline;
+}
+
+.elmap-legend {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px dashed var(--border);
+  background: color-mix(in srgb, var(--background) 80%, var(--surface));
+}
+
+.elmap-legend h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.elmap-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.35rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--foreground);
+}
+
+.elmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.elmap-swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.elmap-swatch.spa {
+  background: color-mix(in srgb, #0f766e 45%, var(--surface));
+}
+.elmap-swatch.nda {
+  background: color-mix(in srgb, #b45309 45%, var(--surface));
+}
+.elmap-swatch.tvk {
+  background: color-mix(in srgb, #7c3aed 45%, var(--surface));
+}
+.elmap-swatch.ntk {
+  background: color-mix(in srgb, #64748b 45%, var(--surface));
+}
+
+.elmap-attribution {
+  margin-top: 0.75rem;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.elmap-error {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.elmap-error button {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 1023px) {
+  .elmap-panel {
+    order: 3;
+  }
+}

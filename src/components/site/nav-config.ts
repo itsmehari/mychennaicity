@@ -104,6 +104,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
         heading: "On the map",
         links: [
           {
+            href: "/elections-2026",
+            label: "Elections 2026 map",
+            description: "Chennai metro+ assembly constituencies and curated candidates.",
+          },
+          {
             href: "/#areas",
             label: "Area explorer",
             description: "Jump to the bento map on the home page.",

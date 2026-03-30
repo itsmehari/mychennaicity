@@ -138,8 +138,14 @@ export function HomeSeasonalHub() {
           className="flex flex-col gap-3 sm:flex-row lg:flex-col"
         >
           <Link
-            href="/chennai-local-news/topic/elections"
+            href="/elections-2026"
             className="inline-flex items-center justify-center rounded-full bg-[var(--foreground)] px-8 py-3 text-center text-sm font-bold text-[var(--background)] shadow-lg transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          >
+            Constituency map (2026)
+          </Link>
+          <Link
+            href="/chennai-local-news/topic/elections"
+            className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,var(--foreground)_35%,transparent)] bg-[var(--surface)] px-8 py-3 text-center text-sm font-bold text-[var(--foreground)] transition hover:border-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             Election news and explainers
           </Link>

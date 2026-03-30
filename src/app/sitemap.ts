@@ -75,6 +75,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${base}/elections-2026`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.72,
+    },
+    {
       url: `${base}/about`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -96,6 +102,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${base}/glossary`,
       lastModified: now,
       changeFrequency: "monthly",
+      priority: 0.35,
+    },
+    {
+      url: `${base}/privacy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.35,
+    },
+    {
+      url: `${base}/cookies`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.35,
+    },
+    {
+      url: `${base}/terms`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.35,
+    },
+    {
+      url: `${base}/community-guidelines`,
+      lastModified: now,
+      changeFrequency: "yearly",
       priority: 0.35,
     },
   ];

@@ -9,3 +9,7 @@
 5. Optional: In GA4, **Admin → Product links → Search Console links** to link GA4 and GSC.
 
 No API keys are required for basic URL inspection and sitemap submission.
+
+## See also
+
+- [ADSENSE_PRE_FLIGHT.md](ADSENSE_PRE_FLIGHT.md) — use verified GSC property + sitemaps as part of AdSense site setup.

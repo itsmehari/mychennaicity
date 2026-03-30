@@ -83,6 +83,12 @@ export const mockJobs: MockJob[] = [
  */
 export const mockEvents: MockEvent[] = [
   {
+    title: "Mylapore Panguni Festival 2026",
+    when: "22 Mar – 12 Apr 2026",
+    where: "Panguni Uthiram · Kapaleeshwarar Temple, Mylapore",
+    href: "/chennai-local-events/mylapore-panguni-festival-kapaleeshwarar-2026",
+  },
+  {
     title: "Rajadhiraaj Yatra — musical theatre (Krishna)",
     when: "Fri 27 Mar – Sun 29 Mar 2026",
     where: "Sir Mutha Venkatasubba Rao Concert Hall",

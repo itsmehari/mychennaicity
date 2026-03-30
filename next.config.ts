@@ -26,6 +26,21 @@ const nextConfig: NextConfig = {
         hostname: "thumbs.dreamstime.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pbs.twimg.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.adotrip.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "dc-cdn.s3-ap-southeast-1.amazonaws.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {

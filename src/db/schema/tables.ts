@@ -107,6 +107,10 @@ export const events = pgTable(
     localityLabel: text("locality_label"),
     status: eventStatusEnum("status").notNull().default("draft"),
     featured: boolean("featured").notNull().default(false),
+    /** When set with `contentRef`, detail page uses a registered rich layout; NULL = legacy prose layout. */
+    presentationKey: text("presentation_key"),
+    /** Keys the code content module (e.g. festival schedule bundle). */
+    contentRef: text("content_ref"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },

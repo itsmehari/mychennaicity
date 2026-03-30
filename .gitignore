@@ -48,6 +48,8 @@ mcp/production-data/node_modules/
 
 # Chennai ward GeoJSON source (large); build outputs live in public/data/chennai-map
 /data/chennai/
+# TN assembly GeoJSON optional local override; default build fetches remote
+/data/tamil-nadu/
 
 # typescript
 *.tsbuildinfo
