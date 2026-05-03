@@ -17,12 +17,12 @@ const titleSegment = "Tamil Nadu Election 2026 — Chennai constituency map";
 export const metadata: Metadata = {
   title: titleSegment,
   description:
-    "Interactive map of Chennai district and suburban-ring assembly constituencies for Tamil Nadu 2026, with curated candidate notes and links to election coverage.",
+    "Explore 22 Chennai metro+ assembly constituencies on an interactive map: editorial hooks, reservation facts, candidate rows with sources, and past results. Tamil Nadu Assembly election 2026—verify against official nominations.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description:
-      "Explore Greater Chennai metro+ assembly seats and read curated candidate rows with sources.",
+      "Explore 22 Chennai metro+ assembly seats with hooks, facts, sourced candidate snapshots, and past results for Tamil Nadu 2026.",
     url: `${getSiteUrl()}${path}`,
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
@@ -40,7 +40,7 @@ export default function Elections2026Page() {
     "@type": "WebPage",
     name: titleSegment,
     description:
-      "Interactive constituency map for Chennai metro+ and Tamil Nadu Assembly Election 2026.",
+      "Explore 22 Chennai metro+ assembly constituencies: map, hooks, facts, sourced candidates, past results—Tamil Nadu 2026.",
     url: `${siteUrl}${path}`,
     isPartOf: { "@type": "WebSite", url: siteUrl },
   };

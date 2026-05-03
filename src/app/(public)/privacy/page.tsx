@@ -10,7 +10,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/privacy";
 
-const titleSegment = "Privacy policy";
+const titleSegment = "Privacy policy — Chennai-area local site";
 
 export const metadata: Metadata = {
   title: titleSegment,

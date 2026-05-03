@@ -3,9 +3,10 @@ import Link from "next/link";
 import { AlertBar } from "@/components/site/alert-bar";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 export const metadata: Metadata = {
-  title: "Page not found",
+  title: { absolute: fullSiteTitle("Page not found") },
   robots: { index: false, follow: true },
 };
 
@@ -21,7 +22,7 @@ export default function NotFound() {
             This page isn&apos;t here
           </h1>
           <p className="type-lede mt-4 text-sm leading-relaxed text-[var(--muted)]">
-            The URL may have changed or the story may have moved. Try the news
+            The URL may have changed or the story may have moved. Try the local
             news section, the area map on the home page, or a topic below.
           </p>
           <ul className="mt-10 space-y-3 text-sm font-medium">

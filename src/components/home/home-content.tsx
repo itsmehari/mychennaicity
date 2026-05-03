@@ -13,6 +13,7 @@ import {
   zoneShortcuts,
 } from "@/lib/home-mock";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { HomeExploreChennai } from "./home-explore-chennai";
 
 export { HomeHero } from "./home-hero";
@@ -87,7 +88,13 @@ export function HomeTrustStrip() {
           Trust
         </p>
         <p className="mt-2 text-sm leading-snug text-[var(--muted)]">
-          Editorial standards & corrections policy — publishing soon.
+          <Link
+            href="/editorial-standards"
+            className="font-semibold text-[var(--foreground)] underline-offset-4 hover:underline"
+          >
+            Editorial standards &amp; corrections
+          </Link>
+          — how we source stories and fix errors.
         </p>
       </div>
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-center shadow-sm sm:text-left">
@@ -134,13 +141,13 @@ export function HomeStatsRibbon() {
   const stats = [
     {
       value: `${homeStats.jobsLive}+`,
-      label: "Live job signals",
+      label: "Sample job picks",
       Icon: IconBriefcase,
       tint: "var(--accent)",
     },
     {
       value: String(homeStats.eventsWeek),
-      label: "Events this week",
+      label: "Sample event picks",
       Icon: IconCalendar,
       tint: "var(--accent-warm)",
     },
@@ -182,11 +189,12 @@ export function HomeStatsRibbon() {
 }
 
 export function HomeJobsSpotlight() {
+  const asOf = formatIndiaLongDate();
   return (
     <Section
       eyebrow="Careers"
       title="Jobs spotlight"
-      subtitle="Updated 25 Mar 2026 from Chennai tech employers and public listings. Links open the company’s own careers page — read the ad there before you apply. On your phone, swipe sideways to browse."
+      subtitle={`Illustrative picks (${asOf}) from Chennai employers and public listings. Links open each company’s careers page — read the ad there before you apply. On your phone, swipe sideways to browse.`}
       action={{ href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" }}
     >
       <JobsSpotlightList />
@@ -195,11 +203,12 @@ export function HomeJobsSpotlight() {
 }
 
 export function HomeEventsFeatured() {
+  const asOf = formatIndiaLongDate();
   return (
     <Section
       eyebrow="Calendar"
       title="Featured events"
-      subtitle="Picked Mar 25 2026 from public listings (Mar–Apr). External rows open the organiser or ticket page — confirm time and price before you go. On narrow screens, swipe sideways to browse."
+      subtitle={`Illustrative picks (${asOf}) from public listings. External rows open the organiser or ticket page — confirm time and price before you go. On narrow screens, swipe sideways to browse.`}
       action={{ href: "/chennai-local-events", label: "All local events" }}
     >
       <EventsFeaturedList />
@@ -212,8 +221,8 @@ export function HomeMarketplaceTeaser() {
     <Section
       eyebrow="Peer listings"
       title="Marketplace teaser"
-      subtitle="Peer listings and classifieds will share one moderation pipeline — here is the visual language early."
-      action={{ href: "/directory", label: "List something" }}
+      subtitle="Sample tiles only — peer listings and classifieds will share one moderation pipeline once submissions open."
+      action={{ href: "/directory", label: "Browse directory samples" }}
     >
       <ul className="grid gap-4 md:grid-cols-3">
         {mockListings.map((l) => (
@@ -296,9 +305,9 @@ export { HomeSeasonalHub } from "./home-seasonal-hub";
 export function HomeSponsoredRow() {
   return (
     <Section
-      eyebrow="Transparency"
-      title="Partners & sponsors"
-      subtitle="Ethical disclosure — every paid placement will be labeled in production."
+      eyebrow="Editorial note"
+      title="Sources & roadmap"
+      subtitle="Nothing here is a paid sponsor yet — we label commercial partners clearly when they appear."
     >
       <ul className="grid gap-4 md:grid-cols-2">
         {sponsors.map((s) => (

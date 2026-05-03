@@ -355,6 +355,54 @@ This page is **not** a substitute for a site inspection. If you see sparks, burn
       ],
     },
   },
+  {
+    slug: "chennai-metro-singara-chennai-card-from-may-1",
+    title:
+      "Chennai Metro to fully shift to Singara Chennai card from 1 May: what commuters need to know",
+    summary:
+      "The old CMRL travel card will be discontinued from 1 May 2026. Passengers must use the Singara Chennai Card (NCMC) for metro and parking, and move any remaining balance via the app or to NCMC.",
+    dek: "Closed-loop travel cards are phased out in favour of the National Common Mobility Card—plan balance transfer before the deadline.",
+    category: "Mobility",
+    featured: true,
+    publishedAt: new Date("2026-04-22T05:00:00Z"),
+    sourceUrl: "https://x.com/cmrlofficial/status/2046518670055112944",
+    sourceName: "CMRL (@cmrlofficial) on X",
+    reportBody: `## What we know
+
+Chennai Metro Rail Limited (CMRL) has said the **existing CMRL travel card** will be **discontinued from 1 May 2026**. After that date, passengers are expected to use the **Singara Chennai Card**—Chennai Metro’s **National Common Mobility Card (NCMC)**—for **metro travel** and **metro parking**.
+
+CMRL’s [official announcement on X](https://x.com/cmrlofficial/status/2046518670055112944) (21 April 2026) states that the Singara Chennai Card was already introduced on **14 April 2023** alongside the older travel card. The **1 May 2026** date completes the move away from the closed-loop metro card.
+
+## Balance transfer
+
+Anyone with value left on the **old travel card** must move it to either:
+
+- A **QR-based Stored Value Pass (SVP)** obtained through the **CMRL Mobile App**, or
+- The **National Common Mobility Card** (Singara Chennai / NCMC).
+
+## Why CMRL says it is doing this
+
+The operator ties the change to **Government of India** guidance on **interoperable** public transport payments—so a single card ecosystem can work across systems, not only inside one mode. CMRL has also said it is committed to a **secure, reliable, and transparent** travel experience, while acknowledging that some passengers may face **inconvenience** during the switch.`,
+    analysisBody: `## What to do now
+
+If you still tap the old travel card, **check the balance today** and start the **transfer** in the CMRL app or onto NCMC—do not assume counters will be quiet on the last day of April.
+
+After **1 May 2026**, the legacy travel card is not expected to remain valid for **train entry** or **parking** at CMRL facilities. Treat the date as a hard cutover for the old product, even if you rarely use the Metro.
+
+## Bigger picture
+
+This is not only a rebrand. **NCMC** is meant to line up with **nationwide** mobility payment standards, so Chennai sits in the same direction as other cities pushing **open-loop** cards and, over time, **more joined-up** public transport. For daily users, the practical impact is: **one fewer proprietary card** to carry—once migration is done—as long as issuance and top-up stay straightforward.`,
+    interactiveJson: {
+      type: "takeaways",
+      title: "Quick facts",
+      items: [
+        "What is changing? The old CMRL travel card is being discontinued.",
+        "What is the new card? The Singara Chennai Card (National Common Mobility Card / NCMC).",
+        "When does it start? 1 May 2026.",
+        "What should you do? Transfer remaining balance to a QR Stored Value Pass via the CMRL Mobile App, or to the National Common Mobility Card.",
+      ],
+    },
+  },
 ];
 
 /**
@@ -904,6 +952,8 @@ const ARTICLE_HERO_IMAGE_URLS: Record<string, string> = {
     "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/38362108b2aac04c294c2acd382e10db601d73fb.jpg",
   "chennai-summer-water-tanker-advisory-mar-25":
     "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/cfaefb28f01ecb65b3d27b7f99edc799cd6d7713.jpg",
+  "chennai-metro-singara-chennai-card-from-may-1":
+    "https://pbs.twimg.com/card_img/2046552697277759488/iZFQfYq1?format=jpg&name=large",
 };
 
 function heroUrlForSlug(slug: string): string {

@@ -11,6 +11,7 @@ import { getSiteUrl } from "@/lib/env";
 import { homeStats, mockEvents } from "@/lib/home-mock";
 import { buildEventsHubJsonLd } from "@/lib/seo/events-hub-jsonld";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const canonicalPath = "/chennai-local-events";
@@ -51,6 +52,7 @@ function formatEventWhen(startsAt: Date, endsAt: Date | null, allDay: boolean) {
 
 export default async function ChennaiLocalEventsPage() {
   let dbEvents: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
+  const sampleAsOf = formatIndiaLongDate();
   try {
     dbEvents = await listPublicEventsForChennaiHub(40);
   } catch {
@@ -98,10 +100,10 @@ export default async function ChennaiLocalEventsPage() {
             {" "}
             Below is a{" "}
             <strong className="font-medium text-[var(--foreground)]">
-              sample list (updated 25 Mar 2026)
+              sample list ({sampleAsOf})
             </strong>
-            — always confirm dates, venue gates, and tickets on the organiser or
-            ticket site before you travel.
+            — illustrative only; confirm dates, venue gates, and tickets on the
+            organiser or ticket site before you travel.
           </>
         )}
       </p>

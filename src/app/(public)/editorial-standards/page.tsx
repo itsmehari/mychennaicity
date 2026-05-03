@@ -11,7 +11,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/editorial-standards";
 
-const titleSegment = "Editorial standards & corrections";
+const titleSegment = "Editorial standards & corrections — Chennai newsroom";
 
 export const metadata: Metadata = {
   title: titleSegment,

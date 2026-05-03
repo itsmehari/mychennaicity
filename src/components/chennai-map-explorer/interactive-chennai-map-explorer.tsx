@@ -326,7 +326,7 @@ export function InteractiveChennaiMapExplorer() {
           <div
             className="ccmap-map-wrap"
             role="img"
-            aria-label="Chennai ward map from open civic data. Each area is one GCC ward."
+            aria-label="Chennai ward map using open civic geometry. Polygons follow common GCC ward labelling — verify boundaries on official corporation maps for legal or planning use."
           >
             <div ref={mapHostRef} className="ccmap-map-inner" />
             {!shouldLoad ? (
@@ -385,10 +385,7 @@ export function InteractiveChennaiMapExplorer() {
               </div>
             </div>
             <p className="ccmap-attribution">
-              Ward boundaries: community GCC dataset (e.g. Datameet). Verify
-              license and official GCC releases before production; replace
-              geometry via <code className="text-xs">npm run geo:build</code>{" "}
-              when you publish updated GeoJSON.
+              Ward shapes are built from community GCC-aligned datasets (for example Datameet-style releases). They are editorial, not a legal survey — confirm license and official Greater Chennai Corporation geometry for authoritative use.
             </p>
           </div>
         </div>

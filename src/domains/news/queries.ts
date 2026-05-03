@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { and, desc, eq, isNotNull, ne } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { articles, cities } from "@/db/schema/tables";
@@ -81,6 +82,37 @@ export async function latestArticlesForHome(limit = 8) {
     .where(and(eq(articles.cityId, cityId), publishedCond))
     .orderBy(desc(articles.publishedAt))
     .limit(limit);
+}
+
+/** Short CDN/data-cache TTL for home bulletin — keeps TTFB lower while staying fresh. */
+const HOME_NEWS_REVALIDATE_SEC = 120;
+
+export async function homeNewsBulletinCached(): Promise<{
+  featured: PublicArticleRow[];
+  latest: PublicArticleRow[];
+}> {
+  return unstable_cache(
+    async () => {
+      const featured = await featuredArticlesForHome(3);
+      const latest = await latestArticlesForHome(10);
+      return { featured, latest };
+    },
+    ["home-news-bulletin"],
+    { revalidate: HOME_NEWS_REVALIDATE_SEC },
+  )();
+}
+
+const ARTICLE_PUBLIC_REVALIDATE_SEC = 120;
+
+/** Cached read for public article pages (metadata + body share one cache entry per slug). */
+export async function getPublishedArticleBySlugCached(
+  slug: string,
+): Promise<PublicArticleRow | null> {
+  return unstable_cache(
+    () => getPublishedArticleBySlug(slug),
+    ["news-article-public", slug],
+    { revalidate: ARTICLE_PUBLIC_REVALIDATE_SEC },
+  )();
 }
 
 export async function getPublishedSlugsForChennai(): Promise<string[]> {

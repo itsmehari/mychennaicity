@@ -14,9 +14,11 @@ import { getSiteUrl } from "@/lib/env";
 import { homeStats, mockJobs } from "@/lib/home-mock";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
+import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 
-const titleSegment = "Jobs in Chennai";
+const hubTitleSegment = "Jobs in Chennai";
 
 const PAGE_SIZE = 20;
 
@@ -42,6 +44,9 @@ export async function generateMetadata({
 
   const canonical =
     pageNum <= 1 ? hubUrl : `${hubUrl}?page=${pageNum}`;
+
+  const titleSegment =
+    pageNum <= 1 ? hubTitleSegment : `${hubTitleSegment} — Page ${pageNum}`;
 
   return {
     title: titleSegment,
@@ -72,6 +77,7 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const pageNum = Math.max(1, parseInt(sp.page ?? "1", 10) || 1);
   const offset = (pageNum - 1) * PAGE_SIZE;
+  const snapshotAsOf = formatIndiaLongDate();
 
   let total = 0;
   let dbJobs: Awaited<ReturnType<typeof listOpenJobPostingsForChennaiHub>> =
@@ -114,31 +120,28 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
         Jobs in Chennai
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-        Real openings in Chennai and nearby tech areas (OMR, Guindy, city
-        offices). Where we can, we check the company before we show the ad —
-        this isn’t a feed of thousands of copied posts.
         {useDb ? (
           <>
-            {" "}
+            Real openings in Chennai and nearby tech areas (OMR, Guindy, city
+            offices). Where we can, we check the company before we show the ad —
+            this isn&apos;t a feed of thousands of copied posts.{" "}
             <strong className="font-medium text-[var(--foreground)]">
               {total} open {total === 1 ? "role" : "roles"}
             </strong>{" "}
-            below link to full listings on this site; confirm every detail
-            before you apply.
+            below link to full listings on this site; confirm every detail before
+            you apply.
           </>
         ) : (
           <>
-            {" "}
-            Each sample row opens the employer&apos;s careers site; always read
-            the full JD and confirm location. Snapshot refreshed{" "}
+            Curated sample rows for Chennai-area roles (OMR, Guindy, city desks)
+            — not an exhaustive job portal. Where we list real openings from our
+            database, we verify the employer first; this fallback is illustrative
+            only. Each sample row opens the employer&apos;s careers site; read the
+            full JD and confirm location. List as of{" "}
             <strong className="font-medium text-[var(--foreground)]">
-              29 Mar 2026
-            </strong>
-            . Seed{" "}
-            <code className="rounded bg-[var(--surface)] px-1 text-xs">
-              npm run db:seed:chennai-jobs
-            </code>{" "}
-            in staging to preview DB-backed listings.
+              {snapshotAsOf}
+            </strong>{" "}
+            (IST).
           </>
         )}
       </p>
@@ -154,7 +157,7 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
           <p className="text-xs text-[var(--muted)]">
             {useDb
               ? "Jobs listed on this page"
-              : "Rough count we show on the home page too"}
+              : "Illustrative tally — same source as the home jobs strip"}
           </p>
         </div>
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-center shadow-sm sm:text-left">
@@ -180,6 +183,8 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
           </p>
         </div>
       </div>
+
+      <ChennaiJobsPartnerBanner slotId="jobs-index-top" />
 
       <p className="mt-6 text-sm text-[var(--muted)]">
         <Link

@@ -40,10 +40,20 @@ export type AdSize = (typeof AD_SIZES)[number];
 
 export type AdDesign =
   | "resumedoctor"
+  | "vacancychennai"
   | "mycovai"
   | "colourchemist"
   | "bseri"
   | "resumebuilder";
+
+/** House ads rotated on `/chennai-jobs` (random per page view). */
+export const RESUMEDOCTOR_CREATIVE_ID = "resumedoctor-1";
+export const VACANCYCHENNAI_CREATIVE_ID = "vacancychennai-1";
+
+export const CHENNAI_JOBS_PARTNER_CREATIVE_IDS = [
+  RESUMEDOCTOR_CREATIVE_ID,
+  VACANCYCHENNAI_CREATIVE_ID,
+] as const;
 
 export type AdCreative = {
   id: string;
@@ -70,6 +80,18 @@ export const ADS: AdCreative[] = [
     headline: "Make your resume in minutes",
     tagline:
       "Choose a layout, add your details, download and send to employers",
+    active: true,
+  },
+  {
+    id: "vacancychennai-1",
+    advertiser: "Vacancy Chennai",
+    url: "https://vacancychennai.in/",
+    slot_ids: SLOT_LIST,
+    sizes: ["728x90", "336x280", "300x250", "320x50"],
+    design: "vacancychennai",
+    headline: "Hyperlocal jobs across Chennai",
+    tagline:
+      "OMR, Tambaram, Porur & more — browse by area and apply quickly",
     active: true,
   },
   {

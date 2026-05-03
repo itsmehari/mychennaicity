@@ -8,7 +8,7 @@ export function HomeCommunityBand() {
       id="newsletter"
       eyebrow="Community"
       title="Stay in the loop"
-      subtitle="Newsletter + chat groups — hooks only until Resend and community policies ship."
+      subtitle="Weekly digest and neighbourhood channels are coming soon — we are finishing email and moderation first."
     >
       <div className="grid gap-6 rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm lg:grid-cols-[1fr_auto] lg:items-center">
         <div>
@@ -16,10 +16,12 @@ export function HomeCommunityBand() {
             Weekly Chennai digest
           </p>
           <p className="type-lede mt-1 text-sm">
-            Jobs, civic deadlines, weekend events — one concise email. No spam.
+            Jobs, civic deadlines, and weekend events in one email — not live yet;
+            join once we open sign-ups.
           </p>
           <form
             className="mt-4 flex max-w-md flex-col gap-2 sm:flex-row"
+            aria-label="Newsletter (not yet active)"
             onSubmit={(e) => {
               e.preventDefault();
             }}
@@ -32,14 +34,16 @@ export function HomeCommunityBand() {
               name="email"
               type="email"
               autoComplete="email"
+              disabled
               placeholder="you@example.com"
-              className="flex-1 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+              className="flex-1 cursor-not-allowed rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2.5 text-sm text-[var(--foreground)] opacity-70 placeholder:text-[var(--muted)]"
             />
             <button
-              type="submit"
-              className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-fg)] transition hover:bg-[var(--accent-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              type="button"
+              disabled
+              className="cursor-not-allowed rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--muted)]"
             >
-              Subscribe
+              Coming soon
             </button>
           </form>
         </div>

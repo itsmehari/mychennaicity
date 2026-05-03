@@ -77,9 +77,9 @@ const SLIDES: Slide[] = [
     hrefOnSubmit: "/chennai-local-news",
     primaryCta: { href: "/chennai-local-news", label: "Browse all local news" },
     secondaryCta: { href: "/chennai-local-news/feed.xml", label: "RSS feed" },
-    statLabel: "How often we refresh",
-    statValue: "Daily",
-    statHint: "Updated when new stories go live",
+    statLabel: "Story cadence",
+    statValue: "As published",
+    statHint: "When new filed pieces go live",
   },
   {
     key: "events",

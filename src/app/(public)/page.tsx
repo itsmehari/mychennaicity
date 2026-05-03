@@ -22,15 +22,15 @@ import {
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
-import {
-  featuredArticlesForHome,
-  latestArticlesForHome,
-} from "@/domains/news";
+import { homeNewsBulletinCached } from "@/domains/news";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
-/** Load news from Neon on every request — build-time static HTML had empty bulletin when DATABASE_URL was missing at Vercel build. */
+/**
+ * Stay dynamic at the route so builds without `DATABASE_URL` never ship a frozen-empty bulletin.
+ * Article rows are additionally cached via `homeNewsBulletinCached` (short revalidate) to improve TTFB.
+ */
 export const dynamic = "force-dynamic";
 
 const titleSegment = "Chennai news, jobs, events & directory";
@@ -60,11 +60,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  let featured: Awaited<ReturnType<typeof featuredArticlesForHome>> = [];
-  let latest: Awaited<ReturnType<typeof latestArticlesForHome>> = [];
+  let featured: Awaited<
+    ReturnType<typeof homeNewsBulletinCached>
+  >["featured"] = [];
+  let latest: Awaited<ReturnType<typeof homeNewsBulletinCached>>["latest"] = [];
   try {
-    featured = await featuredArticlesForHome(3);
-    latest = await latestArticlesForHome(10);
+    ({ featured, latest } = await homeNewsBulletinCached());
   } catch (err) {
     /* DATABASE_URL unset, schema drift (run db:migrate / db:push), or DB unreachable */
     console.error("[home] News query failed:", err);
@@ -94,7 +95,7 @@ export default async function Home() {
           <Section
             eyebrow="Explore"
             title="Interactive Chennai Map Explorer"
-            subtitle="Real GCC ward boundaries from open civic data — hover wards, toggle overlays, and jump to macro area hubs. Replace or refresh geometry anytime with npm run geo:build."
+            subtitle="Ward-level map from open civic datasets — hover areas, toggle overlays, and jump to macro hubs. Boundaries are editorial; confirm on official Greater Chennai Corporation materials for planning or legal use."
             action={{ href: "/directory", label: "Browse all listings" }}
           >
             <HomeAreaMap />

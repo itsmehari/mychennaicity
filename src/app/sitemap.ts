@@ -6,13 +6,13 @@ import {
   listTopicKeysForChennai,
   type SitemapArticleRow,
 } from "@/domains/news";
+import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mychennaicity.in";
+  const base = getSiteUrl();
   const now = new Date();
 
   let articleRows: SitemapArticleRow[] = [];
@@ -24,8 +24,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     topicKeys = await listTopicKeysForChennai();
     eventRows = await listEventsForSitemap();
     jobRows = await listJobsForSitemap();
-  } catch {
-    /* DATABASE_URL unset or DB unreachable */
+  } catch (err) {
+    console.warn(
+      "[sitemap] DB unreachable or misconfigured — emitting static URLs only (no article/topic/event/job entries).",
+      err,
+    );
   }
 
   const hubLastModified =

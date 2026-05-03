@@ -11,7 +11,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/about";
 
-const titleSegment = "About us";
+const titleSegment = "About us — Chennai local newsroom";
 
 export const metadata: Metadata = {
   title: titleSegment,

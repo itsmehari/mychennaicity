@@ -8,7 +8,7 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import {
-  getPublishedArticleBySlug,
+  getPublishedArticleBySlugCached,
   getPublishedSlugsForChennai,
 } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
@@ -33,6 +33,7 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Route stays dynamic; per-slug article reads use a short `unstable_cache` TTL (see `getPublishedArticleBySlugCached`). */
 export const dynamic = "force-dynamic";
 
 function clipMetaDescription(raw: string, max = 155): string {
@@ -52,9 +53,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  let article: Awaited<ReturnType<typeof getPublishedArticleBySlug>> = null;
+  let article: Awaited<
+    ReturnType<typeof getPublishedArticleBySlugCached>
+  > = null;
   try {
-    article = await getPublishedArticleBySlug(slug);
+    article = await getPublishedArticleBySlugCached(slug);
   } catch {
     return { title: { absolute: fullSiteTitle("Article not found") } };
   }
@@ -103,7 +106,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = await getPublishedArticleBySlug(slug);
+  const article = await getPublishedArticleBySlugCached(slug);
   if (!article) {
     notFound();
   }

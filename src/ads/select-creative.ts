@@ -54,3 +54,25 @@ export function selectCreative(
   const idx = hashString(key) % eligible.length;
   return eligible[idx] ?? null;
 }
+
+/** Uniform pick for rotating house ads (new choice each render / visitor session on the server). */
+export function selectCreativeRandom(
+  slotId: string,
+  size: AdSize,
+  options?: SelectCreativeOptions,
+): AdCreative | null {
+  const pool = options?.ads ?? ADS;
+  const eligible = getEligibleCreatives(slotId, size, pool);
+  if (eligible.length === 0) {
+    if (process.env.NODE_ENV === "development") {
+      console.info(
+        `[ads] No eligible creative for slot="${slotId}" size="${size}" (random)`,
+      );
+    }
+    return null;
+  }
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  const idx = buf[0]! % eligible.length;
+  return eligible[idx] ?? null;
+}

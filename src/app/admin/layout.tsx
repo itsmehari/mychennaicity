@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 export const metadata: Metadata = {
+  title: { absolute: fullSiteTitle("Admin") },
   robots: { index: false, follow: false },
 };
 

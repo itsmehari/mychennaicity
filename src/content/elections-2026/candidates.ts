@@ -194,6 +194,24 @@ export const CANDIDATES_BY_AC: Partial<Record<number, ElectionCandidateRow[]>> =
       asOf: "2026-03-29",
     },
   ],
+  23: [
+    {
+      party: "DMK",
+      alliance: "DMK-led SPA",
+      name: "Ma. Subramanian",
+      sourceUrl:
+        "https://www.livechennai.com/detailnews.asp?catid=78&nav=p&newsid=79284",
+      asOf: "2026-03-28",
+    },
+    {
+      party: "AMMK",
+      alliance: "NDA",
+      name: "Senthamizhan",
+      sourceUrl:
+        "https://www.theweek.in/news/india/2026/03/28/ammk-candidate-list-2026-all-11-nominees-named-by-ttv-dhinakaran.html",
+      asOf: "2026-03-28",
+    },
+  ],
   24: [
     {
       party: "DMK",
@@ -286,6 +304,70 @@ export const CANDIDATES_BY_AC: Partial<Record<number, ElectionCandidateRow[]>> =
       sourceUrl:
         "https://navbharattimes.indiatimes.com/state/tamil-nadu/chennai/aiadmk-released-final-list-on-candidates-for-tamil-nadu-election-2026-see-full-list/articleshow/129876020.cms",
       asOf: "2026-03-29",
+    },
+  ],
+  29: [
+    {
+      party: "INC",
+      alliance: "DMK-led SPA",
+      name: "K. Selvaperunthagai",
+      sourceUrl:
+        "https://www.tv9tamilnews.com/photo-gallery/k-selvaperunthagai-tamil-nadu-election-2026-contesting-sriperumbudur-constituency-congress-party-photo-gallery-63696.html",
+      asOf: "2026-03-28",
+    },
+    {
+      party: "AIADMK",
+      alliance: "NDA",
+      name: "K. Palani",
+      sourceUrl:
+        "https://www.dtnext.in/news/politics/2026-tn-elections-aiadmk-releases-second-candidate-list-check-out-full-names-here",
+      asOf: "2026-03-27",
+    },
+  ],
+  30: [
+    {
+      party: "DMDK",
+      alliance: "DMK-led SPA",
+      name: "D. Murugesan",
+      sourceUrl:
+        "https://newstodaynet.com/2026/03/28/dmdk-announces-10-candidates-fields-premalatha-from-vijayakanths-bastion/",
+      asOf: "2026-03-28",
+    },
+  ],
+  31: [
+    {
+      party: "DMK",
+      alliance: "DMK-led SPA",
+      name: "Dr. R. S. Krithika Devi",
+      sourceUrl:
+        "https://www.livechennai.com/detailnews.asp?catid=78&nav=p&newsid=79284",
+      asOf: "2026-03-28",
+    },
+    {
+      party: "AIADMK",
+      alliance: "NDA",
+      name: "Chitlapakkam S. Rajendran",
+      sourceUrl:
+        "https://www.dtnext.in/news/politics/2026-tn-elections-aiadmk-releases-second-candidate-list-check-out-full-names-here",
+      asOf: "2026-03-27",
+    },
+  ],
+  32: [
+    {
+      party: "DMK",
+      alliance: "DMK-led SPA",
+      name: "M. K. D. Karthik",
+      sourceUrl:
+        "https://www.livechennai.com/detailnews.asp?catid=78&nav=p&newsid=79284",
+      asOf: "2026-03-28",
+    },
+    {
+      party: "AIADMK",
+      alliance: "NDA",
+      name: "M. Gaja (alias Gajendran)",
+      sourceUrl:
+        "https://www.dtnext.in/news/politics/2026-tn-elections-aiadmk-releases-second-candidate-list-check-out-full-names-here",
+      asOf: "2026-03-27",
     },
   ],
 };

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { AdSize } from "@/ads/registry";
-import { selectCreative } from "@/ads/select-creative";
+import { ADS } from "@/ads/registry";
+import { selectCreative, selectCreativeRandom } from "@/ads/select-creative";
 import { AdBannerIcon, normalizeDesignForClass } from "@/ads/ad-banner-icons";
 
 function compactHeadline(headline: string, maxLen: number): string {
@@ -13,15 +14,38 @@ export function AdSlot({
   slotId,
   size,
   pickKeySuffix = "",
+  creativeId,
+  creativeIds,
 }: {
   slotId: string;
   size: AdSize;
   /** For `AdSlotRow`: pass `|0`, `|1`, … so picks differ deterministically. */
   pickKeySuffix?: string;
+  /** When set, only this creative is eligible. */
+  creativeId?: string;
+  /**
+   * When set, only these creatives are eligible. If more than one matches the
+   * slot + size, selection is random on each server render (visitors and page
+   * loads see rotated ads).
+   */
+  creativeIds?: readonly string[];
 }) {
-  const creative = selectCreative(slotId, size, {
-    pickKeySuffix,
-  });
+  let pool = ADS;
+  if (creativeIds != null && creativeIds.length > 0) {
+    const idSet = new Set(creativeIds);
+    pool = ADS.filter((a) => idSet.has(a.id));
+  } else if (creativeId != null && creativeId !== "") {
+    pool = ADS.filter((a) => a.id === creativeId);
+  }
+
+  const useRandom =
+    creativeIds != null && creativeIds.length > 1 && pool.length > 1;
+  const creative = useRandom
+    ? selectCreativeRandom(slotId, size, { pickKeySuffix, ads: pool })
+    : selectCreative(slotId, size, {
+        pickKeySuffix,
+        ads: pool,
+      });
   if (!creative) return null;
 
   const designClass = normalizeDesignForClass(creative.design);

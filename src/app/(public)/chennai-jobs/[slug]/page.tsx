@@ -16,7 +16,11 @@ import {
   buildJobBreadcrumbJsonLd,
   buildJobPostingJsonLd,
 } from "@/lib/seo/job-posting-jsonld";
-import { fullSiteTitle } from "@/lib/seo/site-titles";
+import {
+  buildClippedTitleSegment,
+  fullSiteTitle,
+} from "@/lib/seo/site-titles";
+import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -41,7 +45,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base = getSiteUrl();
   const url = `${base}${chennaiJobsDetailPath(row.job.slug)}`;
   const desc = clipDesc(row.job.body) || row.job.title;
-  const titleSegment = `${row.job.title} · ${row.employer.name}`;
+  const titleSegment = buildClippedTitleSegment(
+    row.job.title,
+    ` · ${row.employer.name}`,
+  );
   const docTitle = fullSiteTitle(titleSegment);
   return {
     title: titleSegment,
@@ -71,6 +78,19 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
   const jobLd = buildJobPostingJsonLd(row);
   const crumbLd = buildJobBreadcrumbJsonLd(row.job.slug, row.job.title);
   const applyHref = row.job.applicationUrl?.trim();
+  const isWhatsApp =
+    !!applyHref &&
+    (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(applyHref) ||
+      applyHref.includes("whatsapp"));
+  const isTel = !!applyHref && /^tel:/i.test(applyHref);
+  const applyLabel = isWhatsApp
+    ? "Apply via WhatsApp"
+    : isTel
+      ? "Call to apply"
+      : "Apply on employer / ATS";
+  const applyLinkProps = isTel
+    ? ({} as const)
+    : ({ target: "_blank", rel: "noopener noreferrer" } as const);
 
   return (
     <>
@@ -118,14 +138,17 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           <p className="mt-4">
             <a
               href={applyHref}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...applyLinkProps}
               className="inline-flex items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-fg)] transition hover:opacity-90"
             >
-              Apply on employer / ATS
+              {applyLabel}
             </a>
           </p>
         ) : null}
+        <ChennaiJobsPartnerBanner
+          slotId="jobs-detail-mid"
+          className={applyHref ? "mt-6" : "mt-8"}
+        />
         <div className="mt-8">
           <ArticleProse content={row.job.body} />
         </div>

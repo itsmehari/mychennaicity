@@ -1,9 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type { AdCreative, AdSize } from "@/ads/registry";
 import {
   getEligibleCreatives,
   hashString,
   selectCreative,
+  selectCreativeRandom,
   utcDateKey,
 } from "@/ads/select-creative";
 
@@ -82,6 +83,32 @@ describe("getEligibleCreatives", () => {
     expect(
       getEligibleCreatives("discover-top", "728x90" as AdSize, mockAds),
     ).toEqual([]);
+  });
+});
+
+describe("selectCreativeRandom", () => {
+  it("returns null when nothing eligible", () => {
+    expect(
+      selectCreativeRandom("missing-slot", "300x250" as AdSize, {
+        ads: mockAds,
+      }),
+    ).toBeNull();
+  });
+
+  it("picks from eligible using random index (mocked)", () => {
+    const spy = vi
+      .spyOn(crypto, "getRandomValues")
+      .mockImplementation((arr: ArrayBufferView) => {
+        (arr as Uint32Array)[0] = 5;
+        return arr;
+      });
+    const picked = selectCreativeRandom("article-top", "728x90" as AdSize, {
+      ads: mockAds,
+    });
+    spy.mockRestore();
+    expect(picked).not.toBeNull();
+    /* 5 % 2 === 1 → id "b" */
+    expect(picked!.id).toBe("b");
   });
 });
 

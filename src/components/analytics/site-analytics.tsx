@@ -8,14 +8,22 @@ import { GoogleAnalyticsScripts } from "./google-analytics-scripts";
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
 const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID?.trim() ?? "";
 
+type Props = {
+  /** When true (matched server-side IP), skip GA + AdSense only. */
+  suppressGoogleMeasurement?: boolean;
+};
+
 /**
  * Single entry for all site-wide measurement. Mounted once in `app/layout.tsx`
  * so every route (public, admin, API error pages, etc.) is covered.
  */
-export function SiteAnalytics() {
+export function SiteAnalytics({
+  suppressGoogleMeasurement = false,
+}: Props) {
+  const loadGoogle = !suppressGoogleMeasurement;
   return (
     <>
-      {gaId ? (
+      {loadGoogle && gaId ? (
         <>
           <GoogleAnalyticsScripts measurementId={gaId} />
           <Suspense fallback={null}>
@@ -23,7 +31,7 @@ export function SiteAnalytics() {
           </Suspense>
         </>
       ) : null}
-      {adsenseClientId ? (
+      {loadGoogle && adsenseClientId ? (
         <GoogleAdSenseScripts clientId={adsenseClientId} />
       ) : null}
       <Analytics />

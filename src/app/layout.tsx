@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import { SiteAnalytics } from "@/components/analytics";
+import { shouldSuppressGoogleMeasurementForRequest } from "@/lib/analytics-ip-exclusion";
+import { getSiteUrl } from "@/lib/env";
 import { SITE_TITLE_TEMPLATE } from "@/lib/seo/site-titles";
 import "./globals.css";
 
@@ -19,7 +22,7 @@ const googleSiteVerification =
 
 export const metadata: Metadata = {
   title: {
-    default: "mychennaicity.in — Chennai news, jobs, events & listings",
+    default: "Chennai news, jobs, events & directory",
     template: SITE_TITLE_TEMPLATE,
   },
   description:
@@ -31,9 +34,7 @@ export const metadata: Metadata = {
         },
       }
     : {}),
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mychennaicity.in",
-  ),
+  metadataBase: new URL(getSiteUrl()),
   openGraph: {
     type: "website",
     siteName: "mychennaicity.in",
@@ -53,18 +54,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const h = await headers();
+  const suppressGoogleMeasurement =
+    shouldSuppressGoogleMeasurementForRequest(h);
+
   return (
     <html
       lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SiteAnalytics />
+        <SiteAnalytics suppressGoogleMeasurement={suppressGoogleMeasurement} />
         {children}
       </body>
     </html>

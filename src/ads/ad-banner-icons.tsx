@@ -112,6 +112,8 @@ export function AdBannerIcon({
   switch (key) {
     case "resumedoctor":
       return <IconDocument className={className} />;
+    case "vacancychennai":
+      return <IconMapPin className={className} />;
     case "mycovai":
       return <IconMapPin className={className} />;
     case "colourchemist":

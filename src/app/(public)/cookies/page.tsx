@@ -10,7 +10,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/cookies";
 
-const titleSegment = "Cookie policy";
+const titleSegment = "Cookie policy — Chennai-area local site";
 
 export const metadata: Metadata = {
   title: titleSegment,

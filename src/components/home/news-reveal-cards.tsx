@@ -211,9 +211,15 @@ export function NewsRevealGrid({
   if (!articles.length) {
     return (
       <p className="rounded-2xl border border-dashed border-[var(--border)] p-6 text-sm text-[var(--muted)]">
-        No published articles yet. Set{" "}
-        <code className="rounded bg-[var(--surface)] px-1">DATABASE_URL</code> and run{" "}
-        <code className="rounded bg-[var(--surface)] px-1">npm run db:seed</code>.
+        No published articles in our bulletin yet. Please check back soon, or
+        browse{" "}
+        <Link
+          href="/chennai-local-news"
+          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          Chennai local news
+        </Link>{" "}
+        for the full hub.
       </p>
     );
   }

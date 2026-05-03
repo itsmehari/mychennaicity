@@ -65,13 +65,13 @@ export default async function ChennaiLocalNewsPage() {
 
         <p className="type-eyebrow mt-8 text-[var(--accent)]">From other publishers</p>
         <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-          Chennai headlines while we connect the database
+          Chennai headlines — bulletin wiring in progress
         </h1>
         <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-          Full stories from our team will show here once the site is hooked to
-          the database. For now, here are hand-picked links from trusted outlets
-          covering Chennai and nearby — the same kinds of topics we&apos;ll
-          explain in plain language on this site soon.
+          Our filed Chennai reports will appear in the bulletin as we publish.
+          For now, here are hand-picked links from trusted outlets covering
+          Chennai and nearby — similar beats, in plain language, once our own
+          stories are live.
         </p>
 
         <ul className="mt-10 space-y-4">
@@ -103,18 +103,6 @@ export default async function ChennaiLocalNewsPage() {
             </li>
           ))}
         </ul>
-
-        <div className="mt-10 rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_96%,var(--accent))] px-5 py-5 text-sm text-[var(--muted)]">
-          <p className="font-medium text-[var(--foreground)]">Editors &amp; deploy</p>
-          <p className="mt-2">
-            Connect <code className="rounded bg-[var(--surface)] px-1 ring-1 ring-[var(--border)]">DATABASE_URL</code>{" "}
-            and run{" "}
-            <code className="rounded bg-[var(--surface)] px-1 ring-1 ring-[var(--border)]">
-              npm run db:seed
-            </code>{" "}
-            to publish the full Chennai local news edition on this URL.
-          </p>
-        </div>
 
         <p className="mt-8 max-w-2xl text-sm text-[var(--muted)]">
           Looking for work meanwhile?{" "}

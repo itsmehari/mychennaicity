@@ -14,7 +14,10 @@ import {
   buildFaqPageJsonLdFromItems,
   buildFestivalRichEventJsonLd,
 } from "@/lib/seo/festival-event-jsonld";
-import { fullSiteTitle } from "@/lib/seo/site-titles";
+import {
+  buildClippedTitleSegment,
+  fullSiteTitle,
+} from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,7 +29,10 @@ function standardMetadataForEvent(
   const base = getSiteUrl();
   const url = `${base}/chennai-local-events/${ev.slug}`;
   const desc = (ev.description ?? ev.title).slice(0, 155);
-  const titleSegment = `${ev.title} · Chennai local events`;
+  const titleSegment = buildClippedTitleSegment(
+    ev.title,
+    " · Chennai local events",
+  );
   const docTitle = fullSiteTitle(titleSegment);
   return {
     title: titleSegment,

@@ -2,6 +2,7 @@
 
 ## What this app expects
 
+- **`NEXT_PUBLIC_SITE_URL`** — canonical **origin** only (e.g. `https://mychennaicity.in`, no trailing slash). Used for `metadataBase`, Open Graph `url`, canonical links, sitemap `loc`, and robots sitemap lines. Set this in **Vercel → Production** to the hostname you want indexed; preview deployments may override with the preview URL if you choose, but Production must match the live domain or you risk split signals (duplicate canonicals). The app normalizes via [`getSiteUrl()`](../src/lib/env.ts): trims whitespace, strips trailing slashes, uses `URL.origin`, and upgrades `http` to `https` when `NODE_ENV=production`.
 - **Single variable:** `DATABASE_URL` — full Postgres URI from Neon (pooled connection string is recommended for serverless / Vercel).
 - **Runtime:** Next.js reads **`.env.local`** in development and **Vercel Environment Variables** in production. It does **not** read `secrets/database.local.env` automatically.
 - **Tooling:** `drizzle.config.ts` and seed scripts load, in order:
@@ -56,7 +57,7 @@ Direct link (team slug may vary):
 
 The app used **static generation** for `/` at build time. If `DATABASE_URL` was missing during the Vercel build (or the DB was empty then), Next.js shipped **HTML with zero articles** until the next change.
 
-**Fix (in repo):** `/`, `/chennai-local-news`, topic pages, article `[slug]`, and `feed.xml` use **`export const dynamic = "force-dynamic"`** so each request loads articles from Neon using **runtime** env vars. After setting `DATABASE_URL` on Vercel, **redeploy** once.
+**Fix (in repo):** `/`, `/chennai-local-news`, topic pages, article `[slug]`, and `feed.xml` use **`export const dynamic = "force-dynamic"`** so each request loads articles from Neon using **runtime** env vars. After setting `DATABASE_URL` on Vercel, **redeploy** once. The home bulletin and public article reads additionally use **`unstable_cache`** (short revalidate, see `homeNewsBulletinCached` / `getPublishedArticleBySlugCached` in `src/domains/news/queries.ts`) to cut repeated DB work without reverting to build-time-only HTML.
 
 ## Security learnings
 
