@@ -44,10 +44,13 @@ function formatInline(text: string) {
 export function ArticleProse({
   content,
   headingAnchors,
+  className,
 }: {
   content: string;
   /** In document order for ## then ### only; consumes sequentially. */
   headingAnchors?: ArticleHeadingAnchor[];
+  /** Merged after base prose classes (e.g. constrain width). */
+  className?: string;
 }) {
   let anchorIdx = 0;
   const nextAnchor = (level: 2 | 3) => {
@@ -60,8 +63,11 @@ export function ArticleProse({
   };
 
   const blocks = content.split(/\n\n+/);
+  const rootClass =
+    "space-y-4 text-[15px] leading-relaxed text-[var(--foreground)]" +
+    (className ? ` ${className}` : "");
   return (
-    <div className="space-y-4 text-[15px] leading-relaxed text-[var(--foreground)]">
+    <div className={rootClass}>
       {blocks.map((block, i) => {
         const line = block.trim();
         if (line.startsWith("## ")) {

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArticleProse } from "@/components/news/article-prose";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
 import {
@@ -20,7 +20,6 @@ import {
   buildClippedTitleSegment,
   fullSiteTitle,
 } from "@/lib/seo/site-titles";
-import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -110,48 +109,13 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
             { label: row.job.title },
           ]}
         />
-        <p className="type-eyebrow text-[var(--accent)]">Chennai job</p>
-        <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-          {row.job.title}
-        </h1>
-        <p className="type-lede mt-2 text-sm text-[var(--muted)]">
-          {row.employer.name}
-          {row.employer.verified ? (
-            <span className="text-[var(--accent)]"> · Checked by us</span>
-          ) : null}
-          {row.job.locationLabel ? ` · ${row.job.locationLabel}` : " · Chennai"}
-          {row.employer.websiteUrl ? (
-            <>
-              {" · "}
-              <a
-                href={row.employer.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-              >
-                Employer site
-              </a>
-            </>
-          ) : null}
-        </p>
-        {applyHref ? (
-          <p className="mt-4">
-            <a
-              href={applyHref}
-              {...applyLinkProps}
-              className="inline-flex items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-fg)] transition hover:opacity-90"
-            >
-              {applyLabel}
-            </a>
-          </p>
-        ) : null}
-        <ChennaiJobsPartnerBanner
-          slotId="jobs-detail-mid"
-          className={applyHref ? "mt-6" : "mt-8"}
+        <JobPostingDetail
+          row={row}
+          applyHref={applyHref ?? null}
+          applyLabel={applyLabel}
+          applyLinkProps={applyLinkProps}
+          isWhatsApp={isWhatsApp}
         />
-        <div className="mt-8">
-          <ArticleProse content={row.job.body} />
-        </div>
         <InteriorCrossNav />
       </div>
     </>
