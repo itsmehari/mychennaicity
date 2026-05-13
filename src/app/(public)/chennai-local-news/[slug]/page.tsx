@@ -25,6 +25,10 @@ import {
   buildBreadcrumbJsonLd,
   buildNewsArticleJsonLd,
 } from "@/lib/seo/news-article-jsonld";
+import {
+  buildReaderListingWebPageJsonLd,
+  isReaderListingSlug,
+} from "@/lib/seo/reader-listing-jsonld";
 import { defaultOgImageAbsoluteUrl } from "@/lib/seo/site-defaults";
 import {
   clipArticleHeadlineForTitle,
@@ -115,9 +119,11 @@ export default async function ArticlePage({ params }: Props) {
   const speakableSummaryLead = Boolean(
     summaryLead && summaryLead !== dekTrim,
   );
-  const newsLd = buildNewsArticleJsonLd(article, {
-    speakableSummaryLead,
-  });
+  const newsLd = isReaderListingSlug(article.slug)
+    ? buildReaderListingWebPageJsonLd(article)
+    : buildNewsArticleJsonLd(article, {
+        speakableSummaryLead,
+      });
   const crumbLd = buildBreadcrumbJsonLd(article.slug, article.title);
   const extraLd = buildInteractiveExtraJsonLd(
     article.slug,
