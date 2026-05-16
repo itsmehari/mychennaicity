@@ -101,6 +101,9 @@ export async function latestArticlesForHome(limit = 8) {
     .limit(limit);
 }
 
+/** Bump when article cache shape or hero handling changes (invalidates stale `unstable_cache` rows). */
+const NEWS_CACHE_VERSION = "v2";
+
 /** Short CDN/data-cache TTL for home bulletin — keeps TTFB lower while staying fresh. */
 const HOME_NEWS_REVALIDATE_SEC = 120;
 
@@ -114,8 +117,8 @@ export async function homeNewsBulletinCached(): Promise<{
       const latest = await latestArticlesForHome(10);
       return { featured, latest };
     },
-    ["home-news-bulletin"],
-    { revalidate: HOME_NEWS_REVALIDATE_SEC },
+    ["home-news-bulletin", NEWS_CACHE_VERSION],
+    { revalidate: HOME_NEWS_REVALIDATE_SEC, tags: ["news-home-bulletin"] },
   )();
   return {
     featured: data.featured.map(reviveArticleRow),
@@ -131,8 +134,11 @@ export async function getPublishedArticleBySlugCached(
 ): Promise<PublicArticleRow | null> {
   const row = await unstable_cache(
     () => getPublishedArticleBySlug(slug),
-    ["news-article-public", slug],
-    { revalidate: ARTICLE_PUBLIC_REVALIDATE_SEC },
+    ["news-article-public", NEWS_CACHE_VERSION, slug],
+    {
+      revalidate: ARTICLE_PUBLIC_REVALIDATE_SEC,
+      tags: ["news-article", `news-article:${slug}`],
+    },
   )();
   return row ? reviveArticleRow(row) : null;
 }

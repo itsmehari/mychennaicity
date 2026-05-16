@@ -10,8 +10,10 @@ export function picsumHeroUrlForSlug(slug: string, width = 800, height = 500): s
  */
 export function resolveArticleHeroSrc(article: Pick<PublicArticleRow, "slug" | "heroImageUrl">): string {
   const raw = article.heroImageUrl?.trim();
-  if (raw && /^https?:\/\//i.test(raw)) {
-    return raw;
+  if (raw) {
+    if (/^https?:\/\//i.test(raw) || raw.startsWith("/")) {
+      return raw;
+    }
   }
   return picsumHeroUrlForSlug(article.slug);
 }
