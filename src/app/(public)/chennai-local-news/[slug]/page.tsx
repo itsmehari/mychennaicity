@@ -29,6 +29,10 @@ import {
   buildReaderListingWebPageJsonLd,
   isReaderListingSlug,
 } from "@/lib/seo/reader-listing-jsonld";
+import {
+  normalizeArticleHeroUrl,
+  resolveArticleHeroAbsoluteUrl,
+} from "@/lib/article-hero-image";
 import { defaultOgImageAbsoluteUrl } from "@/lib/seo/site-defaults";
 import {
   clipArticleHeadlineForTitle,
@@ -78,10 +82,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const headline = clipArticleHeadlineForTitle(article.title);
   const titleSegment = `${headline} · Chennai local news`;
   const docTitle = fullSiteTitle(titleSegment);
-  const hero = article.heroImageUrl?.trim();
-  const ogImage = hero
-    ? [{ url: hero }]
-    : [{ url: defaultOgImageAbsoluteUrl(), width: 1200, height: 630 }];
+  const heroAbsolute = resolveArticleHeroAbsoluteUrl(article);
+  const ogImage =
+    normalizeArticleHeroUrl(article.heroImageUrl) != null
+      ? [{ url: heroAbsolute }]
+      : [{ url: defaultOgImageAbsoluteUrl(), width: 1200, height: 630 }];
   return {
     title: titleSegment,
     description: desc,
@@ -103,7 +108,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: docTitle,
       description: desc,
-      images: hero ? [hero] : [defaultOgImageAbsoluteUrl()],
+      images:
+        normalizeArticleHeroUrl(article.heroImageUrl) != null
+          ? [heroAbsolute]
+          : [defaultOgImageAbsoluteUrl()],
     },
   };
 }

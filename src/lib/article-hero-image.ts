@@ -1,25 +1,79 @@
 import type { PublicArticleRow } from "@/domains/news";
+import { getSiteUrl } from "@/lib/env";
 
 /** Stable placeholder per slug when DB has no hero (matches seed script). */
 export function picsumHeroUrlForSlug(slug: string, width = 800, height = 500): string {
   return `https://picsum.photos/seed/${encodeURIComponent(slug)}/${width}/${height}`;
 }
 
+const NEXT_IMAGE_REMOTE_HOSTS = new Set([
+  "picsum.photos",
+  "fastly.picsum.photos",
+  "images.unsplash.com",
+  "pplx-res.cloudinary.com",
+  "images.news9live.com",
+  "metrorailnews.in",
+  "static.amazon.jobs",
+  "thumbs.dreamstime.com",
+  "pbs.twimg.com",
+  "www.adotrip.com",
+  "dc-cdn.s3-ap-southeast-1.amazonaws.com",
+]);
+
 /**
- * Hero image for cards and OG. Uses `hero_image_url` when set; otherwise a deterministic Picsum URL.
+ * Raw `hero_image_url` from DB: external https URL or site path (`/images/...`).
+ * Returns null when empty or unrecognized.
  */
-export function resolveArticleHeroSrc(article: Pick<PublicArticleRow, "slug" | "heroImageUrl">): string {
-  const raw = article.heroImageUrl?.trim();
-  if (raw) {
-    if (/^https?:\/\//i.test(raw) || raw.startsWith("/")) {
-      return raw;
-    }
-  }
-  return picsumHeroUrlForSlug(article.slug);
+export function normalizeArticleHeroUrl(
+  heroImageUrl: string | null | undefined,
+): string | null {
+  const raw = heroImageUrl?.trim();
+  if (!raw) return null;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  if (raw.startsWith("/")) return raw;
+  return null;
 }
 
-/** Hosts allowed in `next.config` `images.remotePatterns` — else use `<img>`. */
-/** Accessible hero / thumbnail copy: title + topic + place (not decorative). */
+/**
+ * Hero src for `<Image>` / `<img>`: external URL as-is; same-origin absolute URLs
+ * become paths; relative paths unchanged; else Picsum fallback.
+ */
+export function resolveArticleHeroSrc(
+  article: Pick<PublicArticleRow, "slug" | "heroImageUrl">,
+): string {
+  const normalized = normalizeArticleHeroUrl(article.heroImageUrl);
+  if (!normalized) {
+    return picsumHeroUrlForSlug(article.slug);
+  }
+
+  if (normalized.startsWith("/")) {
+    return normalized;
+  }
+
+  try {
+    const origin = getSiteUrl();
+    const parsed = new URL(normalized);
+    if (parsed.origin === origin) {
+      return `${parsed.pathname}${parsed.search}`;
+    }
+  } catch {
+    /* fall through */
+  }
+
+  return normalized;
+}
+
+/** Absolute URL for Open Graph, JSON-LD, and RSS. */
+export function resolveArticleHeroAbsoluteUrl(
+  article: Pick<PublicArticleRow, "slug" | "heroImageUrl">,
+): string {
+  const src = resolveArticleHeroSrc(article);
+  if (src.startsWith("/")) {
+    return `${getSiteUrl()}${src}`;
+  }
+  return src;
+}
+
 export function articleHeroAlt(article: {
   title: string;
   category?: string | null;
@@ -33,13 +87,7 @@ export function articleHeroUsesNextImage(src: string): boolean {
   try {
     const u = new URL(src);
     if (u.protocol !== "https:" && u.protocol !== "http:") return false;
-    return (
-      u.hostname === "picsum.photos" ||
-      u.hostname === "fastly.picsum.photos" ||
-      u.hostname === "images.unsplash.com" ||
-      u.hostname === "pplx-res.cloudinary.com" ||
-      u.hostname === "images.news9live.com"
-    );
+    return NEXT_IMAGE_REMOTE_HOSTS.has(u.hostname);
   } catch {
     return false;
   }

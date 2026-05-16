@@ -1,4 +1,8 @@
 import type { PublicArticleRow } from "@/domains/news";
+import {
+  normalizeArticleHeroUrl,
+  resolveArticleHeroAbsoluteUrl,
+} from "@/lib/article-hero-image";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { getSiteUrl } from "@/lib/env";
 import { normalizeAreaHubSlug } from "@/lib/news-area-hint";
@@ -29,7 +33,10 @@ export function buildNewsArticleJsonLd(
     article.summary ??
     article.dek ??
     stripMarkdownLite(article.reportBody ?? article.body ?? "");
-  const image = article.heroImageUrl ?? `${base}/favicon.ico`;
+  const image =
+    normalizeArticleHeroUrl(article.heroImageUrl) != null
+      ? resolveArticleHeroAbsoluteUrl(article)
+      : `${base}/favicon.ico`;
   const published = article.publishedAt?.toISOString() ?? article.createdAt.toISOString();
   const modified = article.updatedAt.toISOString();
   const sameAs = orgSameAsUrls();

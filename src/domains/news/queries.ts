@@ -102,7 +102,7 @@ export async function latestArticlesForHome(limit = 8) {
 }
 
 /** Bump when article cache shape or hero handling changes (invalidates stale `unstable_cache` rows). */
-const NEWS_CACHE_VERSION = "v2";
+const NEWS_CACHE_VERSION = "v3";
 
 /** Short CDN/data-cache TTL for home bulletin — keeps TTFB lower while staying fresh. */
 const HOME_NEWS_REVALIDATE_SEC = 120;

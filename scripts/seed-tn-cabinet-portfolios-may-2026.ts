@@ -10,9 +10,9 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
-/** Self-hosted copy of News9Live TN Secretariat photo (see public/images/articles/). */
+/** External hero (News9Live). Self-hosted alternative: /images/articles/tamil-nadu-cabinet-portfolios-hero.jpg */
 const HERO_IMAGE_URL =
-  "https://mychennaicity.in/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg";
+  "https://images.news9live.com/wp-content/uploads/2025/06/Tamil-Nadu-govt.jpg";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
