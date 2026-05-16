@@ -7,6 +7,23 @@ export const CHENNAI_CITY_SLUG = "chennai";
 
 export type PublicArticleRow = typeof articles.$inferSelect;
 
+/** `unstable_cache` JSON round-trip turns timestamps into strings — revive for `.toISOString()` etc. */
+function toDate(value: Date | string | null | undefined): Date | null {
+  if (value == null) return null;
+  if (value instanceof Date) return value;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+export function reviveArticleRow(row: PublicArticleRow): PublicArticleRow {
+  return {
+    ...row,
+    publishedAt: toDate(row.publishedAt),
+    createdAt: toDate(row.createdAt) ?? new Date(),
+    updatedAt: toDate(row.updatedAt) ?? new Date(),
+  };
+}
+
 async function getChennaiCityId(): Promise<string | null> {
   const db = getDb();
   const row = await db
@@ -91,7 +108,7 @@ export async function homeNewsBulletinCached(): Promise<{
   featured: PublicArticleRow[];
   latest: PublicArticleRow[];
 }> {
-  return unstable_cache(
+  const data = await unstable_cache(
     async () => {
       const featured = await featuredArticlesForHome(3);
       const latest = await latestArticlesForHome(10);
@@ -100,6 +117,10 @@ export async function homeNewsBulletinCached(): Promise<{
     ["home-news-bulletin"],
     { revalidate: HOME_NEWS_REVALIDATE_SEC },
   )();
+  return {
+    featured: data.featured.map(reviveArticleRow),
+    latest: data.latest.map(reviveArticleRow),
+  };
 }
 
 const ARTICLE_PUBLIC_REVALIDATE_SEC = 120;
@@ -108,11 +129,12 @@ const ARTICLE_PUBLIC_REVALIDATE_SEC = 120;
 export async function getPublishedArticleBySlugCached(
   slug: string,
 ): Promise<PublicArticleRow | null> {
-  return unstable_cache(
+  const row = await unstable_cache(
     () => getPublishedArticleBySlug(slug),
     ["news-article-public", slug],
     { revalidate: ARTICLE_PUBLIC_REVALIDATE_SEC },
   )();
+  return row ? reviveArticleRow(row) : null;
 }
 
 export async function getPublishedSlugsForChennai(): Promise<string[]> {
