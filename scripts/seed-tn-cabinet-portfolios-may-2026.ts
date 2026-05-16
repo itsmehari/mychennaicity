@@ -10,7 +10,8 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
-import { picsumHeroUrlForSlug } from "../src/lib/article-hero-image";
+const HERO_IMAGE_URL =
+  "https://images.news9live.com/wp-content/uploads/2025/06/Tamil-Nadu-govt.jpg";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -134,7 +135,7 @@ Portfolio allocation is not only an administrative formality — it tells citize
     .where(and(eq(articles.cityId, city.id), eq(articles.slug, SLUG)))
     .limit(1);
 
-  const heroImageUrl = picsumHeroUrlForSlug(SLUG);
+  const heroImageUrl = HERO_IMAGE_URL;
   const values = {
     cityId: city.id,
     slug: SLUG,

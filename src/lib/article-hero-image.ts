@@ -35,7 +35,8 @@ export function articleHeroUsesNextImage(src: string): boolean {
       u.hostname === "picsum.photos" ||
       u.hostname === "fastly.picsum.photos" ||
       u.hostname === "images.unsplash.com" ||
-      u.hostname === "pplx-res.cloudinary.com"
+      u.hostname === "pplx-res.cloudinary.com" ||
+      u.hostname === "images.news9live.com"
     );
   } catch {
     return false;

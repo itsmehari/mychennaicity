@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         hostname: "dc-cdn.s3-ap-southeast-1.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.news9live.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
