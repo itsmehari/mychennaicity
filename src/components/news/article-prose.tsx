@@ -20,6 +20,30 @@ function formatBold(text: string) {
   });
 }
 
+function headingLevel(line: string): 2 | 3 | null {
+  if (line.startsWith("## ")) return 2;
+  if (line.startsWith("### ")) return 3;
+  return null;
+}
+
+/** Precompute DOM ids for headings so render stays pure (no mutable index during map). */
+function resolveHeadingIds(
+  blocks: string[],
+  headingAnchors?: ArticleHeadingAnchor[],
+): (string | undefined)[] {
+  let anchorIdx = 0;
+  return blocks.map((block) => {
+    const level = headingLevel(block.trim());
+    if (level == null) return undefined;
+    const a = headingAnchors?.[anchorIdx];
+    if (a && a.level === level) {
+      anchorIdx += 1;
+      return a.id;
+    }
+    return undefined;
+  });
+}
+
 function formatInline(text: string) {
   const segments = text.split(MD_LINK);
   return segments.map((segment, i) => {
@@ -52,17 +76,8 @@ export function ArticleProse({
   /** Merged after base prose classes (e.g. constrain width). */
   className?: string;
 }) {
-  let anchorIdx = 0;
-  const nextAnchor = (level: 2 | 3) => {
-    const a = headingAnchors?.[anchorIdx];
-    if (a && a.level === level) {
-      anchorIdx += 1;
-      return a.id;
-    }
-    return undefined;
-  };
-
   const blocks = content.split(/\n\n+/);
+  const headingIds = resolveHeadingIds(blocks, headingAnchors);
   const rootClass =
     "space-y-4 text-[15px] leading-relaxed text-[var(--foreground)]" +
     (className ? ` ${className}` : "");
@@ -71,7 +86,7 @@ export function ArticleProse({
       {blocks.map((block, i) => {
         const line = block.trim();
         if (line.startsWith("## ")) {
-          const id = nextAnchor(2);
+          const id = headingIds[i];
           return (
             <h2
               key={i}
@@ -83,7 +98,7 @@ export function ArticleProse({
           );
         }
         if (line.startsWith("### ")) {
-          const id = nextAnchor(3);
+          const id = headingIds[i];
           return (
             <h3
               key={i}

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { startTransition, useCallback, useEffect, useMemo, useState } from "react";
 import {
   DISMISS_COOLDOWN_MS,
   LS_NEWSLETTER_DISMISSED_AT,
@@ -40,7 +40,7 @@ export function NewsletterModalHost() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setOpen(false);
+    startTransition(() => setOpen(false));
   }, [pathname]);
 
   const skipAuto = useCallback(() => {

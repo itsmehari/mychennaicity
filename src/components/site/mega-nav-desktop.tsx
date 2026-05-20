@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { startTransition, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MegaNavPanel } from "./mega-nav-panel";
 import { MEGA_NAV_SECTIONS, getMegaNavSection } from "./nav-config";
@@ -51,7 +51,7 @@ export function MegaNavDesktop() {
   );
 
   useEffect(() => {
-    setOpenId(null);
+    startTransition(() => setOpenId(null));
   }, [pathname]);
 
   useEffect(() => {

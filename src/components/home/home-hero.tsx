@@ -8,11 +8,26 @@ import {
   useEffect,
   useId,
   useState,
+  useSyncExternalStore,
 } from "react";
 import { homeStats } from "@/lib/home-mock";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 const AUTO_MS = 7000;
+
+function subscribeReducedMotion(onStoreChange: () => void) {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
 
 const HERO_IMAGES = {
   metro:
@@ -326,34 +341,38 @@ export function HomeHero() {
   const [paused, setPaused] = useState(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const reduceMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    const onChange = () => setReduceMotion(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  useEffect(() => {
-    const first = SLIDES[index]?.filterOptions[0]?.value;
+  const resetSlideFields = useCallback((slideIndex: number) => {
+    const first = SLIDES[slideIndex]?.filterOptions[0]?.value;
     if (first !== undefined) setFilter(first);
     setQuery("");
-  }, [index]);
+  }, []);
 
   useEffect(() => {
     if (paused || reduceMotion) return;
     const t = window.setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
+      setIndex((i) => {
+        const next = (i + 1) % SLIDES.length;
+        const first = SLIDES[next]?.filterOptions[0]?.value;
+        if (first !== undefined) setFilter(first);
+        setQuery("");
+        return next;
+      });
     }, AUTO_MS);
     return () => window.clearInterval(t);
   }, [paused, reduceMotion]);
 
   const slide = SLIDES[index];
   const go = useCallback((i: number) => {
-    setIndex(((i % SLIDES.length) + SLIDES.length) % SLIDES.length);
-  }, []);
+    const next = ((i % SLIDES.length) + SLIDES.length) % SLIDES.length;
+    setIndex(next);
+    resetSlideFields(next);
+  }, [resetSlideFields]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
