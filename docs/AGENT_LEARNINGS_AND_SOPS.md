@@ -33,6 +33,7 @@ When unsure what “done” means for a thread, check the matching plan file in 
 
 - **Next.js in this repo may differ from training cutoffs.** Before unfamiliar APIs, check `node_modules/next/dist/docs/` (see `AGENTS.md`).
 - **`DATABASE_URL` at build time vs runtime:** Production empty home/news was traced to static generation without DB at build. Routes that list DB content should use **`dynamic = "force-dynamic"`** where the codebase already does—do not reintroduce static shells for those pages.
+- **News list freshness:** Home bulletin and article pages read Neon **per request** (no `unstable_cache` on article lists). After live seeds, optional **`REVALIDATE_SECRET`** + `POST /api/revalidate/news` busts edge HTML; see `scripts/lib/revalidate-news-after-seed.ts`.
 - **External images:** Add hosts to `next.config.ts` `images.remotePatterns` (or self-host under `public/`) before using `next/image`.
 - **Structured data:** Emit Event / JobPosting / rich article extras only when **data is stable and real**; avoid fake schema for mocks (user explicitly called this out in SEO plans).
 

@@ -1,13 +1,14 @@
-import { unstable_cache } from "next/cache";
 import { and, desc, eq, isNotNull, ne } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { articles, cities } from "@/db/schema/tables";
 
 export const CHENNAI_CITY_SLUG = "chennai";
 
+/** Home “News bulletin” grid — newest published stories (not featured-only). */
+export const HOME_BULLETIN_LIMIT = 12;
+
 export type PublicArticleRow = typeof articles.$inferSelect;
 
-/** `unstable_cache` JSON round-trip turns timestamps into strings — revive for `.toISOString()` etc. */
 function toDate(value: Date | string | null | undefined): Date | null {
   if (value == null) return null;
   if (value instanceof Date) return value;
@@ -89,7 +90,7 @@ export async function featuredArticlesForHome(limit = 3) {
     .limit(limit);
 }
 
-export async function latestArticlesForHome(limit = 8) {
+export async function latestArticlesForHome(limit = HOME_BULLETIN_LIMIT) {
   const cityId = await getChennaiCityId();
   if (!cityId) return [];
   const db = getDb();
@@ -101,45 +102,29 @@ export async function latestArticlesForHome(limit = 8) {
     .limit(limit);
 }
 
-/** Bump when article cache shape or hero handling changes (invalidates stale `unstable_cache` rows). */
-const NEWS_CACHE_VERSION = "v3";
-
-/** Short CDN/data-cache TTL for home bulletin — keeps TTFB lower while staying fresh. */
-const HOME_NEWS_REVALIDATE_SEC = 120;
-
+/**
+ * Home bulletin + editor picks — always reads Neon (no stale list cache after seeds).
+ * Name kept for existing imports (`homeNewsBulletinCached`).
+ */
 export async function homeNewsBulletinCached(): Promise<{
   featured: PublicArticleRow[];
   latest: PublicArticleRow[];
 }> {
-  const data = await unstable_cache(
-    async () => {
-      const featured = await featuredArticlesForHome(3);
-      const latest = await latestArticlesForHome(10);
-      return { featured, latest };
-    },
-    ["home-news-bulletin", NEWS_CACHE_VERSION],
-    { revalidate: HOME_NEWS_REVALIDATE_SEC, tags: ["news-home-bulletin"] },
-  )();
+  const [featured, latest] = await Promise.all([
+    featuredArticlesForHome(3),
+    latestArticlesForHome(HOME_BULLETIN_LIMIT),
+  ]);
   return {
-    featured: data.featured.map(reviveArticleRow),
-    latest: data.latest.map(reviveArticleRow),
+    featured: featured.map(reviveArticleRow),
+    latest: latest.map(reviveArticleRow),
   };
 }
 
-const ARTICLE_PUBLIC_REVALIDATE_SEC = 120;
-
-/** Cached read for public article pages (metadata + body share one cache entry per slug). */
+/** Public article page — fresh DB read per request (metadata + body stay in sync after publish). */
 export async function getPublishedArticleBySlugCached(
   slug: string,
 ): Promise<PublicArticleRow | null> {
-  const row = await unstable_cache(
-    () => getPublishedArticleBySlug(slug),
-    ["news-article-public", NEWS_CACHE_VERSION, slug],
-    {
-      revalidate: ARTICLE_PUBLIC_REVALIDATE_SEC,
-      tags: ["news-article", `news-article:${slug}`],
-    },
-  )();
+  const row = await getPublishedArticleBySlug(slug);
   return row ? reviveArticleRow(row) : null;
 }
 

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { StoryCardCompact } from "@/components/news/newspaper-layout";
 import {
   InteriorCrossNav,
@@ -77,6 +79,7 @@ export default async function TopicPage({ params }: Props) {
           ]}
         />
         <TopicSectionNav currentSlug={topic} />
+        <HubCommunityStrip businessVariant="news" className="mt-6" />
         <h1 className="type-display text-3xl text-[var(--foreground)] sm:text-4xl">
           {category}
         </h1>
@@ -201,6 +204,7 @@ export default async function TopicPage({ params }: Props) {
           Area map
         </Link>
       </nav>
+      <HubCommunityStrip businessVariant="news" className="mt-6" />
       {topic === "economy" ? (
         <aside
           className="mt-6 max-w-2xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
@@ -228,6 +232,9 @@ export default async function TopicPage({ params }: Props) {
           </p>
         </aside>
       ) : null}
+      <div className="mt-10 flex justify-center">
+        <AdSlot slotId="content-mid" size="300x250" />
+      </div>
       <div className="mt-10 max-w-2xl">
         {items.map((a) => (
           <StoryCardCompact key={a.id} article={a} />

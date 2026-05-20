@@ -14,6 +14,7 @@ import {
 import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
 import { InteractiveBlock } from "./interactive-block";
@@ -380,6 +381,20 @@ export async function EditorialArticle({
     </div>
   );
 
+  const adMid = (
+    <div className="flex w-full justify-center">
+      <AdSlot slotId="article-mid" size="300x250" />
+    </div>
+  );
+
+  const communityBand = <ArticleCommunityBand />;
+
+  const adEnd = (
+    <div className="flex w-full justify-center">
+      <AdSlot slotId="article-end" size="320x50" />
+    </div>
+  );
+
   return (
     <ArticleDetailLayout
       variant={layoutVariant}
@@ -395,8 +410,11 @@ export async function EditorialArticle({
         adTop,
         toc,
         main,
+        adMid,
         attribution,
+        communityBand,
         related: relatedNav,
+        adEnd,
         back,
       }}
     />

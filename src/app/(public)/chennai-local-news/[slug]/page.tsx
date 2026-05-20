@@ -41,7 +41,7 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
-/** Route stays dynamic; per-slug article reads use a short `unstable_cache` TTL (see `getPublishedArticleBySlugCached`). */
+/** Route stays dynamic; per-slug reads use `getPublishedArticleBySlugCached` (fresh Neon query per request). */
 export const dynamic = "force-dynamic";
 
 function clipMetaDescription(raw: string, max = 155): string {

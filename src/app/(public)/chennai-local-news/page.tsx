@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { NewspaperGrid, NewspaperMasthead } from "@/components/news/newspaper-layout";
 import {
   InteriorCrossNav,
@@ -62,7 +64,10 @@ export default async function ChennaiLocalNewsPage() {
         />
         <NewspaperMasthead />
         <TopicSectionNav />
-
+        <div className="mt-6 flex justify-center">
+          <AdSlot slotId="content-top" size="320x50" />
+        </div>
+        <HubCommunityStrip businessVariant="news" />
         <p className="type-eyebrow mt-8 text-[var(--accent)]">From other publishers</p>
         <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
           Chennai headlines — bulletin wiring in progress
@@ -140,6 +145,10 @@ export default async function ChennaiLocalNewsPage() {
       />
       <NewspaperMasthead />
       <TopicSectionNav />
+      <div className="mt-4 flex justify-center">
+        <AdSlot slotId="content-top" size="728x90" />
+      </div>
+      <HubCommunityStrip businessVariant="news" />
       <NewspaperGrid
         lead={lead}
         rest={rest}

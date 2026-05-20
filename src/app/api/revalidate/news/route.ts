@@ -1,9 +1,11 @@
-import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateNewsSurfaces } from "@/lib/revalidate-news-surfaces";
 
 /**
- * Bust news article + home bulletin caches after DB seeds or hero updates.
+ * Bust cached HTML for home + news hub (and optional article) after DB seeds or publish.
  * POST /api/revalidate/news?secret=…&slug=optional-article-slug
+ *
+ * Listing queries read Neon on every request; this route refreshes any stale full-page cache at the edge.
  */
 export async function POST(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get("secret");
@@ -13,15 +15,7 @@ export async function POST(request: NextRequest) {
   }
 
   const slug = request.nextUrl.searchParams.get("slug")?.trim();
-
-  revalidateTag("news-home-bulletin", "max");
-  revalidateTag("news-article", "max");
-  if (slug) {
-    revalidateTag(`news-article:${slug}`, "max");
-    revalidatePath(`/chennai-local-news/${slug}`);
-  }
-  revalidatePath("/chennai-local-news");
-  revalidatePath("/");
+  revalidateNewsSurfaces(slug || undefined);
 
   return NextResponse.json({ ok: true, slug: slug ?? null });
 }

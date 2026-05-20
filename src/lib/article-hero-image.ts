@@ -12,6 +12,7 @@ const NEXT_IMAGE_REMOTE_HOSTS = new Set([
   "images.unsplash.com",
   "pplx-res.cloudinary.com",
   "images.news9live.com",
+  "img-cdn.publive.online",
   "metrorailnews.in",
   "static.amazon.jobs",
   "thumbs.dreamstime.com",

@@ -17,6 +17,7 @@ import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 
 const hubTitleSegment = "Jobs in Chennai";
 
@@ -184,6 +185,8 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
         </div>
       </div>
 
+      <HubCommunityStrip businessVariant="jobs" />
+
       <ChennaiJobsPartnerBanner slotId="jobs-index-top" />
 
       <p className="mt-6 text-sm text-[var(--muted)]">
@@ -325,6 +328,8 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
         </Link>{" "}
         for submission openings.
       </p>
+
+      <ChennaiJobsPartnerBanner slotId="jobs-index-mid" className="mt-14" />
 
       <InteriorCrossNav />
     </div>

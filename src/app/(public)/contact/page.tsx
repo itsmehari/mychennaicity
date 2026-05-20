@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -88,6 +89,9 @@ export default function ContactPage() {
           ; use the same tips channel for listing enquiries or corrections to an
           employer we show.
         </p>
+      </div>
+      <div className="mt-12 max-w-2xl">
+        <BusinessWhatsAppCta variant="default" />
       </div>
       <InteriorCrossNav />
     </div>

@@ -21,15 +21,16 @@ import {
   HomeZoneShortcuts,
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
 import { homeNewsBulletinCached } from "@/domains/news";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 /**
  * Stay dynamic at the route so builds without `DATABASE_URL` never ship a frozen-empty bulletin.
- * Article rows are additionally cached via `homeNewsBulletinCached` (short revalidate) to improve TTFB.
+ * Bulletin rows load from Neon on each request via `homeNewsBulletinCached` (no stale list cache).
  */
 export const dynamic = "force-dynamic";
 
@@ -79,6 +80,9 @@ export default async function Home() {
       <HomeJsonLd />
       <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
         <HomeHero />
+        <div className="mt-8 sm:mt-10">
+          <BusinessWhatsAppCta variant="home" />
+        </div>
         <HomeSectionFrame>
           <div className="mb-8 flex justify-center sm:mb-10">
             <AdSlot slotId="homepage-top" size="728x90" />
@@ -129,6 +133,9 @@ export default async function Home() {
           <HomeSponsoredRow />
         </HomeSectionFrame>
         <HomeSectionFrame className="border-b border-[var(--home-section-border)] pb-12 sm:pb-16">
+          <div className="mb-10 flex justify-center sm:mb-12">
+            <AdSlot slotId="homepage-mid" size="728x90" />
+          </div>
           <HomeCommunityBand />
         </HomeSectionFrame>
       </div>

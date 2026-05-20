@@ -11,6 +11,7 @@ import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 import { picsumHeroUrlForSlug } from "../src/lib/article-hero-image";
+import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -1046,6 +1047,10 @@ async function main() {
   }
 
   console.log("Done.");
+
+  if (live) {
+    await revalidateNewsAfterSeed({ label: "seed-articles" });
+  }
 }
 
 main().catch((e) => {

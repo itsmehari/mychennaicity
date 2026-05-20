@@ -46,6 +46,11 @@ const nextConfig: NextConfig = {
         hostname: "images.news9live.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "img-cdn.publive.online",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {

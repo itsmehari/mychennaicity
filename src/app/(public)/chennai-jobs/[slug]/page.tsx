@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -116,6 +117,9 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           applyLinkProps={applyLinkProps}
           isWhatsApp={isWhatsApp}
         />
+        <div className="mt-12 max-w-2xl">
+          <BusinessWhatsAppCta variant="jobs" />
+        </div>
         <InteriorCrossNav />
       </div>
     </>

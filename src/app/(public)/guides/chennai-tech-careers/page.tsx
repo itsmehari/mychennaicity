@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -60,6 +62,8 @@ export default function ChennaiTechCareersGuidePage() {
         .
       </p>
 
+      <HubCommunityStrip businessVariant="jobs" />
+
       <article className="prose prose-sm mt-10 max-w-2xl text-[var(--muted)] prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-strong:text-[var(--foreground)]">
         <h2 className="text-lg font-semibold">Why “Chennai” in the headline matters</h2>
         <p>
@@ -113,6 +117,10 @@ export default function ChennaiTechCareersGuidePage() {
           .
         </p>
       </article>
+
+      <div className="mt-12 flex justify-center">
+        <AdSlot slotId="content-mid" size="300x250" />
+      </div>
 
       <InteriorCrossNav />
     </div>

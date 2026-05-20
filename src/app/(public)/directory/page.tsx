@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { Section } from "@/components/home/section";
 import {
   InteriorCrossNav,
@@ -75,6 +77,12 @@ export default function DirectoryPage() {
         </Link>
         .
       </p>
+
+      <div className="mt-8 flex justify-center sm:mt-10">
+        <AdSlot slotId="listing-top" size="728x90" />
+      </div>
+
+      <HubCommunityStrip businessVariant="directory" />
 
       <Section
         className="mt-12"

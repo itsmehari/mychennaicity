@@ -2,6 +2,7 @@
 export const ALL_SLOTS = [
   "article-top",
   "article-mid",
+  "article-end",
   "homepage-top",
   "homepage-mid",
   "content-top",

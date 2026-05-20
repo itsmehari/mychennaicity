@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { Section } from "@/components/home/section";
 import {
   InteriorCrossNav,
@@ -108,6 +110,10 @@ export default async function ChennaiLocalEventsPage() {
         )}
       </p>
 
+      <div className="mt-8 flex justify-center sm:mt-10">
+        <AdSlot slotId="events-index-top" size="728x90" />
+      </div>
+
       <div className="mt-8 flex flex-wrap gap-3">
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 shadow-sm">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent-warm)]">
@@ -139,6 +145,8 @@ export default async function ChennaiLocalEventsPage() {
           </span>
         </Link>
       </div>
+
+      <HubCommunityStrip businessVariant="events" />
 
       <ul className="mt-10 space-y-4">
         {useDb
@@ -221,6 +229,10 @@ export default async function ChennaiLocalEventsPage() {
           </li>
         </ul>
       </Section>
+
+      <div className="mt-12 flex justify-center">
+        <AdSlot slotId="events-index-mid" size="300x250" />
+      </div>
 
       <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
         Job hunting around the same dates? See{" "}

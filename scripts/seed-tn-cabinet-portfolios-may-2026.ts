@@ -10,6 +10,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
+import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 /** External hero (News9Live). Self-hosted alternative: /images/articles/tamil-nadu-cabinet-portfolios-hero.jpg */
 const HERO_IMAGE_URL =
   "https://images.news9live.com/wp-content/uploads/2025/06/Tamil-Nadu-govt.jpg";
@@ -200,19 +201,7 @@ Portfolio allocation is not only an administrative formality — it tells citize
   console.log("[seed-tn-cabinet] Hero image:", HERO_IMAGE_URL);
 
   if (live) {
-    const secret = process.env.REVALIDATE_SECRET?.trim();
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-      "https://mychennaicity.in";
-    if (secret) {
-      const url = `${site}/api/revalidate/news?secret=${encodeURIComponent(secret)}&slug=${encodeURIComponent(SLUG)}`;
-      const res = await fetch(url, { method: "POST" });
-      console.log("[seed-tn-cabinet] Cache revalidate:", res.status, await res.text());
-    } else {
-      console.log(
-        "[seed-tn-cabinet] REVALIDATE_SECRET not set — redeploy or wait ~2 min for article/home caches",
-      );
-    }
+    await revalidateNewsAfterSeed({ slug: SLUG, label: "seed-tn-cabinet" });
   }
 }
 

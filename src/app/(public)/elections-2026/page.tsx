@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Elections2026PageInfo } from "@/components/election-map-explorer/elections-2026-page-info";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { InteractiveElectionMapExplorer } from "@/components/election-map-explorer/interactive-election-map-explorer";
 import { ELECTION_FAQ } from "@/content/elections-2026/election-meta";
 import {
@@ -86,11 +88,21 @@ export default function Elections2026Page() {
         nominations and affidavits.
       </p>
 
+      <div className="mt-8 flex justify-center sm:mt-10">
+        <AdSlot slotId="elections-top" size="728x90" />
+      </div>
+
       <div className="mt-10">
         <InteractiveElectionMapExplorer />
       </div>
 
       <Elections2026PageInfo />
+
+      <div className="mt-12 flex justify-center">
+        <AdSlot slotId="elections-mid" size="300x250" />
+      </div>
+
+      <HubCommunityStrip businessVariant="default" className="mt-12" />
 
       <InteriorCrossNav />
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -84,6 +85,7 @@ export default function AboutPage() {
           are all linked from the home page and site footer too.
         </p>
       </div>
+      <HubCommunityStrip businessVariant="home" className="mt-12" />
       <InteriorCrossNav />
     </div>
   );

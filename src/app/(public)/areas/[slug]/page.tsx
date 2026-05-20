@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -167,6 +169,12 @@ export default async function AreaPage({ params }: Props) {
           ))}
         </ul>
       </section>
+
+      <div className="mt-10 flex justify-center">
+        <AdSlot slotId="content-mid" size="300x250" />
+      </div>
+
+      <HubCommunityStrip businessVariant="default" className="mt-10" />
 
       <p className="mt-10">
         <Link

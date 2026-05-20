@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AdSlot } from "@/ads/render-ad-slot";
+import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import { ArticleProse } from "@/components/news/article-prose";
 import {
   InteriorCrossNav,
@@ -56,6 +58,12 @@ export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
           No detailed description on file — confirm timings with the organiser.
         </p>
       )}
+      <div className="mt-10 space-y-8">
+        <div className="flex justify-center">
+          <AdSlot slotId="events-detail-mid" size="300x250" />
+        </div>
+        <BusinessWhatsAppCta variant="events" />
+      </div>
       <p className="type-lede mt-8 text-sm text-[var(--muted)]">
         More listings:{" "}
         <Link

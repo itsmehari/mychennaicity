@@ -57,7 +57,7 @@ Direct link (team slug may vary):
 
 The app used **static generation** for `/` at build time. If `DATABASE_URL` was missing during the Vercel build (or the DB was empty then), Next.js shipped **HTML with zero articles** until the next change.
 
-**Fix (in repo):** `/`, `/chennai-local-news`, topic pages, article `[slug]`, and `feed.xml` use **`export const dynamic = "force-dynamic"`** so each request loads articles from Neon using **runtime** env vars. After setting `DATABASE_URL` on Vercel, **redeploy** once. The home bulletin and public article reads additionally use **`unstable_cache`** (short revalidate, see `homeNewsBulletinCached` / `getPublishedArticleBySlugCached` in `src/domains/news/queries.ts`) to cut repeated DB work without reverting to build-time-only HTML.
+**Fix (in repo):** `/`, `/chennai-local-news`, topic pages, article `[slug]`, and `feed.xml` use **`export const dynamic = "force-dynamic"`** so each request loads articles from Neon using **runtime** env vars. After setting `DATABASE_URL` on Vercel, **redeploy** once. Home bulletin and article pages query Neon **on every request** (no stale `unstable_cache` list after seeds). Optionally set **`REVALIDATE_SECRET`** on Vercel and locally so live seeds can `POST /api/revalidate/news` to refresh any edge HTML immediately.
 
 ## Security learnings
 

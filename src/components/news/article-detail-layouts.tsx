@@ -21,8 +21,14 @@ export type ArticleDetailSlots = {
   adTop?: ReactNode;
   toc: ReactNode;
   main: ReactNode;
+  /** Mid-article display ad — after body, before attribution. */
+  adMid?: ReactNode;
   attribution: ReactNode;
+  /** Community / desk CTA — after attribution, before related. */
+  communityBand?: ReactNode;
   related: ReactNode;
+  /** End-of-article display ad — after related, before back link. */
+  adEnd?: ReactNode;
   back: ReactNode;
 };
 
@@ -43,8 +49,11 @@ function MastheadLayout({ s }: { s: ArticleDetailSlots }) {
         {s.adTop}
         {s.toc}
         {s.main}
+        {s.adMid}
         {s.attribution}
+        {s.communityBand}
         {s.related}
+        {s.adEnd}
         {s.back}
       </ReadingColumn>
     </article>
@@ -81,8 +90,11 @@ function MetroColumnsLayout({ s }: { s: ArticleDetailSlots }) {
           {s.adTop}
           {s.toc}
           {s.main}
+          {s.adMid}
           {s.attribution}
+          {s.communityBand}
           {s.related}
+          {s.adEnd}
           {s.back}
         </ReadingColumn>
       </div>
@@ -112,8 +124,11 @@ function FeatureRibbonLayout({ s }: { s: ArticleDetailSlots }) {
         {s.adTop}
         {s.toc}
         {s.main}
+        {s.adMid}
         {s.attribution}
+        {s.communityBand}
         {s.related}
+        {s.adEnd}
         {s.back}
       </ReadingColumn>
     </article>
@@ -143,8 +158,11 @@ function EditorialGridLayout({ s }: { s: ArticleDetailSlots }) {
         {s.adTop}
         {s.toc}
         {s.main}
+        {s.adMid}
         {s.attribution}
+        {s.communityBand}
         {s.related}
+        {s.adEnd}
         {s.back}
       </ReadingColumn>
     </article>

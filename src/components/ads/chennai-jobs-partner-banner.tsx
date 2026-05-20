@@ -1,7 +1,10 @@
 import { AdSlot } from "@/ads/render-ad-slot";
 import { CHENNAI_JOBS_PARTNER_CREATIVE_IDS } from "@/ads/registry";
 
-type JobsBannerSlot = "jobs-index-top" | "jobs-detail-mid";
+type JobsBannerSlot =
+  | "jobs-index-top"
+  | "jobs-index-mid"
+  | "jobs-detail-mid";
 
 /**
  * Rotates [ResumeDoctor](https://www.resumedoctor.in/) and

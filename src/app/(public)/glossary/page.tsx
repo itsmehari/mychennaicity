@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -110,6 +111,8 @@ export default function GlossaryPage() {
           </div>
         ))}
       </dl>
+
+      <HubCommunityStrip businessVariant="default" className="mt-12" />
 
       <InteriorCrossNav />
     </div>

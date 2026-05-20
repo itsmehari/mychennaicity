@@ -98,12 +98,13 @@ export function AdSlot({
 
   return (
     <section
-      className="ad-banner-region"
+      className="ad-banner-region ad-banner-region--slot"
       role="region"
       aria-label="Sponsored content"
     >
       <p className="ad-banner__disclosure">
         <span className="ad-banner__label">Ad</span>
+        <span className="ad-banner__sponsored-hint"> Sponsored</span>
       </p>
       <a
         href={creative.url}

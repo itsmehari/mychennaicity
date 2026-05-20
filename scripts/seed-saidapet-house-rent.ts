@@ -11,6 +11,7 @@ import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 import { picsumHeroUrlForSlug } from "../src/lib/article-hero-image";
+import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -122,6 +123,10 @@ If this listing is outdated or was posted without authorisation, use the site **
   }
 
   console.log("[seed-listing] Public URL:", `/chennai-local-news/${SLUG}`);
+
+  if (live) {
+    await revalidateNewsAfterSeed({ slug: SLUG, label: "seed-saidapet-house-rent" });
+  }
 }
 
 main().catch((e) => {
