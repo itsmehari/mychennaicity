@@ -12,7 +12,7 @@ export function getSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (!raw) return DEFAULT_SITE_URL;
   try {
-    let href = raw.replace(/\/+$/, "");
+    const href = raw.replace(/\/+$/, "");
     const parsed = new URL(href);
     if (parsed.protocol === "http:" && process.env.NODE_ENV === "production") {
       parsed.protocol = "https:";
