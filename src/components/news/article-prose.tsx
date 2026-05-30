@@ -1,24 +1,19 @@
-/** Minimal markdown-like rendering for seeded article bodies (## headings, **bold**, [label](https://...), lists). */
+/** Article body: section shells + GFM markdown (react-markdown / remark-gfm / typography). */
 
-import { Fragment } from "react";
+import {
+  ProseSectionShell,
+  proseSectionSkin,
+  type ProseSectionSkin,
+} from "./article-prose-blocks";
+import {
+  ArticleMarkdown,
+  buildH3TitleIdMap,
+} from "./article-markdown";
 
 export type ArticleHeadingAnchor = {
   level: 2 | 3;
   id: string;
 };
-
-const MD_LINK = /(\[[^\]]+\]\(https?:\/\/[^)]+\))/g;
-
-function formatBold(text: string) {
-  const parts = text.split(/(\*\*.+?\*\*)/g);
-  return parts.map((part, i) => {
-    const m = part.match(/^\*\*(.+)\*\*$/);
-    if (m) {
-      return <strong key={i}>{m[1]}</strong>;
-    }
-    return part;
-  });
-}
 
 function headingLevel(line: string): 2 | 3 | null {
   if (line.startsWith("## ")) return 2;
@@ -26,7 +21,6 @@ function headingLevel(line: string): 2 | 3 | null {
   return null;
 }
 
-/** Precompute DOM ids for headings so render stays pure (no mutable index during map). */
 function resolveHeadingIds(
   blocks: string[],
   headingAnchors?: ArticleHeadingAnchor[],
@@ -44,25 +38,94 @@ function resolveHeadingIds(
   });
 }
 
-function formatInline(text: string) {
-  const segments = text.split(MD_LINK);
-  return segments.map((segment, i) => {
-    const m = segment.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
-    if (m) {
-      return (
-        <a
-          key={i}
-          href={m[2]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium text-[var(--accent)] underline underline-offset-2 hover:opacity-90"
-        >
-          {formatBold(m[1])}
-        </a>
-      );
+function buildH3IdsByBlockIndex(
+  blocks: string[],
+  headingAnchors?: ArticleHeadingAnchor[],
+): Map<number, string> {
+  const h3Anchors = headingAnchors?.filter((a) => a.level === 3) ?? [];
+  const out = new Map<number, string>();
+  let h3i = 0;
+  for (let i = 0; i < blocks.length; i += 1) {
+    if (blocks[i].trim().startsWith("### ") && h3i < h3Anchors.length) {
+      out.set(i, h3Anchors[h3i].id);
+      h3i += 1;
     }
-    return <Fragment key={i}>{formatBold(segment)}</Fragment>;
+  }
+  return out;
+}
+
+type SectionBlock = { content: string; index: number };
+
+type SectionGroup = {
+  skin: ProseSectionSkin;
+  headingText: string;
+  headingId?: string;
+  blocks: SectionBlock[];
+};
+
+function groupSections(
+  blocks: string[],
+  headingIds: (string | undefined)[],
+): SectionGroup[] {
+  const sections: SectionGroup[] = [];
+  let current: SectionGroup | null = null;
+
+  blocks.forEach((block, i) => {
+    const line = block.trim();
+    const level = headingLevel(line);
+    if (level === 2) {
+      if (current) sections.push(current);
+      const headingText = line.slice(3).trim();
+      current = {
+        skin: proseSectionSkin(headingText),
+        headingText,
+        headingId: headingIds[i],
+        blocks: [],
+      };
+      return;
+    }
+    if (!current) {
+      current = {
+        skin: "default",
+        headingText: "",
+        blocks: [{ content: block, index: i }],
+      };
+      return;
+    }
+    current.blocks.push({ content: block, index: i });
   });
+  if (current) sections.push(current);
+  return sections;
+}
+
+function SectionHeading({
+  text,
+  id,
+  skin,
+}: {
+  text: string;
+  id?: string;
+  skin: ProseSectionSkin;
+}) {
+  const label = text.replace(/\*\*(.+?)\*\*/g, "$1");
+  if (skin === "takeaways") {
+    return (
+      <h2
+        id={id}
+        className="text-lg font-semibold tracking-tight text-[var(--foreground)]"
+      >
+        {label}
+      </h2>
+    );
+  }
+  return (
+    <h2
+      id={id}
+      className="text-xl font-semibold tracking-tight text-[var(--foreground)]"
+    >
+      {label}
+    </h2>
+  );
 }
 
 export function ArticleProse({
@@ -71,73 +134,53 @@ export function ArticleProse({
   className,
 }: {
   content: string;
-  /** In document order for ## then ### only; consumes sequentially. */
   headingAnchors?: ArticleHeadingAnchor[];
-  /** Merged after base prose classes (e.g. constrain width). */
   className?: string;
 }) {
-  const blocks = content.split(/\n\n+/);
+  const blocks = content.replace(/\r\n/g, "\n").split(/\n\n+/);
   const headingIds = resolveHeadingIds(blocks, headingAnchors);
-  const rootClass =
-    "space-y-4 text-[15px] leading-relaxed text-[var(--foreground)]" +
-    (className ? ` ${className}` : "");
+  const sections = groupSections(blocks, headingIds);
+  const h3IdsByBlock = buildH3IdsByBlockIndex(blocks, headingAnchors);
+
+  const rootClass = ["article-prose space-y-10", className]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div className={rootClass}>
-      {blocks.map((block, i) => {
-        const line = block.trim();
-        if (line.startsWith("## ")) {
-          const id = headingIds[i];
+      {sections.map((section, si) => {
+        const sectionMd = section.blocks.map((b) => b.content).join("\n\n");
+        const h3Map = buildH3TitleIdMap(section.blocks, h3IdsByBlock);
+
+        const body = (
+          <ArticleMarkdown content={sectionMd} h3IdByTitle={h3Map} />
+        );
+
+        if (!section.headingText) {
           return (
-            <h2
-              key={i}
-              id={id}
-              className="mt-8 scroll-mt-28 text-xl font-semibold tracking-tight text-[var(--foreground)] first:mt-0"
-            >
-              {formatInline(line.slice(3).trim())}
-            </h2>
-          );
-        }
-        if (line.startsWith("### ")) {
-          const id = headingIds[i];
-          return (
-            <h3
-              key={i}
-              id={id}
-              className="mt-6 scroll-mt-28 text-lg font-semibold text-[var(--foreground)]"
-            >
-              {formatInline(line.slice(4).trim())}
-            </h3>
-          );
-        }
-        if (line.includes("\n- ")) {
-          const [intro, ...rest] = line.split("\n- ");
-          return (
-            <div key={i} className="space-y-2">
-              {intro ? (
-                <p className="text-[var(--muted)]">{formatInline(intro)}</p>
-              ) : null}
-              <ul className="list-disc space-y-1 pl-5">
-                {rest.map((item, j) => (
-                  <li key={j}>{formatInline(item.trim())}</li>
-                ))}
-              </ul>
+            <div key={si} className="space-y-4">
+              {body}
             </div>
           );
         }
-        if (line.startsWith("- ")) {
-          const items = block.split("\n").map((l) => l.replace(/^-\s*/, "").trim());
-          return (
-            <ul key={i} className="list-disc space-y-1 pl-5">
-              {items.map((item, j) => (
-                <li key={j}>{formatInline(item)}</li>
-              ))}
-            </ul>
-          );
-        }
+
+        const heading = (
+          <SectionHeading
+            text={section.headingText}
+            id={section.headingId}
+            skin={section.skin}
+          />
+        );
+
         return (
-          <p key={i} className="text-[color-mix(in_srgb,var(--foreground)_92%,var(--muted))]">
-            {formatInline(line)}
-          </p>
+          <ProseSectionShell
+            key={si}
+            skin={section.skin}
+            headingId={section.headingId}
+            heading={heading}
+          >
+            {body}
+          </ProseSectionShell>
         );
       })}
     </div>

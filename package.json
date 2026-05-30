@@ -25,12 +25,16 @@
     "db:seed:chennai-job:office-manager-advocate:live": "tsx scripts/seed-chennai-job-office-manager-advocate.ts --live",
     "db:seed:chennai-job:myfirststep-school": "tsx scripts/seed-chennai-job-myfirststep-school.ts",
     "db:seed:chennai-job:myfirststep-school:live": "tsx scripts/seed-chennai-job-myfirststep-school.ts --live",
+    "db:seed:chennai-job:viyani-builder": "tsx scripts/seed-chennai-job-viyani-builder.ts",
+    "db:seed:chennai-job:viyani-builder:live": "tsx scripts/seed-chennai-job-viyani-builder.ts --live",
     "db:seed:saidapet-house-rent": "tsx scripts/seed-saidapet-house-rent.ts",
     "db:seed:saidapet-house-rent:live": "tsx scripts/seed-saidapet-house-rent.ts --live",
     "db:seed:tn-cabinet-portfolios-may-2026": "tsx scripts/seed-tn-cabinet-portfolios-may-2026.ts",
     "db:seed:tn-cabinet-portfolios-may-2026:live": "tsx scripts/seed-tn-cabinet-portfolios-may-2026.ts --live",
     "db:seed:savukku-goondas-revoked-may-2026": "tsx scripts/seed-savukku-shankar-goondas-revoked-may-2026.ts",
     "db:seed:savukku-goondas-revoked-may-2026:live": "tsx scripts/seed-savukku-shankar-goondas-revoked-may-2026.ts --live",
+    "db:seed:tn-ias-reshuffle-may-2026": "tsx scripts/seed-tn-ias-reshuffle-may-2026.ts",
+    "db:seed:tn-ias-reshuffle-may-2026:live": "tsx scripts/seed-tn-ias-reshuffle-may-2026.ts --live",
     "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:push:production-env": "drizzle-kit push --force",
     "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts",
@@ -40,6 +44,7 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
     "@neondatabase/serverless": "^1.0.2",
+    "@tailwindcss/typography": "^0.5.19",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "drizzle-orm": "^0.45.1",
@@ -47,7 +52,9 @@
     "next": "16.2.1",
     "next-auth": "^5.0.0-beta.30",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

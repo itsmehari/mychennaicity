@@ -17,7 +17,12 @@ import { AdSlot } from "@/ads/render-ad-slot";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
+import {
+  extractGoMetadata,
+  GoMetadataStrip,
+} from "./go-metadata-strip";
 import { InteractiveBlock } from "./interactive-block";
+import { OfficialDocumentBanner } from "./official-document-banner";
 
 function tocLinkLabel(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, "$1");
@@ -206,6 +211,24 @@ export async function EditorialArticle({
     </div>
   ) : null;
 
+  const goMeta = extractGoMetadata(`${report}\n${article.title}`);
+  const showOfficialPdf =
+    article.sourceUrl?.toLowerCase().includes(".pdf") ?? false;
+
+  const officialBanner = showOfficialPdf && article.sourceUrl ? (
+    <OfficialDocumentBanner
+      href={article.sourceUrl}
+      label={article.sourceName ?? "Official document (PDF)"}
+      meta={
+        goMeta
+          ? `G.O. (Rt.) No. ${goMeta.number} · ${goMeta.date}`
+          : undefined
+      }
+    />
+  ) : null;
+
+  const goStrip = goMeta ? <GoMetadataStrip meta={goMeta} /> : null;
+
   const areaBlock = areaZone ? (
     <p className="type-lede mt-4 text-sm text-[var(--muted)]">
       <span className="text-[var(--foreground)]">Local area: </span>
@@ -271,14 +294,23 @@ export async function EditorialArticle({
 
   const main = (
     <>
-      <section className="mt-2" aria-labelledby="report-heading">
-        <h2
-          id="report-heading"
-          className="text-lg font-semibold text-[var(--foreground)]"
-        >
-          The news
-        </h2>
-        <div className="mt-4">
+      <section
+        className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-8 ring-1 ring-[color-mix(in_srgb,var(--foreground)_5%,transparent)]"
+        aria-labelledby="report-heading"
+      >
+        <div className="flex flex-wrap items-center gap-3 border-b border-[var(--border)] pb-5">
+          <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,var(--surface))] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--accent)]">
+            Report
+          </span>
+          <h2
+            id="report-heading"
+            className="text-lg font-semibold text-[var(--foreground)] sm:text-xl"
+          >
+            Transfers and postings
+          </h2>
+        </div>
+        {goStrip ? <div className="mt-6">{goStrip}</div> : null}
+        <div className="mt-6">
           <ArticleProse
             content={report}
             headingAnchors={reportHeadingAnchors}
@@ -288,16 +320,24 @@ export async function EditorialArticle({
 
       {analysis ? (
         <section
-          className="mt-12 border-t border-[var(--border)] pt-10"
+          className="rounded-2xl border border-[color-mix(in_srgb,var(--accent-warm)_22%,var(--border))] bg-[color-mix(in_srgb,var(--accent-warm)_4%,var(--surface))] p-5 sm:p-8"
           aria-labelledby="analysis-heading"
         >
-          <h2
-            id="analysis-heading"
-            className="text-lg font-semibold text-[var(--foreground)]"
-          >
-            Analysis: what this means in Chennai
-          </h2>
-          <div className="mt-4">
+          <div className="border-b border-[color-mix(in_srgb,var(--accent-warm)_20%,var(--border))] pb-5">
+            <span className="rounded-full bg-[color-mix(in_srgb,var(--accent-warm)_14%,var(--surface))] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--accent-warm)]">
+              Chennai desk
+            </span>
+            <h2
+              id="analysis-heading"
+              className="mt-3 text-lg font-semibold text-[var(--foreground)] sm:text-xl"
+            >
+              What this means in Chennai
+            </h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              Local impact, institutions, and what residents should watch next.
+            </p>
+          </div>
+          <div className="mt-6">
             <ArticleProse
               content={analysis}
               headingAnchors={analysisHeadingAnchors}
@@ -306,23 +346,13 @@ export async function EditorialArticle({
         </section>
       ) : null}
 
-      {!takeawaysAtTop ? (
+      {!takeawaysAtTop && article.interactiveJson ? (
         <section
-          className="mt-12 border-t border-[var(--border)] pt-10"
-          aria-labelledby="interactive-heading"
+          id="interactive-heading"
+          className="scroll-mt-28 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6"
+          aria-labelledby="interactive-heading-title"
         >
-          <h2
-            id="interactive-heading"
-            className="text-lg font-semibold text-[var(--foreground)]"
-          >
-            Your move
-          </h2>
-          <p className="mt-1 text-sm text-[var(--muted)]">
-            A lightweight interactive tied to this story.
-          </p>
-          <div className="mt-6">
-            <InteractiveBlock data={article.interactiveJson ?? undefined} />
-          </div>
+          <InteractiveBlock data={article.interactiveJson ?? undefined} />
         </section>
       ) : null}
     </>
@@ -407,6 +437,7 @@ export async function EditorialArticle({
         areaZone: areaBlock,
         publishedRow,
         hero,
+        officialPdf: officialBanner,
         adTop,
         toc,
         main,

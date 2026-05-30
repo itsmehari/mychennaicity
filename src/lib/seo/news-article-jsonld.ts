@@ -124,13 +124,38 @@ export function buildNewsArticleJsonLd(
   }
 
   if (article.sourceUrl?.trim()) {
+    const sourceUrl = article.sourceUrl.trim();
     core.isBasedOn = {
       "@type": "CreativeWork",
-      url: article.sourceUrl.trim(),
+      url: sourceUrl,
       ...(article.sourceName?.trim()
         ? { name: article.sourceName.trim() }
         : {}),
     };
+    if (sourceUrl.toLowerCase().includes(".pdf")) {
+      core.associatedMedia = {
+        "@type": "MediaObject",
+        contentUrl: sourceUrl,
+        encodingFormat: "application/pdf",
+        ...(article.sourceName?.trim()
+          ? { name: article.sourceName.trim() }
+          : {}),
+      };
+    }
+  }
+
+  const reportText = article.reportBody ?? article.body ?? "";
+  if (/G\.O\.\s*\(Rt\.\)/i.test(`${article.title}\n${reportText}`)) {
+    core.about = [
+      {
+        "@type": "GovernmentOrganization",
+        name: "Government of Tamil Nadu",
+      },
+      {
+        "@type": "Thing",
+        name: "Tamil Nadu IAS cadre transfer and posting order",
+      },
+    ];
   }
 
   if (options?.speakableSummaryLead) {
@@ -146,30 +171,55 @@ export function buildNewsArticleJsonLd(
   return core;
 }
 
-export function buildBreadcrumbJsonLd(slug: string, title: string) {
+export function buildBreadcrumbJsonLd(
+  slug: string,
+  title: string,
+  options?: { category?: string | null; topicHref?: string | null },
+) {
   const base = getSiteUrl();
+  const elements: {
+    "@type": "ListItem";
+    position: number;
+    name: string;
+    item: string;
+  }[] = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: base,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Chennai local news",
+      item: `${base}/chennai-local-news`,
+    },
+  ];
+
+  const category = options?.category?.trim();
+  const topicHref = options?.topicHref?.trim();
+  if (category) {
+    elements.push({
+      "@type": "ListItem",
+      position: elements.length + 1,
+      name: category,
+      item: topicHref
+        ? `${base}${topicHref.startsWith("/") ? topicHref : `/${topicHref}`}`
+        : `${base}/chennai-local-news`,
+    });
+  }
+
+  elements.push({
+    "@type": "ListItem",
+    position: elements.length + 1,
+    name: title,
+    item: `${base}/chennai-local-news/${slug}`,
+  });
+
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: base,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Chennai local news",
-        item: `${base}/chennai-local-news`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: title,
-        item: `${base}/chennai-local-news/${slug}`,
-      },
-    ],
+    itemListElement: elements,
   };
 }

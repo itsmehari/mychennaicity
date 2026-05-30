@@ -45,21 +45,30 @@ export function InteractiveBlock({
     if (!c.items?.length) return null;
     return (
       <aside
-        className="rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] p-5"
+        className="border-t border-[var(--border)] pt-8"
         aria-label="Interactive checklist"
       >
-        <h2 className="text-sm font-semibold text-[var(--foreground)]">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+          Reader checklist
+        </p>
+        <h2 className="mt-2 text-lg font-semibold text-[var(--foreground)]">
           {c.title}
         </h2>
-        <ul className="mt-3 space-y-2">
+        <ul className="mt-5 space-y-3">
           {c.items.map((item) => (
-            <li key={item.id} className="flex gap-2 text-sm">
+            <li
+              key={item.id}
+              className="flex gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm"
+            >
               <input
                 id={`chk-${item.id}`}
                 type="checkbox"
                 className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
               />
-              <label htmlFor={`chk-${item.id}`} className="text-[var(--foreground)]">
+              <label
+                htmlFor={`chk-${item.id}`}
+                className="leading-relaxed text-[var(--foreground)]"
+              >
                 {item.label}
               </label>
             </li>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "../styles/ad-banners.css";
 
 :root {
@@ -231,5 +232,47 @@ body {
 
   .mega-nav-mobile-enter {
     animation: mega-nav-mobile-in 0.2s ease-out both;
+  }
+}
+
+/* Long-form news: @tailwindcss/typography + GFM tables */
+.article-prose {
+  --tw-prose-body: color-mix(in srgb, var(--foreground) 92%, var(--muted));
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-bullets: var(--accent);
+}
+
+.article-prose .article-table th,
+.article-prose .article-table td {
+  vertical-align: top;
+}
+
+.article-prose .article-table tbody tr:hover {
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+
+.article-prose :where(thead th):first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.article-prose :where(tbody td):first-child {
+  font-weight: 600;
+}
+
+.article-shell--masthead header {
+  text-wrap: balance;
+}
+
+.article-shell .reading-column {
+  max-width: 42rem;
+}
+
+@media (min-width: 1024px) {
+  .article-shell--masthead .reading-column-prose {
+    max-width: 46rem;
   }
 }

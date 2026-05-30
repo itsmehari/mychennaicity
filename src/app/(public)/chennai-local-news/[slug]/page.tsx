@@ -20,7 +20,7 @@ import {
 } from "@/lib/markdown-outline";
 import { articleLayoutVariantForSlug } from "@/lib/news-article-layout";
 import { categoryToTopicSlug } from "@/lib/news-topics";
-import { buildInteractiveExtraJsonLd } from "@/lib/seo/article-interactive-jsonld";
+import { buildArticleSupplementalJsonLd } from "@/lib/seo/article-rich-snippets";
 import {
   buildBreadcrumbJsonLd,
   buildNewsArticleJsonLd,
@@ -132,12 +132,6 @@ export default async function ArticlePage({ params }: Props) {
     : buildNewsArticleJsonLd(article, {
         speakableSummaryLead,
       });
-  const crumbLd = buildBreadcrumbJsonLd(article.slug, article.title);
-  const extraLd = buildInteractiveExtraJsonLd(
-    article.slug,
-    article.interactiveJson ?? undefined,
-  );
-
   const reportBody = article.reportBody ?? article.body;
   const analysisBody = article.analysisBody ?? "";
   const showToc = shouldShowArticleToc(reportBody, analysisBody);
@@ -151,6 +145,17 @@ export default async function ArticlePage({ params }: Props) {
     id: `analysis-${o.baseId}`,
   }));
   const articleUrl = `${getSiteUrl()}/chennai-local-news/${article.slug}`;
+  const topicHref = article.category
+    ? `/chennai-local-news/topic/${categoryToTopicSlug(article.category)}`
+    : null;
+  const crumbLd = buildBreadcrumbJsonLd(article.slug, article.title, {
+    category: article.category,
+    topicHref,
+  });
+  const extraLd = buildArticleSupplementalJsonLd(article, {
+    articleUrl,
+    reportBody,
+  });
   const tocItemListLd =
     showToc && tocEntries.length > 0
       ? buildArticleSectionItemListJsonLd(articleUrl, tocEntries)

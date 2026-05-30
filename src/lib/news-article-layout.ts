@@ -11,7 +11,16 @@ export const ARTICLE_LAYOUT_VARIANTS = [
 
 export type ArticleLayoutVariant = (typeof ARTICLE_LAYOUT_VARIANTS)[number];
 
+/** Long-form government / transfer desks — stable masthead layout. */
+const SLUG_LAYOUT_OVERRIDES: Partial<Record<string, ArticleLayoutVariant>> = {
+  "tamil-nadu-ias-reshuffle-collectors-may-2026": "masthead",
+  "tamil-nadu-cabinet-portfolios-may-2026": "masthead",
+};
+
 export function articleLayoutVariantForSlug(slug: string): ArticleLayoutVariant {
+  const override = SLUG_LAYOUT_OVERRIDES[slug];
+  if (override) return override;
+
   let h = 0;
   for (let i = 0; i < slug.length; i++) {
     h = (Math.imul(31, h) + slug.charCodeAt(i)) | 0;

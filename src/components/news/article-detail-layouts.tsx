@@ -3,7 +3,9 @@ import type { ArticleLayoutVariant } from "@/lib/news-article-layout";
 
 function ReadingColumn({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto w-full max-w-[720px] space-y-10">{children}</div>
+    <div className="reading-column reading-column-prose mx-auto w-full max-w-3xl space-y-10 px-0 sm:px-1">
+      {children}
+    </div>
   );
 }
 
@@ -17,7 +19,8 @@ export type ArticleDetailSlots = {
   areaZone: ReactNode;
   publishedRow: ReactNode;
   hero: ReactNode;
-  /** Display ad (e.g. `article-top` leaderboard) — first in reading column. */
+  /** G.O. / official PDF download CTA when `source_url` is a PDF. */
+  officialPdf?: ReactNode;
   adTop?: ReactNode;
   toc: ReactNode;
   main: ReactNode;
@@ -44,6 +47,7 @@ function MastheadLayout({ s }: { s: ArticleDetailSlots }) {
         {s.takeaways}
         {s.areaZone}
         {s.publishedRow}
+        {s.officialPdf ? <div className="mt-6">{s.officialPdf}</div> : null}
       </header>
       <ReadingColumn>
         {s.adTop}
@@ -85,6 +89,7 @@ function MetroColumnsLayout({ s }: { s: ArticleDetailSlots }) {
           {s.takeaways}
           {s.areaZone}
           {s.publishedRow}
+          {s.officialPdf}
         </div>
         <ReadingColumn>
           {s.adTop}
@@ -119,6 +124,7 @@ function FeatureRibbonLayout({ s }: { s: ArticleDetailSlots }) {
           {s.areaZone}
         </div>
       </div>
+      {s.officialPdf ? <div className="my-6">{s.officialPdf}</div> : null}
       <hr className="my-8 border-[var(--border)] lg:my-10" />
       <ReadingColumn>
         {s.adTop}
@@ -153,6 +159,7 @@ function EditorialGridLayout({ s }: { s: ArticleDetailSlots }) {
         {s.takeaways}
         {s.areaZone}
         {s.publishedRow}
+        {s.officialPdf}
       </div>
       <ReadingColumn>
         {s.adTop}

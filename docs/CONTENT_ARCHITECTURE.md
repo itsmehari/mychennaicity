@@ -48,6 +48,7 @@
 - **Summary vs dek:** `dek` is the short display line; `summary` is the factual lead — show both when they differ so the first screen matches meta description intent.
 - **Primary source:** keep `source_url` / `source_name` accurate; the article template surfaces them as the outbound citation.
 - **Interactives:** `interactive_json` supports `checklist`, `poll`, `takeaways`, `faq`, and `howto` shapes — use `faq` / `howto` only with real, non-thin Q&A or steps (avoid empty schema).
+- **Rich snippets (JSON-LD):** Article pages emit `NewsArticle`, `BreadcrumbList`, optional TOC `ItemList`, plus `buildArticleSupplementalJsonLd` — `FAQPage` (from `faq` type, optional `faqItems` on checklist, or ## Fact box table), checklist/takeaways `ItemList`, and `DigitalDocument` when `source_url` is a PDF. Validate in [Google Rich Results Test](https://search.google.com/test/rich-results) after publish.
 
 ## Search measurement (ops)
 
