@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "img-cdn.publive.online",
+        hostname: "assets.vccircle.com",
         pathname: "/**",
       },
     ],
