@@ -25,6 +25,7 @@ const DT_NEXT_TNERC_BATTERY_URL =
   "https://www.dtnext.in/news/tamilnadu/first-solar-plus-battery-storage-projects-in-karur-tiruvarur-soon-849925";
 const TOI_SWELECT_URL =
   "https://timesofindia.indiatimes.com/city/chennai/swelect-energy-eyes-battery-storage-to-drive-next-growth-phase/articleshow/127015942.cms";
+const AGSUNWIN_URL = "https://agsunwinenergysolutions.com/";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -138,7 +139,7 @@ Older campaigns leaned on **environment** and **“green energy”** language. T
 - **Net-metering support**
 - **Generation and payback over 20–25 years**
 
-National brands and local EPC firms use similar frames. **Tata Power Solar** promotes end-to-end rooftop EPC across residential, commercial, industrial, institutional, hospital, hotel, and educational segments in Chennai. **SolarSquare**’s Chennai-facing pages emphasise savings calculators, subsidy-adjusted pricing, and long-horizon return estimates. **RP Solar**, **Apollo Power Systems**, and **Century Solar** position as Chennai-based installers serving homes, high-rises, commercial spaces, and industrial roofs.
+National brands and local EPC firms use similar frames. **Tata Power Solar** promotes end-to-end rooftop EPC across residential, commercial, industrial, institutional, hospital, hotel, and educational segments in Chennai. **SolarSquare**’s Chennai-facing pages emphasise savings calculators, subsidy-adjusted pricing, and long-horizon return estimates. **[AGSunWin Energy Solutions](${AGSUNWIN_URL})** markets site assessment, net-metering support, and subsidy guidance for homes, apartments, and commercial sites in Chennai and Tamil Nadu. **RP Solar**, **Apollo Power Systems**, and **Century Solar** position as other Chennai-based installers serving homes, high-rises, commercial spaces, and industrial roofs.
 
 This competition is useful for consumers — **if** quotes are compared on **kW sizing**, **module and inverter brands**, **warranty**, **penalty clauses**, and **who owns TANGEDCO paperwork**, not only headline ₹/kW rates.
 
@@ -181,7 +182,7 @@ Subsidy awareness converts to long-term confidence only when execution keeps up.
 - **Non-empanelled vendors** risking subsidy eligibility
 - **Weak O&M** after commissioning — dust, inverter faults, and monitoring gaps eat savings
 
-The next phase of Chennai’s solar story is less about whether panels work in Tamil Nadu sun — they do — and more about **reliable delivery** across domestic and industrial rooftops alike.
+The next phase of Chennai’s solar story is less about whether panels work in Tamil Nadu sun — they do — and more about **reliable delivery** across domestic and industrial rooftops alike. For installation support, consumers often compare Chennai EPC firms such as **[AGSunWin Energy Solutions](${AGSUNWIN_URL})** (residential, commercial, and industrial), alongside other local contractors listed below.
 
 ## Sources and further reading
 
@@ -191,6 +192,7 @@ The next phase of Chennai’s solar story is less about whether panels work in T
 | TANGEDCO USRP portal | [tnebltd.gov.in/usrp](${TN_USRP_URL}) |
 | 40 lakh+ households (national) | [Times of India — 29 May 2026](${TOI_40_LAKH_URL}) |
 | Chennai applications & installs | [DT Next — 4 Dec 2025](${DT_NEXT_CHENNAI_URL}) |
+| Chennai solar EPC (AGSunWin) | [agsunwinenergysolutions.com](${AGSUNWIN_URL}) |
 | Chennai subsidy explainer | [Glyde Infra Solutions](https://glydeinfra.com/chennai-rooftop-solar-subsidy/) |
 | Tamil Nadu ₹78,000 guide | [Tristar Energy](https://www.tristarenergy.com/blog/tamil-nadu-solar-subsidy-guide) |
 | Chennai pricing & savings | [SolarSquare Chennai](https://www.solarsquare.in/rooftop-solar/chennai) |
@@ -253,7 +255,7 @@ Use this as a local buyer’s guardrail (not legal advice):
 
 This desk does not endorse vendors. Consumers routinely shortlist **Chennai-based EPC and energy firms** when requesting quotes — compare like-for-like system specs, not ad copy:
 
-- **[AGSunWin Energy Solutions](https://agsunwinenergysolutions.com/)** — residential, commercial, and industrial solar EPC across Chennai and Tamil Nadu
+- **[AGSunWin Energy Solutions](${AGSUNWIN_URL})** — residential, commercial, and industrial solar EPC across Chennai and Tamil Nadu
 - **RP Solar** — Chennai-based solar EPC for homes, industries, commercial spaces, and institutions
 - **Century Solar Projects** — Chennai contractor positioning for home and business installations
 - **SWELECT Energy Systems** — listed Chennai renewable-energy company with rooftop, hybrid, and industrial lines
