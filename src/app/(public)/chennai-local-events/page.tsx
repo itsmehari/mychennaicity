@@ -188,12 +188,15 @@ export default async function ChennaiLocalEventsPage() {
                     </span>
                   </a>
                 ) : (
-                  <div className="text-[var(--foreground)]">
+                  <Link
+                    href={e.href}
+                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
+                  >
                     <span className="text-sm font-semibold">{e.title}</span>
                     <span className="mt-1 block text-xs text-[var(--muted)]">
-                      {e.when} · {e.where}
+                      {e.when} · {e.where} · Full detail on site
                     </span>
-                  </div>
+                  </Link>
                 )}
               </li>
             ))}

@@ -45,7 +45,30 @@ export type AdDesign =
   | "mycovai"
   | "colourchemist"
   | "bseri"
-  | "resumebuilder";
+  | "resumebuilder"
+  | "agsunwin";
+
+/** Home, news, events, and general content — not jobs/listings verticals. */
+export const CHENNAI_CONSUMER_AD_SLOTS: readonly SlotId[] = [
+  "homepage-top",
+  "homepage-mid",
+  "content-top",
+  "content-mid",
+  "article-top",
+  "article-mid",
+  "article-end",
+  "events-index-top",
+  "events-index-mid",
+  "events-detail-mid",
+  "global-top",
+  "discover-top",
+  "sidebar",
+  "elections-top",
+  "elections-mid",
+  "listing-top",
+] as const;
+
+export const AGSUNWIN_SOLAR_CREATIVE_ID = "agsunwin-solar-1";
 
 /** House ads rotated on `/chennai-jobs` (random per page view). */
 export const RESUMEDOCTOR_CREATIVE_ID = "resumedoctor-1";
@@ -65,6 +88,12 @@ export type AdCreative = {
   design: AdDesign;
   headline: string;
   tagline: string;
+  /** Accent line between headline and tagline (e.g. price hook). */
+  hook?: string;
+  /** Button label; defaults vary by banner size when omitted. */
+  ctaLabel?: string;
+  /** Small print under copy (e.g. subsidy asterisk). Hidden on 320×50. */
+  disclaimer?: string;
   active: boolean;
 };
 
@@ -126,6 +155,22 @@ export const ADS: AdCreative[] = [
     design: "bseri",
     headline: "ISO Standards Education & Training",
     tagline: "9001 · 27001 · 22301 — Implementer courses",
+    active: true,
+  },
+  {
+    id: AGSUNWIN_SOLAR_CREATIVE_ID,
+    advertiser: "AG Sunwin",
+    url: "https://agsunwinenergysolutions.com/",
+    slot_ids: CHENNAI_CONSUMER_AD_SLOTS,
+    sizes: ["728x90", "336x280", "300x250", "320x50"],
+    design: "agsunwin",
+    headline: "Home Solar Now Starts Smarter With Subsidy Support",
+    hook: "Save up to ₹78,000 on eligible rooftop solar installation*",
+    tagline:
+      "AG Sunwin helps Chennai homes plan domestic solar with site survey, system design, installation and net-metering support.",
+    ctaLabel: "Get Free Solar Quote",
+    disclaimer:
+      "*Indicative savings; eligibility, subsidy and installed cost depend on site survey and current scheme rules.",
     active: true,
   },
 ];

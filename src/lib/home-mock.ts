@@ -83,6 +83,12 @@ export const mockJobs: MockJob[] = [
  */
 export const mockEvents: MockEvent[] = [
   {
+    title: "Champions of Change Award Function",
+    when: "Mon 1 Jun 2026 · 6:00 PM",
+    where: "ITC Grand Chola, Guindy",
+    href: "/chennai-local-events/lions-council-champions-of-change-award-2026",
+  },
+  {
     title: "Mylapore Panguni Festival 2026",
     when: "22 Mar – 12 Apr 2026",
     where: "Panguni Uthiram · Kapaleeshwarar Temple, Mylapore",

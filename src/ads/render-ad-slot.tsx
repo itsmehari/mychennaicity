@@ -51,6 +51,11 @@ export function AdSlot({
   const designClass = normalizeDesignForClass(creative.design);
   const linkClass = `ad-banner ad-banner--${size} ad-banner--${designClass}`;
   const ariaLabel = `${creative.advertiser} - ${creative.headline}`;
+  const ctaWide = creative.ctaLabel ?? "Visit site";
+  const ctaMid = creative.ctaLabel ?? "Learn more";
+  const ctaMobile = creative.ctaLabel
+    ? compactHeadline(creative.ctaLabel, 14)
+    : "Visit";
 
   const icon = (
     <span className="ad-banner__icon" aria-hidden>
@@ -58,10 +63,22 @@ export function AdSlot({
     </span>
   );
 
+  const hookLine =
+    creative.hook != null && creative.hook.trim() !== "" ? (
+      <span className="ad-banner__hook">{creative.hook}</span>
+    ) : null;
+
+  const disclaimerLine =
+    creative.disclaimer != null && creative.disclaimer.trim() !== "" ? (
+      <span className="ad-banner__disclaimer-copy">{creative.disclaimer}</span>
+    ) : null;
+
   const copyWide = (
     <span className="ad-banner__copy">
       <span className="ad-banner__headline">{creative.headline}</span>
+      {hookLine}
       <span className="ad-banner__tagline">{creative.tagline}</span>
+      {size !== "320x50" ? disclaimerLine : null}
     </span>
   );
 
@@ -71,7 +88,7 @@ export function AdSlot({
       <>
         {icon}
         {copyWide}
-        <span className="ad-banner__cta">Visit site</span>
+        <span className="ad-banner__cta">{ctaWide}</span>
       </>
     );
   } else if (size === "336x280" || size === "300x250") {
@@ -79,7 +96,7 @@ export function AdSlot({
       <>
         {icon}
         {copyWide}
-        <span className="ad-banner__cta">Learn more</span>
+        <span className="ad-banner__cta">{ctaMid}</span>
       </>
     );
   } else {
@@ -90,8 +107,13 @@ export function AdSlot({
           <span className="ad-banner__headline">
             {compactHeadline(creative.headline, 42)}
           </span>
+          {creative.hook ? (
+            <span className="ad-banner__hook ad-banner__hook--compact">
+              {compactHeadline(creative.hook, 36)}
+            </span>
+          ) : null}
         </span>
-        <span className="ad-banner__cta">Visit</span>
+        <span className="ad-banner__cta">{ctaMobile}</span>
       </>
     );
   }

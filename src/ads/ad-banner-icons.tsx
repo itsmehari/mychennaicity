@@ -78,6 +78,24 @@ function IconCertificate({ className }: { className?: string }) {
   );
 }
 
+function IconSun({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width={28}
+      height={28}
+      viewBox="0 0 24 24"
+      fill={stroke.fill}
+      stroke={stroke.stroke}
+      strokeWidth={stroke.width}
+      aria-hidden
+    >
+      <circle cx={12} cy={12} r={4} />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+
 function IconMegaphone({ className }: { className?: string }) {
   return (
     <svg
@@ -120,6 +138,8 @@ export function AdBannerIcon({
       return <IconPalette className={className} />;
     case "bseri":
       return <IconCertificate className={className} />;
+    case "agsunwin":
+      return <IconSun className={className} />;
     default:
       return <IconMegaphone className={className} />;
   }

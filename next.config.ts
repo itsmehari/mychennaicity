@@ -51,6 +51,11 @@ const nextConfig: NextConfig = {
         hostname: "assets.vccircle.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.samsung.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
