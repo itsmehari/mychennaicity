@@ -280,34 +280,6 @@ A financial app must remain reliable when users urgently need to **pay**, **veri
             "Chennai’s Android market includes many mid-range devices (including Redmi models cited in reviews). Fragmented OS skins and upgrade paths make post-update crashes a common metro consumer risk.",
         },
       ],
-      faqItems: [
-        {
-          question:
-            "What are OneCard users complaining about on Google Play?",
-          answer:
-            "Visible reviews cite app crashes after updates, inability to open the app, auto-exit, login failures, and repayment options not working — often after users already cleared cache or reinstalled.",
-        },
-        {
-          question: "Why is an app crash more serious for a credit card app?",
-          answer:
-            "Users rely on the app to check dues, view statements, and pay before due dates. Failures can lead to late fees, credit score anxiety, and loss of trust — not just inconvenience.",
-        },
-        {
-          question: "Have users tried basic troubleshooting?",
-          answer:
-            "Yes. Multiple reviews say they cleared cache and app data, reinstalled, raised tickets, and contacted support — yet the app still crashed or blocked repayment.",
-        },
-        {
-          question: "What should OneCard communicate publicly?",
-          answer:
-            "Affected versions/devices, hotfix timeline, alternate official repayment routes, and whether late fees will be waived when app failure caused delay.",
-        },
-        {
-          question: "Why is this relevant to Chennai readers?",
-          answer:
-            "Chennai’s Android market includes many mid-range devices (including Redmi models cited in reviews). Fragmented OS skins and upgrade paths make post-update crashes a common metro consumer risk.",
-        },
-      ],
     } as Record<string, unknown>,
     updatedAt: now,
   };

@@ -15,7 +15,7 @@ function parseMarkdownTableRow(line: string): string[] {
     .map((c) => stripMarkdownCell(c));
 }
 
-/** Turn ## Fact box table rows into FAQ entities for rich results. */
+/** Turn ## Fact box table rows into FAQ entities (utility only — not emitted as FAQPage). */
 export function parseFactBoxFaqItems(markdown: string): FaqItem[] {
   const match = markdown.match(
     /##\s*Fact box\s*\n+([\s\S]*?)(?=\n##\s|\n---\s*\n|$)/i,
@@ -47,14 +47,15 @@ export function parseFactBoxFaqItems(markdown: string): FaqItem[] {
   return items;
 }
 
-function readOptionalFaqItems(
+/** FAQ JSON-LD only when `interactive_json.type === "faq"` — matches visible on-page FAQ block. */
+function readVisibleFaqItems(
   interactive: Record<string, unknown> | null | undefined,
 ): FaqItem[] {
   if (!interactive || typeof interactive !== "object") return [];
-  const raw = interactive.faqItems;
-  if (!Array.isArray(raw)) return [];
+  if (interactive.type !== "faq" || !Array.isArray(interactive.items)) return [];
+
   const items: FaqItem[] = [];
-  for (const x of raw) {
+  for (const x of interactive.items) {
     if (
       x &&
       typeof x === "object" &&
@@ -172,8 +173,8 @@ export type ArticleSupplementalJsonLdOptions = {
 };
 
 /**
- * All supplemental JSON-LD for a news article (FAQ, ItemList, DigitalDocument, interactive).
- * Keep NewsArticle / Breadcrumb / TOC ItemList on the page route; merge outputs here.
+ * Supplemental JSON-LD for news articles.
+ * FAQPage: single block, only when interactive type is `faq` (visible Q&A on page).
  */
 export function buildArticleSupplementalJsonLd(
   article: PublicArticleRow,
@@ -181,22 +182,11 @@ export function buildArticleSupplementalJsonLd(
 ): unknown[] {
   const out: unknown[] = [];
   const interactive = article.interactiveJson;
-  const report = options.reportBody ?? article.reportBody ?? article.body ?? "";
 
   out.push(...buildInteractiveExtraJsonLd(article.slug, interactive ?? undefined));
 
-  const faqCandidates: FaqItem[] = [
-    ...readOptionalFaqItems(interactive ?? undefined),
-    ...parseFactBoxFaqItems(report),
-  ];
-  const faqSeen = new Set<string>();
-  const faqDeduped = faqCandidates.filter((item) => {
-    const key = item.question.toLowerCase();
-    if (faqSeen.has(key)) return false;
-    faqSeen.add(key);
-    return true;
-  });
-  const faqLd = buildFaqPageJsonLdFromItems(faqDeduped);
+  const faqItems = readVisibleFaqItems(interactive ?? undefined);
+  const faqLd = buildFaqPageJsonLdFromItems(faqItems);
   if (faqLd) out.push(faqLd);
 
   if (interactive && typeof interactive === "object") {

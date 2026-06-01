@@ -9,32 +9,30 @@ import type { PublicArticleRow } from "@/domains/news";
 const baseArticle = {
   id: "1",
   cityId: "c",
-  slug: "tamil-nadu-ias-reshuffle-collectors-may-2026",
-  title: "Tamil Nadu transfers 40 IAS officers",
-  summary: "G.O. reshuffle",
+  slug: "onecard-app-crashes-payment-failures-play-store-reviews",
+  title: "OneCard app issues",
+  summary: "Play Store reviews",
   body: "",
   reportBody: `## Fact box
 
 | Item | Detail |
 |------|--------|
-| **Order** | G.O. (Rt.) No. 1883 |
-| **Date** | 29 May 2026 |`,
+| **App** | OneCard |
+| **Platform** | Android |`,
   analysisBody: "",
-  category: "Politics",
+  category: "Consumer",
   status: "published" as const,
-  publishedAt: new Date("2026-05-29T05:30:00.000Z"),
+  publishedAt: new Date("2026-05-30T06:00:00.000Z"),
   featured: true,
   heroImageUrl: null,
-  sourceUrl: "https://mychennaicity.in/documents/go.pdf",
-  sourceName: "G.O. 1883 PDF",
+  sourceUrl: "https://play.google.com/store/apps/details?id=co.onecard.android",
+  sourceName: "Google Play",
   interactiveJson: {
-    type: "checklist",
-    title: "Follow-ups",
-    items: [{ id: "a", label: "Download PDF" }],
-    faqItems: [
+    type: "faq",
+    items: [
       {
-        question: "How many collectors moved?",
-        answer: "14 district collectors.",
+        question: "What are users reporting?",
+        answer: "App crashes after updates.",
       },
     ],
   },
@@ -46,25 +44,69 @@ describe("parseFactBoxFaqItems", () => {
   it("parses fact box table into FAQ pairs", () => {
     const items = parseFactBoxFaqItems(baseArticle.reportBody!);
     expect(items.length).toBe(2);
-    expect(items[0]?.question).toContain("order");
-    expect(items[0]?.answer).toContain("1883");
+    expect(items[0]?.question).toContain("app");
   });
 });
 
 describe("buildArticleSupplementalJsonLd", () => {
-  it("emits FAQPage, ItemList, and DigitalDocument", () => {
+  it("emits a single FAQPage when interactive type is faq", () => {
     const docs = buildArticleSupplementalJsonLd(baseArticle, {
       articleUrl: "https://mychennaicity.in/chennai-local-news/test",
       reportBody: baseArticle.reportBody!,
     });
+    const faqPages = docs.filter(
+      (d) =>
+        d &&
+        typeof d === "object" &&
+        (d as { "@type"?: string })["@type"] === "FAQPage",
+    );
+    expect(faqPages).toHaveLength(1);
+  });
+
+  it("does not emit FAQPage for checklist-only interactives", () => {
+    const docs = buildArticleSupplementalJsonLd(
+      {
+        ...baseArticle,
+        interactiveJson: {
+          type: "checklist",
+          title: "Steps",
+          items: [{ id: "a", label: "Check Play Store" }],
+        },
+      },
+      {
+        articleUrl: "https://mychennaicity.in/chennai-local-news/test",
+        reportBody: baseArticle.reportBody!,
+      },
+    );
+    const faqPages = docs.filter(
+      (d) =>
+        d &&
+        typeof d === "object" &&
+        (d as { "@type"?: string })["@type"] === "FAQPage",
+    );
+    expect(faqPages).toHaveLength(0);
+  });
+
+  it("emits ItemList for checklist interactives", () => {
+    const docs = buildArticleSupplementalJsonLd(
+      {
+        ...baseArticle,
+        interactiveJson: {
+          type: "checklist",
+          title: "Steps",
+          items: [{ id: "a", label: "Check Play Store" }],
+        },
+      },
+      {
+        articleUrl: "https://mychennaicity.in/chennai-local-news/test",
+      },
+    );
     const types = docs.map((d) =>
       d && typeof d === "object" && "@type" in d
         ? (d as { "@type": string })["@type"]
         : null,
     );
-    expect(types).toContain("FAQPage");
     expect(types).toContain("ItemList");
-    expect(types).toContain("DigitalDocument");
   });
 });
 

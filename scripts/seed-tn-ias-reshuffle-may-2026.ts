@@ -263,32 +263,6 @@ Creating **time-bound cadre posts** for Prohibition & Excise and three Directora
           label: "Finance Department — watch Joint Secretary and Expenditure Secretary changes",
         },
       ],
-      faqItems: [
-        {
-          question: "How many district collectors were transferred in the May 2026 Tamil Nadu IAS reshuffle?",
-          answer:
-            "G.O. (Rt.) No. 1883 dated 29 May 2026 notifies 14 district collector postings, including a direct swap of Madurai and Nagapattinam between P. Akash and K.J. Praveen Kumar.",
-        },
-        {
-          question: "What is G.O. (Rt.) No. 1883?",
-          answer:
-            "It is a Public (Special-A) Department order dated 29.05.2026, signed by Chief Secretary M. Sai Kumar, transferring and posting more than 30 IAS officers and creating temporary cadre posts for Prohibition and Excise and three directorates.",
-        },
-        {
-          question: "Who is the new Collector of Chengalpattu after the May 2026 transfers?",
-          answer:
-            "Dr. M. Veerappan, IAS, Additional Registrar of Cooperative Societies, is posted as District Collector, Chengalpattu District.",
-        },
-        {
-          question: "Which Chennai-area bodies see leadership changes in this order?",
-          answer:
-            "P.S. Leela Alex leaves Chennai Rivers Restoration Trust for Vellore collectorate; Simranjeet Singh Kahlon is placed at Chennai Rivers Restoration Trust as Member Secretary; S.P. Karthikaa becomes CEO of CMDA; Chandra Sekhar Sakhamuri moves from CMDA CEO to agricultural marketing directorate.",
-        },
-        {
-          question: "Where can I download the official transfer order PDF?",
-          answer: `The government order is available as a PDF on mychennaicity.in at ${SOURCE_URL}.`,
-        },
-      ],
     } as Record<string, unknown>,
     updatedAt: now,
   };
