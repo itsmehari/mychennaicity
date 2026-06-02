@@ -43,6 +43,8 @@
     "db:seed:samsung-solve-for-tomorrow-2026:live": "tsx scripts/seed-samsung-solve-for-tomorrow-2026.ts --live",
     "db:seed:chennai-rooftop-solar-surya-ghar-2026": "tsx scripts/seed-chennai-rooftop-solar-surya-ghar-2026.ts",
     "db:seed:chennai-rooftop-solar-surya-ghar-2026:live": "tsx scripts/seed-chennai-rooftop-solar-surya-ghar-2026.ts --live",
+    "db:seed:edii-tn-ecommerce-training-2026": "tsx scripts/seed-edii-tn-ecommerce-training-2026.ts",
+    "db:seed:edii-tn-ecommerce-training-2026:live": "tsx scripts/seed-edii-tn-ecommerce-training-2026.ts --live",
     "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:push:production-env": "drizzle-kit push --force",
     "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts",
