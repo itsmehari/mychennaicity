@@ -13,7 +13,7 @@ import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const HERO_IMAGE_URL =
-  "/images/articles/tamil-nadu-private-school-fee-transparency-chennai.jpg";
+  "/images/articles/tamil-nadu-private-school-fee-transparency-chennai.png";
 
 const TNIE_ORDER_URL =
   "https://www.newindianexpress.com/states/tamil-nadu/2026/Jun/03/tn-private-schools-told-to-publish-fee-structures-online-before-june-5";
