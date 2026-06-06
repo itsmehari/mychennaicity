@@ -212,6 +212,7 @@ export async function EditorialArticle({
   ) : null;
 
   const goMeta = extractGoMetadata(`${report}\n${article.title}`);
+  const reportSectionTitle = goMeta ? "Transfers and postings" : "What we know";
   const showOfficialPdf =
     article.sourceUrl?.toLowerCase().includes(".pdf") ?? false;
 
@@ -306,7 +307,7 @@ export async function EditorialArticle({
             id="report-heading"
             className="text-lg font-semibold text-[var(--foreground)] sm:text-xl"
           >
-            Transfers and postings
+            {reportSectionTitle}
           </h2>
         </div>
         {goStrip ? <div className="mt-6">{goStrip}</div> : null}
