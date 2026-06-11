@@ -1,0 +1,215 @@
+/* Events hub — discovery cards inspired by clean event-marketplace layouts */
+
+.mcc-events-hub-listing {
+  --hub-card-width: min(42vw, 11.25rem);
+}
+
+.mcc-events-hub-categories {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.mcc-events-hub-categories__chip {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.mcc-events-hub-categories__chip:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.mcc-events-hub-categories__chip.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--accent);
+}
+
+.mcc-events-hub-categories__chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mcc-events-hub-section + .mcc-events-hub-section {
+  margin-top: 2rem;
+}
+
+.mcc-events-hub-section__title {
+  margin-bottom: 0.85rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-rail {
+  display: flex;
+  gap: 0.85rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.mcc-events-hub-rail__item {
+  flex: 0 0 var(--hub-card-width);
+  scroll-snap-align: start;
+}
+
+.mcc-events-hub-card__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--foreground) 4%, var(--surface));
+}
+
+.mcc-events-hub-card__placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(
+      320deg,
+      color-mix(in srgb, var(--accent-warm) 16%, transparent),
+      transparent 50%
+    ),
+    color-mix(in srgb, var(--foreground) 5%, var(--surface));
+}
+
+.mcc-events-hub-card__placeholder--festival {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--accent-warm) 28%, transparent), transparent 58%),
+    color-mix(in srgb, var(--accent-warm) 8%, var(--surface));
+}
+
+.mcc-events-hub-card__placeholder--culture {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, #6b4fa0 22%, transparent), transparent 58%),
+    color-mix(in srgb, var(--foreground) 4%, var(--surface));
+}
+
+.mcc-events-hub-card__placeholder--business {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--accent) 24%, transparent), transparent 58%),
+    color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+
+.mcc-events-hub-card__placeholder--community {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, #3d7a52 20%, transparent), transparent 58%),
+    color-mix(in srgb, var(--foreground) 4%, var(--surface));
+}
+
+.mcc-events-hub-card__date {
+  position: absolute;
+  left: 0.55rem;
+  bottom: 0.55rem;
+  max-width: calc(100% - 1.1rem);
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--foreground) 78%, black);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mcc-events-hub-card__status {
+  margin-top: 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mcc-events-hub-card__status--accent {
+  color: var(--accent);
+}
+
+.mcc-events-hub-card__status--muted {
+  color: var(--muted);
+}
+
+.mcc-events-hub-card__status--external {
+  color: var(--muted);
+}
+
+.mcc-events-hub-card__title {
+  margin-top: 0.2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mcc-events-hub-card__venue {
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mcc-events-hub-card:hover .mcc-events-hub-card__title {
+  color: var(--accent);
+}
+
+@media (min-width: 768px) {
+  .mcc-events-hub-listing {
+    --hub-card-width: 11.5rem;
+  }
+
+  .mcc-events-hub-rail {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+    gap: 1.1rem;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .mcc-events-hub-rail__item {
+    flex: initial;
+  }
+
+  .mcc-events-hub-categories {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mcc-events-hub-rail {
+    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  }
+}

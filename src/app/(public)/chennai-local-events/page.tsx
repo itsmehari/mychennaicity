@@ -8,8 +8,13 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { EventsHubListing } from "@/components/events/events-hub-listing";
 import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
+import {
+  buildHubCardFromDb,
+  buildHubCardFromMock,
+} from "@/lib/events/event-hub-helpers";
 import { homeStats, mockEvents } from "@/lib/home-mock";
 import { buildEventsHubJsonLd } from "@/lib/seo/events-hub-jsonld";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
@@ -43,15 +48,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function formatEventWhen(startsAt: Date, endsAt: Date | null, allDay: boolean) {
-  const opts: Intl.DateTimeFormatOptions = allDay
-    ? { dateStyle: "medium", timeZone: "Asia/Kolkata" }
-    : { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Kolkata" };
-  const a = startsAt.toLocaleString("en-IN", opts);
-  if (!endsAt || +endsAt === +startsAt) return a;
-  return `${a} – ${endsAt.toLocaleString("en-IN", opts)}`;
-}
-
 export default async function ChennaiLocalEventsPage() {
   let dbEvents: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
   const sampleAsOf = formatIndiaLongDate();
@@ -62,6 +58,9 @@ export default async function ChennaiLocalEventsPage() {
   }
   const useDb = dbEvents.length > 0;
   const hubLd = useDb ? buildEventsHubJsonLd(dbEvents) : null;
+  const hubCards = useDb
+    ? dbEvents.map(buildHubCardFromDb)
+    : mockEvents.map(buildHubCardFromMock);
 
   return (
     <div className={interiorMainClassName}>
@@ -148,59 +147,7 @@ export default async function ChennaiLocalEventsPage() {
 
       <HubCommunityStrip businessVariant="events" />
 
-      <ul className="mt-10 space-y-4">
-        {useDb
-          ? dbEvents.map((e) => (
-              <li
-                key={e.id}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-              >
-                <Link
-                  href={`/chennai-local-events/${e.slug}`}
-                  className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
-                >
-                  <span className="text-sm font-semibold">{e.title}</span>
-                  <span className="mt-1 block text-xs text-[var(--muted)]">
-                    {formatEventWhen(e.startsAt, e.endsAt, e.allDay)}
-                    {e.venueName ? ` · ${e.venueName}` : null}
-                    {e.localityLabel ? ` · ${e.localityLabel}` : null}
-                    {" · "}
-                    Full detail on site
-                  </span>
-                </Link>
-              </li>
-            ))
-          : mockEvents.map((e) => (
-              <li
-                key={`${e.href}-${e.title}`}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-              >
-                {e.external ? (
-                  <a
-                    href={e.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
-                  >
-                    <span className="text-sm font-semibold">{e.title}</span>
-                    <span className="mt-1 block text-xs text-[var(--muted)]">
-                      {e.when} · {e.where} · opens in new tab
-                    </span>
-                  </a>
-                ) : (
-                  <Link
-                    href={e.href}
-                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
-                  >
-                    <span className="text-sm font-semibold">{e.title}</span>
-                    <span className="mt-1 block text-xs text-[var(--muted)]">
-                      {e.when} · {e.where} · Full detail on site
-                    </span>
-                  </Link>
-                )}
-              </li>
-            ))}
-      </ul>
+      <EventsHubListing cards={hubCards} />
 
       <Section
         className="mt-14"

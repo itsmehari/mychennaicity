@@ -5,6 +5,7 @@ import {
   proseSectionSkin,
   type ProseSectionSkin,
 } from "./article-prose-blocks";
+import { expandMultilineHeadingBlocks } from "@/lib/markdown-blocks";
 import {
   ArticleMarkdown,
   buildH3TitleIdMap,
@@ -137,7 +138,9 @@ export function ArticleProse({
   headingAnchors?: ArticleHeadingAnchor[];
   className?: string;
 }) {
-  const blocks = content.replace(/\r\n/g, "\n").split(/\n\n+/);
+  const blocks = expandMultilineHeadingBlocks(
+    content.replace(/\r\n/g, "\n").split(/\n\n+/),
+  );
   const headingIds = resolveHeadingIds(blocks, headingAnchors);
   const sections = groupSections(blocks, headingIds);
   const h3IdsByBlock = buildH3IdsByBlockIndex(blocks, headingAnchors);

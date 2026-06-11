@@ -18,6 +18,7 @@ import {
   buildClippedTitleSegment,
   fullSiteTitle,
 } from "@/lib/seo/site-titles";
+import { eventPosterAbsoluteUrl } from "@/lib/events/event-poster-image";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -34,6 +35,10 @@ function standardMetadataForEvent(
     " · Chennai local events",
   );
   const docTitle = fullSiteTitle(titleSegment);
+  const posterUrl = eventPosterAbsoluteUrl(ev.slug);
+  const ogImages = posterUrl
+    ? [{ url: posterUrl, width: 1200, height: 1600 }]
+    : [{ url: "/opengraph-image", width: 1200, height: 630 }];
   return {
     title: titleSegment,
     description: desc,
@@ -43,13 +48,13 @@ function standardMetadataForEvent(
       description: desc,
       url,
       type: "website",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+      images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
       title: docTitle,
       description: desc,
-      images: ["/twitter-image"],
+      images: posterUrl ? [posterUrl] : ["/twitter-image"],
     },
   };
 }

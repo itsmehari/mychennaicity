@@ -1,5 +1,6 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
+import { isMonthlyJobSalary } from "@/lib/jobs/format-compensation";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
 const EMPLOYMENT_MAP: Record<string, string> = {
@@ -77,6 +78,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
     job.salaryMin != null &&
     job.salaryMax != null
   ) {
+    const monthly = isMonthlyJobSalary(job.salaryMin, job.salaryMax);
     jp.baseSalary = {
       "@type": "MonetaryAmount",
       currency: "INR",
@@ -84,7 +86,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
         "@type": "QuantitativeValue",
         minValue: job.salaryMin,
         maxValue: job.salaryMax,
-        unitText: "YEAR",
+        unitText: monthly ? "MONTH" : "YEAR",
       },
     };
   }

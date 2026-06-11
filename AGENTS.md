@@ -20,6 +20,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/legal, seeds, browser handoffs): **`docs/AGENT_LEARNINGS_AND_SOPS.md`**.
 
+**Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`.
+
 **Non-negotiables in short:**
 
 - Keep **plan todos** in `.cursor/plans/` aligned with reality when the user tracks work there.

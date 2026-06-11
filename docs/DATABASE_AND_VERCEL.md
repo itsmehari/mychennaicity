@@ -49,9 +49,9 @@ Direct link (team slug may vary):
 ## After `DATABASE_URL` is live
 
 1. Push schema: `npm run db:push` (against dev DB) or `npm run db:push:live` (production `.env.production.local`).
-2. Seed content: `npm run db:seed` or `npm run db:seed:live`.
+2. Seed content: `npm run db:seed` or `npm run db:seed:live`. **Events:** per-event scripts `npm run db:seed:event:*` / `*:live` — see [`prompts/ADD_CHENNAI_EVENT.md`](prompts/ADD_CHENNAI_EVENT.md) and [`CHENNAI_EVENTS.md`](CHENNAI_EVENTS.md).
 3. **Verify DB:** `npm run db:check` (local env) or **`npm run db:check:live`** after `vercel env pull …` — prints Chennai article counts against the **production** `DATABASE_URL`.
-4. Confirm the home **News bulletin** and `/chennai-local-news` show articles.
+4. Confirm the home **News bulletin** and `/chennai-local-news` show articles; for event seeds, confirm `/chennai-local-events` and the new `[slug]` detail URL.
 
 ### Home page was empty on Vercel while DB had data
 

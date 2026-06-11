@@ -1,0 +1,247 @@
+/* Chennai local event detail — mobile-first layout */
+
+.mcc-event-page {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.mcc-event-page .mcc-event-content,
+.mcc-event-page .mcc-event-content-intro {
+  line-height: 1.65;
+}
+
+.mcc-event-kicker {
+  color: var(--accent-warm);
+}
+
+.mcc-event-title {
+  margin-bottom: 12px;
+  color: var(--foreground);
+}
+
+.mcc-event-poster {
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, var(--border));
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.mcc-event-poster__img {
+  display: block;
+  height: auto;
+}
+
+.mcc-event-meta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.mcc-event-meta strong,
+.mcc-event-meta .mcc-event-meta-highlight {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.mcc-event-summary-card,
+.mcc-event-location-card,
+.mcc-event-cta-card {
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, var(--border));
+  border-radius: 16px;
+  padding: 16px;
+  background: var(--surface);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+.mcc-event-summary-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.mcc-event-summary-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.mcc-event-btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+  transition:
+    opacity 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.mcc-event-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mcc-event-btn--primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid transparent;
+}
+
+.mcc-event-btn--primary:hover {
+  opacity: 0.92;
+}
+
+.mcc-event-btn--outline {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.mcc-event-btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mcc-event-details-table {
+  border-collapse: collapse;
+}
+
+.mcc-event-details-table th {
+  font-weight: 600;
+}
+
+.mcc-event-details-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.mcc-event-details-table tr:last-child {
+  border-bottom: 0;
+}
+
+.mcc-event-mobile-actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 8%, var(--border));
+  backdrop-filter: blur(10px);
+}
+
+.mcc-event-mobile-actions .mcc-event-btn {
+  width: 100%;
+}
+
+.mcc-event-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .mcc-event-page {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 1.5rem;
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  }
+
+  .mcc-event-page nav[aria-label="Breadcrumb"] {
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mcc-event-title {
+    font-size: clamp(1.55rem, 6vw, 2.1rem);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+  }
+
+  .mcc-event-meta {
+    display: grid;
+    gap: 6px;
+  }
+
+  .mcc-event-mobile-actions {
+    display: grid;
+  }
+
+  .mcc-event-details-table thead {
+    display: none;
+  }
+
+  .mcc-event-details-table tr,
+  .mcc-event-details-table td,
+  .mcc-event-details-table th {
+    display: block;
+    width: 100%;
+  }
+
+  .mcc-event-details-table tr {
+    padding: 10px 0;
+  }
+
+  .mcc-event-details-table th {
+    padding: 0.75rem 1rem 0.25rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .mcc-event-details-table td {
+    padding: 0 1rem 0.75rem;
+  }
+
+  .article-prose .article-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 769px) {
+  .mcc-event-mobile-actions {
+    display: none !important;
+  }
+
+  .mcc-event-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  .mcc-event-title {
+    font-size: clamp(1.85rem, 3vw, 2.35rem);
+    line-height: 1.14;
+  }
+
+  .mcc-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    align-items: center;
+  }
+
+  .mcc-event-meta-sep {
+    color: var(--border);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mcc-event-layout {
+    gap: 3rem;
+  }
+}

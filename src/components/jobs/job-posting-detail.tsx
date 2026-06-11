@@ -1,5 +1,6 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
-import { ArticleProse } from "@/components/news/article-prose";
+import { formatJobCompensation } from "@/lib/jobs/format-compensation";
+import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 
 function employmentTypeLabel(raw: string | null): string | null {
@@ -12,16 +13,6 @@ function employmentTypeLabel(raw: string | null): string | null {
     INTERN: "Internship",
   };
   return map[u] ?? null;
-}
-
-function formatSalaryBandInr(min: number, max: number): string {
-  const lakhs = (n: number) => {
-    const L = n / 100_000;
-    const r = Math.round(L * 10) / 10;
-    return Number.isInteger(r) ? String(r) : r.toFixed(1);
-  };
-  if (min === max) return `₹${lakhs(min)} LPA`;
-  return `₹${lakhs(min)} – ₹${lakhs(max)} LPA`;
 }
 
 function ApplyCta({
@@ -39,7 +30,7 @@ function ApplyCta({
 }) {
   const style = isWhatsApp
     ? "bg-[#25D366] text-white shadow-sm hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
-    : "bg-[var(--accent)] text-[var(--accent-fg)] hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
+    : "bg-[var(--accent)] text-[var(--accent-fg)] shadow-sm hover:opacity-92 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
   return (
     <a
       href={href}
@@ -48,6 +39,19 @@ function ApplyCta({
     >
       {label}
     </a>
+  );
+}
+
+function GlanceRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex gap-3 border-b border-[color-mix(in_srgb,var(--border)_70%,transparent)] py-3.5 last:border-0 last:pb-0 first:pt-0">
+      <dt className="w-[7.5rem] shrink-0 text-xs font-medium leading-snug text-[var(--muted)]">
+        {label}
+      </dt>
+      <dd className="min-w-0 flex-1 text-sm font-semibold leading-snug text-[var(--foreground)]">
+        {value}
+      </dd>
+    </div>
   );
 }
 
@@ -68,8 +72,8 @@ function AtAGlance({ row }: { row: JobPostingWithEmployer }) {
     job.salaryMax != null
   ) {
     rows.push({
-      label: "Compensation",
-      value: formatSalaryBandInr(job.salaryMin, job.salaryMax),
+      label: "Pay band",
+      value: formatJobCompensation(job.salaryMin, job.salaryMax),
     });
   }
 
@@ -92,7 +96,7 @@ function AtAGlance({ row }: { row: JobPostingWithEmployer }) {
 
   if (job.publishedAt) {
     rows.push({
-      label: "Listed on site",
+      label: "Listed",
       value: job.publishedAt.toLocaleString("en-IN", {
         dateStyle: "medium",
         timeZone: "Asia/Kolkata",
@@ -104,25 +108,42 @@ function AtAGlance({ row }: { row: JobPostingWithEmployer }) {
 
   return (
     <div
-      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_5%,transparent)]"
+      className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm ring-1 ring-[color-mix(in_srgb,var(--foreground)_4%,transparent)]"
       aria-label="Job summary"
     >
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--accent)]">
-        At a glance
-      </h2>
-      <dl className="mt-4 space-y-3.5">
+      <div className="border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_6%,var(--surface))] px-5 py-3.5">
+        <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--accent)]">
+          At a glance
+        </h2>
+      </div>
+      <dl className="px-5 py-1">
         {rows.map((r) => (
-          <div key={`${r.label}-${r.value}`} className="min-w-0">
-            <dt className="text-xs font-medium text-[var(--muted)]">
-              {r.label}
-            </dt>
-            <dd className="mt-0.5 text-sm font-semibold leading-snug text-[var(--foreground)]">
-              {r.value}
-            </dd>
-          </div>
+          <GlanceRow key={`${r.label}-${r.value}`} label={r.label} value={r.value} />
         ))}
       </dl>
     </div>
+  );
+}
+
+function CompensationHighlight({ row }: { row: JobPostingWithEmployer }) {
+  const { job } = row;
+  if (
+    !job.salaryDisclosed ||
+    job.salaryMin == null ||
+    job.salaryMax == null
+  ) {
+    return null;
+  }
+
+  return (
+    <p className="mt-4 inline-flex flex-wrap items-center gap-2 text-sm">
+      <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,var(--surface))] px-3 py-1 text-xs font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
+        Pay disclosed
+      </span>
+      <span className="font-semibold text-[var(--foreground)]">
+        {formatJobCompensation(job.salaryMin, job.salaryMax)}
+      </span>
+    </p>
   );
 }
 
@@ -143,17 +164,24 @@ export function JobPostingDetail({
 
   return (
     <article className="mx-auto w-full max-w-[1100px]">
-      <header className="max-w-[42rem] border-b border-[var(--border)] pb-8">
+      <header className="rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_96%,var(--accent)_2%)] px-5 py-6 sm:px-7 sm:py-8">
         <p className="type-eyebrow text-[var(--accent)]">Chennai job</p>
-        <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
+        <h1 className="type-display mt-2 text-[1.65rem] leading-tight text-[var(--foreground)] sm:text-[2rem]">
           {job.title}
         </h1>
         <p className="type-lede mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          <span className="text-[var(--foreground)]">{employer.name}</span>
+          <span className="font-medium text-[var(--foreground)]">{employer.name}</span>
           {employer.verified ? (
             <span className="text-[var(--accent)]"> · Checked by us</span>
           ) : null}
-          {job.locationLabel ? ` · ${job.locationLabel}` : " · Chennai"}
+          {job.locationLabel ? (
+            <>
+              {" · "}
+              <span>{job.locationLabel}</span>
+            </>
+          ) : (
+            " · Chennai"
+          )}
           {employer.websiteUrl ? (
             <>
               {" · "}
@@ -168,69 +196,47 @@ export function JobPostingDetail({
             </>
           ) : null}
         </p>
+        <CompensationHighlight row={row} />
       </header>
 
-      <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:grid lg:grid-cols-[minmax(0,42rem)_minmax(260px,300px)] lg:items-start lg:gap-10 xl:gap-12">
-        <aside className="min-w-0 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1 lg:self-start">
-          <div className="flex flex-col gap-4">
-            <AtAGlance row={row} />
-            {applyHref ? (
-              <div className="hidden lg:block">
-                <ApplyCta
-                  href={applyHref}
-                  label={applyLabel}
-                  isWhatsApp={isWhatsApp}
-                  linkProps={applyLinkProps}
-                />
-                <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
-                  Opens in a new tab. Prefer a quiet place before you message
-                  the employer.
-                </p>
-              </div>
-            ) : null}
-          </div>
-        </aside>
+      {applyHref ? (
+        <div className="mt-5 lg:hidden">
+          <ApplyCta
+            href={applyHref}
+            label={applyLabel}
+            isWhatsApp={isWhatsApp}
+            linkProps={applyLinkProps}
+          />
+        </div>
+      ) : null}
 
-        <div className="min-w-0 lg:col-start-1 lg:row-start-1">
-          {applyHref ? (
-            <div className="mb-6 lg:hidden">
-              <ApplyCta
-                href={applyHref}
-                label={applyLabel}
-                isWhatsApp={isWhatsApp}
-                linkProps={applyLinkProps}
-              />
-            </div>
-          ) : null}
-
+      <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(260px,300px)] lg:items-start lg:gap-10 xl:gap-12">
+        <div className="min-w-0 lg:order-1">
           <section
-            className="rounded-2xl border border-[color-mix(in_srgb,var(--border)_85%,transparent)] bg-[color-mix(in_srgb,var(--surface)_94%,var(--foreground)_2%)] px-5 py-6 sm:px-6"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-6 shadow-sm sm:px-7 sm:py-8"
             aria-labelledby="job-full-desc-heading"
           >
             <h2
               id="job-full-desc-heading"
-              className="text-base font-semibold tracking-tight text-[var(--foreground)]"
+              className="text-lg font-semibold tracking-tight text-[var(--foreground)]"
             >
               Role details
             </h2>
-            <div className="mt-5 border-t border-[var(--border)] pt-5">
-              <ArticleProse
-                content={job.body}
-                className="text-[var(--foreground)]"
-              />
+            <div className="mt-6">
+              <JobPostingProse content={job.body} />
             </div>
           </section>
 
           {applyHref ? (
-            <div className="mt-10 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[color-mix(in_srgb,var(--foreground)_4%,transparent)]">
-              <p className="text-sm font-semibold text-[var(--foreground)]">
+            <div className="mt-8 rounded-2xl border border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-6 sm:p-7">
+              <p className="text-base font-semibold text-[var(--foreground)]">
                 Ready to apply?
               </p>
-              <p className="mt-1 text-sm text-[var(--muted)]">
-                Use the same channel the employer asked for — confirm details
-                before you share personal information.
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                Use the channel the employer asked for. Confirm role, pay, and
+                location before you share personal details.
               </p>
-              <div className="mt-4 max-w-md">
+              <div className="mt-5 max-w-md">
                 <ApplyCta
                   href={applyHref}
                   label={applyLabel}
@@ -246,6 +252,27 @@ export function JobPostingDetail({
             className="mt-10"
           />
         </div>
+
+        <aside className="min-w-0 lg:order-2 lg:sticky lg:top-24 lg:self-start">
+          <div className="flex flex-col gap-4">
+            <AtAGlance row={row} />
+            {applyHref ? (
+              <div className="hidden lg:block">
+                <ApplyCta
+                  href={applyHref}
+                  label={applyLabel}
+                  isWhatsApp={isWhatsApp}
+                  linkProps={applyLinkProps}
+                />
+                <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
+                  {isWhatsApp
+                    ? "Opens WhatsApp in a new tab."
+                    : "Tap to call the employer directly."}
+                </p>
+              </div>
+            ) : null}
+          </div>
+        </aside>
       </div>
     </article>
   );

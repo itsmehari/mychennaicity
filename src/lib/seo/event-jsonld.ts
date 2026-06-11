@@ -1,4 +1,6 @@
 import type { PublicEventRow } from "@/domains/events";
+import { extractOrganizerFromDescription } from "@/lib/events/event-detail-helpers";
+import { eventPosterAbsoluteUrl } from "@/lib/events/event-poster-image";
 import { getSiteUrl } from "@/lib/env";
 import { defaultOgImageAbsoluteUrl } from "@/lib/seo/site-defaults";
 
@@ -37,7 +39,10 @@ export function buildEventJsonLd(event: PublicEventRow) {
     };
   }
 
-  return {
+  const organizerName = extractOrganizerFromDescription(event.description);
+  const imageUrl =
+    eventPosterAbsoluteUrl(event.slug) ?? defaultOgImageAbsoluteUrl();
+  const payload: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Event",
     name: event.title,
@@ -48,8 +53,15 @@ export function buildEventJsonLd(event: PublicEventRow) {
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: loc,
     url,
-    image: defaultOgImageAbsoluteUrl(),
+    image: imageUrl,
   };
+  if (organizerName) {
+    payload.organizer = {
+      "@type": "Organization",
+      name: organizerName,
+    };
+  }
+  return payload;
 }
 
 export function buildEventBreadcrumbJsonLd(

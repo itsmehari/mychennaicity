@@ -57,7 +57,7 @@
 
 ## Events and jobs (public indexation)
 
-- **Events:** Public hub and sitemap only include rows with `status = scheduled` and `COALESCE(ends_at, starts_at) >= now()`. Cancelled, draft, or ended events are excluded; a bookmarked URL to an ended event should **404** (`notFound`).
+- **Events:** Public hub and sitemap only include rows with `status = scheduled` and `COALESCE(ends_at, starts_at) >= now()`. Cancelled, draft, or ended events are excluded; a bookmarked URL to an ended event should **404** (`notFound`). Hub/detail UI patterns and production seeding: [`CHENNAI_EVENTS.md`](CHENNAI_EVENTS.md), [`prompts/ADD_CHENNAI_EVENT.md`](prompts/ADD_CHENNAI_EVENT.md).
 - **Jobs:** Public hub and sitemap only include `status = open`. Closed or draft postings must not appear in `sitemap.xml` or list UIs.
 - **Hub fallback:** When the database has **no** eligible rows, `/chennai-local-events` and `/chennai-jobs` keep the **mock** editorial lists — **without** `CollectionPage` / `ItemList` JSON-LD (avoid thin or fake structured data). Legacy `/jobs` redirects (301) to `/chennai-jobs`.
 

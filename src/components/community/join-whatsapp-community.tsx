@@ -53,7 +53,7 @@ export function JoinWhatsAppCommunityCard({
     >
       {layout !== "inline" ? (
         <h2 className="text-sm font-semibold text-[var(--foreground)]">
-          Join the Chennai WhatsApp group
+          Join my chennai city on WhatsApp
         </h2>
       ) : null}
       <p
@@ -68,8 +68,9 @@ export function JoinWhatsAppCommunityCard({
             Reader group:
           </span>
         ) : null}{" "}
-        Short updates and civil discussion — same editorial standards as the
-        site. Opens WhatsApp in your browser or app after you tap.
+        The <strong className="font-semibold text-[var(--foreground)]">my chennai city</strong>{" "}
+        reader group — short updates and civil discussion, same standards as the
+        site. Opens WhatsApp after you tap.
       </p>
       <p className={layout === "inline" ? "mt-3" : "mt-4"}>
         <a href="/api/community/whatsapp" className={joinBtnClass}>

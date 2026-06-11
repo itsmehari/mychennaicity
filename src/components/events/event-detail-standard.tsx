@@ -1,6 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
+import {
+  EventAudienceBlock,
+  EventDesktopSidebar,
+  EventDetailsTable,
+  EventHostingCta,
+  EventLocationCard,
+  EventPostCta,
+  EventSummaryCard,
+} from "@/components/events/event-detail-parts";
+import { EventMobileActions } from "@/components/events/event-mobile-actions";
 import { ArticleProse } from "@/components/news/article-prose";
 import {
   InteriorCrossNav,
@@ -8,6 +19,13 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import type { PublicEventRow } from "@/domains/events";
+import {
+  formatEventDate,
+  formatEventTime,
+  getEventCategoryLabel,
+  splitDescriptionIntro,
+} from "@/lib/events/event-detail-helpers";
+import { getEventPosterImage } from "@/lib/events/event-poster-image";
 
 export function formatEventWhen(
   startsAt: Date,
@@ -23,11 +41,80 @@ export function formatEventWhen(
   return `${a} – ${b}`;
 }
 
-export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
-  const desc = ev.description ?? "";
+function EventHeroMeta({ ev }: { ev: PublicEventRow }) {
+  const date = formatEventDate(ev.startsAt, ev.endsAt, ev.allDay);
+  const time = formatEventTime(ev.startsAt, ev.endsAt, ev.allDay);
+  const category = getEventCategoryLabel(ev.presentationKey);
 
   return (
-    <div className={interiorMainClassName}>
+    <div className="mcc-event-meta mt-4">
+      {date ? (
+        <span>
+          <span className="mcc-event-meta-highlight">{date}</span>
+        </span>
+      ) : null}
+      {time ? (
+        <>
+          <span className="mcc-event-meta-sep hidden sm:inline" aria-hidden>
+            ·
+          </span>
+          <span>{time}</span>
+        </>
+      ) : null}
+      {ev.venueName?.trim() ? (
+        <>
+          <span className="mcc-event-meta-sep" aria-hidden>
+            ·
+          </span>
+          <span className="mcc-event-meta-highlight">{ev.venueName.trim()}</span>
+        </>
+      ) : null}
+      {ev.localityLabel?.trim() ? (
+        <>
+          <span className="mcc-event-meta-sep" aria-hidden>
+            ·
+          </span>
+          <span>{ev.localityLabel.trim()}</span>
+        </>
+      ) : null}
+      {category ? (
+        <>
+          <span className="mcc-event-meta-sep hidden md:inline" aria-hidden>
+            ·
+          </span>
+          <span className="hidden md:inline">{category}</span>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function EventPosterHero({ slug, title }: { slug: string; title: string }) {
+  const poster = getEventPosterImage(slug, title);
+  if (!poster) return null;
+
+  return (
+    <figure className="mcc-event-poster mt-6 max-w-md">
+      <Image
+        src={poster.src}
+        alt={poster.alt}
+        width={960}
+        height={1200}
+        className="mcc-event-poster__img w-full rounded-2xl"
+        sizes="(max-width: 768px) 100vw, 384px"
+        priority
+      />
+      <figcaption className="sr-only">{poster.alt}</figcaption>
+    </figure>
+  );
+}
+
+export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
+  const desc = ev.description ?? "";
+  const { intro, rest } = splitDescriptionIntro(desc);
+
+  return (
+    <div className={`mcc-event-page ${interiorMainClassName}`}>
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -35,46 +122,85 @@ export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
           { label: ev.title },
         ]}
       />
-      <p className="type-eyebrow text-[var(--accent-warm)]">Event</p>
-      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-        {ev.title}
-      </h1>
-      <p className="type-lede mt-4 text-sm text-[var(--muted)]">
-        {formatEventWhen(ev.startsAt, ev.endsAt, ev.allDay)}
-        {ev.venueName ? ` · ${ev.venueName}` : null}
-        {ev.localityLabel ? ` · ${ev.localityLabel}` : null}
-      </p>
-      {ev.venueAddress ? (
-        <p className="type-lede mt-2 text-sm text-[var(--muted)]">
-          {ev.venueAddress}
-        </p>
-      ) : null}
-      {desc.trim() ? (
-        <div className="mt-8">
-          <ArticleProse content={desc} />
-        </div>
-      ) : (
-        <p className="type-lede mt-8 text-sm text-[var(--muted)]">
-          No detailed description on file — confirm timings with the organiser.
-        </p>
-      )}
-      <div className="mt-10 space-y-8">
-        <div className="flex justify-center">
-          <AdSlot slotId="events-detail-mid" size="300x250" />
-        </div>
-        <BusinessWhatsAppCta variant="events" />
+
+      <header className="mcc-event-hero">
+        <p className="mcc-event-kicker type-eyebrow">Event · Chennai</p>
+        <h1 className="mcc-event-title type-display mt-2 text-[var(--foreground)]">
+          {ev.title}
+        </h1>
+        <EventHeroMeta ev={ev} />
+        {ev.venueAddress ? (
+          <p className="mcc-event-meta mt-2 text-[var(--muted)] lg:hidden">
+            {ev.venueAddress}
+          </p>
+        ) : null}
+      </header>
+
+      <EventPosterHero slug={ev.slug} title={ev.title} />
+
+      <div className="lg:hidden">
+        <EventSummaryCard ev={ev} />
+        <EventLocationCard ev={ev} />
       </div>
-      <p className="type-lede mt-8 text-sm text-[var(--muted)]">
-        More listings:{" "}
-        <Link
-          href="/chennai-local-events"
-          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-        >
-          Chennai local events calendar
-        </Link>
-        .
-      </p>
-      <InteriorCrossNav />
+
+      <div className="mcc-event-layout">
+        <div className="mcc-event-main min-w-0">
+          <div className="hidden lg:block">
+            <EventLocationCard ev={ev} />
+          </div>
+          {desc.trim() ? (
+            <>
+              {intro ? (
+                <div className="mcc-event-content-intro mcc-event-content mt-8">
+                  <ArticleProse content={intro} />
+                </div>
+              ) : null}
+              <EventHostingCta className="mt-8" />
+              {rest ? (
+                <div className="mcc-event-content mt-8">
+                  <ArticleProse content={rest} />
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <p className="mcc-event-content mt-8 text-base leading-relaxed text-[var(--muted)]">
+                No detailed description on file — confirm timings with the
+                organiser.
+              </p>
+              <EventHostingCta className="mt-8" />
+            </>
+          )}
+
+          <EventDetailsTable ev={ev} />
+          <EventAudienceBlock ev={ev} />
+
+          <div className="mt-10 space-y-8">
+            <div className="flex justify-center">
+              <AdSlot slotId="events-detail-mid" size="300x250" />
+            </div>
+            <BusinessWhatsAppCta variant="events" />
+          </div>
+
+          <EventPostCta className="mt-10" />
+
+          <p className="mcc-event-meta mt-8 text-[var(--muted)]">
+            More listings:{" "}
+            <Link
+              href="/chennai-local-events"
+              className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              Chennai local events calendar
+            </Link>
+            .
+          </p>
+          <InteriorCrossNav />
+        </div>
+
+        <EventDesktopSidebar ev={ev} />
+      </div>
+
+      <EventMobileActions ev={ev} />
     </div>
   );
 }

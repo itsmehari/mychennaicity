@@ -18,7 +18,7 @@
 
 ## Phase 2 — Engagement
 
-- **Done (public surface):** `events` and `job_postings` (+ `employers`) in schema; domain queries; `/chennai-local-events`, `/chennai-jobs` hubs and `[slug]` details (legacy `/jobs` → 301); sitemap inclusion for eligible rows; mock fallback when DB has no public rows (with structured-data rules in [CONTENT_ARCHITECTURE.md](CONTENT_ARCHITECTURE.md)).
+- **Done (public surface):** `events` and `job_postings` (+ `employers`) in schema; domain queries; `/chennai-local-events`, `/chennai-jobs` hubs and `[slug]` details (legacy `/jobs` → 301); sitemap inclusion for eligible rows; mock fallback when DB has no public rows (with structured-data rules in [CONTENT_ARCHITECTURE.md](CONTENT_ARCHITECTURE.md)). Events hub: discovery cards + category filter; standard detail: mobile summary + sticky actions ([CHENNAI_EVENTS.md](CHENNAI_EVENTS.md)). Production event seeds: [prompts/ADD_CHENNAI_EVENT.md](prompts/ADD_CHENNAI_EVENT.md).
 - **Remaining:** Event/job submission flows, employer accounts, email alerts, moderation queues.
 
 ## Phase 3 — Listings

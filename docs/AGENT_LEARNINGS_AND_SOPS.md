@@ -12,7 +12,7 @@ Workstreams that appear repeatedly across chats:
 |------|-----------|
 | **Home & brand** | Hero carousel, seasonal hub (election band, GSAP), typography aligned to hero (Geist-style system), clearer section demarcation, fat footer, mega nav. |
 | **News** | DB-backed articles, newspaper-style hub at `/chennai-local-news`, editorial template (report / analysis / interactive), thumbnails, SEO (metadata, JSON-LD, TOC, Speakable where appropriate). |
-| **Events** | Route `chennai-local-events`, DB-backed listings, **generic “special event” presentation** (`presentation_key` + content resolver) so Panguni-style pages do not fork the normal events workflow. |
+| **Events** | Route `chennai-local-events`, DB-backed listings, **discovery hub** (portrait cards + category chips), **mobile-first detail** (summary card, sticky actions, share/calendar/maps), **generic “special event” presentation** (`presentation_key` + content resolver) for Panguni-style pages. Ops: **`docs/prompts/ADD_CHENNAI_EVENT.md`**, **`docs/CHENNAI_EVENTS.md`**, **`scripts/lib/seed-event-shared.ts`**. |
 | **Jobs** | `src/domains/jobs/`, JobPosting JSON-LD where data is real, hub copy tuned for “Chennai jobs” intent without corporate “desk” jargon where users asked for plainer language. |
 | **Maps** | Interactive Chennai ward/map explorer (GeoJSON build pipeline); parallel **elections-2026** constituency map (separate content + build script). |
 | **Monetization & trust** | Registry-driven display ads (`src/ads/`), AdSense readiness (legal pages, cookies disclosure, optional `ads.txt`, env-gated scripts). |
@@ -87,6 +87,8 @@ Abbreviated:
 4. **`npm run db:check:live`** to verify counts.
 5. Hit live **home** and **hub** pages; **redeploy** if you changed `dynamic` or env-dependent behavior.
 
+**Chennai events only:** follow **`docs/prompts/ADD_CHENNAI_EVENT.md`** — idempotent `scripts/seed-event-*.ts` via **`scripts/lib/seed-event-shared.ts`**, then verify hub + `/chennai-local-events/[slug]`.
+
 ### SOP C — “Home/news shows nothing on live site”
 
 1. Verify **`DATABASE_URL`** on Vercel and **redeploy**.
@@ -131,6 +133,7 @@ Abbreviated:
 | DB + Vercel + seeding | `docs/DATABASE_AND_VERCEL.md` |
 | Feature inventory | `docs/MYCHENNAICITY_FEATURES.md` |
 | Content IA | `docs/CONTENT_ARCHITECTURE.md` |
+| **Add / seed Chennai events** | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
 | Agent rules (short) | `AGENTS.md` |
 | Initiative plans | `.cursor/plans/*.plan.md` |
 
@@ -139,3 +142,4 @@ Abbreviated:
 ## 6. Changelog
 
 - **2026-03-30:** Initial synthesis from multi-thread agent transcripts (AdSense/legal, elections map, Panguni special events, hero/home, jobs SERP copy, SEO/JSON-LD, portable ads, map explorer, ops/browser handoffs).
+- **2026-06-10:** Events hub discovery cards + mobile detail UX; `CHENNAI_EVENTS.md`, `ADD_CHENNAI_EVENT` prompt, `seed-event-shared.ts`, Cursor rule `chennai-events.mdc`.
