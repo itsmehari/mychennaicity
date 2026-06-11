@@ -73,12 +73,9 @@ export function ContactServiceGrid() {
         );
       })}
 
-      <article
-        className={`${cardClass} sm:col-span-2 lg:col-span-2`}
-        aria-label="Reader WhatsApp community"
-      >
+      <div className="sm:col-span-2" aria-label="Reader WhatsApp community">
         <JoinWhatsAppCommunityCard layout="card" />
-      </article>
+      </div>
     </div>
   );
 }
