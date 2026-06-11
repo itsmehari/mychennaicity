@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { EventDetailStandard } from "@/components/events/event-detail-standard";
 import {
   getPublicEventBySlug,
+  getEventUniqueReaderViewCount,
   resolveEventPresentation,
 } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
@@ -117,6 +118,8 @@ export default async function EventDetailPage({ params }: Props) {
   const ev = await getPublicEventBySlug(slug);
   if (!ev) notFound();
 
+  const uniqueReaderViews = await getEventUniqueReaderViewCount(ev.id);
+
   const rich = resolveEventPresentation(ev);
   if (rich) {
     const { entry, content } = rich;
@@ -139,7 +142,7 @@ export default async function EventDetailPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
-        <Page event={ev} content={content} />
+        <Page event={ev} content={content} uniqueReaderViews={uniqueReaderViews} />
       </>
     );
   }
@@ -157,7 +160,7 @@ export default async function EventDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbLd) }}
       />
-      <EventDetailStandard ev={ev} />
+      <EventDetailStandard ev={ev} uniqueReaderViews={uniqueReaderViews} />
     </>
   );
 }

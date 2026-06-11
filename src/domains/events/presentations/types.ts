@@ -5,6 +5,7 @@ import type { FestivalRichContent } from "@/content/special-events";
 export type FestivalRichPageProps = {
   event: PublicEventRow;
   content: FestivalRichContent;
+  uniqueReaderViews?: number;
 };
 
 export type PresentationRegistryEntry = {

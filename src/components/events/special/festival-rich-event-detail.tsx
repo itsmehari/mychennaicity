@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { FestivalRichPageProps } from "@/domains/events/presentations/types";
 import { formatEventWhen } from "@/components/events/event-detail-standard";
+import { EventReaderViews } from "@/components/events/event-reader-views";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -11,7 +12,11 @@ import { FestivalSchedule } from "./festival-schedule";
 import { OfficialPdfHighlight } from "./official-pdf-highlight";
 import { PracticalAndFaq } from "./practical-and-faq";
 
-export function FestivalRichEventDetail({ event, content }: FestivalRichPageProps) {
+export function FestivalRichEventDetail({
+  event,
+  content,
+  uniqueReaderViews = 0,
+}: FestivalRichPageProps) {
   return (
     <div className={interiorMainClassName}>
       <PageBreadcrumbs
@@ -35,6 +40,11 @@ export function FestivalRichEventDetail({ event, content }: FestivalRichPageProp
           {event.venueAddress}
         </p>
       ) : null}
+      <EventReaderViews
+        slug={event.slug}
+        initialCount={uniqueReaderViews}
+        className="mt-3"
+      />
       <div className="mt-6 flex flex-wrap gap-3">
         <a
           href="#schedule"

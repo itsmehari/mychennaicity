@@ -32,6 +32,10 @@
   height: auto;
 }
 
+.mcc-event-reader-views {
+  font-size: 14px;
+}
+
 .mcc-event-meta {
   font-size: 14px;
   color: var(--muted);

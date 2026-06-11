@@ -119,6 +119,27 @@ export const events = pgTable(
   }),
 );
 
+/** One row per anonymous visitor (`mcc_vid` cookie) per event — unique reader views. */
+export const eventPageViewers = pgTable(
+  "event_page_viewers",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    eventId: uuid("event_id")
+      .notNull()
+      .references(() => events.id, { onDelete: "cascade" }),
+    visitorId: text("visitor_id").notNull(),
+    viewedAt: timestamp("viewed_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => ({
+    eventVisitorUidx: uniqueIndex("event_page_viewers_event_visitor_uidx").on(
+      t.eventId,
+      t.visitorId,
+    ),
+  }),
+);
+
 export const jobPostings = pgTable(
   "job_postings",
   {

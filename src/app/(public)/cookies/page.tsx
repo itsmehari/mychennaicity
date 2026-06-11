@@ -52,7 +52,9 @@ export default function CookiesPage() {
           We may use first-party cookies to keep you signed in if you use
           password or OAuth sessions, to remember preferences, or to protect the
           site (for example CSRF or rate limiting). These are typically
-          first-party and limited to our domain.
+          first-party and limited to our domain. We also set an anonymous{" "}
+          <strong className="text-[var(--foreground)]">mcc_vid</strong> cookie on
+          event listing pages to count unique readers (no name, email, or phone).
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Analytics.</strong> If

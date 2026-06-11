@@ -12,6 +12,7 @@ import {
   EventSummaryCard,
 } from "@/components/events/event-detail-parts";
 import { EventMobileActions } from "@/components/events/event-mobile-actions";
+import { EventReaderViews } from "@/components/events/event-reader-views";
 import { ArticleProse } from "@/components/news/article-prose";
 import {
   InteriorCrossNav,
@@ -109,7 +110,13 @@ function EventPosterHero({ slug, title }: { slug: string; title: string }) {
   );
 }
 
-export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
+export function EventDetailStandard({
+  ev,
+  uniqueReaderViews = 0,
+}: {
+  ev: PublicEventRow;
+  uniqueReaderViews?: number;
+}) {
   const desc = ev.description ?? "";
   const { intro, rest } = splitDescriptionIntro(desc);
 
@@ -129,6 +136,11 @@ export function EventDetailStandard({ ev }: { ev: PublicEventRow }) {
           {ev.title}
         </h1>
         <EventHeroMeta ev={ev} />
+        <EventReaderViews
+          slug={ev.slug}
+          initialCount={uniqueReaderViews}
+          className="mt-3"
+        />
         {ev.venueAddress ? (
           <p className="mcc-event-meta mt-2 text-[var(--muted)] lg:hidden">
             {ev.venueAddress}
