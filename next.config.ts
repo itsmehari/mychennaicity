@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
         hostname: "images.samsung.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "imagesvs.oneindia.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
