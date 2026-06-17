@@ -18,6 +18,8 @@ import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
+import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 
 const hubTitleSegment = "Jobs in Chennai";
 
@@ -184,6 +186,15 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
           </p>
         </div>
       </div>
+
+      <p className="mt-6">
+        <WhatsAppCommunityJoinLink
+          utmContent="jobs-hub"
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:brightness-[0.97]"
+        >
+          Job alerts on WhatsApp
+        </WhatsAppCommunityJoinLink>
+      </p>
 
       <HubCommunityStrip businessVariant="jobs" />
 

@@ -1,4 +1,6 @@
 import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
+import { WHATSAPP_COMMUNITY_GROUP_NAME } from "@/lib/whatsapp-community";
+import { WhatsAppCommunityJoinLink, WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
 
 const joinBtnClass =
   "inline-flex min-h-[44px] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--foreground)_12%,var(--border))] bg-[var(--background)] px-5 py-2.5 text-sm font-semibold text-[var(--foreground)] transition hover:border-[#128C7E] hover:text-[#128C7E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]";
@@ -73,9 +75,23 @@ export function JoinWhatsAppCommunityCard({
         site. Opens WhatsApp after you tap.
       </p>
       <p className={layout === "inline" ? "mt-3" : "mt-4"}>
-        <a href="/api/community/whatsapp" className={joinBtnClass}>
+        <WhatsAppCommunityJoinLink
+          utmContent={layout === "inline" ? "inline" : "card"}
+          className={joinBtnClass}
+        >
           Join on WhatsApp
-        </a>
+        </WhatsAppCommunityJoinLink>
+        {layout !== "inline" ? (
+          <>
+            {" "}
+            <WhatsAppCommunityPageLink
+              src="card"
+              className="ml-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              About the group
+            </WhatsAppCommunityPageLink>
+          </>
+        ) : null}
       </p>
     </div>
   );

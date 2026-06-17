@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -84,6 +85,9 @@ export default function AboutPage() {
           </Link>{" "}
           are all linked from the home page and site footer too.
         </p>
+      </div>
+      <div className="mt-8">
+        <WhatsAppCommunityCta variant="compact" utmContent="about" />
       </div>
       <HubCommunityStrip businessVariant="home" className="mt-12" />
       <InteriorCrossNav />

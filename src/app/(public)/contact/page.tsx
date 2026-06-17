@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactServiceGrid } from "@/components/contact/contact-service-grid";
+import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -71,6 +72,10 @@ export default function ContactPage() {
             while we finish the mail link.
           </p>
         )}
+      </div>
+
+      <div className="mt-8">
+        <WhatsAppCommunityCta variant="compact" utmContent="contact" />
       </div>
 
       <ContactServiceGrid />

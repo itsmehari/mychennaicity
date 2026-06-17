@@ -1,4 +1,8 @@
 import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
+import {
+  WhatsAppCommunityJoinLink,
+  WhatsAppCommunityPageLink,
+} from "@/components/community/whatsapp-community-join-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -72,10 +76,16 @@ export function JobDetailWhatsAppCommunityStrip({
           </div>
         </div>
         <p className="sm:shrink-0">
-          <a href="/api/community/whatsapp" className={joinBtnClass}>
+          <WhatsAppCommunityJoinLink utmContent="job-detail" className={joinBtnClass}>
             <WhatsAppMark className="h-4 w-4" />
             Join group
-          </a>
+          </WhatsAppCommunityJoinLink>
+          <WhatsAppCommunityPageLink
+            src="job-detail"
+            className="mt-2 block text-center text-xs font-semibold text-[#128C7E] hover:underline sm:mt-2"
+          >
+            About the group
+          </WhatsAppCommunityPageLink>
         </p>
       </div>
     </section>

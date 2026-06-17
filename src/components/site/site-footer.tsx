@@ -2,6 +2,7 @@ import Link from "next/link";
 import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-footer-trigger";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
@@ -14,6 +15,7 @@ const newsLinks = [
 
 const discoverLinks = [
   { href: "/glossary", label: "Chennai & GCC glossary" },
+  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
   { href: "/directory", label: "Full directory" },
   { href: "/directory", label: "Schools & colleges" },
   { href: "/directory", label: "Hospitals" },
@@ -127,6 +129,12 @@ export function SiteFooter() {
             <NewsletterFooterTrigger className="inline-flex items-center justify-center rounded-full border-2 border-[var(--footer-border)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--footer-fg)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]">
               Email digest
             </NewsletterFooterTrigger>
+            <Link
+              href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=footer`}
+              className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,#25D366_40%,var(--footer-border))] bg-[color-mix(in_srgb,#25D366_10%,transparent)] px-6 py-3 text-sm font-bold text-[#7dcea0] transition hover:border-[#25D366] hover:text-[#a8e6cf]"
+            >
+              WhatsApp community
+            </Link>
           </div>
         </div>
 
@@ -158,20 +166,24 @@ export function SiteFooter() {
 
             <div className="mt-8">
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--footer-muted)]">
-                Follow (coming soon)
+                Follow
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {["WhatsApp", "Instagram", "YouTube", "X / Twitter"].map(
-                  (label) => (
-                    <span
-                      key={label}
-                      className="inline-flex cursor-not-allowed items-center rounded-full border border-[var(--footer-border)] bg-[color-mix(in_srgb,var(--footer-elevated)_70%,var(--footer-bg))] px-3 py-1.5 text-xs font-medium text-[var(--footer-muted)]"
-                      title="Social links go live with community policy"
-                    >
-                      {label}
-                    </span>
-                  ),
-                )}
+                <Link
+                  href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=footer-social`}
+                  className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,#25D366_40%,var(--footer-border))] bg-[color-mix(in_srgb,#25D366_12%,var(--footer-elevated))] px-3 py-1.5 text-xs font-semibold text-[#a8e6cf] transition hover:border-[#25D366]"
+                >
+                  WhatsApp
+                </Link>
+                {["Instagram", "YouTube", "X / Twitter"].map((label) => (
+                  <span
+                    key={label}
+                    className="inline-flex cursor-not-allowed items-center rounded-full border border-[var(--footer-border)] bg-[color-mix(in_srgb,var(--footer-elevated)_70%,var(--footer-bg))] px-3 py-1.5 text-xs font-medium text-[var(--footer-muted)]"
+                    title="Social links go live with community policy"
+                  >
+                    {label}
+                  </span>
+                ))}
               </div>
             </div>
             <p className="mt-8 text-xs text-[var(--footer-muted)]">

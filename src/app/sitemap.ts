@@ -10,6 +10,12 @@ import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
+import {
+  WHATSAPP_COMMUNITY_GUIDE_PATH,
+  WHATSAPP_COMMUNITY_PAGE_PATH,
+  WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
+  WHATSAPP_COMMUNITY_PARTNERS_PATH,
+} from "@/lib/whatsapp-community";
 
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
 export const dynamic = "force-dynamic";
@@ -133,6 +139,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.35,
+    },
+    {
+      url: `${base}${WHATSAPP_COMMUNITY_PAGE_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${base}${WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${base}${WHATSAPP_COMMUNITY_GUIDE_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${base}${WHATSAPP_COMMUNITY_PARTNERS_PATH}`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.6,
     },
   ];
 

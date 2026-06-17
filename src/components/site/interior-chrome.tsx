@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 
 export const interiorMainClassName =
@@ -69,6 +70,11 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     href: "/guides/chennai-tech-careers",
     label: "Reading job ads",
     hint: "Plain tips on Chennai tech hiring",
+  },
+  {
+    href: WHATSAPP_COMMUNITY_PAGE_PATH,
+    label: "WhatsApp community",
+    hint: "Official my chennai city group",
   },
   {
     href: "/directory",

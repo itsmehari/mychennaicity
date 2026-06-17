@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
 
@@ -38,6 +39,12 @@ export function SiteHeader() {
         <MegaNavDesktop />
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
+          <Link
+            href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=nav`}
+            className="focus-ring hidden min-h-11 items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-4 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] sm:inline-flex"
+          >
+            WhatsApp
+          </Link>
           <button
             type="button"
             className="focus-ring hidden min-h-11 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--muted)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--foreground)] sm:inline-flex"

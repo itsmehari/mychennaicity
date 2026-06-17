@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { Section } from "@/components/home/section";
 import {
   InteriorCrossNav,
@@ -143,6 +144,10 @@ export default async function ChennaiLocalEventsPage() {
             T. Nagar retail peaks and Kodambakkam corridors
           </span>
         </Link>
+      </div>
+
+      <div className="mt-8">
+        <WhatsAppCommunityCta variant="compact" utmContent="events-hub" />
       </div>
 
       <HubCommunityStrip businessVariant="events" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { NewspaperGrid, NewspaperMasthead } from "@/components/news/newspaper-layout";
 import {
   InteriorCrossNav,
@@ -63,6 +64,9 @@ export default async function ChennaiLocalNewsPage() {
           items={[{ label: "Home", href: "/" }, { label: "Chennai local news" }]}
         />
         <NewspaperMasthead />
+        <div className="mt-6">
+          <WhatsAppCommunityCta variant="compact" utmContent="news-hub" />
+        </div>
         <TopicSectionNav />
         <div className="mt-6 flex justify-center">
           <AdSlot slotId="content-top" size="320x50" />
@@ -144,6 +148,9 @@ export default async function ChennaiLocalNewsPage() {
         items={[{ label: "Home", href: "/" }, { label: "Chennai local news" }]}
       />
       <NewspaperMasthead />
+      <div className="mt-6">
+        <WhatsAppCommunityCta variant="compact" utmContent="news-hub" />
+      </div>
       <TopicSectionNav />
       <div className="mt-4 flex justify-center">
         <AdSlot slotId="content-top" size="728x90" />

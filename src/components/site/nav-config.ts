@@ -1,4 +1,5 @@
 import { chennaiZones } from "@/lib/chennai-zones";
+import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { TOPIC_SLUG_TO_CATEGORY } from "@/lib/news-topics";
 
 export type MegaNavLink = {
@@ -97,6 +98,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             href: "/directory",
             label: "City directory",
             description: "Schools, services, and local listings.",
+          },
+          {
+            href: WHATSAPP_COMMUNITY_PAGE_PATH,
+            label: "WhatsApp community",
+            description: "Official my chennai city reader group.",
           },
         ],
       },
