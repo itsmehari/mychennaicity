@@ -22,6 +22,8 @@ const NEXT_IMAGE_REMOTE_HOSTS = new Set([
   "assets.vccircle.com",
   "images.samsung.com",
   "imagesvs.oneindia.com",
+  "upload.wikimedia.org",
+  "s3.ap-south-1.amazonaws.com",
 ]);
 
 /**

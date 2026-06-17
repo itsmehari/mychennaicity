@@ -61,6 +61,26 @@ const nextConfig: NextConfig = {
         hostname: "imagesvs.oneindia.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "s3.ap-south-1.amazonaws.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "gumlet-images.assettype.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.etimg.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
