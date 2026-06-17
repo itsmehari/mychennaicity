@@ -6,10 +6,9 @@ import {
   EVENT_HUB_CATEGORIES,
   type EventHubCardData,
   type EventHubCategoryId,
-  groupHubCards,
 } from "@/lib/events/event-hub-helpers";
 
-function EventCardRail({
+function EventCardGrid({
   cards,
   label,
   labelledBy,
@@ -24,10 +23,11 @@ function EventCardRail({
     <section className="mcc-events-hub-section" aria-labelledby={labelledBy}>
       <h2 id={labelledBy} className="mcc-events-hub-section__title">
         {label}
+        <span className="mcc-events-hub-section__count">{cards.length}</span>
       </h2>
-      <div className="mcc-events-hub-rail" role="list">
+      <div className="mcc-events-hub-grid" role="list">
         {cards.map((card) => (
-          <div key={card.id} className="mcc-events-hub-rail__item" role="listitem">
+          <div key={card.id} className="mcc-events-hub-grid__item" role="listitem">
             <EventHubCard card={card} />
           </div>
         ))}
@@ -39,18 +39,22 @@ function EventCardRail({
 export function EventsHubListing({ cards }: { cards: EventHubCardData[] }) {
   const [activeCategory, setActiveCategory] = useState<EventHubCategoryId>("all");
 
-  const filtered = useMemo(() => {
-    if (activeCategory === "all") return cards;
-    return cards.filter((c) => c.tags.includes(activeCategory));
+  const sorted = useMemo(() => {
+    const list =
+      activeCategory === "all"
+        ? cards
+        : cards.filter((c) => c.tags.includes(activeCategory));
+    return [...list].sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      return a.sortKey - b.sortKey;
+    });
   }, [cards, activeCategory]);
 
-  const { featured, upcoming } = useMemo(
-    () => groupHubCards(filtered),
-    [filtered],
-  );
-
-  const showFeaturedSection =
-    activeCategory === "all" && featured.length > 0 && upcoming.length > 0;
+  const sectionLabel =
+    activeCategory === "all"
+      ? "Chennai events — concerts, comedy, markets & meetups"
+      : (EVENT_HUB_CATEGORIES.find((c) => c.id === activeCategory)?.label ??
+        "Events");
 
   return (
     <div className="mcc-events-hub-listing mt-10">
@@ -74,40 +78,23 @@ export function EventsHubListing({ cards }: { cards: EventHubCardData[] }) {
         })}
       </nav>
 
-      {filtered.length === 0 ? (
+      {sorted.length === 0 ? (
         <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">
           No events in this category right now. Try another filter or check back
           soon.
         </p>
-      ) : showFeaturedSection ? (
-        <>
-          <EventCardRail
-            cards={featured}
-            label="Featured"
-            labelledBy="events-hub-featured"
-          />
-          <EventCardRail
-            cards={upcoming}
-            label="Coming up in Chennai"
-            labelledBy="events-hub-upcoming"
-          />
-        </>
       ) : (
-        <EventCardRail
-          cards={filtered}
-          label={
-            activeCategory === "all"
-              ? "Coming up in Chennai"
-              : EVENT_HUB_CATEGORIES.find((c) => c.id === activeCategory)?.label ??
-                "Events"
-          }
+        <EventCardGrid
+          cards={sorted}
+          label={sectionLabel}
           labelledBy="events-hub-main"
         />
       )}
 
       <p className="mcc-events-hub-footnote mt-6 text-xs leading-relaxed text-[var(--muted)]">
-        Swipe sideways on your phone to browse rows. Confirm date, venue, and
-        tickets on the organiser page before you travel.
+        Grid shows upcoming listings across Greater Chennai — OMR, central, and
+        western suburbs. Confirm date, venue, and tickets on the organiser page
+        before you travel.
       </p>
     </div>
   );

@@ -104,6 +104,38 @@ export async function insertEventIfMissing(
   return "inserted";
 }
 
+/** Insert or refresh row when `(city_id, slug)` already exists. */
+export async function upsertEvent(
+  db: NeonHttpDatabase<typeof schema>,
+  cityId: string,
+  row: EventSeedRow,
+): Promise<"inserted" | "updated"> {
+  const result = await insertEventIfMissing(db, cityId, row);
+  if (result === "inserted") return "inserted";
+
+  await db
+    .update(events)
+    .set({
+      title: row.title,
+      description: row.description,
+      startsAt: row.startsAt,
+      endsAt: row.endsAt,
+      allDay: row.allDay ?? false,
+      venueName: row.venueName ?? null,
+      venueAddress: row.venueAddress ?? null,
+      localityLabel: row.localityLabel ?? null,
+      featured: row.featured ?? false,
+      presentationKey: row.presentationKey ?? null,
+      contentRef: row.contentRef ?? null,
+      status: "scheduled",
+      updatedAt: new Date(),
+    })
+    .where(and(eq(events.cityId, cityId), eq(events.slug, row.slug)));
+
+  console.log("Refreshed event:", row.slug);
+  return "updated";
+}
+
 /** Call at end of live event/job seed scripts to refresh sitemap + hubs. */
 export async function finishListingSeedLive(options?: {
   jobSlug?: string;

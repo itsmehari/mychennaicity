@@ -11,7 +11,7 @@ function CardInner({ card }: { card: EventHubCardData }) {
             src={card.imageSrc}
             alt={card.imageAlt}
             fill
-            sizes="(max-width: 768px) 42vw, 180px"
+            sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 22vw"
             className="object-cover"
           />
         ) : (

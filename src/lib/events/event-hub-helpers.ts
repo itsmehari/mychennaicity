@@ -57,16 +57,24 @@ function inferTagsFromText(
     tags.add("festivals");
   }
   if (
-    /concert|theatre|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal/.test(
+    /concert|theatre|theater|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal|stand-up|stand up|comedy|open mic|comedian|puppet|singalong|rave|dj|orchestra|grammy/.test(
       text,
     )
   ) {
     tags.add("culture");
   }
-  if (/award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur/.test(text)) {
+  if (
+    /award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur|meetup|magento|storage|seminar|tech|snia|property expo/.test(
+      text,
+    )
+  ) {
     tags.add("business");
   }
-  if (/meetup|community|neighbourhood|gathering|local/.test(text)) {
+  if (
+    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local/.test(
+      text,
+    )
+  ) {
     tags.add("community");
   }
 
