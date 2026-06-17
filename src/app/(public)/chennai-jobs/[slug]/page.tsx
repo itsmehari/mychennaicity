@@ -6,6 +6,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { JobDetailWhatsAppCommunityStrip } from "@/components/jobs/job-detail-whatsapp-community-strip";
 import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
@@ -110,6 +111,7 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
             { label: row.job.title },
           ]}
         />
+        <JobDetailWhatsAppCommunityStrip />
         <JobPostingDetail
           row={row}
           applyHref={applyHref ?? null}
