@@ -8,6 +8,7 @@ import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
+import { finishListingSeedLive } from "./lib/seed-event-shared";
 import * as schema from "../src/db/schema";
 import { cities, events } from "../src/db/schema/tables";
 import {
@@ -155,6 +156,7 @@ async function main() {
       contentRef: null,
     });
   }
+  await finishListingSeedLive({ eventSlug: SLUG, label: "event-seed" });
 }
 
 main().catch((e) => {

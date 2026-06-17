@@ -1,8 +1,8 @@
 /**
- * Java, Data Engineering, Salesforce, .NET & Power Apps — leading MNC, Chennai (HR Mamatha).
+ * Office roles (part / full time) — TIC, Guindy, Chennai.
  *
- * Dev:  `npm run db:seed:chennai-job:top-mnc-tech-roles`
- * Live: `npm run db:seed:chennai-job:top-mnc-tech-roles:live` — uses `.env.production.local`
+ * Dev:  `npm run db:seed:chennai-job:tic-office-guindy`
+ * Live: `npm run db:seed:chennai-job:tic-office-guindy:live` — uses `.env.production.local`
  */
 import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
@@ -35,12 +35,13 @@ if (!url) {
 
 const db = drizzle(neon(url), { schema });
 
-const EMPLOYER_SLUG = "leading-mnc-chennai-confidential";
-const JOB_SLUG =
-  "java-data-engineering-salesforce-dotnet-power-apps-leading-mnc-chennai";
+const EMPLOYER_SLUG = "tic-guindy-chennai";
+const JOB_SLUG = "office-roles-tic-guindy-chennai";
 
-const PHONE_DISPLAY = "7760587759";
-const PHONE_APPLY = "tel:+917760587759";
+const WA_DISPLAY = "7397524453";
+const WA_APPLY = `https://wa.me/917397524453?text=${encodeURIComponent(
+  "Hi, I saw the TIC office role opening (Guindy, Chennai) on MyChennaiCity and would like to apply.",
+)}`;
 
 async function main() {
   const [city] = await db
@@ -66,7 +67,7 @@ async function main() {
     await db
       .update(employers)
       .set({
-        name: "Leading MNC — Chennai",
+        name: "TIC · Guindy, Chennai",
         updatedAt: new Date(),
       })
       .where(eq(employers.id, employerId));
@@ -75,7 +76,7 @@ async function main() {
     const [ins] = await db
       .insert(employers)
       .values({
-        name: "Leading MNC — Chennai",
+        name: "TIC · Guindy, Chennai",
         slug: EMPLOYER_SLUG,
         verified: false,
       })
@@ -97,26 +98,20 @@ async function main() {
   validThrough.setDate(validThrough.getDate() + 90);
 
   const body = `
-A **leading MNC** has **urgent openings** in Chennai across multiple technology roles.
+**TIC** is hiring for **office-based roles** at **Guindy, Chennai** — **part-time and full-time** options available.
 
-## Open roles
+## Role at a glance
+- **Location:** Guindy office, Chennai
+- **Work mode:** Office-based with **work from home** available
+- **Timing:** **Flexible**
+- **Salary:** ₹18,000 – ₹25,000 per month (confirm exact band with HR)
+- **Open to:** Freshers and experienced candidates
 
-### Java developer
-- **Experience:** 3 to 20 years
-- **Package:** ₹10 lakh – ₹25 lakh per annum (CTC; confirm with HR)
-
-### Data engineering
-- **Experience:** 4 to 8 years
-- **Package:** ₹8 lakh – ₹18 lakh per annum (CTC; confirm with HR)
-
-### Salesforce & .NET
-- **Experience:** 4 years
-
-### Power Apps
-- **Experience:** 3 years
+## Job process briefing
+The employer is running a **job process details meeting** at the **Guindy office at 9:00 AM** — **confirm the date and role fit on WhatsApp** before you travel.
 
 ## How to apply
-Contact **Ms. Mamatha (HR)** on **[${PHONE_DISPLAY}](${PHONE_APPLY})** for role fit, interview process, and exact compensation for Salesforce, .NET, and Power Apps openings.
+WhatsApp **[${WA_DISPLAY}](${WA_APPLY})** for the briefing slot, role details, and next steps.
 
 Mention that you saw the opening on MyChennaiCity jobs.
 
@@ -127,20 +122,19 @@ Mention that you saw the opening on MyChennaiCity jobs.
     employerId,
     cityId: city.id,
     slug: JOB_SLUG,
-    title:
-      "Java, Data Engineering, Salesforce, .NET & Power Apps — leading MNC (urgent)",
+    title: "Office roles — TIC · Guindy (part / full time; WFH)",
     body,
-    locationLabel: "Chennai",
+    locationLabel: "Guindy, Chennai",
     status: "open" as const,
     employmentType: "FULL_TIME",
     validThrough,
     publishedAt: now,
-    applicationUrl: PHONE_APPLY,
+    applicationUrl: WA_APPLY,
     salaryDisclosed: true,
-    salaryMin: 800_000,
-    salaryMax: 2_500_000,
-    openingsCount: 4,
-    remotePolicy: "onsite" as const,
+    salaryMin: 18_000,
+    salaryMax: 25_000,
+    openingsCount: 1,
+    remotePolicy: "hybrid" as const,
     updatedAt: now,
   };
 

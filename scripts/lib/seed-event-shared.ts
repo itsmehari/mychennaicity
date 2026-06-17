@@ -104,6 +104,23 @@ export async function insertEventIfMissing(
   return "inserted";
 }
 
+/** Call at end of live event/job seed scripts to refresh sitemap + hubs. */
+export async function finishListingSeedLive(options?: {
+  jobSlug?: string;
+  eventSlug?: string;
+  label?: string;
+}): Promise<void> {
+  if (!isLiveSeed()) return;
+  const { revalidateListingsAfterSeed } = await import(
+    "./revalidate-listings-after-seed"
+  );
+  await revalidateListingsAfterSeed({
+    jobSlug: options?.jobSlug,
+    eventSlug: options?.eventSlug,
+    label: options?.label ?? "listing-seed",
+  });
+}
+
 /**
  * Convert IST wall-clock to UTC `Date` for `starts_at` / `ends_at`.
  * Example: `istToUtcDate(2026, 6, 1, 18, 0)` → 1 Jun 2026 6:00 PM IST.

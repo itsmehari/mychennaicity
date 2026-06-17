@@ -8,6 +8,7 @@ import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
+import { finishListingSeedLive } from "./lib/seed-event-shared";
 import * as schema from "../src/db/schema";
 import { cities, employers, jobPostings } from "../src/db/schema/tables";
 
@@ -259,6 +260,7 @@ async function main() {
   }
 
   console.log("[seed-jobs] Done. Hub:", "/chennai-jobs");
+  await finishListingSeedLive({ label: "seed-jobs" });
 }
 
 main().catch((e) => {

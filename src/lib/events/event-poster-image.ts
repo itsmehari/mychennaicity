@@ -14,6 +14,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/tote-bag-paint-and-play-thinnai-porur-june-2026.jpg",
     alt: "Tote Bag Paint and Play poster — Thinnai board games café, Madhanandapuram, Porur, Chennai, 13 June 2026",
   },
+  "jolly-phonics-workshop-tweeties-online-july-2026": {
+    src: "/images/events/jolly-phonics-workshop-tweeties-july-2026.jpg",
+    alt: "Jolly Phonics Workshop poster — Tweeties Institute of Education and Jolly Learning, 8-day online training July 2026",
+  },
 };
 
 export function getEventPosterImage(

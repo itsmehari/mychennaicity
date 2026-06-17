@@ -8,6 +8,7 @@ import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
+import { finishListingSeedLive } from "./lib/seed-event-shared";
 import * as schema from "../src/db/schema";
 import { cities, employers, jobPostings } from "../src/db/schema/tables";
 
@@ -170,6 +171,7 @@ Call or WhatsApp **Vinoth** at **${PHONE_DISPLAY}**, or use the **Apply via What
   }
 
   console.log("[seed-job] Done. Detail:", `/chennai-jobs/${JOB_SLUG}`);
+  await finishListingSeedLive({ jobSlug: JOB_SLUG, label: "seed-job" });
 }
 
 main().catch((e) => {

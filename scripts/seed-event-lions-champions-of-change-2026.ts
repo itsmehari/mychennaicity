@@ -8,6 +8,7 @@ import { config as loadEnv } from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
+import { finishListingSeedLive } from "./lib/seed-event-shared";
 import * as schema from "../src/db/schema";
 import { cities, events } from "../src/db/schema/tables";
 
@@ -115,6 +116,10 @@ async function main() {
   });
 
   console.log("Inserted event:", LIONS_CHAMPIONS_OF_CHANGE_2026_SLUG);
+  await finishListingSeedLive({
+    eventSlug: LIONS_CHAMPIONS_OF_CHANGE_2026_SLUG,
+    label: "event-seed",
+  });
 }
 
 main().catch((e) => {

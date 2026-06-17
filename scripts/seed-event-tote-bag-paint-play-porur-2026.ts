@@ -19,6 +19,7 @@ import {
   isLiveSeed,
   loadEventSeedEnv,
   requireDatabaseUrl,
+  finishListingSeedLive,
 } from "./lib/seed-event-shared";
 
 export const TOTE_BAG_PAINT_PLAY_SLUG =
@@ -99,6 +100,10 @@ async function main() {
       .where(and(eq(events.cityId, cityId), eq(events.slug, row.slug)));
     console.log("Refreshed event:", row.slug);
   }
+  await finishListingSeedLive({
+    eventSlug: TOTE_BAG_PAINT_PLAY_SLUG,
+    label: "event-seed",
+  });
 }
 
 main().catch((e) => {
