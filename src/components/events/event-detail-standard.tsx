@@ -90,8 +90,16 @@ function EventHeroMeta({ ev }: { ev: PublicEventRow }) {
   );
 }
 
-function EventPosterHero({ slug, title }: { slug: string; title: string }) {
-  const poster = getEventPosterImage(slug, title);
+function EventPosterHero({
+  slug,
+  title,
+  description,
+}: {
+  slug: string;
+  title: string;
+  description: string | null;
+}) {
+  const poster = getEventPosterImage(slug, title, description);
   if (!poster) return null;
 
   return (
@@ -148,7 +156,7 @@ export function EventDetailStandard({
         ) : null}
       </header>
 
-      <EventPosterHero slug={ev.slug} title={ev.title} />
+      <EventPosterHero slug={ev.slug} title={ev.title} description={ev.description} />
 
       <div className="lg:hidden">
         <EventSummaryCard ev={ev} />

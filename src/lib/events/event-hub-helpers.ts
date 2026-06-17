@@ -104,7 +104,7 @@ function resolveEventImage(
       return { src: content.seo.ogImageUrl, alt: ev.title };
     }
   }
-  const poster = getEventPosterImage(ev.slug, ev.title);
+  const poster = getEventPosterImage(ev.slug, ev.title, ev.description);
   if (poster) return poster;
   return null;
 }

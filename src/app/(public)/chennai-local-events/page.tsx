@@ -17,24 +17,27 @@ import {
   buildHubCardFromMock,
 } from "@/lib/events/event-hub-helpers";
 import { homeStats, mockEvents } from "@/lib/home-mock";
-import { buildEventsHubJsonLd } from "@/lib/seo/events-hub-jsonld";
+import { buildEventsHubJsonLdGraph } from "@/lib/seo/events-hub-jsonld";
+import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
+import { EventsHubFaq } from "@/components/events/events-hub-faq";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const canonicalPath = "/chennai-local-events";
 
-const titleSegment = "Chennai events calendar — what’s on";
+const titleSegment =
+  "Chennai events this week — concerts, comedy & markets";
 
 export const metadata: Metadata = {
   title: titleSegment,
   description:
-    "Chennai local events: temple festivals, neighbourhood meetups, culture, and civic dates across the city and suburbs. See what is on and plan your week.",
+    "Chennai events calendar: live music, stand-up comedy, exhibitions, and meetups in Mylapore, OMR, Porur, T Nagar, Egmore, and across Greater Chennai. Free to browse on mychennaicity.in.",
   alternates: { canonical: `${getSiteUrl()}${canonicalPath}` },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description:
-      "Festivals, meetups, and civic dates for Chennai — from the core city to OMR and suburbs.",
+      "What's on in Chennai — concerts, comedy nights, shopping festivals, and tech meetups across the city.",
     url: `${getSiteUrl()}${canonicalPath}`,
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
@@ -42,9 +45,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: fullSiteTitle(titleSegment),
     description:
-      "Temple festivals, culture, meetups, and civic dates across Chennai and nearby.",
+      "Chennai concerts, comedy, exhibitions, and meetups — updated listings with venue and booking links.",
     images: ["/twitter-image"],
   },
+  other: { ...CHENNAI_GEO_META },
 };
 
 export const dynamic = "force-dynamic";
@@ -58,7 +62,7 @@ export default async function ChennaiLocalEventsPage() {
     dbEvents = [];
   }
   const useDb = dbEvents.length > 0;
-  const hubLd = useDb ? buildEventsHubJsonLd(dbEvents) : null;
+  const hubLd = useDb ? buildEventsHubJsonLdGraph(dbEvents) : null;
   const hubCards = useDb
     ? dbEvents.map(buildHubCardFromDb)
     : mockEvents.map(buildHubCardFromMock);
@@ -66,18 +70,10 @@ export default async function ChennaiLocalEventsPage() {
   return (
     <div className={interiorMainClassName}>
       {hubLd ? (
-        <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(hubLd.collectionPage),
-            }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd.itemList) }}
-          />
-        </>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd) }}
+        />
       ) : null}
       <PageBreadcrumbs
         items={[
@@ -153,6 +149,8 @@ export default async function ChennaiLocalEventsPage() {
       <HubCommunityStrip businessVariant="events" />
 
       <EventsHubListing cards={hubCards} />
+
+      <EventsHubFaq />
 
       <Section
         className="mt-14"

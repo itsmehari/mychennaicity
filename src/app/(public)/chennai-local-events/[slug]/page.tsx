@@ -36,7 +36,7 @@ function standardMetadataForEvent(
     " · Chennai local events",
   );
   const docTitle = fullSiteTitle(titleSegment);
-  const posterUrl = eventPosterAbsoluteUrl(ev.slug);
+  const posterUrl = eventPosterAbsoluteUrl(ev.slug, ev.title, ev.description);
   const ogImages = posterUrl
     ? [{ url: posterUrl, width: 1200, height: 1600 }]
     : [{ url: "/opengraph-image", width: 1200, height: 630 }];

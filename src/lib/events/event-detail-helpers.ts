@@ -64,6 +64,41 @@ export function extractOrganizerFromDescription(
   return null;
 }
 
+/** Booking / ticket URL from `**Booking:** [label](url)` in seeded descriptions. */
+export function extractBookingUrlFromDescription(
+  description: string | null | undefined,
+): string | null {
+  if (!description?.trim()) return null;
+  const m = description.match(/\*\*Booking:\*\*\s*\[[^\]]+\]\(([^)]+)\)/i);
+  const url = m?.[1]?.trim();
+  if (!url || !/^https?:\/\//i.test(url)) return null;
+  return url;
+}
+
+/** Headliner from titles like "Vir Das — …", "… ft. Kitty Amor", "… by Aashish Solanki". */
+export function extractPerformerFromTitle(title: string): string | null {
+  const t = title.trim();
+  if (!t) return null;
+  const ft = t.match(/\bft\.?\s+([^—–\-|]+)/i);
+  if (ft?.[1]?.trim()) return ft[1].trim();
+  const by = t.match(/\bby\s+([A-Z][^—–\-|]+)/i);
+  if (by?.[1]?.trim()) return by[1].trim();
+  const live = t.match(/^([A-Z][^—–\-|]+?)\s+Live\b/i);
+  if (live?.[1]?.trim()) return live[1].trim();
+  const dash = t.match(/^([^—–\-|]+?)\s+[—–\-]/);
+  if (dash?.[1]?.trim() && dash[1].length < 48) return dash[1].trim();
+  return null;
+}
+
+/** Category line from seeded event descriptions: `**Live music & concerts** in …` */
+export function extractCategoryFromDescription(
+  description: string | null | undefined,
+): string | null {
+  if (!description?.trim()) return null;
+  const m = description.match(/^\*\*([^*]+)\*\*/);
+  return m?.[1]?.trim() ?? null;
+}
+
 export function buildMapsSearchUrl(ev: PublicEventRow): string | null {
   const parts = [
     ev.venueName?.trim(),
