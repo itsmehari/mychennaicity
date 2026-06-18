@@ -7,6 +7,10 @@ export type EventPosterSpec = {
 };
 
 const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
+  "kathakali-tamil-solo-play-restore-kottivakkam-june-2026": {
+    src: "/images/events/kathakali-restore-kottivakkam-june-2026.png",
+    alt: "Kathakali Tamil solo play poster — Seetha Lakshmi at reStore, Kottivakkam, Chennai, 27 June 2026",
+  },
   "tote-bag-paint-and-play-thinnai-porur-june-2026": {
     src: "/images/events/tote-bag-paint-and-play-thinnai-porur-june-2026.jpg",
     alt: "Tote Bag Paint and Play poster — Thinnai board games café, Madhanandapuram, Porur, Chennai, 13 June 2026",
