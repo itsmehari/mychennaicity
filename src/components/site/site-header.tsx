@@ -60,25 +60,39 @@ export function SiteHeader() {
             aria-controls="mobile-mega-nav"
             onClick={() => setMobileOpen((v) => !v)}
           >
-            <span className="sr-only">Open menu</span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden
-            >
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <span className="sr-only">
+              {mobileOpen ? "Close menu" : "Open menu"}
+            </span>
+            {mobileOpen ? (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden
+              >
+                <path d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden
+              >
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
 
-      <div id="mobile-mega-nav" aria-live="polite">
-        <MegaNavMobile open={mobileOpen} onClose={closeMobile} />
-      </div>
+      <MegaNavMobile open={mobileOpen} onClose={closeMobile} />
     </header>
   );
 }
