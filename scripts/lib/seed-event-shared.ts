@@ -140,6 +140,8 @@ export async function upsertEvent(
 export async function finishListingSeedLive(options?: {
   jobSlug?: string;
   eventSlug?: string;
+  directoryType?: string;
+  directorySlug?: string;
   label?: string;
 }): Promise<void> {
   if (!isLiveSeed()) return;
@@ -149,6 +151,8 @@ export async function finishListingSeedLive(options?: {
   await revalidateListingsAfterSeed({
     jobSlug: options?.jobSlug,
     eventSlug: options?.eventSlug,
+    directoryType: options?.directoryType,
+    directorySlug: options?.directorySlug,
     label: options?.label ?? "listing-seed",
   });
 }

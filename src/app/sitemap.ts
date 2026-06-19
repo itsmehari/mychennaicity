@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listEventsForSitemap } from "@/domains/events";
 import { listJobsForSitemap } from "@/domains/jobs";
+import { listDirectoryEntriesForSitemap } from "@/domains/directory";
 import {
   listArticlesForSitemap,
   listTopicKeysForChennai,
@@ -10,6 +11,7 @@ import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
+import { directoryDetailPath } from "@/lib/routes/directory";
 import {
   WHATSAPP_COMMUNITY_GUIDE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
@@ -28,14 +30,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let topicKeys: string[] = [];
   let eventRows: { slug: string; lastModified: Date }[] = [];
   let jobRows: { slug: string; lastModified: Date }[] = [];
+  let directoryRows: {
+    type: string;
+    slug: string;
+    lastModified: Date;
+  }[] = [];
   try {
     articleRows = await listArticlesForSitemap();
     topicKeys = await listTopicKeysForChennai();
     eventRows = await listEventsForSitemap();
     jobRows = await listJobsForSitemap();
+    directoryRows = await listDirectoryEntriesForSitemap();
   } catch (err) {
     console.warn(
-      "[sitemap] DB unreachable or misconfigured — emitting static URLs only (no article/topic/event/job entries).",
+      "[sitemap] DB unreachable or misconfigured — emitting static URLs only (no article/topic/event/job/directory entries).",
       err,
     );
   }
@@ -204,6 +212,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  const directoryEntries: MetadataRoute.Sitemap = directoryRows.map((d) => ({
+    url: `${base}${directoryDetailPath(d.type, d.slug)}`,
+    lastModified: d.lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.62,
+  }));
+
   return [
     ...staticEntries,
     ...areaEntries,
@@ -211,5 +226,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...topicEntries,
     ...eventEntries,
     ...jobEntries,
+    ...directoryEntries,
   ];
 }

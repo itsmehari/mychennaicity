@@ -10,9 +10,12 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { HomeTrustStrip } from "@/components/home/home-content";
+import { listDirectoryEntriesForChennaiHub } from "@/domains/directory";
 import { categoryTiles, mockListings } from "@/lib/home-mock";
+import { directoryTypeLabel } from "@/lib/directory/type-labels";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { directoryDetailPath } from "@/lib/routes/directory";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Chennai directory — schools, services & places";
@@ -38,7 +41,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DirectoryPage() {
+export const dynamic = "force-dynamic";
+
+export default async function DirectoryPage() {
+  let liveListings: Awaited<
+    ReturnType<typeof listDirectoryEntriesForChennaiHub>
+  > = [];
+  try {
+    liveListings = await listDirectoryEntriesForChennaiHub();
+  } catch {
+    liveListings = [];
+  }
+
+  const hasLive = liveListings.length > 0;
+
   return (
     <div className={interiorMainClassName}>
       <PageBreadcrumbs
@@ -120,28 +136,68 @@ export default function DirectoryPage() {
 
       <Section
         className="mt-14"
-        eyebrow="Sample listings"
-        title="What a neighbourhood row will look like"
-        subtitle="Illustrative snapshots — not live inventory. Prices and availability must be confirmed with the poster."
+        eyebrow={hasLive ? "Local business listings" : "Sample listings"}
+        title={
+          hasLive
+            ? "Businesses listed on mychennaicity.in"
+            : "What a neighbourhood row will look like"
+        }
+        subtitle={
+          hasLive
+            ? "Reader and business listings — confirm prices, availability, and delivery with the contact on each page."
+            : "Illustrative snapshots — not live inventory. Prices and availability must be confirmed with the poster."
+        }
       >
-        <ul className="grid gap-4 md:grid-cols-3">
-          {mockListings.map((m) => (
-            <li
-              key={m.title}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-            >
-              <p className="text-sm font-semibold text-[var(--foreground)]">
-                {m.title}
-              </p>
-              <p className="mt-1 text-xs text-[var(--muted)]">
-                {m.price} · {m.area}
-              </p>
-              <span className="mt-3 inline-block text-xs font-medium text-[var(--muted)]">
-                Claim / edit flow — coming soon
-              </span>
-            </li>
-          ))}
-        </ul>
+        {hasLive ? (
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {liveListings.map((entry) => (
+              <li key={entry.id}>
+                <Link
+                  href={directoryDetailPath(entry.type, entry.slug)}
+                  className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--border))]"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
+                    {directoryTypeLabel(entry.type)}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+                    {entry.name}
+                  </p>
+                  <p className="mt-1 text-xs text-[var(--muted)]">
+                    {entry.localityLabel?.trim() || "Chennai"}
+                    {entry.phone?.trim() ? ` · ${entry.phone.trim()}` : ""}
+                  </p>
+                  {entry.meta.summary?.trim() ? (
+                    <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-[var(--muted)]">
+                      {entry.meta.summary}
+                    </p>
+                  ) : null}
+                  <span className="mt-4 text-xs font-medium text-[var(--accent)]">
+                    View listing →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="grid gap-4 md:grid-cols-3">
+            {mockListings.map((m) => (
+              <li
+                key={m.title}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
+              >
+                <p className="text-sm font-semibold text-[var(--foreground)]">
+                  {m.title}
+                </p>
+                <p className="mt-1 text-xs text-[var(--muted)]">
+                  {m.price} · {m.area}
+                </p>
+                <span className="mt-3 inline-block text-xs font-medium text-[var(--muted)]">
+                  Claim / edit flow — coming soon
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </Section>
 
       <div className="mt-14">
