@@ -26,6 +26,42 @@ export function getSiteUrl(): string {
 /** Official public inbox for tips, listings, corrections, and privacy requests. */
 export const OFFICIAL_PUBLIC_CONTACT_EMAIL = "mychennaicityportal@gmail.com";
 
+/** Verified organization profiles for footer links and JSON-LD `sameAs`. */
+export const OFFICIAL_ORG_SAME_AS_URLS = [
+  "https://www.instagram.com/mychennaicityportal/",
+] as const;
+
+function parseSameAsEnv(raw: string | undefined): string[] {
+  if (!raw?.trim()) return [];
+  return raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter((href) => href.startsWith("http"));
+}
+
+/** Organization profile URLs — official list plus optional env extras (dev/staging). */
+export function orgSameAsUrls(): string[] {
+  const extra =
+    process.env.NODE_ENV !== "production"
+      ? parseSameAsEnv(process.env.NEXT_PUBLIC_ORG_SAME_AS)
+      : parseSameAsEnv(process.env.NEXT_PUBLIC_ORG_SAME_AS);
+  return [...new Set([...OFFICIAL_ORG_SAME_AS_URLS, ...extra])];
+}
+
+function socialLabelForUrl(href: string): string {
+  try {
+    const host = new URL(href).hostname.replace(/^www\./, "");
+    if (host.includes("twitter.com") || host === "x.com") return "X / Twitter";
+    if (host.includes("youtube.com") || host === "youtu.be") return "YouTube";
+    if (host.includes("instagram.com")) return "Instagram";
+    if (host.includes("facebook.com")) return "Facebook";
+    if (host.includes("linkedin.com")) return "LinkedIn";
+    return host;
+  } catch {
+    return "Profile";
+  }
+}
+
 /**
  * Public contact email (mailto target). In production always returns the official
  * inbox. `NEXT_PUBLIC_CONTACT_EMAIL` may override in non-production for local testing.
@@ -47,28 +83,10 @@ export type OrgSocialLink = {
   label: string;
 };
 
-/** Parse `NEXT_PUBLIC_ORG_SAME_AS` comma-separated profile URLs for footer / JSON-LD. */
+/** Footer / nav links for verified organization profiles. */
 export function getOrgSocialLinks(): OrgSocialLink[] {
-  const raw = process.env.NEXT_PUBLIC_ORG_SAME_AS?.trim();
-  if (!raw) return [];
-
-  return raw
-    .split(",")
-    .map((s) => s.trim())
-    .filter((href) => href.startsWith("http"))
-    .map((href) => {
-      let label = "Profile";
-      try {
-        const host = new URL(href).hostname.replace(/^www\./, "");
-        if (host.includes("twitter.com") || host === "x.com") label = "X / Twitter";
-        else if (host.includes("youtube.com") || host === "youtu.be") label = "YouTube";
-        else if (host.includes("instagram.com")) label = "Instagram";
-        else if (host.includes("facebook.com")) label = "Facebook";
-        else if (host.includes("linkedin.com")) label = "LinkedIn";
-        else label = host;
-      } catch {
-        /* keep default */
-      }
-      return { href, label };
-    });
+  return orgSameAsUrls().map((href) => ({
+    href,
+    label: socialLabelForUrl(href),
+  }));
 }

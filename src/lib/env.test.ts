@@ -77,3 +77,53 @@ describe("getPublicContactEmail", () => {
     expect(getPublicContactEmail()).toBe("dev@example.com");
   });
 });
+
+describe("orgSameAsUrls", () => {
+  const original = process.env.NEXT_PUBLIC_ORG_SAME_AS;
+  const originalNodeEnv = process.env.NODE_ENV;
+
+  afterEach(() => {
+    if (original === undefined) {
+      delete process.env.NEXT_PUBLIC_ORG_SAME_AS;
+    } else {
+      process.env.NEXT_PUBLIC_ORG_SAME_AS = original;
+    }
+    process.env.NODE_ENV = originalNodeEnv;
+    vi.resetModules();
+  });
+
+  it("includes official Instagram when env is unset", async () => {
+    delete process.env.NEXT_PUBLIC_ORG_SAME_AS;
+    vi.resetModules();
+    const { orgSameAsUrls, OFFICIAL_ORG_SAME_AS_URLS } = await import("./env");
+    expect(orgSameAsUrls()).toEqual([...OFFICIAL_ORG_SAME_AS_URLS]);
+  });
+
+  it("merges extra profiles from env without duplicates", async () => {
+    process.env.NEXT_PUBLIC_ORG_SAME_AS =
+      "https://www.youtube.com/@mychennaicity,https://www.instagram.com/mychennaicityportal/";
+    vi.resetModules();
+    const { orgSameAsUrls } = await import("./env");
+    expect(orgSameAsUrls()).toEqual([
+      "https://www.instagram.com/mychennaicityportal/",
+      "https://www.youtube.com/@mychennaicity",
+    ]);
+  });
+});
+
+describe("getOrgSocialLinks", () => {
+  afterEach(() => {
+    delete process.env.NEXT_PUBLIC_ORG_SAME_AS;
+    vi.resetModules();
+  });
+
+  it("labels Instagram profile", async () => {
+    vi.resetModules();
+    const { getOrgSocialLinks } = await import("./env");
+    const links = getOrgSocialLinks();
+    expect(links.some((l) => l.label === "Instagram")).toBe(true);
+    expect(links.some((l) => l.href.includes("instagram.com/mychennaicityportal"))).toBe(
+      true,
+    );
+  });
+});
