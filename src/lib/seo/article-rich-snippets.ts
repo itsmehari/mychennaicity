@@ -186,7 +186,14 @@ export function buildArticleSupplementalJsonLd(
   out.push(...buildInteractiveExtraJsonLd(article.slug, interactive ?? undefined));
 
   const faqItems = readVisibleFaqItems(interactive ?? undefined);
-  const faqLd = buildFaqPageJsonLdFromItems(faqItems);
+  const faqFragment =
+    article.slug === "international-yoga-day-2026-chennai-yoga-for-healthy-ageing"
+      ? "faq"
+      : "interactive-heading";
+  const faqLd = buildFaqPageJsonLdFromItems(faqItems, {
+    pageUrl: options.articleUrl,
+    fragment: faqItems.length ? faqFragment : undefined,
+  });
   if (faqLd) out.push(faqLd);
 
   if (interactive && typeof interactive === "object") {
