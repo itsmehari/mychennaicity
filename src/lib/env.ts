@@ -23,14 +23,23 @@ export function getSiteUrl(): string {
   }
 }
 
+/** Official public inbox for tips, listings, corrections, and privacy requests. */
+export const OFFICIAL_PUBLIC_CONTACT_EMAIL = "mychennaicityportal@gmail.com";
+
 /**
- * Public inbox for tips, corrections, and privacy requests (mailto target).
- * Set in Vercel as `NEXT_PUBLIC_CONTACT_EMAIL` when the inbox is ready.
+ * Public contact email (mailto target). In production always returns the official
+ * inbox. `NEXT_PUBLIC_CONTACT_EMAIL` may override in non-production for local testing.
  */
-export function getPublicContactEmail(): string | null {
+export function getPublicContactEmail(): string {
   const raw = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
-  if (!raw || !raw.includes("@")) return null;
-  return raw;
+  if (
+    process.env.NODE_ENV !== "production" &&
+    raw &&
+    raw.includes("@")
+  ) {
+    return raw;
+  }
+  return OFFICIAL_PUBLIC_CONTACT_EMAIL;
 }
 
 export type OrgSocialLink = {

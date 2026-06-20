@@ -38,35 +38,42 @@ describe("getSiteUrl", () => {
 });
 
 describe("getPublicContactEmail", () => {
-  const original = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+  const originalEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+  const originalNodeEnv = process.env.NODE_ENV;
 
   afterEach(() => {
-    if (original === undefined) {
+    if (originalEmail === undefined) {
       delete process.env.NEXT_PUBLIC_CONTACT_EMAIL;
     } else {
-      process.env.NEXT_PUBLIC_CONTACT_EMAIL = original;
+      process.env.NEXT_PUBLIC_CONTACT_EMAIL = originalEmail;
     }
+    process.env.NODE_ENV = originalNodeEnv;
     vi.resetModules();
   });
 
-  it("returns null when unset", async () => {
+  it("returns official inbox in production even when env is stale", async () => {
+    process.env.NODE_ENV = "production";
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL = "old@example.com";
+    vi.resetModules();
+    const { getPublicContactEmail, OFFICIAL_PUBLIC_CONTACT_EMAIL } =
+      await import("./env");
+    expect(getPublicContactEmail()).toBe(OFFICIAL_PUBLIC_CONTACT_EMAIL);
+  });
+
+  it("returns official inbox when unset in development", async () => {
+    process.env.NODE_ENV = "development";
     delete process.env.NEXT_PUBLIC_CONTACT_EMAIL;
     vi.resetModules();
-    const { getPublicContactEmail } = await import("./env");
-    expect(getPublicContactEmail()).toBeNull();
+    const { getPublicContactEmail, OFFICIAL_PUBLIC_CONTACT_EMAIL } =
+      await import("./env");
+    expect(getPublicContactEmail()).toBe(OFFICIAL_PUBLIC_CONTACT_EMAIL);
   });
 
-  it("returns null for invalid value", async () => {
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL = "not-an-email";
+  it("allows dev override when env is valid", async () => {
+    process.env.NODE_ENV = "development";
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL = "  dev@example.com  ";
     vi.resetModules();
     const { getPublicContactEmail } = await import("./env");
-    expect(getPublicContactEmail()).toBeNull();
-  });
-
-  it("trims valid email", async () => {
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL = "  hello@mychennaicity.in  ";
-    vi.resetModules();
-    const { getPublicContactEmail } = await import("./env");
-    expect(getPublicContactEmail()).toBe("hello@mychennaicity.in");
+    expect(getPublicContactEmail()).toBe("dev@example.com");
   });
 });

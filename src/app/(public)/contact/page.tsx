@@ -49,29 +49,16 @@ export default function ContactPage() {
           directory listings, advertising, or the reader WhatsApp group. We read
           everything, even if we cannot reply instantly.
         </p>
-        {contactEmail ? (
-          <p>
-            Prefer email? Write to{" "}
-            <a
-              href={`mailto:${contactEmail}`}
-              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              {contactEmail}
-            </a>{" "}
-            with a clear subject line so we can route it faster.
-          </p>
-        ) : (
-          <p>
-            A public inbox is being set up — use WhatsApp below for now, or read{" "}
-            <Link
-              href="/editorial-standards"
-              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              editorial standards
-            </Link>{" "}
-            while we finish the mail link.
-          </p>
-        )}
+        <p>
+          Prefer email? Write to{" "}
+          <a
+            href={`mailto:${contactEmail}`}
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            {contactEmail}
+          </a>{" "}
+          with a clear subject line so we can route it faster.
+        </p>
       </div>
 
       <div className="mt-8">
