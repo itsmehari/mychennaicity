@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import { SiteAnalytics } from "@/components/analytics";
 import { shouldSuppressGoogleMeasurementForRequest } from "@/lib/analytics-ip-exclusion";
+import { resolveAdsenseClientId } from "@/lib/adsense-config";
 import { getSiteUrl } from "@/lib/env";
 import { SITE_TITLE_TEMPLATE } from "@/lib/seo/site-titles";
 import "./globals.css";
@@ -20,6 +21,10 @@ const geistMono = Geist_Mono({
 const googleSiteVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
 
+const adsenseClientId = resolveAdsenseClientId(
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
+);
+
 export const metadata: Metadata = {
   title: {
     default: "Chennai news, jobs, events & directory",
@@ -34,6 +39,9 @@ export const metadata: Metadata = {
         },
       }
     : {}),
+  other: {
+    "google-adsense-account": adsenseClientId,
+  },
   metadataBase: new URL(getSiteUrl()),
   openGraph: {
     type: "website",

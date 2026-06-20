@@ -63,6 +63,15 @@ const CHECKS: Check[] = [
     expectStatus: 200,
     bodyIncludes: ["google.com, pub-5760699639501978, DIRECT, f08c47fec0942fa0"],
   },
+  {
+    name: "AdSense meta tag",
+    url: `${SITE}/`,
+    expectStatus: 200,
+    bodyIncludes: [
+      'name="google-adsense-account"',
+      "ca-pub-5760699639501978",
+    ],
+  },
 ];
 
 async function runCheck(check: Check): Promise<{ ok: boolean; detail: string }> {
