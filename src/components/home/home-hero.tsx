@@ -10,7 +10,6 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { homeStats } from "@/lib/home-mock";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 const AUTO_MS = 7000;
@@ -121,9 +120,9 @@ const SLIDES: Slide[] = [
     hrefOnSubmit: "/chennai-local-events",
     primaryCta: { href: "/chennai-local-events", label: "Chennai local events" },
     secondaryCta: { href: "#areas", label: "Pick your area on the map" },
-    statLabel: "Sample listings",
-    statValue: `${homeStats.eventsWeek}+`,
-    statHint: "Illustrative count on the homepage",
+    statLabel: "Upcoming events",
+    statValue: "Live",
+    statHint: "From the Chennai events calendar",
   },
   {
     key: "directory",
@@ -149,7 +148,7 @@ const SLIDES: Slide[] = [
     searchMode: "link",
     hrefOnSubmit: "/directory",
     primaryCta: { href: "/directory", label: "Search the directory" },
-    secondaryCta: { href: "/directory", label: "List your business (soon)" },
+    secondaryCta: { href: "/contact", label: "List your business" },
     statLabel: "Area hubs",
     statValue: "10",
     statHint: "Macro zones you can open in one tap",
@@ -179,12 +178,12 @@ const SLIDES: Slide[] = [
     hrefOnSubmit: CHENNAI_JOBS_HUB_PATH,
     primaryCta: { href: CHENNAI_JOBS_HUB_PATH, label: "Go to Chennai jobs" },
     secondaryCta: {
-      href: CHENNAI_JOBS_HUB_PATH,
-      label: "Post a job (soon)",
+      href: "/contact",
+      label: "Post a job",
     },
-    statLabel: "Sample roles shown",
-    statValue: `${homeStats.jobsLive}+`,
-    statHint: "Example count on the home page",
+    statLabel: "Open roles",
+    statValue: "Live",
+    statHint: "Updated from the Chennai jobs hub",
   },
 ];
 

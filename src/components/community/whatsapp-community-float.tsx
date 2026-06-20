@@ -23,6 +23,10 @@ function WhatsAppMark({ className = "" }: { className?: string }) {
 const HIDE_FLOAT_PREFIXES = [
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
+  "/privacy",
+  "/terms",
+  "/cookies",
+  "/community-guidelines",
 ];
 
 export function WhatsAppCommunityFloat() {

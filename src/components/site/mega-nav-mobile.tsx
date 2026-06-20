@@ -157,10 +157,19 @@ export function MegaNavMobile({ open, onClose }: Props) {
           })}
         </ul>
 
-        <div className="mt-6 rounded-2xl border border-dashed border-[var(--border)] p-4 text-center">
-          <p className="text-sm text-[var(--muted)]">
-            Tip: on desktop, hover sections for the full megamenu.
-          </p>
+        <div className="mt-6 space-y-3">
+          <Link
+            href="/search"
+            className="focus-ring flex min-h-11 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm font-semibold text-[var(--foreground)]"
+            onClick={onClose}
+          >
+            Search the site
+          </Link>
+          <div className="rounded-2xl border border-dashed border-[var(--border)] p-4 text-center">
+            <p className="text-sm text-[var(--muted)]">
+              Tip: on desktop, hover sections for the full megamenu.
+            </p>
+          </div>
         </div>
       </nav>
     </div>

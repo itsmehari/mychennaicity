@@ -10,7 +10,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { and, eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
-import { picsumHeroUrlForSlug } from "../src/lib/article-hero-image";
+import { defaultArticleHeroPath } from "../src/lib/article-hero-image";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const live =
@@ -909,7 +909,7 @@ The pitch is **decentralisation architecture**, not cosmetic branding.`,
   },
 ];
 
-/** Editorial hero images (stored in hero_image_url). Unlisted slugs keep Picsum placeholders. */
+/** Editorial hero images (stored in hero_image_url). Unlisted slugs use the site default hero. */
 const ARTICLE_HERO_IMAGE_URLS: Record<string, string> = {
   "bjp-goyal-tn-nda-seat-sharing":
     "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/ed35b582edba400b53bc071e3b6a7f810adaaff2.jpg",
@@ -958,7 +958,7 @@ const ARTICLE_HERO_IMAGE_URLS: Record<string, string> = {
 };
 
 function heroUrlForSlug(slug: string): string {
-  return ARTICLE_HERO_IMAGE_URLS[slug] ?? picsumHeroUrlForSlug(slug);
+  return ARTICLE_HERO_IMAGE_URLS[slug] ?? defaultArticleHeroPath();
 }
 
 async function main() {

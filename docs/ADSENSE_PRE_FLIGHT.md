@@ -2,6 +2,15 @@
 
 Use this after code for legal pages, `ads.txt`, and optional AdSense script is merged and deployed. Google approval still depends on live content and policies—this list is operational only.
 
+**Automated checks (after deploy):**
+
+```bash
+npm run adsense:verify      # legal pages, robots, sitemap, ads.txt
+npm run links:verify:live   # sample link crawl from sitemap
+```
+
+**Content batch seed (live Neon):** `npm run db:seed:adsense-readiness:live` then `npm run db:check:live`.
+
 ## 0. Deploy the latest app first
 
 Legal routes (`/privacy`, `/cookies`, `/terms`, `/community-guidelines`) and the dynamic `ads.txt` route exist in the repo. **Production must run a build that includes them.** Until then, those URLs may 404 (verify with [Privacy](https://mychennaicity.in/privacy) after deploy).
@@ -29,15 +38,24 @@ In [Vercel → Project → Settings → Environment Variables](https://vercel.co
 |----------|---------|
 | `DATABASE_URL` | Neon pooled URI (already required for news) |
 | `NEXT_PUBLIC_SITE_URL` | `https://mychennaicity.in` (no trailing slash) |
-| `ADSENSE_PUBLISHER_ID` | `pub-xxxxxxxxxxxxxxxx` so [https://mychennaicity.in/ads.txt](https://mychennaicity.in/ads.txt) returns a valid seller line (not 404) |
+| `ADSENSE_PUBLISHER_ID` | `pub-xxxxxxxxxxxxxxxx` so [https://mychennaicity.in/ads.txt](https://mychennaicity.in/ads.txt) returns a valid seller line (not 404). **Required before AdSense site review.** |
 | `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | `ca-pub-xxxxxxxxxxxxxxxx` — add **after** AdSense gives you a client ID; loads `adsbygoogle.js` |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 `G-…` if you use Analytics |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | GSC HTML-tag **content** value; `metadata` in `src/app/layout.tsx` emits the tag |
+
+Leave **`NEXT_PUBLIC_NEWSLETTER_AUTO_MODAL` unset or `false`** until after approval (auto modal is off by default in code).
+
+Optional post-approval display slots: `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_TOP`, `_MID`, `_END` (see `.env.example`).
+
+**Set `ADSENSE_PUBLISHER_ID=pub-5760699639501978` on Vercel Production** (optional — the app default matches this id). Redeploy, then run `npm run adsense:verify`. Confirm the live file matches:
+
+```
+google.com, pub-5760699639501978, DIRECT, f08c47fec0942fa0
+```
+
+See [Create an ads.txt file](https://support.google.com/adsense/answer/12171612) and verify status in AdSense → **Sites**.
 
 Optional but recommended:
-
-| Variable | Purpose |
-|----------|---------|
-| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | GSC HTML-tag **content** value; `metadata` in `src/app/layout.tsx` emits the tag |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 `G-…` if you use Analytics |
 
 **Redeploy** after changing env vars so serverless and edge see new values.
 
@@ -84,6 +102,17 @@ Expect important URLs to appear over time (not instant). Use [URL Inspection](ht
 | Community | https://mychennaicity.in/community-guidelines |
 | ads.txt (with `ADSENSE_PUBLISHER_ID`) | https://mychennaicity.in/ads.txt |
 | Sitemap | https://mychennaicity.in/sitemap.xml |
+
+---
+
+## 8. Domain age (India accounts)
+
+Google sometimes expects **6+ months** of domain history for `.in` publishers (not a hard rule). Check registration date:
+
+1. [ICANN Lookup](https://lookup.icann.org/) → search `mychennaicity.in`
+2. Or your registrar’s WHOIS panel
+
+If the domain is younger than six months, keep publishing (30+ articles, jobs, events), verify GSC indexing, and apply when traffic is steady.
 
 ---
 

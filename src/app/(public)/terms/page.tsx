@@ -96,10 +96,15 @@ export default function TermsPage() {
           quotations with attribution; wider reuse needs our permission unless
           allowed by law.
         </p>
-        <p>
+        <p id="disclaimer">
           <strong className="text-[var(--foreground)]">Disclaimer of warranties.</strong>{" "}
           The site is provided &quot;as is&quot;. We do not warrant uninterrupted
           or error-free operation.
+        </p>
+        <p>
+          <strong className="text-[var(--foreground)]">Advertising.</strong>{" "}
+          Display advertising (including Google AdSense when enabled) does not
+          influence editorial coverage, news selection, or listing decisions.
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Limitation of liability.</strong>{" "}

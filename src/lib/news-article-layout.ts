@@ -15,6 +15,7 @@ export type ArticleLayoutVariant = (typeof ARTICLE_LAYOUT_VARIANTS)[number];
 const SLUG_LAYOUT_OVERRIDES: Partial<Record<string, ArticleLayoutVariant>> = {
   "tamil-nadu-ias-reshuffle-collectors-may-2026": "masthead",
   "tamil-nadu-cabinet-portfolios-may-2026": "masthead",
+  "tamil-nadu-fiscal-white-paper-2026-debt-revenue-deficit-analysis": "masthead",
 };
 
 export function articleLayoutVariantForSlug(slug: string): ArticleLayoutVariant {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EditorialArticle } from "@/components/news/editorial-article";
+import { getSpecialArticleEntry } from "@/content/special-articles";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -173,6 +174,8 @@ export default async function ArticlePage({ params }: Props) {
   }
   crumbs.push({ label: clipCrumbTitle(article.title) });
 
+  const specialArticle = getSpecialArticleEntry(slug);
+
   return (
     <>
       <script
@@ -207,13 +210,17 @@ export default async function ArticlePage({ params }: Props) {
       })}
       <div className={interiorMainClassName}>
         <PageBreadcrumbs items={crumbs} />
-        <EditorialArticle
-          article={article}
-          layoutVariant={articleLayoutVariantForSlug(article.slug)}
-          onThisPage={showToc ? tocEntries : null}
-          reportHeadingAnchors={showToc ? reportAnchors : undefined}
-          analysisHeadingAnchors={showToc ? analysisAnchors : undefined}
-        />
+        {specialArticle ? (
+          <specialArticle.Component article={article} />
+        ) : (
+          <EditorialArticle
+            article={article}
+            layoutVariant={articleLayoutVariantForSlug(article.slug)}
+            onThisPage={showToc ? tocEntries : null}
+            reportHeadingAnchors={showToc ? reportAnchors : undefined}
+            analysisHeadingAnchors={showToc ? analysisAnchors : undefined}
+          />
+        )}
         <InteriorCrossNav />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, count, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, events } from "@/db/schema/tables";
 
@@ -37,6 +37,23 @@ export async function listPublicEventsForChennaiHub(limit = 40) {
     )
     .orderBy(asc(events.startsAt))
     .limit(limit);
+}
+
+export async function countPublicEventsForChennaiHub(): Promise<number> {
+  const cityId = await getChennaiCityId();
+  if (!cityId) return 0;
+  const db = getDb();
+  const [row] = await db
+    .select({ n: count() })
+    .from(events)
+    .where(
+      and(
+        eq(events.cityId, cityId),
+        eq(events.status, "scheduled"),
+        notEndedCondition(),
+      ),
+    );
+  return Number(row?.n ?? 0);
 }
 
 export async function getPublicEventBySlug(

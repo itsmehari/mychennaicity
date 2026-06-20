@@ -13,7 +13,6 @@ import {
 import { listPublishedArticlesForChennai } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
-import { mockArticles } from "@/lib/home-mock";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Chennai news today — local reporting";
@@ -57,7 +56,6 @@ export default async function ChennaiLocalNewsPage() {
   }
 
   if (!all.length) {
-    const wire = mockArticles.slice(0, 8);
     return (
       <div className={interiorMainClassName}>
         <PageBreadcrumbs
@@ -68,68 +66,21 @@ export default async function ChennaiLocalNewsPage() {
           <WhatsAppCommunityCta variant="compact" utmContent="news-hub" />
         </div>
         <TopicSectionNav />
-        <div className="mt-6 flex justify-center">
-          <AdSlot slotId="content-top" size="320x50" />
-        </div>
         <HubCommunityStrip businessVariant="news" />
-        <p className="type-eyebrow mt-8 text-[var(--accent)]">From other publishers</p>
-        <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-          Chennai headlines — bulletin wiring in progress
+        <h1 className="type-display mt-8 text-3xl text-[var(--foreground)] sm:text-4xl">
+          Chennai local news
         </h1>
         <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-          Our filed Chennai reports will appear in the bulletin as we publish.
-          For now, here are hand-picked links from trusted outlets covering
-          Chennai and nearby — similar beats, in plain language, once our own
-          stories are live.
-        </p>
-
-        <ul className="mt-10 space-y-4">
-          {wire.map((a) => (
-            <li
-              key={a.href}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-            >
-              <a
-                href={a.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
-              >
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
-                  {a.category}
-                  {a.source ? ` · ${a.source}` : ""}
-                </span>
-                <span className="mt-1 block text-sm font-semibold">{a.title}</span>
-                {a.excerpt ? (
-                  <span className="mt-2 block text-xs leading-relaxed text-[var(--muted)]">
-                    {a.excerpt}
-                  </span>
-                ) : null}
-                <span className="mt-2 block text-xs text-[var(--muted)]">
-                  {a.date} · opens in new tab
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-8 max-w-2xl text-sm text-[var(--muted)]">
-          Looking for work meanwhile?{" "}
+          Published stories will appear here as the desk files them. Have a tip?
+          Send dates, locations, and links via{" "}
           <Link
-            href={CHENNAI_JOBS_HUB_PATH}
+            href="/contact#news"
             className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
           >
-            Jobs in Chennai
+            Contact → Story tips
           </Link>
-          {" · "}
-          <Link
-            href="/guides/chennai-tech-careers"
-            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-          >
-            How to read job ads
-          </Link>
+          .
         </p>
-
         <InteriorCrossNav />
       </div>
     );

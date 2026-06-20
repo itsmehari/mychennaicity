@@ -1,5 +1,5 @@
 /**
- * Mylapore Kapaleeshwarar Panguni 2026 — rich presentation (`festival_rich`) + hub placeholders.
+ * Mylapore Kapaleeshwarar Panguni 2026 — rich presentation (`festival_rich`).
  *
  * Live: `tsx scripts/seed-event-mylapore-panguni-2026.ts --live`
  * Dev:  `tsx scripts/seed-event-mylapore-panguni-2026.ts`
@@ -45,29 +45,6 @@ const DESCRIPTION = `Panguni Peruvizha at Sri Kapaleeshwarar Temple, Mylapore �
 /** End of Vidaiyatri window (12 Apr 2026) — keeps event listable through the period. */
 const ENDS_IST = new Date("2026-04-12T18:30:00.000Z");
 const STARTS_IST = new Date("2026-03-21T18:30:00.000Z"); // 22 Mar 2026 00:00 IST
-
-const PLACEHOLDER_EVENTS = [
-  {
-    slug: "chennai-heritage-walk-mylapore-apr-2026",
-    title: "Heritage walk — Mylapore tank & lanes (sample)",
-    description:
-      "Placeholder listing so the events hub stays populated when only DB rows are shown. Replace with a real organiser event when available.",
-    startsAt: new Date("2026-04-05T04:30:00.000Z"),
-    endsAt: new Date("2026-04-05T06:30:00.000Z"),
-    venueName: "Mylapore",
-    localityLabel: "Mylapore",
-  },
-  {
-    slug: "classical-concert-sabha-chennai-apr-2026",
-    title: "Kutcheri season — weekend slot (sample)",
-    description:
-      "Placeholder for the Chennai events hub. Confirm venue and tickets on the sabha or organiser site.",
-    startsAt: new Date("2026-04-08T10:30:00.000Z"),
-    endsAt: new Date("2026-04-08T12:30:00.000Z"),
-    venueName: "T. Nagar / Sabha corridor",
-    localityLabel: "T. Nagar",
-  },
-] as const;
 
 async function insertIfMissing(
   cityId: string,
@@ -141,21 +118,6 @@ async function main() {
     contentRef: MYLAPORE_KAPALI_PANGUNI_2026_REF,
   });
 
-  for (const p of PLACEHOLDER_EVENTS) {
-    await insertIfMissing(city.id, {
-      slug: p.slug,
-      title: p.title,
-      description: p.description,
-      startsAt: p.startsAt,
-      endsAt: p.endsAt,
-      allDay: false,
-      venueName: p.venueName,
-      localityLabel: p.localityLabel,
-      featured: false,
-      presentationKey: null,
-      contentRef: null,
-    });
-  }
   await finishListingSeedLive({ eventSlug: SLUG, label: "event-seed" });
 }
 

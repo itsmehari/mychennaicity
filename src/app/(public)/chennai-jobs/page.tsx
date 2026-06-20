@@ -11,7 +11,6 @@ import {
   listOpenJobPostingsForChennaiHub,
 } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
-import { homeStats, mockJobs } from "@/lib/home-mock";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
@@ -136,15 +135,15 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
           </>
         ) : (
           <>
-            Curated sample rows for Chennai-area roles (OMR, Guindy, city desks)
-            — not an exhaustive job portal. Where we list real openings from our
-            database, we verify the employer first; this fallback is illustrative
-            only. Each sample row opens the employer&apos;s careers site; read the
-            full JD and confirm location. List as of{" "}
-            <strong className="font-medium text-[var(--foreground)]">
-              {snapshotAsOf}
-            </strong>{" "}
-            (IST).
+            Open roles in Chennai and nearby will appear here as employers list
+            with us. Hiring locally? Send role, company, and apply link via{" "}
+            <Link
+              href="/contact#jobs"
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              Contact → Jobs
+            </Link>
+            .
           </>
         )}
       </p>
@@ -155,12 +154,10 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
             Open now
           </p>
           <p className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
-            {useDb ? total : `${homeStats.jobsLive}+`}
+            {useDb ? total : "—"}
           </p>
           <p className="text-xs text-[var(--muted)]">
-            {useDb
-              ? "Jobs listed on this page"
-              : "Illustrative tally — same source as the home jobs strip"}
+            {useDb ? "Jobs listed on this page" : "No open listings yet"}
           </p>
         </div>
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-center shadow-sm sm:text-left">
@@ -233,33 +230,18 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
                 </Link>
               </li>
             ))
-          : mockJobs.map((j) => (
-              <li
-                key={`${j.href}-${j.title}`}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
-              >
-                {j.external ? (
-                  <a
-                    href={j.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-[var(--foreground)] transition hover:text-[var(--accent)]"
-                  >
-                    <span className="text-sm font-semibold">{j.title}</span>
-                    <span className="mt-1 block text-xs text-[var(--muted)]">
-                      {j.company} · {j.location} · opens in new tab
-                    </span>
-                  </a>
-                ) : (
-                  <div className="text-[var(--foreground)]">
-                    <span className="text-sm font-semibold">{j.title}</span>
-                    <span className="mt-1 block text-xs text-[var(--muted)]">
-                      {j.company} · {j.location} · apply on site (soon)
-                    </span>
-                  </div>
-                )}
+          : (
+              <li className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] px-5 py-6 text-sm text-[var(--muted)]">
+                No job listings yet. Employers can submit via{" "}
+                <Link
+                  href="/contact#jobs"
+                  className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+                >
+                  Contact → Jobs
+                </Link>
+                .
               </li>
-            ))}
+            )}
       </ul>
 
       {useDb && totalPages > 1 ? (
@@ -315,29 +297,28 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
             fine print on base office and tax state.
           </li>
           <li>
-            <strong className="text-[var(--foreground)]">Coming next.</strong>{" "}
-            Saved searches, email alerts, and on-site applications will follow
-            once listings stay authenticated in our database.
+            <strong className="text-[var(--foreground)]">List with us.</strong>{" "}
+            Employers can send role details via{" "}
+            <Link
+              href="/contact#jobs"
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              Contact → Jobs
+            </Link>
+            .
           </li>
         </ul>
       </Section>
 
       <p className="mt-10 text-sm text-[var(--muted)]">
-        Hiring in Chennai and want a mention? Watch{" "}
+        Hiring in Chennai? Send role details via{" "}
         <Link
-          href="/chennai-local-news/topic/economy"
+          href="/contact#jobs"
           className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
         >
-          Economy
-        </Link>{" "}
-        and{" "}
-        <Link
-          href="/chennai-local-news"
-          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-        >
-          Chennai local news
-        </Link>{" "}
-        for submission openings.
+          Contact → Jobs in Chennai
+        </Link>
+        .
       </p>
 
       <ChennaiJobsPartnerBanner slotId="jobs-index-mid" className="mt-14" />

@@ -91,8 +91,7 @@ export function NewsletterModal({
               id={descId}
               className="type-lede mt-2 text-sm leading-relaxed text-[var(--muted)]"
             >
-              Jobs, civic deadlines, weekend events — one concise email when we
-              launch delivery. No spam.
+              Jobs, civic deadlines, weekend events — one concise email. No spam.
             </p>
           </div>
 

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const ALERT = {
   message:
-    "Northeast monsoon readiness: GCC desilting dashboards and ward helplines — guides coming soon.",
-  href: "/chennai-local-news",
-  cta: "Read local news",
+    "Monsoon prep: GCC desilting and ward helplines — follow our Chennai civic desk for updates.",
+  href: "/chennai-local-news/topic/chennai",
+  cta: "Civic & GCC news",
 };
 
 export function AlertBar() {

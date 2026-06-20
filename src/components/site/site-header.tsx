@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
+import { SiteSearchForm } from "./site-search-form";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,14 +46,7 @@ export function SiteHeader() {
           >
             WhatsApp
           </Link>
-          <button
-            type="button"
-            className="focus-ring hidden min-h-11 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--muted)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--foreground)] sm:inline-flex"
-            aria-disabled
-            title="Search coming soon"
-          >
-            Search
-          </button>
+          <SiteSearchForm />
           <button
             type="button"
             className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-[var(--foreground)] md:hidden"

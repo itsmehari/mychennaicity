@@ -35,7 +35,7 @@ export function ContactServiceGrid() {
         const waHref = waCopy && waDesk ? businessWhatsAppHref(waCopy) : null;
 
         return (
-          <article key={channel.id} className={cardClass}>
+          <article key={channel.id} id={channel.id} className={cardClass}>
             <h2 className="text-base font-semibold text-[var(--foreground)]">
               {channel.title}
             </h2>

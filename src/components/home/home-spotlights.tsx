@@ -4,7 +4,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
-import { mockEvents, mockJobs } from "@/lib/home-mock";
+import type { HomeSpotlightEvent, HomeSpotlightJob } from "@/lib/home-feed";
 
 let scrollTriggerRegistered = false;
 
@@ -14,29 +14,22 @@ function ensureScrollTrigger() {
   scrollTriggerRegistered = true;
 }
 
-/** Extra shadow on hover; lift comes from `.home-bento-tile:hover`. */
-const cardHover = "transition-shadow duration-200 ease-out hover:shadow-lg";
+const cardHover =
+  "transition-shadow duration-200 ease-out hover:shadow-lg";
 
-/**
- * Jobs spotlight list — scroll stagger + horizontal snap rail on small screens.
- */
-export function JobsSpotlightList() {
+export function JobsSpotlightList({ jobs }: { jobs: HomeSpotlightJob[] }) {
   const rootRef = useRef<HTMLUListElement>(null);
 
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     ensureScrollTrigger();
     const items = root.querySelectorAll<HTMLElement>("[data-spotlight-item]");
     if (!items.length) return;
 
     gsap.set(items, { opacity: 0, y: 22 });
-
     const ctx = gsap.context(() => {
       gsap.to(items, {
         opacity: 1,
@@ -51,9 +44,10 @@ export function JobsSpotlightList() {
         },
       });
     }, root);
-
     return () => ctx.revert();
-  }, []);
+  }, [jobs]);
+
+  if (jobs.length === 0) return null;
 
   return (
     <ul
@@ -61,7 +55,7 @@ export function JobsSpotlightList() {
       className="home-spotlight-jobs flex flex-nowrap gap-4 overflow-x-auto overflow-y-visible pb-3 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] snap-x snap-mandatory scroll-pl-4 scroll-pr-4 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:pl-0 sm:pr-0 sm:snap-none lg:grid-cols-4"
       aria-label="Featured job listings"
     >
-      {mockJobs.map((j, i) => {
+      {jobs.map((j, i) => {
         const className = `home-spotlight-link home-bento-tile ${cardHover} flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${
           i === 0
             ? "relative overflow-hidden bg-[color-mix(in_srgb,var(--accent)_7%,var(--surface))] before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(120deg,transparent_40%,color-mix(in_srgb,var(--accent)_12%,transparent)_100%)] lg:min-h-[11rem] lg:flex-row lg:items-center lg:gap-8 lg:p-8"
@@ -71,7 +65,7 @@ export function JobsSpotlightList() {
           <>
             <div className={i === 0 ? "lg:max-w-md" : ""}>
               <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-                {i === 0 ? "Featured role" : j.external ? "Employer site" : "Open role"}
+                {i === 0 ? "Featured role" : "Open role"}
               </p>
               <p
                 className={`mt-1 font-semibold text-[var(--foreground)] ${
@@ -87,8 +81,7 @@ export function JobsSpotlightList() {
                 i === 0 ? "lg:ml-auto lg:text-sm" : ""
               }`}
             >
-              {j.location}
-              {j.external ? " · ↗" : ""}
+              {j.location} · View listing
             </p>
           </>
         );
@@ -123,26 +116,19 @@ export function JobsSpotlightList() {
   );
 }
 
-/**
- * Featured events list — scroll stagger + horizontal snap rail on small screens.
- */
-export function EventsFeaturedList() {
+export function EventsFeaturedList({ events }: { events: HomeSpotlightEvent[] }) {
   const rootRef = useRef<HTMLUListElement>(null);
 
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     ensureScrollTrigger();
     const items = root.querySelectorAll<HTMLElement>("[data-spotlight-item]");
     if (!items.length) return;
 
     gsap.set(items, { opacity: 0, y: 22 });
-
     const ctx = gsap.context(() => {
       gsap.to(items, {
         opacity: 1,
@@ -157,9 +143,10 @@ export function EventsFeaturedList() {
         },
       });
     }, root);
-
     return () => ctx.revert();
-  }, []);
+  }, [events]);
+
+  if (events.length === 0) return null;
 
   return (
     <ul
@@ -167,7 +154,7 @@ export function EventsFeaturedList() {
       className="home-spotlight-events flex flex-nowrap gap-4 overflow-x-auto overflow-y-visible pb-3 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] snap-x snap-mandatory scroll-pl-4 scroll-pr-4 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0 lg:pl-0 lg:pr-0 lg:snap-none"
       aria-label="Featured events"
     >
-      {mockEvents.map((e, i) => {
+      {events.map((e, i) => {
         const className = `home-spotlight-link home-bento-tile ${cardHover} flex rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${
           i === 0
             ? "flex-col gap-4 border-l-4 border-l-[var(--accent-warm)] p-6 sm:flex-row sm:items-center sm:justify-between"
@@ -177,7 +164,7 @@ export function EventsFeaturedList() {
           <>
             <div className="flex min-w-0 flex-1 flex-col gap-1">
               <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-warm)]">
-                {i === 0 ? "Headline" : e.external ? "Tickets / info" : "On our calendar"}
+                {i === 0 ? "Headline" : "On our calendar"}
               </p>
               <p
                 className={`font-semibold text-[var(--foreground)] ${
@@ -190,7 +177,6 @@ export function EventsFeaturedList() {
             </div>
             <p className="shrink-0 rounded-xl bg-[color-mix(in_srgb,var(--accent-warm)_12%,var(--surface))] px-4 py-2 text-center text-xs font-bold text-[var(--accent-warm)] sm:text-left">
               {e.where}
-              {e.external ? " · ↗" : ""}
             </p>
           </>
         );
@@ -198,10 +184,10 @@ export function EventsFeaturedList() {
           <li
             key={`${e.href}-${e.title}`}
             data-spotlight-item
-            className={`shrink-0 snap-center first:pl-0 lg:first:pl-0 ${
+            className={`shrink-0 snap-center first:pl-0 lg:min-w-0 ${
               i === 0
-                ? "min-w-[min(92vw,24rem)] lg:col-span-2 lg:min-w-0"
-                : "min-w-[min(85vw,18rem)] lg:min-w-0"
+                ? "min-w-[min(92vw,22rem)] lg:col-span-2"
+                : "min-w-[min(78vw,17rem)]"
             }`}
           >
             {e.external ? (

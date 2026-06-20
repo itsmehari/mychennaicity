@@ -13,7 +13,7 @@ import {
 } from "@/lib/article-hero-image";
 import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
-import { AdSlot } from "@/ads/render-ad-slot";
+import { ArticleAdRegion } from "@/ads/article-ad-region";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
@@ -408,13 +408,21 @@ export async function EditorialArticle({
 
   const adTop = (
     <div className="flex w-full justify-center">
-      <AdSlot slotId="article-top" size="728x90" />
+      <ArticleAdRegion
+        slotId="article-top"
+        size="728x90"
+        adsenseSlotEnvKey="ARTICLE_TOP"
+      />
     </div>
   );
 
   const adMid = (
     <div className="flex w-full justify-center">
-      <AdSlot slotId="article-mid" size="300x250" />
+      <ArticleAdRegion
+        slotId="article-mid"
+        size="300x250"
+        adsenseSlotEnvKey="ARTICLE_MID"
+      />
     </div>
   );
 
@@ -422,7 +430,11 @@ export async function EditorialArticle({
 
   const adEnd = (
     <div className="flex w-full justify-center">
-      <AdSlot slotId="article-end" size="320x50" />
+      <ArticleAdRegion
+        slotId="article-end"
+        size="320x50"
+        adsenseSlotEnvKey="ARTICLE_END"
+      />
     </div>
   );
 

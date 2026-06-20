@@ -11,7 +11,7 @@ import {
 } from "@/components/site/interior-chrome";
 import { HomeTrustStrip } from "@/components/home/home-content";
 import { listDirectoryEntriesForChennaiHub } from "@/domains/directory";
-import { categoryTiles, mockListings } from "@/lib/home-mock";
+import { categoryTiles } from "@/lib/home-mock";
 import { directoryTypeLabel } from "@/lib/directory/type-labels";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
@@ -23,7 +23,7 @@ const titleSegment = "Chennai directory — schools, services & places";
 export const metadata: Metadata = {
   title: titleSegment,
   description:
-    "Schools, hospitals, food, transit, and civic listings across Chennai and nearby — browse categories and samples on mychennaicity.in.",
+    "Schools, hospitals, food, transit, and civic listings across Chennai and nearby — browse verified entries on mychennaicity.in.",
   alternates: { canonical: `${getSiteUrl()}/directory` },
   openGraph: {
     title: fullSiteTitle(titleSegment),
@@ -126,7 +126,7 @@ export default async function DirectoryPage() {
                   {c.label}
                 </span>
                 <span className="mt-1 text-xs font-medium text-[var(--muted)]">
-                  {c.count === "—" ? "Listings syncing soon" : `${c.count} listings`}
+                  {c.count === "—" ? "Listings in progress" : `${c.count} listings`}
                 </span>
               </div>
             </li>
@@ -136,16 +136,16 @@ export default async function DirectoryPage() {
 
       <Section
         className="mt-14"
-        eyebrow={hasLive ? "Local business listings" : "Sample listings"}
+        eyebrow={hasLive ? "Local business listings" : "Directory"}
         title={
           hasLive
             ? "Businesses listed on mychennaicity.in"
-            : "What a neighbourhood row will look like"
+            : "Listings are being added neighbourhood by neighbourhood"
         }
         subtitle={
           hasLive
             ? "Reader and business listings — confirm prices, availability, and delivery with the contact on each page."
-            : "Illustrative snapshots — not live inventory. Prices and availability must be confirmed with the poster."
+            : "We are onboarding schools, health, food, and civic listings. Have a place to add? Contact us with name, area, and phone."
         }
       >
         {hasLive ? (
@@ -179,24 +179,19 @@ export default async function DirectoryPage() {
             ))}
           </ul>
         ) : (
-          <ul className="grid gap-4 md:grid-cols-3">
-            {mockListings.map((m) => (
-              <li
-                key={m.title}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-sm"
+          <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_96%,var(--accent))] px-5 py-8 text-sm text-[var(--muted)]">
+            <p>
+              No public directory rows are live yet. Send a listing via{" "}
+              <Link
+                href="/contact#directory"
+                className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
               >
-                <p className="text-sm font-semibold text-[var(--foreground)]">
-                  {m.title}
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">
-                  {m.price} · {m.area}
-                </p>
-                <span className="mt-3 inline-block text-xs font-medium text-[var(--muted)]">
-                  Claim / edit flow — coming soon
-                </span>
-              </li>
-            ))}
-          </ul>
+                Contact &amp; tips
+              </Link>{" "}
+              with the business name, category, and locality. We verify before
+              publishing.
+            </p>
+          </div>
         )}
       </Section>
 
@@ -204,19 +199,20 @@ export default async function DirectoryPage() {
         <Section
           eyebrow="For businesses and residents"
           title="List with us"
-          subtitle="When submissions open you will be able to add a place, mark hours, and link to maps — with basic verification to reduce spam."
+          subtitle="Send your place via Contact — name, category, area, and hours if you have them. We verify before publishing to reduce spam."
         >
           <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_96%,var(--accent))] px-5 py-6 text-sm text-[var(--muted)]">
             <p>
-              We plan to open civic and GCC-related listings first, then
-              food and health, then retail and services. Follow{" "}
+              Civic and GCC-related listings, food and health, retail, and
+              services are all welcome. Use{" "}
               <Link
-                href="/chennai-local-news"
+                href="/contact#directory"
                 className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
               >
-                Chennai local news
+                Directory &amp; listings
               </Link>{" "}
-              for the announcement.
+              on the contact page, or message us on WhatsApp from the same
+              form.
             </p>
           </div>
         </Section>

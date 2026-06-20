@@ -1,4 +1,4 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, count, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, directoryEntries } from "@/db/schema/tables";
 import {
@@ -50,6 +50,17 @@ export async function listDirectoryEntriesForChennaiHub(limit = 24) {
     .orderBy(desc(directoryEntries.updatedAt))
     .limit(limit);
   return rows.map(toView);
+}
+
+export async function countDirectoryEntriesForChennaiHub(): Promise<number> {
+  const cityId = await getChennaiCityId();
+  if (!cityId) return 0;
+  const db = getDb();
+  const [row] = await db
+    .select({ n: count() })
+    .from(directoryEntries)
+    .where(eq(directoryEntries.cityId, cityId));
+  return Number(row?.n ?? 0);
 }
 
 export async function getDirectoryEntryByTypeAndSlug(

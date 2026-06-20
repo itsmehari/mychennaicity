@@ -14,9 +14,7 @@ import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
 import {
   buildHubCardFromDb,
-  buildHubCardFromMock,
 } from "@/lib/events/event-hub-helpers";
-import { homeStats, mockEvents } from "@/lib/home-mock";
 import { buildEventsHubJsonLdGraph } from "@/lib/seo/events-hub-jsonld";
 import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { EventsHubFaq } from "@/components/events/events-hub-faq";
@@ -55,7 +53,6 @@ export const dynamic = "force-dynamic";
 
 export default async function ChennaiLocalEventsPage() {
   let dbEvents: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
-  const sampleAsOf = formatIndiaLongDate();
   try {
     dbEvents = await listPublicEventsForChennaiHub(40);
   } catch {
@@ -63,9 +60,7 @@ export default async function ChennaiLocalEventsPage() {
   }
   const useDb = dbEvents.length > 0;
   const hubLd = useDb ? buildEventsHubJsonLdGraph(dbEvents) : null;
-  const hubCards = useDb
-    ? dbEvents.map(buildHubCardFromDb)
-    : mockEvents.map(buildHubCardFromMock);
+  const hubCards = dbEvents.map(buildHubCardFromDb);
 
   return (
     <div className={interiorMainClassName}>
@@ -96,12 +91,14 @@ export default async function ChennaiLocalEventsPage() {
         ) : (
           <>
             {" "}
-            Below is a{" "}
-            <strong className="font-medium text-[var(--foreground)]">
-              sample list ({sampleAsOf})
-            </strong>
-            — illustrative only; confirm dates, venue gates, and tickets on the
-            organiser or ticket site before you travel.
+            Listings are added as organisers share dates — send yours via{" "}
+            <Link
+              href="/contact#events"
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              Contact → Local events
+            </Link>
+            .
           </>
         )}
       </p>
@@ -113,13 +110,13 @@ export default async function ChennaiLocalEventsPage() {
       <div className="mt-8 flex flex-wrap gap-3">
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 shadow-sm">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent-warm)]">
-            This week on the home page
+            Upcoming listings
           </p>
           <p className="mt-1 text-lg font-semibold text-[var(--foreground)]">
-            {homeStats.eventsWeek} picks
+            {useDb ? dbEvents.length : 0}
           </p>
           <p className="text-xs text-[var(--muted)]">
-            Rotating spotlight — not an exhaustive city calendar
+            Scheduled events on mychennaicity.in
           </p>
         </div>
         <Link
@@ -148,7 +145,20 @@ export default async function ChennaiLocalEventsPage() {
 
       <HubCommunityStrip businessVariant="events" />
 
-      <EventsHubListing cards={hubCards} />
+      {useDb ? (
+        <EventsHubListing cards={hubCards} />
+      ) : (
+        <div className="mt-10 rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] px-5 py-8 text-sm text-[var(--muted)]">
+          No events are listed yet. Share date, venue, and ticket link via{" "}
+          <Link
+            href="/contact#events"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            Contact → Local events
+          </Link>
+          .
+        </div>
+      )}
 
       <EventsHubFaq />
 
@@ -171,14 +181,14 @@ export default async function ChennaiLocalEventsPage() {
           </li>
           <li>
             <strong className="text-[var(--foreground)]">Submit yours.</strong>{" "}
-            Organisers will soon list free and paid events directly — follow{" "}
+            Organisers can send free and paid events via{" "}
             <Link
-              href="/directory"
+              href="/contact#events"
               className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
             >
-              Directory
-            </Link>{" "}
-            for the submission launch post.
+              Contact &amp; tips
+            </Link>
+            . Include date, venue, and a ticket or RSVP link when you have one.
           </li>
         </ul>
       </Section>

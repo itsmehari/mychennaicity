@@ -321,7 +321,7 @@ export const sponsors = [
   },
   {
     name: "Community signal",
-    blurb: "Tip lines + neighbourhood WhatsApp groups — coming soon on mychennaicity.in.",
+    blurb: "Tip lines and neighbourhood WhatsApp groups — see Contact and our WhatsApp community page.",
     href: "/chennai-local-news",
     external: false,
   },

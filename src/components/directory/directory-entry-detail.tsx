@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { DirectoryEntryView } from "@/domains/directory";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import { directoryTypeLabel } from "@/lib/directory/type-labels";
@@ -129,6 +130,16 @@ export function DirectoryEntryDetail({ entry }: { entry: DirectoryEntryView }) {
               Call {phoneDisplay}
             </a>
           ) : null}
+          <p className="mt-4 text-xs leading-relaxed text-[var(--muted)]">
+            Own this listing or spot an error?{" "}
+            <Link
+              href="/contact#directory"
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              Contact us to claim or update
+            </Link>
+            .
+          </p>
         </aside>
       </div>
     </article>

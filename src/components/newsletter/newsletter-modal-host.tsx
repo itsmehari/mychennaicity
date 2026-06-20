@@ -10,6 +10,7 @@ import {
   SS_NEWSLETTER_AUTO_SHOWN,
   newsletterRuleForPathname,
 } from "@/config/newsletter-modal";
+import { isNewsletterAutoModalEnabled } from "@/lib/feature-flags";
 import { NewsletterModal } from "./newsletter-modal";
 
 function readLs(key: string): string | null {
@@ -90,6 +91,7 @@ export function NewsletterModalHost() {
 
   /** Auto-open from rule (new timer/scroll listener per pathname) */
   useEffect(() => {
+    if (!isNewsletterAutoModalEnabled()) return;
     if (!rule) return;
     if (skipAuto()) return;
 

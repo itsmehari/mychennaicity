@@ -1,9 +1,19 @@
 import type { PublicArticleRow } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
 
-/** Stable placeholder per slug when DB has no hero (matches seed script). */
+/** Site-owned editorial fallback when DB has no hero (matches seed script). */
+export const DEFAULT_ARTICLE_HERO_PATH = "/images/explore-chennai-madras-high-court.jpg";
+
+/** @deprecated Use {@link defaultArticleHeroPath} — Picsum is not used on public pages. */
 export function picsumHeroUrlForSlug(slug: string, width = 800, height = 500): string {
-  return `https://picsum.photos/seed/${encodeURIComponent(slug)}/${width}/${height}`;
+  void slug;
+  void width;
+  void height;
+  return DEFAULT_ARTICLE_HERO_PATH;
+}
+
+export function defaultArticleHeroPath(): string {
+  return DEFAULT_ARTICLE_HERO_PATH;
 }
 
 const NEXT_IMAGE_REMOTE_HOSTS = new Set([
@@ -35,7 +45,9 @@ export function normalizeArticleHeroUrl(
 ): string | null {
   const raw = heroImageUrl?.trim();
   if (!raw) return null;
-  if (/^https?:\/\//i.test(raw)) return raw;
+  if (/^https?:\/\//i.test(raw)) {
+    return raw.replace(/^http:\/\//i, "https://");
+  }
   if (raw.startsWith("/")) return raw;
   return null;
 }
@@ -49,7 +61,7 @@ export function resolveArticleHeroSrc(
 ): string {
   const normalized = normalizeArticleHeroUrl(article.heroImageUrl);
   if (!normalized) {
-    return picsumHeroUrlForSlug(article.slug);
+    return defaultArticleHeroPath();
   }
 
   if (normalized.startsWith("/")) {

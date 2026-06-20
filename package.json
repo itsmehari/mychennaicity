@@ -95,6 +95,9 @@
     "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:push:production-env": "drizzle-kit push --force",
     "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts",
+    "adsense:verify": "tsx scripts/verify-adsense-readiness.ts",
+    "links:verify:live": "tsx scripts/verify-production-links.ts",
+    "db:seed:adsense-readiness:live": "tsx scripts/seed-adsense-readiness-live.ts",
     "geo:build": "tsx scripts/build-chennai-map-data.ts",
     "election-map:build": "tsx scripts/build-election-map-data.ts"
   },

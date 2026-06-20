@@ -6,12 +6,16 @@ import {
 } from "@/components/home/home-spotlights";
 import {
   cityPulseBullets,
-  homeStats,
-  mockListings,
   sponsors,
   trendingTags,
   zoneShortcuts,
 } from "@/lib/home-mock";
+import type {
+  HomeDirectoryTeaser,
+  HomeLiveCounts,
+  HomeSpotlightEvent,
+  HomeSpotlightJob,
+} from "@/lib/home-feed";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { HomeExploreChennai } from "./home-explore-chennai";
@@ -137,23 +141,23 @@ export function HomeZoneShortcuts() {
   );
 }
 
-export function HomeStatsRibbon() {
+export function HomeStatsRibbon({ counts }: { counts: HomeLiveCounts }) {
   const stats = [
     {
-      value: `${homeStats.jobsLive}+`,
-      label: "Sample job picks",
+      value: String(counts.jobs),
+      label: "Open jobs",
       Icon: IconBriefcase,
       tint: "var(--accent)",
     },
     {
-      value: String(homeStats.eventsWeek),
-      label: "Sample event picks",
+      value: String(counts.events),
+      label: "Upcoming events",
       Icon: IconCalendar,
       tint: "var(--accent-warm)",
     },
     {
-      value: String(homeStats.guidesNew),
-      label: "New guides (mock)",
+      value: String(counts.articles),
+      label: "Published stories",
       Icon: IconSpark,
       tint: "var(--accent)",
     },
@@ -188,62 +192,108 @@ export function HomeStatsRibbon() {
   );
 }
 
-export function HomeJobsSpotlight() {
+export function HomeJobsSpotlight({
+  jobs,
+  total,
+}: {
+  jobs: HomeSpotlightJob[];
+  total: number;
+}) {
+  if (jobs.length === 0) return null;
   const asOf = formatIndiaLongDate();
   return (
     <Section
       eyebrow="Careers"
       title="Jobs spotlight"
-      subtitle={`Illustrative picks (${asOf}) from Chennai employers and public listings. Links open each company’s careers page — read the ad there before you apply. On your phone, swipe sideways to browse.`}
+      subtitle={`${total} open role${total === 1 ? "" : "s"} in Chennai (${asOf}). Read the full post on mychennaicity.in — apply on the employer’s site when listed.`}
       action={{ href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" }}
     >
-      <JobsSpotlightList />
+      <JobsSpotlightList jobs={jobs} />
     </Section>
   );
 }
 
-export function HomeEventsFeatured() {
+export function HomeEventsFeatured({
+  events,
+  total,
+}: {
+  events: HomeSpotlightEvent[];
+  total: number;
+}) {
+  if (events.length === 0) return null;
   const asOf = formatIndiaLongDate();
   return (
     <Section
       eyebrow="Calendar"
       title="Featured events"
-      subtitle={`Illustrative picks (${asOf}) from public listings. External rows open the organiser or ticket page — confirm time and price before you go. On narrow screens, swipe sideways to browse.`}
+      subtitle={`${total} upcoming event${total === 1 ? "" : "s"} around Chennai (${asOf}). Confirm time, venue, and tickets on each listing page.`}
       action={{ href: "/chennai-local-events", label: "All local events" }}
     >
-      <EventsFeaturedList />
+      <EventsFeaturedList events={events} />
     </Section>
   );
 }
 
-export function HomeMarketplaceTeaser() {
+export function HomeMarketplaceTeaser({
+  listings,
+  total,
+}: {
+  listings: HomeDirectoryTeaser[];
+  total: number;
+}) {
   return (
     <Section
-      eyebrow="Peer listings"
-      title="Marketplace teaser"
-      subtitle="Sample tiles only — peer listings and classifieds will share one moderation pipeline once submissions open."
-      action={{ href: "/directory", label: "Browse directory samples" }}
+      eyebrow="Directory"
+      title={
+        listings.length > 0
+          ? "Places & services on mychennaicity.in"
+          : "List your business"
+      }
+      subtitle={
+        listings.length > 0
+          ? `${total} listing${total === 1 ? "" : "s"} in the Chennai directory — verify details with each contact before you pay or visit.`
+          : "Send name, category, and area via Contact — we verify before publishing."
+      }
+      action={{
+        href: listings.length > 0 ? "/directory" : "/contact#directory",
+        label: listings.length > 0 ? "Full directory" : "Submit a listing",
+      }}
     >
-      <ul className="grid gap-4 md:grid-cols-3">
-        {mockListings.map((l) => (
-          <li key={l.title}>
+      {listings.length > 0 ? (
+        <ul className="grid gap-4 md:grid-cols-3">
+          {listings.map((l) => (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                className="home-bento-tile flex h-full flex-col rounded-2xl border border-[var(--border)] border-t-4 border-t-[var(--accent-warm)] bg-[color-mix(in_srgb,var(--surface)_94%,var(--accent-warm)_3%)] p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                <p className="text-sm font-bold text-[var(--foreground)]">
+                  {l.title}
+                </p>
+                <p className="mt-2 text-xs font-medium text-[var(--muted)]">
+                  {l.subtitle}
+                </p>
+                <span className="mt-4 text-xs font-semibold text-[var(--accent)]">
+                  View listing →
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] px-5 py-6 text-sm text-[var(--muted)]">
+          <p>
+            Directory listings are added by request. Use{" "}
             <Link
-              href={l.href}
-              className="home-bento-tile flex flex-col rounded-2xl border border-[var(--border)] border-t-4 border-t-[var(--accent-warm)] bg-[color-mix(in_srgb,var(--surface)_94%,var(--accent-warm)_3%)] p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              href="/contact#directory"
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
             >
-              <p className="text-sm font-bold text-[var(--foreground)]">
-                {l.title}
-              </p>
-              <p className="mt-3 text-lg font-bold text-[var(--accent)]">
-                {l.price}
-              </p>
-              <p className="mt-2 text-xs font-medium text-[var(--muted)]">
-                {l.area}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              Contact → Directory &amp; listings
+            </Link>{" "}
+            with business name, area, and phone.
+          </p>
+        </div>
+      )}
     </Section>
   );
 }
@@ -253,7 +303,7 @@ export function HomeTrendingTags() {
     <Section
       eyebrow="Discover"
       title="Trending topics"
-      subtitle="Tag links go to local news for now; search across tags may come later."
+      subtitle="Topic links across Chennai local news, jobs, and events."
     >
       <div className="flex flex-wrap gap-2">
         {trendingTags.map((t) => (

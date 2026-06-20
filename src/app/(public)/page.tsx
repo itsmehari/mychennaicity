@@ -26,6 +26,7 @@ import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-ct
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
 import { homeNewsBulletinCached } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
+import { loadHomeFeedData } from "@/lib/home-feed";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 /**
@@ -75,6 +76,8 @@ export default async function Home() {
   const editorPicks =
     featured.length > 0 ? featured : latest.slice(0, 3);
 
+  const feed = await loadHomeFeedData();
+
   return (
     <>
       <HomeJsonLd />
@@ -106,15 +109,21 @@ export default async function Home() {
           </Section>
         </HomeSectionFrame>
         <HomeSectionFrame>
-          <HomeStatsRibbon />
+          <HomeStatsRibbon counts={feed.counts} />
         </HomeSectionFrame>
         <HomeSectionFrame>
-          <HomeJobsSpotlight />
+          <HomeJobsSpotlight jobs={feed.jobs} total={feed.counts.jobs} />
           <HomeSectionInnerRule>
-            <HomeEventsFeatured />
+            <HomeEventsFeatured
+              events={feed.events}
+              total={feed.counts.events}
+            />
           </HomeSectionInnerRule>
           <HomeSectionInnerRule>
-            <HomeMarketplaceTeaser />
+            <HomeMarketplaceTeaser
+              listings={feed.directory}
+              total={feed.counts.directory}
+            />
           </HomeSectionInnerRule>
         </HomeSectionFrame>
         <HomeSectionFrame>

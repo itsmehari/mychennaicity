@@ -50,7 +50,7 @@ export const newsletterModalRules: NewsletterModalRule[] = [
     id: "job-detail",
     match: (p) => {
       const s = segments(p);
-      return s.length === 2 && s[0] === "jobs";
+      return s.length === 2 && s[0] === "chennai-jobs";
     },
     delayMs: 18_000,
     scrollPercent: 45,

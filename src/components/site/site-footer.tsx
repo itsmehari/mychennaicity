@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-footer-trigger";
 import { chennaiZones } from "@/lib/chennai-zones";
+import { getOrgSocialLinks } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 
@@ -14,12 +15,10 @@ const newsLinks = [
 ];
 
 const discoverLinks = [
+  { href: "/search", label: "Search the site" },
   { href: "/glossary", label: "Chennai & GCC glossary" },
   { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
   { href: "/directory", label: "Full directory" },
-  { href: "/directory", label: "Schools & colleges" },
-  { href: "/directory", label: "Hospitals" },
-  { href: "/directory", label: "Food & dining" },
   { href: "/chennai-local-events", label: "Chennai local events" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
   { href: "/#areas", label: "Area map (home)" },
@@ -27,9 +26,9 @@ const discoverLinks = [
 
 const workLinks = [
   { href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" },
-  { href: CHENNAI_JOBS_HUB_PATH, label: "Post a job (soon)" },
-  { href: "/directory", label: "List your business" },
-  { href: "/chennai-local-events", label: "Submit an event (soon)" },
+  { href: "/contact#jobs", label: "Post a job" },
+  { href: "/contact#directory", label: "List your business" },
+  { href: "/contact#events", label: "Submit an event" },
 ];
 
 const companyLinks = [
@@ -43,6 +42,7 @@ const companyLinks = [
 const legalLinks = [
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms of use" },
+  { href: "/terms#disclaimer", label: "Disclaimer" },
   { href: "/cookies", label: "Cookies" },
   { href: "/community-guidelines", label: "Community guidelines" },
 ];
@@ -91,6 +91,7 @@ export function SiteFooter() {
     href: `/areas/${z.slug}`,
     label: z.label,
   }));
+  const socialLinks = getOrgSocialLinks();
 
   return (
     <footer
@@ -175,19 +176,21 @@ export function SiteFooter() {
                 >
                   WhatsApp
                 </Link>
-                {["Instagram", "YouTube", "X / Twitter"].map((label) => (
-                  <span
-                    key={label}
-                    className="inline-flex cursor-not-allowed items-center rounded-full border border-[var(--footer-border)] bg-[color-mix(in_srgb,var(--footer-elevated)_70%,var(--footer-bg))] px-3 py-1.5 text-xs font-medium text-[var(--footer-muted)]"
-                    title="Social links go live with community policy"
+                {socialLinks.map((s) => (
+                  <a
+                    key={s.href}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-full border border-[var(--footer-border)] bg-[var(--footer-elevated)] px-3 py-1.5 text-xs font-semibold text-[var(--footer-link)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]"
                   >
-                    {label}
-                  </span>
+                    {s.label}
+                  </a>
                 ))}
               </div>
             </div>
             <p className="mt-8 text-xs text-[var(--footer-muted)]">
-              Web-first · Mobile apps on the roadmap.
+              Web-first · English (தமிழ் pages in progress).
             </p>
           </div>
 
@@ -268,7 +271,7 @@ export function SiteFooter() {
               © {new Date().getFullYear()} mychennaicity.in
             </p>
             <p className="mt-1">
-              Chennai · Tamil Nadu · India · Content in English (தமிழ் soon)
+              Chennai · Tamil Nadu · India
             </p>
           </div>
         </div>
