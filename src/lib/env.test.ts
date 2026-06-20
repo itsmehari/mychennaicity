@@ -92,7 +92,7 @@ describe("orgSameAsUrls", () => {
     vi.resetModules();
   });
 
-  it("includes official Instagram when env is unset", async () => {
+  it("includes official profiles when env is unset", async () => {
     delete process.env.NEXT_PUBLIC_ORG_SAME_AS;
     vi.resetModules();
     const { orgSameAsUrls, OFFICIAL_ORG_SAME_AS_URLS } = await import("./env");
@@ -106,6 +106,7 @@ describe("orgSameAsUrls", () => {
     const { orgSameAsUrls } = await import("./env");
     expect(orgSameAsUrls()).toEqual([
       "https://www.instagram.com/mychennaicityportal/",
+      "https://x.com/my_chennaicity",
       "https://www.youtube.com/@mychennaicity",
     ]);
   });
@@ -117,7 +118,7 @@ describe("getOrgSocialLinks", () => {
     vi.resetModules();
   });
 
-  it("labels Instagram profile", async () => {
+  it("labels official social profiles", async () => {
     vi.resetModules();
     const { getOrgSocialLinks } = await import("./env");
     const links = getOrgSocialLinks();
@@ -125,5 +126,7 @@ describe("getOrgSocialLinks", () => {
     expect(links.some((l) => l.href.includes("instagram.com/mychennaicityportal"))).toBe(
       true,
     );
+    expect(links.some((l) => l.label === "X / Twitter")).toBe(true);
+    expect(links.some((l) => l.href.includes("x.com/my_chennaicity"))).toBe(true);
   });
 });

@@ -29,6 +29,7 @@ export const OFFICIAL_PUBLIC_CONTACT_EMAIL = "mychennaicityportal@gmail.com";
 /** Verified organization profiles for footer links and JSON-LD `sameAs`. */
 export const OFFICIAL_ORG_SAME_AS_URLS = [
   "https://www.instagram.com/mychennaicityportal/",
+  "https://x.com/my_chennaicity",
 ] as const;
 
 function parseSameAsEnv(raw: string | undefined): string[] {
