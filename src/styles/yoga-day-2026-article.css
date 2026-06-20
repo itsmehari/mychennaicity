@@ -1,0 +1,428 @@
+/* International Yoga Day 2026 — Chennai wellness editorial layout */
+
+.yoga-day-article {
+  --yoga-primary-green: #1f7a4d;
+  --yoga-deep-green: #0f3d2e;
+  --yoga-soft-green: #e9f7ef;
+  --yoga-light-sand: #fff7ea;
+  --yoga-sea-blue: #eaf6fb;
+  --yoga-text-dark: #1f2933;
+  --yoga-text-muted: #5f6b76;
+  --yoga-border-light: #dfe7e2;
+  --yoga-body-max: 780px;
+  --yoga-visual-max: 1120px;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-article__header {
+  max-width: var(--yoga-body-max);
+}
+
+.yoga-day-article__category {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yoga-primary-green);
+}
+
+.yoga-day-article__title {
+  margin-top: 0.75rem;
+  font-size: clamp(1.75rem, 4.2vw, 2.75rem);
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-article__excerpt {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--yoga-text-muted);
+}
+
+.yoga-day-article__meta {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--yoga-text-muted);
+}
+
+.yoga-day-article__hero {
+  margin-top: 1.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--yoga-border-light);
+}
+
+.yoga-day-article__hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.yoga-day-article__hero figcaption,
+.yoga-day-article__figure figcaption {
+  padding: 0.875rem 1rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--yoga-text-muted);
+  background: var(--yoga-soft-green);
+  border-top: 1px solid var(--yoga-border-light);
+}
+
+.yoga-day-fact-ribbon {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .yoga-day-fact-ribbon {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.yoga-day-fact-ribbon__item {
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--yoga-border-light);
+  background: #fff;
+}
+
+.yoga-day-fact-ribbon__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yoga-primary-green);
+}
+
+.yoga-day-fact-ribbon__value {
+  margin-top: 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-toc {
+  margin-top: 2rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--yoga-border-light);
+  background: var(--yoga-light-sand);
+}
+
+.yoga-day-toc__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-toc__list {
+  margin-top: 0.875rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.yoga-day-toc__list a {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--yoga-primary-green);
+  text-decoration: none;
+}
+
+.yoga-day-toc__list a:hover {
+  text-decoration: underline;
+}
+
+.yoga-day-body {
+  margin-top: 2.5rem;
+  max-width: var(--yoga-body-max);
+}
+
+.yoga-day-prose {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-prose > * + * {
+  margin-top: 1.125rem;
+}
+
+.yoga-day-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+  scroll-margin-top: 5rem;
+}
+
+.yoga-day-prose h2:first-child {
+  margin-top: 0;
+}
+
+.yoga-day-prose ul,
+.yoga-day-prose ol {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.yoga-day-prose li + li {
+  margin-top: 0.4rem;
+}
+
+.yoga-day-prose strong {
+  font-weight: 650;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-prose a {
+  color: var(--yoga-primary-green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.yoga-day-article__figure {
+  margin-top: 1.75rem;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  border: 1px solid var(--yoga-border-light);
+}
+
+.yoga-day-article__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.yoga-day-local-grid {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .yoga-day-local-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .yoga-day-local-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.yoga-day-local-card {
+  padding: 1rem 1.125rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--yoga-border-light);
+  background: #fff;
+}
+
+.yoga-day-local-card__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.yoga-day-local-card__title {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-local-card__line {
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--yoga-text-muted);
+}
+
+.yoga-day-local-card__line strong {
+  color: var(--yoga-text-dark);
+  font-weight: 600;
+}
+
+.yoga-day-safety {
+  margin-top: 1.75rem;
+  padding: 1.125rem 1.25rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--yoga-border-light);
+  border-left: 4px solid var(--yoga-primary-green);
+  background: var(--yoga-soft-green);
+}
+
+.yoga-day-safety__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-safety__text {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-event-callout {
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--yoga-primary-green) 25%, var(--yoga-border-light));
+  background: linear-gradient(
+    135deg,
+    var(--yoga-sea-blue) 0%,
+    var(--yoga-soft-green) 100%
+  );
+}
+
+.yoga-day-event-callout__eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yoga-primary-green);
+}
+
+.yoga-day-event-callout__title {
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-event-callout__details {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-event-callout__poster {
+  margin-top: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--yoga-border-light);
+}
+
+.yoga-day-event-callout__poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.yoga-day-faq {
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--yoga-border-light);
+}
+
+.yoga-day-faq__title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+  scroll-margin-top: 5rem;
+}
+
+.yoga-day-faq__list {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.yoga-day-faq__item {
+  padding: 1rem 1.125rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--yoga-border-light);
+  background: #fff;
+}
+
+.yoga-day-faq__question {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  color: var(--yoga-text-dark);
+}
+
+.yoga-day-faq__answer {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--yoga-text-muted);
+}
+
+.yoga-day-links {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--yoga-border-light);
+  background: var(--yoga-light-sand);
+}
+
+.yoga-day-links__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+}
+
+.yoga-day-links__list {
+  margin-top: 0.875rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.yoga-day-links__list a {
+  font-size: 0.9375rem;
+  color: var(--yoga-primary-green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.yoga-day-close {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1rem;
+  background: var(--yoga-deep-green);
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+}
+
+.yoga-day-close p {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.yoga-day-close p + p {
+  margin-top: 0.875rem;
+}
+
+.yoga-day-close__emphasis {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.yoga-day-published {
+  margin-top: 2rem;
+  font-size: 0.8125rem;
+  color: var(--yoga-text-muted);
+}
+
+.yoga-day-grid-heading {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--yoga-deep-green);
+}

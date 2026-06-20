@@ -16,6 +16,7 @@ const SLUG_LAYOUT_OVERRIDES: Partial<Record<string, ArticleLayoutVariant>> = {
   "tamil-nadu-ias-reshuffle-collectors-may-2026": "masthead",
   "tamil-nadu-cabinet-portfolios-may-2026": "masthead",
   "tamil-nadu-fiscal-white-paper-2026-debt-revenue-deficit-analysis": "masthead",
+  "international-yoga-day-2026-chennai-yoga-for-healthy-ageing": "feature-ribbon",
 };
 
 export function articleLayoutVariantForSlug(slug: string): ArticleLayoutVariant {

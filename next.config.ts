@@ -105,6 +105,12 @@ const nextConfig: NextConfig = {
         destination: "/chennai-jobs/:slug",
         permanent: true,
       },
+      {
+        source: "/international-yoga-day-2026-chennai-yoga-for-healthy-ageing",
+        destination:
+          "/chennai-local-news/international-yoga-day-2026-chennai-yoga-for-healthy-ageing",
+        permanent: true,
+      },
     ];
   },
 };

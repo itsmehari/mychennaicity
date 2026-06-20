@@ -76,6 +76,8 @@
     "db:seed:tn-cabinet-portfolios-may-2026:live": "tsx scripts/seed-tn-cabinet-portfolios-may-2026.ts --live",
     "db:seed:tn-fiscal-white-paper-2026": "tsx scripts/seed-tn-fiscal-white-paper-2026.ts",
     "db:seed:tn-fiscal-white-paper-2026:live": "tsx scripts/seed-tn-fiscal-white-paper-2026.ts --live",
+    "db:seed:international-yoga-day-2026-chennai": "tsx scripts/seed-international-yoga-day-2026-chennai.ts",
+    "db:seed:international-yoga-day-2026-chennai:live": "tsx scripts/seed-international-yoga-day-2026-chennai.ts --live",
     "db:seed:savukku-goondas-revoked-may-2026": "tsx scripts/seed-savukku-shankar-goondas-revoked-may-2026.ts",
     "db:seed:savukku-goondas-revoked-may-2026:live": "tsx scripts/seed-savukku-shankar-goondas-revoked-may-2026.ts --live",
     "db:seed:tn-ias-reshuffle-may-2026": "tsx scripts/seed-tn-ias-reshuffle-may-2026.ts",
