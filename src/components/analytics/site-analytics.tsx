@@ -1,12 +1,15 @@
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { resolveAdsenseClientId } from "@/lib/adsense-config";
 import { GoogleAdSenseScripts } from "./google-adsense-scripts";
 import { GoogleAnalyticsRouteTracker } from "./google-analytics-route-tracker";
 import { GoogleAnalyticsScripts } from "./google-analytics-scripts";
 
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
-const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID?.trim() ?? "";
+const adsenseClientId = resolveAdsenseClientId(
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
+);
 
 type Props = {
   /** When true (matched server-side IP), skip GA + AdSense only. */

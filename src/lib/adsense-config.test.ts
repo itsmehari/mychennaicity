@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
+  ADSENSE_CLIENT_ID_DEFAULT,
   ADSENSE_PUBLISHER_ID_DEFAULT,
   adsTxtBody,
+  normalizeAdsenseClientId,
   normalizeAdsensePublisherId,
+  resolveAdsenseClientId,
   resolveAdsensePublisherId,
 } from "@/lib/adsense-config";
 
@@ -20,6 +23,9 @@ describe("adsense-config", () => {
     expect(normalizeAdsensePublisherId("5760699639501978")).toBe(
       "pub-5760699639501978",
     );
+    expect(normalizeAdsenseClientId("pub-5760699639501978")).toBe(
+      ADSENSE_CLIENT_ID_DEFAULT,
+    );
   });
 
   it("falls back to site default when env is empty", () => {
@@ -29,5 +35,6 @@ describe("adsense-config", () => {
     expect(resolveAdsensePublisherId("pub-1111111111111111")).toBe(
       "pub-1111111111111111",
     );
+    expect(resolveAdsenseClientId(undefined)).toBe(ADSENSE_CLIENT_ID_DEFAULT);
   });
 });
