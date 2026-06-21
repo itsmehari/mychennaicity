@@ -1,0 +1,764 @@
+/* Tiruvallur ammonia leak — industrial safety breaking-news layout */
+
+.ammonia-leak-article {
+  --al-navy: #0f1729;
+  --al-charcoal: #1a2332;
+  --al-slate: #334155;
+  --al-muted: #64748b;
+  --al-light: #f1f5f9;
+  --al-border: #cbd5e1;
+  --al-red: #b91c1c;
+  --al-red-soft: #fef2f2;
+  --al-amber: #b45309;
+  --al-green: #166534;
+  --al-green-soft: #ecfdf5;
+  --al-blue-grey: #475569;
+  --al-industrial: #64748b;
+  --al-body-max: 780px;
+  --al-visual-max: 1120px;
+  color: var(--al-charcoal);
+}
+
+/* Hero */
+.ammonia-leak-hero {
+  position: relative;
+  min-height: clamp(440px, 68vh, 580px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 0 0 1.25rem 1.25rem;
+  background: var(--al-navy);
+}
+
+.ammonia-leak-hero__bg {
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.ammonia-leak-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 41, 0.55) 0%,
+    rgba(15, 23, 41, 0.88) 45%,
+    rgba(15, 23, 41, 0.96) 100%
+  );
+}
+
+.ammonia-leak-hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--al-visual-max);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 2.75rem;
+}
+
+.ammonia-leak-hero__alert {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--al-red);
+  border-radius: 0.25rem;
+}
+
+.ammonia-leak-hero__title {
+  margin-top: 1rem;
+  max-width: 22ch;
+  font-size: clamp(1.75rem, 4.8vw, 2.875rem);
+  line-height: 1.14;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ammonia-leak-hero__deck {
+  margin-top: 1rem;
+  max-width: 44rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ammonia-leak-hero__meta {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Fact strip */
+.ammonia-leak-fact-strip {
+  margin-top: -1.25rem;
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem;
+}
+
+.ammonia-leak-fact-strip__inner {
+  max-width: var(--al-visual-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0.875rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(15, 23, 41, 0.1);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--al-charcoal);
+}
+
+.ammonia-leak-fact-strip__item {
+  display: flex;
+  align-items: center;
+}
+
+.ammonia-leak-fact-strip__item:not(:last-child)::after {
+  content: "|";
+  margin: 0 0.75rem;
+  color: var(--al-muted);
+  font-weight: 400;
+}
+
+@media (max-width: 639px) {
+  .ammonia-leak-fact-strip__inner {
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: flex-start;
+  }
+
+  .ammonia-leak-fact-strip__item:not(:last-child)::after {
+    display: none;
+  }
+}
+
+/* Body wrap */
+.ammonia-leak-body {
+  max-width: var(--al-visual-max);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.ammonia-leak-toc {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: var(--al-light);
+}
+
+.ammonia-leak-toc__title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-toc__list {
+  margin-top: 0.75rem;
+  columns: 2;
+  column-gap: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.ammonia-leak-toc__list a {
+  color: var(--al-navy);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  .ammonia-leak-toc__list {
+    columns: 1;
+  }
+}
+
+.ammonia-leak-prose {
+  max-width: var(--al-body-max);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--al-charcoal);
+}
+
+.ammonia-leak-prose p + p {
+  margin-top: 1rem;
+}
+
+.ammonia-leak-prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--al-navy);
+}
+
+.ammonia-leak-prose ul,
+.ammonia-leak-prose ol {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.ammonia-leak-prose li + li {
+  margin-top: 0.35rem;
+}
+
+/* Two-column incident section */
+.ammonia-leak-incident-grid {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .ammonia-leak-incident-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.ammonia-leak-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ammonia-leak-timeline__card {
+  padding: 1rem 1.25rem;
+  border-radius: 0.625rem;
+  border-left: 3px solid var(--al-red);
+  background: #fff;
+  border: 1px solid var(--al-border);
+  border-left-width: 3px;
+  border-left-color: var(--al-red);
+}
+
+.ammonia-leak-timeline__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--al-red);
+}
+
+.ammonia-leak-timeline__detail {
+  margin-top: 0.35rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--al-slate);
+}
+
+.ammonia-leak-map-card {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: var(--al-light);
+}
+
+.ammonia-leak-map-card__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-map-card__svg {
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.ammonia-leak-map-card__caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--al-muted);
+  line-height: 1.5;
+}
+
+/* Refrigeration explainer */
+.ammonia-leak-explainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.ammonia-leak-explainer__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--al-navy);
+}
+
+.ammonia-leak-explainer__flow {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ammonia-leak-explainer__node {
+  position: relative;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  background: var(--al-industrial);
+  color: #fff;
+}
+
+.ammonia-leak-explainer__node--danger {
+  background: var(--al-slate);
+  outline: 2px solid var(--al-red);
+  outline-offset: 1px;
+}
+
+.ammonia-leak-explainer__node--danger::after {
+  content: "⚠";
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  font-size: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--al-red);
+  border-radius: 50%;
+  color: #fff;
+}
+
+.ammonia-leak-explainer__arrow {
+  color: var(--al-muted);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.ammonia-leak-explainer__legend {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--al-muted);
+}
+
+/* Safety question box */
+.ammonia-leak-safety-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--al-amber);
+  background: #fffbeb;
+}
+
+.ammonia-leak-safety-box__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--al-amber);
+}
+
+.ammonia-leak-zoning {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .ammonia-leak-zoning {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ammonia-leak-zoning__zone {
+  padding: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+}
+
+.ammonia-leak-zoning__zone--high {
+  background: var(--al-red-soft);
+  color: var(--al-red);
+  border-color: color-mix(in srgb, var(--al-red) 25%, transparent);
+}
+
+.ammonia-leak-zoning__zone--safe {
+  background: var(--al-green-soft);
+  color: var(--al-green);
+  border-color: color-mix(in srgb, var(--al-green) 25%, transparent);
+}
+
+/* Compliance grid */
+.ammonia-leak-compliance-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .ammonia-leak-compliance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ammonia-leak-compliance-card {
+  padding: 1.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--al-border);
+  background: #fff;
+}
+
+.ammonia-leak-compliance-card__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--al-navy);
+}
+
+.ammonia-leak-compliance-card__list {
+  margin-top: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.ammonia-leak-compliance-card__list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--al-slate);
+}
+
+.ammonia-leak-compliance-card__list li + li {
+  margin-top: 0.5rem;
+}
+
+.ammonia-leak-compliance-card__list li::before {
+  content: "☐";
+  flex-shrink: 0;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-warning-note {
+  margin-top: 1.25rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--al-red);
+  background: var(--al-red-soft);
+  border-radius: 0.375rem;
+  border-left: 3px solid var(--al-red);
+}
+
+/* Accountability map */
+.ammonia-leak-accountability {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: #fff;
+}
+
+.ammonia-leak-accountability__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--al-muted);
+  text-align: center;
+}
+
+.ammonia-leak-accountability__svg {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Investigation tracker */
+.ammonia-leak-investigation {
+  margin-top: 2rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--al-navy);
+  color: #fff;
+}
+
+.ammonia-leak-investigation__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.ammonia-leak-investigation__grid {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .ammonia-leak-investigation__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ammonia-leak-investigation__tile {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ammonia-leak-investigation__tile-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ammonia-leak-investigation__tile-status {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+/* Regional risk map */
+.ammonia-leak-regional-map {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--al-border);
+  background: var(--al-light);
+}
+
+.ammonia-leak-regional-map__caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--al-muted);
+  text-align: center;
+}
+
+/* Human cost */
+.ammonia-leak-pull-quote {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid var(--al-navy);
+  background: var(--al-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--al-navy);
+  font-style: italic;
+}
+
+.ammonia-leak-human-illustration {
+  margin-top: 1.5rem;
+  padding: 2rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px dashed var(--al-border);
+  background: #fff;
+  text-align: center;
+}
+
+.ammonia-leak-human-illustration__icons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  font-size: 2.5rem;
+  opacity: 0.7;
+}
+
+.ammonia-leak-human-illustration__caption {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--al-muted);
+}
+
+/* Immediate actions */
+.ammonia-leak-actions {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.ammonia-leak-actions__card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--al-border);
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 41, 0.04);
+}
+
+.ammonia-leak-actions__num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--al-red);
+  border-radius: 50%;
+}
+
+.ammonia-leak-actions__text {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--al-charcoal);
+}
+
+/* Editorial block */
+.ammonia-leak-editorial {
+  margin-top: 2.5rem;
+  padding: 1.75rem 1.5rem 1.75rem 1.25rem;
+  border-left: 4px solid var(--al-slate);
+  background: #f4f4f5;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.ammonia-leak-editorial__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-editorial__prose {
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--al-charcoal);
+}
+
+.ammonia-leak-editorial__prose p + p {
+  margin-top: 1rem;
+}
+
+.ammonia-leak-editorial__emphasis {
+  margin-top: 1.25rem;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--al-navy);
+}
+
+/* Printable checklist */
+.ammonia-leak-print-checklist {
+  margin-top: 2rem;
+  padding: 1.75rem;
+  border-radius: 0.75rem;
+  border: 2px dashed var(--al-navy);
+  background: #fff;
+}
+
+.ammonia-leak-print-checklist__tag {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--al-navy);
+  border-radius: 0.25rem;
+}
+
+.ammonia-leak-print-checklist__title {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--al-navy);
+}
+
+.ammonia-leak-print-checklist__grid {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .ammonia-leak-print-checklist__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+}
+
+.ammonia-leak-print-checklist__item {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--al-slate);
+}
+
+.ammonia-leak-print-checklist__item::before {
+  content: "☐";
+  flex-shrink: 0;
+  color: var(--al-navy);
+  font-weight: 700;
+}
+
+/* Key takeaway */
+.ammonia-leak-takeaway {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--al-border);
+  background: var(--al-light);
+}
+
+.ammonia-leak-takeaway__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-takeaway__text {
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--al-navy);
+}
+
+.ammonia-leak-published {
+  margin-top: 2.5rem;
+  font-size: 0.8125rem;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-source {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--al-muted);
+}
+
+.ammonia-leak-source a {
+  color: var(--al-navy);
+  text-decoration: underline;
+}

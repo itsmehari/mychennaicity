@@ -99,6 +99,8 @@
     "db:seed:tn-electricity-bill-calculation-2026:live": "tsx scripts/seed-tn-electricity-bill-calculation-2026.ts --live",
     "db:seed:ozone-greens-perumbakkam-power-crisis-2026": "tsx scripts/seed-ozone-greens-perumbakkam-power-crisis-2026.ts",
     "db:seed:ozone-greens-perumbakkam-power-crisis-2026:live": "tsx scripts/seed-ozone-greens-perumbakkam-power-crisis-2026.ts --live",
+    "db:seed:tiruvallur-ammonia-leak-2026": "tsx scripts/seed-tiruvallur-ammonia-leak-2026.ts",
+    "db:seed:tiruvallur-ammonia-leak-2026:live": "tsx scripts/seed-tiruvallur-ammonia-leak-2026.ts --live",
     "db:push:live": "node --env-file=.env.production.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:push:production-env": "drizzle-kit push --force",
     "gsc:submit-sitemap": "tsx scripts/gsc-submit-sitemap.ts",
