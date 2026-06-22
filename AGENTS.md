@@ -12,6 +12,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Full checklist:** `docs/DATABASE_AND_VERCEL.md`.
 - If a user pastes a live connection string in chat, advise **rotating** the Neon password and updating Vercel + local secrets.
 
+## Canonical public site URL
+
+- **Live site:** `https://mychennaicity.in` — **never** `mychennaicity.com` or other TLDs in copy, links, canonicals, sitemaps, or JSON-LD.
+- **`NEXT_PUBLIC_SITE_URL`** on Vercel Production must be `https://mychennaicity.in` (no trailing slash). `getSiteUrl()` forces this origin on Vercel production even if the env var is wrong.
+- Wrong hosts (`www.mychennaicity.in`, `*.mychennaicity.com`, etc.) 308 to the apex `.in` via middleware.
+
 ## Optional: Google site verification (Search Console)
 
 - **`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`** — paste the **content** value from GSC’s HTML tag method (not the full tag). Next.js `metadata.verification.google` in `src/app/layout.tsx` will emit the meta tag. Set in Vercel for Production (and Preview if you verify preview hosts separately).

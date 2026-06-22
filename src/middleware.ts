@@ -1,5 +1,9 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import {
+  CANONICAL_SITE_HOST,
+  isWrongSiteHost,
+} from "@/lib/canonical-site";
 
 /**
  * Session cookies for Auth.js v5 (names vary by dev/prod/https).
@@ -15,7 +19,22 @@ function hasAuthSessionCookie(request: NextRequest): boolean {
   );
 }
 
+function canonicalHostRedirect(request: NextRequest): NextResponse | null {
+  if (process.env.VERCEL_ENV !== "production") return null;
+
+  const host = request.headers.get("host")?.split(":")[0];
+  if (!host || !isWrongSiteHost(host)) return null;
+
+  const url = request.nextUrl.clone();
+  url.protocol = "https:";
+  url.host = CANONICAL_SITE_HOST;
+  return NextResponse.redirect(url, 308);
+}
+
 export function middleware(request: NextRequest) {
+  const hostRedirect = canonicalHostRedirect(request);
+  if (hostRedirect) return hostRedirect;
+
   if (
     request.nextUrl.pathname.startsWith("/admin") &&
     !hasAuthSessionCookie(request)
@@ -28,5 +47,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
 };

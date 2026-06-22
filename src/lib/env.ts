@@ -1,25 +1,36 @@
 /** Shared env helpers. Prefer reading at call sites for tree-shaking. */
 
-const DEFAULT_SITE_URL = "https://mychennaicity.in";
+import {
+  CANONICAL_SITE_URL,
+  isWrongSiteHost,
+} from "@/lib/canonical-site";
 
 /**
  * Canonical origin for metadata, sitemaps, JSON-LD, and Open Graph.
- * Trims whitespace, strips trailing slashes, and uses `URL.origin` so paths
- * on `NEXT_PUBLIC_SITE_URL` do not leak into canonicals.
- * In production, `http:` is upgraded to `https:` to avoid duplicate signals.
+ * Live Vercel production always returns `https://mychennaicity.in` so a
+ * mis-set `NEXT_PUBLIC_SITE_URL` (e.g. `.com`) cannot leak into SEO signals.
+ * Elsewhere: trims whitespace, strips trailing slashes, uses `URL.origin`,
+ * upgrades `http:` to `https:` in production, and rejects `.com` hostnames.
  */
 export function getSiteUrl(): string {
+  if (process.env.VERCEL_ENV === "production") {
+    return CANONICAL_SITE_URL;
+  }
+
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!raw) return DEFAULT_SITE_URL;
+  if (!raw) return CANONICAL_SITE_URL;
   try {
     const href = raw.replace(/\/+$/, "");
     const parsed = new URL(href);
     if (parsed.protocol === "http:" && process.env.NODE_ENV === "production") {
       parsed.protocol = "https:";
     }
+    if (isWrongSiteHost(parsed.hostname)) {
+      return CANONICAL_SITE_URL;
+    }
     return parsed.origin;
   } catch {
-    return DEFAULT_SITE_URL;
+    return CANONICAL_SITE_URL;
   }
 }
 

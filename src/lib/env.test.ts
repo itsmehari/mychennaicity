@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 describe("getSiteUrl", () => {
   const originalUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const originalNodeEnv = process.env.NODE_ENV;
+  const originalVercelEnv = process.env.VERCEL_ENV;
 
   afterEach(() => {
     if (originalUrl === undefined) {
@@ -11,6 +12,11 @@ describe("getSiteUrl", () => {
       process.env.NEXT_PUBLIC_SITE_URL = originalUrl;
     }
     process.env.NODE_ENV = originalNodeEnv;
+    if (originalVercelEnv === undefined) {
+      delete process.env.VERCEL_ENV;
+    } else {
+      process.env.VERCEL_ENV = originalVercelEnv;
+    }
     vi.resetModules();
   });
 
@@ -31,6 +37,23 @@ describe("getSiteUrl", () => {
   it("upgrades http to https in production", async () => {
     process.env.NEXT_PUBLIC_SITE_URL = "http://mychennaicity.in";
     process.env.NODE_ENV = "production";
+    vi.resetModules();
+    const { getSiteUrl } = await import("./env");
+    expect(getSiteUrl()).toBe("https://mychennaicity.in");
+  });
+
+  it("always returns .in on Vercel production even if env says .com", async () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://www.mychennaicity.com";
+    process.env.VERCEL_ENV = "production";
+    vi.resetModules();
+    const { getSiteUrl } = await import("./env");
+    expect(getSiteUrl()).toBe("https://mychennaicity.in");
+  });
+
+  it("rejects .com hostnames in a local production build", async () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://mychennaicity.com";
+    process.env.NODE_ENV = "production";
+    delete process.env.VERCEL_ENV;
     vi.resetModules();
     const { getSiteUrl } = await import("./env");
     expect(getSiteUrl()).toBe("https://mychennaicity.in");
