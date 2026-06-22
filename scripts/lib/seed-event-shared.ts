@@ -140,6 +140,7 @@ export async function upsertEvent(
 export async function finishListingSeedLive(options?: {
   jobSlug?: string;
   jobSeekerSlug?: string;
+  classifiedSlug?: string;
   eventSlug?: string;
   directoryType?: string;
   directorySlug?: string;
@@ -152,6 +153,7 @@ export async function finishListingSeedLive(options?: {
   await revalidateListingsAfterSeed({
     jobSlug: options?.jobSlug,
     jobSeekerSlug: options?.jobSeekerSlug,
+    classifiedSlug: options?.classifiedSlug,
     eventSlug: options?.eventSlug,
     directoryType: options?.directoryType,
     directorySlug: options?.directorySlug,

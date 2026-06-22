@@ -100,6 +100,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Schools, services, and local listings.",
           },
           {
+            href: "/chennai-classifieds",
+            label: "Chennai classifieds",
+            description: "Reader-submitted tuition, services, and wanted posts.",
+          },
+          {
             href: WHATSAPP_COMMUNITY_PAGE_PATH,
             label: "WhatsApp community",
             description: "Official my chennai city reader group.",

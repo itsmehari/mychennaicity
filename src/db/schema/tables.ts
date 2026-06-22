@@ -37,6 +37,12 @@ export const jobSeekerPostStatusEnum = pgEnum("job_seeker_post_status", [
   "closed",
 ]);
 
+export const classifiedListingStatusEnum = pgEnum("classified_listing_status", [
+  "draft",
+  "open",
+  "closed",
+]);
+
 export const cities = pgTable("cities", {
   id: uuid("id").defaultRandom().primaryKey(),
   slug: text("slug").notNull().unique(),
@@ -250,5 +256,34 @@ export const directoryEntries = pgTable(
       t.type,
       t.slug,
     ),
+  }),
+);
+
+/** Reader-submitted classified ads — tuition, services, wanted posts, etc. */
+export const classifiedListings = pgTable(
+  "classified_listings",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    cityId: uuid("city_id")
+      .notNull()
+      .references(() => cities.id, { onDelete: "restrict" }),
+    slug: text("slug").notNull(),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    /** e.g. tuition, services, wanted */
+    category: text("category"),
+    posterName: text("poster_name"),
+    posterUrl: text("poster_url"),
+    locationLabel: text("location_label"),
+    contactPhone: text("contact_phone"),
+    areaHubSlug: text("area_hub_slug"),
+    status: classifiedListingStatusEnum("status").notNull().default("draft"),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    citySlug: uniqueIndex("classified_listings_city_slug_uidx").on(t.cityId, t.slug),
   }),
 );

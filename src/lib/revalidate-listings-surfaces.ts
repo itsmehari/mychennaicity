@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { CHENNAI_CLASSIFIEDS_HUB_PATH } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH } from "@/lib/routes/chennai-jobs";
 
 /**
@@ -8,6 +9,7 @@ import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH } from "@/lib/routes/c
 export function revalidateListingsSurfaces(options?: {
   jobSlug?: string;
   jobSeekerSlug?: string;
+  classifiedSlug?: string;
   eventSlug?: string;
   directoryType?: string;
   directorySlug?: string;
@@ -15,6 +17,7 @@ export function revalidateListingsSurfaces(options?: {
   revalidatePath("/sitemap.xml");
   revalidatePath(CHENNAI_JOBS_HUB_PATH);
   revalidatePath(CHENNAI_JOBS_LOOKING_PATH);
+  revalidatePath(CHENNAI_CLASSIFIEDS_HUB_PATH);
   revalidatePath("/chennai-local-events");
   revalidatePath("/directory");
   const jobSlug = options?.jobSlug?.trim();
@@ -24,6 +27,10 @@ export function revalidateListingsSurfaces(options?: {
   const jobSeekerSlug = options?.jobSeekerSlug?.trim();
   if (jobSeekerSlug) {
     revalidatePath(`${CHENNAI_JOBS_LOOKING_PATH}/${jobSeekerSlug}`);
+  }
+  const classifiedSlug = options?.classifiedSlug?.trim();
+  if (classifiedSlug) {
+    revalidatePath(`${CHENNAI_CLASSIFIEDS_HUB_PATH}/${classifiedSlug}`);
   }
   const eventSlug = options?.eventSlug?.trim();
   if (eventSlug) {

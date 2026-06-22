@@ -128,6 +128,13 @@ const nextConfig: NextConfig = {
           "/chennai-local-news/international-yoga-day-2026-chennai-yoga-for-healthy-ageing",
         permanent: true,
       },
+      {
+        source:
+          "/chennai-local-news/reader-listing-perumbakkam-grade3-tuition-teacher-june-2026",
+        destination:
+          "/chennai-classifieds/tuition-teacher-wanted-grade3-perumbakkam",
+        permanent: true,
+      },
     ];
   },
 };

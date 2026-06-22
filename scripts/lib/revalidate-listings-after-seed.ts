@@ -4,6 +4,7 @@
 export async function revalidateListingsAfterSeed(options?: {
   jobSlug?: string;
   jobSeekerSlug?: string;
+  classifiedSlug?: string;
   eventSlug?: string;
   directoryType?: string;
   directorySlug?: string;
@@ -25,11 +26,13 @@ export async function revalidateListingsAfterSeed(options?: {
   const params = new URLSearchParams({ secret });
   const jobSlug = options?.jobSlug?.trim();
   const jobSeekerSlug = options?.jobSeekerSlug?.trim();
+  const classifiedSlug = options?.classifiedSlug?.trim();
   const eventSlug = options?.eventSlug?.trim();
   const directoryType = options?.directoryType?.trim();
   const directorySlug = options?.directorySlug?.trim();
   if (jobSlug) params.set("jobSlug", jobSlug);
   if (jobSeekerSlug) params.set("jobSeekerSlug", jobSeekerSlug);
+  if (classifiedSlug) params.set("classifiedSlug", classifiedSlug);
   if (eventSlug) params.set("eventSlug", eventSlug);
   if (directoryType) params.set("directoryType", directoryType);
   if (directorySlug) params.set("directorySlug", directorySlug);
