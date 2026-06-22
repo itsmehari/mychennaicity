@@ -1,6 +1,6 @@
 import { and, count, eq, ilike, isNotNull, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { articles, cities, directoryEntries, events, jobPostings } from "@/db/schema/tables";
+import { articles, cities, directoryEntries, events, jobPostings, jobSeekerPosts } from "@/db/schema/tables";
 
 const CHENNAI_SLUG = "chennai";
 
@@ -19,7 +19,7 @@ function likePattern(q: string): string {
 }
 
 export type SiteSearchHit = {
-  kind: "news" | "job" | "event" | "directory";
+  kind: "news" | "job" | "job_seeker" | "event" | "directory";
   title: string;
   href: string;
   meta: string;
@@ -92,6 +92,37 @@ export async function searchSite(query: string, limitPerKind = 8): Promise<SiteS
       title: row.title,
       href: `/chennai-jobs/${row.slug}`,
       meta: row.location?.trim() || "Chennai",
+    });
+  }
+
+  const seekerRows = await db
+    .select({
+      title: jobSeekerPosts.title,
+      slug: jobSeekerPosts.slug,
+      location: jobSeekerPosts.locationLabel,
+      role: jobSeekerPosts.roleSought,
+    })
+    .from(jobSeekerPosts)
+    .where(
+      and(
+        eq(jobSeekerPosts.cityId, cityId),
+        eq(jobSeekerPosts.status, "open"),
+        or(
+          ilike(jobSeekerPosts.title, pattern),
+          ilike(jobSeekerPosts.body, pattern),
+          ilike(jobSeekerPosts.roleSought, pattern),
+          ilike(jobSeekerPosts.locationLabel, pattern),
+        ),
+      ),
+    )
+    .limit(limitPerKind);
+
+  for (const row of seekerRows) {
+    hits.push({
+      kind: "job_seeker",
+      title: row.title,
+      href: `/chennai-jobs/looking-for-work/${row.slug}`,
+      meta: row.role?.trim() || row.location?.trim() || "Looking for work",
     });
   }
 

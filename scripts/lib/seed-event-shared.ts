@@ -139,6 +139,7 @@ export async function upsertEvent(
 /** Call at end of live event/job seed scripts to refresh sitemap + hubs. */
 export async function finishListingSeedLive(options?: {
   jobSlug?: string;
+  jobSeekerSlug?: string;
   eventSlug?: string;
   directoryType?: string;
   directorySlug?: string;
@@ -150,6 +151,7 @@ export async function finishListingSeedLive(options?: {
   );
   await revalidateListingsAfterSeed({
     jobSlug: options?.jobSlug,
+    jobSeekerSlug: options?.jobSeekerSlug,
     eventSlug: options?.eventSlug,
     directoryType: options?.directoryType,
     directorySlug: options?.directorySlug,

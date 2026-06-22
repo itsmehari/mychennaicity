@@ -32,6 +32,7 @@ type PageProps = { searchParams: Promise<{ q?: string }> };
 const KIND_LABEL: Record<SiteSearchHit["kind"], string> = {
   news: "News",
   job: "Job",
+  job_seeker: "Looking for work",
   event: "Event",
   directory: "Directory",
 };
@@ -40,6 +41,7 @@ function groupHits(hits: SiteSearchHit[]) {
   const groups: Record<SiteSearchHit["kind"], SiteSearchHit[]> = {
     news: [],
     job: [],
+    job_seeker: [],
     event: [],
     directory: [],
   };

@@ -31,6 +31,12 @@ export const jobPostingStatusEnum = pgEnum("job_posting_status", [
   "closed",
 ]);
 
+export const jobSeekerPostStatusEnum = pgEnum("job_seeker_post_status", [
+  "draft",
+  "open",
+  "closed",
+]);
+
 export const cities = pgTable("cities", {
   id: uuid("id").defaultRandom().primaryKey(),
   slug: text("slug").notNull().unique(),
@@ -172,6 +178,37 @@ export const jobPostings = pgTable(
   },
   (t) => ({
     citySlug: uniqueIndex("job_postings_city_slug_uidx").on(t.cityId, t.slug),
+  }),
+);
+
+/** Job seeker / “looking for work” listings — people hiring managers can reach out to. */
+export const jobSeekerPosts = pgTable(
+  "job_seeker_posts",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    cityId: uuid("city_id")
+      .notNull()
+      .references(() => cities.id, { onDelete: "restrict" }),
+    slug: text("slug").notNull(),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    /** Short label, e.g. “Watchman · family of 3”. */
+    seekerLabel: text("seeker_label"),
+    locationLabel: text("location_label"),
+    roleSought: text("role_sought"),
+    needsAccommodation: boolean("needs_accommodation").notNull().default(false),
+    /** e.g. immediate, 2 weeks notice */
+    availability: text("availability"),
+    contactPhone: text("contact_phone"),
+    contactWhatsApp: text("contact_whatsapp"),
+    contactEmail: text("contact_email"),
+    status: jobSeekerPostStatusEnum("status").notNull().default("draft"),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    citySlug: uniqueIndex("job_seeker_posts_city_slug_uidx").on(t.cityId, t.slug),
   }),
 );
 

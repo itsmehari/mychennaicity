@@ -10,12 +10,14 @@ import {
   countOpenJobPostingsForChennaiHub,
   listOpenJobPostingsForChennaiHub,
 } from "@/domains/jobs";
+import { countOpenJobSeekerPostsForChennaiHub } from "@/domains/job-seekers";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
+import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
@@ -82,14 +84,17 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
   const snapshotAsOf = formatIndiaLongDate();
 
   let total = 0;
+  let seekingTotal = 0;
   let dbJobs: Awaited<ReturnType<typeof listOpenJobPostingsForChennaiHub>> =
     [];
   try {
     total = await countOpenJobPostingsForChennaiHub();
+    seekingTotal = await countOpenJobSeekerPostsForChennaiHub();
     dbJobs = await listOpenJobPostingsForChennaiHub(PAGE_SIZE, offset);
   } catch {
     dbJobs = [];
     total = 0;
+    seekingTotal = 0;
   }
 
   const useDb = total > 0;
@@ -147,6 +152,12 @@ export default async function ChennaiJobsHubPage({ searchParams }: PageProps) {
           </>
         )}
       </p>
+
+      <ChennaiJobsHubTabs
+        active="openings"
+        openingsCount={total}
+        seekingCount={seekingTotal}
+      />
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-center shadow-sm sm:text-left">

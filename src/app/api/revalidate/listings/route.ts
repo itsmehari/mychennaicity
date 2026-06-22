@@ -13,11 +13,13 @@ export async function POST(request: NextRequest) {
   }
 
   const jobSlug = request.nextUrl.searchParams.get("jobSlug")?.trim();
+  const jobSeekerSlug = request.nextUrl.searchParams.get("jobSeekerSlug")?.trim();
   const eventSlug = request.nextUrl.searchParams.get("eventSlug")?.trim();
   const directoryType = request.nextUrl.searchParams.get("directoryType")?.trim();
   const directorySlug = request.nextUrl.searchParams.get("directorySlug")?.trim();
   revalidateListingsSurfaces({
     jobSlug: jobSlug || undefined,
+    jobSeekerSlug: jobSeekerSlug || undefined,
     eventSlug: eventSlug || undefined,
     directoryType: directoryType || undefined,
     directorySlug: directorySlug || undefined,
@@ -26,6 +28,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({
     ok: true,
     jobSlug: jobSlug ?? null,
+    jobSeekerSlug: jobSeekerSlug ?? null,
     eventSlug: eventSlug ?? null,
     directoryType: directoryType ?? null,
     directorySlug: directorySlug ?? null,

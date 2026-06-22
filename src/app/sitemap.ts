@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listEventsForSitemap } from "@/domains/events";
 import { listJobsForSitemap } from "@/domains/jobs";
+import { listJobSeekerPostsForSitemap } from "@/domains/job-seekers";
 import { listDirectoryEntriesForSitemap } from "@/domains/directory";
 import {
   listArticlesForSitemap,
@@ -10,7 +11,7 @@ import {
 import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
-import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
+import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
 import {
   WHATSAPP_COMMUNITY_GUIDE_PATH,
@@ -30,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let topicKeys: string[] = [];
   let eventRows: { slug: string; lastModified: Date }[] = [];
   let jobRows: { slug: string; lastModified: Date }[] = [];
+  let jobSeekerRows: { slug: string; lastModified: Date }[] = [];
   let directoryRows: {
     type: string;
     slug: string;
@@ -40,6 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     topicKeys = await listTopicKeysForChennai();
     eventRows = await listEventsForSitemap();
     jobRows = await listJobsForSitemap();
+    jobSeekerRows = await listJobSeekerPostsForSitemap();
     directoryRows = await listDirectoryEntriesForSitemap();
   } catch (err) {
     console.warn(
@@ -81,6 +84,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${base}${CHENNAI_JOBS_LOOKING_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.68,
     },
     {
       url: `${base}/guides/chennai-tech-careers`,
@@ -219,6 +228,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.62,
   }));
 
+  const jobSeekerEntries: MetadataRoute.Sitemap = jobSeekerRows.map((j) => ({
+    url: `${base}${chennaiJobSeekerDetailPath(j.slug)}`,
+    lastModified: j.lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.64,
+  }));
+
   return [
     ...staticEntries,
     ...areaEntries,
@@ -226,6 +242,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...topicEntries,
     ...eventEntries,
     ...jobEntries,
+    ...jobSeekerEntries,
     ...directoryEntries,
   ];
 }
