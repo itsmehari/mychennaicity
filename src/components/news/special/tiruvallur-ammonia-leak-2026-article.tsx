@@ -17,6 +17,8 @@ import {
   TIRUVALLUR_AMMONIA_LEAK_H1,
   TIRUVALLUR_AMMONIA_LEAK_HERO_IMAGE,
   TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL,
+  TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL_DAY_ONE,
+  ammoniaLeakLatestUpdate,
 } from "@/content/special-articles/tiruvallur-ammonia-leak-2026";
 
 function LocationMapSvg() {
@@ -173,6 +175,11 @@ export function TiruvallurAmmoniaLeak2026Article({
       dateStyle: "long",
       timeZone: "Asia/Kolkata",
     }) ?? null;
+  const updated =
+    article.updatedAt.toLocaleString("en-IN", {
+      dateStyle: "long",
+      timeZone: "Asia/Kolkata",
+    }) ?? null;
 
   return (
     <article className="ammonia-leak-article local-article -mx-4 sm:mx-0">
@@ -198,6 +205,8 @@ export function TiruvallurAmmoniaLeak2026Article({
           ) : null}
           <p className="ammonia-leak-hero__meta">
             {published ? <>Published {published}</> : null}
+            {published && updated ? " · " : null}
+            {updated ? <>Updated {updated}</> : null}
             {" · "}
             Chennai / Tiruvallur · MyChennaiCity Editorial
           </p>
@@ -226,29 +235,51 @@ export function TiruvallurAmmoniaLeak2026Article({
           </ol>
         </nav>
 
+        <section
+          id="latest-update"
+          className="ammonia-leak-update"
+          aria-labelledby="latest-update-heading"
+        >
+          <p className="ammonia-leak-update__label">Latest update</p>
+          <h2 id="latest-update-heading" className="ammonia-leak-update__title">
+            {ammoniaLeakLatestUpdate.dateLabel}
+          </h2>
+          <ul className="ammonia-leak-update__list">
+            {ammoniaLeakLatestUpdate.bullets.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="ammonia-leak-update__correction">
+            {ammoniaLeakLatestUpdate.correctionNote}
+          </p>
+        </section>
+
         <div className="ammonia-leak-prose">
           <p>
-            <strong>Chennai / Tiruvallur, June 21, 2026:</strong> A major industrial
+            <strong>Chennai / Tiruvallur, June 21–22, 2026:</strong> A major industrial
             safety tragedy near Chennai has raised urgent questions about hazardous
             chemical handling, worker accommodation inside factory premises and the
             depth of regulatory inspection in food-processing and cold-storage
-            industries. Seven guest workers died and more than forty others were
-            hospitalised after ammonia gas leaked from a private seafood export unit
-            at Kannigaipair near Periyapalayam in Tiruvallur district on Sunday.
+            industries. An ammonia gas leak at a private seafood export unit in
+            Kannigaipair near Periyapalayam in Tiruvallur district on Sunday left{" "}
+            <strong>five women workers dead</strong> and{" "}
+            <strong>67 others under treatment</strong> as of Monday morning, according
+            to a state health bulletin.
           </p>
           <p>
-            The unit has been identified in media reports as{" "}
-            <strong>St Peter&apos;s Paul Seafoods Exports Private Limited</strong>, a
-            seafood processing and export facility operating near Periyapalayam. The
-            incident reportedly occurred on the unit&apos;s weekly holiday, when many
-            workers were inside accommodation provided within the factory campus.
+            The unit has been identified as{" "}
+            <strong>St Peter &amp; Paul Sea Foods Exports Private Limited</strong>, a
+            seafood processing and export facility in the Kannigaipair/Manjangaranai
+            area near Periyapalayam. The leak occurred around 11 am on Sunday while
+            many migrant workers were off duty and resting in hostel rooms about 50
+            metres from the unit&apos;s ammonia plant.
           </p>
           <p>
-            According to police sources cited in reports, around 120 guest workers,
-            including women from Assam, Odisha and Jharkhand, were staying on the
-            premises. The leak reportedly originated from the seafood processing unit
-            and spread across the campus, affecting workers who were inside their
-            accommodation area.
+            Most affected workers are young women from Odisha, Jharkhand, Assam and
+            West Bengal. The National Disaster Response Force said the gas spread to
+            worker accommodation. About 130 workers who were not affected were shifted
+            to the Govinda Bhavanam marriage hall in Kannigaipair, where food and
+            drinking water were arranged.
           </p>
 
           <h2 id="what-happened">What Happened at the Facility</h2>
@@ -277,33 +308,36 @@ export function TiruvallurAmmoniaLeak2026Article({
         <div className="ammonia-leak-prose">
           <p>
             The ammonia gas leak was reported from the seafood processing section of
-            the plant. Workers exposed to the gas complained of breathing difficulty.
-            Some reports also mentioned severe symptoms, including bleeding from the
-            mouth and nose. The affected workers were rushed to nearby private
-            hospitals for emergency care.
+            the plant. Workers exposed to the gas complained of breathlessness, eye and
+            respiratory tract irritation, coughing, chest discomfort, and varying
+            degrees of respiratory distress. The affected workers were rushed to nearby
+            government and private hospitals for emergency care.
           </p>
           <p>
-            Nine critically affected persons were later shifted from a private hospital
-            to <strong>Government Stanley Medical College Hospital, Chennai</strong>, in
-            108 ambulances. Police personnel from Periyapalayam, Fire and Rescue
-            Services, revenue officials and health department teams reached the spot
-            and carried out rescue operations.
+            Health Minister K. G. Arunraj said experts recorded ammonia levels of around{" "}
+            <strong>300 ppm</strong> in the air at the plant. Police personnel from
+            Periyapalayam, Fire and Rescue Services, revenue officials and health
+            department teams reached the spot and carried out rescue operations.
           </p>
           <p>
             Following a request from the district administration, the National Disaster
             Response Force deployed a specialised{" "}
             <strong>
               Chemical, Biological, Radiological and Nuclear response team
-            </strong>{" "}
-            from Arakkonam. A 30-member team equipped with gas-detection devices and
-            specialised rescue gear was pressed into service. Periyapalayam police have
-            registered a case, and investigation is underway.
+            </strong>
+            . NDRF officials said the gas had spread to workers&apos; accommodation,
+            causing breathing difficulties. Periyapalayam police registered a case
+            under Sections 105 and 125(a) of the Bharatiya Nyaya Sanhita. Unit owners
+            Mohan and Joseph were detained for inquiry.
           </p>
           <p>
-            The latest media reports also mention that a{" "}
-            <strong>three-member committee</strong> has been formed to examine the
-            incident. The exact mechanical cause of the leak has not yet been officially
-            confirmed.
+            Chief Minister <strong>C. Joseph Vijay</strong> formed a{" "}
+            <strong>three-member committee</strong> to probe the incident and directed
+            that a detailed inquiry be completed within three days. The government
+            announced ₹2 lakh compensation for each bereaved family, pledged to bear
+            the cost of transporting bodies to native states, and said PF and ESI
+            benefits would be released immediately. The exact mechanical cause of the
+            leak has not yet been officially confirmed.
           </p>
 
           <h2 id="why-ammonia">Why Ammonia Is Used in Seafood Processing Units</h2>
@@ -382,10 +416,11 @@ export function TiruvallurAmmoniaLeak2026Article({
             consider night-time and holiday exposure, not only working-hour exposure.
           </p>
           <p>
-            The incident reportedly happened on a weekly holiday. This makes the safety
-            concern sharper. A worker may not be operating machinery, but if accommodation
-            is within the same risk envelope, the worker remains exposed to industrial
-            hazards even while resting.
+            The incident happened while workers were off duty on Sunday, not during
+            active processing shifts. This makes the safety concern sharper. A worker
+            may not be operating machinery, but if accommodation sits within roughly 50
+            metres of an ammonia plant, the worker remains exposed to industrial hazards
+            even while resting.
           </p>
         </div>
 
@@ -486,6 +521,13 @@ export function TiruvallurAmmoniaLeak2026Article({
             facility may meet product quality standards for international markets, but
             that does not automatically mean it is safe for the workers who process those
             products.
+          </p>
+          <p>
+            On Monday, Labour Minister <strong>J. Mohamed Farvas</strong> told the Tamil
+            Nadu Legislative Assembly that the government would immediately constitute a
+            committee to inspect hazardous industries across the State. He said reports
+            from DISH, the Public Health Department and TNPCB had been sought within 24
+            hours.
           </p>
         </div>
 
@@ -697,9 +739,10 @@ export function TiruvallurAmmoniaLeak2026Article({
           <h2>Conclusion</h2>
           <p>
             The Kannigaipair ammonia leak has exposed a dangerous gap between industrial
-            operations and worker safety. Seven workers have lost their lives, and many
-            others have suffered exposure to a toxic gas. The official investigation must
-            determine the exact cause, but the broader safety lesson is already clear.
+            operations and worker safety. Five workers have lost their lives, and dozens
+            of others remain under treatment after exposure to a toxic gas. The official
+            investigation must determine the exact cause, but the broader safety lesson
+            is already clear.
           </p>
           <p>
             Every ammonia-based facility in Chennai and surrounding districts must now be
@@ -723,7 +766,23 @@ export function TiruvallurAmmoniaLeak2026Article({
         <p className="ammonia-leak-source">
           Primary reporting:{" "}
           <a href={TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL} target="_blank" rel="noopener noreferrer">
-            The New Indian Express
+            The New Indian Express (22 June update)
+          </a>
+          {" · "}
+          <a
+            href={TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL_DAY_ONE}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Day-one report (21 June)
+          </a>
+          {" · "}
+          <a
+            href="https://www.thehindu.com/news/national/tamil-nadu/death-toll-rises-in-ammonia-gas-leak-inicident-at-seafood-processing-unit-in-tiruvallur/article71131720.ece"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            The Hindu
           </a>
           . This article is MyChennaiCity editorial analysis on industrial safety
           compliance. See more{" "}
@@ -732,6 +791,8 @@ export function TiruvallurAmmoniaLeak2026Article({
 
         <p className="ammonia-leak-published">
           {published ? <>Published {published}</> : null}
+          {published && updated ? " · " : null}
+          {updated ? <>Updated {updated}</> : null}
           {" · "}
           Category: Chennai
           {" · "}

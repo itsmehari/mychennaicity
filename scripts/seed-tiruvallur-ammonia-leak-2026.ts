@@ -61,30 +61,33 @@ async function main() {
 
   const reportBody = `## Summary
 
-**Seven guest workers died** and **40+ were hospitalised** after an ammonia gas leak at a seafood export unit in Kannigaipair, Tiruvallur district, on Sunday, 21 June 2026.
+**Five women workers died** and **67 remain under treatment** after an ammonia gas leak at St Peter & Paul Sea Foods Exports in Kannigaipair, Tiruvallur district, on Sunday, 21 June 2026. A state health bulletin on Monday, 22 June, confirmed the toll.
 
-The unit has been identified in media reports as **St Peter's Paul Seafoods Exports Private Limited**. The leak reportedly occurred on the unit's weekly holiday when many migrant workers were inside on-campus accommodation.
+Early Sunday reports cited seven deaths; the official health bulletin revised the confirmed toll to five.
 
 **Read the full article:** [${TIRUVALLUR_AMMONIA_LEAK_SEO_TITLE}](${ARTICLE_URL})
 
-## Key facts
+## Key facts (updated 22 June 2026)
 
 | Detail | Value |
 | --- | --- |
-| Deaths | 7 |
-| Hospitalised | 40+ |
-| Location | Kannigaipair, near Periyapalayam, Tiruvallur |
-| Cause | Ammonia gas leak from refrigeration system |
-| Workers on premises | ~120 guest workers (Assam, Odisha, Jharkhand) |
-| Critical cases shifted | 9 to Government Stanley Medical College Hospital, Chennai |
-| Response | NDRF CBRN team from Arakkonam deployed |
+| Deaths | 5 (all women from Odisha) |
+| Under treatment | 67 |
+| Discharged | 2 |
+| Total exposed | 74 |
+| Location | Kannigaipair/Manjangaranai, near Periyapalayam, Tiruvallur |
+| Leak time | ~11 am Sunday, 21 June 2026 |
+| Cause | Ammonia gas leak from refrigeration system (under investigation) |
+| Ammonia level at plant | ~300 ppm (per Health Minister) |
+| Response | NDRF CBRN team; owners detained; CM forms 3-member probe committee |
 
 ## What happened
 
-- Ammonia leak reported from seafood processing section.
-- Workers complained of breathing difficulty; some reports mention bleeding from mouth and nose.
-- Fire and Rescue, police, revenue and health teams reached the spot.
-- Periyapalayam police registered a case; three-member committee formed.
+- Leak occurred while workers were off duty in hostel rooms ~50 m from the ammonia plant.
+- Gas spread to worker accommodation; 130 unaffected workers shifted to Govinda Bhavanam marriage hall.
+- Two workers died Sunday night; three more died Monday morning per health bulletin.
+- Police case under BNS Sections 105 and 125(a); unit owners Mohan and Joseph detained.
+- CM announced ₹2 lakh per family; Labour Minister ordered statewide hazardous-industry inspection.
 - Exact mechanical cause of leak not yet officially confirmed.`.trim();
 
   const analysisBody = `## Editorial note
@@ -108,7 +111,7 @@ This article is **MyChennaiCity editorial analysis** on industrial safety compli
     slug: TIRUVALLUR_AMMONIA_LEAK_SLUG,
     title: TIRUVALLUR_AMMONIA_LEAK_SEO_TITLE,
     summary: TIRUVALLUR_AMMONIA_LEAK_META_DESCRIPTION,
-    dek: "Seven guest workers died and 40+ were hospitalised after ammonia gas leaked from a seafood export unit at Kannigaipair near Periyapalayam in Tiruvallur district.",
+    dek: "Five women workers died and 67 remain under treatment after ammonia gas leaked from St Peter & Paul Sea Foods Exports at Kannigaipair near Periyapalayam. Updated 22 June with official health bulletin figures.",
     body,
     reportBody,
     analysisBody,

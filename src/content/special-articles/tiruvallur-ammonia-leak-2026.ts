@@ -2,57 +2,75 @@ export const TIRUVALLUR_AMMONIA_LEAK_SLUG =
   "tiruvallur-ammonia-leak-seafood-unit-seven-dead-2026";
 
 export const TIRUVALLUR_AMMONIA_LEAK_H1 =
-  "Tiruvallur Ammonia Leak: Seven Workers Die at Seafood Unit, Safety Compliance Comes Under Scrutiny";
+  "Tiruvallur Ammonia Leak: Five Workers Dead at Seafood Unit, Safety Compliance Comes Under Scrutiny";
 
 export const TIRUVALLUR_AMMONIA_LEAK_SEO_TITLE =
-  "Tiruvallur Ammonia Leak: 7 Dead at Seafood Unit Near Chennai — Safety Under Scrutiny";
+  "Tiruvallur Ammonia Leak: 5 Dead at Seafood Unit Near Chennai — Safety Under Scrutiny";
 
 export const TIRUVALLUR_AMMONIA_LEAK_META_DESCRIPTION =
-  "Seven guest workers died and 40+ were hospitalised after an ammonia gas leak at a seafood export unit in Kannigaipair, Tiruvallur. What happened, why ammonia is used, and what safety compliance must change.";
+  "Five women workers died and 67 remain under treatment after an ammonia gas leak at St Peter & Paul Sea Foods Exports in Kannigaipair, Tiruvallur. Updated June 22 with official health bulletin figures.";
 
 export const TIRUVALLUR_AMMONIA_LEAK_HERO_IMAGE =
   "/images/articles/tiruvallur-ammonia-leak-2026-hero.jpeg";
 
 export const TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL =
+  "https://www.newindianexpress.com/states/tamil-nadu/2026/Jun/22/tiruvallur-ammonia-leak-death-toll-rises-to-five-67-under-treatment";
+
+export const TIRUVALLUR_AMMONIA_LEAK_SOURCE_URL_DAY_ONE =
   "https://www.newindianexpress.com/states/tamil-nadu/2026/Jun/21/seven-workers-die-in-ammonia-leak-at-seafood-unit-in-tiruvallur";
 
 export const ammoniaLeakFactStrip = [
-  "7 dead",
-  "40+ hospitalised",
+  "5 dead",
+  "67 under treatment",
   "Kannigaipair, Tiruvallur",
   "Ammonia leak",
 ] as const;
+
+export const ammoniaLeakLatestUpdate = {
+  dateLabel: "Monday, 22 June 2026",
+  bullets: [
+    "State Health and Family Welfare Department bulletin confirms five deaths — two on Sunday night and three on Monday morning. All five deceased workers are women from Odisha.",
+    "Of 74 workers exposed to the gas, 67 remain under medical observation and two have been discharged.",
+    "The leak occurred around 11 am on Sunday while workers were off duty and resting in hostel rooms about 50 metres from the ammonia plant.",
+    "Health Minister K. G. Arunraj said experts recorded ammonia levels of around 300 ppm at the plant. NDRF teams confirmed the gas had spread to worker accommodation.",
+    "Police registered a case under BNS Sections 105 and 125(a). Unit owners Mohan and Joseph were detained for inquiry.",
+    "Chief Minister C. Joseph Vijay ordered a three-member committee to complete a detailed probe within three days and announced ₹2 lakh compensation per family.",
+    "Labour Minister J. Mohamed Farvas told the Assembly the government will constitute a committee to inspect hazardous industries statewide.",
+  ],
+  correctionNote:
+    "Early Sunday reports cited seven deaths. The official health bulletin on Monday revised the confirmed toll to five.",
+} as const;
 
 export const ammoniaLeakTimeline = [
   {
     id: "leak-reported",
     label: "Leak reported",
     detail:
-      "Ammonia gas leak reported from the seafood processing section on the unit's weekly holiday.",
+      "Ammonia gas leak around 11 am on Sunday, 21 June, at St Peter & Paul Sea Foods Exports in Kannigaipair during routine operations.",
   },
   {
     id: "workers-hospitalised",
     label: "Workers hospitalised",
     detail:
-      "Affected workers rushed to nearby private hospitals with breathing difficulty and severe symptoms.",
+      "74 workers exposed; victims rushed to government and private hospitals with breathlessness, eye irritation, and respiratory distress.",
   },
   {
-    id: "critical-shifted",
-    label: "Critical patients shifted",
+    id: "death-toll-confirmed",
+    label: "Official toll confirmed",
     detail:
-      "Nine critically affected persons shifted to Government Stanley Medical College Hospital, Chennai, in 108 ambulances.",
+      "Health bulletin on Monday confirms five deaths — two Sunday night, three Monday morning. Sixty-seven remain under treatment; two discharged.",
   },
   {
     id: "ndrf-deployed",
     label: "NDRF deployed",
     detail:
-      "30-member CBRN response team from Arakkonam deployed with gas-detection devices and rescue gear.",
+      "NDRF CBRN team deployed; gas had spread to worker hostel accommodation about 50 metres from the ammonia plant.",
   },
   {
     id: "case-registered",
-    label: "Case registered",
+    label: "Probe and arrests",
     detail:
-      "Periyapalayam police registered a case; three-member committee formed to examine the incident.",
+      "Police case under BNS; owners detained. CM forms three-member committee for a three-day inquiry; statewide hazardous-industry inspection ordered.",
   },
 ] as const;
 
@@ -185,6 +203,7 @@ export const officialChecklist = [
 ] as const;
 
 export const ammoniaLeakToc = [
+  { id: "latest-update", label: "Latest update — 22 June 2026" },
   { id: "what-happened", label: "What happened at the facility" },
   { id: "why-ammonia", label: "Why ammonia is used in seafood processing" },
   { id: "worker-accommodation", label: "Worker accommodation safety question" },
