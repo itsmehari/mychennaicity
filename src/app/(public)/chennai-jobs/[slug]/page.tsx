@@ -6,6 +6,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { JobDetailResumeDoctorStrip } from "@/components/jobs/job-detail-resumedoctor-strip";
 import { JobDetailWhatsAppCommunityStrip } from "@/components/jobs/job-detail-whatsapp-community-strip";
 import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
@@ -112,6 +113,10 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           ]}
         />
         <JobDetailWhatsAppCommunityStrip />
+        <JobDetailResumeDoctorStrip
+          audience="employer-job"
+          isWhatsAppApply={isWhatsApp}
+        />
         <JobPostingDetail
           row={row}
           applyHref={applyHref ?? null}
