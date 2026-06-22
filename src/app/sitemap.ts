@@ -25,6 +25,20 @@ import {
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
 export const dynamic = "force-dynamic";
 
+function absoluteAssetUrl(base: string, url: string | null): string | null {
+  if (!url?.trim()) return null;
+  const trimmed = url.trim();
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
+  }
+  return `${base}${trimmed.startsWith("/") ? trimmed : `/${trimmed}`}`;
+}
+
+function latestModified(dates: Date[], fallback: Date): Date {
+  if (dates.length === 0) return fallback;
+  return new Date(Math.max(...dates.map((d) => d.getTime())));
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
   const now = new Date();
@@ -55,14 +69,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
   }
 
-  const hubLastModified =
-    articleRows.length > 0
-      ? new Date(
-          Math.max(
-            ...articleRows.map((r) => r.lastModified.getTime()),
-          ),
-        )
-      : now;
+  const hubLastModified = latestModified(
+    articleRows.map((r) => r.lastModified),
+    now,
+  );
+
+  const eventsLastModified = latestModified(
+    eventRows.map((e) => e.lastModified),
+    now,
+  );
+
+  const jobsLastModified = latestModified(
+    [
+      ...jobRows.map((j) => j.lastModified),
+      ...jobSeekerRows.map((j) => j.lastModified),
+    ],
+    now,
+  );
+
+  const classifiedsLastModified = latestModified(
+    classifiedRows.map((c) => c.lastModified),
+    now,
+  );
+
+  const directoryLastModified = latestModified(
+    directoryRows.map((d) => d.lastModified),
+    now,
+  );
 
   const staticEntries: MetadataRoute.Sitemap = [
     {
@@ -79,25 +112,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${base}/chennai-local-events`,
-      lastModified: now,
+      lastModified: eventsLastModified,
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
       url: `${base}${CHENNAI_JOBS_HUB_PATH}`,
-      lastModified: now,
+      lastModified: jobsLastModified,
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
       url: `${base}${CHENNAI_JOBS_LOOKING_PATH}`,
-      lastModified: now,
+      lastModified: jobsLastModified,
       changeFrequency: "weekly",
       priority: 0.68,
     },
     {
       url: `${base}${CHENNAI_CLASSIFIEDS_HUB_PATH}`,
-      lastModified: now,
+      lastModified: classifiedsLastModified,
       changeFrequency: "weekly",
       priority: 0.66,
     },
@@ -109,7 +142,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${base}/directory`,
-      lastModified: now,
+      lastModified: directoryLastModified,
       changeFrequency: "weekly",
       priority: 0.7,
     },
@@ -200,15 +233,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const articleEntries: MetadataRoute.Sitemap = articleRows.map((a) => ({
-    url: `${base}/chennai-local-news/${a.slug}`,
-    lastModified: a.lastModified,
-    changeFrequency: "weekly" as const,
-    priority: 0.75,
-    ...(a.heroImageUrl
-      ? { images: [a.heroImageUrl] }
-      : {}),
-  }));
+  const articleEntries: MetadataRoute.Sitemap = articleRows.map((a) => {
+    const imageUrl = absoluteAssetUrl(base, a.heroImageUrl);
+    return {
+      url: `${base}/chennai-local-news/${a.slug}`,
+      lastModified: a.lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.75,
+      ...(imageUrl ? { images: [imageUrl] } : {}),
+    };
+  });
 
   const topicEntries: MetadataRoute.Sitemap = topicKeys.map((cat) => ({
     url: `${base}/chennai-local-news/topic/${categoryToTopicSlug(cat)}`,

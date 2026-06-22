@@ -69,9 +69,19 @@ async function main() {
   const webmasters = google.webmasters({ version: "v3", auth });
   await webmasters.sitemaps.submit({ siteUrl, feedpath });
 
+  const newsSitemap =
+    siteUrl.startsWith("sc-domain:")
+      ? `https://${siteUrl.slice("sc-domain:".length)}/news-sitemap.xml`
+      : `${siteUrl.replace(/\/$/, "")}/news-sitemap.xml`;
+
+  if (feedpath !== newsSitemap) {
+    await webmasters.sitemaps.submit({ siteUrl, feedpath: newsSitemap });
+  }
+
   console.log("Submitted sitemap to Search Console.");
   console.log(`  property: ${siteUrl}`);
   console.log(`  sitemap:  ${feedpath}`);
+  console.log(`  sitemap:  ${newsSitemap}`);
 }
 
 main().catch((e) => {

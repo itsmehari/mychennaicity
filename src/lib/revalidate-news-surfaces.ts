@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { revalidateSitemapSurfaces } from "@/lib/revalidate-sitemap-surfaces";
 
 /** Paths that list or surface published Chennai articles. */
 const NEWS_LIST_PATHS = ["/", "/chennai-local-news"] as const;
@@ -14,6 +15,6 @@ export function revalidateNewsSurfaces(articleSlug?: string): void {
   if (articleSlug?.trim()) {
     revalidatePath(`/chennai-local-news/${articleSlug.trim()}`);
   }
-  revalidatePath("/news-sitemap.xml");
+  revalidateSitemapSurfaces();
   revalidatePath("/chennai-local-news/feed.xml");
 }

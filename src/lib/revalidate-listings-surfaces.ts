@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { revalidateSitemapSurfaces } from "@/lib/revalidate-sitemap-surfaces";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH } from "@/lib/routes/chennai-jobs";
 
@@ -14,7 +15,7 @@ export function revalidateListingsSurfaces(options?: {
   directoryType?: string;
   directorySlug?: string;
 }): void {
-  revalidatePath("/sitemap.xml");
+  revalidateSitemapSurfaces();
   revalidatePath(CHENNAI_JOBS_HUB_PATH);
   revalidatePath(CHENNAI_JOBS_LOOKING_PATH);
   revalidatePath(CHENNAI_CLASSIFIEDS_HUB_PATH);
