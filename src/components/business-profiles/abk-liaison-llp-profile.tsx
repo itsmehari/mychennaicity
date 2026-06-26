@@ -2,9 +2,13 @@ import styles from "./abk-liaison-llp-profile.module.css";
 
 const LOGO_SRC = "/images/business-profile/abk-liaison-llp/abk-logo.png";
 
-export function AbkLiaisonLlpProfile() {
+type AbkLiaisonLlpProfileProps = {
+  className?: string;
+};
+
+export function AbkLiaisonLlpProfile({ className }: AbkLiaisonLlpProfileProps) {
   return (
-    <div className={styles.root}>
+    <div className={[styles.root, className].filter(Boolean).join(" ")}>
 
       <header className={styles.topbar}>
         <div className={`${styles.wrap} ${styles.topbarInner}`}>

@@ -12,13 +12,18 @@
   --max: 1180px;
   --shadow: 0 24px 70px rgba(7, 20, 34, 0.14);
   --img-base: /images/business-profile/abk-liaison-llp;
+  --font-body: var(--font-abk-sans), "Segoe UI", sans-serif;
 
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
   color: var(--ink);
   background: #fff;
-  line-height: 1.55;
+  line-height: 1.6;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .root * {
@@ -46,9 +51,9 @@
   align-items: center;
   gap: 10px;
   color: var(--red);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -61,20 +66,21 @@
 }
 
 .sectionTitle {
-  margin: 14px 0 0;
-  font-size: clamp(32px, 4vw, 54px);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  font-weight: 800;
+  margin: 12px 0 0;
+  font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: 600;
   color: var(--navy);
 }
 
 .sectionLead {
-  margin: 20px 0 0;
-  max-width: 760px;
+  margin: 18px 0 0;
+  max-width: 720px;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.72;
 }
 
 .topbar {
@@ -84,7 +90,7 @@
 }
 
 .topbarInner {
-  min-height: 92px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,8 +116,9 @@
   border-left: 1px solid rgba(255, 255, 255, 0.22);
   padding-left: 18px;
   color: #d7dde7;
-  font-size: 14px;
-  letter-spacing: 0.03em;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .topLinks {
@@ -119,7 +126,8 @@
   align-items: center;
   gap: 22px;
   color: #dce3ef;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -157,41 +165,42 @@
 .heroInner {
   position: relative;
   z-index: 2;
-  min-height: 610px;
+  min-height: 520px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
-  gap: 70px;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 56px;
   align-items: end;
-  padding-top: 84px;
-  padding-bottom: 72px;
+  padding-top: 72px;
+  padding-bottom: 64px;
 }
 
 .heroLabel {
   display: inline-flex;
-  padding: 9px 13px;
+  padding: 8px 12px;
   background: var(--red);
   color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .hero h1 {
-  margin: 24px 0 0;
-  max-width: 730px;
-  font-size: clamp(48px, 7.3vw, 92px);
-  line-height: 0.93;
-  letter-spacing: -0.07em;
-  font-weight: 900;
+  margin: 20px 0 0;
+  max-width: 680px;
+  font-size: clamp(2rem, 4.2vw, 3.375rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 600;
 }
 
 .hero p {
-  margin: 26px 0 0;
-  max-width: 680px;
+  margin: 22px 0 0;
+  max-width: 620px;
   color: #d7dde7;
-  font-size: 20px;
-  line-height: 1.65;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.68;
 }
 
 .heroActions {
@@ -205,13 +214,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 20px;
+  min-height: 44px;
+  padding: 0 18px;
   border: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.01em;
 }
 
 .btnPrimary {
@@ -231,9 +240,10 @@
 
 .heroPanel h2 {
   margin: 0;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
 }
 
 .heroPanel dl {
@@ -249,18 +259,18 @@
 
 .heroPanel dt {
   color: #687384;
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 }
 
 .heroPanel dd {
   margin: 4px 0 0;
   color: var(--navy);
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .intro {
@@ -277,10 +287,11 @@
 }
 
 .introCopy {
-  font-size: 20px;
-  line-height: 1.8;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
   color: #273244;
-  max-width: 760px;
+  max-width: 720px;
 }
 
 .introCopy p {
@@ -297,9 +308,10 @@
 .quotePanel strong {
   display: block;
   color: var(--navy);
-  font-size: 26px;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  font-size: 1.3125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }
 
 .quotePanel span {
@@ -330,17 +342,18 @@
 
 .capabilityRow .num {
   color: var(--red);
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
 }
 
 .capabilityRow h3 {
   margin: 0;
   color: var(--navy);
-  font-size: 25px;
-  line-height: 1.15;
-  letter-spacing: -0.035em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .capabilityRow p {
@@ -351,11 +364,11 @@
 }
 
 .capabilityRow .scope {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
   color: #6b7280;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .credentials {
@@ -420,9 +433,10 @@
 
 .credentialStatement h3 {
   margin: 0;
-  font-size: 34px;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .credentialStatement p {
@@ -448,16 +462,17 @@
 
 .fact span {
   color: #9ca8ba;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-weight: 600;
 }
 
 .fact strong {
   color: #fff;
-  font-size: 22px;
-  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .projects {
@@ -497,18 +512,19 @@
 
 .projectCopy .type {
   color: var(--red);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .projectCopy h3 {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   color: var(--navy);
-  font-size: 38px;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
 }
 
 .projectCopy p {
@@ -530,7 +546,7 @@
   position: relative;
   padding-left: 22px;
   color: #273244;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .projectCopy li::before {
@@ -580,9 +596,10 @@
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 40px;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
 }
 
 .contactDark p {
@@ -608,8 +625,9 @@
 .person strong {
   display: block;
   color: var(--navy);
-  font-size: 26px;
-  letter-spacing: -0.03em;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .person span {
@@ -628,9 +646,9 @@
 
 .contactLine span {
   color: #6b7280;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -638,7 +656,7 @@
 .contactLine address {
   font-style: normal;
   color: var(--navy);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .footer {
@@ -728,12 +746,12 @@
   }
 
   .hero h1 {
-    font-size: 48px;
+    font-size: 2rem;
   }
 
   .hero p,
   .introCopy {
-    font-size: 17px;
+    font-size: 1rem;
   }
 
   .heroPanel,
@@ -753,11 +771,11 @@
   }
 
   .sectionTitle {
-    font-size: 34px;
+    font-size: 1.75rem;
   }
 
   .sectionLead {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .fact {
@@ -794,7 +812,7 @@
   }
 
   .sectionTitle {
-    font-size: 34px;
+    font-size: 1.75rem;
   }
 
   .heroInner {
