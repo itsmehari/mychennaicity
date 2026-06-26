@@ -2,34 +2,9 @@ import styles from "./abk-liaison-llp-profile.module.css";
 
 const LOGO_SRC = "/images/business-profile/abk-liaison-llp/abk-logo.png";
 
-const profileJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "ABK Liaison LLP",
-  url: "https://www.abkliaison.com",
-  areaServed: ["Tamil Nadu", "Pondicherry"],
-  telephone: "+91 98404 04590",
-  email: "abkliaison@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "16, SPS 2nd Street, Royapettah",
-    addressLocality: "Chennai",
-    postalCode: "600014",
-    addressRegion: "Tamil Nadu",
-    addressCountry: "IN",
-  },
-  founder: "AB Kathirravan",
-  description:
-    "Statutory licensing, liaison coordination, government contracts and civil development services across Tamil Nadu and Pondicherry.",
-};
-
 export function AbkLiaisonLlpProfile() {
   return (
     <div className={styles.root}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
-      />
 
       <header className={styles.topbar}>
         <div className={`${styles.wrap} ${styles.topbarInner}`}>
