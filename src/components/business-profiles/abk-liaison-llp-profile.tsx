@@ -87,16 +87,14 @@ export function AbkLiaisonLlpProfile() {
               </h2>
               <div className={styles.introCopy}>
                 <p>
-                  ABK Liaison LLP supports businesses and institutions through
-                  statutory registration processes, retail outlet coordination,
-                  government contracting pathways and commercial built-space
-                  development requirements.
+                  ABK Liaison LLP operates across statutory licensing, liaison
+                  coordination, government contracting, and civil development.
                 </p>
                 <p>
-                  The firm brings together business experience,
-                  academic-institution exposure and government-facing process
-                  knowledge to support clients where documentation, coordination,
-                  approval follow-up and execution discipline matter.
+                  The firm is a blend of business support, estate management
+                  services, government registration processes, and commercial
+                  built-space development, with a focused operating presence
+                  across Tamil Nadu and Puducherry.
                 </p>
               </div>
             </div>
@@ -237,10 +235,10 @@ export function AbkLiaisonLlpProfile() {
                 <h3>Professors Hall</h3>
                 <p>
                   Completed 6000+2000 sq. ft. event space developed in memory of
-                  the family&apos;s grandmother and great grandfather.
+                  Mr A B Kathirravan&apos;s Grand Mother &amp; Great Grand Father.
                 </p>
                 <ul>
-                  <li>Institutional event space</li>
+                  <li>6000+2000 sq. ft. event space</li>
                   <li>Large-format civil development</li>
                   <li>Memory-led legacy project</li>
                 </ul>
@@ -251,16 +249,15 @@ export function AbkLiaisonLlpProfile() {
               className={`${styles.projectFeature} ${styles.projectFeatureReverse}`}
             >
               <div className={styles.projectCopy}>
-                <span className={styles.type}>Redevelopment project</span>
+                <span className={styles.type}>Redevelopment</span>
                 <h3>Arcot, T Nagar</h3>
                 <p>
-                  Commercial redevelopment project in memory of Mr A B
-                  Kathirravan&apos;s grandmother and great grandfather.
+                  Redevelopment of family home into commercial rental space.
                 </p>
                 <ul>
-                  <li>Commercial asset transformation</li>
-                  <li>Urban redevelopment coordination</li>
-                  <li>Construction after liaison</li>
+                  <li>Family home redevelopment</li>
+                  <li>Commercial rental space</li>
+                  <li>Urban asset transformation</li>
                 </ul>
               </div>
               <div
