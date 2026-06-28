@@ -14,6 +14,7 @@ import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { ChennaiJobsHubHero } from "@/components/jobs/chennai-jobs-hub-hero";
@@ -121,6 +122,8 @@ export default async function ChennaiJobsHubPage() {
         openingsCount={total}
         seekingCount={seekingTotal}
       />
+
+      <AdvertisePanel variant="jobs" layout="section" className="mt-8" />
 
       <HubCommunityStrip businessVariant="jobs" className="mt-6" />
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
   InteriorCrossNav,
@@ -9,6 +10,8 @@ import {
 import { JobDetailResumeDoctorStrip } from "@/components/jobs/job-detail-resumedoctor-strip";
 import { JobDetailWhatsAppCommunityStrip } from "@/components/jobs/job-detail-whatsapp-community-strip";
 import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
+import { ChennaiJobsHubSafety } from "@/components/jobs/chennai-jobs-hub-sections";
+import { JobsDetailBackLink } from "@/components/jobs/chennai-jobs-detail-parts";
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
 import {
@@ -124,7 +127,10 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           applyLinkProps={applyLinkProps}
           isWhatsApp={isWhatsApp}
         />
-        <div className="mt-12 max-w-2xl">
+        <ChennaiJobsHubSafety />
+        <JobsDetailBackLink href={CHENNAI_JOBS_HUB_PATH} label="All jobs in Chennai" />
+        <div className="mt-8 max-w-2xl space-y-6">
+          <AdvertisePanel variant="jobs" layout="strip" />
           <BusinessWhatsAppCta variant="jobs" />
         </div>
         <InteriorCrossNav />

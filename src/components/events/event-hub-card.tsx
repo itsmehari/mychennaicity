@@ -5,8 +5,8 @@ import type { EventHubCardData } from "@/lib/events/event-hub-helpers";
 function CardInner({ card }: { card: EventHubCardData }) {
   return (
     <>
-      <div className="mcc-events-hub-card__media">
-        {card.imageSrc ? (
+      {card.imageSrc ? (
+        <div className="mcc-events-hub-card__media">
           <Image
             src={card.imageSrc}
             alt={card.imageAlt}
@@ -14,14 +14,11 @@ function CardInner({ card }: { card: EventHubCardData }) {
             sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 22vw"
             className="object-cover"
           />
-        ) : (
-          <div
-            className={`mcc-events-hub-card__placeholder mcc-events-hub-card__placeholder--${card.placeholderTone}`}
-            aria-hidden
-          />
-        )}
-        <span className="mcc-events-hub-card__date">{card.dateBadge}</span>
-      </div>
+          <span className="mcc-events-hub-card__date">{card.dateBadge}</span>
+        </div>
+      ) : (
+        <p className="mcc-events-hub-card__date-inline">{card.dateBadge}</p>
+      )}
       <p
         className={`mcc-events-hub-card__status mcc-events-hub-card__status--${card.statusTone}`}
       >

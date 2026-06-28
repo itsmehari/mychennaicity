@@ -19,6 +19,24 @@
   color: var(--foreground);
 }
 
+.mcc-event-hero {
+  margin-top: 1.5rem;
+}
+
+.mcc-event-hero--with-poster {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.mcc-event-hero__main {
+  min-width: 0;
+}
+
+.mcc-event-hero__poster {
+  max-width: 22rem;
+}
+
 .mcc-event-poster {
   border: 1px solid color-mix(in srgb, var(--foreground) 8%, var(--border));
   border-radius: 16px;
@@ -247,5 +265,15 @@
 @media (min-width: 1024px) {
   .mcc-event-layout {
     gap: 3rem;
+  }
+
+  .mcc-event-hero--with-poster {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+    gap: 2rem;
+  }
+
+  .mcc-event-hero__poster {
+    justify-self: end;
+    max-width: 100%;
   }
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import { DirectoryEntryDetail } from "@/components/directory/directory-entry-detail";
 import {
@@ -105,7 +106,8 @@ export default async function DirectoryEntryPage({ params }: Props) {
           ]}
         />
         <DirectoryEntryDetail entry={entry} />
-        <div className="mt-10">
+        <div className="mt-10 space-y-6">
+          <AdvertisePanel variant="directory" layout="strip" />
           <BusinessWhatsAppCta variant="directory" />
         </div>
         <InteriorCrossNav />

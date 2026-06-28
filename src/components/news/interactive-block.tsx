@@ -31,69 +31,125 @@ type HowToBlockJson = {
   steps: { name: string; text: string }[];
 };
 
+function FaqAccordion({ items }: { items: FaqBlockJson["items"] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section className="civic-faq" aria-label="Frequently asked questions">
+      <h2 className="civic-faq__title">FAQ</h2>
+      <div>
+        {items.map((item, i) => {
+          const isOpen = openIndex === i;
+          return (
+            <div
+              key={i}
+              className="civic-faq__item"
+              data-open={isOpen ? "true" : "false"}
+            >
+              <button
+                type="button"
+                className="civic-faq__question"
+                aria-expanded={isOpen}
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+              >
+                <span>{item.question}</span>
+                <span className="civic-faq__chevron" aria-hidden>
+                  ▾
+                </span>
+              </button>
+              {isOpen ? (
+                <p className="civic-faq__answer">{item.answer}</p>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function StepGuide({
+  title,
+  steps,
+}: {
+  title: string;
+  steps: HowToBlockJson["steps"];
+}) {
+  return (
+    <aside className="civic-steps" aria-label={title}>
+      <h2 className="civic-steps__title">{title}</h2>
+      <ol className="civic-steps__list">
+        {steps.map((step, i) => (
+          <li key={i} className="civic-steps__step">
+            <span className="civic-steps__number">{i + 1}</span>
+            <div>
+              <p className="civic-steps__name">{step.name}</p>
+              <p className="civic-steps__text">{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </aside>
+  );
+}
+
 export function InteractiveBlock({
   data,
+  variant = "default",
 }: {
   data: Record<string, unknown> | null | undefined;
+  variant?: "default" | "faq-only" | "howto-only";
 }) {
   if (!data || typeof data !== "object" || !("type" in data)) {
     return null;
   }
   const t = data.type as string;
+
   if (t === "checklist") {
     const c = data as unknown as ChecklistJson;
     if (!c.items?.length) return null;
     return (
-      <aside
-        className="border-t border-[var(--border)] pt-8"
-        aria-label="Interactive checklist"
-      >
-        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+      <aside className="civic-prose-advisory" aria-label="Interactive checklist">
+        <p className="text-[0.625rem] font-bold uppercase tracking-[0.14em] text-[var(--accent-warm)]">
           Reader checklist
         </p>
-        <h2 className="mt-2 text-lg font-semibold text-[var(--foreground)]">
+        <h2 className="mt-2 text-base font-semibold text-[var(--foreground)]">
           {c.title}
         </h2>
-        <ul className="mt-5 space-y-3">
+        <ul className="mt-4 space-y-2">
           {c.items.map((item) => (
             <li
               key={item.id}
-              className="flex gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm"
+              className="flex gap-3 py-2 text-sm leading-relaxed text-[var(--foreground)]"
             >
               <input
                 id={`chk-${item.id}`}
                 type="checkbox"
                 className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
               />
-              <label
-                htmlFor={`chk-${item.id}`}
-                className="leading-relaxed text-[var(--foreground)]"
-              >
-                {item.label}
-              </label>
+              <label htmlFor={`chk-${item.id}`}>{item.label}</label>
             </li>
           ))}
         </ul>
       </aside>
     );
   }
+
   if (t === "poll") {
     const p = data as unknown as PollJson;
     if (!p.options?.length) return null;
     return <PollBlock question={p.question} options={p.options} />;
   }
+
   if (t === "takeaways") {
     const tk = data as unknown as TakeawaysJson;
     if (!tk.items?.length) return null;
     return (
-      <aside
-        className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_6%,transparent)]"
-        aria-label="Key takeaways"
-      >
-        <h2 className="text-sm font-semibold text-[var(--foreground)]">
-          {tk.title?.trim() || "Key takeaways"}
+      <aside className="civic-quick-summary" aria-label="Key takeaways">
+        <h2 className="civic-quick-summary__title">
+          {tk.title?.trim() || "Quick Summary"}
         </h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--foreground)]">
+        <ul className="civic-quick-summary__list">
           {tk.items.map((line, i) => (
             <li key={i}>{line}</li>
           ))}
@@ -101,56 +157,26 @@ export function InteractiveBlock({
       </aside>
     );
   }
+
   if (t === "faq") {
     const f = data as unknown as FaqBlockJson;
     if (!f.items?.length) return null;
-    return (
-      <aside
-        className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
-        aria-label="Frequently asked questions"
-      >
-        <h2 className="text-sm font-semibold text-[var(--foreground)]">
-          Quick answers
-        </h2>
-        <dl className="mt-4 space-y-4">
-          {f.items.map((item, i) => (
-            <div key={i}>
-              <dt className="text-sm font-medium text-[var(--foreground)]">
-                {item.question}
-              </dt>
-              <dd className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
-                {item.answer}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </aside>
-    );
+    if (variant === "howto-only") return null;
+    return <FaqAccordion items={f.items} />;
   }
+
   if (t === "howto") {
     const h = data as unknown as HowToBlockJson;
     if (!h.steps?.length) return null;
+    if (variant === "faq-only") return null;
     return (
-      <aside
-        className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
-        aria-label={h.name?.trim() || "How to"}
-      >
-        <h2 className="text-sm font-semibold text-[var(--foreground)]">
-          {h.name?.trim() || "Steps"}
-        </h2>
-        <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-[var(--foreground)]">
-          {h.steps.map((s, i) => (
-            <li key={i}>
-              <span className="font-medium">{s.name}</span>
-              <span className="mt-1 block font-normal text-[var(--muted)]">
-                {s.text}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </aside>
+      <StepGuide
+        title={h.name?.trim() || "Step-by-step guide"}
+        steps={h.steps}
+      />
     );
   }
+
   return null;
 }
 
@@ -165,10 +191,10 @@ function PollBlock({
   const [picked, setPicked] = useState<string | null>(null);
   return (
     <aside
-      className="rounded-2xl border border-dashed border-[var(--accent)] bg-[var(--surface)] p-5"
+      className="civic-prose-advisory"
       aria-label="Reader poll"
     >
-      <h2 className="text-sm font-semibold text-[var(--foreground)]">
+      <h2 className="text-base font-semibold text-[var(--foreground)]">
         {question}
       </h2>
       <p className="mt-1 text-xs text-[var(--muted)]">
@@ -196,8 +222,8 @@ function PollBlock({
       </div>
       {picked ? (
         <p className="mt-3 text-xs text-[var(--muted)]">
-          Thanks — share this story if the topic matters to your neighbourhood group
-          (canonical URL, not screenshots).
+          Thanks — share this story if the topic matters to your neighbourhood
+          group (canonical URL, not screenshots).
         </p>
       ) : null}
     </aside>

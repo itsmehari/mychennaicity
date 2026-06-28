@@ -144,6 +144,18 @@
   text-overflow: ellipsis;
 }
 
+.mcc-events-hub-card__date-inline {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--foreground) 78%, black);
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .mcc-events-hub-card__status {
   margin-top: 0.45rem;
   font-size: 0.6875rem;

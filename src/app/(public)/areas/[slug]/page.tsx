@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { RichAreaHubPage } from "@/components/areas/rich-area-hub-page";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { getRichAreaHubContent } from "@/content/area-hubs";
+import {
+  listArticlesByAreaHubForChennai,
+  listClassifiedsByAreaHubForChennai,
+  listOmrCorridorJobsForChennai,
+} from "@/domains/areas";
 import { CHENNAI_GEO_VERSION, chennaiZones } from "@/lib/chennai-zones";
 import { getSiteUrl } from "@/lib/env";
 import { buildAreaHubJsonLd } from "@/lib/seo/area-hub-jsonld";
@@ -19,22 +27,28 @@ export function generateStaticParams() {
   return chennaiZones.map((z) => ({ slug: z.slug }));
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const zone = chennaiZones.find((z) => z.slug === slug);
   if (!zone) {
     return { title: { absolute: fullSiteTitle("Chennai area not found") } };
   }
+  const rich = getRichAreaHubContent(slug);
   const base = getSiteUrl();
-  const titleSegment = `${zone.label} — Chennai area`;
+  const titleSegment = `${zone.label} — Chennai area guide`;
   const docTitle = fullSiteTitle(titleSegment);
+  const description =
+    rich?.metaDescription ??
+    `${zone.blurb} News, events, jobs, and directory links for this part of Chennai.`;
   return {
     title: titleSegment,
-    description: `${zone.blurb} News, events, jobs, and directory links for this part of Chennai.`,
+    description,
     alternates: { canonical: `${base}/areas/${zone.slug}` },
     openGraph: {
       title: docTitle,
-      description: zone.blurb,
+      description,
       url: `${base}/areas/${zone.slug}`,
       images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     },
@@ -46,11 +60,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function AreaPage({ params }: Props) {
-  const { slug } = await params;
-  const zone = chennaiZones.find((z) => z.slug === slug);
-  if (!zone) notFound();
-
+function DefaultAreaPage({
+  zone,
+}: {
+  zone: (typeof chennaiZones)[number];
+}) {
   const { webPage, breadcrumbs, itemList } = buildAreaHubJsonLd(zone);
 
   const quickLinks: {
@@ -115,10 +129,14 @@ export default async function AreaPage({ params }: Props) {
         {zone.blurb}
       </p>
 
-      <section
-        className="mt-10"
-        aria-labelledby="highlights-heading"
-      >
+      <AdvertisePanel
+        variant="area"
+        layout="section"
+        className="mt-8"
+        areaLabel={zone.label}
+      />
+
+      <section className="mt-10" aria-labelledby="highlights-heading">
         <h2
           id="highlights-heading"
           className="type-display text-xl text-[var(--foreground)]"
@@ -128,7 +146,10 @@ export default async function AreaPage({ params }: Props) {
         <ul className="mt-4 max-w-2xl space-y-3 text-sm leading-relaxed text-[var(--muted)]">
           {zone.highlights.map((h, i) => (
             <li key={i} className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden />
+              <span
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                aria-hidden
+              />
               <span>{h}</span>
             </li>
           ))}
@@ -187,5 +208,46 @@ export default async function AreaPage({ params }: Props) {
 
       <InteriorCrossNav />
     </div>
+  );
+}
+
+export default async function AreaPage({ params }: Props) {
+  const { slug } = await params;
+  const zone = chennaiZones.find((z) => z.slug === slug);
+  if (!zone) notFound();
+
+  const richContent = getRichAreaHubContent(slug);
+  if (!richContent) {
+    return <DefaultAreaPage zone={zone} />;
+  }
+
+  let articles: Awaited<ReturnType<typeof listArticlesByAreaHubForChennai>> = [];
+  let classifieds: Awaited<
+    ReturnType<typeof listClassifiedsByAreaHubForChennai>
+  > = [];
+  let jobs: Awaited<ReturnType<typeof listOmrCorridorJobsForChennai>> = [];
+
+  try {
+    [articles, classifieds, jobs] = await Promise.all([
+      listArticlesByAreaHubForChennai(slug, 6),
+      listClassifiedsByAreaHubForChennai(slug, 6),
+      slug === "omr-perungudi-sholinganallur"
+        ? listOmrCorridorJobsForChennai(6)
+        : Promise.resolve([]),
+    ]);
+  } catch {
+    articles = [];
+    classifieds = [];
+    jobs = [];
+  }
+
+  return (
+    <RichAreaHubPage
+      zone={zone}
+      content={richContent}
+      articles={articles}
+      classifieds={classifieds}
+      jobs={jobs}
+    />
   );
 }

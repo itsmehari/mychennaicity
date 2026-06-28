@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { Section } from "@/components/home/section";
@@ -142,6 +143,8 @@ export default async function ChennaiLocalEventsPage() {
       <div className="mt-8">
         <WhatsAppCommunityCta variant="compact" utmContent="events-hub" />
       </div>
+
+      <AdvertisePanel variant="events" layout="section" className="mt-8" />
 
       <HubCommunityStrip businessVariant="events" />
 

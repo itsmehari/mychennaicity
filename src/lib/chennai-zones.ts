@@ -110,11 +110,12 @@ export const chennaiZones: ChennaiZone[] = [
   {
     slug: "omr-perungudi-sholinganallur",
     label: "OMR — Perungudi to Sholinganallur",
-    blurb: "IT corridor pulse, startups, and apartment-town energy.",
+    blurb:
+      "Chennai's IT corridor on Rajiv Gandhi Salai — tech parks, apartment towns, schools, and metro Phase 2 construction from Perungudi through Sholinganallur.",
     gridClass: "md:col-span-2",
     highlights: [
-      "Perungudi to Sholinganallur is Chennai’s densest IT and startup strip — commute shuttles and metro phase updates matter daily.",
-      "Apartment towns drive demand for clinics, schools, and co-working; directory listings will anchor here first when the API ships.",
+      "Perungudi to Sholinganallur is Chennai's densest IT and startup strip — commute shuttles and metro phase updates matter daily.",
+      "Apartment towns drive demand for clinics, schools, and co-working; area-tagged news and classifieds anchor on this hub.",
       "OMR flooding hotspots during cyclonic spells differ from core city storm drains — watch GCC and highways bulletins together.",
     ],
   },

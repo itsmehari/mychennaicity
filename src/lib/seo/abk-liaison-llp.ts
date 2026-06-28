@@ -84,7 +84,7 @@ export function buildAbkLiaisonLlpJsonLd() {
     url: "https://www.abkliaison.com",
     image,
     logo: `${base}/images/business-profile/abk-liaison-llp/abk-logo.png`,
-    telephone: "+91-98404-04590",
+    telephone: "+91-98404-04509",
     email: "abkliaison@gmail.com",
     founder: {
       "@type": "Person",

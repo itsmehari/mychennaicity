@@ -16,9 +16,23 @@ async function getChennaiCityId(): Promise<string | null> {
   return row[0]?.id ?? null;
 }
 
+function openClassifiedConditions(
+  cityId: string,
+  category?: string | null,
+) {
+  const base = and(
+    eq(classifiedListings.cityId, cityId),
+    eq(classifiedListings.status, "open"),
+  );
+  const cat = category?.trim();
+  if (!cat) return base;
+  return and(base, eq(classifiedListings.category, cat));
+}
+
 export async function listOpenClassifiedListingsForChennaiHub(
   limit = 20,
   offset = 0,
+  category?: string | null,
 ) {
   const cityId = await getChennaiCityId();
   if (!cityId) return [] as ClassifiedListingRow[];
@@ -26,12 +40,7 @@ export async function listOpenClassifiedListingsForChennaiHub(
   return db
     .select()
     .from(classifiedListings)
-    .where(
-      and(
-        eq(classifiedListings.cityId, cityId),
-        eq(classifiedListings.status, "open"),
-      ),
-    )
+    .where(openClassifiedConditions(cityId, category))
     .orderBy(
       desc(classifiedListings.publishedAt),
       desc(classifiedListings.createdAt),
@@ -40,19 +49,16 @@ export async function listOpenClassifiedListingsForChennaiHub(
     .offset(offset);
 }
 
-export async function countOpenClassifiedListingsForChennaiHub(): Promise<number> {
+export async function countOpenClassifiedListingsForChennaiHub(
+  category?: string | null,
+): Promise<number> {
   const cityId = await getChennaiCityId();
   if (!cityId) return 0;
   const db = getDb();
   const [row] = await db
     .select({ n: count() })
     .from(classifiedListings)
-    .where(
-      and(
-        eq(classifiedListings.cityId, cityId),
-        eq(classifiedListings.status, "open"),
-      ),
-    );
+    .where(openClassifiedConditions(cityId, category));
   return Number(row?.n ?? 0);
 }
 

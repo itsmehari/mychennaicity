@@ -192,6 +192,8 @@ export function ArticleDetailLayout({
       return <FeatureRibbonLayout s={slots} />;
     case "editorial-grid":
       return <EditorialGridLayout s={slots} />;
+    case "civic-editorial":
+      return null;
     default:
       return <MastheadLayout s={slots} />;
   }

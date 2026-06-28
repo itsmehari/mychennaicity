@@ -1,9 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @import "../styles/ad-banners.css";
+@import "../styles/advertise-panels.css";
 @import "../styles/event-detail.css";
 @import "../styles/events-hub.css";
 @import "../styles/chennai-jobs-hub.css";
+@import "../styles/civic-editorial-article.css";
 @import "../styles/fiscal-white-paper-article.css";
 @import "../styles/yoga-day-2026-article.css";
 @import "../styles/tiruvallur-ammonia-leak-2026-article.css";

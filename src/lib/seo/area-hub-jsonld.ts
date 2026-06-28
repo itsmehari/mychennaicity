@@ -1,10 +1,15 @@
 import type { ChennaiZone } from "@/lib/chennai-zones";
+import type { RichAreaHubContent } from "@/lib/area-hubs/types";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
 
-export function buildAreaHubJsonLd(zone: ChennaiZone) {
+export function buildAreaHubJsonLd(
+  zone: ChennaiZone,
+  richContent?: RichAreaHubContent,
+) {
   const base = getSiteUrl();
   const pageUrl = `${base}/areas/${zone.slug}`;
+  const description = richContent?.metaDescription ?? zone.blurb;
 
   const webPage = {
     "@context": "https://schema.org",
@@ -12,12 +17,12 @@ export function buildAreaHubJsonLd(zone: ChennaiZone) {
     "@id": pageUrl,
     url: pageUrl,
     name: `${zone.label} — Chennai area hub`,
-    description: zone.blurb,
+    description,
     isPartOf: { "@id": `${base}/#website` },
     about: {
       "@type": "Place",
       name: zone.label,
-      description: zone.blurb,
+      description,
       containedInPlace: CHENNAI_PLACE_GRAPH,
     },
     inLanguage: "en-IN",

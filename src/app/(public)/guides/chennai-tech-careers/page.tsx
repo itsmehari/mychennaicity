@@ -3,6 +3,11 @@ import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
+  ChennaiJobsGuideHero,
+  ChennaiJobsGuideResources,
+} from "@/components/jobs/chennai-jobs-guide-parts";
+import { ChennaiJobsHubSafety } from "@/components/jobs/chennai-jobs-hub-sections";
+import {
   InteriorCrossNav,
   PageBreadcrumbs,
   interiorMainClassName,
@@ -46,26 +51,13 @@ export default function ChennaiTechCareersGuidePage() {
           { label: "Chennai tech careers" },
         ]}
       />
-      <p className="type-eyebrow text-[var(--accent)]">Guide</p>
-      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
-        Chennai tech jobs — how to read a job ad
-      </h1>
-      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        For anyone searching <strong className="text-[var(--foreground)]">Chennai jobs</strong> in
-        tech, product, or newsroom IT — and for teams who want a role on{" "}
-        <Link
-          href={CHENNAI_JOBS_HUB_PATH}
-          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-        >
-          our jobs-in-Chennai page
-        </Link>
-        .
-      </p>
 
-      <HubCommunityStrip businessVariant="jobs" />
+      <ChennaiJobsGuideHero />
 
-      <article className="prose prose-sm mt-10 max-w-2xl text-[var(--muted)] prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-strong:text-[var(--foreground)]">
-        <h2 className="text-lg font-semibold">Why “Chennai” in the headline matters</h2>
+      <HubCommunityStrip businessVariant="jobs" className="mt-6" />
+
+      <article className="prose prose-sm mcc-jobs-guide__article text-[var(--muted)] prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-strong:text-[var(--foreground)]">
+        <h2>Why “Chennai” in the headline matters</h2>
         <p>
           Candidates type <em>Chennai jobs</em>, not “Greater Chennai jobs.” The
           metro (OMR, GST Road, Sriperumbudur orbit) is implied. Good employers
@@ -73,7 +65,7 @@ export default function ChennaiTechCareersGuidePage() {
           payroll is required — read for that in the first screen of the JD.
         </p>
 
-        <h2 className="mt-8 text-lg font-semibold">Hybrid and “Bengaluru rotation” clauses</h2>
+        <h2>Hybrid and “Bengaluru rotation” clauses</h2>
         <p>
           Many Chennai listings allow remote days but anchor legal employment
           in Tamil Nadu. Watch for mandatory travel to another city, on-call
@@ -81,7 +73,7 @@ export default function ChennaiTechCareersGuidePage() {
           (Guindy, TIDEL, Sholinganallur, etc.).
         </p>
 
-        <h2 className="mt-8 text-lg font-semibold">Salary bands and equity</h2>
+        <h2>Salary bands and equity</h2>
         <p>
           India tech compensation moved quickly post-2024. When a post
           discloses INR ranges in structured data, treat it as directional;
@@ -90,7 +82,7 @@ export default function ChennaiTechCareersGuidePage() {
           random DMs from unverified recruiters.
         </p>
 
-        <h2 className="mt-8 text-lg font-semibold">What “checked by us” means</h2>
+        <h2>What “checked by us” means</h2>
         <p>
           When we can, we mark an employer as <strong>checked by us</strong> after
           a basic look at the company. That is not a guarantee — still apply only
@@ -98,7 +90,7 @@ export default function ChennaiTechCareersGuidePage() {
           random people a “processing fee.”
         </p>
 
-        <h2 className="mt-8 text-lg font-semibold">More reading</h2>
+        <h2>More reading</h2>
         <p>
           Hiring and the wider economy are on the{" "}
           <Link
@@ -117,6 +109,9 @@ export default function ChennaiTechCareersGuidePage() {
           .
         </p>
       </article>
+
+      <ChennaiJobsHubSafety />
+      <ChennaiJobsGuideResources />
 
       <div className="mt-12 flex justify-center">
         <AdSlot slotId="content-mid" size="300x250" />

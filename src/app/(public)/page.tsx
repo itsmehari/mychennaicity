@@ -22,7 +22,7 @@ import {
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
 import { AdSlot } from "@/ads/render-ad-slot";
-import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
 import { homeNewsBulletinCached } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
@@ -84,7 +84,7 @@ export default async function Home() {
       <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
         <HomeHero />
         <div className="mt-8 sm:mt-10">
-          <BusinessWhatsAppCta variant="home" />
+          <AdvertisePanel variant="home" layout="hero" />
         </div>
         <HomeSectionFrame>
           <div className="mb-8 flex justify-center sm:mb-10">

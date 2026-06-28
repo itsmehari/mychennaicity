@@ -50,8 +50,8 @@ export function AbkLiaisonLlpProfile({ className }: AbkLiaisonLlpProfileProps) {
                 focused civil development across Tamil Nadu and Pondicherry.
               </p>
               <div className={styles.heroActions}>
-                <a className={`${styles.btn} ${styles.btnPrimary}`} href="tel:+919840404590">
-                  Call +91 98404 04590
+                <a className={`${styles.btn} ${styles.btnPrimary}`} href="tel:+919840404509">
+                  Call +91 98404 04509
                 </a>
                 <a className={styles.btn} href="mailto:abkliaison@gmail.com">
                   Email ABK Liaison
@@ -290,7 +290,7 @@ export function AbkLiaisonLlpProfile({ className }: AbkLiaisonLlpProfileProps) {
                 </div>
                 <div className={styles.contactLine}>
                   <span>Phone</span>
-                  <a href="tel:+919840404590">+91 98404 04590</a>
+                  <a href="tel:+919840404509">+91 98404 04509</a>
                 </div>
                 <div className={styles.contactLine}>
                   <span>Email</span>

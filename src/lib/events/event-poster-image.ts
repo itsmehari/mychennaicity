@@ -1,4 +1,3 @@
-import { extractCategoryFromDescription } from "@/lib/events/event-detail-helpers";
 import { getSiteUrl } from "@/lib/env";
 
 export type EventPosterSpec = {
@@ -6,6 +5,7 @@ export type EventPosterSpec = {
   alt: string;
 };
 
+/** Self-hosted event posters keyed by event slug. Add a row when a flyer is supplied. */
 const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   "kathakali-tamil-solo-play-restore-kottivakkam-june-2026": {
     src: "/images/events/kathakali-restore-kottivakkam-june-2026.png",
@@ -19,68 +19,39 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/jolly-phonics-workshop-tweeties-july-2026.jpg",
     alt: "Jolly Phonics Workshop poster — Tweeties Institute of Education and Jolly Learning, 8-day online training July 2026",
   },
-};
-
-const CATEGORY_PLACEHOLDER: Record<string, EventPosterSpec> = {
-  "live music": {
-    src: "/images/events/placeholders/live-music.svg",
-    alt: "Live music event in Chennai",
+  "grand-vegetable-exhibition-heirloom-seed-festival-t-nagar-july-2026": {
+    src: "/images/events/grand-vegetable-exhibition-heirloom-seed-festival-t-nagar-july-2026.png",
+    alt: "Grand Vegetable Exhibition and Heirloom Seed Festival poster — Thakkar Baba Vidyalaya School, T. Nagar, Chennai, 26 July 2026",
   },
-  comedy: {
-    src: "/images/events/placeholders/comedy.svg",
-    alt: "Stand-up comedy event in Chennai",
+  "myavtar-sheworks-career-fair-mop-vaishnav-july-2026": {
+    src: "/images/events/myavtar-sheworks-career-fair-mop-vaishnav-july-2026.png",
+    alt: "myAvtar SheWorks Career Fair poster — MOP Vaishnav College for Women, Nungambakkam, Chennai, 4 July 2026",
   },
-  exhibition: {
-    src: "/images/events/placeholders/exhibition.svg",
-    alt: "Exhibition or shopping event in Chennai",
+  "print-expo-chennai-trade-centre-july-2026": {
+    src: "/images/events/print-expo-chennai-trade-centre-july-2026.png",
+    alt: "Print Expo Chennai poster — South India prints here, Chennai Trade Centre, 9–11 July 2026",
   },
-  theatre: {
-    src: "/images/events/placeholders/theatre.svg",
-    alt: "Theatre or family event in Chennai",
-  },
-  meetup: {
-    src: "/images/events/placeholders/meetup.svg",
-    alt: "Community or business meetup in Chennai",
+  "seafood-expo-bharat-chennai-trade-centre-july-2026": {
+    src: "/images/events/seafood-expo-bharat-chennai-trade-centre-july-2026.png",
+    alt: "Seafood Expo Bharat 2026 poster — Connect. Discover. Grow., Chennai Trade Centre, 1–3 July 2026",
   },
 };
 
-function categoryPlaceholder(
-  category: string | null,
-  title: string,
-): EventPosterSpec | null {
-  const c = (category ?? "").toLowerCase();
-  if (/music|concert|rave|singalong|orchestra/.test(c)) {
-    return { ...CATEGORY_PLACEHOLDER["live music"]!, alt: `${title} — live music in Chennai` };
-  }
-  if (/comedy|stand-up|open mic/.test(c)) {
-    return { ...CATEGORY_PLACEHOLDER.comedy!, alt: `${title} — comedy in Chennai` };
-  }
-  if (/exhibition|shopping|lifestyle|property|bazaar|sale/.test(c)) {
-    return { ...CATEGORY_PLACEHOLDER.exhibition!, alt: `${title} — exhibition in Chennai` };
-  }
-  if (/theatre|theater|family|puppet/.test(c)) {
-    return { ...CATEGORY_PLACEHOLDER.theatre!, alt: `${title} — theatre in Chennai` };
-  }
-  if (/meetup|tech|business|community/.test(c)) {
-    return { ...CATEGORY_PLACEHOLDER.meetup!, alt: `${title} — meetup in Chennai` };
-  }
-  return null;
+export function getRegisteredEventPoster(slug: string): EventPosterSpec | null {
+  return POSTERS_BY_SLUG[slug.trim()] ?? null;
 }
 
+/** Returns a poster only when one is explicitly registered for the slug. */
 export function getEventPosterImage(
   slug: string,
-  fallbackTitle?: string,
-  description?: string | null,
+  _fallbackTitle?: string,
+  _description?: string | null,
 ): EventPosterSpec | null {
-  const hit = POSTERS_BY_SLUG[slug.trim()];
-  if (hit) return hit;
+  return getRegisteredEventPoster(slug);
+}
 
-  const category = extractCategoryFromDescription(description ?? "");
-  const fromCategory = categoryPlaceholder(category, fallbackTitle ?? "Chennai event");
-  if (fromCategory) return fromCategory;
-
-  if (!fallbackTitle?.trim()) return null;
-  return null;
+export function hasEventPosterImage(slug: string): boolean {
+  return getRegisteredEventPoster(slug) !== null;
 }
 
 export function eventPosterAbsoluteUrl(

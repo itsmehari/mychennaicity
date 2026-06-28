@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { ClassifiedAdDetail } from "@/components/classifieds/classified-ad-detail";
 import {
   InteriorCrossNav,
@@ -98,6 +99,9 @@ export default async function ChennaiClassifiedDetailPage({ params }: Props) {
         </div>
         <div className="mt-8">
           <ClassifiedAdDetail listing={listing} />
+        </div>
+        <div className="mt-10 max-w-2xl">
+          <AdvertisePanel variant="classifieds" layout="strip" />
         </div>
         <InteriorCrossNav />
       </div>

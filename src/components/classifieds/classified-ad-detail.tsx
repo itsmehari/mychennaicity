@@ -1,5 +1,6 @@
 import type { ClassifiedListingRow } from "@/domains/classifieds";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
+import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import Link from "next/link";
 
 function GlanceRow({ label, value }: { label: string; value: string }) {
@@ -38,19 +39,13 @@ function ContactCta({
   );
 }
 
-function formatCategoryLabel(category: string): string {
-  return category
-    .split(/[-_\s]+/)
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
 function AtAGlance({ listing }: { listing: ClassifiedListingRow }) {
   const rows: { label: string; value: string }[] = [];
 
   const category = listing.category?.trim();
-  if (category) rows.push({ label: "Category", value: formatCategoryLabel(category) });
+  if (category) {
+    rows.push({ label: "Category", value: formatClassifiedCategoryLabel(category) });
+  }
 
   const loc = listing.locationLabel?.trim();
   if (loc) rows.push({ label: "Area", value: loc });
@@ -118,7 +113,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
           {listing.category ? (
             <span className="text-[var(--accent)]">
               {" · "}
-              {formatCategoryLabel(listing.category)}
+              {formatClassifiedCategoryLabel(listing.category)}
             </span>
           ) : null}
         </p>
@@ -163,7 +158,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
                 {posterUrl ? (
                   <ContactCta
                     href={posterUrl}
-                    label="View poster profile"
+                    label={phoneHref ? "View poster profile" : "Message on Facebook"}
                   />
                 ) : null}
               </div>
@@ -192,7 +187,10 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             ) : null}
             {posterUrl ? (
               <div className="hidden lg:block">
-                <ContactCta href={posterUrl} label="View poster profile" />
+                <ContactCta
+                  href={posterUrl}
+                  label={phoneHref ? "View poster profile" : "Message on Facebook"}
+                />
               </div>
             ) : null}
           </div>

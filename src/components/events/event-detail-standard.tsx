@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
   EventAudienceBlock,
@@ -26,7 +27,10 @@ import {
   getEventCategoryLabel,
   splitDescriptionIntro,
 } from "@/lib/events/event-detail-helpers";
-import { getEventPosterImage } from "@/lib/events/event-poster-image";
+import {
+  getEventPosterImage,
+  type EventPosterSpec,
+} from "@/lib/events/event-poster-image";
 
 export function formatEventWhen(
   startsAt: Date,
@@ -90,27 +94,16 @@ function EventHeroMeta({ ev }: { ev: PublicEventRow }) {
   );
 }
 
-function EventPosterHero({
-  slug,
-  title,
-  description,
-}: {
-  slug: string;
-  title: string;
-  description: string | null;
-}) {
-  const poster = getEventPosterImage(slug, title, description);
-  if (!poster) return null;
-
+function EventPosterFigure({ poster }: { poster: EventPosterSpec }) {
   return (
-    <figure className="mcc-event-poster mt-6 max-w-md">
+    <figure className="mcc-event-poster">
       <Image
         src={poster.src}
         alt={poster.alt}
         width={960}
         height={1200}
-        className="mcc-event-poster__img w-full rounded-2xl"
-        sizes="(max-width: 768px) 100vw, 384px"
+        className="mcc-event-poster__img w-full"
+        sizes="(max-width: 1024px) 100vw, 320px"
         priority
       />
       <figcaption className="sr-only">{poster.alt}</figcaption>
@@ -118,27 +111,18 @@ function EventPosterHero({
   );
 }
 
-export function EventDetailStandard({
+function EventHero({
   ev,
-  uniqueReaderViews = 0,
+  uniqueReaderViews,
+  poster,
 }: {
   ev: PublicEventRow;
-  uniqueReaderViews?: number;
+  uniqueReaderViews: number;
+  poster: EventPosterSpec | null;
 }) {
-  const desc = ev.description ?? "";
-  const { intro, rest } = splitDescriptionIntro(desc);
-
   return (
-    <div className={`mcc-event-page ${interiorMainClassName}`}>
-      <PageBreadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Chennai local events", href: "/chennai-local-events" },
-          { label: ev.title },
-        ]}
-      />
-
-      <header className="mcc-event-hero">
+    <header className={`mcc-event-hero${poster ? " mcc-event-hero--with-poster" : ""}`}>
+      <div className="mcc-event-hero__main">
         <p className="mcc-event-kicker type-eyebrow">Event · Chennai</p>
         <h1 className="mcc-event-title type-display mt-2 text-[var(--foreground)]">
           {ev.title}
@@ -154,9 +138,38 @@ export function EventDetailStandard({
             {ev.venueAddress}
           </p>
         ) : null}
-      </header>
+      </div>
+      {poster ? (
+        <div className="mcc-event-hero__poster">
+          <EventPosterFigure poster={poster} />
+        </div>
+      ) : null}
+    </header>
+  );
+}
 
-      <EventPosterHero slug={ev.slug} title={ev.title} description={ev.description} />
+export function EventDetailStandard({
+  ev,
+  uniqueReaderViews = 0,
+}: {
+  ev: PublicEventRow;
+  uniqueReaderViews?: number;
+}) {
+  const desc = ev.description ?? "";
+  const { intro, rest } = splitDescriptionIntro(desc);
+  const poster = getEventPosterImage(ev.slug);
+
+  return (
+    <div className={`mcc-event-page ${interiorMainClassName}`}>
+      <PageBreadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Chennai local events", href: "/chennai-local-events" },
+          { label: ev.title },
+        ]}
+      />
+
+      <EventHero ev={ev} uniqueReaderViews={uniqueReaderViews} poster={poster} />
 
       <div className="lg:hidden">
         <EventSummaryCard ev={ev} />
@@ -195,10 +208,11 @@ export function EventDetailStandard({
           <EventDetailsTable ev={ev} />
           <EventAudienceBlock ev={ev} />
 
-          <div className="mt-10 space-y-8">
+          <div className="mt-10 space-y-6">
             <div className="flex justify-center">
               <AdSlot slotId="events-detail-mid" size="300x250" />
             </div>
+            <AdvertisePanel variant="events" layout="strip" />
             <BusinessWhatsAppCta variant="events" />
           </div>
 

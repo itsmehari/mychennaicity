@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { NewspaperGrid, NewspaperMasthead } from "@/components/news/newspaper-layout";
@@ -66,6 +67,7 @@ export default async function ChennaiLocalNewsPage() {
           <WhatsAppCommunityCta variant="compact" utmContent="news-hub" />
         </div>
         <TopicSectionNav />
+        <AdvertisePanel variant="news" layout="section" className="mt-8" />
         <HubCommunityStrip businessVariant="news" />
         <h1 className="type-display mt-8 text-3xl text-[var(--foreground)] sm:text-4xl">
           Chennai local news
@@ -106,6 +108,7 @@ export default async function ChennaiLocalNewsPage() {
       <div className="mt-4 flex justify-center">
         <AdSlot slotId="content-top" size="728x90" />
       </div>
+      <AdvertisePanel variant="news" layout="section" className="mt-8" />
       <HubCommunityStrip businessVariant="news" />
       <NewspaperGrid
         lead={lead}
