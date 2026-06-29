@@ -87,7 +87,8 @@ async function main() {
     try {
       const html = await fetchText(article.sourceUrl);
       const og = extractOgImage(html);
-      if (og) {
+      // Skip outlet-branded OG images (TOI, TNIE logos) — use site default instead
+      if (og && !/indiatimes|timesofindia|toi|newindianexpress|dinamani/i.test(og)) {
         ok = await downloadImage(og, dest);
         if (ok) note = "og";
       }
@@ -97,7 +98,7 @@ async function main() {
 
     if (!ok) {
       await copyDefaultHero(dest);
-      note = `default (${note})`;
+      note = `site-default (${note})`;
     }
 
     results.push({ slug, ok: true, path: dest, note });
