@@ -34,6 +34,21 @@ function absoluteAssetUrl(base: string, url: string | null): string | null {
   return `${base}${trimmed.startsWith("/") ? trimmed : `/${trimmed}`}`;
 }
 
+/**
+ * Next.js sitemap XML does not escape `&` inside `<image:loc>` query strings.
+ * Strip search params (e.g. Twitter `?format=jpg&name=large`) so the file stays valid.
+ */
+function sitemapSafeImageUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    parsed.search = "";
+    const sanitized = parsed.toString();
+    return sanitized.includes("&") ? null : sanitized;
+  } catch {
+    return url.includes("&") ? null : url;
+  }
+}
+
 function latestModified(dates: Date[], fallback: Date): Date {
   if (dates.length === 0) return fallback;
   return new Date(Math.max(...dates.map((d) => d.getTime())));
@@ -241,12 +256,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articleEntries: MetadataRoute.Sitemap = articleRows.map((a) => {
     const imageUrl = absoluteAssetUrl(base, a.heroImageUrl);
+    const safeImageUrl = imageUrl ? sitemapSafeImageUrl(imageUrl) : null;
     return {
       url: `${base}/chennai-local-news/${a.slug}`,
       lastModified: a.lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.75,
-      ...(imageUrl ? { images: [imageUrl] } : {}),
+      ...(safeImageUrl ? { images: [safeImageUrl] } : {}),
     };
   });
 
