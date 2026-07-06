@@ -9,6 +9,11 @@ import {
   sovereignValue,
 } from "./purity-math";
 import { previousIstCalendarDate } from "./ist-date";
+import {
+  computeInrPerGramFromUsdTroyOz,
+  computeRetailRatesFromSpot,
+  isGoldRateSnapshotStale,
+} from "./spot-math";
 
 describe("derivePurityRatesFrom24k", () => {
   it("derives 22K and 18K from 24K", () => {
@@ -75,5 +80,28 @@ describe("gramsFromBudget", () => {
 describe("previousIstCalendarDate", () => {
   it("steps back one day", () => {
     expect(previousIstCalendarDate("2026-07-05")).toBe("2026-07-04");
+  });
+});
+
+describe("computeRetailRatesFromSpot", () => {
+  it("converts USD spot to INR per gram with markup", () => {
+    const r = computeRetailRatesFromSpot({
+      xauUsdPerTroyOz: 2400,
+      xagUsdPerTroyOz: 28,
+      usdInr: 85,
+      retailMarkupPercent: 0,
+    });
+    expect(r.rate24kPerGram).toBe(
+      computeInrPerGramFromUsdTroyOz(2400, 85, 0),
+    );
+    expect(r.rate22kPerGram).toBe(Math.round(r.rate24kPerGram * (22 / 24)));
+  });
+});
+
+describe("isGoldRateSnapshotStale", () => {
+  it("flags snapshots older than 36 hours", () => {
+    const old = new Date(Date.now() - 40 * 60 * 60 * 1000);
+    expect(isGoldRateSnapshotStale(old)).toBe(true);
+    expect(isGoldRateSnapshotStale(new Date())).toBe(false);
   });
 });

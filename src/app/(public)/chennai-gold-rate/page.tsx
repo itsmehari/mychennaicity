@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { GoldRateAnswerBox, buildGoldRateMetaDescription } from "@/components/gold-rate/gold-rate-answer-box";
+import { GoldRateStaleNotice } from "@/components/gold-rate/gold-rate-stale-notice";
 import { GoldRateCalculators } from "@/components/gold-rate/gold-rate-calculators";
 import { GoldRateCards } from "@/components/gold-rate/gold-rate-cards";
 import { GoldRateEditorialSections } from "@/components/gold-rate/gold-rate-editorial";
@@ -65,6 +66,7 @@ export default async function ChennaiGoldRatePage() {
 
       <div className="mt-6">
         <GoldRateAnswerBox snapshot={snapshot} />
+        <GoldRateStaleNotice snapshot={snapshot} />
       </div>
 
       <HubCommunityStrip businessVariant="default" className="mt-6" />

@@ -40,11 +40,12 @@ export function GoldRateEditorialSections() {
 
         <h2>Methodology &amp; disclaimer</h2>
         <p>
-          We publish one Chennai snapshot per IST calendar day, sourced from
-          widely used Indian bullion benchmarks and rounded for retail
-          readability. Numbers are <strong>indicative</strong> — not an offer to
-          buy or sell. Always confirm the final quote at the counter. For
-          editorial standards see{" "}
+          We publish one Chennai snapshot per IST calendar day, refreshed
+          automatically from international spot gold/silver and USD/INR, with a
+          small retail markup tuned for Chennai jewellery counters. Numbers are{" "}
+          <strong>indicative</strong> — not an IBJA quote or an offer to buy or
+          sell. Always confirm the final quote at the counter. For editorial
+          standards see{" "}
           <Link href="/editorial-standards">editorial standards</Link>.
         </p>
       </section>

@@ -45,6 +45,7 @@
     "db:seed:chennai-jobs:live": "tsx scripts/seed-chennai-jobs.ts --live",
     "db:seed:chennai-gold-rate": "tsx scripts/seed-chennai-gold-rate-snapshot.ts",
     "db:seed:chennai-gold-rate:live": "tsx scripts/seed-chennai-gold-rate-snapshot.ts --live",
+    "gold-rate:sync:live": "tsx scripts/gold-rate-sync-live.ts",
     "db:seed:chennai-job:office-manager-advocate": "tsx scripts/seed-chennai-job-office-manager-advocate.ts",
     "db:seed:chennai-job:office-manager-advocate:live": "tsx scripts/seed-chennai-job-office-manager-advocate.ts --live",
     "db:seed:chennai-job:myfirststep-school": "tsx scripts/seed-chennai-job-myfirststep-school.ts",

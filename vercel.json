@@ -1,4 +1,14 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/gold-rate",
+      "schedule": "30 0 * * *"
+    },
+    {
+      "path": "/api/cron/gold-rate",
+      "schedule": "30 12 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/ads.txt",

@@ -3,16 +3,13 @@
  *
  * Dev:  `npm run db:seed:chennai-gold-rate`
  * Live: `npm run db:seed:chennai-gold-rate:live`
+ * Auto: Vercel Cron → GET /api/cron/gold-rate (twice daily IST)
  *
- * Override rates via env (whole INR per gram):
- *   GOLD_RATE_24K=14946 GOLD_RATE_22K=13700 GOLD_RATE_18K=11440 npm run db:seed:chennai-gold-rate
+ * Manual override (whole INR per gram):
+ *   GOLD_RATE_24K=14946 npm run db:seed:chennai-gold-rate
  */
 import { config as loadEnv } from "dotenv";
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
-import { and, eq } from "drizzle-orm";
-import * as schema from "../src/db/schema";
-import { cities, goldRateSnapshots } from "../src/db/schema/tables";
+import { upsertChennaiGoldRateSnapshot } from "../src/domains/gold-rate/upsert-snapshot";
 import { getIstCalendarDate } from "../src/lib/gold-rate/ist-date";
 
 const live =
@@ -36,8 +33,6 @@ if (!url) {
   process.exit(1);
 }
 
-const db = drizzle(neon(url), { schema });
-
 function parseRateEnv(key: string, fallback: number): number {
   const raw = process.env[key]?.trim();
   if (!raw) return fallback;
@@ -46,17 +41,6 @@ function parseRateEnv(key: string, fallback: number): number {
 }
 
 async function main() {
-  const [city] = await db
-    .select({ id: cities.id })
-    .from(cities)
-    .where(eq(cities.slug, "chennai"))
-    .limit(1);
-
-  if (!city) {
-    console.error("City slug 'chennai' not found.");
-    process.exit(1);
-  }
-
   const rate24k = parseRateEnv("GOLD_RATE_24K", 14_946);
   const rate22k = parseRateEnv("GOLD_RATE_22K", 13_700);
   const rate18k = parseRateEnv("GOLD_RATE_18K", 11_440);
@@ -65,23 +49,12 @@ async function main() {
   const platinum = platinumRaw ? parseInt(platinumRaw, 10) : null;
 
   const rateDate = process.env.GOLD_RATE_DATE?.trim() || getIstCalendarDate();
-  const fetchedAt = new Date();
   const sourceName =
     process.env.GOLD_RATE_SOURCE?.trim() ||
-    "Chennai retail benchmark (IBJA/MCX-derived, indicative)";
+    "Chennai retail benchmark (manual seed, indicative)";
 
-  const existing = await db
-    .select({ id: goldRateSnapshots.id })
-    .from(goldRateSnapshots)
-    .where(
-      and(
-        eq(goldRateSnapshots.cityId, city.id),
-        eq(goldRateSnapshots.rateDate, rateDate),
-      ),
-    )
-    .limit(1);
-
-  const payload = {
+  const { action } = await upsertChennaiGoldRateSnapshot({
+    rateDate,
     rate24kPerGram: rate24k,
     rate22kPerGram: rate22k,
     rate18kPerGram: rate18k,
@@ -90,25 +63,9 @@ async function main() {
     sourceName,
     sourceNote:
       "Indicative Chennai retail rates for jewellery buyers. Confirm at the shop counter before paying.",
-    fetchedAt,
-    updatedAt: fetchedAt,
-  };
+  });
 
-  if (existing[0]) {
-    await db
-      .update(goldRateSnapshots)
-      .set(payload)
-      .where(eq(goldRateSnapshots.id, existing[0].id));
-    console.log(`Updated gold rate snapshot for ${rateDate}`);
-  } else {
-    await db.insert(goldRateSnapshots).values({
-      cityId: city.id,
-      rateDate,
-      ...payload,
-    });
-    console.log(`Inserted gold rate snapshot for ${rateDate}`);
-  }
-
+  console.log(`${action} gold rate snapshot for ${rateDate}`);
   console.log(
     `24K ₹${rate24k}/g · 22K ₹${rate22k}/g · 18K ₹${rate18k}/g · silver ₹${silver}/g`,
   );
