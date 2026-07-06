@@ -12,6 +12,8 @@ import {
 import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
+import { getGoldRateLastModifiedForSitemap } from "@/domains/gold-rate";
+import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
@@ -69,6 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     slug: string;
     lastModified: Date;
   }[] = [];
+  let goldRateLastModified: Date | null = null;
   try {
     articleRows = await listArticlesForSitemap();
     topicKeys = await listTopicKeysForChennai();
@@ -77,6 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     jobSeekerRows = await listJobSeekerPostsForSitemap();
     classifiedRows = await listClassifiedListingsForSitemap();
     directoryRows = await listDirectoryEntriesForSitemap();
+    goldRateLastModified = await getGoldRateLastModifiedForSitemap();
   } catch (err) {
     console.warn(
       "[sitemap] DB unreachable or misconfigured — emitting static URLs only (no article/topic/event/job/directory entries).",
@@ -148,6 +152,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: classifiedsLastModified,
       changeFrequency: "weekly",
       priority: 0.66,
+    },
+    {
+      url: `${base}${CHENNAI_GOLD_RATE_HUB_PATH}`,
+      lastModified: goldRateLastModified ?? now,
+      changeFrequency: "daily",
+      priority: 0.88,
     },
     {
       url: `${base}/guides/chennai-tech-careers`,

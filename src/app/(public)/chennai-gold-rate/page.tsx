@@ -1,0 +1,104 @@
+import type { Metadata } from "next";
+import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { GoldRateAnswerBox, buildGoldRateMetaDescription } from "@/components/gold-rate/gold-rate-answer-box";
+import { GoldRateCalculators } from "@/components/gold-rate/gold-rate-calculators";
+import { GoldRateCards } from "@/components/gold-rate/gold-rate-cards";
+import { GoldRateEditorialSections } from "@/components/gold-rate/gold-rate-editorial";
+import { GoldRateHubHero } from "@/components/gold-rate/gold-rate-hub-hero";
+import {
+  InteriorCrossNav,
+  PageBreadcrumbs,
+  interiorMainClassName,
+} from "@/components/site/interior-chrome";
+import { CHENNAI_GOLD_RATE_FAQ } from "@/content/gold-rate/chennai-gold-rate-faq";
+import { getSiteUrl } from "@/lib/env";
+import { loadChennaiGoldRateHubData } from "@/lib/gold-rate/load-hub-data";
+import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
+import { buildGoldRateHubJsonLd } from "@/lib/seo/gold-rate-jsonld";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
+
+const titleSegment = "Chennai gold rate today";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { snapshot } = await loadChennaiGoldRateHubData();
+  const description = buildGoldRateMetaDescription(snapshot);
+  const url = `${getSiteUrl()}${CHENNAI_GOLD_RATE_HUB_PATH}`;
+
+  return {
+    title: titleSegment,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: fullSiteTitle(titleSegment),
+      description,
+      url,
+      type: "website",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullSiteTitle(titleSegment),
+      description,
+      images: ["/twitter-image"],
+    },
+  };
+}
+
+export default async function ChennaiGoldRatePage() {
+  const { snapshot, previous } = await loadChennaiGoldRateHubData();
+  const description = buildGoldRateMetaDescription(snapshot);
+  const jsonLd = buildGoldRateHubJsonLd(snapshot, CHENNAI_GOLD_RATE_FAQ, description);
+
+  return (
+    <div className={interiorMainClassName}>
+      <PageBreadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Chennai gold rate" },
+        ]}
+      />
+
+      <GoldRateHubHero snapshot={snapshot} />
+
+      <div className="mt-6">
+        <GoldRateAnswerBox snapshot={snapshot} />
+      </div>
+
+      <HubCommunityStrip businessVariant="default" className="mt-6" />
+
+      <div className="mt-10 space-y-12">
+        <GoldRateCards snapshot={snapshot} previous={previous} />
+        <GoldRateCalculators snapshot={snapshot} />
+        <GoldRateEditorialSections />
+      </div>
+
+      <AdvertisePanel variant="directory" layout="section" className="mt-10" />
+
+      <InteriorCrossNav />
+
+      {jsonLd.breadcrumb ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.breadcrumb) }}
+        />
+      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.webPage) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.dataset) }}
+      />
+      {jsonLd.faq ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.faq) }}
+        />
+      ) : null}
+    </div>
+  );
+}

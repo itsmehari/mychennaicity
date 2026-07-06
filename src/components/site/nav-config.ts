@@ -105,6 +105,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Reader-submitted tuition, services, and wanted posts.",
           },
           {
+            href: "/chennai-gold-rate",
+            label: "Chennai gold rate",
+            description: "Today's 24K and 22K per gram plus jewellery calculator.",
+          },
+          {
             href: WHATSAPP_COMMUNITY_PAGE_PATH,
             label: "WhatsApp community",
             description: "Official my chennai city reader group.",

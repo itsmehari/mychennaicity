@@ -77,6 +77,11 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     hint: "Official my chennai city group",
   },
   {
+    href: "/chennai-gold-rate",
+    label: "Gold rate",
+    hint: "Daily Chennai 24K/22K and calculator",
+  },
+  {
     href: "/directory",
     label: "Directory",
     hint: "Places, services, listings",

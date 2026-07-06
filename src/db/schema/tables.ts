@@ -287,3 +287,33 @@ export const classifiedListings = pgTable(
     citySlug: uniqueIndex("classified_listings_city_slug_uidx").on(t.cityId, t.slug),
   }),
 );
+
+/** Daily Chennai retail gold/silver benchmark — one row per IST calendar day. */
+export const goldRateSnapshots = pgTable(
+  "gold_rate_snapshots",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    cityId: uuid("city_id")
+      .notNull()
+      .references(() => cities.id, { onDelete: "restrict" }),
+    /** IST calendar date `YYYY-MM-DD`. */
+    rateDate: text("rate_date").notNull(),
+    /** INR per gram, whole rupees. */
+    rate24kPerGram: integer("rate_24k_per_gram").notNull(),
+    rate22kPerGram: integer("rate_22k_per_gram").notNull(),
+    rate18kPerGram: integer("rate_18k_per_gram").notNull(),
+    silverPerGram: integer("silver_per_gram"),
+    platinumPerGram: integer("platinum_per_gram"),
+    sourceName: text("source_name").notNull(),
+    sourceNote: text("source_note"),
+    fetchedAt: timestamp("fetched_at", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    cityRateDate: uniqueIndex("gold_rate_snapshots_city_date_uidx").on(
+      t.cityId,
+      t.rateDate,
+    ),
+  }),
+);
