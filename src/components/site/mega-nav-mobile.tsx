@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { MEGA_NAV_SECTIONS } from "./nav-config";
 
@@ -12,38 +13,69 @@ type Props = {
 
 export function MegaNavMobile({ open, onClose }: Props) {
   const pathname = usePathname();
-  const [expanded, setExpanded] = useState<string | null>(MEGA_NAV_SECTIONS[0]?.id ?? null);
+  const [expanded, setExpanded] = useState<string | null>(
+    MEGA_NAV_SECTIONS[0]?.id ?? null,
+  );
   const onCloseRef = useRef(onClose);
+  const prevPathnameRef = useRef(pathname);
 
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!open) return;
+
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+    const prevOverflow = style.overflow;
+    const prevPosition = style.position;
+    const prevTop = style.top;
+    const prevWidth = style.width;
+
+    style.overflow = "hidden";
+    style.position = "fixed";
+    style.top = `-${scrollY}px`;
+    style.width = "100%";
+
     return () => {
-      document.body.style.overflow = "";
+      style.overflow = prevOverflow;
+      style.position = prevPosition;
+      style.top = prevTop;
+      style.width = prevWidth;
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
   useEffect(() => {
+    if (prevPathnameRef.current === pathname) return;
+    prevPathnameRef.current = pathname;
     onCloseRef.current();
   }, [pathname]);
 
-  if (!open) return null;
+  useEffect(() => {
+    if (!open) return;
 
-  return (
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onCloseRef.current();
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  if (!open || typeof document === "undefined") return null;
+
+  const panel = (
     <div
-      className="mega-nav-mobile-enter fixed inset-0 z-[70] flex flex-col bg-[var(--background)] md:hidden"
+      id="mobile-mega-nav"
+      className="mega-nav-mobile-enter fixed inset-0 z-[100] flex flex-col bg-[var(--background)] md:hidden"
       role="dialog"
       aria-modal="true"
       aria-label="Site menu"
+      aria-live="polite"
     >
-      <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-4">
+      <div className="flex shrink-0 items-center justify-between border-b border-[var(--border)] px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))]">
         <p className="type-display text-lg text-[var(--foreground)]">Menu</p>
         <button
           type="button"
@@ -66,7 +98,7 @@ export function MegaNavMobile({ open, onClose }: Props) {
       </div>
 
       <nav
-        className="flex-1 overflow-y-auto overscroll-contain px-4 py-4"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
         aria-label="Mobile primary"
       >
         <ul className="space-y-2">
@@ -110,46 +142,46 @@ export function MegaNavMobile({ open, onClose }: Props) {
                     aria-labelledby={`m-trigger-${section.id}`}
                     className="border-t border-[var(--border)] px-2 py-3"
                   >
-                  {section.featured ? (
-                    <Link
-                      href={section.featured.href}
-                      className="focus-ring mb-4 block rounded-xl bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] p-4"
-                      onClick={onClose}
-                    >
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-                        Featured
-                      </p>
-                      <p className="type-display mt-1 text-base text-[var(--foreground)]">
-                        {section.featured.title}
-                      </p>
-                      <p className="mt-1 text-sm text-[var(--muted)]">
-                        {section.featured.description}
-                      </p>
-                      <span className="mt-3 inline-flex text-sm font-semibold text-[var(--accent)]">
-                        {section.featured.cta} →
-                      </span>
-                    </Link>
-                  ) : null}
-                  {section.columns.map((col) => (
-                    <div key={col.heading} className="mb-4 last:mb-0">
-                      <p className="px-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
-                        {col.heading}
-                      </p>
-                      <ul className="mt-2 space-y-0.5">
-                        {col.links.map((link) => (
-                          <li key={link.href + link.label}>
-                            <Link
-                              href={link.href}
-                              className="focus-ring block min-h-11 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background)]"
-                              onClick={onClose}
-                            >
-                              {link.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                    {section.featured ? (
+                      <Link
+                        href={section.featured.href}
+                        className="focus-ring mb-4 block rounded-xl bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] p-4"
+                        onClick={onClose}
+                      >
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
+                          Featured
+                        </p>
+                        <p className="type-display mt-1 text-base text-[var(--foreground)]">
+                          {section.featured.title}
+                        </p>
+                        <p className="mt-1 text-sm text-[var(--muted)]">
+                          {section.featured.description}
+                        </p>
+                        <span className="mt-3 inline-flex text-sm font-semibold text-[var(--accent)]">
+                          {section.featured.cta} →
+                        </span>
+                      </Link>
+                    ) : null}
+                    {section.columns.map((col) => (
+                      <div key={col.heading} className="mb-4 last:mb-0">
+                        <p className="px-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
+                          {col.heading}
+                        </p>
+                        <ul className="mt-2 space-y-0.5">
+                          {col.links.map((link) => (
+                            <li key={link.href + link.label}>
+                              <Link
+                                href={link.href}
+                                className="focus-ring block min-h-11 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--background)]"
+                                onClick={onClose}
+                              >
+                                {link.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 ) : null}
               </li>
@@ -174,4 +206,6 @@ export function MegaNavMobile({ open, onClose }: Props) {
       </nav>
     </div>
   );
+
+  return createPortal(panel, document.body);
 }
