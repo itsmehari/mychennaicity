@@ -35,6 +35,158 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/seafood-expo-bharat-chennai-trade-centre-july-2026.png",
     alt: "Seafood Expo Bharat 2026 poster — Connect. Discover. Grow., Chennai Trade Centre, 1–3 July 2026",
   },
+  "ticket9-chennaiyil-chinna-kuyil": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennaiyil%20Chinna%20Kuyil/64711457/Chennaiyil%20Chinna%20Kuyil_bannerimage.webp",
+    alt: "Chennaiyil Chinna Kuyil — Ticket9 Chennai event poster",
+  },
+  "ticket9-kalam-s-world-records-honour-ceremony-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Kalam%27s%20World%20Records%20Honour%20Ceremony%202026/86657068/Kalam%27s%20World%20Records%20Honour%20Ceremony%202026_bannerimage.webp",
+    alt: "Kalam's World Records Honour Ceremony 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-my-dream-stage-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/My%20Dream%20Stage%202026/16550068/My%20Dream%20Stage%202026_bannerimage.webp",
+    alt: "My Dream Stage 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-thiruporur-marathon": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Thiruporur%20marathon/70305868/Thiruporur%20marathon_bannerimage.webp",
+    alt: "Thiruporur marathon — Ticket9 Chennai event poster",
+  },
+  "ticket9-frangipani-tour-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Frangipani%20Tour%20-%20Chennai/86314792/Frangipani%20Tour%20-%20Chennai_bannerimage.webp",
+    alt: "Frangipani Tour - Chennai — Ticket9 Chennai event poster",
+  },
+  "ticket9-pomblel-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Pomblel%20%28Chennai%29/32558663/Pomblel%20%28Chennai%29_bannerimage.webp",
+    alt: "Pomblel (Chennai) — Ticket9 Chennai event poster",
+  },
+  "ticket9-good-timing-ji-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Good%20Timing%20Ji/58120761/Good%20Timing%20Ji_bannerimage.webp",
+    alt: "Good Timing Ji - Chennai — Ticket9 Chennai event poster",
+  },
+  "ticket9-the-green-chase-26": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/THE%20GREEN%20CHASE%20%2726/37373103/THE%20GREEN%20CHASE%20%2726_bannerimage.webp",
+    alt: "THE GREEN CHASE '26 — Ticket9 Chennai event poster",
+  },
+  "ticket9-bharat-option-traders-summit-chennai-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/BHARAT%20OPTION%20TRADERS%20SUMMIT%20CHENNAI%20-%202026/17185630/BHARAT%20OPTION%20TRADERS%20SUMMIT%20CHENNAI%20-%202026_bannerimage.webp",
+    alt: "BHARAT OPTION TRADERS SUMMIT CHENNAI - 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-independence-day-kidzathon-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/INDEPENDENCE%20DAY%20KIDZATHON%202026/91275810/INDEPENDENCE%20DAY%20KIDZATHON%202026_bannerimage.webp",
+    alt: "INDEPENDENCE DAY KIDZATHON 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-omr-marathon": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/OMR%20Marathon%20/90969966/OMR%20Marathon%20_bannerimage.webp",
+    alt: "OMR Marathon — Ticket9 Chennai event poster",
+  },
+  "ticket9-chennai-kidathon-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/CHENNAI%20KIDATHON%202026/24704685/CHENNAI%20KIDATHON%202026_bannerimage.webp",
+    alt: "CHENNAI KIDATHON 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-thangame-thalapathy": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Thangame%20Thalapathy/90151354/Thangame%20Thalapathy_bannerimage.webp",
+    alt: "Thangame Thalapathy — Ticket9 Chennai event poster",
+  },
+  "ticket9-magic-money-tn-summit-2026-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Magic%20Money%20TN%20Summit%202026%20%E2%80%93%20Chennai/78244578/Magic%20Money%20TN%20Summit%202026%20%E2%80%93%20Chennai_bannerimage.webp",
+    alt: "Magic Money TN Summit 2026 – Chennai — Ticket9 Chennai event poster",
+  },
+  "ticket9-love-vs-friendship-by-lea-i-sing-along-concert-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/LOVE%20vs%20FRIENDSHIP%20by%20LEA%20I%20SING-ALONG%20CONCERT%20-%20CHENNAI/88255550/LOVE%20vs%20FRIENDSHIP%20by%20LEA%20I%20SING-ALONG%20CONCERT%20-%20CHENNAI_bannerimage.webp",
+    alt: "LOVE vs FRIENDSHIP by LEA I SING-ALONG CONCERT - CHENNAI — Ticket9 Chennai event poster",
+  },
+  "ticket9-run-for-women-empowerment-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Run%20for%20women%20empowerment%202026/92796699/Run%20for%20women%20empowerment%202026_bannerimage.webp",
+    alt: "Run for women empowerment 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-the-iconic-dream-chakras-awards-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/The%20Iconic%20Dream%20Chakras%20Awards%202026/92934528/The%20Iconic%20Dream%20Chakras%20Awards%202026_bannerimage.webp",
+    alt: "The Iconic Dream Chakras Awards 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-chennai-freelancers-club-monthly-meetup-july-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennai%20Freelancers%20Club%20%E2%80%93%20Monthly%20Meetup%20July%202026/69605987/Chennai%20Freelancers%20Club%20%E2%80%93%20Monthly%20Meetup%20July%202026_bannerimage.webp",
+    alt: "Chennai Freelancers Club – Monthly Meetup July 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-64-gambit": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/64%20Gambit%20/98701341/64%20Gambit%20_bannerimage.webp",
+    alt: "64 Gambit — Ticket9 Chennai event poster",
+  },
+  "ticket9-radicex": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/RadicEx/31895336/RadicEx_bannerimage.webp",
+    alt: "RadicEx — Ticket9 Chennai event poster",
+  },
+  "ticket9-dia-diamonds-south-indian-nakshatram-awards-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/DIA%20Diamonds%20%E2%80%93%20South%20Indian%20Nakshatram%20Awards%202026/87359246/DIA%20Diamonds%20%E2%80%93%20South%20Indian%20Nakshatram%20Awards%202026_bannerimage.webp",
+    alt: "DIA Diamonds – South Indian Nakshatram Awards 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-xy-cromax-go-paddie-she-miss-beauty-tamilnadu-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/XY%20Cromax%20Go%20Paddie%20%E2%80%93%20She%20Miss%20Beauty%20Tamilnadu%202026/47347361/XY%20Cromax%20Go%20Paddie%20%E2%80%93%20She%20Miss%20Beauty%20Tamilnadu%202026_bannerimage.webp",
+    alt: "XY Cromax Go Paddie – She Miss Beauty Tamilnadu 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-handwriting-competition-july-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20Level%20Handwriting%20Competition%20July%202026/66986487/State%20Level%20Handwriting%20Competition%20July%202026_bannerimage.webp",
+    alt: "State Level Handwriting Competition July 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-chennai-clay-keychains-with-puppies-at-sage-lavender": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennai%20Clay%20Keychains%20with%20Puppies%20at%20Sage%20%26%20Lavender/71959259/Chennai%20Clay%20Keychains%20with%20Puppies%20at%20Sage%20%26%20Lavender_bannerimage.webp",
+    alt: "Chennai Clay Keychains with Puppies at Sage & Lavender — Ticket9 Chennai event poster",
+  },
+  "ticket9-galatta-digital-stars-2026-4th-edition": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Galatta%20Digital%20Stars%202026%20-%204th%20Edition/78425128/Galatta%20Digital%20Stars%202026%20-%204th%20Edition_bannerimage.webp",
+    alt: "Galatta Digital Stars 2026 - 4th Edition — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-kids-drawing-carnival-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20level%20kids%20drawing%20carnival%202026/46810189/State%20level%20kids%20drawing%20carnival%202026_bannerimage.webp",
+    alt: "State level kids drawing carnival 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-kids-junior-badminton-tournament-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20level%20kids%20%26%20junior%20badminton%20tournament%202026/29982601/State%20level%20kids%20%26%20junior%20badminton%20tournament%202026_bannerimage.webp",
+    alt: "State level kids & junior badminton tournament 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-inter-school-chess-tournament-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/INTER%20SCHOOL%20CHESS%20TOURNAMENT%202026/87805828/INTER%20SCHOOL%20CHESS%20TOURNAMENT%202026_bannerimage.webp",
+    alt: "INTER SCHOOL CHESS TOURNAMENT 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-drawing-carnivals-july-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20Level%20Drawing%20Carnivals%20July%202026/17714985/State%20Level%20Drawing%20Carnivals%20July%202026_bannerimage.webp",
+    alt: "State Level Drawing Carnivals July 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-chennai-puppy-yoga-journaling-circle-at-the-bistrograph": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennai%20Puppy%20Yoga%20%2B%20Journaling%20Circle%20at%20The%20Bistrograph/41827741/Chennai%20Puppy%20Yoga%20%2B%20Journaling%20Circle%20at%20The%20Bistrograph_bannerimage.webp",
+    alt: "Chennai Puppy Yoga + Journaling Circle at The Bistrograph — Ticket9 Chennai event poster",
+  },
+  "ticket9-pets-day-out-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/PETS%20DAY%20OUT%202026/53616067/PETS%20DAY%20OUT%202026_bannerimage.webp",
+    alt: "PETS DAY OUT 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-inter-school-athletic-championship-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20level%20inter%20school%20athletic%20championship%202026/99658028/State%20level%20inter%20school%20athletic%20championship%202026_bannerimage.webp",
+    alt: "State level inter school athletic championship 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-founder-circle-edition-12": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Founder%20Circle%20Edition%2012/10993337/Founder%20Circle%20Edition%2012_bannerimage.webp",
+    alt: "Founder Circle Edition 12 — Ticket9 Chennai event poster",
+  },
+  "ticket9-madrasakka-live-tamil-sing-along-jamming-in-chennai": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/MADRASAKKA%20-%20Live%20Tamil%20Sing-Along%20%2B%20Jamming%20in%20Chennai/64096156/MADRASAKKA%20-%20Live%20Tamil%20Sing-Along%20%2B%20Jamming%20in%20Chennai_bannerimage.webp",
+    alt: "MADRASAKKA - Live Tamil Sing-Along + Jamming in Chennai — Ticket9 Chennai event poster",
+  },
+  "ticket9-state-level-inter-school-handwriting-competition-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/State%20level%20inter%20school%20handwriting%20competition%202026/36419447/State%20level%20inter%20school%20handwriting%20competition%202026_bannerimage.webp",
+    alt: "State level inter school handwriting competition 2026 — Ticket9 Chennai event poster",
+  },
+  "ticket9-namma-chennai-juniorthon-4th-edition": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/NAMMA%20CHENNAI%20JUNIORTHON%204TH%20EDITION/67884102/NAMMA%20CHENNAI%20JUNIORTHON%204TH%20EDITION_bannerimage.webp",
+    alt: "NAMMA CHENNAI JUNIORTHON 4TH EDITION — Ticket9 Chennai event poster",
+  },
+  "ticket9-the-unwritten-journey-a-stranger-photowalk": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/The%20Unwritten%20Journey%20-%20%20A%20Stranger%20Photowalk/39224958/The%20Unwritten%20Journey%20-%20%20A%20Stranger%20Photowalk_bannerimage.webp",
+    alt: "The Unwritten Journey - A Stranger Photowalk — Ticket9 Chennai event poster",
+  },
+  "ticket9-namma-besy-run-2026": {
+    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Namma%20Bessy%20Mile%20Run%202026/51604693/Namma%20Bessy%20Mile%20Run%202026_bannerimage.webp",
+    alt: "Namma Bessy Mile Run 2026 — Ticket9 Chennai event poster",
+  },
 };
 
 export function getRegisteredEventPoster(slug: string): EventPosterSpec | null {

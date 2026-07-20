@@ -95,6 +95,12 @@
   --ad-panel-bg-soft: #0f3330;
 }
 
+.ad-panel--civic {
+  --ad-panel-accent: #2563eb;
+  --ad-panel-bg: #0c1628;
+  --ad-panel-bg-soft: #132038;
+}
+
 .ad-panel--hero {
   padding: 1.75rem 1.5rem;
 }

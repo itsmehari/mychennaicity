@@ -4,10 +4,12 @@ import { categoryToTopicSlug } from "@/lib/news-topics";
 import { ArticleAdRegion } from "@/ads/article-ad-region";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 
-function formatDate(d: Date | null) {
+function formatSidebarDate(d: Date | null) {
   if (!d) return "";
   return d.toLocaleString("en-IN", {
-    dateStyle: "medium",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
     timeZone: "Asia/Kolkata",
   });
 }
@@ -15,33 +17,60 @@ function formatDate(d: Date | null) {
 function SidebarArticleList({
   title,
   articles,
+  numbered = false,
+  showCategory = false,
 }: {
   title: string;
   articles: PublicArticleRow[];
+  numbered?: boolean;
+  showCategory?: boolean;
 }) {
   if (articles.length === 0) return null;
 
+  const titleId = `sidebar-${title.replace(/\s+/g, "-").toLowerCase()}`;
+
   return (
-    <section className="civic-sidebar-block" aria-labelledby={`sidebar-${title}`}>
-      <h2 id={`sidebar-${title}`} className="civic-sidebar-block__title">
-        {title}
-      </h2>
-      <ul className="civic-sidebar-block__list">
-        {articles.map((a) => (
-          <li key={a.id}>
+    <section
+      className="civic-sidebar-module"
+      aria-labelledby={titleId}
+    >
+      <div className="civic-sidebar-module__head">
+        <h2 id={titleId} className="civic-sidebar-module__title">
+          {title}
+        </h2>
+      </div>
+      <ul
+        className={
+          numbered
+            ? "civic-sidebar-module__list civic-sidebar-module__list--numbered"
+            : "civic-sidebar-module__list"
+        }
+      >
+        {articles.map((a, i) => (
+          <li key={a.id} className="civic-sidebar-module__item">
             <Link
               href={`/chennai-local-news/${a.slug}`}
               className="civic-sidebar-link"
             >
-              <span className="civic-sidebar-link__title">{a.title}</span>
-              {a.publishedAt ? (
-                <time
-                  dateTime={a.publishedAt.toISOString()}
-                  className="civic-sidebar-link__date"
-                >
-                  {formatDate(a.publishedAt)}
-                </time>
+              {numbered ? (
+                <span className="civic-sidebar-link__index" aria-hidden>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
               ) : null}
+              <span className="civic-sidebar-link__body">
+                {showCategory && a.category ? (
+                  <span className="civic-sidebar-link__chip">{a.category}</span>
+                ) : null}
+                <span className="civic-sidebar-link__title">{a.title}</span>
+                {a.publishedAt ? (
+                  <time
+                    dateTime={a.publishedAt.toISOString()}
+                    className="civic-sidebar-link__date"
+                  >
+                    {formatSidebarDate(a.publishedAt)}
+                  </time>
+                ) : null}
+              </span>
             </Link>
           </li>
         ))}
@@ -63,11 +92,17 @@ export function ArticleRightSidebar({
 
   return (
     <aside className="civic-right-sidebar" aria-label="Chennai updates and guides">
-      <SidebarArticleList title="Chennai updates" articles={latestArticles} />
+      <SidebarArticleList
+        title="Chennai updates"
+        articles={latestArticles}
+        showCategory
+      />
       {topicSlug && category ? (
-        <section className="civic-sidebar-block" aria-label="Related guides">
-          <h2 className="civic-sidebar-block__title">Related guides</h2>
-          <p className="civic-sidebar-block__text">
+        <section className="civic-sidebar-module civic-sidebar-module--cta">
+          <div className="civic-sidebar-module__head">
+            <h2 className="civic-sidebar-module__title">Related guides</h2>
+          </div>
+          <p className="civic-sidebar-module__text">
             More {category.toLowerCase()} stories and explainers for Chennai
             residents.
           </p>
@@ -75,15 +110,20 @@ export function ArticleRightSidebar({
             href={`/chennai-local-news/topic/${topicSlug}`}
             className="civic-sidebar-topic-link"
           >
-            Browse {category} topic →
+            Browse {category} topic
+            <span aria-hidden> →</span>
           </Link>
         </section>
       ) : null}
-      <SidebarArticleList title="Popular now" articles={relatedArticles} />
-      <div className="civic-sidebar-block">
+      <SidebarArticleList
+        title="Popular now"
+        articles={relatedArticles}
+        numbered
+      />
+      <div className="civic-sidebar-module civic-sidebar-module--community">
         <JoinWhatsAppCommunityCard layout="inline" />
       </div>
-      <div className="civic-sidebar-ad">
+      <div className="civic-sidebar-module civic-sidebar-module--ad">
         <ArticleAdRegion
           slotId="article-sidebar"
           size="300x250"

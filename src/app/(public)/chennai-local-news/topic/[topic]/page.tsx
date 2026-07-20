@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { StoryCardCompact } from "@/components/news/newspaper-layout";
 import {
@@ -129,6 +130,12 @@ export default async function TopicPage({ params }: Props) {
             ))}
           </ul>
         </div>
+        <AdvertisePanel
+          variant="news"
+          layout="section"
+          className="mt-8"
+          source="news_topic_hub"
+        />
         <InteriorCrossNav />
       </div>
     );
@@ -240,6 +247,12 @@ export default async function TopicPage({ params }: Props) {
           <StoryCardCompact key={a.id} article={a} />
         ))}
       </div>
+      <AdvertisePanel
+        variant="news"
+        layout="section"
+        className="mt-10"
+        source="news_topic_hub"
+      />
       <InteriorCrossNav />
     </div>
   );

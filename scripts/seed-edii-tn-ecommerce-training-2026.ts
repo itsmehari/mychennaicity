@@ -186,7 +186,11 @@ Dates, venue, eligibility, learning outcomes, and contact numbers are on our **e
 
 ---
 
-Notice basis: **DIPR, Secretariat, Chennai – 9**. Confirm schedule and registration on [editn.in](${ORGANISER_URL}) before you apply.`;
+Notice basis: **DIPR, Secretariat, Chennai – 9**. Confirm schedule and registration on [editn.in](${ORGANISER_URL}) before you apply.
+
+## Leadership note (July 2026)
+
+On **15 July 2026**, senior IAS officer **Supriya Sahu** was appointed **Additional Chief Secretary / Commissioner of EDII-TN**, succeeding **Dheeraj Kumar**. See our politics desk: **[Yet Another IAS Reshuffle — July 2026](/chennai-local-news/yet-another-tamil-nadu-ias-reshuffle-july-2026)**. Programme dates and registration for this June training remain as notified above.`;
 
   const body = reportBody;
 

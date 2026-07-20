@@ -98,6 +98,16 @@ const nextConfig: NextConfig = {
         hostname: "img.etimg.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.isro.gov.in",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/ticket9-prod.appspot.com/**",
+      },
     ],
   },
   async redirects() {
@@ -133,6 +143,13 @@ const nextConfig: NextConfig = {
           "/chennai-local-news/reader-listing-perumbakkam-grade3-tuition-teacher-june-2026",
         destination:
           "/chennai-classifieds/tuition-teacher-wanted-grade3-perumbakkam",
+        permanent: true,
+      },
+      {
+        source:
+          "/chennai-guides/bulk-waste-generator-readiness-checklist-2026",
+        destination:
+          "/guides/bulk-waste-generator-readiness-checklist-2026",
         permanent: true,
       },
     ];

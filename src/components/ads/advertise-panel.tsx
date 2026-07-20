@@ -196,8 +196,16 @@ function StripLayout({
 }
 
 /**
- * Self-serve advertising panel — WhatsApp enquiry via `/api/contact/whatsapp`
- * (number never rendered in HTML; API blocked in robots.txt).
+ * Local advertising panel for My Chennai City.
+ *
+ * Drop into any public page:
+ * ```tsx
+ * import { AdvertisePanel } from "@/components/ads";
+ * <AdvertisePanel variant="news" layout="section" className="mt-8" />
+ * ```
+ *
+ * Layouts: `hero` (home-style), `section` (hub band), `strip` (compact).
+ * WhatsApp via `/api/contact/whatsapp` (number never in HTML; API in robots.txt).
  */
 export function AdvertisePanel({
   variant,

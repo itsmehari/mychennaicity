@@ -49,6 +49,7 @@
 - **Primary source:** keep `source_url` / `source_name` accurate; the article template surfaces them as the outbound citation.
 - **Interactives:** `interactive_json` supports `checklist`, `poll`, `takeaways`, `faq`, and `howto` shapes — use `faq` / `howto` only with real, non-thin Q&A or steps (avoid empty schema).
 - **Rich snippets (JSON-LD):** Article pages emit `NewsArticle`, `BreadcrumbList`, optional TOC `ItemList`, plus `buildArticleSupplementalJsonLd`. **FAQPage:** exactly one block, only when `interactive_json.type === "faq"` and Q&A is rendered on the page (do not duplicate with `faqItems` or auto-generated fact-box FAQs). Validate in [Google Rich Results Test](https://search.google.com/test/rich-results) after publish.
+- **SWM Rules AEO block:** Solid-waste / SWM Rules articles listed in [`src/content/civic-swm/swm-rules-aeo.ts`](../src/content/civic-swm/swm-rules-aeo.ts) render a factual “Quick answers” section (`#swm-rules-aeo`) with a direct answer, definitions, series links, Speakable markup, and `about` entities. Keep copy aligned with published reporting — no new claims.
 
 ## Search measurement (ops)
 

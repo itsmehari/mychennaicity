@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdvertisePanel } from "@/components/ads";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   InteriorCrossNav,
@@ -111,6 +112,13 @@ export default function GlossaryPage() {
           </div>
         ))}
       </dl>
+
+      <AdvertisePanel
+        variant="directory"
+        layout="section"
+        className="mt-12"
+        source="glossary_page"
+      />
 
       <HubCommunityStrip businessVariant="default" className="mt-12" />
 

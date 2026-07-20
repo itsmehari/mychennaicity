@@ -120,6 +120,16 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
         heading: "On the map",
         links: [
           {
+            href: "/civic-tools",
+            label: "Civic tools",
+            description: "Zone & ward finder, boundary maps, complaint router, and civic card.",
+          },
+          {
+            href: "/civic-tools/zone-ward-finder",
+            label: "Zone & Ward Finder",
+            description: "What is my current GCC zone and ward?",
+          },
+          {
             href: "/elections-2026",
             label: "Elections 2026 map",
             description: "Chennai metro+ assembly constituencies and curated candidates.",

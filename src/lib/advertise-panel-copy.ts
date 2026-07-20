@@ -5,7 +5,8 @@ export type AdvertisePanelVariant =
   | "jobs"
   | "directory"
   | "classifieds"
-  | "area";
+  | "area"
+  | "civic";
 
 export type AdvertisePanelLayout = "hero" | "section" | "strip";
 
@@ -87,6 +88,14 @@ const copy: Record<AdvertisePanelVariant, AdvertisePanelCopy> = {
     ctaLabel: "Advertise Locally",
     prefill: `${basePrefill} (area page)`,
   },
+  civic: {
+    source: "civic_tools_banner",
+    eyebrow: "Local advertising",
+    headline: "Advertise your business where Chennai residents look up civic info.",
+    body: "Reach people using zone finders, maps, and neighbourhood tools — then browsing news, events, and local discovery.",
+    ctaLabel: "Enquire on WhatsApp",
+    prefill: `${basePrefill} (civic tools)`,
+  },
 };
 
 /** Detail-page strip sources — distinct from hub banners for click tracking. */
@@ -100,6 +109,7 @@ export const advertiseDetailSources: Record<
   directory: "directory_detail_strip",
   classifieds: "classifieds_detail_strip",
   area: "area_detail_strip",
+  civic: "civic_tools_strip",
 };
 
 export function getAdvertisePanelCopy(

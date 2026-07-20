@@ -1,5 +1,6 @@
 import {
   boolean,
+  doublePrecision,
   integer,
   jsonb,
   pgEnum,
@@ -287,6 +288,17 @@ export const classifiedListings = pgTable(
     citySlug: uniqueIndex("classified_listings_city_slug_uidx").on(t.cityId, t.slug),
   }),
 );
+
+/** Community boundary feedback — does not modify authoritative geo data. */
+export const boundaryFeedback = pgTable("boundary_feedback", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  type: text("type").notNull(),
+  lat: doublePrecision("lat").notNull(),
+  lng: doublePrecision("lng").notNull(),
+  wardHint: text("ward_hint"),
+  note: text("note"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
 
 /** Daily Chennai retail gold/silver benchmark — one row per IST calendar day. */
 export const goldRateSnapshots = pgTable(

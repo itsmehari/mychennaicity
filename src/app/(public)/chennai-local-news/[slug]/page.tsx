@@ -39,6 +39,10 @@ import {
   clipArticleHeadlineForTitle,
   fullSiteTitle,
 } from "@/lib/seo/site-titles";
+import {
+  SWM_RULES_AEO_SECTION_ID,
+  isSwmRulesArticleSlug,
+} from "@/content/civic-swm/swm-rules-aeo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -128,15 +132,29 @@ export default async function ArticlePage({ params }: Props) {
   const speakableSummaryLead = Boolean(
     summaryLead && summaryLead !== dekTrim,
   );
+  const swmSpeakable = isSwmRulesArticleSlug(article.slug);
   const newsLd = isReaderListingSlug(article.slug)
     ? buildReaderListingWebPageJsonLd(article)
     : buildNewsArticleJsonLd(article, {
         speakableSummaryLead,
+        speakableExtraSelectors: swmSpeakable
+          ? ['[data-speakable="swm-aeo-answer"]']
+          : undefined,
       });
   const reportBody = article.reportBody ?? article.body;
   const analysisBody = article.analysisBody ?? "";
-  const showToc = shouldShowArticleToc(reportBody, analysisBody);
+  const showToc = shouldShowArticleToc(reportBody, analysisBody) || swmSpeakable;
   const tocEntries = buildArticleTocEntries(reportBody, analysisBody);
+  const tocEntriesWithAeo = swmSpeakable
+    ? [
+        {
+          level: 2 as const,
+          text: "Quick answers (SWM Rules)",
+          domId: SWM_RULES_AEO_SECTION_ID,
+        },
+        ...tocEntries,
+      ]
+    : tocEntries;
   const reportAnchors = extractMarkdownOutline(reportBody).map((o) => ({
     level: o.level,
     id: `report-${o.baseId}`,
@@ -158,8 +176,8 @@ export default async function ArticlePage({ params }: Props) {
     reportBody,
   });
   const tocItemListLd =
-    showToc && tocEntries.length > 0
-      ? buildArticleSectionItemListJsonLd(articleUrl, tocEntries)
+    showToc && tocEntriesWithAeo.length > 0
+      ? buildArticleSectionItemListJsonLd(articleUrl, tocEntriesWithAeo)
       : null;
 
   const crumbs: { label: string; href?: string }[] = [
@@ -216,7 +234,7 @@ export default async function ArticlePage({ params }: Props) {
           <EditorialArticle
             article={article}
             layoutVariant={articleLayoutVariantForSlug(article.slug)}
-            onThisPage={showToc ? tocEntries : null}
+            onThisPage={showToc ? tocEntriesWithAeo : null}
             reportHeadingAnchors={showToc ? reportAnchors : undefined}
             analysisHeadingAnchors={showToc ? analysisAnchors : undefined}
           />

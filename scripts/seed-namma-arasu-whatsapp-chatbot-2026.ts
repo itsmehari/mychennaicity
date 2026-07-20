@@ -211,6 +211,7 @@ It does **not** mean every certificate, grievance, or complex case is fully onli
 
 - **[Consumer topic](/chennai-local-news/topic/consumer)** — bills, apps, and household services in Chennai
 - **[Tamil Nadu electricity bill guide](/chennai-local-news/tamil-nadu-electricity-bill-calculation-2026-june-tnpdcl)** — TNEB slab math and TNPDCL calculator
+- **[July 2026 IAS reshuffle — IT & MSME secretaries swap](/chennai-local-news/yet-another-tamil-nadu-ias-reshuffle-july-2026)** — Atul Anand takes IT and Digital Services; Pradeep Yadav moves to MSME
 - **[Chennai local news](/chennai-local-news)** — latest city desk stories`.trim();
 
   const analysisBody = `## Why Chennai residents should know about Namma Arasu

@@ -1,12 +1,23 @@
 import type { KeyDetailItem } from "@/lib/article-content-extract";
 
-export function ArticleQuickSummary({ bullets }: { bullets: string[] }) {
+export function ArticleQuickSummary({
+  bullets,
+  anchorId = "report-key-takeaways",
+}: {
+  bullets: string[];
+  /** Matches TOC / markdown outline id for ## Key takeaways */
+  anchorId?: string;
+}) {
   if (bullets.length === 0) return null;
 
   const items = bullets.slice(0, 5);
 
   return (
-    <aside className="civic-quick-summary" aria-label="Quick summary">
+    <aside
+      id={anchorId}
+      className="civic-quick-summary scroll-mt-28"
+      aria-label="Quick summary"
+    >
       <h2 className="civic-quick-summary__title">Quick Summary</h2>
       <ul className="civic-quick-summary__list">
         {items.map((line, i) => (

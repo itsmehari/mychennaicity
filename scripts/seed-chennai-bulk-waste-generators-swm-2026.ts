@@ -24,6 +24,9 @@ const DTNEXT_URL =
 const GCC_PORTAL = "https://gccservices.in/bulkwaste/register";
 const CPCB_PORTAL = "https://swm.cpcb.gov.in/register";
 
+/** Indicative end of 15-day window from the 4 July 2026 Ripon Buildings review direction (IST end of day). */
+const COUNTDOWN_ENDS_AT = "2026-07-19T18:29:59.000Z";
+
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
 
@@ -67,17 +70,19 @@ async function main() {
 
   const reportBody = `## Key takeaways
 
-- **Greater Chennai Corporation (GCC)** has directed bulk waste generators across all **15 zones** to complete mandatory online registration within **15 days**, under the **Solid Waste Management Rules, 2026**.
-- Registration is required on **both** the [GCC bulk-waste portal](${GCC_PORTAL}) and the [CPCB solid-waste portal](${CPCB_PORTAL}).
-- Of **3,203** identified bulk generators in Chennai, only about **1,944** had registered at the time of reporting — a gap of roughly **1,259** premises (~39%).
-- In **June 2026**, GCC imposed penalties totalling **₹5.95 lakh** on **120** bulk generators. Reported fines range from **₹5,000 to ₹25,000**.
-- Qualifying premises must segregate waste into **four streams**, process wet waste on-site where required, use authorised collectors, keep records and submit periodic returns.
+- **Greater Chennai Corporation** has told bulk waste generators across all **15 zones** to finish mandatory online registration within **15 days** under the **Solid Waste Management Rules, 2026**.
+- You must register on **both** the [GCC bulk-waste portal](${GCC_PORTAL}) and the [CPCB solid-waste portal](${CPCB_PORTAL}).
+- Of **3,203** identified bulk generators, only about **1,944** had registered when figures were reported — roughly **1,259** still pending (~**39%**).
+- In **June 2026**, GCC imposed **₹5.95 lakh** in penalties on **120** bulk generators. Reported fines: **₹5,000–₹25,000**.
+- The real shift: it is no longer enough to “hand over bags.” Premises must show **how much** waste they generate, how it is **segregated**, who **collects** it, and where it is **processed**.
 
 ## Summary
 
-**Chennai, July 2026** — Greater Chennai Corporation has moved from awareness to enforcement on solid waste. Large apartments, IT parks, hospitals, hotels, malls, colleges, marriage halls and other major premises must register as bulk waste generators and prove how their waste is segregated, processed and disposed of — not only that bags were “handed over.”
+**Chennai, July 2026** — If you run a large apartment, IT park, hospital, hotel, mall, college, marriage hall or factory in Chennai, solid waste is no longer only a housekeeping chore. It is a compliance file.
 
-The direction follows a civic review chaired by Commissioner **Dr G.S. Sameeran** at Ripon Buildings and contemporaneous Corporation instructions reported in July 2026. The Solid Waste Management Rules, 2026 took effect on **1 April 2026**, replacing the 2016 framework.
+At a review meeting at Ripon Buildings on **4 July 2026**, Commissioner **Dr G.S. Sameeran** directed officials to tighten implementation of the Solid Waste Management Rules, 2026 across every Corporation zone. Bulk waste generators were told to register with GCC and CPCB, keep records, and submit information on generation, processing, transport and disposal.
+
+The rules took effect on **1 April 2026**. The first months were mostly awareness. July marks the move into inspections, digital reporting and fines.
 
 ## Key facts
 
@@ -85,35 +90,21 @@ The direction follows a civic review chaired by Commissioner **Dr G.S. Sameeran*
 |---|---|
 | Civic body | Greater Chennai Corporation (15 zones) |
 | Legal frame | Solid Waste Management Rules, 2026 |
-| Who must act | Bulk waste generators (apartments, campuses, hotels, hospitals, institutions, commercial premises) |
-| Registration deadline | Within 15 days of direction / zonal notice |
-| Portals | [GCC](${GCC_PORTAL}) and [CPCB](${CPCB_PORTAL}) |
+| Who must act | Bulk waste generators — apartments, campuses, hotels, hospitals, institutions, commercial premises |
+| Registration window | Within 15 days of direction / zonal notice |
+| Portals | [GCC](${GCC_PORTAL}) · [CPCB](${CPCB_PORTAL}) |
 | Identified BWGs | 3,203 |
-| Registered | 1,944 |
-| Pending | ~1,259 (~39%) |
+| Registered | 1,944 (~60.7%) |
+| Pending | ~1,259 (~39.3%) |
 | June penalties | ₹5.95 lakh from 120 generators |
 | Fine range reported | ₹5,000–₹25,000 |
-| Daily BWG waste (reported) | ~600 tonnes |
+| City waste collected (approx.) | 6,150 tonnes/day |
+| Reported BWG waste | ~600 tonnes/day |
 | Four streams | Wet · Dry · Sanitary · Special-care |
 
-## What has happened now?
+## Are you a bulk waste generator?
 
-GCC has instructed qualifying bulk waste generators to finish online registration quickly or face action under the 2026 rules.
-
-Reporting indicates the Corporation is tightening inspections after finding that some large generators still place mixed waste in roadside Corporation bins instead of processing wet waste on-site or using authorised collection. That practice overflows public bins, contaminates recyclables and adds pressure on disposal sites such as **Perungudi** and **Kodungaiyur**.
-
-Bulk generators are also expected to:
-
-1. Buy suitable colour-coded bins at their own cost.
-2. Segregate at source into four streams.
-3. Process biodegradable (wet) waste within the premises where required and feasible.
-4. Hand dry, sanitary and special-care waste to GCC or authorised agencies.
-5. Maintain generation, processing, transport and disposal records.
-6. Upload periodic information through the GCC and CPCB portals (including quarterly reporting described in recent coverage).
-
-## Who is a bulk waste generator in Chennai?
-
-A premises may qualify if it meets **any one** of these thresholds:
+You may qualify if **any one** of these is true:
 
 | Threshold | Limit |
 |---|---|
@@ -121,9 +112,15 @@ A premises may qualify if it meets **any one** of these thresholds:
 | Daily water use | **40,000 litres** or more |
 | Daily solid waste | **100 kg** or more |
 
-You do **not** need to meet all three. A dense apartment community can cross 100 kg/day even on a modest plot. Rough guide: about **200 households** at ~500 g each, or **300 households** at ~400 g each, can approach or exceed 100 kg/day — before counting gardens, events or commercial kitchens.
+You do **not** need all three. A dense high-rise can cross 100 kg/day on a modest plot.
 
-### Typical Chennai premises that may qualify
+**Rough apartment math**
+
+- ~**200** households at ~500 g each ≈ **100 kg/day**
+- ~**300** households at ~400 g each ≈ **120 kg/day**
+- A hotel kitchen, hospital or IT cafeteria can cross the line on food waste alone
+
+### Premises most likely to be affected in Chennai
 
 - Large apartment associations and gated communities
 - IT parks and corporate campuses (including OMR)
@@ -135,9 +132,26 @@ You do **not** need to meet all three. A dense apartment community can cross 100
 - Factories, offices and multi-tenant commercial buildings
 - Transport terminals and large public institutions
 
+## What has happened now?
+
+GCC has instructed qualifying premises to complete online registration quickly or face action under the 2026 rules.
+
+Between **1 and 30 June 2026**, the Corporation reportedly fined **120** bulk generators for a total of **₹5.95 lakh** — about **₹4,958** per action on average, near the lower end of the ₹5,000–₹25,000 range.
+
+Reporting also flags a practical problem: some large generators still dump mixed waste into roadside Corporation bins. That overflows public bins, contaminates recyclables, and adds pressure on **Perungudi** and **Kodungaiyur**.
+
+### What registered premises must still do
+
+1. Buy suitable colour-coded bins at their own cost.
+2. Segregate at source into **four streams** — starting inside homes, kitchens, offices and wards, not only at the gate.
+3. Process wet (biodegradable) waste on-site where required and feasible (composting, biomethanation or another approved method).
+4. Hand dry, sanitary and special-care waste to GCC or authorised agencies — and keep proof.
+5. Maintain generation, processing, transport and disposal records.
+6. Upload periodic information on the GCC and CPCB portals (including quarterly reporting described in recent coverage).
+
 ## Four-stream segregation: the new basic standard
 
-Under the 2026 rules, “wet vs dry” alone is not enough.
+“Wet vs dry” alone is no longer enough.
 
 | Stream | What goes in | Typical destination |
 |---|---|---|
@@ -146,33 +160,34 @@ Under the 2026 rules, “wet vs dry” alone is not enough.
 | **Sanitary** | Pads, diapers, tampons, similar hygiene waste (securely wrapped) | Authorised separate handling |
 | **Special-care** | Bulbs, expired medicines, paint containers, certain batteries, chemical containers | Authorised collection points |
 
-Mixing streams contaminates compost, lowers recycling value and exposes conservancy workers to health risks.
+Mixing streams dirty recyclables, spoil compost, and expose conservancy workers to health risks. If collection carts or vehicles remix segregated waste, earlier effort is wasted — residents and associations should report that.
 
-## What each stakeholder should do
+## Action guide by stakeholder
 
-### Residents (every household)
+### Apartment associations / RWAs
+
+1. Check built-up area, water use and run a **7-day waste audit** (weekdays + weekend).
+2. Complete **both** GCC and CPCB registrations; save acknowledgements.
+3. Fix the chain: homes → floor collection → waste room → vehicle — without remixing.
+4. Audit the wet-waste plant: capacity, downtime, odour, leachate, compost use.
+5. Verify vendor authorisation, weight slips and destination facilities.
+6. Keep a compliance file: registrations, audits, contracts, returns, inspection notes.
+7. Brief residents in Tamil and English on which bin to use and how to wrap sanitary waste.
+
+### Residents inside bulk-generator buildings
 
 - Keep separate containers for wet and dry waste.
 - Wrap sanitary waste securely; never mix it with recyclables.
 - Store bulbs, medicines and batteries in a labelled special-care box until authorised collection.
-- Do not dump bags at gates, drains or roadside bins meant for household routes.
-- Report if segregated waste is remixed by staff or collectors.
-
-### Apartment associations / RWAs
-
-1. Check built-up area, water use and a **7-day waste audit** (weekdays + weekend).
-2. Complete **both** GCC and CPCB registrations; save acknowledgements.
-3. Fix four-stream bins from homes → service floors → waste room → vehicle.
-4. Audit the wet-waste plant: capacity, downtime, odour, leachate, compost use.
-5. Verify vendor authorisation, weight slips and destination facilities.
-6. Keep a compliance file: registrations, audits, contracts, returns, inspection notes.
+- Do not dump bags at gates, drains or roadside bins meant for ordinary household routes.
+- Ask the association whether dual-portal registration is done — and whether the composting unit actually runs.
 
 ### IT parks and corporate campuses
 
 - Map waste from cafeterias, floors, pantries, events and landscaping.
-- Clarify landlord vs tenant responsibility in facility rules and leases.
+- Spell out landlord vs tenant responsibility in facility rules and leases.
 - Track ESG-ready metrics: waste per employee, segregation rate, landfill diversion.
-- Treat cafeteria food waste as a prevention problem, not only a processing problem.
+- Treat cafeteria food waste as prevention first, processing second.
 
 ### Hotels, marriage halls and restaurants
 
@@ -195,6 +210,10 @@ Mixing streams contaminates compost, lowers recycling value and exposes conserva
 
 OMR and nearby corridors concentrate high-rise apartments, IT campuses, food courts, hotels and hostels — many of which are likely bulk generators. Improper disposal here can block drains, worsen local flooding, pollute channels linked to **Pallikaranai Marsh**, and add load to the **Perungudi** waste landscape. For campuses and associations, waste compliance is now a governance and reputation issue as well as a civic duty.
 
+## Chennai’s waste scale (context)
+
+GCC states that about **6,150 metric tonnes** of garbage are collected citywide every day — roughly **256 tonnes per hour**, or about **71 kg every second**. Bulk generators are reported to produce around **600 tonnes/day** (~10% of that municipal figure), while national framing often puts bulk generators near **30%** of total solid waste. The gap underlines why Chennai needs clearer public waste data — and why large premises cannot treat municipal bins as their private disposal system.
+
 ## Data snapshot
 
 | Metric | Figure |
@@ -216,7 +235,7 @@ OMR and nearby corridors concentrate high-rise apartments, IT campuses, food cou
 |---|---|
 | Story type | Civic / solid waste enforcement |
 | Neighbourhood or area | Greater Chennai (all 15 GCC zones); OMR relevance |
-| Event / review | July 2026 GCC review and registration directions |
+| Event / review | 4 July 2026 GCC review and registration directions |
 | Category | Chennai |
 | Verification status | Based on cited media and Corporation-reported figures; portal requirements may be updated by zonal notices |
 
@@ -250,6 +269,14 @@ The 2026 rules shift responsibility to where waste is generated. For households 
 
 **Corporation (public expectation):** zone-wise registration data · authorised vendor lists · verified portal returns · worker protection · segregated collection · follow-up inspections.
 
+## What to watch next
+
+- Whether the pending registration count (~1,259) falls after the 15-day push
+- Whether inspections go beyond paperwork into segregation and wet-waste plants
+- Whether authorised vendor lists are easy to find zone-wise
+- Whether roadside overflow near large premises reduces
+- Whether landfill intake at Perungudi and Kodungaiyur trends down over time
+
 ## Related reading on mychennaicity.in
 
 - [NGT direction on wet and dry waste collection days](/chennai-local-news/chennai-ngt-gcc-wet-dry-waste-separate-collection-days)
@@ -259,7 +286,7 @@ The 2026 rules shift responsibility to where waste is generated. For households 
 
 ## Editorial note
 
-This follow-up is based on Greater Chennai Corporation directions reported in July 2026, contemporaneous coverage of registration and June penalties, and the Union framework for the Solid Waste Management Rules, 2026. Figures should be updated when GCC publishes newer registration, penalty or processing data. Establishments should follow the latest portal requirements and any zonal officer notice issued to them.`.trim();
+This follow-up is based on Greater Chennai Corporation directions reported in July 2026, contemporaneous coverage of registration and June penalties, and the Union framework for the Solid Waste Management Rules, 2026. Figures should be updated when GCC publishes newer registration, penalty or processing data. Establishments should follow the latest portal requirements and any zonal officer notice issued to them. The countdown on this page is an **indicative** window from the 4 July review direction — your formal deadline is the one on your notice.`.trim();
 
   const body = `${reportBody}\n\n---\n\n${analysisBody}`;
 
@@ -273,10 +300,10 @@ This follow-up is based on Greater Chennai Corporation directions reported in Ju
     cityId: city.id,
     slug: SLUG,
     title:
-      "Chennai bulk waste generators get 15 days to register under SWM Rules 2026",
+      "Chennai bulk waste generators: 15 days to register under SWM Rules 2026",
     summary:
-      "Greater Chennai Corporation has directed bulk waste generators to register on GCC and CPCB portals within 15 days, with fines of ₹5,000–₹25,000 for non-compliance.",
-    dek: "Apartments, IT parks, hospitals, hotels and institutions face stricter four-stream segregation and digital reporting across all 15 GCC zones.",
+      "Apartments, IT parks, hospitals, hotels and institutions must register on GCC and CPCB portals within 15 days. Fines of ₹5,000–₹25,000 already applied; ~39% of identified bulk generators still pending.",
+    dek: "If your building generates 100 kg of waste a day — or uses 40,000 litres of water — GCC now expects dual-portal registration, four-stream segregation and proof of where the waste goes.",
     body,
     reportBody,
     analysisBody,
@@ -292,6 +319,19 @@ This follow-up is based on Greater Chennai Corporation directions reported in Ju
     authorByline: "mychennaicity.in editorial",
     interactiveJson: {
       type: "faq",
+      countdown: {
+        title: "Bulk waste registration window",
+        subtitle:
+          "Indicative 15-day countdown from the 4 July 2026 GCC review direction. Confirm the exact deadline on your zonal notice.",
+        endsAt: COUNTDOWN_ENDS_AT,
+        ctaLabel: "Register on GCC portal",
+        ctaUrl: GCC_PORTAL,
+        secondaryCtaLabel: "CPCB portal",
+        secondaryCtaUrl: CPCB_PORTAL,
+        expiredLabel:
+          "The indicative 15-day window from the July review has ended. If you have not registered on both GCC and CPCB portals, do it now and keep acknowledgements ready for inspection.",
+        note: "Registration alone is not full compliance — four-stream segregation, wet-waste processing and authorised collection still apply.",
+      },
       items: [
         {
           question: "Who is a bulk waste generator in Chennai?",
@@ -314,7 +354,12 @@ This follow-up is based on Greater Chennai Corporation directions reported in Ju
             "Recent reporting cites fines from ₹5,000 to ₹25,000 under the Solid Waste Management Rules, 2026. In June 2026, GCC reportedly collected ₹5.95 lakh from 120 bulk waste generators.",
         },
         {
-          question: "What should apartment residents do right now?",
+          question: "What should apartment associations do this week?",
+          answer:
+            "Confirm whether any threshold applies, complete both portal registrations, start a seven-day waste audit, check that the wet-waste plant actually runs, and verify that collectors are authorised with weight slips and destination records.",
+        },
+        {
+          question: "What should residents do right now?",
           answer:
             "Segregate into four streams at home, wrap sanitary waste separately, ask the association to confirm dual-portal registration, and check that wet-waste processing and authorised collection are actually working — not only that bins exist at the gate.",
         },
@@ -341,6 +386,7 @@ This follow-up is based on Greater Chennai Corporation directions reported in Ju
 
   console.log("[seed-swm-bwg] Public URL:", `/chennai-local-news/${SLUG}`);
   console.log("[seed-swm-bwg] Hero image:", HERO_IMAGE_URL);
+  console.log("[seed-swm-bwg] Countdown ends:", COUNTDOWN_ENDS_AT);
 
   if (live) {
     await revalidateNewsAfterSeed({ slug: SLUG, label: "seed-swm-bwg" });

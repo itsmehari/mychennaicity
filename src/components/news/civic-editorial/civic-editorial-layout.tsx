@@ -9,6 +9,7 @@ export type CivicEditorialSlots = {
   hero: ReactNode;
   quickSummary: ReactNode;
   keyDetails: ReactNode;
+  countdown?: ReactNode;
   adAfterSummary?: ReactNode;
   officialPdf?: ReactNode;
   main: ReactNode;
@@ -41,6 +42,7 @@ export function CivicEditorialLayout({ slots }: { slots: CivicEditorialSlots }) 
           />
           {slots.quickSummary}
           {slots.keyDetails}
+          {slots.countdown}
           {slots.officialPdf ? (
             <div className="civic-official-pdf">{slots.officialPdf}</div>
           ) : null}

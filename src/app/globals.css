@@ -9,6 +9,8 @@
 @import "../styles/fiscal-white-paper-article.css";
 @import "../styles/yoga-day-2026-article.css";
 @import "../styles/tiruvallur-ammonia-leak-2026-article.css";
+@import "../styles/chennai-corporation-zones-article.css";
+@import "../styles/bwg-readiness-guide.css";
 
 :root {
   --background: #faf8f5;
@@ -313,4 +315,23 @@ body {
 
 .job-posting-prose .prose p:first-child {
   margin-top: 0;
+}
+
+@media print {
+  body:has(#civic-card-print) * {
+    visibility: hidden;
+  }
+
+  body:has(#civic-card-print) #civic-card-print,
+  body:has(#civic-card-print) #civic-card-print * {
+    visibility: visible;
+  }
+
+  body:has(#civic-card-print) #civic-card-print {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    max-width: 42rem;
+    border-color: #18181b;
+  }
 }

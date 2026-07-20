@@ -11,6 +11,8 @@
 | Area | Route(s) | What it does today |
 |------|----------|-------------------|
 | **Home** | `/` | City positioning, interactive **Explore Chennai** map, stat ribbon, DB-backed **news** sections when Neon has published articles, plus mock-backed jobs/events/directory spotlights when those hubs have no DB rows (see hub pages). |
+| **Civic tools** | `/civic-tools` and `/civic-tools/*` | Ten interactive apps: zone & ward finder, 15/20/23 map, ward migration, responsibility router, zonal office access, zone dashboard, reorg tracker, civic card, Area Sabha tracker, boundary feedback. Data bundle: `public/data/civic-geo/`. |
+| **Guides** | `/guides/chennai-tech-careers`, `/guides/bulk-waste-generator-readiness-checklist-2026` | Evergreen careers guide; BWG readiness article + interactive self-assessment (browser-local). Legacy `/chennai-guides/...` redirects to the BWG guide. |
 | **Chennai local news — hub** | `/chennai-local-news` | Newspaper-style listing; **published articles from Neon** when `DATABASE_URL` is available, otherwise mock articles. `force-dynamic` so production sees live DB without a rebuild. |
 | **Article detail** | `/chennai-local-news/[slug]` | Story page with metadata, **layout variants** (`src/lib/news-article-layout.ts`, `article-detail-layouts.tsx`), hero image handling, and news JSON-LD. |
 | **Topic desks** | `/chennai-local-news/topic/[topic]` | Topic-filtered views via `TOPIC_SLUG_TO_CATEGORY` / DB categories. |

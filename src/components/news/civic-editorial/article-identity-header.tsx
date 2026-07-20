@@ -1,42 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { ArticleTocEntry } from "@/lib/markdown-outline";
 import { ArticleShareTools } from "./article-share-tools";
-
-function tocLinkLabel(text: string): string {
-  return text.replace(/\*\*(.+?)\*\*/g, "$1");
-}
-
-export function ArticleTocNav({
-  entries,
-  variant = "rail",
-}: {
-  entries: ArticleTocEntry[];
-  variant?: "rail" | "inline";
-}) {
-  if (entries.length === 0) return null;
-
-  return (
-    <nav
-      className={`civic-toc civic-toc--${variant}`}
-      aria-label="On this page"
-    >
-      <p className="civic-toc__label">On this page</p>
-      <ol className="civic-toc__list">
-        {entries.map((e) => (
-          <li
-            key={e.domId}
-            className={e.level === 3 ? "civic-toc__item--nested" : ""}
-          >
-            <a href={`#${e.domId}`} className="civic-toc__link">
-              {tocLinkLabel(e.text)}
-            </a>
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
-}
 
 export function ArticleIdentityHeader({
   categoryLink,

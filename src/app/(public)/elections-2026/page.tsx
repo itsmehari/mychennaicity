@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Elections2026PageInfo } from "@/components/election-map-explorer/elections-2026-page-info";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { InteractiveElectionMapExplorer } from "@/components/election-map-explorer/interactive-election-map-explorer";
 import { ELECTION_FAQ } from "@/content/elections-2026/election-meta";
@@ -101,6 +102,13 @@ export default function Elections2026Page() {
       <div className="mt-12 flex justify-center">
         <AdSlot slotId="elections-mid" size="300x250" />
       </div>
+
+      <AdvertisePanel
+        variant="news"
+        layout="section"
+        className="mt-12"
+        source="elections_2026_page"
+      />
 
       <HubCommunityStrip businessVariant="default" className="mt-12" />
 

@@ -23,6 +23,7 @@ import {
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
 } from "@/lib/whatsapp-community";
+import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
 export const dynamic = "force-dynamic";
@@ -166,6 +167,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.55,
     },
     {
+      url: `${base}/guides/bulk-waste-generator-readiness-checklist-2026`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${base}/directory`,
       lastModified: directoryLastModified,
       changeFrequency: "weekly",
@@ -177,6 +184,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.72,
     },
+    ...CIVIC_TOOL_SITEMAP_PATHS.map((path) => ({
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: path === "/civic-tools" ? 0.74 : 0.7,
+    })),
     {
       url: `${base}/about`,
       lastModified: now,

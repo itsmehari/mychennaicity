@@ -1,0 +1,34 @@
+.zwf-map-host {
+  aspect-ratio: 1000 / 780;
+  max-height: min(70vh, 560px);
+}
+
+.zwf-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.zwf-ward {
+  fill: color-mix(in srgb, var(--accent) 12%, transparent);
+  stroke: color-mix(in srgb, var(--foreground) 25%, transparent);
+  stroke-width: 0.35;
+  cursor: pointer;
+  transition: fill 0.15s ease;
+}
+
+.zwf-ward:hover {
+  fill: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.zwf-ward--selected {
+  fill: color-mix(in srgb, var(--accent) 45%, transparent);
+  stroke: var(--accent);
+  stroke-width: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zwf-ward {
+    transition: none;
+  }
+}

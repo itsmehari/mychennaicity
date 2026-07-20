@@ -204,8 +204,15 @@ Creating **time-bound cadre posts** for Prohibition & Excise and three Directora
 - Track **district collector press meets** and **collectorate transfer orders** in the first fortnight after joining.
 - For Chennai river and CMDA matters, follow **Chennai Rivers Restoration Trust** and **CMDA** press notes for new office-bearers.
 
+## Update — July 2026 follow-up
+
+On **15 July 2026**, the government ordered another major reshuffle — this time of **secretaries and institutional heads** rather than collectors. Read the full July desk: **[Yet Another IAS Reshuffle in Tamil Nadu — July Reshuffle 2026](/chennai-local-news/yet-another-tamil-nadu-ias-reshuffle-july-2026)**.
+
+Notable continuity with this May G.O.: **Pooja Kulkarni**, posted here as **Commissioner, Prohibition and Excise**, returns in July as **CEO, Tamil Nadu Infrastructure Development Board**.
+
 ## Related reading on mychennaicity.in
 
+- **[Yet another IAS reshuffle — July 2026](/chennai-local-news/yet-another-tamil-nadu-ias-reshuffle-july-2026)** — senior departmental leadership after this collector G.O. (Supriya Sahu, Radhakrishnan, Umanath and others).
 - **[Politics topic](/chennai-local-news/topic/politics)** — Tamil Nadu executive and bureaucracy updates.
 - **[Tamil Nadu cabinet portfolios (May 2026)](/chennai-local-news/tamil-nadu-cabinet-portfolios-may-2026)** — ministerial allocation after the May 2026 government.
 - **[Explore Chennai areas](/areas)** — neighbourhood guides across the GCC map.`.trim();

@@ -17,6 +17,7 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Property (hostels / rent / coworking) | Module pattern | **Later** | Same listing core with `vertical` enum. |
 | GA4 in app | gtag + optional Data API | **P1** | Measurement ID in env; Data API for internal dashboards only. |
 | Elections / campaign hubs | `elections-2026` | **Later** | Only if editorial priority. |
+| Civic interactive tools (10) | Zone/ward finder, maps, router | **P0** | `/civic-tools/*` — see civic-geo bundle. |
 
 ## Explicitly out of v1
 
@@ -31,6 +32,8 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Drizzle schema: `articles`, `events`, `job_postings`, `employers`, `directory_entries`, `cities`, auth tables | **Done** — `src/db/schema/` |
 | Public news: hub, topic desks, detail, RSS, dynamic rendering, JSON-LD | **Done** — `src/app/(public)/chennai-local-news/`, `src/domains/news/` |
 | Home: DB news sections + map/explore + mock-backed jobs/events/directory previews | **Done** — `src/app/(public)/page.tsx`, `src/components/home/` |
+| Civic tools: hub + 10 interactive apps (`/civic-tools/*`) | **Done** — `src/components/civic-tools/`, `public/data/civic-geo/` |
+| Guides: BWG readiness checklist 2026 | **Done** — `/guides/bulk-waste-generator-readiness-checklist-2026` (`/chennai-guides/...` redirects); localStorage assessment |
 | Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, `/chennai-jobs` routes (legacy `/jobs` → 301) |
 | Sitemap / news sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/robots.ts` |
 | Static pages: about, contact, editorial standards, glossary | **Done** — under `src/app/(public)/` |

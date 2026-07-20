@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
+import { AdvertisePanel } from "@/components/ads";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   ChennaiJobsGuideHero,
@@ -112,6 +113,13 @@ export default function ChennaiTechCareersGuidePage() {
 
       <ChennaiJobsHubSafety />
       <ChennaiJobsGuideResources />
+
+      <AdvertisePanel
+        variant="jobs"
+        layout="section"
+        className="mt-10"
+        source="guides_tech_careers"
+      />
 
       <div className="mt-12 flex justify-center">
         <AdSlot slotId="content-mid" size="300x250" />

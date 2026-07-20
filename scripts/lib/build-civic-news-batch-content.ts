@@ -212,7 +212,8 @@ const RELATED_BY_SLUG: Record<string, string> = {
 
 - [Economy topic hub](/chennai-local-news/topic/economy)
 - [Tamil Nadu urban infrastructure mission](/chennai-local-news/tamil-nadu-urban-infrastructure-mission-chennai-civic-impact)
-- [Tamil Nadu IAS reshuffle — CMDA leadership](/chennai-local-news/tamil-nadu-ias-reshuffle-collectors-may-2026)
+- [Tamil Nadu IAS reshuffle — CMDA leadership (May 2026)](/chennai-local-news/tamil-nadu-ias-reshuffle-collectors-may-2026)
+- [Yet another IAS reshuffle — July 2026](/chennai-local-news/yet-another-tamil-nadu-ias-reshuffle-july-2026)
 - [Chengalpattu bus terminus](/chennai-local-news/chengalpattu-cmda-bus-terminus-opening-july-2026)`,
 
   "tamil-nadu-urban-infrastructure-mission-chennai-civic-impact": `## Related reading on mychennaicity.in

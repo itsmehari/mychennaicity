@@ -33,6 +33,7 @@ function normalizeBookingUrl(raw?: string): string | undefined {
   if (t.includes("facebook.com")) return "https://www.facebook.com/";
   if (t.includes("meetup.com")) return "https://www.meetup.com/find/in--chennai/";
   if (t.includes("district.in")) return "https://www.district.in/";
+  if (t.includes("theticket9.com")) return t.startsWith("http") ? t : `https://${t}`;
   return `https://${t}`;
 }
 

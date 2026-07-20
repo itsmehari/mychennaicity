@@ -4,6 +4,7 @@ import {
   resolveArticleHeroAbsoluteUrl,
 } from "@/lib/article-hero-image";
 import { chennaiZones } from "@/lib/chennai-zones";
+import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
 import { getSiteUrl } from "@/lib/env";
 import { normalizeAreaHubSlug } from "@/lib/news-area-hint";
 import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
@@ -76,6 +77,8 @@ export function buildArticleImageObjects(
 export type NewsArticleJsonLdOptions = {
   /** When true, both `[data-speakable=article-title]` and `[data-speakable=article-lead]` exist in DOM. */
   speakableSummaryLead?: boolean;
+  /** Extra CSS selectors for SpeakableSpecification (must exist in the rendered DOM). */
+  speakableExtraSelectors?: string[];
 };
 
 export function buildNewsArticleJsonLd(
@@ -220,15 +223,43 @@ export function buildNewsArticleJsonLd(
         name: "Tamil Nadu IAS cadre transfer and posting order",
       },
     ];
+  } else if (isSwmRulesArticleSlug(article.slug)) {
+    newsArticle.about = [
+      {
+        "@type": "Thing",
+        name: "Solid Waste Management Rules, 2026",
+      },
+      {
+        "@type": "GovernmentOrganization",
+        name: "Greater Chennai Corporation",
+      },
+      {
+        "@type": "GovernmentOrganization",
+        name: "Ministry of Environment, Forest and Climate Change",
+      },
+    ];
   }
 
+  const speakableSelectors: string[] = [];
   if (options?.speakableSummaryLead) {
+    speakableSelectors.push(
+      '[data-speakable="article-title"]',
+      '[data-speakable="article-lead"]',
+    );
+  }
+  if (options?.speakableExtraSelectors?.length) {
+    if (!options.speakableSummaryLead) {
+      speakableSelectors.push('[data-speakable="article-title"]');
+    }
+    for (const sel of options.speakableExtraSelectors) {
+      const t = sel.trim();
+      if (t && !speakableSelectors.includes(t)) speakableSelectors.push(t);
+    }
+  }
+  if (speakableSelectors.length > 0) {
     newsArticle.speakable = {
       "@type": "SpeakableSpecification",
-      cssSelector: [
-        '[data-speakable="article-title"]',
-        '[data-speakable="article-lead"]',
-      ],
+      cssSelector: speakableSelectors,
     };
   }
 

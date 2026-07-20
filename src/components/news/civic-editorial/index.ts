@@ -1,4 +1,5 @@
-export { ArticleIdentityHeader, ArticleLocationTag, ArticleTocNav } from "./article-identity-header";
+export { ArticleIdentityHeader, ArticleLocationTag } from "./article-identity-header";
+export { ArticleTocNav } from "./article-toc-nav";
 export { ArticleQuickSummary, ArticleKeyDetailsStrip } from "./article-summary-blocks";
 export {
   ArticleLeftRail,

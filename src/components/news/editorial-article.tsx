@@ -44,7 +44,13 @@ import {
   GoMetadataStrip,
 } from "./go-metadata-strip";
 import { InteractiveBlock } from "./interactive-block";
+import {
+  ArticleCountdown,
+  readArticleCountdown,
+} from "./article-countdown";
 import { OfficialDocumentBanner } from "./official-document-banner";
+import { SwmRulesAeoSection } from "./swm-rules-aeo-section";
+import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
 
 function LegacyRelatedNav({
   related,
@@ -167,8 +173,13 @@ export async function EditorialArticle({
     </div>
   );
 
+  const swmAeoBlock = isSwmRulesArticleSlug(article.slug) ? (
+    <SwmRulesAeoSection slug={article.slug} />
+  ) : null;
+
   const mainBody = (
     <>
+      {swmAeoBlock}
       <section className="civic-body-section" aria-labelledby="report-heading">
         <span className="civic-body-section__label">Report</span>
         <h2 id="report-heading" className="civic-body-section__title">
@@ -217,6 +228,13 @@ export async function EditorialArticle({
     ) : article.interactiveJson ? (
       <InteractiveBlock data={article.interactiveJson ?? undefined} />
     ) : null;
+
+  const countdownData = readArticleCountdown(
+    article.interactiveJson ?? undefined,
+  );
+  const countdownBlock = countdownData ? (
+    <ArticleCountdown data={countdownData} />
+  ) : null;
 
   const back = (
     <p className="mt-8 pb-2">
@@ -287,6 +305,7 @@ export async function EditorialArticle({
           hero: civicHero,
           quickSummary: <ArticleQuickSummary bullets={takeawaysBullets} />,
           keyDetails: <ArticleKeyDetailsStrip items={keyDetails} />,
+          countdown: countdownBlock,
           officialPdf:
             showOfficialPdf && article.sourceUrl ? (
               <OfficialDocumentBanner
