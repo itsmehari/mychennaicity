@@ -1,10 +1,8 @@
 /* -----------------------------------------------------------------------
    chennai-area-hub.css
    Scoped styles for /areas/[slug] hub pages and the /areas index.
-   All selectors are prefixed with .mcc-area-* to avoid global collisions.
    ----------------------------------------------------------------------- */
 
-/* Hero block — full-bleed image with gradient + identity text */
 .mcc-area-hero {
   container-type: inline-size;
 }
@@ -12,12 +10,20 @@
 .mcc-area-hero .hero-image-wrap {
   position: relative;
   width: 100%;
+  aspect-ratio: 21 / 9;
   overflow: hidden;
   border-radius: 1rem;
   background-color: var(--border);
+  min-height: 14rem;
 }
 
-/* Best-of card grid — even height across columns */
+@media (min-width: 768px) {
+  .mcc-area-hero .hero-image-wrap {
+    min-height: 18rem;
+  }
+}
+
+/* Best-of — image-first editorial cards */
 .mcc-area-best ul {
   align-items: stretch;
 }
@@ -28,6 +34,30 @@
 
 .mcc-area-best li > * {
   width: 100%;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.15s ease;
+}
+
+.mcc-area-best li > *:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.mcc-area-best .mcc-area-best__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #ece9e3;
+}
+
+.mcc-area-best .mcc-area-best__kicker {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 /* Related hubs strip */
@@ -43,11 +73,19 @@
   width: 100%;
 }
 
-/* -----------------------------------------------------------------------
-   Responsive tweaks
-   ----------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .mcc-area-best li > * {
+    transition: none;
+  }
+
+  .mcc-area-best li > *:hover {
+    transform: none;
+  }
+}
+
 @media (max-width: 640px) {
   .mcc-area-hero .hero-image-wrap {
     border-radius: 0.75rem;
+    aspect-ratio: 16 / 10;
   }
 }

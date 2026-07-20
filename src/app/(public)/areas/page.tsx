@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   InteriorCrossNav,
@@ -80,24 +81,38 @@ export default function AreasIndexPage() {
           {chennaiZones.map((zone) => {
             const rich = getRichAreaHubContent(zone.slug);
             const identityLine = rich?.identityLine ?? zone.blurb;
+            const hero = rich?.heroImage;
             return (
               <li key={zone.slug}>
                 <Link
                   href={`/areas/${zone.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition hover:border-[var(--accent)]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition hover:border-[var(--accent)]"
                 >
-                  <h3 className="text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
-                    {zone.label}
-                  </h3>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-[var(--accent-warm)]">
-                    {identityLine}
-                  </p>
-                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--muted)]">
-                    {zone.blurb}
-                  </p>
-                  <span className="mt-4 text-xs font-semibold text-[var(--accent)] underline-offset-2 group-hover:underline">
-                    Open area guide →
-                  </span>
+                  {hero ? (
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--border)]">
+                      <Image
+                        src={hero}
+                        alt={rich?.heroImageAlt ?? zone.label}
+                        fill
+                        className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
+                      {zone.label}
+                    </h3>
+                    <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-[var(--accent-warm)]">
+                      {identityLine}
+                    </p>
+                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--muted)]">
+                      {zone.blurb}
+                    </p>
+                    <span className="mt-4 text-xs font-semibold text-[var(--accent)] underline-offset-2 group-hover:underline">
+                      Open area guide →
+                    </span>
+                  </div>
                 </Link>
               </li>
             );

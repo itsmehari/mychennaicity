@@ -338,56 +338,48 @@ export function RichAreaHubPage({
           className="mcc-area-best mt-12"
         >
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {content.bestOf.map((card) => (
-              <li key={card.id}>
-                {card.href ? (
-                  <Link
-                    href={card.href}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition hover:border-[var(--accent)]"
-                  >
-                    {card.imageSrc ? (
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--border)]">
-                        <Image
-                          src={card.imageSrc}
-                          alt={card.imageAlt ?? card.title}
-                          fill
-                          className="object-cover transition group-hover:scale-[1.02]"
-                          sizes="(max-width: 640px) 100vw, 25vw"
-                        />
-                      </div>
-                    ) : null}
-                    <div className="flex flex-1 flex-col p-4">
-                      <h3 className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
-                        {card.title}
-                      </h3>
-                      <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
-                        {card.blurb}
-                      </p>
+            {content.bestOf.map((card) => {
+              const inner = (
+                <>
+                  {card.imageSrc ? (
+                    <div className="mcc-area-best__media relative w-full overflow-hidden">
+                      <Image
+                        src={card.imageSrc}
+                        alt={card.imageAlt ?? card.title}
+                        fill
+                        className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, 25vw"
+                      />
                     </div>
-                  </Link>
-                ) : (
-                  <div className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-                    {card.imageSrc ? (
-                      <div className="relative mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl bg-[var(--border)]">
-                        <Image
-                          src={card.imageSrc}
-                          alt={card.imageAlt ?? card.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, 25vw"
-                        />
-                      </div>
-                    ) : null}
-                    <h3 className="text-sm font-semibold text-[var(--foreground)]">
+                  ) : null}
+                  <div className="flex flex-1 flex-col p-4">
+                    <p className="mcc-area-best__kicker">Highlight</p>
+                    <h3 className="mt-1 text-sm font-semibold leading-snug text-[var(--foreground)] group-hover:text-[var(--accent)]">
                       {card.title}
                     </h3>
                     <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
                       {card.blurb}
                     </p>
                   </div>
-                )}
-              </li>
-            ))}
+                </>
+              );
+              return (
+                <li key={card.id}>
+                  {card.href ? (
+                    <Link
+                      href={card.href}
+                      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition hover:border-[var(--accent)]"
+                    >
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+                      {inner}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </Section>
       ) : null}

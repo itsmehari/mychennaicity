@@ -1,7 +1,9 @@
 import type { RichAreaHubContent } from "@/lib/area-hubs/types";
 import { localityCardsForHub } from "@/lib/area-hubs/localities";
+import { visualPackForHub } from "@/content/area-hubs/hub-visual-packs";
 
 const SLUG = "omr-perungudi-sholinganallur";
+const OMR_VISUALS = visualPackForHub(SLUG)!;
 
 export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
   slug: SLUG,
@@ -10,8 +12,8 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
   identityLine: "IT corridor & apartment towns on Rajiv Gandhi Salai",
   heroDek:
     "Rajiv Gandhi Salai from Perungudi through Sholinganallur is Chennai's busiest IT-and-apartment spine — metro construction, commute shuttles, schools, clinics, and civic stress all move faster here than in the core city.",
-  heroImage: "/images/explore-chennai-madras-high-court.jpg",
-  heroImageAlt: "Chennai — OMR Perungudi to Sholinganallur area guide",
+  heroImage: OMR_VISUALS.heroImage,
+  heroImageAlt: OMR_VISUALS.heroImageAlt,
   mapBlurb:
     "Perungudi and Sholinganallur wards highlight on the city map — tap a ward for local context, then open news and jobs for this belt.",
   statChips: [
@@ -32,32 +34,7 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
     { id: "guides", label: "Useful links" },
     { id: "faq", label: "FAQ" },
   ],
-  bestOf: [
-    {
-      id: "omr-it",
-      title: "IT & startups",
-      blurb:
-        "Tech parks and campus offices from Perungudi through Sholinganallur drive weekday peak traffic and shuttle networks.",
-    },
-    {
-      id: "omr-housing",
-      title: "Apartment towns",
-      blurb:
-        "Gated communities and PG clusters stack along the corridor — water, EB, and school seats are everyday topics.",
-    },
-    {
-      id: "omr-metro",
-      title: "Metro Phase 2",
-      blurb:
-        "Elevated Corridor 3 works reshape junctions at Perungudi, SRP Tools, and Sholinganallur for several seasons.",
-    },
-    {
-      id: "omr-marsh",
-      title: "Marsh & monsoon",
-      blurb:
-        "Pallikaranai adjacency means flood patterns differ from core-city drains — watch GCC and highways together.",
-    },
-  ],
+  bestOf: OMR_VISUALS.bestOf,
   aboutTitle: "About OMR — Perungudi to Sholinganallur",
   aboutSubtitle:
     "Rajiv Gandhi Salai is Chennai's IT spine; this hub tracks the densest apartment-and-office belt.",

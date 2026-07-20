@@ -9,6 +9,7 @@ import type {
   AreaHubBestOfCard,
   RichAreaHubContent,
 } from "@/lib/area-hubs/types";
+import { visualPackForHub } from "@/content/area-hubs/hub-visual-packs";
 
 const IDENTITY: Record<string, string> = {
   "tiruvottiyur-manali-belt": "North coastal harbour & industrial belt",
@@ -69,14 +70,18 @@ export function buildDefaultRichAreaHubContent(
 ): RichAreaHubContent {
   const localityCards = localityCardsForHub(zone.slug);
   const related = relatedHubsFor(zone.slug);
+  const visuals = visualPackForHub(zone.slug);
 
   return {
     slug: zone.slug,
     metaDescription: `${zone.label} Chennai area guide: neighbourhood facts, civic watchlist, commute notes, local news and classifieds — linked to the interactive Chennai ward map on mychennaicity.in.`,
     identityLine: IDENTITY[zone.slug] ?? zone.blurb,
     heroDek: zone.blurb,
-    heroImage: "/images/explore-chennai-madras-high-court.jpg",
-    heroImageAlt: `${zone.label} — Chennai area guide on mychennaicity.in`,
+    heroImage:
+      visuals?.heroImage ?? "/images/explore-chennai-madras-high-court.jpg",
+    heroImageAlt:
+      visuals?.heroImageAlt ??
+      `${zone.label} — Chennai area guide on mychennaicity.in`,
     mapBlurb:
       "Wards in this hub highlight on the city map. Open the full explorer to pick a ward and jump back into local news.",
     statChips: [
@@ -104,7 +109,7 @@ export function buildDefaultRichAreaHubContent(
       { id: "civic", label: "Civic watch" },
       { id: "faq", label: "FAQ" },
     ],
-    bestOf: bestOfFromHighlights(zone),
+    bestOf: visuals?.bestOf ?? bestOfFromHighlights(zone),
     aboutTitle: `About ${zone.label}`,
     aboutSubtitle: "Why this hub exists for Chennai readers.",
     aboutParagraphs: [
