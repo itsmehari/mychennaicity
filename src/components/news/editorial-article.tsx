@@ -44,13 +44,11 @@ import {
   GoMetadataStrip,
 } from "./go-metadata-strip";
 import { InteractiveBlock } from "./interactive-block";
-import {
-  ArticleCountdown,
-  readArticleCountdown,
-} from "./article-countdown";
+import { ArticleCountdown } from "./article-countdown";
 import { OfficialDocumentBanner } from "./official-document-banner";
 import { SwmRulesAeoSection } from "./swm-rules-aeo-section";
 import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
+import { readArticleCountdown } from "@/lib/article-countdown";
 
 function LegacyRelatedNav({
   related,
