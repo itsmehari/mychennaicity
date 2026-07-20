@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="MyChennaiCity local news">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A6664"/>
+      <stop offset="100%" stop-color="#0E4A48"/>
+    </linearGradient>
+    <pattern id="lines" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 24 L24 0" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <rect width="960" height="600" fill="url(#lines)"/>
+  <g fill="#ffffff" fill-opacity="0.92" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif">
+    <text x="480" y="278" font-size="28" font-weight="700" letter-spacing="0.08em">MYCHENNAICITY</text>
+    <text x="480" y="318" font-size="14" font-weight="600" letter-spacing="0.28em" fill-opacity="0.75">CHENNAI NEWS</text>
+  </g>
+</svg>

@@ -4,12 +4,13 @@ import { notFound } from "next/navigation";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
-import { StoryCardCompact } from "@/components/news/newspaper-layout";
+import {
+  NewsCategoryNav,
+  NewsStoryCard,
+} from "@/components/news/chennai-news-hub";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
-  TopicSectionNav,
-  interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { listArticlesByCategoryForChennai } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
@@ -71,7 +72,8 @@ export default async function TopicPage({ params }: Props) {
 
   if (!items.length) {
     return (
-      <div className={interiorMainClassName}>
+      <div className="mcc-news-hub-page">
+      <div className="mcc-news-hub">
         <PageBreadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -79,9 +81,9 @@ export default async function TopicPage({ params }: Props) {
             { label: category },
           ]}
         />
-        <TopicSectionNav currentSlug={topic} />
+        <NewsCategoryNav activeSlug={topic} />
         <HubCommunityStrip businessVariant="news" className="mt-6" />
-        <h1 className="type-display text-3xl text-[var(--foreground)] sm:text-4xl">
+        <h1 className="mcc-news-hero__title" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>
           {category}
         </h1>
         <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
@@ -138,6 +140,7 @@ export default async function TopicPage({ params }: Props) {
         />
         <InteriorCrossNav />
       </div>
+      </div>
     );
   }
 
@@ -150,7 +153,8 @@ export default async function TopicPage({ params }: Props) {
   const siblingTopics = CHENNAI_NEWS_TOPIC_NAV.filter((t) => t.slug !== topic);
 
   return (
-    <div className={interiorMainClassName}>
+    <div className="mcc-news-hub-page">
+    <div className="mcc-news-hub">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPage) }}
@@ -170,16 +174,18 @@ export default async function TopicPage({ params }: Props) {
           { label: category },
         ]}
       />
-      <TopicSectionNav currentSlug={topic} />
-      <p className="type-eyebrow text-[var(--accent)]">News topic</p>
-      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl lg:text-5xl">
-        {category}
-      </h1>
-      <p className="type-lede mt-3 max-w-2xl text-sm leading-relaxed">
-        Newest first. Each story has a short summary, what it means for Chennai,
-        and a small on-page extra (poll, checklist, or similar). Use the row
-        above to jump to another topic.
-      </p>
+      <header className="mcc-news-hero" style={{ paddingTop: "1.25rem" }}>
+        <div className="mcc-news-hero__inner">
+          <p className="mcc-news-hero__eyebrow">News topic</p>
+          <h1 className="mcc-news-hero__title" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
+            {category}
+          </h1>
+          <p className="mcc-news-hero__lede">
+            Newest first. Short reports with local context for Chennai readers.
+          </p>
+        </div>
+      </header>
+      <NewsCategoryNav activeSlug={topic} />
       <nav
         className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]"
         aria-label="Related sections"
@@ -239,12 +245,12 @@ export default async function TopicPage({ params }: Props) {
           </p>
         </aside>
       ) : null}
-      <div className="mt-10 flex justify-center">
+      <div className="mt-6 flex justify-center">
         <AdSlot slotId="content-mid" size="300x250" />
       </div>
-      <div className="mt-10 max-w-2xl">
+      <div className="mcc-news-latest mt-8">
         {items.map((a) => (
-          <StoryCardCompact key={a.id} article={a} />
+          <NewsStoryCard key={a.id} article={a} />
         ))}
       </div>
       <AdvertisePanel
@@ -254,6 +260,7 @@ export default async function TopicPage({ params }: Props) {
         source="news_topic_hub"
       />
       <InteriorCrossNav />
+    </div>
     </div>
   );
 }

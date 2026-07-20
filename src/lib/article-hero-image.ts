@@ -4,6 +4,9 @@ import { getSiteUrl } from "@/lib/env";
 /** Site-owned editorial fallback when DB has no hero (matches seed script). */
 export const DEFAULT_ARTICLE_HERO_PATH = "/images/explore-chennai-madras-high-court.jpg";
 
+/** Branded card fallback when a remote/local hero fails to load. */
+export const NEWS_IMAGE_FALLBACK_PATH = "/images/news-placeholder.svg";
+
 /** @deprecated Use {@link defaultArticleHeroPath} — Picsum is not used on public pages. */
 export function picsumHeroUrlForSlug(slug: string, width = 800, height = 500): string {
   void slug;
