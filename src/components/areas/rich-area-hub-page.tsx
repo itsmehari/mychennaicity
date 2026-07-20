@@ -9,6 +9,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { InteractiveChennaiMapExplorer } from "@/components/chennai-map-explorer/interactive-chennai-map-explorer";
 import type { ClassifiedListingRow } from "@/domains/classifieds";
 import type { PublicArticleRow } from "@/domains/news";
 import type { JobPostingWithEmployer } from "@/domains/jobs/queries";
@@ -18,11 +19,17 @@ import {
   resolveArticleHeroSrc,
 } from "@/lib/article-hero-image";
 import type { ChennaiZone } from "@/lib/chennai-zones";
+import { getChennaiZoneBySlug } from "@/lib/chennai-zones";
 import type { RichAreaHubContent } from "@/lib/area-hubs/types";
 import { buildAreaHubJsonLd } from "@/lib/seo/area-hub-jsonld";
+import { homeMapUrlForHub, relatedHubsFor } from "@/lib/area-hubs/geography";
 import { chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
+
+// ---------------------------------------------------------------------------
+// Inline helpers
+// ---------------------------------------------------------------------------
 
 function MarkdownBoldInline({ text }: { text: string }) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
@@ -155,6 +162,10 @@ function JobMiniCard({ row }: { row: JobPostingWithEmployer }) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Main page component
+// ---------------------------------------------------------------------------
+
 export function RichAreaHubPage({
   zone,
   content,
@@ -182,8 +193,22 @@ export function RichAreaHubPage({
     })),
   };
 
+  const mapUrl = homeMapUrlForHub(zone.slug);
+
+  // Resolve related hub zones: prefer explicit relatedHubSlugs, fall back to geography
+  const relatedZones = (
+    content.relatedHubSlugs.length > 0
+      ? content.relatedHubSlugs
+          .map((s) => getChennaiZoneBySlug(s))
+          .filter((z): z is NonNullable<typeof z> => Boolean(z))
+      : relatedHubsFor(zone.slug)
+  ).slice(0, 6);
+
+  const hasGuides = content.practicalGuides.length > 0 || content.partnerLinks.length > 0;
+
   return (
     <div className={interiorMainClassName}>
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }}
@@ -201,50 +226,100 @@ export function RichAreaHubPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
+      {/* Breadcrumbs */}
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Areas", href: "/#areas" },
+          { label: "Areas", href: "/areas" },
           { label: zone.label },
         ]}
       />
 
-      <header className="mt-2">
-        <p className="type-eyebrow text-[var(--accent)]">Chennai area guide</p>
+      {/* Hero */}
+      <header className="mcc-area-hero mt-2">
+        {content.heroImage ? (
+          <div className="relative mb-6 aspect-[21/8] w-full overflow-hidden rounded-2xl bg-[var(--border)]">
+            <Image
+              src={content.heroImage}
+              alt={content.heroImageAlt ?? `${zone.label} — Chennai area guide`}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 1200px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+            <p className="absolute bottom-4 left-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
+              {content.identityLine}
+            </p>
+          </div>
+        ) : (
+          <p className="type-eyebrow text-[var(--accent)]">
+            {content.identityLine}
+          </p>
+        )}
         <h1 className="type-display mt-2 max-w-4xl text-3xl text-[var(--foreground)] sm:text-4xl lg:text-[2.65rem] lg:leading-tight">
           {zone.label}
         </h1>
         <p className="type-lede mt-4 max-w-3xl text-base leading-relaxed text-[var(--muted)]">
           {content.heroDek}
         </p>
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {content.statChips.map((chip) => (
-            <li
-              key={chip.label}
-              className="rounded-full border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_6%,var(--surface))] px-3 py-1.5 text-xs"
-            >
-              <span className="font-semibold text-[var(--foreground)]">
-                {chip.label}:
-              </span>{" "}
-              <span className="text-[var(--muted)]">{chip.value}</span>
-            </li>
-          ))}
-        </ul>
+
+        {/* Stat chips */}
+        {content.statChips.length > 0 ? (
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {content.statChips.map((chip) => (
+              <li
+                key={chip.label}
+                className="rounded-full border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_6%,var(--surface))] px-3 py-1.5 text-xs"
+              >
+                <span className="font-semibold text-[var(--foreground)]">
+                  {chip.label}:
+                </span>{" "}
+                <span className="text-[var(--muted)]">{chip.value}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        {/* CTA row */}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={mapUrl}
+            className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--accent-fg)] transition hover:bg-[var(--accent-hover)]"
+          >
+            Open on city map
+          </Link>
+          <Link
+            href="/chennai-local-news"
+            className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)]"
+          >
+            Local news
+          </Link>
+          <Link
+            href="/chennai-jobs"
+            className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)]"
+          >
+            Jobs in Chennai
+          </Link>
+        </div>
       </header>
 
+      {/* Sticky-ish section nav */}
       <nav
-        className="mt-8 flex flex-wrap gap-2"
+        className="sticky top-0 z-10 -mx-4 mt-8 overflow-x-auto bg-[color-mix(in_srgb,var(--background)_92%,transparent)] px-4 py-2 backdrop-blur-md sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
         aria-label="On this page"
       >
-        {content.sectionNav.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-          >
-            {item.label}
-          </a>
-        ))}
+        <div className="flex gap-2">
+          {content.sectionNav.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="whitespace-nowrap rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
       </nav>
 
       <AdvertisePanel
@@ -254,11 +329,75 @@ export function RichAreaHubPage({
         areaLabel={zone.label}
       />
 
+      {/* Best-of */}
+      {content.bestOf.length > 0 ? (
+        <Section
+          id="best-of"
+          eyebrow="Highlights"
+          title={`Best of ${zone.label}`}
+          className="mcc-area-best mt-12"
+        >
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {content.bestOf.map((card) => (
+              <li key={card.id}>
+                {card.href ? (
+                  <Link
+                    href={card.href}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition hover:border-[var(--accent)]"
+                  >
+                    {card.imageSrc ? (
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--border)]">
+                        <Image
+                          src={card.imageSrc}
+                          alt={card.imageAlt ?? card.title}
+                          fill
+                          className="object-cover transition group-hover:scale-[1.02]"
+                          sizes="(max-width: 640px) 100vw, 25vw"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="flex flex-1 flex-col p-4">
+                      <h3 className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+                        {card.blurb}
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+                    {card.imageSrc ? (
+                      <div className="relative mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl bg-[var(--border)]">
+                        <Image
+                          src={card.imageSrc}
+                          alt={card.imageAlt ?? card.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 25vw"
+                        />
+                      </div>
+                    ) : null}
+                    <h3 className="text-sm font-semibold text-[var(--foreground)]">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+                      {card.blurb}
+                    </p>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
+      {/* About */}
       <Section
-        id="about-omr"
+        id="about"
         eyebrow="Corridor"
-        title="About OMR — Perungudi to Sholinganallur"
-        subtitle="Rajiv Gandhi Salai is Chennai's IT spine; this hub tracks the densest apartment-and-office belt."
+        title={content.aboutTitle}
+        subtitle={content.aboutSubtitle}
         className="mt-12"
       >
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -273,6 +412,7 @@ export function RichAreaHubPage({
         </div>
       </Section>
 
+      {/* Localities */}
       <Section
         id="localities"
         eyebrow="Neighbourhoods"
@@ -280,41 +420,75 @@ export function RichAreaHubPage({
         subtitle="GCC ward labels and corridor tags from our Chennai map catalog."
         className="mt-14"
       >
-        <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {content.localityCards.map((loc) => (
-            <li
-              key={loc.id}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_3%,transparent)]"
-            >
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--accent-warm)]">
-                {loc.zone}
-              </p>
-              <h3 className="mt-1 text-lg font-semibold text-[var(--foreground)]">
-                {loc.name}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                {loc.description}
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {loc.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-md bg-[color-mix(in_srgb,var(--foreground)_5%,var(--surface))] px-2 py-0.5 text-[10px] font-medium text-[var(--muted)]"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+        {content.localityCards.length > 0 ? (
+          <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {content.localityCards.map((loc) => (
+              <li
+                key={loc.id}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_3%,transparent)]"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--accent-warm)]">
+                  {loc.zone}
+                </p>
+                <h3 className="mt-1 text-lg font-semibold text-[var(--foreground)]">
+                  {loc.name}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                  {loc.description}
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-1.5">
+                  {loc.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-md bg-[color-mix(in_srgb,var(--foreground)_5%,var(--surface))] px-2 py-0.5 text-[10px] font-medium text-[var(--muted)]"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="rounded-2xl border border-dashed border-[var(--border)] px-5 py-8 text-sm text-[var(--muted)]">
+            Localities in this hub will appear here as the Chennai map catalog grows.{" "}
+            <Link href={mapUrl} className="font-medium text-[var(--accent)] hover:underline">
+              Open on city map →
+            </Link>
+          </p>
+        )}
       </Section>
 
+      {/* On the map */}
+      <Section
+        id="on-the-map"
+        eyebrow="Ward map"
+        title="Explore on the Chennai map"
+        subtitle={content.mapBlurb}
+        className="mt-14"
+      >
+        <InteractiveChennaiMapExplorer
+          initialHubSlug={zone.slug}
+          forceLoad
+          compact
+        />
+        <p className="mt-4 text-sm text-[var(--muted)]">
+          Tap a ward to see locality context.{" "}
+          <Link
+            href={mapUrl}
+            className="font-medium text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            Open full-size map →
+          </Link>
+        </p>
+      </Section>
+
+      {/* Local news */}
       <Section
         id="local-news"
         eyebrow="From mychennaicity.in"
-        title="News tagged for this belt"
-        subtitle="Editorial stories with an OMR / south Chennai area tag."
+        title="Local news for this area"
+        subtitle="Editorial stories tagged for this hub."
         action={{ href: "/chennai-local-news", label: "All Chennai news" }}
         className="mt-14"
       >
@@ -340,12 +514,13 @@ export function RichAreaHubPage({
         )}
       </Section>
 
+      {/* Jobs */}
       {jobs.length > 0 ? (
         <Section
           id="jobs"
           eyebrow="Hiring"
-          title="Jobs along the OMR corridor"
-          subtitle="Open listings mentioning Perungudi, Sholinganallur, OMR, or nearby localities."
+          title="Jobs in this area"
+          subtitle="Open listings mentioning localities in this hub."
           action={{ href: "/chennai-jobs", label: "All Chennai jobs" }}
           className="mt-14"
         >
@@ -359,6 +534,7 @@ export function RichAreaHubPage({
         </Section>
       ) : null}
 
+      {/* Classifieds */}
       <Section
         id="classifieds"
         eyebrow="Classifieds"
@@ -393,6 +569,7 @@ export function RichAreaHubPage({
         <AdSlot slotId="content-mid" size="300x250" />
       </div>
 
+      {/* Commute */}
       <Section
         id="commute"
         eyebrow="Mobility"
@@ -403,11 +580,12 @@ export function RichAreaHubPage({
         <FactTable rows={content.commuteRows} />
       </Section>
 
+      {/* Civic watchlist */}
       <Section
         id="civic"
         eyebrow="Civic desk"
-        title="What to watch on OMR"
-        subtitle="Recurring themes in south Chennai civic reporting — not an official bulletin."
+        title={content.civicTitle}
+        subtitle="Recurring themes in local civic reporting — not an official bulletin."
         className="mt-14"
       >
         <ul className="max-w-3xl space-y-3 text-sm leading-relaxed text-[var(--muted)]">
@@ -425,67 +603,126 @@ export function RichAreaHubPage({
         </ul>
       </Section>
 
-      <Section
-        id="guides"
-        eyebrow="Shortcuts"
-        title="Useful links for OMR residents"
-        subtitle="mychennaicity.in pages plus long-running OMR community resources."
-        className="mt-14"
-      >
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {content.practicalGuides.map((guide) => (
-            <li key={guide.href}>
-              {guide.external ? (
+      {/* Lifestyle notes */}
+      {content.lifestyleNotes.length > 0 ? (
+        <section id="lifestyle" className="mt-14" aria-labelledby="lifestyle-heading">
+          <h2
+            id="lifestyle-heading"
+            className="type-display text-xl text-[var(--foreground)]"
+          >
+            Living here
+          </h2>
+          <ul className="mt-4 max-w-3xl space-y-3 text-sm leading-relaxed text-[var(--muted)]">
+            {content.lifestyleNotes.map((note, i) => (
+              <li key={i} className="flex gap-2">
+                <span
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                  aria-hidden
+                />
+                <MarkdownBoldInline text={note} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {/* Guides & partner links */}
+      {hasGuides ? (
+        <Section
+          id="guides"
+          eyebrow="Shortcuts"
+          title="Useful links for residents"
+          subtitle="mychennaicity.in pages and local community resources for this hub."
+          className="mt-14"
+        >
+          {content.practicalGuides.length > 0 ? (
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {content.practicalGuides.map((guide) => (
+                <li key={guide.href}>
+                  {guide.external ? (
+                    <a
+                      href={guide.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 transition hover:border-[var(--accent)]"
+                    >
+                      <span className="text-sm font-semibold text-[var(--foreground)]">
+                        {guide.label}
+                      </span>
+                      <span className="mt-2 block text-xs leading-relaxed text-[var(--muted)]">
+                        {guide.hint}
+                      </span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={guide.href}
+                      className="block h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 transition hover:border-[var(--accent)]"
+                    >
+                      <span className="text-sm font-semibold text-[var(--foreground)]">
+                        {guide.label}
+                      </span>
+                      <span className="mt-2 block text-xs leading-relaxed text-[var(--muted)]">
+                        {guide.hint}
+                      </span>
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {content.partnerLinks.length > 0 ? (
+            <div className="mt-8 grid gap-4 lg:grid-cols-2">
+              {content.partnerLinks.map((partner) => (
                 <a
-                  href={guide.href}
+                  key={partner.href}
+                  href={partner.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 transition hover:border-[var(--accent)]"
+                  className="rounded-2xl border border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-5 transition hover:border-[var(--accent)]"
                 >
-                  <span className="text-sm font-semibold text-[var(--foreground)]">
-                    {guide.label}
-                  </span>
-                  <span className="mt-2 block text-xs leading-relaxed text-[var(--muted)]">
-                    {guide.hint}
-                  </span>
+                  <p className="text-sm font-semibold text-[var(--foreground)]">
+                    {partner.label}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                    {partner.description}
+                  </p>
                 </a>
-              ) : (
+              ))}
+            </div>
+          ) : null}
+        </Section>
+      ) : null}
+
+      {/* Related hubs */}
+      {relatedZones.length > 0 ? (
+        <Section
+          id="related"
+          eyebrow="Nearby"
+          title="Related area hubs"
+          className="mcc-area-related mt-14"
+        >
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedZones.map((z) => (
+              <li key={z.slug}>
                 <Link
-                  href={guide.href}
-                  className="block h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 transition hover:border-[var(--accent)]"
+                  href={`/areas/${z.slug}`}
+                  className="group block rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition hover:border-[var(--accent)]"
                 >
-                  <span className="text-sm font-semibold text-[var(--foreground)]">
-                    {guide.label}
-                  </span>
-                  <span className="mt-2 block text-xs leading-relaxed text-[var(--muted)]">
-                    {guide.hint}
-                  </span>
+                  <h3 className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
+                    {z.label}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
+                    {z.blurb}
+                  </p>
                 </Link>
-              )}
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-2">
-          {content.partnerLinks.map((partner) => (
-            <a
-              key={partner.href}
-              href={partner.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-2xl border border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-5 transition hover:border-[var(--accent)]"
-            >
-              <p className="text-sm font-semibold text-[var(--foreground)]">
-                {partner.label}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                {partner.description}
-              </p>
-            </a>
-          ))}
-        </div>
-      </Section>
-
+      {/* FAQ */}
       <Section
         id="faq"
         eyebrow="FAQ"
@@ -518,10 +755,10 @@ export function RichAreaHubPage({
 
       <p className="mt-10">
         <Link
-          href="/#areas"
+          href="/areas"
           className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
         >
-          ← All areas on the map
+          ← All Chennai areas
         </Link>
       </p>
 

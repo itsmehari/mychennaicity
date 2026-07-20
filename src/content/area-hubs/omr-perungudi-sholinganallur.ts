@@ -7,8 +7,13 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
   slug: SLUG,
   metaDescription:
     "OMR Perungudi to Sholinganallur area guide: IT corridor news, jobs, classifieds, metro Phase 2 updates, schools, flooding watchlist, and neighbourhood facts for Chennai's densest apartment-and-tech belt.",
+  identityLine: "IT corridor & apartment towns on Rajiv Gandhi Salai",
   heroDek:
     "Rajiv Gandhi Salai from Perungudi through Sholinganallur is Chennai's busiest IT-and-apartment spine — metro construction, commute shuttles, schools, clinics, and civic stress all move faster here than in the core city.",
+  heroImage: "/images/explore-chennai-madras-high-court.jpg",
+  heroImageAlt: "Chennai — OMR Perungudi to Sholinganallur area guide",
+  mapBlurb:
+    "Perungudi and Sholinganallur wards highlight on the city map — tap a ward for local context, then open news and jobs for this belt.",
   statChips: [
     { label: "GCC zones", value: "XIV (Perungudi) · XV (Sholinganallur)" },
     { label: "Core stretch", value: "Perungudi → Sholinganallur on OMR" },
@@ -16,8 +21,10 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
     { label: "Assembly", value: "Sholinganallur constituency" },
   ],
   sectionNav: [
-    { id: "about-omr", label: "About the corridor" },
+    { id: "best-of", label: "Best of" },
+    { id: "about", label: "About the corridor" },
     { id: "localities", label: "Neighbourhoods" },
+    { id: "on-the-map", label: "On the map" },
     { id: "local-news", label: "Local news" },
     { id: "classifieds", label: "Classifieds" },
     { id: "commute", label: "Commute & metro" },
@@ -25,6 +32,35 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
     { id: "guides", label: "Useful links" },
     { id: "faq", label: "FAQ" },
   ],
+  bestOf: [
+    {
+      id: "omr-it",
+      title: "IT & startups",
+      blurb:
+        "Tech parks and campus offices from Perungudi through Sholinganallur drive weekday peak traffic and shuttle networks.",
+    },
+    {
+      id: "omr-housing",
+      title: "Apartment towns",
+      blurb:
+        "Gated communities and PG clusters stack along the corridor — water, EB, and school seats are everyday topics.",
+    },
+    {
+      id: "omr-metro",
+      title: "Metro Phase 2",
+      blurb:
+        "Elevated Corridor 3 works reshape junctions at Perungudi, SRP Tools, and Sholinganallur for several seasons.",
+    },
+    {
+      id: "omr-marsh",
+      title: "Marsh & monsoon",
+      blurb:
+        "Pallikaranai adjacency means flood patterns differ from core-city drains — watch GCC and highways together.",
+    },
+  ],
+  aboutTitle: "About OMR — Perungudi to Sholinganallur",
+  aboutSubtitle:
+    "Rajiv Gandhi Salai is Chennai's IT spine; this hub tracks the densest apartment-and-office belt.",
   aboutParagraphs: [
     "**Old Mahabalipuram Road (OMR)** — officially **Rajiv Gandhi Salai** — is Chennai's best-known IT corridor. The **Perungudi to Sholinganallur** belt sits in the middle of that spine: tech parks, gated apartment towns, international schools, hospitals, and service retail stacked along a single arterial road.",
     "Residents here rarely live in one neighbourhood alone. Families commute between **Perungudi, Thoraipakkam, Karapakkam, Sholinganallur, and Navalur**; office shuttles, share autos, and peak-hour junction delays at **Sholinganallur** and **SRP Tools** shape daily life as much as office timings.",
@@ -82,6 +118,11 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
     "**Road cuts and metro barricades** — Phase-2 construction means lane closures, U-turn bans, and revised bus stops; bookmark official CMRL / GCC updates.",
     "**Water tanker dependence** in newer layouts — some apartment phases still rely on tankers between monsoons; ask residents' associations about supply schedules.",
   ],
+  civicTitle: "What to watch on OMR",
+  lifestyleNotes: [
+    "Weekdays are IT-shift driven; weekends pull beach and ECR traffic onto the same junctions.",
+    "Many residents live in one locality and work two exits away — treat Perungudi–Sholinganallur as one labour market.",
+  ],
   practicalGuides: [
     {
       label: "Chennai local news",
@@ -104,6 +145,11 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
       hint: "Concerts, school events, and community dates",
     },
     {
+      label: "Open on city map",
+      href: "/#areas?hub=omr-perungudi-sholinganallur",
+      hint: "Highlight Perungudi–Sholinganallur wards on the home map",
+    },
+    {
       label: "TNEB bill guide (Chennai)",
       href: "/chennai-local-news/tamil-nadu-electricity-bill-calculation-2026-june-tnpdcl",
       hint: "Includes OMR apartment billing scenarios",
@@ -120,11 +166,6 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
       hint: "Rentals, schools, traffic, and OMR civic updates",
       external: true,
     },
-    {
-      label: "Chennai map explorer",
-      href: "/chennai-map",
-      hint: "Ward-level view — Perungudi (189) and Sholinganallur (200)",
-    },
   ],
   partnerLinks: [
     {
@@ -140,6 +181,7 @@ export const OMR_PERUNGUDI_SHOLINGANALLUR_HUB: RichAreaHubContent = {
         "Local hiring across restaurants, security, admin, teaching, and site roles along the IT corridor.",
     },
   ],
+  relatedHubSlugs: ["adyar-thiruvanmiyur", "saidapet-guindy-alandur"],
   faq: [
     {
       question: "Which areas does this OMR hub cover?",

@@ -1,0 +1,53 @@
+/* -----------------------------------------------------------------------
+   chennai-area-hub.css
+   Scoped styles for /areas/[slug] hub pages and the /areas index.
+   All selectors are prefixed with .mcc-area-* to avoid global collisions.
+   ----------------------------------------------------------------------- */
+
+/* Hero block — full-bleed image with gradient + identity text */
+.mcc-area-hero {
+  container-type: inline-size;
+}
+
+.mcc-area-hero .hero-image-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--border);
+}
+
+/* Best-of card grid — even height across columns */
+.mcc-area-best ul {
+  align-items: stretch;
+}
+
+.mcc-area-best li {
+  display: flex;
+}
+
+.mcc-area-best li > * {
+  width: 100%;
+}
+
+/* Related hubs strip */
+.mcc-area-related ul {
+  align-items: stretch;
+}
+
+.mcc-area-related li {
+  display: flex;
+}
+
+.mcc-area-related li > a {
+  width: 100%;
+}
+
+/* -----------------------------------------------------------------------
+   Responsive tweaks
+   ----------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .mcc-area-hero .hero-image-wrap {
+    border-radius: 0.75rem;
+  }
+}

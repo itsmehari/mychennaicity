@@ -220,7 +220,7 @@ export const LOCALITY_SEED: Record<string, LocalityRecord> = {
       floodRisk: true,
       growthZone: true,
     },
-    primaryHubSlug: "tambaram-pallavaram-medavakkam",
+    primaryHubSlug: "saidapet-guindy-alandur",
   },
   perungudi: {
     id: "perungudi",

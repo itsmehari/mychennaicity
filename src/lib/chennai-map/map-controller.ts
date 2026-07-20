@@ -26,6 +26,7 @@ export class ChennaiMapController {
   private viewMode: MapViewMode = "greater";
   private regionFilter: string | null = null;
   private corridorFilter: string | null = null;
+  private hubFilter: string | null = null;
   private reduceMotion = false;
 
   constructor(private opts: MapControllerOptions) {
@@ -205,10 +206,34 @@ export class ChennaiMapController {
     this.refreshPathClasses();
   }
 
+  /** Dim wards outside this macro hub; pass null to clear. */
+  setHubFilter(hubSlug: string | null): void {
+    this.hubFilter = hubSlug?.trim() || null;
+    this.refreshPathClasses();
+  }
+
+  /** First ward whose locality (or ward meta) maps to the hub. */
+  pickWardForHub(hubSlug: string): string | null {
+    const slug = hubSlug.trim();
+    if (!slug) return null;
+    for (const w of this.wards) {
+      if (w.primaryHubSlug === slug) return w.id;
+      const loc = this.localities[w.localityId];
+      if (loc?.primaryHubSlug === slug) return w.id;
+    }
+    return null;
+  }
+
+  pickWardByNumber(wardNo: number): string | null {
+    const hit = this.wards.find((w) => w.wardNo === wardNo);
+    return hit?.id ?? null;
+  }
+
   reset(): void {
     this.selectedId = null;
     this.regionFilter = null;
     this.corridorFilter = null;
+    this.hubFilter = null;
     this.viewMode = "greater";
     this.overlays.clear();
     this.applyChromeState();
@@ -310,6 +335,14 @@ export class ChennaiMapController {
       if (this.viewMode === "corridor" && this.corridorFilter) {
         const hit = this.corridorPathMatches(path, this.corridorFilter);
         if (!hit) path.classList.add("is-dimmed");
+        else path.classList.add("corridor-hit");
+      }
+
+      if (this.hubFilter) {
+        const loc = this.localities[w.localityId];
+        const hub =
+          w.primaryHubSlug || loc?.primaryHubSlug || "";
+        if (hub !== this.hubFilter) path.classList.add("is-dimmed");
         else path.classList.add("corridor-hit");
       }
     }

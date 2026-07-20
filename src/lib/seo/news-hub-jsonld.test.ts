@@ -30,7 +30,6 @@ function fakeArticle(
     authorSameAs: null,
     createdAt: now,
     updatedAt: now,
-    ...overrides,
   };
 }
 

@@ -87,9 +87,9 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     hint: "Places, services, listings",
   },
   {
-    href: "/#areas",
-    label: "Area map",
-    hint: "Big zones around the city",
+    href: "/areas",
+    label: "Area hubs",
+    hint: "Neighbourhood guides linked to the city map",
   },
 ];
 

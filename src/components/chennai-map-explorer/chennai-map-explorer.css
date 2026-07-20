@@ -401,3 +401,31 @@
     order: 3;
   }
 }
+
+.ccmap-hub-banner {
+  margin: 0 0 1rem;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.ccmap-hub-banner a {
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.ccmap-hub-banner a:hover {
+  text-decoration: underline;
+}
+
+.ccmap-root--compact .ccmap-map-wrap {
+  min-height: 280px;
+}
+
+.ccmap-root--compact .ccmap-layout {
+  gap: 1rem;
+}

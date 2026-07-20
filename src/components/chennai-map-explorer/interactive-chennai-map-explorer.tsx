@@ -7,6 +7,11 @@ import {
   useRef,
   useState,
 } from "react";
+import { getChennaiZoneBySlug } from "@/lib/chennai-zones";
+import {
+  normalizeAreaHubSlug,
+  parseHomeMapQuery,
+} from "@/lib/area-hubs/geography";
 import { ChennaiMapController } from "@/lib/chennai-map/map-controller";
 import { loadChennaiMapBundle } from "@/lib/chennai-map/load-map-bundle";
 import type {
@@ -54,12 +59,42 @@ type TooltipState = {
   locality: LocalityRecord;
 } | null;
 
-export function InteractiveChennaiMapExplorer() {
+export type InteractiveChennaiMapExplorerProps = {
+  initialHubSlug?: string;
+  forceLoad?: boolean;
+  compact?: boolean;
+};
+
+function readDeepLinkFromLocation(): {
+  hub: string | null;
+  ward: number | null;
+} {
+  if (typeof window === "undefined") return { hub: null, ward: null };
+  const hash = window.location.hash || "";
+  const fromHash = hash.includes("?")
+    ? hash.slice(hash.indexOf("?") + 1)
+    : "";
+  const parsedHash = parseHomeMapQuery(fromHash);
+  const parsedSearch = parseHomeMapQuery(window.location.search);
+  return {
+    hub: parsedHash.hub ?? parsedSearch.hub,
+    ward: parsedHash.ward ?? parsedSearch.ward,
+  };
+}
+
+export function InteractiveChennaiMapExplorer({
+  initialHubSlug,
+  forceLoad = false,
+  compact = false,
+}: InteractiveChennaiMapExplorerProps = {}) {
   const mapHostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<ChennaiMapController | null>(null);
   const [bundleError, setBundleError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(forceLoad);
+  const [hubFilter, setHubFilter] = useState<string | null>(
+    () => normalizeAreaHubSlug(initialHubSlug) ?? null,
+  );
   const [selected, setSelected] = useState<{
     ward: WardPathRecord;
     locality: LocalityRecord;
@@ -72,8 +107,13 @@ export function InteractiveChennaiMapExplorer() {
   const [searchQ, setSearchQ] = useState("");
 
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const pendingDeepLink = useRef(readDeepLinkFromLocation());
 
   useEffect(() => {
+    if (forceLoad) {
+      setShouldLoad(true);
+      return;
+    }
     const el = sentinelRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -84,6 +124,27 @@ export function InteractiveChennaiMapExplorer() {
     );
     io.observe(el);
     return () => io.disconnect();
+  }, [forceLoad]);
+
+  useEffect(() => {
+    const apply = () => {
+      const { hub, ward } = readDeepLinkFromLocation();
+      pendingDeepLink.current = { hub, ward };
+      if (hub) setHubFilter(hub);
+      const c = controllerRef.current;
+      if (!c) return;
+      if (hub) c.setHubFilter(hub);
+      if (ward != null) {
+        const id = c.pickWardByNumber(ward);
+        if (id) c.select(id);
+      } else if (hub) {
+        const id = c.pickWardForHub(hub);
+        if (id) c.select(id);
+      }
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
   }, []);
 
   const syncControllerChrome = useCallback(() => {
@@ -93,7 +154,8 @@ export function InteractiveChennaiMapExplorer() {
     c.setViewMode(viewMode);
     c.setRegionFilter(viewMode === "region" ? regionFilter : null);
     c.setCorridorFilter(viewMode === "corridor" ? corridorKey : null);
-  }, [overlays, viewMode, regionFilter, corridorKey]);
+    c.setHubFilter(hubFilter);
+  }, [overlays, viewMode, regionFilter, corridorKey, hubFilter]);
 
   useEffect(() => {
     if (!shouldLoad || !mapHostRef.current) return;
@@ -134,6 +196,21 @@ export function InteractiveChennaiMapExplorer() {
         ctrl.setViewMode(viewMode);
         ctrl.setRegionFilter(viewMode === "region" ? regionFilter : null);
         ctrl.setCorridorFilter(viewMode === "corridor" ? corridorKey : null);
+
+        const deep = pendingDeepLink.current;
+        const focusHub =
+          normalizeAreaHubSlug(initialHubSlug) ?? deep.hub ?? hubFilter;
+        if (focusHub) {
+          setHubFilter(focusHub);
+          ctrl.setHubFilter(focusHub);
+        }
+        if (deep.ward != null) {
+          const id = ctrl.pickWardByNumber(deep.ward);
+          if (id) ctrl.select(id);
+        } else if (focusHub) {
+          const id = ctrl.pickWardForHub(focusHub);
+          if (id) ctrl.select(id);
+        }
       } catch (e) {
         if (!cancelled) {
           setBundleError(
@@ -172,7 +249,14 @@ export function InteractiveChennaiMapExplorer() {
     setCorridorKey("omr");
     setOverlays(new Set());
     setSearchQ("");
+    const slug = normalizeAreaHubSlug(initialHubSlug);
+    setHubFilter(slug);
     controllerRef.current?.reset();
+    if (slug) {
+      controllerRef.current?.setHubFilter(slug);
+      const id = controllerRef.current?.pickWardForHub(slug);
+      if (id) controllerRef.current?.select(id);
+    }
     setSelected(null);
     setTooltip(null);
   };
@@ -194,9 +278,16 @@ export function InteractiveChennaiMapExplorer() {
     if (mode === "region" && !regionFilter) setRegionFilter("north");
   };
 
+  const hubZone = hubFilter ? getChennaiZoneBySlug(hubFilter) : null;
+  const selectedHubSlug = selected
+    ? normalizeAreaHubSlug(selected.locality.primaryHubSlug) ??
+      selected.locality.primaryHubSlug
+    : null;
+
   return (
-    <div className="ccmap-root">
+    <div className={`ccmap-root${compact ? " ccmap-root--compact" : ""}`}>
       <div ref={sentinelRef} className="sr-only" aria-hidden />
+      {!compact ? (
       <div
         className="ccmap-toolbar"
         role="toolbar"
@@ -320,6 +411,14 @@ export function InteractiveChennaiMapExplorer() {
           </button>
         </div>
       </div>
+      ) : null}
+
+      {hubZone ? (
+        <p className="ccmap-hub-banner">
+          Showing <strong>{hubZone.label}</strong> on the ward map.{" "}
+          <Link href={`/areas/${hubZone.slug}`}>Open full area guide →</Link>
+        </p>
+      ) : null}
 
       <div className="ccmap-layout">
         <div>
@@ -344,8 +443,8 @@ export function InteractiveChennaiMapExplorer() {
                 <p>{bundleError}</p>
                 <p>
                   Open area hubs still work — browse{" "}
-                  <Link href="/directory" className="ccmap-cta">
-                    directory
+                  <Link href="/areas" className="ccmap-cta">
+                    all areas
                   </Link>{" "}
                   or retry after refreshing.
                 </p>
@@ -426,38 +525,35 @@ export function InteractiveChennaiMapExplorer() {
                 </p>
               ) : null}
               <Link
-                href={`/areas/${selected.locality.primaryHubSlug}`}
+                href={`/areas/${selectedHubSlug}`}
                 className="ccmap-cta"
-                data-slug={selected.locality.primaryHubSlug}
+                data-slug={selectedHubSlug ?? undefined}
               >
-                Explore area hub →
+                Open area guide →
               </Link>
-              <div className="ccmap-stats">
-                <div className="ccmap-stat">
-                  Listings
-                  <strong>—</strong>
-                </div>
-                <div className="ccmap-stat">
-                  Jobs
-                  <strong>—</strong>
-                </div>
-                <div className="ccmap-stat">
-                  Schools
-                  <strong>—</strong>
-                </div>
-                <div className="ccmap-stat">
-                  Articles
-                  <strong>—</strong>
-                </div>
-              </div>
+              <p className="ccmap-meta" style={{ marginTop: "0.75rem" }}>
+                Full civic notes and neighbourhood context live on the area
+                landing page.
+              </p>
+            </>
+          ) : hubZone ? (
+            <>
+              <h3 id="ccmap-panel-title">{hubZone.label}</h3>
+              <p className="ccmap-desc">{hubZone.blurb}</p>
+              <Link href={`/areas/${hubZone.slug}`} className="ccmap-cta">
+                Open area guide →
+              </Link>
+              <p className="ccmap-desc" style={{ marginTop: "0.75rem" }}>
+                Tap a highlighted ward for locality detail.
+              </p>
             </>
           ) : (
             <>
               <h3 id="ccmap-panel-title">Pick a ward</h3>
               <p className="ccmap-desc">
                 Hover for a short summary; tap or click a ward for local context
-                and a link to the matching area page. Listings, jobs, and news
-                counts will show here when we connect the data.
+                and a link to the matching area guide. Browse all hubs at{" "}
+                <Link href="/areas">/areas</Link>.
               </p>
             </>
           )}

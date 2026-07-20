@@ -3,6 +3,7 @@ import type {
   LocalityRecord,
   WardPathRecord,
 } from "./types";
+import { normalizeAreaHubSlug } from "@/lib/area-hubs/geography";
 
 const BASE = "/data/chennai-map";
 
@@ -28,5 +29,13 @@ export async function loadChennaiMapBundle(
   const manifest = (await manifestRes.json()) as ChennaiMapManifest;
   const wards = (await wardsRes.json()) as WardPathRecord[];
   const localities = (await locRes.json()) as Record<string, LocalityRecord>;
+  for (const loc of Object.values(localities)) {
+    const n = normalizeAreaHubSlug(loc.primaryHubSlug);
+    if (n) loc.primaryHubSlug = n;
+  }
+  for (const w of wards) {
+    const n = normalizeAreaHubSlug(w.primaryHubSlug);
+    if (n) w.primaryHubSlug = n;
+  }
   return { manifest, wards, localities };
 }
