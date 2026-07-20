@@ -1,5 +1,6 @@
 import type { PublicArticleRow } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
 
 export function buildTopicHubJsonLd(
   topicSlug: string,
@@ -10,6 +11,7 @@ export function buildTopicHubJsonLd(
   const base = getSiteUrl();
   const pageUrl = `${base}/chennai-local-news/topic/${topicSlug}`;
   const slice = articles.slice(0, maxItems);
+  const latest = articles[0]?.publishedAt ?? null;
 
   const collectionPage = {
     "@context": "https://schema.org",
@@ -20,13 +22,17 @@ export function buildTopicHubJsonLd(
     description: `Latest ${categoryLabel} news for Chennai and nearby on mychennaicity.in.`,
     isPartOf: { "@id": `${base}/#website` },
     inLanguage: "en-IN",
+    about: CHENNAI_PLACE_GRAPH,
+    contentLocation: CHENNAI_PLACE_GRAPH,
+    ...(latest ? { dateModified: latest.toISOString() } : {}),
   };
 
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${categoryLabel} articles`,
+    name: `${categoryLabel} articles — Chennai`,
     numberOfItems: slice.length,
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
     itemListElement: slice.map((a, i) => ({
       "@type": "ListItem",
       position: i + 1,

@@ -18,6 +18,7 @@ import {
   CHENNAI_NEWS_TOPIC_NAV,
   topicSlugToCategory,
 } from "@/lib/news-topics";
+import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { buildTopicHubJsonLd } from "@/lib/seo/topic-hub-jsonld";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
@@ -34,18 +35,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const base = getSiteUrl();
   const url = `${base}/chennai-local-news/topic/${topic}`;
-  const desc = `Latest ${category} news for Chennai and nearby — reports and local context on mychennaicity.in.`;
+  const desc = `Latest ${category} news for Chennai and nearby — civic context, neighbourhood angle, and clear takeaways on mychennaicity.in. Covers Greater Chennai including Adyar, OMR, Anna Nagar, and T. Nagar.`;
   const titleSegment = `${category} — Chennai local news`;
   const docTitle = fullSiteTitle(titleSegment);
   return {
     title: titleSegment,
     description: desc,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title: docTitle,
       description: desc,
       url,
       type: "website",
+      locale: "en_IN",
+      siteName: "mychennaicity.in",
       images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     },
     twitter: {
@@ -54,6 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: desc,
       images: ["/twitter-image"],
     },
+    other: { ...CHENNAI_GEO_META },
   };
 }
 
