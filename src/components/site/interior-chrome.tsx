@@ -91,6 +91,11 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     label: "Area hubs",
     hint: "Neighbourhood guides linked to the city map",
   },
+  {
+    href: "/chennai-map",
+    label: "Interactive map",
+    hint: "Full-page ward map with overlays and search",
+  },
 ];
 
 export function TopicSectionNav({ currentSlug }: { currentSlug?: string }) {

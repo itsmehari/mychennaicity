@@ -135,9 +135,9 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Chennai metro+ assembly constituencies and curated candidates.",
           },
           {
-            href: "/#areas",
-            label: "Area explorer",
-            description: "Jump to the bento map on the home page.",
+            href: "/chennai-map",
+            label: "Interactive map explorer",
+            description: "Full-page ward map with overlays, search, and area guides.",
           },
         ],
       },
