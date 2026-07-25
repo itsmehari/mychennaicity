@@ -171,9 +171,14 @@ export function InteractiveZoneMap() {
       <ShareUrlButton
         buildUrl={() => {
           const params = new URLSearchParams();
+          const path = window.location.pathname;
+          if (path.startsWith("/chennai-map")) params.set("view", "zones");
           if (selectedWard) params.set("ward", String(selectedWard.wardNo));
           params.set("layers", [...activeLayers].join(","));
-          return `${window.location.origin}/civic-tools/zone-map?${params}`;
+          const basePath = path.startsWith("/chennai-map")
+            ? "/chennai-map"
+            : "/civic-tools/zone-map";
+          return `${window.location.origin}${basePath}?${params}`;
         }}
       />
     </div>

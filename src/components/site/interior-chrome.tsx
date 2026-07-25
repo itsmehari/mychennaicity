@@ -94,7 +94,7 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
   {
     href: "/chennai-map",
     label: "Interactive map",
-    hint: "Full-page ward map with overlays and search",
+    hint: "Ward map and Corporation zone options",
   },
 ];
 

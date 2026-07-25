@@ -137,7 +137,12 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/chennai-map",
             label: "Interactive map explorer",
-            description: "Full-page ward map with overlays, search, and area guides.",
+            description: "Ward map and Corporation zone map — overlays, search, area guides.",
+          },
+          {
+            href: "/chennai-map?view=zones",
+            label: "Corporation zone map",
+            description: "GCC 15-zone interactive map with ward and locality search.",
           },
         ],
       },
