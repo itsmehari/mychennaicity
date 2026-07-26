@@ -161,6 +161,8 @@
     "db:seed:dvac-raids-chennai-corporation-july-2026:live": "tsx scripts/seed-dvac-raids-chennai-corporation-july-2026.ts --live",
     "db:seed:skyroot-vikram-1-orbital-launch-analysis-july-2026": "tsx scripts/seed-skyroot-vikram-1-orbital-launch-analysis-july-2026.ts",
     "db:seed:skyroot-vikram-1-orbital-launch-analysis-july-2026:live": "tsx scripts/seed-skyroot-vikram-1-orbital-launch-analysis-july-2026.ts --live",
+    "db:seed:tamil-nadu-government-order-portal-july-2026": "tsx scripts/seed-tamil-nadu-government-order-portal-july-2026.ts",
+    "db:seed:tamil-nadu-government-order-portal-july-2026:live": "tsx scripts/seed-tamil-nadu-government-order-portal-july-2026.ts --live",
     "db:seed:tiruvallur-ammonia-leak-2026": "tsx scripts/seed-tiruvallur-ammonia-leak-2026.ts",
     "db:seed:tiruvallur-ammonia-leak-2026:live": "tsx scripts/seed-tiruvallur-ammonia-leak-2026.ts --live",
     "db:seed:chennai-corporation-zones-15-vs-20": "tsx scripts/seed-chennai-corporation-zones-15-vs-20.ts",
