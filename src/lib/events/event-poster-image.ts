@@ -35,6 +35,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/seafood-expo-bharat-chennai-trade-centre-july-2026.png",
     alt: "Seafood Expo Bharat 2026 poster — Connect. Discover. Grow., Chennai Trade Centre, 1–3 July 2026",
   },
+  "omr-marathon-anti-drug-awareness-padur-august-2026": {
+    src: "/images/events/omr-marathon-anti-drug-awareness-padur-august-2026.png",
+    alt: "OMR Marathon — Anti-Drug Awareness Marathon poster, Padur OMR Chennai, 9 August 2026",
+  },
   "ticket9-chennaiyil-chinna-kuyil": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennaiyil%20Chinna%20Kuyil/64711457/Chennaiyil%20Chinna%20Kuyil_bannerimage.webp",
     alt: "Chennaiyil Chinna Kuyil — Ticket9 Chennai event poster",
@@ -76,8 +80,8 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     alt: "INDEPENDENCE DAY KIDZATHON 2026 — Ticket9 Chennai event poster",
   },
   "ticket9-omr-marathon": {
-    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/OMR%20Marathon%20/90969966/OMR%20Marathon%20_bannerimage.webp",
-    alt: "OMR Marathon — Ticket9 Chennai event poster",
+    src: "/images/events/omr-marathon-anti-drug-awareness-padur-august-2026.png",
+    alt: "OMR Marathon — Anti-Drug Awareness Marathon poster, Padur OMR Chennai, 9 August 2026",
   },
   "ticket9-chennai-kidathon-2026": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/CHENNAI%20KIDATHON%202026/24704685/CHENNAI%20KIDATHON%202026_bannerimage.webp",

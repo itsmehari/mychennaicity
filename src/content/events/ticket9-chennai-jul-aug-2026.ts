@@ -463,21 +463,8 @@ export const TICKET9_CHENNAI_EVENTS_JUL_AUG_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.theticket9.com/event/independence-day-kidzathon-2026",
     notes: "Organiser: Kalam Event Management on 9th Aug 2026 at SDAT Nehru Park, Chetpet, Chennai. Categories | Distance |Timing LKG | 75Mtrs. | 7:30am UKG | 75Mtrs. | 7:30am 1st STD | 100Mtrs. | 7:00am 2nd STD | 100Mtrs. | 7:00am 3rd STD | 200Mtrs. | 6:30am 4th STD | 300Mtrs. | 6:30am 5th & 6th STD | 500Mtrs. | 6:15am 7th & 8th STD | 800Mtrs. | 6:15am Open Category | 2KM | 8:30am Open Walkathon | 2KM | 8:30am BIB Collection on Event Date Prizes and Awards: Top 5 winners in each category will get a Trophy and all participants benefits included. All Participants will receive a Finisher Medal, Finisher Trophy, Participation Certificate, T-Shirt, BIB and a Refreshments Drink. Report 30Min before the event for Registration and don't forget to Carry your School ID and proof of Booking for the event. Thanks to our supporting partners: Venue: SDAT Nehru Park | Chetpet | Chennai. Show More Become a Sponsor Event Comforts & Features. Listed via Ticket9 (theticket9.com).",
   },
-  {
-    slug: "ticket9-omr-marathon",
-    title: "OMR Marathon",
-    category: "Marathon",
-    date: "2026-08-09",
-    time: "04:00:00 to 07:00:00",
-    venueName: "Padur",
-    address: "Padur, Rajiv Gandhi Salai, Chennai",
-    locality: "OMR",
-    description: "Community marathon along the OMR corridor starting from Padur.",
-    ticketPrice: "₹500 onwards",
-    targetAudience: "Chennai residents and visitors",
-    bookingLink: "https://www.theticket9.com/event/omr-marathon",
-    notes: "Listed via Ticket9 (theticket9.com).",
-  },
+  // OMR Marathon curated as `omr-marathon-anti-drug-awareness-padur-august-2026`
+  // (seed-event-omr-marathon-august-2026.ts) — omit Ticket9 stub to avoid duplicates.
   {
     slug: "ticket9-good-timing-ji-chennai",
     title: "Good Timing Ji - Chennai",

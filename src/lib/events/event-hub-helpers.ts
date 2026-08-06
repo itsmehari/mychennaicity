@@ -71,7 +71,7 @@ function inferTagsFromText(
     tags.add("business");
   }
   if (
-    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local/.test(
+    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon/.test(
       text,
     )
   ) {
