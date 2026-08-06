@@ -1,0 +1,20 @@
+---
+description: Chennai local events — read ADD_CHENNAI_EVENT.md when seeding, publishing, or editing hub/detail event UI.
+globs: scripts/seed-event*.ts,scripts/seed-*event*.ts,scripts/lib/seed-event-shared.ts,src/**/events/**,src/app/(public)/chennai-local-events/**,src/lib/events/**,src/styles/event*.css,docs/CHENNAI_EVENTS.md,docs/prompts/ADD_CHENNAI_EVENT.md
+alwaysApply: false
+---
+
+# Chennai local events
+
+When the user asks to **add**, **seed**, **publish**, or **list** a Chennai event (or you edit files matched by this rule):
+
+1. **Read first:** `docs/prompts/ADD_CHENNAI_EVENT.md` and `docs/CHENNAI_EVENTS.md`.
+2. **Seeds:** Use `scripts/lib/seed-event-shared.ts` (`insertEventIfMissing`, `istToUtcDate`, live env pattern). One script per event; add `db:seed:event:*` to `package.json`.
+3. **Schema:** Only use columns on `events` in `src/db/schema/tables.ts` — do not invent DB fields.
+4. **Routes:** Hub `/chennai-local-events`, detail `/chennai-local-events/[slug]`. No URL changes without explicit request.
+5. **UI:** Hub cards in `events-hub-listing.tsx` / `event-hub-helpers.ts`; standard detail in `event-detail-standard.tsx` + `event-detail-parts.tsx`. Rich festivals use `presentation_key` + `src/content/special-events/`.
+6. **SEO:** Real Event JSON-LD only for DB rows; no fake pricing or organizer URLs. See `src/lib/seo/event-jsonld.ts`.
+7. **Production:** Live seed via `npm run db:seed:event:*:live` and `.env.production.local`; confirm Vercel `DATABASE_URL` target per `docs/DATABASE_AND_VERCEL.md`.
+8. **Images:** Register new remote hosts in `next.config.ts` before `next/image`.
+
+Do not remove existing event content when improving templates.

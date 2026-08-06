@@ -40,8 +40,11 @@ yarn-error.log*
 # vercel
 .vercel
 
-# Cursor IDE (local skills; do not ship in app repo)
-.cursor/
+# Cursor IDE (local skills/cache; do not ship whole folder)
+.cursor/*
+# Keep shared agent rules in-repo (referenced from AGENTS.md)
+!.cursor/rules/
+!.cursor/rules/**
 
 # MCP server dependencies (run npm install in mcp/production-data)
 mcp/production-data/node_modules/
