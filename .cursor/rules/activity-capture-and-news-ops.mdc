@@ -1,0 +1,31 @@
+---
+description: Capture project activities into existing docs; news publish checklist (disclaimer, AI fine print, bilingual, social).
+alwaysApply: true
+---
+
+# Activity capture + news ops (always follow)
+
+## After substantive work — write it down
+
+Do **not** leave new habits only in chat. When we publish, seed, change editorial policy, or invent a repeatable workflow, update the **existing** project docs in the same session (or immediately after):
+
+| What happened | Where to record it |
+| --- | --- |
+| Recurring agent habit / non-negotiable | `docs/AGENT_LEARNINGS_AND_SOPS.md` (learnings or new SOP) + short pointer in `AGENTS.md` if site-wide |
+| File/route-specific convention | `.cursor/rules/*.mdc` (match globs or `alwaysApply`) |
+| Events workflow | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
+| News pipeline / seed patterns | `docs/AGENT_LEARNINGS_AND_SOPS.md` SOP for news; optionally `docs/prompts/NEWS_PUBLISHING_PIPELINE_SYSTEM_DESIGN.md` |
+| One-off initiative status | Matching `.cursor/plans/*.plan.md` todos |
+
+**Minimum log:** what we did, the rule to follow next time, and the live URL / script name if published.
+
+## News articles (every publish)
+
+1. **Disclaimer** near the top of `reportBody` — civic journalism; source scope; not official agency copy; verify before acting.
+2. **Fine print — AI-assisted authoring** (separate section, 2–3 lines) at the end — AI-assisted drafting + human review; AI can err; cross-check primary sources. Use disclaimer-skin headings (`Disclaimer`, `Fine print`, Tamil `பொறுப்புத்துறப்பு`, `நுண்ணெழுத்து`, etc.).
+3. Prefer **idempotent** `scripts/seed-*.ts` + `package.json` `:live` script; seed production when the user asks to float online.
+4. Self-host hero under `public/images/articles/` when possible; push so Vercel serves the asset.
+5. Bilingual when requested: separate EN/TA slugs, cross-links, natural Tamil (not a literal dump).
+6. When the user asks for social: provide X/Twitter (and similar) copy with **live URL CTA** + relevant hashtags — optionally note the post text in the seed comment or AGENT_LEARNINGS changelog if it becomes a template.
+
+Canonical site: **https://mychennaicity.in** only.
