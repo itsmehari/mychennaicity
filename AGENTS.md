@@ -28,6 +28,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`.
 
+**Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
+
 **Non-negotiables in short:**
 
 - Keep **plan todos** in `.cursor/plans/` aligned with reality when the user tracks work there.
@@ -36,3 +38,5 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 - **Production DB:** after env or schema changes, **redeploy Vercel**; use `docs/DATABASE_AND_VERCEL.md` for push/seed/check-live flows.
 - **Secrets:** never commit; rotate if exposed in chat.
 - **Browser steps** (GitHub/Vercel/registrar/Neon): coordinate with the user—they log in, then automate or guide the next clicks.
+- **Capture activities:** after substantive work (publish, new editorial habit, ops change), update existing docs — `docs/AGENT_LEARNINGS_AND_SOPS.md`, matching prompts, and `.cursor/rules/` — do not leave rules only in chat. See `.cursor/rules/activity-capture-and-news-ops.mdc`.
+- **News publish:** Disclaimer + separate AI-assisted fine print on every article (see AGENT_LEARNINGS SOP I / news ops rule).

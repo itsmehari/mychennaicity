@@ -125,6 +125,31 @@ Abbreviated:
 2. One **migration series** per schema change; avoid conflicting edits to same route file across branches when possible.
 3. Update **sitemap** and **nav** in the same PR as new public routes when they ship together.
 
+### SOP I — Capture activities into existing docs (mandatory)
+
+When a chat produces a **repeatable practice**, **live publish**, or **policy** (disclaimers, bilingual news, social CTA style, seed scripts, etc.):
+
+1. Update **`docs/AGENT_LEARNINGS_AND_SOPS.md`** (learning bullet and/or new SOP) in the same work session.
+2. If agents must always obey it: add or extend **`.cursor/rules/*.mdc`** (`alwaysApply: true` for site-wide; globs for scoped).
+3. Add a one-line pointer in **`AGENTS.md`** non-negotiables when the rule is site-wide.
+4. Domain prompts stay in place: events → `docs/prompts/ADD_CHENNAI_EVENT.md`; news pipeline design → `docs/prompts/NEWS_PUBLISHING_PIPELINE_SYSTEM_DESIGN.md`.
+5. Append a short line under **§6 Changelog** (date + what was codified).
+6. Do **not** invent parallel “activity log” folders — use this doc tree only.
+
+Cursor rule: **`.cursor/rules/activity-capture-and-news-ops.mdc`**.
+
+### SOP J — Publish a Chennai local news article
+
+1. Idempotent `scripts/seed-*.ts` + `package.json` `db:seed:…` / `:live` scripts.
+2. **Disclaimer** near top of `reportBody`; separate **Fine print — AI-assisted authoring** (2–3 lines) at end — headings that hit disclaimer skin in `article-prose-blocks.tsx`.
+3. Hero under `public/images/articles/` when possible; commit + push so Vercel serves it.
+4. Live: `npm run db:seed:…:live` with `.env.production.local`; confirm URLs on **https://mychennaicity.in**.
+5. Bilingual when asked: separate EN/TA slugs, cross-links, natural Tamil.
+6. Social when asked: X/Twitter (etc.) with live URL CTA + hashtags.
+7. Then run **SOP I** so any new habit is written into docs/rules.
+
+Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-metro-nilgiri-tbm-breakthrough-moolakadai-2026`, TA `…-tamil`.
+
 ---
 
 ## 5. Where to look next
@@ -135,6 +160,7 @@ Abbreviated:
 | Feature inventory | `docs/MYCHENNAICITY_FEATURES.md` |
 | Content IA | `docs/CONTENT_ARCHITECTURE.md` |
 | **Add / seed Chennai events** | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
+| **Capture activities + news publish** | `.cursor/rules/activity-capture-and-news-ops.mdc`, SOP I / SOP J (this file) |
 | Agent rules (short) | `AGENTS.md` |
 | Initiative plans | `.cursor/plans/*.plan.md` |
 
@@ -144,3 +170,4 @@ Abbreviated:
 
 - **2026-03-30:** Initial synthesis from multi-thread agent transcripts (AdSense/legal, elections map, Panguni special events, hero/home, jobs SERP copy, SEO/JSON-LD, portable ads, map explorer, ops/browser handoffs).
 - **2026-06-10:** Events hub discovery cards + mobile detail UX; `CHENNAI_EVENTS.md`, `ADD_CHENNAI_EVENT` prompt, `seed-event-shared.ts`, Cursor rule `chennai-events.mdc`.
+- **2026-08-06:** SOP I (capture activities into existing docs) + SOP J (news publish: disclaimer, AI fine print, bilingual, social); Cursor rule `activity-capture-and-news-ops.mdc`; Nilgiri TBM Moolakadai EN/TA live articles.
