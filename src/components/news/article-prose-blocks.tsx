@@ -20,7 +20,13 @@ export function proseSectionSkin(headingText: string): ProseSectionSkin {
   if (
     h.includes("disclaimer") ||
     h.includes("legal note") ||
-    h.startsWith("editorial note")
+    h.startsWith("editorial note") ||
+    h.includes("fine print") ||
+    h.includes("ai-assisted") ||
+    h.includes("ai assisted") ||
+    h.includes("பொறுப்புத்துறப்பு") ||
+    h.includes("தலையங்கக் குறிப்பு") ||
+    h.includes("நுண்ணெழுத்து")
   )
     return "disclaimer";
   if (h.includes("fact box") || h.includes("fact check") || h.includes("at a glance"))

@@ -28,6 +28,7 @@ When unsure what “done” means for a thread, check the matching plan file in 
 
 - Users often want **plain, searcher-aligned language** (“Chennai jobs”, “local news”) rather than internal marketing labels (“curated hiring desk”). Audit hub and news strings when asked.
 - **Greater Chennai** nuance belongs in supporting copy; **headlines and SEO-visible text** often should lead with **Chennai**.
+- **News articles:** always include a short **Disclaimer** (civic journalism / source scope / not official agency copy) near the top of the report, and a separate **Fine print — AI-assisted authoring** block (2–3 lines) at the end stating AI-assisted drafting, that AI can err, and that readers should verify with primary sources. Use headings that map to the disclaimer skin (`Disclaimer`, `Fine print`, Tamil `பொறுப்புத்துறப்பு` / `நுண்ணெழுத்து`, etc.).
 
 ### Technical
 

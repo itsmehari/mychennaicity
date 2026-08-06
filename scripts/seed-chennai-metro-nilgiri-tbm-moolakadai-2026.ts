@@ -76,6 +76,12 @@ async function main() {
 
 [தமிழ் பதிப்பு](${RELATED_TAMIL})
 
+## Disclaimer
+
+This article is **civic journalism** for public-interest information. It summarises a **CMRL press note** and published CMRL project materials available at the time of writing. It is **not** an official CMRL communication, tender notice or passenger-service advisory.
+
+Construction figures, timelines and opening dates can change after publication. Items marked **[unconfirmed]** were not stated in the sources reviewed here. Verify current information with [CMRL](${CMRL_SITE}) before relying on this article for travel, property or worksite decisions.
+
 ## Summary
 
 **Chennai, 6 August 2026** — Chennai Metro Rail Limited (CMRL) has reported that tunnel boring machine **Nilgiri (S 96)** has successfully completed tunnelling on the **up line** between **Madhavaram High Road** and **Moolakadai** Metro stations and reached Moolakadai station box.
@@ -206,7 +212,13 @@ Nilgiri’s arrival at Moolakadai is a hard-earned civil milestone on Corridor 3
 
 ## Editorial note
 
-Opening dates, remaining TBM launch schedules and exact second-drive start date for Nilgiri toward Moolakadai are marked **[unconfirmed]** where the summarised press note or cited CMRL pages do not state them. Photo shows the cutterhead breakthrough at the Moolakadai station structure (CMRL / project site image supplied with the press note).`;
+Opening dates, remaining TBM launch schedules and exact second-drive start date for Nilgiri toward Moolakadai are marked **[unconfirmed]** where the summarised press note or cited CMRL pages do not state them. Photo shows the cutterhead breakthrough at the Moolakadai station structure (CMRL / project site image supplied with the press note).
+
+## Fine print — AI-assisted authoring
+
+This report was prepared with **AI-assisted news authoring** and human editorial review.
+AI tools can sometimes make mistakes — misread numbers, miss nuance, or invent detail.
+Please cross-check important facts with CMRL or other primary sources before acting on them.`;
 
   const body = `${reportBody}\n\n---\n\n${analysisBody}`;
 
