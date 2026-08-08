@@ -68,6 +68,14 @@ export const SWM_RULES_SERIES_LINKS: SwmRulesRelatedLink[] = [
     title: "Bulk-waste empanelment: two vendors, four zones",
   },
   {
+    slug: "gcc-bulk-waste-agencies-scrapped-paper-trail-chennai",
+    title: "GCC bulk-waste agencies: reported cancellations and paper trail",
+  },
+  {
+    slug: "chennai-waste-rules-2026-gcc-must-explain-system",
+    title: "Waste rules changing: GCC must explain how the system works",
+  },
+  {
     slug: "chennai-ngt-gcc-wet-dry-waste-separate-collection-days",
     title: "NGT direction on wet and dry waste collection days",
   },
@@ -148,6 +156,58 @@ const BY_SLUG: Record<string, SwmRulesAeoContent> = {
         term: "Four-stream gap",
         definition:
           "The 2026 Rules require wet, dry, sanitary and special-care streams; the vendor document reviewed for this report identified the two listed providers only for wet and dry waste.",
+      },
+    ],
+  },
+
+  "gcc-bulk-waste-agencies-scrapped-paper-trail-chennai": {
+    slug: "gcc-bulk-waste-agencies-scrapped-paper-trail-chennai",
+    directAnswer:
+      "As of 30–31 July 2026 reporting, a senior Greater Chennai Corporation official was quoted as saying nearly 17–18 bulk-waste agencies were removed after alleged dumping of Bulk Waste Generator waste into roadside compactors. Separate public records still refer to 31, 14, two and 17–18 providers; agency-wise orders and inspection findings were not in the reviewed public domain.",
+    contextParagraphs: [
+      "Media coverage also said dry, sanitary and special-care collection shifted to Ramky and Urbaser. This page maps attributed claims against public-record gaps. It does not conclude that any named or unnamed agency committed an offence.",
+    ],
+    facts: [
+      {
+        term: "Attributed claim",
+        definition:
+          "Nearly 17–18 empanelled agencies cancelled, per a senior GCC official quoted by The New Indian Express (30 July 2026).",
+      },
+      {
+        term: "Provider counts in public materials",
+        definition:
+          "31 (2024 NGT-linked status), 14 (2026 NGT-linked status), two (GCC sheet for four zones), 17–18 (July 2026 media).",
+      },
+      {
+        term: "Still unpublished in reviewed materials",
+        definition:
+          "Complete agency list, order type per agency, inspection evidence, show-cause replies, and zone-wise wet-waste destination advisory.",
+      },
+    ],
+  },
+
+  "chennai-waste-rules-2026-gcc-must-explain-system": {
+    slug: "chennai-waste-rules-2026-gcc-must-explain-system",
+    directAnswer:
+      "Greater Chennai Corporation is enforcing Solid Waste Management Rules, 2026 against Bulk Waste Generators and changing collection arrangements, but as of 31 July 2026 reporting it has not published one consolidated public explanation of authorised collectors by zone and waste stream, processing eligibility, wet-waste pathways, or agency-wise reasons for discontinuing earlier vendors.",
+    contextParagraphs: [
+      "This editorial asks for interim implementation guidance while revised bye-laws are prepared (Rule 39 deadline: 31 March 2027), a transparency dashboard for authorised providers, and graded participation models. It does not conclude that GCC deliberately favoured any company.",
+    ],
+    facts: [
+      {
+        term: "Core ask",
+        definition:
+          "Publish rules, responsibilities, orders, authorised service channels and supporting infrastructure so generators and vendors can comply on a level field.",
+      },
+      {
+        term: "Bye-law transition",
+        definition:
+          "GCC remains inside the Rule 39 window to frame updated bye-laws by 31 March 2027, but should still issue interim public guidance while enforcement continues.",
+      },
+      {
+        term: "What this page is not",
+        definition:
+          "Not a finding of wrongdoing against any vendor, concessionaire or official. Prefer primary GCC orders and notices for authoritative text.",
       },
     ],
   },

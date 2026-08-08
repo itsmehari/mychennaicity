@@ -32,4 +32,9 @@ export const CHENNAI_NEWS_HUB_FAQ: FaqItem[] = [
     answer:
       "Yes. Subscribe at mychennaicity.in/chennai-local-news/feed.xml to receive newly published Chennai stories in your reader.",
   },
+  {
+    question: "Where is the AI / LLM index for mychennaicity.in?",
+    answer:
+      "AI systems can start at mychennaicity.in/llms.txt for a curated map of Chennai news, jobs, and events hubs, plus feeds and editorial standards. A longer digest is at /llms-full.txt.",
+  },
 ];

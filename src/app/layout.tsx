@@ -43,6 +43,15 @@ export const metadata: Metadata = {
     "google-adsense-account": adsenseClientId,
   },
   metadataBase: new URL(getSiteUrl()),
+  alternates: {
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
+      ],
+      "text/markdown": [{ url: "/aeo/chennai.md", title: "Chennai AEO digest" }],
+    },
+  },
   openGraph: {
     type: "website",
     siteName: "mychennaicity.in",

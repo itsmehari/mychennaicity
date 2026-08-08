@@ -33,7 +33,6 @@ import {
   ArticleKeyDetailsStrip,
   ArticleLocationTag,
   ArticleQuickSummary,
-  ArticleRelatedGrid,
   ArticleRightSidebar,
   ArticleTocNav,
   CivicEditorialLayout,
@@ -47,22 +46,9 @@ import { InteractiveBlock } from "./interactive-block";
 import { ArticleCountdown } from "./article-countdown";
 import { OfficialDocumentBanner } from "./official-document-banner";
 import { SwmRulesAeoSection } from "./swm-rules-aeo-section";
+import { ArticleChennaiContextCluster } from "./article-chennai-context-cluster";
 import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
 import { readArticleCountdown } from "@/lib/article-countdown";
-
-function LegacyRelatedNav({
-  related,
-  layoutVariant,
-}: {
-  related: PublicArticleRow[];
-  layoutVariant: ArticleLayoutVariant;
-}) {
-  if (related.length === 0) return null;
-  if (layoutVariant === "editorial-grid") {
-    return <ArticleRelatedGrid articles={related} />;
-  }
-  return <ArticleRelatedGrid articles={related} />;
-}
 
 export async function EditorialArticle({
   article,
@@ -98,6 +84,18 @@ export async function EditorialArticle({
   const areaZone = areaSlug
     ? chennaiZones.find((z) => z.slug === areaSlug)
     : undefined;
+  const topicHref = article.category
+    ? `/chennai-local-news/topic/${categoryToTopicSlug(article.category)}`
+    : null;
+  const contextCluster = (
+    <ArticleChennaiContextCluster
+      articles={relatedRows}
+      areaLabel={areaZone?.label}
+      areaSlug={areaZone?.slug}
+      category={article.category}
+      topicHref={topicHref}
+    />
+  );
 
   const takeawaysBullets = extractTakeawaysBullets(reportRaw);
   const factBoxDetails = extractFactBoxDetails(reportRaw);
@@ -347,12 +345,7 @@ export async function EditorialArticle({
               <ArticleCommunityBand />
             </div>
           ),
-          related: (
-            <ArticleRelatedGrid
-              articles={relatedRows}
-              title="More from MyChennaiCity"
-            />
-          ),
+          related: contextCluster,
           adEnd: (
             <div className="civic-ad-slot">
               <ArticleAdRegion
@@ -459,12 +452,7 @@ export async function EditorialArticle({
       />
     ),
     communityBand: <ArticleCommunityBand />,
-    related: (
-      <LegacyRelatedNav
-        related={relatedRows}
-        layoutVariant={layoutVariant}
-      />
-    ),
+    related: contextCluster,
     adEnd: (
       <div className="flex w-full justify-center">
         <ArticleAdRegion

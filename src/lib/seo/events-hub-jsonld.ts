@@ -25,6 +25,16 @@ export function buildEventsHubJsonLdGraph(events: PublicEventRow[]) {
       about: CHENNAI_PLACE_GRAPH,
       breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
       mainEntity: { "@id": `${pageUrl}#eventlist` },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [
+          "[data-speakable='events-hub-title']",
+          "[data-speakable='events-hub-lede']",
+          '[data-speakable="hub-aeo-answer"]',
+          "#events-this-week",
+          "#events-hub-faq",
+        ],
+      },
     },
     {
       "@type": "CollectionPage",

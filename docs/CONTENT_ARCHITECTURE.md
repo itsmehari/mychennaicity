@@ -50,6 +50,8 @@
 - **Interactives:** `interactive_json` supports `checklist`, `poll`, `takeaways`, `faq`, and `howto` shapes — use `faq` / `howto` only with real, non-thin Q&A or steps (avoid empty schema).
 - **Rich snippets (JSON-LD):** Article pages emit `NewsArticle`, `BreadcrumbList`, optional TOC `ItemList`, plus `buildArticleSupplementalJsonLd`. **FAQPage:** exactly one block, only when `interactive_json.type === "faq"` and Q&A is rendered on the page (do not duplicate with `faqItems` or auto-generated fact-box FAQs). Validate in [Google Rich Results Test](https://search.google.com/test/rich-results) after publish.
 - **SWM Rules AEO block:** Solid-waste / SWM Rules articles listed in [`src/content/civic-swm/swm-rules-aeo.ts`](../src/content/civic-swm/swm-rules-aeo.ts) render a factual “Quick answers” section (`#swm-rules-aeo`) with a direct answer, definitions, series links, Speakable markup, and `about` entities. Keep copy aligned with published reporting — no new claims.
+- **AI discovery:** Keep [`/llms.txt`](../src/app/llms.txt/route.ts) hubs accurate when adding major public routes. Full plan: [`AEO_GEO_PLAN.md`](AEO_GEO_PLAN.md).
+- **Hub AEO strips:** Jobs and events hubs use shared [`AeoAnswerBlock`](../src/components/seo/aeo-answer-block.tsx). Article pages end with [`ArticleChennaiContextCluster`](../src/components/news/article-chennai-context-cluster.tsx) (related news + area/jobs/events hubs).
 
 ## Search measurement (ops)
 

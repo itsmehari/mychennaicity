@@ -1,32 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { EVENTS_HUB_FAQ } from "@/content/events/events-hub-faq";
+import { CHENNAI_JOBS_HUB_FAQ } from "@/content/jobs/chennai-jobs-hub-faq";
 
-export function EventsHubFaq() {
+export function ChennaiJobsHubFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section
-      id="events-hub-faq"
-      aria-labelledby="events-hub-faq-heading"
+      id="jobs-hub-faq"
+      aria-labelledby="jobs-hub-faq-heading"
       className="mt-14"
     >
       <h2
-        id="events-hub-faq-heading"
+        id="jobs-hub-faq-heading"
         className="type-display text-2xl text-[var(--foreground)] sm:text-3xl"
       >
-        Chennai events — common questions
+        Chennai jobs — common questions
       </h2>
       <p className="type-lede mt-2 max-w-2xl text-sm text-[var(--muted)]">
-        How to find concerts, comedy, and markets across the city — same answers
-        search engines read in our structured data.
+        How hiring works on this board — the same answers appear in our
+        structured data for search and answer engines.
       </p>
       <div className="mt-6 divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-        {EVENTS_HUB_FAQ.map((item, i) => {
+        {CHENNAI_JOBS_HUB_FAQ.map((item, i) => {
           const open = openIndex === i;
-          const panelId = `events-hub-faq-panel-${i}`;
-          const btnId = `events-hub-faq-btn-${i}`;
+          const panelId = `jobs-hub-faq-panel-${i}`;
+          const btnId = `jobs-hub-faq-btn-${i}`;
           return (
             <div key={item.question}>
               <h3>

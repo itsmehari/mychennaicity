@@ -1,5 +1,7 @@
 # SEO engine plan
 
+For Answer Engine / Generative Engine discovery (`llms.txt`, AI crawlers, hub FAQ/Speakable parity), see [`AEO_GEO_PLAN.md`](AEO_GEO_PLAN.md).
+
 ## Lessons applied from legacy
 
 1. **Canonical URL** must match sitemap `loc` and internal links.

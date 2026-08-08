@@ -1,0 +1,12 @@
+/* TEAM */
+Site: mychennaicity.in
+Location: Chennai, Tamil Nadu, India
+Contact: https://mychennaicity.in/contact
+
+/* SITE */
+Standards: HTML5, Next.js App Router, Schema.org JSON-LD
+Languages: en-IN (primary)
+Focus: Chennai local news, jobs, events, neighbourhood guides
+AI discovery: https://mychennaicity.in/llms.txt
+Editorial: https://mychennaicity.in/editorial-standards
+Last update: 2026

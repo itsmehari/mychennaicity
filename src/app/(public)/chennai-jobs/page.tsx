@@ -11,6 +11,7 @@ import {
 import { countOpenJobSeekerPostsForChennaiHub } from "@/domains/job-seekers";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
@@ -18,6 +19,8 @@ import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { ChennaiJobsHubHero } from "@/components/jobs/chennai-jobs-hub-hero";
+import { ChennaiJobsHubFaq } from "@/components/jobs/chennai-jobs-hub-faq";
+import { ChennaiJobsHubAeoStrip } from "@/components/jobs/chennai-jobs-hub-aeo-strip";
 import { ChennaiJobsHubListing } from "@/components/jobs/chennai-jobs-hub-listing";
 import {
   ChennaiJobsHubEmployerCta,
@@ -53,7 +56,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: hubTitleSegment,
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      types: {
+        "application/rss+xml": `${hubUrl}/feed.xml`,
+      },
+    },
     openGraph: {
       title: fullSiteTitle(hubTitleSegment),
       description: hasLive
@@ -70,6 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
         : "Chennai job listings — confirm on the employer’s site.",
       images: ["/twitter-image"],
     },
+    other: { ...CHENNAI_GEO_META },
   };
 }
 
@@ -92,30 +101,22 @@ export default async function ChennaiJobsHubPage() {
   }
 
   const useDb = total > 0;
-  const hubLd = useDb ? buildJobsHubJsonLd(dbJobs) : null;
+  const hubLd = buildJobsHubJsonLd(dbJobs);
   const hubCards = buildChennaiJobsHubCards(dbJobs);
 
   return (
     <div className={interiorMainClassName}>
-      {hubLd ? (
-        <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(hubLd.collectionPage),
-            }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd.itemList) }}
-          />
-        </>
-      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd) }}
+      />
       <PageBreadcrumbs
         items={[{ label: "Home", href: "/" }, { label: "Jobs in Chennai" }]}
       />
 
       <ChennaiJobsHubHero totalJobs={total} hasLiveJobs={useDb} />
+
+      <ChennaiJobsHubAeoStrip openJobsCount={total} />
 
       <ChennaiJobsHubTabs
         active="openings"
@@ -147,6 +148,7 @@ export default async function ChennaiJobsHubPage() {
       <ChennaiJobsHubSafety />
       <ChennaiJobsHubEmployerCta />
       <ChennaiJobsHubResources />
+      <ChennaiJobsHubFaq />
 
       <ChennaiJobsPartnerBanner slotId="jobs-index-mid" className="mt-14" />
 

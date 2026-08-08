@@ -1,4 +1,5 @@
 import { getSiteUrl } from "@/lib/env";
+import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
 import {
   orgPostalAddressJsonLd,
   orgSameAsUrls,
@@ -32,11 +33,25 @@ export function HomeJsonLd() {
         url: base,
         name: "mychennaicity.in",
         description:
-          "Chennai-area local news, directory, jobs, events, and neighbourhood pages.",
+          "Chennai local news, jobs, events, directory, and neighbourhood pages for Greater Chennai.",
         publisher: { "@id": `${base}/#org` },
         inLanguage: "en-IN",
+        about: CHENNAI_PLACE_GRAPH,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${base}/search?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
       },
-      org,
+      {
+        ...org,
+        areaServed: CHENNAI_PLACE_GRAPH,
+        description:
+          "Independent Chennai local publication covering Greater Chennai news, jobs, events, and neighbourhood guides.",
+      },
     ],
   };
 

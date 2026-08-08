@@ -27,4 +27,9 @@ export const EVENTS_HUB_FAQ: FaqItem[] = [
     answer:
       "Listings cover Greater Chennai including Mylapore, Adyar, T Nagar, Anna Nagar, Velachery, OMR, Sholinganallur, Porur, Guindy, Egmore, Nungambakkam, Kodambakkam, Royapettah, and nearby suburbs.",
   },
+  {
+    question: "Is there an RSS feed for Chennai events?",
+    answer:
+      "Yes. Subscribe at mychennaicity.in/chennai-local-events/feed.xml for upcoming Chennai event listings.",
+  },
 ];

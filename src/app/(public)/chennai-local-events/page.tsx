@@ -19,6 +19,7 @@ import {
 import { buildEventsHubJsonLdGraph } from "@/lib/seo/events-hub-jsonld";
 import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { EventsHubFaq } from "@/components/events/events-hub-faq";
+import { EventsHubThisWeekDigest } from "@/components/events/events-hub-this-week-digest";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
@@ -32,7 +33,12 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Chennai events calendar: live music, stand-up comedy, exhibitions, and meetups in Mylapore, OMR, Porur, T Nagar, Egmore, and across Greater Chennai. Free to browse on mychennaicity.in.",
-  alternates: { canonical: `${getSiteUrl()}${canonicalPath}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${canonicalPath}`,
+    types: {
+      "application/rss+xml": `${getSiteUrl()}${canonicalPath}/feed.xml`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description:
@@ -60,17 +66,15 @@ export default async function ChennaiLocalEventsPage() {
     dbEvents = [];
   }
   const useDb = dbEvents.length > 0;
-  const hubLd = useDb ? buildEventsHubJsonLdGraph(dbEvents) : null;
+  const hubLd = buildEventsHubJsonLdGraph(dbEvents);
   const hubCards = dbEvents.map(buildHubCardFromDb);
 
   return (
     <div className={interiorMainClassName}>
-      {hubLd ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd) }}
-        />
-      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(hubLd) }}
+      />
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -78,10 +82,16 @@ export default async function ChennaiLocalEventsPage() {
         ]}
       />
       <p className="type-eyebrow text-[var(--accent-warm)]">Chennai local events</p>
-      <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
+      <h1
+        className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl"
+        data-speakable="events-hub-title"
+      >
         What&apos;s on in Chennai
       </h1>
-      <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
+      <p
+        className="type-lede mt-4 max-w-2xl text-sm leading-relaxed"
+        data-speakable="events-hub-lede"
+      >
         Temple utsavams, concerts, theatre, lit fests, and neighbourhood
         gatherings across Chennai and nearby.
         {useDb ? (
@@ -147,6 +157,8 @@ export default async function ChennaiLocalEventsPage() {
       <AdvertisePanel variant="events" layout="section" className="mt-8" />
 
       <HubCommunityStrip businessVariant="events" />
+
+      <EventsHubThisWeekDigest events={dbEvents} />
 
       {useDb ? (
         <EventsHubListing cards={hubCards} />
