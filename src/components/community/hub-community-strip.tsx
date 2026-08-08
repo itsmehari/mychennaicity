@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
+import { MYCHENNAICITY_USAGE_GUIDE_PATH } from "@/content/guides/mychennaicity-usage";
 import type { BusinessWhatsAppCtaVariant } from "@/lib/whatsapp-cta-copy";
 
 /**
@@ -19,7 +21,19 @@ export function HubCommunityStrip({
       aria-label="Community and contact"
     >
       <JoinWhatsAppCommunityCard layout="card" />
-      <BusinessWhatsAppCta variant={businessVariant} />
+      <div className="flex min-h-0 flex-col gap-4">
+        <BusinessWhatsAppCta variant={businessVariant} />
+        <p className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-xs leading-relaxed text-[var(--muted)]">
+          New to the site?{" "}
+          <Link
+            href={MYCHENNAICITY_USAGE_GUIDE_PATH}
+            className="font-semibold text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            How to use mychennaicity.in
+          </Link>{" "}
+          — guides for residents, job seekers, WhatsApp admins, and more.
+        </p>
+      </div>
     </section>
   );
 }

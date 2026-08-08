@@ -126,10 +126,52 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
+      url: `${base}/llms.txt`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
+      url: `${base}/llms-full.txt`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
+    {
+      url: `${base}/aeo/chennai.md`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.75,
+    },
+    {
+      url: `${base}/humans.txt`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
       url: `${base}/chennai-local-news`,
       lastModified: hubLastModified,
       changeFrequency: "daily",
       priority: 0.9,
+    },
+    {
+      url: `${base}/chennai-local-news/feed.xml`,
+      lastModified: hubLastModified,
+      changeFrequency: "hourly",
+      priority: 0.65,
+    },
+    {
+      url: `${base}${CHENNAI_JOBS_HUB_PATH}/feed.xml`,
+      lastModified: jobsLastModified,
+      changeFrequency: "hourly",
+      priority: 0.55,
+    },
+    {
+      url: `${base}/chennai-local-events/feed.xml`,
+      lastModified: eventsLastModified,
+      changeFrequency: "hourly",
+      priority: 0.55,
     },
     {
       url: `${base}/areas`,
@@ -172,6 +214,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.55,
+    },
+    {
+      url: `${base}/guides/how-to-use-mychennaicity`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.75,
     },
     {
       url: `${base}/guides/bulk-waste-generator-readiness-checklist-2026`,

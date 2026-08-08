@@ -4,6 +4,7 @@ import { chennaiZones } from "@/lib/chennai-zones";
 import { getOrgSocialLinks } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { MYCHENNAICITY_USAGE_GUIDE_PATH } from "@/content/guides/mychennaicity-usage";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
@@ -16,11 +17,13 @@ const newsLinks = [
 
 const discoverLinks = [
   { href: "/search", label: "Search the site" },
+  { href: MYCHENNAICITY_USAGE_GUIDE_PATH, label: "How to use this site" },
   { href: "/glossary", label: "Chennai & GCC glossary" },
   { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
   { href: "/directory", label: "Full directory" },
   { href: "/chennai-local-events", label: "Chennai local events" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
+  { href: "/llms.txt", label: "AI / LLM site index" },
   { href: "/#areas", label: "Area map (home)" },
 ];
 
@@ -33,6 +36,7 @@ const workLinks = [
 
 const companyLinks = [
   { href: "/about", label: "About us" },
+  { href: MYCHENNAICITY_USAGE_GUIDE_PATH, label: "How to use this site" },
   { href: "/contact", label: "Contact & tips" },
   { href: "/editorial-standards", label: "Editorial standards" },
   { href: "/contact", label: "Advertise" },
@@ -45,6 +49,7 @@ const legalLinks = [
   { href: "/terms#disclaimer", label: "Disclaimer" },
   { href: "/cookies", label: "Cookies" },
   { href: "/community-guidelines", label: "Community guidelines" },
+  { href: "/humans.txt", label: "humans.txt" },
 ];
 
 const tagLinks = [

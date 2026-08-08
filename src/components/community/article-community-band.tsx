@@ -1,6 +1,7 @@
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
+import { ExploreMyChennaiCityBand } from "@/components/site/explore-mychennaicity-band";
 
 /**
  * Placement rule: end of the reading column, after the article body and
@@ -13,6 +14,7 @@ export function ArticleCommunityBand() {
       className="space-y-5 rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_88%,var(--accent)_4%)] p-5 sm:p-6"
       aria-label="Community and tips"
     >
+      <ExploreMyChennaiCityBand compact />
       <AdvertisePanel variant="news" layout="strip" />
       <JoinWhatsAppCommunityCard layout="inline" />
       <div className="border-t border-[var(--border)] pt-5">
