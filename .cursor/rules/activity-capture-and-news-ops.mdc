@@ -16,8 +16,11 @@ Do **not** leave new habits only in chat. When we publish, seed, change editoria
 | Events workflow | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
 | News pipeline / seed patterns | `docs/AGENT_LEARNINGS_AND_SOPS.md` SOP for news; optionally `docs/prompts/NEWS_PUBLISHING_PIPELINE_SYSTEM_DESIGN.md` |
 | One-off initiative status | Matching `.cursor/plans/*.plan.md` todos |
+| **Cross-chat daily work log** (when user asks, or end of a heavy multi-chat day) | `docs/AGENT_LEARNINGS_AND_SOPS.md` **§7 Daily work logs** + one-line pointer in **§6 Changelog** |
 
 **Minimum log:** what we did, the rule to follow next time, and the live URL / script name if published.
+
+**Daily work log minimum:** date; chat titles + transcript ids; commits; live URLs / routes; pending uncommitted items.
 
 ## News articles (every publish)
 

@@ -134,7 +134,8 @@ When a chat produces a **repeatable practice**, **live publish**, or **policy** 
 3. Add a one-line pointer in **`AGENTS.md`** non-negotiables when the rule is site-wide.
 4. Domain prompts stay in place: events → `docs/prompts/ADD_CHENNAI_EVENT.md`; news pipeline design → `docs/prompts/NEWS_PUBLISHING_PIPELINE_SYSTEM_DESIGN.md`.
 5. Append a short line under **§6 Changelog** (date + what was codified).
-6. Do **not** invent parallel “activity log” folders — use this doc tree only.
+6. For **cross-chat day summaries**, add or update **§7 Daily work logs** (do not invent a separate work-log folder).
+7. Do **not** invent parallel “activity log” folders — use this doc tree only.
 
 Cursor rule: **`.cursor/rules/activity-capture-and-news-ops.mdc`**.
 
@@ -161,6 +162,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 | Content IA | `docs/CONTENT_ARCHITECTURE.md` |
 | **Add / seed Chennai events** | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
 | **Capture activities + news publish** | `.cursor/rules/activity-capture-and-news-ops.mdc`, SOP I / SOP J (this file) |
+| **Daily work logs** | §7 below (cross-chat day summaries) |
 | Agent rules (short) | `AGENTS.md` |
 | Initiative plans | `.cursor/plans/*.plan.md` |
 
@@ -171,3 +173,58 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-03-30:** Initial synthesis from multi-thread agent transcripts (AdSense/legal, elections map, Panguni special events, hero/home, jobs SERP copy, SEO/JSON-LD, portable ads, map explorer, ops/browser handoffs).
 - **2026-06-10:** Events hub discovery cards + mobile detail UX; `CHENNAI_EVENTS.md`, `ADD_CHENNAI_EVENT` prompt, `seed-event-shared.ts`, Cursor rule `chennai-events.mdc`.
 - **2026-08-06:** SOP I (capture activities into existing docs) + SOP J (news publish: disclaimer, AI fine print, bilingual, social); Cursor rule `activity-capture-and-news-ops.mdc`; Nilgiri TBM Moolakadai EN/TA live articles.
+- **2026-08-08:** Cross-chat day — see **§7 Daily work logs** (AEO/llms.txt, WhatsApp spammers + article, site usage guide, BWG ship, civic seed batch, IAS G.O. follow-up, activity-log rule).
+
+---
+
+## 7. Daily work logs
+
+Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcripts under this project. Keep entries factual; link live URLs with the `.in` host only.
+
+### 2026-08-08
+
+**Commits (main):** `1be09ec` · `e5d7975` · `5418823` · `536a79c`
+
+#### Chats active this day
+
+| Chat (short title) | Transcript id | Focus |
+| --- | --- | --- |
+| [AEO / llms.txt / GCC trail](23c25e22-0afc-46ab-8c94-c99b131e482d) | `23c25e22-…` | Bulk-waste agencies paper trail; AEO ranking tasks; implement llms.txt + related surfaces |
+| [Savukku / WhatsApp admins](c0443c55-bdcc-4c54-8200-323fdb404b25) | `c0443c55-…` | Condolences article edits; WhatsApp spammers list page; spam-report platform news article |
+| [BWG guide + ship](a0d0e45f-fbee-4716-905c-22b917741147) | `a0d0e45f-…` | Bulk Waste Generator readiness guide/tool; commit & push recent work across chats |
+| [IAS G.O. follow-up](2d6f09dc-77c4-4872-9923-fef7e3b9a8ca) | `2d6f09dc-…` | Publish G.O. (Rt.) No. 2892 as follow-up to May/July IAS desks |
+| [Nilgiri / ops rules](6ccc6a3a-b30d-42ab-bdbc-c98192b23337) | `6ccc6a3a-…` | (Carry-over) disclaimer/AI fine print, Twitter CTAs, activity-capture rule; **this** daily work log |
+
+#### Shipped / live
+
+1. **WhatsApp spammers list (admins)** — `/chennai-whatsapp-spammers`  
+   Content `src/content/whatsapp-community/spammers.ts`; linked from community landing, guide, FAQ, rules, sitemap (`1be09ec`).
+
+2. **WhatsApp spam-report platform article** — `/chennai-local-news/whatsapp-spam-report-platform-chennai-group-admins-august-2026`  
+   Seed `scripts/seed-whatsapp-spam-report-platform-chennai-admins-august-2026.ts` (`e5d7975`).
+
+3. **How to use mychennaicity + Explore bands** — `/guides/how-to-use-mychennaicity`  
+   Audience guide + home/hub/article Explore conversion sections (`5418823`).
+
+4. **AEO / GEO / discoverability batch** (`536a79c`, `docs/AEO_GEO_PLAN.md`):  
+   - `/llms.txt`, `/llms-full.txt`, `/llm.txt`, `/aeo/chennai.md`, `humans.txt`, robots updates  
+   - Jobs + events hub FAQ / AEO strips / digest UX; feeds for jobs & events  
+   - Article Chennai-context cluster + AEO answer block components  
+   - SWM AEO expansions (`src/content/civic-swm/swm-rules-aeo.ts`)
+
+5. **Pending civic news seeds landed in repo** (same ship commit):  
+   GCC bulk-waste paper trail EN/TA; Ilai banana-leaf mission; Chennai waste-rules “must explain”; Savukku son condolences seed; Nilgiri hero PNG.
+
+6. **IAS follow-up desk** — G.O. (Rt.) No. 2892 (07.08.2026), G. Prakash ↔ S. Malarvizhi (Archives / Revenue Administration):  
+   - Target slug `/chennai-local-news/tamil-nadu-ias-prakash-malarvizhi-archives-revenue-swap-august-2026`  
+   - Seed `scripts/seed-tn-ias-prakash-malarvizhi-august-2026.ts` + scan `public/documents/tn-ias-prakash-malarvizhi-go-rt-2892-07-08-2026.png`  
+   - **Note at log time:** seed + document were live-oriented but still **uncommitted** on working tree — commit/push if not already done after this log.
+
+#### Ops / process
+
+- Reinforced **SOP I/J** and always-on rule `.cursor/rules/activity-capture-and-news-ops.mdc` (started 2026-08-06; referenced again today for daily logging).
+- `.cursor/rules/` tracked in git (ignore exception) so shared rules version with the repo.
+
+#### Not in today’s commits (context only)
+
+- Nilgiri EN/TA metro breakthrough articles were published **2026-08-06**; today’s Nilgiri chat work was policy/social/logging, not a new seed.
