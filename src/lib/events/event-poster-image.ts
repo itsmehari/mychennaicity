@@ -39,6 +39,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/omr-marathon-anti-drug-awareness-padur-august-2026.png",
     alt: "OMR Marathon — Anti-Drug Awareness Marathon poster, Padur OMR Chennai, 9 August 2026",
   },
+  "saturangam-360-chess-endgame-webinar-august-2026": {
+    src: "/images/events/saturangam-360-chess-endgame-webinar-august-2026.png",
+    alt: "Saturangam 360 Academy — Game Concept Endgame Fundamentals chess webinar poster, 22 August 2026",
+  },
   "ticket9-chennaiyil-chinna-kuyil": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennaiyil%20Chinna%20Kuyil/64711457/Chennaiyil%20Chinna%20Kuyil_bannerimage.webp",
     alt: "Chennaiyil Chinna Kuyil — Ticket9 Chennai event poster",

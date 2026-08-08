@@ -38,6 +38,8 @@
     "db:seed:event:seafood-expo-bharat:live": "tsx scripts/seed-event-seafood-expo-bharat-july-2026.ts --live",
     "db:seed:event:omr-marathon": "tsx scripts/seed-event-omr-marathon-august-2026.ts",
     "db:seed:event:omr-marathon:live": "tsx scripts/seed-event-omr-marathon-august-2026.ts --live",
+    "db:seed:event:saturangam-chess-webinar": "tsx scripts/seed-event-saturangam-chess-webinar-august-2026.ts",
+    "db:seed:event:saturangam-chess-webinar:live": "tsx scripts/seed-event-saturangam-chess-webinar-august-2026.ts --live",
     "db:seed:chennai-discovery-events": "tsx scripts/seed-chennai-discovery-events-2026.ts",
     "db:seed:chennai-discovery-events:live": "tsx scripts/seed-chennai-discovery-events-2026.ts --live",
     "db:seed:ticket9-chennai-events": "tsx scripts/seed-ticket9-chennai-events-2026.ts",

@@ -174,6 +174,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-06-10:** Events hub discovery cards + mobile detail UX; `CHENNAI_EVENTS.md`, `ADD_CHENNAI_EVENT` prompt, `seed-event-shared.ts`, Cursor rule `chennai-events.mdc`.
 - **2026-08-06:** SOP I (capture activities into existing docs) + SOP J (news publish: disclaimer, AI fine print, bilingual, social); Cursor rule `activity-capture-and-news-ops.mdc`; Nilgiri TBM Moolakadai EN/TA live articles.
 - **2026-08-08:** Cross-chat day — see **§7 Daily work logs** (AEO/llms.txt, WhatsApp spammers + article, site usage guide, BWG ship, civic seed batch, IAS G.O. follow-up, activity-log rule).
+- **2026-08-08:** Events — Saturangam 360 chess endgame webinar (22 Aug 2026) seeded live; poster `public/images/events/saturangam-360-chess-endgame-webinar-august-2026.png` + `db:seed:event:saturangam-chess-webinar(:live)`.
 
 ---
 
