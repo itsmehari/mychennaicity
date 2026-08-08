@@ -12,4 +12,5 @@ export const WHATSAPP_COMMUNITY_RULES: string[] = [
   "English, Tamil, Tanglish welcome",
   "Admins may warn/remove without notice",
   "Official group only via mychennaicity.in or links we publish",
+  "Admins: reject invite-flood numbers listed on mychennaicity.in/chennai-whatsapp-spammers",
 ];

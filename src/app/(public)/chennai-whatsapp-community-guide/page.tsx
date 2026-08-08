@@ -12,6 +12,7 @@ import {
   WHATSAPP_COMMUNITY_GEO_META,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
+  WHATSAPP_SPAMMERS_PAGE_PATH,
   siteWhatsappCommunityPageUrl,
 } from "@/lib/whatsapp-community";
 
@@ -48,7 +49,7 @@ const SECTIONS = [
   },
   {
     title: "Watch for spam patterns",
-    body: "Repeated crypto schemes, gambling links, adult content, and cold DMs are red flags. Leave or mute groups that tolerate them — WhatsApp cannot moderate content for you.",
+    body: "Repeated crypto schemes, gambling links, adult content, and cold DMs are red flags. Leave or mute groups that tolerate them — WhatsApp cannot moderate content for you. Group admins: check our public WhatsApp spammers list for numbers already flagged from invite-link floods.",
   },
   {
     title: "Prefer one city-wide group over many splinters",
@@ -102,6 +103,17 @@ export default function ChennaiWhatsappCommunityGuidePage() {
       <div className="mt-12">
         <WhatsAppCommunityCta variant="banner" utmContent="guide" />
       </div>
+
+      <p className="mt-8 max-w-2xl text-sm text-[var(--muted)]">
+        Running a Chennai WhatsApp group? See the{" "}
+        <Link
+          href={WHATSAPP_SPAMMERS_PAGE_PATH}
+          className="font-semibold text-[var(--accent)] hover:underline"
+        >
+          WhatsApp spammers list
+        </Link>{" "}
+        for numbers we have rejected from invite-link floods.
+      </p>
 
       <p className="mt-8 text-xs text-[var(--muted)]">
         Canonical community URL:{" "}

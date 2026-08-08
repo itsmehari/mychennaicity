@@ -36,6 +36,7 @@
 | Tamil companion | `/chennai-whatsapp-group-tamil` |
 | SEO guide | `/chennai-whatsapp-community-guide` |
 | Partners | `/whatsapp-community/partners` |
+| Spammers list (admins) | `/chennai-whatsapp-spammers` |
 
 ## Analytics
 

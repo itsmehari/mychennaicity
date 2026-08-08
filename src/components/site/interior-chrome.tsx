@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { WHATSAPP_COMMUNITY_PAGE_PATH, WHATSAPP_SPAMMERS_PAGE_PATH } from "@/lib/whatsapp-community";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 
 export const interiorMainClassName =
@@ -75,6 +75,11 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     href: WHATSAPP_COMMUNITY_PAGE_PATH,
     label: "WhatsApp community",
     hint: "Official my chennai city group",
+  },
+  {
+    href: WHATSAPP_SPAMMERS_PAGE_PATH,
+    label: "WhatsApp spammers list",
+    hint: "Flagged join-request numbers for admins",
   },
   {
     href: "/chennai-gold-rate",

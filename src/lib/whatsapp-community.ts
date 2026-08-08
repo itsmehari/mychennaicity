@@ -17,6 +17,9 @@ export const WHATSAPP_COMMUNITY_GUIDE_PATH = "/chennai-whatsapp-community-guide"
 /** Partner badge / embed */
 export const WHATSAPP_COMMUNITY_PARTNERS_PATH = "/whatsapp-community/partners";
 
+/** Flagged invite-flood / spam numbers for group admins */
+export const WHATSAPP_SPAMMERS_PAGE_PATH = "/chennai-whatsapp-spammers";
+
 export const WHATSAPP_COMMUNITY_OG_IMAGE =
   "/images/mychennaicity-whatsapp-community-og.svg";
 
@@ -54,6 +57,10 @@ export function siteWhatsappCommunityGuideUrl(): string {
 
 export function siteWhatsappCommunityPartnersUrl(): string {
   return `${getSiteUrl()}${WHATSAPP_COMMUNITY_PARTNERS_PATH}`;
+}
+
+export function siteWhatsappSpammersUrl(): string {
+  return `${getSiteUrl()}${WHATSAPP_SPAMMERS_PAGE_PATH}`;
 }
 
 /**

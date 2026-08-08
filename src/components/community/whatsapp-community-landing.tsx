@@ -11,6 +11,7 @@ import {
   WHATSAPP_COMMUNITY_LAST_UPDATED,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
+  WHATSAPP_SPAMMERS_PAGE_PATH,
 } from "@/lib/whatsapp-community";
 import {
   InteriorCrossNav,
@@ -192,8 +193,15 @@ export function WhatsAppCommunityLanding() {
           Same rules are pinned in WhatsApp. Also see our{" "}
           <Link href="/community-guidelines" className="font-semibold text-[var(--accent)] hover:underline">
             community guidelines
-          </Link>
-          .
+          </Link>{" "}
+          and the{" "}
+          <Link
+            href={WHATSAPP_SPAMMERS_PAGE_PATH}
+            className="font-semibold text-[var(--accent)] hover:underline"
+          >
+            WhatsApp spammers list
+          </Link>{" "}
+          for numbers we reject from invite-link floods.
         </p>
         <ul className="mt-5 grid gap-2 sm:grid-cols-2">
           {WHATSAPP_COMMUNITY_RULES.map((rule) => (
@@ -318,6 +326,13 @@ export function WhatsAppCommunityLanding() {
             className="underline underline-offset-2 hover:text-white"
           >
             How to find trusted local groups
+          </Link>
+          {" · "}
+          <Link
+            href={WHATSAPP_SPAMMERS_PAGE_PATH}
+            className="underline underline-offset-2 hover:text-white"
+          >
+            Spammers list for admins
           </Link>
         </p>
       </section>

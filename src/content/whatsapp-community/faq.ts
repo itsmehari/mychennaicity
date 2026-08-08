@@ -48,6 +48,11 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
       "Volunteer admins from the mychennaicity.in editorial team enforce posted rules: warnings, message removal, or removal from the group without notice for repeat spam or abuse. Full rules are on this page and pinned in WhatsApp.",
   },
   {
+    question: "Do you publish a WhatsApp spammers list?",
+    answer:
+      "Yes. Numbers flagged from invite-link join floods on the my chennai city group are listed at mychennaicity.in/chennai-whatsapp-spammers so other Chennai WhatsApp admins can stay wary. The list is a public-interest moderation aid, not a police or court finding.",
+  },
+  {
     question: "Is mychennaicity.in affiliated with WhatsApp?",
     answer:
       "No. mychennaicity.in is an independent Chennai local site. WhatsApp is a product of Meta. We use WhatsApp as a channel; we are not affiliated with WhatsApp LLC or Meta.",

@@ -22,6 +22,7 @@ import {
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
+  WHATSAPP_SPAMMERS_PAGE_PATH,
 } from "@/lib/whatsapp-community";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 
@@ -267,6 +268,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.6,
+    },
+    {
+      url: `${base}${WHATSAPP_SPAMMERS_PAGE_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${base}/business-profile/abk-liaison-llp`,
