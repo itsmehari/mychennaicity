@@ -173,6 +173,8 @@
     "db:seed:bvm-global-perungudi-chess-tournament-2026:live": "tsx scripts/seed-bvm-global-perungudi-chess-tournament-2026.ts --live",
     "db:seed:savukku-shankar-son-condolences-august-2026": "tsx scripts/seed-savukku-shankar-son-condolences-august-2026.ts",
     "db:seed:savukku-shankar-son-condolences-august-2026:live": "tsx scripts/seed-savukku-shankar-son-condolences-august-2026.ts --live",
+    "db:seed:whatsapp-spam-report-platform-chennai-admins-august-2026": "tsx scripts/seed-whatsapp-spam-report-platform-chennai-admins-august-2026.ts",
+    "db:seed:whatsapp-spam-report-platform-chennai-admins-august-2026:live": "tsx scripts/seed-whatsapp-spam-report-platform-chennai-admins-august-2026.ts --live",
     "db:seed:chennai-metro-nilgiri-tbm-moolakadai-2026": "tsx scripts/seed-chennai-metro-nilgiri-tbm-moolakadai-2026.ts",
     "db:seed:chennai-metro-nilgiri-tbm-moolakadai-2026:live": "tsx scripts/seed-chennai-metro-nilgiri-tbm-moolakadai-2026.ts --live",
     "db:seed:chennai-metro-nilgiri-tbm-moolakadai-2026-tamil": "tsx scripts/seed-chennai-metro-nilgiri-tbm-moolakadai-2026-tamil.ts",

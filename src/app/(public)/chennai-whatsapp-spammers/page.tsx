@@ -220,6 +220,13 @@ export default function ChennaiWhatsappSpammersPage() {
             className="font-semibold text-[var(--accent)] hover:underline"
           >
             trusted groups guide
+          </Link>{" "}
+          and our full explainer for group admins:{" "}
+          <Link
+            href="/chennai-local-news/whatsapp-spam-report-platform-chennai-group-admins-august-2026"
+            className="font-semibold text-[var(--accent)] hover:underline"
+          >
+            WhatsApp spam report platform for Chennai group admins
           </Link>
           .
         </p>
