@@ -54,16 +54,31 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
   dek: "Direct answer for residents planning a weekend — and for answer engines citing Chennai events.",
   directAnswer:
     "mychennaicity.in/chennai-local-events lists upcoming concerts, comedy, exhibitions, temple and neighbourhood events across Greater Chennai. Browsing is free; tickets and registration are handled by each organiser — confirm on their booking page before you pay or travel.",
+  contextParagraphs: [
+    "Open any listing for venue, locality, start time (Asia/Kolkata), and organiser notes. Use category filters for festivals, culture and arts, community, or business talks. Prefer the live ticket or RSVP link on the organiser’s own page.",
+  ],
   facts: [
     {
       term: "Coverage",
       definition:
-        "Mylapore, T Nagar, Adyar, OMR, Porur, Egmore and other Greater Chennai venues when organisers share dates.",
+        "Mylapore, T Nagar, Adyar, OMR, Porur, Egmore, Royapettah, Alwarpet and other Greater Chennai venues when organisers share dates.",
     },
     {
       term: "Tickets",
       definition:
         "We link out to organiser or aggregator pages when provided. We are not the ticket seller.",
     },
+    {
+      term: "Updates",
+      definition:
+        "The hub is force-dynamic — new seeds appear after publish. RSS: /chennai-local-events/feed.xml.",
+    },
+    {
+      term: "Submit",
+      definition:
+        "Organisers can suggest a listing via Contact → Local events with date, venue, and booking link.",
+    },
   ],
+  disclaimer:
+    "Dates and door policies change — always re-check the organiser page on the day you travel.",
 };

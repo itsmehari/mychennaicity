@@ -43,6 +43,18 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/saturangam-360-chess-endgame-webinar-august-2026.png",
     alt: "Saturangam 360 Academy — Game Concept Endgame Fundamentals chess webinar poster, 22 August 2026",
   },
+  "sj-jananiy-carnatic-vocal-narada-gana-sabha-august-2026": {
+    src: "/images/events/sj-jananiy-carnatic-narada-gana-sabha-august-2026.jpg",
+    alt: "Carnatic vocal concert mood — Kalaimamani S. J. Jananiy at Narada Gana Sabha, Chennai, 15 August 2026",
+  },
+  "sukoon-baithak-utkarsh-sharma-mathsya-adyar-september-2026": {
+    src: "/images/events/sukoon-baithak-utkarsh-sharma-adyar-september-2026.jpg",
+    alt: "Sukoon Baithak mood — Utkarsh Sharma ghazals at Mathsya Adyar, Chennai, 5 September 2026",
+  },
+  "tabla-poetry-bhupendra-singh-music-academy-september-2026": {
+    src: "/images/events/tabla-poetry-bhupendra-singh-september-2026.jpg",
+    alt: "Tabla Poetry Live mood — Bhupendra Singh Khidia at Music Academy Mini Hall, Chennai, 20 September 2026",
+  },
   "ticket9-chennaiyil-chinna-kuyil": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennaiyil%20Chinna%20Kuyil/64711457/Chennaiyil%20Chinna%20Kuyil_bannerimage.webp",
     alt: "Chennaiyil Chinna Kuyil — Ticket9 Chennai event poster",
@@ -60,8 +72,8 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     alt: "Thiruporur marathon — Ticket9 Chennai event poster",
   },
   "ticket9-frangipani-tour-chennai": {
-    src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Frangipani%20Tour%20-%20Chennai/86314792/Frangipani%20Tour%20-%20Chennai_bannerimage.webp",
-    alt: "Frangipani Tour - Chennai — Ticket9 Chennai event poster",
+    src: "/images/events/frangipani-tour-kaber-vasuki-august-2026.webp",
+    alt: "Frangipani Tour with Kaber Vasuki — The Music Academy, Chennai, 22 August 2026",
   },
   "ticket9-pomblel-chennai": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Pomblel%20%28Chennai%29/32558663/Pomblel%20%28Chennai%29_bannerimage.webp",

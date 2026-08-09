@@ -174,7 +174,9 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-06-10:** Events hub discovery cards + mobile detail UX; `CHENNAI_EVENTS.md`, `ADD_CHENNAI_EVENT` prompt, `seed-event-shared.ts`, Cursor rule `chennai-events.mdc`.
 - **2026-08-06:** SOP I (capture activities into existing docs) + SOP J (news publish: disclaimer, AI fine print, bilingual, social); Cursor rule `activity-capture-and-news-ops.mdc`; Nilgiri TBM Moolakadai EN/TA live articles.
 - **2026-08-08:** Cross-chat day — see **§7 Daily work logs** (AEO/llms.txt, WhatsApp spammers + article, site usage guide, BWG ship, civic seed batch, IAS G.O. follow-up, activity-log rule).
-- **2026-08-08:** Events — Saturangam 360 chess endgame webinar (22 Aug 2026) seeded live; poster `public/images/events/saturangam-360-chess-endgame-webinar-august-2026.png` + `db:seed:event:saturangam-chess-webinar(:live)`.
+- **2026-08-08:** Events — Saturangam 360 chess endgame webinar (22 Aug 2026) seeded live; poster `public/images/events/saturangam-360-chess-endgame-webinar-august-2026.png` + `db:seed:event:saturangam-chess-webinar(:live)`. Zoom register: `https://us06web.zoom.us/meeting/register/325vdTMvTMCccdcke-Jpww` (description updated live).
+- **2026-08-10:** Events — four music listings live: Jananiy Carnatic (`db:seed:event:sj-jananiy-carnatic:live`), Frangipani/Kaber enrich Ticket9 (`db:seed:event:frangipani-kaber-vasuki:live`), Sukoon baithak Adyar (`db:seed:event:sukoon-baithak-adyar:live`), Tabla Poetry (`db:seed:event:tabla-poetry:live`). Posters under `public/images/events/` + `event-poster-image.ts`. **Rule:** enrich existing Ticket9 slugs instead of duplicating Frangipani-style imports.
+- **2026-08-10:** Events hub UX/SEO — `/chennai-local-events` reordered: hero + Next up + **Browse listings** above the fold; ads/WhatsApp/advertise moved below. New `EventsHubHero`, sticky category chips, dynamic meta count, expanded FAQ/AEO. **Rule:** never bury the event grid under promo strips on the hub.
 
 ---
 

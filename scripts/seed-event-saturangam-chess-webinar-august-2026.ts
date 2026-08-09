@@ -24,6 +24,8 @@ export const SATURANGAM_CHESS_WEBINAR_SLUG =
   "saturangam-360-chess-endgame-webinar-august-2026";
 
 const PHONE_DISPLAY = "63806 06143";
+const ZOOM_REGISTER =
+  "https://us06web.zoom.us/meeting/register/325vdTMvTMCccdcke-Jpww";
 const WA_REGISTER = `https://wa.me/916380606143?text=${encodeURIComponent(
   "Hi, I saw the Saturangam 360 Chess Endgame Fundamentals webinar (22 Aug 2026) on MyChennaiCity and would like to register.",
 )}`;
@@ -32,7 +34,7 @@ const live = isLiveSeed();
 loadEventSeedEnv(live);
 const db = drizzle(neon(requireDatabaseUrl(live)), { schema });
 
-const DESCRIPTION = `Online chess webinar on **game concept and endgame fundamentals** for players rated **below 1500**. Fee **₹100**. Call or WhatsApp **[${PHONE_DISPLAY}](${WA_REGISTER})** to register.
+const DESCRIPTION = `Online chess webinar on **game concept and endgame fundamentals** for players rated **below 1500**. Fee **₹100**. **[Register on Zoom](${ZOOM_REGISTER})**, or call / WhatsApp **[${PHONE_DISPLAY}](${WA_REGISTER})**.
 
 **Organiser:** Saturangam 360 Academy
 
@@ -40,7 +42,7 @@ const DESCRIPTION = `Online chess webinar on **game concept and endgame fundamen
 
 **When:** **Saturday, 22 August 2026** · **4:00 PM – 5:30 PM IST**
 
-**Where:** **Online (Zoom)** — join / register via the organiser QR on the flyer, or contact below
+**Where:** **Online (Zoom)** — [register for the webinar](${ZOOM_REGISTER})
 
 ### What you will learn
 
@@ -55,10 +57,11 @@ Students, parents, coaches, and chess enthusiasts — all welcome. Best suited f
 ### Fee & registration
 
 - **Fee:** ₹100
-- Scan & pay / Zoom register via the organiser flyer, or call / WhatsApp **[${PHONE_DISPLAY}](${WA_REGISTER})** (contact: **B. Vidya**)
-- Email: [saturangam360@hotmail.com](mailto:saturangam360@hotmail.com) · [saturnagam360@gmail.com](mailto:saturnagam360@gmail.com)
+- **Register on Zoom:** [${ZOOM_REGISTER}](${ZOOM_REGISTER})
+- Scan & pay via the organiser flyer, or call / WhatsApp **[${PHONE_DISPLAY}](${WA_REGISTER})** (contact: **B. Vidya**)
+- Email: [saturangam360@hotmail.com](mailto:saturangam360@hotmail.com) · [saturangam360@gmail.com](mailto:saturangam360@gmail.com)
 
-Confirm payment, Zoom link, and seat availability with Saturangam 360 before the session. Details from the organiser flyer (August 2026).`;
+Confirm payment and seat availability with Saturangam 360 before the session. Details from the organiser flyer (August 2026).`;
 
 async function main() {
   const cityId = await getChennaiCityId(db);
@@ -71,7 +74,9 @@ async function main() {
     endsAt: istToUtcDate(2026, 8, 22, 17, 30),
     allDay: false,
     venueName: "Online (Zoom)",
-    venueAddress: "Live Zoom webinar — join link after registration",
+    venueAddress:
+      "Live Zoom webinar — https://us06web.zoom.us/meeting/register/325vdTMvTMCccdcke-Jpww",
+
     localityLabel: "Online",
     featured: false,
   });

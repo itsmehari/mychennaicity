@@ -28,25 +28,32 @@ Indexation rules: [`CONTENT_ARCHITECTURE.md`](CONTENT_ARCHITECTURE.md#events-and
 
 ---
 
-## 2. Hub listing UI (2026-06)
+## 2. Hub listing UI (2026-08)
 
-**Inspired by** clean event-marketplace card rails (e.g. portrait posters, date badges, category chips).
+**Goal:** listings and answer copy above the fold; ads / WhatsApp / advertise below.
 
 | Piece | Path |
 |-------|------|
 | Page | `src/app/(public)/chennai-local-events/page.tsx` |
+| Hero (answer + Next up + jumps) | `src/components/events/events-hub-hero.tsx` |
 | Listing (client filter) | `src/components/events/events-hub-listing.tsx` |
 | Card | `src/components/events/event-hub-card.tsx` |
 | Card data / tags | `src/lib/events/event-hub-helpers.ts` |
+| AEO strip (below grid) | `src/components/events/events-hub-aeo-strip.tsx` |
+| Plain digest | `src/components/events/events-hub-this-week-digest.tsx` |
 | Styles | `src/styles/events-hub.css` |
+
+**Above-the-fold order:** breadcrumbs → hero (H1, direct answer, jump links, Next up) → Browse listings (`#browse-events`) with sticky category chips.
+
+**Below fold:** plain digest → AEO facts → FAQ → planning → ads / WhatsApp / advertise / community.
 
 **Behaviour:**
 
-- DB rows → discovery cards; mock list when hub would be empty (no fake `ItemList` JSON-LD on mock).
-- Horizontal swipe rails on mobile; responsive grid on desktop.
-- Category chips: All, Festivals, Culture & arts, Community, Business & talks, Featured (client-side filter from inferred tags).
-- Card image from festival rich `gallery[0]` or `seo.ogImageUrl` when `content_ref` is set; else gradient placeholder.
-- Status line: **See details** (on-site) or **Tickets ↗** (external mock rows). No fake “Free” pricing.
+- DB rows → discovery cards; empty state points to Contact → Local events.
+- Category chips: All, Festivals, Culture & arts, Community, Business & talks, Featured.
+- Card image from festival rich gallery/OG or registered poster (`event-poster-image.ts`); else no image.
+- Status line: **See details** (on-site). No fake “Free” pricing.
+- Dynamic `generateMetadata` includes live upcoming count when available.
 
 ---
 
@@ -123,6 +130,10 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-mylapore-panguni-2026.ts` | `db:seed:event:mylapore-panguni:live` |
 | `seed-event-panguni.ts` | `db:seed:event:panguni:live` |
 | `seed-edii-tn-ecommerce-training-2026.ts` | `db:seed:edii-tn-ecommerce-training-2026:live` |
+| `seed-event-sj-jananiy-carnatic-august-2026.ts` | `db:seed:event:sj-jananiy-carnatic:live` |
+| `seed-event-frangipani-kaber-vasuki-august-2026.ts` | `db:seed:event:frangipani-kaber-vasuki:live` (enriches `ticket9-frangipani-tour-chennai`) |
+| `seed-event-sukoon-baithak-adyar-september-2026.ts` | `db:seed:event:sukoon-baithak-adyar:live` |
+| `seed-event-tabla-poetry-september-2026.ts` | `db:seed:event:tabla-poetry:live` |
 
 ---
 
@@ -139,3 +150,5 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | Date | Change |
 |------|--------|
 | 2026-06-10 | Hub: kynhood-style discovery cards + category filter. Detail: mobile-first summary, sticky actions, share/calendar/maps. Docs + `ADD_CHENNAI_EVENT` prompt + Cursor rule + `seed-event-shared.ts`. |
+| 2026-08-10 | Four music listings: Jananiy Carnatic (Narada Gana Sabha), Frangipani/Kaber (enrich Ticket9), Sukoon baithak (Mathsya Adyar), Tabla Poetry (Music Academy Mini Hall). Self-hosted posters + live seeds. |
+| 2026-08-10 | Hub overhaul: above-the-fold hero + Next up + browse grid; ads/community CTAs below; sticky filters; dynamic meta; stronger FAQ/AEO. Components: `events-hub-hero.tsx`, `events-hub-aeo-strip.tsx`. |

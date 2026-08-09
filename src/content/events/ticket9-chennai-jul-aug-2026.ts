@@ -513,19 +513,21 @@ export const TICKET9_CHENNAI_EVENTS_JUL_AUG_2026: ChennaiDiscoveryEvent[] = [
   },
   {
     slug: "ticket9-frangipani-tour-chennai",
-    title: "Frangipani Tour - Chennai",
+    title: "Frangipani Tour with Kaber Vasuki — The Music Academy (22 Aug 2026)",
     category: "Concert",
     date: "2026-08-22",
-    time: "17:00:00 to 19:30:00",
+    time: "17:00:00 to 20:00:00",
     venueName: "The Music Academy",
-    address: "The Music Academy, Gopalapuram, Chennai",
-    locality: "Gopalapuram",
-    description: "Frangipani Tour live music night at The Music Academy, Chennai.",
+    address:
+      "Old No. 306, New No. 168, TTK Road, Royapettah, Chennai 600014",
+    locality: "Royapettah",
+    description:
+      "Tamil indie storytelling concert — Kaber Vasuki Frangipani Tour at The Music Academy. Seated indoor auditorium; family-friendly listening night. Prefer the dedicated enrich seed `db:seed:event:frangipani-kaber-vasuki` for full copy.",
     ticketPrice: "See Ticket9 for pricing",
-    targetAudience: "Chennai residents and visitors",
+    targetAudience: "Tamil indie music fans, families, and youth",
     bookingLink: "https://www.theticket9.com/event/frangipani-tour-chennai",
     featured: true,
-    notes: "Listed via Ticket9 (theticket9.com).",
+    notes: "Listed via Ticket9 (theticket9.com). Enriched by seed-event-frangipani-kaber-vasuki-august-2026.ts.",
   },
   {
     slug: "ticket9-thiruporur-marathon",

@@ -1,17 +1,307 @@
-/* Events hub — compact discovery grid (4-up on desktop) */
+/* Events hub — discovery grid + above-the-fold hero */
+
+.mcc-skip-to-events {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.mcc-skip-to-events:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 80;
+  width: auto;
+  height: auto;
+  padding: 0.65rem 1rem;
+  overflow: visible;
+  border-radius: 0.5rem;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.mcc-events-hub-hero {
+  margin-top: 0.35rem;
+  padding: 1.1rem 0 0.35rem;
+  background:
+    radial-gradient(
+      120% 80% at 0% 0%,
+      color-mix(in srgb, var(--accent-warm) 14%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 70% at 100% 10%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 50%
+    );
+}
+
+.mcc-events-hub-hero__top {
+  display: grid;
+  gap: 1.35rem;
+}
+
+@media (min-width: 960px) {
+  .mcc-events-hub-hero__top {
+    grid-template-columns: minmax(0, 1.15fr) minmax(17rem, 0.85fr);
+    gap: 1.75rem;
+    align-items: start;
+  }
+}
+
+.mcc-events-hub-hero__title {
+  margin-top: 0.35rem;
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-hero__lede {
+  margin-top: 0.85rem;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.mcc-events-hub-hero__answer {
+  margin-top: 1rem;
+  max-width: 40rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--accent-warm);
+  background: color-mix(in srgb, var(--surface) 88%, var(--accent-warm));
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-hero__answer-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+}
+
+.mcc-events-hub-hero__jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.mcc-events-hub-hero__jump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.mcc-events-hub-hero__jump:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  color: var(--accent);
+}
+
+.mcc-events-hub-hero__jump.is-primary {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--accent);
+}
+
+.mcc-events-hub-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+  max-width: 28rem;
+}
+
+@media (min-width: 480px) {
+  .mcc-events-hub-hero__stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.mcc-events-hub-hero__stats > div {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
+.mcc-events-hub-hero__stats dt {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mcc-events-hub-hero__stats dd {
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-hero__next {
+  padding: 1rem 1.05rem 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--surface);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+.mcc-events-hub-hero__next-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.mcc-events-hub-hero__next-head h2 {
+  font-size: 1rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-hero__next-all {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.mcc-events-hub-hero__next-all:hover {
+  text-decoration: underline;
+}
+
+.mcc-events-hub-hero__next-empty {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.mcc-events-hub-hero__next-empty a {
+  font-weight: 650;
+  color: var(--accent);
+}
+
+.mcc-events-hub-hero__next-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mcc-events-hub-hero__next-list li {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+}
+
+.mcc-events-hub-hero__next-n {
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: var(--accent-warm);
+  padding-top: 0.15rem;
+}
+
+.mcc-events-hub-hero__next-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.mcc-events-hub-hero__next-title:hover {
+  color: var(--accent);
+}
+
+.mcc-events-hub-hero__next-meta {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
 
 .mcc-events-hub-listing {
   --hub-card-aspect: 4 / 5;
+}
+
+.mcc-events-hub-listing__intro {
+  margin-bottom: 0.85rem;
+}
+
+.mcc-events-hub-listing__heading {
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+.mcc-events-hub-listing__dek {
+  margin-top: 0.25rem;
+  max-width: 40rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 .mcc-events-hub-categories {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  padding-bottom: 0.35rem;
-  margin-bottom: 1.25rem;
+  padding: 0.35rem 0 0.55rem;
+  margin-bottom: 1rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+}
+
+.mcc-events-hub-categories--sticky {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 30;
+  margin-left: -0.15rem;
+  margin-right: -0.15rem;
+  padding-left: 0.15rem;
+  padding-right: 0.15rem;
+  background: color-mix(in srgb, var(--background) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
 }
 
 .mcc-events-hub-categories__chip {
@@ -236,5 +526,30 @@
 @media (min-width: 1280px) {
   .mcc-events-hub-grid {
     gap: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mcc-events-hub-hero__copy {
+    animation: mcc-events-hub-in 0.45s ease both;
+  }
+
+  .mcc-events-hub-hero__next {
+    animation: mcc-events-hub-in 0.55s ease 0.08s both;
+  }
+
+  .mcc-events-hub-listing {
+    animation: mcc-events-hub-in 0.5s ease 0.12s both;
+  }
+}
+
+@keyframes mcc-events-hub-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

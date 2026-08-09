@@ -57,9 +57,16 @@ export function EventsHubListing({ cards }: { cards: EventHubCardData[] }) {
         "Events");
 
   return (
-    <div className="mcc-events-hub-listing mt-10">
+    <div id="browse-events" className="mcc-events-hub-listing mt-8 scroll-mt-28">
+      <div className="mcc-events-hub-listing__intro">
+        <h2 className="mcc-events-hub-listing__heading">Browse Chennai events</h2>
+        <p className="mcc-events-hub-listing__dek">
+          Filter by type, then open a card for venue, time, and booking notes.
+          Confirm with the organiser before you travel.
+        </p>
+      </div>
       <nav
-        className="mcc-events-hub-categories"
+        className="mcc-events-hub-categories mcc-events-hub-categories--sticky"
         aria-label="Filter events by category"
       >
         {EVENT_HUB_CATEGORIES.map((cat) => {

@@ -57,7 +57,7 @@ function inferTagsFromText(
     tags.add("festivals");
   }
   if (
-    /concert|theatre|theater|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal|stand-up|stand up|comedy|open mic|comedian|puppet|singalong|rave|dj|orchestra|grammy/.test(
+    /concert|theatre|theater|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal|stand-up|stand up|comedy|open mic|comedian|puppet|singalong|rave|dj|orchestra|grammy|carnatic|kutcheri|ghazal|baithak|mehfil|tabla|spoken.?word|indie/.test(
       text,
     )
   ) {
