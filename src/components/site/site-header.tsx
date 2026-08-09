@@ -41,6 +41,29 @@ export function SiteHeader() {
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <Link
+            href="/contact"
+            className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] text-[var(--accent)] transition hover:border-[var(--accent)] sm:min-w-0 sm:px-3.5 sm:py-2"
+            aria-label="Contact"
+            title="Contact"
+            onClick={closeMobile}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+            <span className="hidden text-xs font-bold sm:inline">Contact</span>
+          </Link>
+          <Link
             href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=nav`}
             className="focus-ring hidden min-h-11 items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-4 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] sm:inline-flex"
           >
