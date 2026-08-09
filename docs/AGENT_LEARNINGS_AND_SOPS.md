@@ -179,6 +179,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-10:** Events hub UX/SEO — `/chennai-local-events` reordered: hero + Next up + **Browse listings** above the fold; ads/WhatsApp/advertise moved below. New `EventsHubHero`, sticky category chips, dynamic meta count, expanded FAQ/AEO. **Rule:** never bury the event grid under promo strips on the hub.
 - **2026-08-10:** Events — Meetup Aug–Sep batch (15 listings) via `db:seed:meetup-chennai-aug-sep(:live)` + `src/content/events/meetup-chennai-aug-sep-2026.ts`. Thematic posters under `public/images/events/meetup-*.jpg`. **Gaps to re-check on Meetup:** Explara URL for RPA, Cloudera floor address for KSUG.AI, TBA venues (Ronda / Women Network / Poker / Freelancers Aug), Breaking Code fee, TechNexus speakers.
 - **2026-08-10:** Local events megamenu — live “Next up” rail via `/api/events/nav-preview` + richer Browse/Plan columns + featured card (`MegaNavEventsLive`). **Rule:** events nav should never be a single empty link; surface live calendar count and soonest listings.
+- **2026-08-10:** All mega-nav sections (News, Explore, Jobs, Events, Areas) share `/api/nav/preview` live rails; dropdown uses scrim + elevated card so it no longer blends into the page. **Rule:** every primary nav megamenu must include a live rail + featured CTA.
 
 ---
 

@@ -1,6 +1,7 @@
 import { chennaiZones } from "@/lib/chennai-zones";
 import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { TOPIC_SLUG_TO_CATEGORY } from "@/lib/news-topics";
+import type { MegaNavLiveKind } from "@/lib/nav/nav-preview-types";
 
 export type MegaNavLink = {
   href: string;
@@ -25,7 +26,9 @@ export type MegaNavSection = {
   label: string;
   columns: MegaNavColumn[];
   featured?: MegaNavFeatured;
-  /** When true, panel shows a live upcoming-events rail (Local events). */
+  /** Live rail kind — fetches `/api/nav/preview`. */
+  livePreview?: MegaNavLiveKind;
+  /** @deprecated use livePreview: "events" */
   liveEventsPreview?: boolean;
 };
 
@@ -43,7 +46,6 @@ const areaLinks: MegaNavLink[] = chennaiZones.map((z) => ({
   description: z.blurb,
 }));
 
-/** Split zones into two balanced columns for the bento grid */
 function splitAreas(): [MegaNavLink[], MegaNavLink[]] {
   const mid = Math.ceil(areaLinks.length / 2);
   return [areaLinks.slice(0, mid), areaLinks.slice(mid)];
@@ -55,6 +57,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "news",
     label: "News",
+    livePreview: "news",
     featured: {
       title: "Chennai newsroom",
       description:
@@ -81,17 +84,30 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             label: "News index",
             description: "Alternate entry to coverage.",
           },
+          {
+            href: "/contact",
+            label: "Send a tip",
+            description: "Civic leads and corrections welcome.",
+          },
         ],
       },
       {
         heading: "Topics",
-        links: topicLinks,
+        links: topicLinks.slice(0, 8),
       },
     ],
   },
   {
     id: "explore",
     label: "Explore",
+    livePreview: "explore",
+    featured: {
+      title: "Discover Chennai",
+      description:
+        "Directory, classifieds, gold rate, WhatsApp community, and civic maps — everyday city tools.",
+      href: "/directory",
+      cta: "Open directory",
+    },
     columns: [
       {
         heading: "Directory",
@@ -104,12 +120,12 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/chennai-classifieds",
             label: "Chennai classifieds",
-            description: "Reader-submitted tuition, services, and wanted posts.",
+            description: "Tuition, services, and wanted posts.",
           },
           {
             href: "/chennai-gold-rate",
             label: "Chennai gold rate",
-            description: "Today's 24K and 22K per gram plus jewellery calculator.",
+            description: "Today's 24K and 22K plus calculator.",
           },
           {
             href: WHATSAPP_COMMUNITY_PAGE_PATH,
@@ -124,7 +140,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/civic-tools",
             label: "Civic tools",
-            description: "Zone & ward finder, boundary maps, complaint router, and civic card.",
+            description: "Zone & ward finder, maps, complaint router.",
           },
           {
             href: "/civic-tools/zone-ward-finder",
@@ -134,17 +150,12 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/elections-2026",
             label: "Elections 2026 map",
-            description: "Chennai metro+ assembly constituencies and curated candidates.",
+            description: "Assembly seats and curated candidates.",
           },
           {
             href: "/chennai-map",
-            label: "Interactive map explorer",
-            description: "Ward map and Corporation zone map — overlays, search, area guides.",
-          },
-          {
-            href: "/chennai-map?view=zones",
-            label: "Corporation zone map",
-            description: "GCC 15-zone interactive map with ward and locality search.",
+            label: "Interactive map",
+            description: "Ward and Corporation zone explorer.",
           },
         ],
       },
@@ -153,14 +164,52 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "jobs",
     label: "Jobs",
+    livePreview: "jobs",
+    featured: {
+      title: "Jobs in Chennai",
+      description:
+        "Open roles and looking-for-work notices — browse free; apply only on the employer’s own page.",
+      href: "/chennai-jobs",
+      cta: "Open jobs hub",
+    },
     columns: [
       {
         heading: "Work",
         links: [
           {
             href: "/chennai-jobs",
-            label: "Chennai jobs",
-            description: "Jobs in Chennai, OMR, and nearby tech areas.",
+            label: "Open jobs",
+            description: "Curated Chennai openings and walk-ins.",
+          },
+          {
+            href: "/chennai-jobs/looking-for-work",
+            label: "Looking for work",
+            description: "Candidate notices for hiring managers.",
+          },
+          {
+            href: "/contact#jobs",
+            label: "Post a job",
+            description: "Free qualifying local listings.",
+          },
+          {
+            href: "/chennai-jobs/feed.xml",
+            label: "Jobs RSS",
+            description: "Subscribe for new openings.",
+          },
+        ],
+      },
+      {
+        heading: "Guides",
+        links: [
+          {
+            href: "/guides/chennai-tech-careers",
+            label: "How to read job ads",
+            description: "Spot fee traps and vague roles.",
+          },
+          {
+            href: "/guides/how-to-use-mychennaicity",
+            label: "For job seekers",
+            description: "How to use the board safely.",
           },
         ],
       },
@@ -169,6 +218,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "chennai-local-events",
     label: "Local events",
+    livePreview: "events",
     liveEventsPreview: true,
     featured: {
       title: "What's on in Chennai",
@@ -233,6 +283,14 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "areas",
     label: "Areas",
+    livePreview: "areas",
+    featured: {
+      title: "Chennai by neighbourhood",
+      description:
+        "Macro area guides linked to the city map — north coastal belt to OMR and Porur.",
+      href: "/chennai-map",
+      cta: "Open map",
+    },
     columns: [
       {
         heading: "North & central",
@@ -251,4 +309,12 @@ export function getMegaNavSection(
 ): MegaNavSection | undefined {
   if (!id) return undefined;
   return MEGA_NAV_SECTIONS.find((s) => s.id === id);
+}
+
+export function resolveLivePreviewKind(
+  section: MegaNavSection,
+): MegaNavLiveKind | null {
+  if (section.livePreview) return section.livePreview;
+  if (section.liveEventsPreview) return "events";
+  return null;
 }

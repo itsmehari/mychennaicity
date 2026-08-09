@@ -1,6 +1,6 @@
 import Link from "next/link";
-import type { MegaNavSection } from "./nav-config";
-import { MegaNavEventsLive } from "./mega-nav-events-live";
+import { resolveLivePreviewKind, type MegaNavSection } from "./nav-config";
+import { MegaNavLiveRail } from "./mega-nav-live-rail";
 
 type Props = {
   section: MegaNavSection;
@@ -9,29 +9,25 @@ type Props = {
 
 export function MegaNavPanel({ section, onNavigate }: Props) {
   const hasFeatured = Boolean(section.featured);
-  const hasLive = Boolean(section.liveEventsPreview);
+  const liveKind = resolveLivePreviewKind(section);
+  const hasLive = Boolean(liveKind);
+  const colCount = section.columns.length;
 
-  let gridClass = "";
-  if (hasLive && hasFeatured) {
-    gridClass =
-      "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,0.95fr)_minmax(0,240px)_minmax(0,300px)]";
-  } else if (hasFeatured) {
-    gridClass = "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,280px)]";
-  } else if (hasLive) {
-    gridClass = "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,300px)]";
-  } else if (section.columns.length > 1) {
-    gridClass = "md:grid-cols-2";
+  let gridClass = "mega-nav-panel-inner--stack";
+  if (hasLive && hasFeatured && colCount >= 2) {
+    gridClass = "mega-nav-panel-inner--quad";
+  } else if (hasFeatured && colCount >= 2) {
+    gridClass = "mega-nav-panel-inner--triple";
+  } else if (hasLive && colCount >= 2) {
+    gridClass = "mega-nav-panel-inner--triple-live";
+  } else if (colCount > 1) {
+    gridClass = "mega-nav-panel-inner--duo";
   }
 
-  const narrow =
-    !hasFeatured && !hasLive && section.columns.length === 1 ? "max-w-lg" : "";
-
   return (
-    <div
-      className={`mega-nav-panel-inner grid gap-8 lg:gap-8 ${gridClass} ${narrow}`}
-    >
+    <div className={`mega-nav-panel-inner ${gridClass}`}>
       {section.columns.map((col) => (
-        <div key={col.heading}>
+        <div key={col.heading} className="mega-nav-panel-col">
           <p className="type-display text-lg text-[var(--foreground)]">
             {col.heading}
           </p>
@@ -59,7 +55,7 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
       ))}
 
       {section.featured ? (
-        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] p-5 shadow-sm lg:self-start">
+        <div className="mega-nav-featured relative overflow-hidden rounded-2xl border border-[var(--border)] p-5 shadow-sm lg:self-start">
           <div
             className="pointer-events-none absolute -right-8 -top-10 h-36 w-36 rounded-full opacity-40 blur-2xl"
             style={{
@@ -86,7 +82,9 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
         </div>
       ) : null}
 
-      {hasLive ? <MegaNavEventsLive onNavigate={onNavigate} /> : null}
+      {liveKind ? (
+        <MegaNavLiveRail kind={liveKind} onNavigate={onNavigate} />
+      ) : null}
     </div>
   );
 }

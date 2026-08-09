@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { MEGA_NAV_SECTIONS } from "./nav-config";
-import { MegaNavEventsLive } from "./mega-nav-events-live";
+import { MEGA_NAV_SECTIONS, resolveLivePreviewKind } from "./nav-config";
+import { MegaNavLiveRail } from "./mega-nav-live-rail";
 
 type Props = {
   open: boolean;
@@ -131,9 +131,15 @@ export function MegaNavMobile({ open, onClose }: Props) {
                       </span>
                     </Link>
                   ) : null}
-                  {section.liveEventsPreview ? (
+                  {section.liveEventsPreview || section.livePreview ? (
                     <div className="mb-4 px-1">
-                      <MegaNavEventsLive onNavigate={onClose} compact />
+                      {resolveLivePreviewKind(section) ? (
+                        <MegaNavLiveRail
+                          kind={resolveLivePreviewKind(section)!}
+                          onNavigate={onClose}
+                          compact
+                        />
+                      ) : null}
                     </div>
                   ) : null}
                   {section.columns.map((col) => (

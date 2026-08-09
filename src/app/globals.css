@@ -183,34 +183,107 @@ body {
   outline-offset: 3px;
 }
 
-/* Megamenu: editorial slab + motion (respect reduced motion) */
+/* Megamenu: elevated slab that separates from page content */
+.mega-nav-scrim {
+  background: color-mix(in srgb, var(--foreground) 28%, transparent);
+  backdrop-filter: blur(2px);
+}
+
 .mega-nav-surface {
-  background-color: var(--surface);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 96%, white) 0%,
+      var(--surface) 40%
+    );
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--border));
+  box-shadow:
+    0 24px 48px -12px color-mix(in srgb, var(--foreground) 28%, transparent),
+    0 8px 20px -8px color-mix(in srgb, var(--foreground) 16%, transparent);
 }
 
 .mega-nav-mesh {
   background-image:
     radial-gradient(
       ellipse 90% 80% at 100% 0%,
-      color-mix(in srgb, var(--accent) 12%, transparent),
+      color-mix(in srgb, var(--accent) 14%, transparent),
       transparent 58%
     ),
     radial-gradient(
       ellipse 70% 60% at 0% 100%,
-      color-mix(in srgb, var(--accent-warm) 10%, transparent),
+      color-mix(in srgb, var(--accent-warm) 12%, transparent),
       transparent 52%
     );
 }
 
-.mega-nav-events-live {
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: color-mix(in srgb, var(--background) 55%, var(--surface));
-  padding: 1rem 1.05rem 1.1rem;
-  box-shadow: 0 12px 28px color-mix(in srgb, var(--foreground) 5%, transparent);
+.mega-nav-card {
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, var(--border));
+  border-radius: 1.15rem;
+  background: color-mix(in srgb, var(--surface) 92%, white);
+  padding: 1.15rem 1.2rem 1.25rem;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 70%, transparent),
+    0 1px 0 color-mix(in srgb, var(--foreground) 4%, transparent);
 }
 
-.mega-nav-events-live__head {
+.mega-nav-featured {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+
+.mega-nav-panel-inner {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.mega-nav-panel-inner--duo,
+.mega-nav-panel-inner--triple,
+.mega-nav-panel-inner--triple-live,
+.mega-nav-panel-inner--quad,
+.mega-nav-panel-inner--stack {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .mega-nav-panel-inner--duo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .mega-nav-panel-inner--triple {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 260px);
+    gap: 1.5rem 1.75rem;
+  }
+
+  .mega-nav-panel-inner--triple-live {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 300px);
+    gap: 1.5rem 1.75rem;
+  }
+
+  .mega-nav-panel-inner--quad {
+    grid-template-columns:
+      minmax(0, 0.95fr)
+      minmax(0, 0.95fr)
+      minmax(0, 230px)
+      minmax(0, 290px);
+    gap: 1.35rem 1.5rem;
+  }
+}
+
+.mega-nav-live {
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius: 1rem;
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--accent) 8%, var(--surface)),
+      var(--surface) 45%
+    );
+  padding: 1rem 1.05rem 1.1rem;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.mega-nav-live__head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -218,7 +291,7 @@ body {
   margin-bottom: 0.85rem;
 }
 
-.mega-nav-events-live__eyebrow {
+.mega-nav-live__eyebrow {
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -226,7 +299,7 @@ body {
   color: var(--accent-warm);
 }
 
-.mega-nav-events-live__title {
+.mega-nav-live__title {
   margin-top: 0.15rem;
   font-size: 1rem;
   font-weight: 750;
@@ -234,24 +307,21 @@ body {
   color: var(--foreground);
 }
 
-.mega-nav-events-live__count {
+.mega-nav-live__count {
   flex-shrink: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
+  max-width: 7.5rem;
+  font-size: 0.7rem;
+  font-weight: 650;
+  line-height: 1.3;
   color: var(--muted);
   text-align: right;
 }
 
-.mega-nav-events-live__count strong {
-  color: var(--accent);
-  font-weight: 750;
-}
-
-.mega-nav-events-live__pulse {
+.mega-nav-live__pulse {
   opacity: 0.7;
 }
 
-.mega-nav-events-live__list {
+.mega-nav-live__list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -260,7 +330,7 @@ body {
   gap: 0.35rem;
 }
 
-.mega-nav-events-live__item {
+.mega-nav-live__item {
   display: grid;
   grid-template-columns: 1.5rem minmax(0, 1fr);
   gap: 0.5rem;
@@ -271,11 +341,11 @@ body {
   transition: background 0.15s ease;
 }
 
-.mega-nav-events-live__item:hover {
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
+.mega-nav-live__item:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
-.mega-nav-events-live__n {
+.mega-nav-live__n {
   font-size: 0.65rem;
   font-weight: 750;
   letter-spacing: 0.04em;
@@ -283,14 +353,14 @@ body {
   padding-top: 0.2rem;
 }
 
-.mega-nav-events-live__body {
+.mega-nav-live__body {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
   min-width: 0;
 }
 
-.mega-nav-events-live__when {
+.mega-nav-live__when {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -298,7 +368,7 @@ body {
   color: var(--accent);
 }
 
-.mega-nav-events-live__name {
+.mega-nav-live__name {
   font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1.3;
@@ -310,7 +380,7 @@ body {
   overflow: hidden;
 }
 
-.mega-nav-events-live__venue {
+.mega-nav-live__venue {
   font-size: 0.7rem;
   line-height: 1.35;
   color: var(--muted);
@@ -320,14 +390,14 @@ body {
   overflow: hidden;
 }
 
-.mega-nav-events-live__empty {
+.mega-nav-live__empty {
   font-size: 0.8125rem;
   line-height: 1.45;
   color: var(--muted);
   margin-bottom: 0.75rem;
 }
 
-.mega-nav-events-live__cta {
+.mega-nav-live__cta {
   display: inline-flex;
   margin-top: 0.85rem;
   min-height: 2.5rem;
@@ -338,15 +408,15 @@ body {
   text-decoration: none;
 }
 
-.mega-nav-events-live__cta:hover {
+.mega-nav-live__cta:hover {
   text-decoration: underline;
 }
 
-.mega-nav-events-live--compact {
+.mega-nav-live--compact {
   padding: 0.85rem 0.9rem;
 }
 
-.mega-nav-events-live--compact .mega-nav-events-live__title {
+.mega-nav-live--compact .mega-nav-live__title {
   font-size: 0.95rem;
 }
 

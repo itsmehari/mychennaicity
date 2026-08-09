@@ -117,17 +117,26 @@ export function MegaNavDesktop() {
         </ul>
 
         {active ? (
-          <div
-            className="mega-nav-surface mega-nav-dropdown absolute left-1/2 top-full z-[55] w-screen max-w-[100vw] -translate-x-1/2 border-b border-[var(--border)] shadow-[0_28px_56px_-16px_color-mix(in_srgb,var(--foreground)_14%,transparent)]"
-            id={`mega-panel-${active.id}`}
-            role="region"
-            aria-labelledby={`mega-trigger-${active.id}`}
-            onMouseEnter={clearCloseTimer}
-          >
-            <div className="mega-nav-mesh mx-auto max-w-[1280px] px-4 py-8 sm:px-6">
-              <MegaNavPanel section={active} />
+          <>
+            <div
+              className="mega-nav-scrim fixed inset-0 top-[var(--site-header-offset,4.5rem)] z-[54]"
+              aria-hidden
+              onClick={() => setOpenId(null)}
+            />
+            <div
+              className="mega-nav-surface mega-nav-dropdown absolute left-1/2 top-full z-[55] w-screen max-w-[100vw] -translate-x-1/2"
+              id={`mega-panel-${active.id}`}
+              role="region"
+              aria-labelledby={`mega-trigger-${active.id}`}
+              onMouseEnter={clearCloseTimer}
+            >
+              <div className="mega-nav-mesh mx-auto max-w-[1280px] px-4 py-5 sm:px-6 sm:py-6">
+                <div className="mega-nav-card">
+                  <MegaNavPanel section={active} />
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </div>
