@@ -26,7 +26,7 @@ type Props = {
  * without pushing the browse UI below the fold.
  */
 export function EventsHubThisWeekDigest({ events }: Props) {
-  const slice = events.slice(0, 12);
+  const slice = events.slice(0, 20);
 
   return (
     <section

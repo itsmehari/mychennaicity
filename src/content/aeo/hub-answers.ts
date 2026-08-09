@@ -69,6 +69,11 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
         "We link out to organiser or aggregator pages when provided. We are not the ticket seller.",
     },
     {
+      term: "Meetup & workshops",
+      definition:
+        "Community workshops, tech talks, networking circles and wellness sessions are listed with organiser Meetup links when known. Exact venues are sometimes shared only after RSVP — we mark those clearly.",
+    },
+    {
       term: "Updates",
       definition:
         "The hub is force-dynamic — new seeds appear after publish. RSS: /chennai-local-events/feed.xml.",
@@ -80,5 +85,5 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
     },
   ],
   disclaimer:
-    "Dates and door policies change — always re-check the organiser page on the day you travel.",
+    "Dates, waitlists and door policies change — always re-check the organiser or Meetup page on the day you travel.",
 };

@@ -134,6 +134,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-frangipani-kaber-vasuki-august-2026.ts` | `db:seed:event:frangipani-kaber-vasuki:live` (enriches `ticket9-frangipani-tour-chennai`) |
 | `seed-event-sukoon-baithak-adyar-september-2026.ts` | `db:seed:event:sukoon-baithak-adyar:live` |
 | `seed-event-tabla-poetry-september-2026.ts` | `db:seed:event:tabla-poetry:live` |
+| `seed-meetup-chennai-aug-sep-2026.ts` | `db:seed:meetup-chennai-aug-sep:live` (15 Meetup/community rows) |
 
 ---
 
@@ -152,3 +153,4 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-06-10 | Hub: kynhood-style discovery cards + category filter. Detail: mobile-first summary, sticky actions, share/calendar/maps. Docs + `ADD_CHENNAI_EVENT` prompt + Cursor rule + `seed-event-shared.ts`. |
 | 2026-08-10 | Four music listings: Jananiy Carnatic (Narada Gana Sabha), Frangipani/Kaber (enrich Ticket9), Sukoon baithak (Mathsya Adyar), Tabla Poetry (Music Academy Mini Hall). Self-hosted posters + live seeds. |
 | 2026-08-10 | Hub overhaul: above-the-fold hero + Next up + browse grid; ads/community CTAs below; sticky filters; dynamic meta; stronger FAQ/AEO. Components: `events-hub-hero.tsx`, `events-hub-aeo-strip.tsx`. |
+| 2026-08-10 | Meetup Aug–Sep batch (15 workshops/tech/networking/wellness) + thematic posters + AEO/FAQ meetup copy. |

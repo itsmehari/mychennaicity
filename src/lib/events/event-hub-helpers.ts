@@ -64,14 +64,14 @@ function inferTagsFromText(
     tags.add("culture");
   }
   if (
-    /award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur|meetup|magento|storage|seminar|tech|snia|property expo/.test(
+    /award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur|meetup|magento|storage|seminar|tech|snia|property expo|rpa|kafka|freelancer|claude code|data science/.test(
       text,
     )
   ) {
     tags.add("business");
   }
   if (
-    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon/.test(
+    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon|board games|meditation|wellness|baking|poker/.test(
       text,
     )
   ) {

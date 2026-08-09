@@ -55,6 +55,66 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/tabla-poetry-bhupendra-singh-september-2026.jpg",
     alt: "Tabla Poetry Live mood — Bhupendra Singh Khidia at Music Academy Mini Hall, Chennai, 20 September 2026",
   },
+  "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
+    src: "/images/events/meetup-baking-workshop-chennai.jpg",
+    alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",
+  },
+  "meetup-data-science-essentials-rpa-iitm-research-park-aug-2026": {
+    src: "/images/events/meetup-tech-workshop-chennai.jpg",
+    alt: "Tech workshop mood — Data Science Essentials RPA at IITM Research Park, Chennai",
+  },
+  "meetup-new-business-circle-ronda-chennai-aug-2026": {
+    src: "/images/events/meetup-networking-chennai.jpg",
+    alt: "Networking mood — NEW BUSINESS CIRCLE by Ronda Club, Chennai",
+  },
+  "meetup-breaking-code-workshop-iitm-research-park-aug-2026": {
+    src: "/images/events/meetup-tech-workshop-chennai.jpg",
+    alt: "Coding workshop mood — Breaking Code at IITM Research Park, Chennai",
+  },
+  "meetup-board-games-banter-brews-funtunes-virugambakkam-aug-2026": {
+    src: "/images/events/meetup-board-games-chennai.jpg",
+    alt: "Board games mood — Board Games, Banter & Brews at Funtunes, Virugambakkam",
+  },
+  "meetup-women-network-india-ronda-chennai-aug-2026": {
+    src: "/images/events/meetup-networking-chennai.jpg",
+    alt: "Community networking mood — Women Network India, Chennai",
+  },
+  "meetup-texsas-holdem-chennai-poker-house-aug-2026": {
+    src: "/images/events/meetup-board-games-chennai.jpg",
+    alt: "Table games mood — Texsas Holdem poker meetup, T. Nagar, Chennai",
+  },
+  "meetup-silent-sufi-meditation-taj-business-hub-santhome-aug-2026": {
+    src: "/images/events/meetup-meditation-chennai.jpg",
+    alt: "Meditation mood — Silent Sufi Meditation at Taj Business Hub, Santhome",
+  },
+  "meetup-power-of-mind-self-realization-ccd-nungambakkam-aug-2026": {
+    src: "/images/events/meetup-meditation-chennai.jpg",
+    alt: "Self-development mood — Power of Mind meetup at CCD Ispahani Centre",
+  },
+  "meetup-beyond-the-hype-ai-technexus-microsoft-teynampet-aug-2026": {
+    src: "/images/events/meetup-ai-cloud-chennai.jpg",
+    alt: "AI meetup mood — Beyond the Hype at Microsoft Prestige Polygon, Teynampet",
+  },
+  "meetup-ksug-ai-india-9-cloud-native-ai-cloudera-aug-2026": {
+    src: "/images/events/meetup-ai-cloud-chennai.jpg",
+    alt: "Cloud native AI mood — KSUG.AI India meetup at Cloudera, Chennai",
+  },
+  "meetup-apache-kafka-chennai-facilio-guindy-aug-2026": {
+    src: "/images/events/meetup-tech-workshop-chennai.jpg",
+    alt: "Streaming tech mood — Apache Kafka Meetup at Facilio, Guindy",
+  },
+  "meetup-chennai-freelancers-club-makers-tribe-aug-2026": {
+    src: "/images/events/meetup-networking-chennai.jpg",
+    alt: "Freelancer networking mood — Chennai Freelancers Club by Makers Tribe",
+  },
+  "meetup-expert-talks-ai-evaluation-auth-indiqube-ekkatuthangal-aug-2026": {
+    src: "/images/events/meetup-ai-cloud-chennai.jpg",
+    alt: "Expert talks mood — AI evaluation and authorisation at IndiQube Alpine",
+  },
+  "meetup-claude-code-data-architects-pro-office-teynampet-sep-2026": {
+    src: "/images/events/meetup-tech-workshop-chennai.jpg",
+    alt: "Claude Code workshop mood — Data Architects at PRO Office, Teynampet",
+  },
   "ticket9-chennaiyil-chinna-kuyil": {
     src: "https://storage.googleapis.com/ticket9-prod.appspot.com/images/Chennaiyil%20Chinna%20Kuyil/64711457/Chennaiyil%20Chinna%20Kuyil_bannerimage.webp",
     alt: "Chennaiyil Chinna Kuyil — Ticket9 Chennai event poster",

@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const hubUrl = `${base}${canonicalPath}`;
   let count = 0;
   try {
-    const rows = await listPublicEventsForChennaiHub(40);
+    const rows = await listPublicEventsForChennaiHub(80);
     count = rows.length;
   } catch {
     count = 0;
@@ -79,7 +79,7 @@ export const dynamic = "force-dynamic";
 export default async function ChennaiLocalEventsPage() {
   let dbEvents: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
   try {
-    dbEvents = await listPublicEventsForChennaiHub(40);
+    dbEvents = await listPublicEventsForChennaiHub(80);
   } catch {
     dbEvents = [];
   }

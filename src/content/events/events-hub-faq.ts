@@ -3,9 +3,14 @@ import type { FaqItem } from "@/lib/seo/faq-jsonld";
 /** Visible FAQ text must match JSON-LD on /chennai-local-events. */
 export const EVENTS_HUB_FAQ: FaqItem[] = [
   {
+    question: "Where can I find Chennai Meetup workshops and tech talks?",
+    answer:
+      "mychennaicity.in/chennai-local-events lists Meetup-style workshops, tech talks, networking circles and wellness gatherings alongside concerts and festivals. Use the Business & talks or Community filters, then open each listing for venue notes, fees and the organiser Meetup link. Always confirm RSVP and building access on Meetup before you travel.",
+  },
+  {
     question: "Where can I find Chennai events this week?",
     answer:
-      "mychennaicity.in/chennai-local-events lists upcoming concerts, stand-up comedy, exhibitions, and meetups across Greater Chennai — from Mylapore and T Nagar to OMR, Porur, and Egmore. Use Browse listings for filters, or read the Next up and plain-list sections for a quick scan. Open any event for venue, time, and booking links.",
+      "mychennaicity.in/chennai-local-events lists upcoming concerts, stand-up comedy, exhibitions, Meetup workshops, and meetups across Greater Chennai — from Mylapore and T Nagar to OMR, Porur, and Egmore. Use Browse listings for filters, or read the Next up and plain-list sections for a quick scan. Open any event for venue, time, and booking links.",
   },
   {
     question: "How do I find concerts and comedy nights in Chennai?",

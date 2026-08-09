@@ -48,6 +48,8 @@
     "db:seed:event:sukoon-baithak-adyar:live": "tsx scripts/seed-event-sukoon-baithak-adyar-september-2026.ts --live",
     "db:seed:event:tabla-poetry": "tsx scripts/seed-event-tabla-poetry-september-2026.ts",
     "db:seed:event:tabla-poetry:live": "tsx scripts/seed-event-tabla-poetry-september-2026.ts --live",
+    "db:seed:meetup-chennai-aug-sep": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts",
+    "db:seed:meetup-chennai-aug-sep:live": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts --live",
     "db:seed:chennai-discovery-events": "tsx scripts/seed-chennai-discovery-events-2026.ts",
     "db:seed:chennai-discovery-events:live": "tsx scripts/seed-chennai-discovery-events-2026.ts --live",
     "db:seed:ticket9-chennai-events": "tsx scripts/seed-ticket9-chennai-events-2026.ts",
