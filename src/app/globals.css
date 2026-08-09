@@ -202,6 +202,154 @@ body {
     );
 }
 
+.mega-nav-events-live {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--background) 55%, var(--surface));
+  padding: 1rem 1.05rem 1.1rem;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
+.mega-nav-events-live__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.mega-nav-events-live__eyebrow {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+}
+
+.mega-nav-events-live__title {
+  margin-top: 0.15rem;
+  font-size: 1rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.mega-nav-events-live__count {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: right;
+}
+
+.mega-nav-events-live__count strong {
+  color: var(--accent);
+  font-weight: 750;
+}
+
+.mega-nav-events-live__pulse {
+  opacity: 0.7;
+}
+
+.mega-nav-events-live__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.mega-nav-events-live__item {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: start;
+  padding: 0.45rem 0.4rem;
+  border-radius: 0.65rem;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.mega-nav-events-live__item:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.mega-nav-events-live__n {
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: var(--accent-warm);
+  padding-top: 0.2rem;
+}
+
+.mega-nav-events-live__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.mega-nav-events-live__when {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mega-nav-events-live__name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mega-nav-events-live__venue {
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mega-nav-events-live__empty {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.mega-nav-events-live__cta {
+  display: inline-flex;
+  margin-top: 0.85rem;
+  min-height: 2.5rem;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.mega-nav-events-live__cta:hover {
+  text-decoration: underline;
+}
+
+.mega-nav-events-live--compact {
+  padding: 0.85rem 0.9rem;
+}
+
+.mega-nav-events-live--compact .mega-nav-events-live__title {
+  font-size: 0.95rem;
+}
+
 /* Home hero: one panel animates per slide (avoids stacked / “stuck” columns) */
 @keyframes home-hero-slide-in {
   from {

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MEGA_NAV_SECTIONS } from "./nav-config";
+import { MegaNavEventsLive } from "./mega-nav-events-live";
 
 type Props = {
   open: boolean;
@@ -129,6 +130,11 @@ export function MegaNavMobile({ open, onClose }: Props) {
                         {section.featured.cta} →
                       </span>
                     </Link>
+                  ) : null}
+                  {section.liveEventsPreview ? (
+                    <div className="mb-4 px-1">
+                      <MegaNavEventsLive onNavigate={onClose} compact />
+                    </div>
                   ) : null}
                   {section.columns.map((col) => (
                     <div key={col.heading} className="mb-4 last:mb-0">

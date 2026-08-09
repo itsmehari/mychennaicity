@@ -25,6 +25,8 @@ export type MegaNavSection = {
   label: string;
   columns: MegaNavColumn[];
   featured?: MegaNavFeatured;
+  /** When true, panel shows a live upcoming-events rail (Local events). */
+  liveEventsPreview?: boolean;
 };
 
 const topicLinks: MegaNavLink[] = Object.entries(TOPIC_SLUG_TO_CATEGORY).map(
@@ -167,14 +169,62 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "chennai-local-events",
     label: "Local events",
+    liveEventsPreview: true,
+    featured: {
+      title: "What's on in Chennai",
+      description:
+        "Concerts, Meetup workshops, comedy, temple dates and neighbourhood gatherings — free to browse; tickets stay with organisers.",
+      href: "/chennai-local-events",
+      cta: "Open events hub",
+    },
     columns: [
       {
-        heading: "Happening",
+        heading: "Browse",
         links: [
           {
-            href: "/chennai-local-events",
-            label: "Chennai local events",
-            description: "Temple festivals, meetups, culture, and civic dates.",
+            href: "/chennai-local-events#browse-events",
+            label: "All upcoming events",
+            description: "Full calendar with filters and posters.",
+          },
+          {
+            href: "/chennai-local-events#events-next-up",
+            label: "Next up",
+            description: "Soonest dates at a glance.",
+          },
+          {
+            href: "/chennai-local-events#browse-events",
+            label: "Culture & arts",
+            description: "Concerts, theatre, music and comedy.",
+          },
+          {
+            href: "/chennai-local-events#browse-events",
+            label: "Workshops & meetups",
+            description: "Tech talks, baking, networking circles.",
+          },
+        ],
+      },
+      {
+        heading: "Plan & share",
+        links: [
+          {
+            href: "/chennai-local-events#events-hub-faq",
+            label: "Events FAQ",
+            description: "Tickets, areas covered, how to submit.",
+          },
+          {
+            href: "/chennai-local-events/feed.xml",
+            label: "Events RSS",
+            description: "Subscribe for upcoming listings.",
+          },
+          {
+            href: "/contact#events",
+            label: "Submit an event",
+            description: "Send date, venue and booking link.",
+          },
+          {
+            href: "/guides/how-to-use-mychennaicity",
+            label: "How to use this site",
+            description: "Guides for residents and organisers.",
           },
         ],
       },

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { MegaNavSection } from "./nav-config";
+import { MegaNavEventsLive } from "./mega-nav-events-live";
 
 type Props = {
   section: MegaNavSection;
@@ -8,15 +9,26 @@ type Props = {
 
 export function MegaNavPanel({ section, onNavigate }: Props) {
   const hasFeatured = Boolean(section.featured);
-  const gridClass = hasFeatured
-    ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,280px)]"
-    : section.columns.length > 1
-      ? "md:grid-cols-2"
-      : "";
+  const hasLive = Boolean(section.liveEventsPreview);
+
+  let gridClass = "";
+  if (hasLive && hasFeatured) {
+    gridClass =
+      "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,0.95fr)_minmax(0,240px)_minmax(0,300px)]";
+  } else if (hasFeatured) {
+    gridClass = "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,280px)]";
+  } else if (hasLive) {
+    gridClass = "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,300px)]";
+  } else if (section.columns.length > 1) {
+    gridClass = "md:grid-cols-2";
+  }
+
+  const narrow =
+    !hasFeatured && !hasLive && section.columns.length === 1 ? "max-w-lg" : "";
 
   return (
     <div
-      className={`mega-nav-panel-inner grid gap-8 lg:gap-10 ${gridClass} ${!hasFeatured && section.columns.length === 1 ? "max-w-lg" : ""}`}
+      className={`mega-nav-panel-inner grid gap-8 lg:gap-8 ${gridClass} ${narrow}`}
     >
       {section.columns.map((col) => (
         <div key={col.heading}>
@@ -46,8 +58,8 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
         </div>
       ))}
 
-      {section.featured && (
-        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] p-6 shadow-sm lg:row-span-1">
+      {section.featured ? (
+        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] p-5 shadow-sm lg:self-start">
           <div
             className="pointer-events-none absolute -right-8 -top-10 h-36 w-36 rounded-full opacity-40 blur-2xl"
             style={{
@@ -72,7 +84,9 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
             {section.featured.cta}
           </Link>
         </div>
-      )}
+      ) : null}
+
+      {hasLive ? <MegaNavEventsLive onNavigate={onNavigate} /> : null}
     </div>
   );
 }
