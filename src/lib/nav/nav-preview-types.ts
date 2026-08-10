@@ -24,3 +24,6 @@ export type NavPreviewResponse = {
   explore: NavPreviewSectionPayload;
   areas: NavPreviewSectionPayload;
 };
+
+/** Megamenu section keys that have a live preview rail. */
+export type MegaNavLiveKind = Exclude<keyof NavPreviewResponse, "updatedAt">;
