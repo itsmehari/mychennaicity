@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 
 function setLaneActive(id: string | null) {
-  document.querySelectorAll<HTMLElement>(".mcc-contact-lane").forEach((el) => {
+  document.querySelectorAll<HTMLElement>(".mcc-corp-lane").forEach((el) => {
     el.dataset.active = id && el.id === id ? "true" : "false";
   });
 }
@@ -39,17 +39,20 @@ export function ContactIntentRail() {
   }
 
   return (
-    <nav className="mcc-contact-intent" aria-label="Choose why you are contacting us">
-      <p className="mcc-contact-intent__label">What do you need?</p>
-      <ul className="mcc-contact-intent__list">
-        {CONTACT_CHANNELS.map((channel) => (
+    <nav className="mcc-corp-toc" aria-label="Inquiry type">
+      <p className="mcc-corp-toc__label">Select inquiry</p>
+      <ul className="mcc-corp-toc__list">
+        {CONTACT_CHANNELS.map((channel, index) => (
           <li key={channel.id}>
             <button
               type="button"
-              className="mcc-contact-intent__chip"
+              className="mcc-corp-toc__chip"
               aria-current={activeId === channel.id ? "true" : undefined}
               onClick={() => goTo(channel.id)}
             >
+              <span className="mcc-corp-toc__n" aria-hidden>
+                {String(index + 1).padStart(2, "0")}
+              </span>
               {channel.shortLabel}
             </button>
           </li>

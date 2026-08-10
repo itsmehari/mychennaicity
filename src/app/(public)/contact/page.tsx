@@ -4,7 +4,6 @@ import { ContactServiceGrid } from "@/components/contact/contact-service-grid";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
-  interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
@@ -16,12 +15,12 @@ const titleSegment = "Contact — news, jobs, events & listings";
 export const metadata: Metadata = {
   title: titleSegment,
   description:
-    "Reach the mychennaicity.in desk for story tips, Chennai job and event listings, directory entries, advertising, or the reader WhatsApp group. WhatsApp is usually the fastest path.",
+    "Corporate contact desk for mychennaicity.in — story tips, Chennai jobs and events, directory listings, advertising, and the reader WhatsApp community.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description:
-      "Contact paths for Chennai local news, jobs, events, directory listings, and partnerships.",
+      "Engage with the mychennaicity.in team for Chennai news, jobs, events, listings, and partnerships.",
     url: `${getSiteUrl()}${path}`,
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
@@ -34,12 +33,14 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className={interiorMainClassName}>
-      <PageBreadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+    <>
+      <div className="mcc-corp-crumbs">
+        <PageBreadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+      </div>
 
       <ContactServiceGrid />
 
-      <div className="mcc-contact-note" role="note">
+      <div className="mcc-corp-note" role="note">
         <p>
           <strong>Urgent safety.</strong> For fire, medical emergencies, or crime
           in progress, contact emergency services and official helplines first —
@@ -48,17 +49,13 @@ export default function ContactPage() {
         <p>
           <strong>Community rules.</strong> Tips and group messages should follow
           our{" "}
-          <Link
-            href="/community-guidelines"
-            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-          >
-            community guidelines
-          </Link>
-          .
+          <Link href="/community-guidelines">community guidelines</Link>.
         </p>
       </div>
 
-      <InteriorCrossNav />
-    </div>
+      <div className="mcc-corp-cross">
+        <InteriorCrossNav />
+      </div>
+    </>
   );
 }

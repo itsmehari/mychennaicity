@@ -181,6 +181,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-10:** Local events megamenu — live “Next up” rail via `/api/events/nav-preview` + richer Browse/Plan columns + featured card (`MegaNavEventsLive`). **Rule:** events nav should never be a single empty link; surface live calendar count and soonest listings.
 - **2026-08-10:** All mega-nav sections (News, Explore, Jobs, Events, Areas) share `/api/nav/preview` live rails; dropdown uses scrim + elevated card so it no longer blends into the page. **Rule:** every primary nav megamenu must include a live rail + featured CTA.
 - **2026-08-10:** Contact page redesign — intent rail + WhatsApp-first CTAs + per-topic checklists (`/contact`, `contact-desk.css`). Keep `#news` `#jobs` `#events` `#directory` `#advertise` `#general` anchors. **Rule:** separate desk messaging from reader community join so conversion paths stay clear.
+- **2026-08-10:** Contact visual system is **page-scoped institutional** (ink + gold, Instrument Serif / Libre Franklin via `contact/layout.tsx`) — deliberately not the civic teal UI. **Rule:** do not reuse `.mcc-corp-*` styles on other hubs; keep Fortune-500 desk look only on `/contact`.
 
 ---
 

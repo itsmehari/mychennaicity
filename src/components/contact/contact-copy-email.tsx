@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-export function ContactCopyEmail({ email }: { email: string }) {
+export function ContactCopyEmail({
+  email,
+  className = "mcc-corp-btn mcc-corp-btn--outline-ink mcc-corp-btn--sm",
+}: {
+  email: string;
+  className?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function onCopy() {
@@ -16,13 +22,8 @@ export function ContactCopyEmail({ email }: { email: string }) {
   }
 
   return (
-    <button
-      type="button"
-      className="mcc-contact-btn mcc-contact-btn--ghost mcc-contact-btn--sm"
-      onClick={onCopy}
-      aria-live="polite"
-    >
-      {copied ? "Copied" : "Copy email"}
+    <button type="button" className={className} onClick={onCopy} aria-live="polite">
+      {copied ? "Copied" : "Copy"}
     </button>
   );
 }
