@@ -182,6 +182,9 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-10:** All mega-nav sections (News, Explore, Jobs, Events, Areas) share `/api/nav/preview` live rails; dropdown uses scrim + elevated card so it no longer blends into the page. **Rule:** every primary nav megamenu must include a live rail + featured CTA.
 - **2026-08-10:** Contact page redesign — intent rail + WhatsApp-first CTAs + per-topic checklists (`/contact`, `contact-desk.css`). Keep `#news` `#jobs` `#events` `#directory` `#advertise` `#general` anchors. **Rule:** separate desk messaging from reader community join so conversion paths stay clear.
 - **2026-08-10:** Contact visual system is **page-scoped institutional** (ink + gold, Instrument Serif / Libre Franklin via `contact/layout.tsx`) — deliberately not the civic teal UI. **Rule:** do not reuse `.mcc-corp-*` styles on other hubs; keep Fortune-500 desk look only on `/contact`.
+- **2026-08-10:** News — TN EB bill shock desk live: `/chennai-local-news/tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-reinspection` via `db:seed:tn-electricity-bill-shock-july-august-2026:live`. Links prior slab guide; asks for TNPDCL final 3.70-lakh scorecard after 7 Aug deadline.
+- **2026-08-10:** Cross-network EB desks — MCC shock + bill-calc seeds link MyOMR (`tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-omr`, TNEB slabs, EB Bill Hub). MyOMR OMR article + hub cards link back to MCC statewide desk. **Rule:** when publishing utility/news twins, interlink both directions in the same session.
+- **2026-08-10:** Site modal system (MyOMR architecture → MCC) — `docs/SITE_MODAL_SYSTEM.md`; mount `SiteModalHost` in public layout; campaigns WhatsApp / newsletter / civic / events + top-story pool; `data-site-cta`; flag `NEXT_PUBLIC_SITE_MODAL_AUTO`. **Rule:** do not port OMR hire copy; cap auto-pops per session.
 
 ---
 

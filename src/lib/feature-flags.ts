@@ -13,6 +13,14 @@ export function isNewsletterAutoModalEnabled(): boolean {
   return envFlag("NEXT_PUBLIC_NEWSLETTER_AUTO_MODAL", false);
 }
 
+/**
+ * Auto first-visit + capped rotation for site campaign / top-story modals (homepage).
+ * Prefer enabling this instead of NEWSLETTER_AUTO_MODAL — newsletter is a rotation slot.
+ */
+export function isSiteModalAutoEnabled(): boolean {
+  return envFlag("NEXT_PUBLIC_SITE_MODAL_AUTO", false);
+}
+
 /** Render Google AdSense display units when client id + slot id are configured. */
 export function isAdSenseDisplayEnabled(): boolean {
   const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID?.trim() ?? "";

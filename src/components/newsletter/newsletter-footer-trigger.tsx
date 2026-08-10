@@ -1,7 +1,6 @@
 "use client";
 
-import { dispatchOpenNewsletterModal } from "@/config/newsletter-modal";
-
+/** Prefer site-modal contract; falls back to newsletter event for older callers. */
 export function NewsletterFooterTrigger({
   className,
   children,
@@ -10,11 +9,7 @@ export function NewsletterFooterTrigger({
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      className={className}
-      onClick={() => dispatchOpenNewsletterModal()}
-    >
+    <button type="button" className={className} data-site-cta="newsletter">
       {children}
     </button>
   );

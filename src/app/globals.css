@@ -15,6 +15,7 @@
 @import "../styles/bwg-readiness-guide.css";
 @import "../styles/chennai-area-hub.css";
 @import "../styles/contact-desk.css";
+@import "../components/site-modals/site-modal.css";
 
 :root {
   --background: #faf8f5;

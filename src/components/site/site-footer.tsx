@@ -128,15 +128,17 @@ export function SiteFooter() {
           <div className="mt-8 flex flex-shrink-0 flex-wrap gap-3 lg:mt-0">
             <Link
               href="/chennai-local-news"
+              data-site-cta="top-story"
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[var(--accent-fg)] shadow-md transition hover:bg-[var(--accent-hover)]"
             >
-              Open local news
+              Top story
             </Link>
             <NewsletterFooterTrigger className="inline-flex items-center justify-center rounded-full border-2 border-[var(--footer-border)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--footer-fg)] transition hover:border-[var(--footer-link-hover)] hover:text-[var(--footer-link-hover)]">
               Email digest
             </NewsletterFooterTrigger>
             <Link
               href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=footer`}
+              data-site-cta="whatsapp"
               className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,#25D366_40%,var(--footer-border))] bg-[color-mix(in_srgb,#25D366_10%,transparent)] px-6 py-3 text-sm font-bold text-[#7dcea0] transition hover:border-[#25D366] hover:text-[#a8e6cf]"
             >
               WhatsApp community

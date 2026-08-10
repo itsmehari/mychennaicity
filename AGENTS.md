@@ -26,6 +26,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/legal, seeds, browser handoffs): **`docs/AGENT_LEARNINGS_AND_SOPS.md`**.
 
+**Site modals (campaign / top-story / WhatsApp):** **`docs/SITE_MODAL_SYSTEM.md`** — `data-site-cta`, homepage auto + session cap, flag `NEXT_PUBLIC_SITE_MODAL_AUTO`.
+
 **Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`.
 
 **Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.

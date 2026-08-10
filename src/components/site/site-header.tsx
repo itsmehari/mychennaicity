@@ -65,6 +65,7 @@ export function SiteHeader() {
           </Link>
           <Link
             href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=nav`}
+            data-site-cta="whatsapp"
             className="focus-ring hidden min-h-11 items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-4 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] sm:inline-flex"
           >
             WhatsApp

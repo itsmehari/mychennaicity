@@ -19,6 +19,16 @@ const TNPDCL_CALCULATOR_URL = "https://www.tnebnet.org/awp/tariffMaster";
 const TANGEDCO_URL = "https://www.tangedco.gov.in/";
 const TNPDCL_PAYMENT_URL = "https://www.tnebnet.org/";
 
+const BILL_SHOCK_PATH =
+  "/chennai-local-news/tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-reinspection";
+const MYOMR_BILL_SHOCK =
+  "https://myomr.in/local-news/tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-omr";
+const MYOMR_BILL_CALC =
+  "https://myomr.in/local-news/tneb-bill-calculation-2026-tamil-nadu-electricity-slabs";
+const MYOMR_EB_HUB = "https://myomr.in/discover-myomr/eb-bill-hub.php";
+const MYOMR_SOLAR =
+  "https://myomr.in/local-news/omr-rooftop-solar-chennai-subsidy-domestic-industrial-installation";
+
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
 
@@ -226,11 +236,19 @@ Use this table when your June bill looks wrong — fill from your PDF and portal
 
 ## Related reading on mychennaicity.in
 
+- **[No tariff hike, yet EB bills surge — July–August 2026](${BILL_SHOCK_PATH})** — TNPDCL’s 3.70-lakh reinspection, heat vs meter faults, what to check.
 - **[OMR — Perungudi to Sholinganallur](/areas/omr-perungudi-sholinganallur)** — corridor hub for apartment-town context.
 - **[Consumer topic](/chennai-local-news/topic/consumer)** — bills, apps, and household costs.
 - **[Chennai rooftop solar subsidy (PM Surya Ghar)](/chennai-local-news/chennai-rooftop-solar-subsidy-pm-surya-ghar-2026)** — when slab bills push you toward PV.
 - **[Pre-monsoon electrical safety](/chennai-local-news/chennai-pre-monsoon-electrical-safety-advisory)** — wiring before squalls.
-- **[Chennai local news](/chennai-local-news)** — latest city desk stories.`.trim();
+- **[Chennai local news](/chennai-local-news)** — latest city desk stories.
+
+## Also on MyOMR.in
+
+- **[July–August EB bill shock — OMR desk](${MYOMR_BILL_SHOCK})**
+- **[TNEB bill calculation 2026 — OMR examples](${MYOMR_BILL_CALC})**
+- **[EB Bill Hub](${MYOMR_EB_HUB})** — unit pages, estimator, solar compare
+- **[OMR rooftop solar subsidy](${MYOMR_SOLAR})**`.trim();
 
   const analysisBody = `## Why your June 2026 bill may feel higher than March
 
