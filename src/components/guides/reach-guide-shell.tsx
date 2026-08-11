@@ -61,7 +61,7 @@ export function ReachGuideShell({
         </aside>
       ) : null}
 
-      <InteriorCrossNav className="mt-14" />
+      <InteriorCrossNav />
     </div>
   );
 }
