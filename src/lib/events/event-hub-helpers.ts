@@ -5,6 +5,8 @@ import { getEventPosterImage } from "@/lib/events/event-poster-image";
 
 export const EVENT_HUB_CATEGORIES = [
   { id: "all", label: "All" },
+  { id: "today", label: "Today" },
+  { id: "weekend", label: "This weekend" },
   { id: "festivals", label: "Festivals" },
   { id: "culture", label: "Culture & arts" },
   { id: "community", label: "Community" },
@@ -32,6 +34,59 @@ export type EventHubCardData = {
 };
 
 const IST = "Asia/Kolkata";
+
+/** Calendar Y-M-D in Asia/Kolkata for a UTC instant. */
+export function istYmd(date: Date): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: IST,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+/** Weekday short name in IST (Sun…Sat). */
+function istWeekday(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: IST,
+    weekday: "short",
+  }).format(date);
+}
+
+/**
+ * True if event start falls on “today” in IST.
+ * Uses sortKey as epoch ms when available (DB cards).
+ */
+export function eventStartsToday(card: EventHubCardData, now = new Date()): boolean {
+  if (!Number.isFinite(card.sortKey) || card.sortKey < 1_000_000_000_000) {
+    return false;
+  }
+  return istYmd(new Date(card.sortKey)) === istYmd(now);
+}
+
+/**
+ * True if event start is Sat or Sun in IST on the coming weekend window:
+ * from today through the next Sunday (inclusive), only Sat/Sun days.
+ */
+export function eventStartsThisWeekend(
+  card: EventHubCardData,
+  now = new Date(),
+): boolean {
+  if (!Number.isFinite(card.sortKey) || card.sortKey < 1_000_000_000_000) {
+    return false;
+  }
+  const start = new Date(card.sortKey);
+  const day = istWeekday(start);
+  if (day !== "Sat" && day !== "Sun") return false;
+
+  const todayYmd = istYmd(now);
+  const startYmd = istYmd(start);
+  if (startYmd < todayYmd) return false;
+
+  // Cap at end of the upcoming Sunday (approx 8 days ahead is enough).
+  const horizon = new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000);
+  return startYmd <= istYmd(horizon);
+}
 
 export function formatEventDateBadge(date: Date): string {
   return date.toLocaleString("en-IN", {

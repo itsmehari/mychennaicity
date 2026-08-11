@@ -185,6 +185,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-10:** News — TN EB bill shock desk live: `/chennai-local-news/tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-reinspection` via `db:seed:tn-electricity-bill-shock-july-august-2026:live`. Links prior slab guide; asks for TNPDCL final 3.70-lakh scorecard after 7 Aug deadline.
 - **2026-08-10:** Cross-network EB desks — MCC shock + bill-calc seeds link MyOMR (`tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-omr`, TNEB slabs, EB Bill Hub). MyOMR OMR article + hub cards link back to MCC statewide desk. **Rule:** when publishing utility/news twins, interlink both directions in the same session.
 - **2026-08-10:** Site modal system (MyOMR architecture → MCC) — `docs/SITE_MODAL_SYSTEM.md`; mount `SiteModalHost` in public layout; campaigns WhatsApp / newsletter / civic / events + top-story pool; `data-site-cta`; flag `NEXT_PUBLIC_SITE_MODAL_AUTO`. **Rule:** do not port OMR hire copy; cap auto-pops per session.
+- **2026-08-11:** Reach hubs batch — gold footer visibility; events Today/Weekend chips; festivals / salary / EV guides; WhatsApp admin toolkit; hospital directory seed (`db:seed:chennai-hospitals-directory:live`). Routes listed in `src/content/reach/reach-hubs.ts`.
 
 ---
 

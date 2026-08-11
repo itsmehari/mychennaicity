@@ -20,6 +20,9 @@ export const WHATSAPP_COMMUNITY_PARTNERS_PATH = "/whatsapp-community/partners";
 /** Flagged invite-flood / spam numbers for group admins */
 export const WHATSAPP_SPAMMERS_PAGE_PATH = "/chennai-whatsapp-spammers";
 
+/** Neighbourhood admin toolkit (rules, spam workflow, links) */
+export const WHATSAPP_ADMINS_TOOLKIT_PATH = "/chennai-whatsapp-group-admins";
+
 export const WHATSAPP_COMMUNITY_OG_IMAGE =
   "/images/mychennaicity-whatsapp-community-og.svg";
 

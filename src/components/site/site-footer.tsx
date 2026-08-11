@@ -3,8 +3,15 @@ import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-foot
 import { chennaiZones } from "@/lib/chennai-zones";
 import { getOrgSocialLinks } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import {
+  WHATSAPP_ADMINS_TOOLKIT_PATH,
+  WHATSAPP_COMMUNITY_PAGE_PATH,
+} from "@/lib/whatsapp-community";
 import { MYCHENNAICITY_USAGE_GUIDE_PATH } from "@/content/guides/mychennaicity-usage";
+import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
+import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
+import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
+import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
@@ -20,15 +27,21 @@ const discoverLinks = [
   { href: MYCHENNAICITY_USAGE_GUIDE_PATH, label: "How to use this site" },
   { href: "/glossary", label: "Chennai & GCC glossary" },
   { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
+  { href: WHATSAPP_ADMINS_TOOLKIT_PATH, label: "WhatsApp admin toolkit" },
   { href: "/directory", label: "Full directory" },
+  { href: CHENNAI_GOLD_RATE_HUB_PATH, label: "Chennai gold & silver rate" },
   { href: "/chennai-local-events", label: "Chennai local events" },
+  { href: "/chennai-local-events#events-weekend", label: "Events this weekend" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
+  { href: CHENNAI_FESTIVALS_GUIDE_PATH, label: "Festivals calendar" },
+  { href: CHENNAI_EV_GUIDE_PATH, label: "EV charging guide" },
   { href: "/llms.txt", label: "AI / LLM site index" },
   { href: "/#areas", label: "Area map (home)" },
 ];
 
 const workLinks = [
   { href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" },
+  { href: CHENNAI_SALARY_GUIDE_PATH, label: "Salary guide 2026" },
   { href: "/contact#jobs", label: "Post a job" },
   { href: "/contact#directory", label: "List your business" },
   { href: "/contact#events", label: "Submit an event" },
@@ -59,7 +72,7 @@ const tagLinks = [
   { href: "/areas/omr-perungudi-sholinganallur", label: "OMR" },
   { href: "/chennai-local-news/topic/chennai", label: "Marina" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Startups" },
-  { href: "/chennai-local-events", label: "Weekend" },
+  { href: "/chennai-local-events#events-weekend", label: "Weekend" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Remote" },
 ];
 

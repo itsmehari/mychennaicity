@@ -18,12 +18,16 @@ import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
 import {
+  WHATSAPP_ADMINS_TOOLKIT_PATH,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
   WHATSAPP_SPAMMERS_PAGE_PATH,
 } from "@/lib/whatsapp-community";
+import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
+import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
+import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
@@ -216,6 +220,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.55,
     },
     {
+      url: `${base}${CHENNAI_SALARY_GUIDE_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${base}${CHENNAI_FESTIVALS_GUIDE_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.68,
+    },
+    {
+      url: `${base}${CHENNAI_EV_GUIDE_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.66,
+    },
+    {
       url: `${base}/guides/how-to-use-mychennaicity`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -322,6 +344,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${base}${WHATSAPP_ADMINS_TOOLKIT_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.62,
     },
     {
       url: `${base}/business-profile/abk-liaison-llp`,

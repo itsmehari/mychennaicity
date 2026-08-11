@@ -134,6 +134,8 @@
     "db:seed:urgent-1bhk-rental-wanted-working-woman-thiruvanmiyur:live": "tsx scripts/seed-urgent-1bhk-rental-wanted-working-woman-thiruvanmiyur-aug-2026.ts --live",
     "db:seed:pallikaranai-ms-homemade-food": "tsx scripts/seed-pallikaranai-ms-homemade-food.ts",
     "db:seed:pallikaranai-ms-homemade-food:live": "tsx scripts/seed-pallikaranai-ms-homemade-food.ts --live",
+    "db:seed:chennai-hospitals-directory": "tsx scripts/seed-chennai-hospitals-directory.ts",
+    "db:seed:chennai-hospitals-directory:live": "tsx scripts/seed-chennai-hospitals-directory.ts --live",
     "db:seed:tn-cabinet-portfolios-may-2026": "tsx scripts/seed-tn-cabinet-portfolios-may-2026.ts",
     "db:seed:tn-cabinet-portfolios-may-2026:live": "tsx scripts/seed-tn-cabinet-portfolios-may-2026.ts --live",
     "db:seed:tn-fiscal-white-paper-2026": "tsx scripts/seed-tn-fiscal-white-paper-2026.ts",

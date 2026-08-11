@@ -1,7 +1,13 @@
 import { chennaiZones } from "@/lib/chennai-zones";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import {
+  WHATSAPP_ADMINS_TOOLKIT_PATH,
+  WHATSAPP_COMMUNITY_PAGE_PATH,
+} from "@/lib/whatsapp-community";
 import { TOPIC_SLUG_TO_CATEGORY } from "@/lib/news-topics";
 import type { MegaNavLiveKind } from "@/lib/nav/nav-preview-types";
+import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
+import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
+import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 
 export type MegaNavLink = {
   href: string;
@@ -132,6 +138,16 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             label: "WhatsApp community",
             description: "Official my chennai city reader group.",
           },
+          {
+            href: WHATSAPP_ADMINS_TOOLKIT_PATH,
+            label: "WhatsApp admin toolkit",
+            description: "Spam controls and neighbourhood group tips.",
+          },
+          {
+            href: CHENNAI_EV_GUIDE_PATH,
+            label: "EV charging guide",
+            description: "Public chargers + home wallbox checklist.",
+          },
         ],
       },
       {
@@ -207,6 +223,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Spot fee traps and vague roles.",
           },
           {
+            href: CHENNAI_SALARY_GUIDE_PATH,
+            label: "Salary guide 2026",
+            description: "Directional CTC bands by role and corridor.",
+          },
+          {
             href: "/guides/how-to-use-mychennaicity",
             label: "For job seekers",
             description: "How to use the board safely.",
@@ -237,19 +258,24 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Full calendar with filters and posters.",
           },
           {
+            href: "/chennai-local-events#events-today",
+            label: "Today",
+            description: "Events starting today (IST).",
+          },
+          {
+            href: "/chennai-local-events#events-weekend",
+            label: "This weekend",
+            description: "Saturday–Sunday listings.",
+          },
+          {
             href: "/chennai-local-events#events-next-up",
             label: "Next up",
             description: "Soonest dates at a glance.",
           },
           {
-            href: "/chennai-local-events#browse-events",
-            label: "Culture & arts",
-            description: "Concerts, theatre, music and comedy.",
-          },
-          {
-            href: "/chennai-local-events#browse-events",
-            label: "Workshops & meetups",
-            description: "Tech talks, baking, networking circles.",
+            href: CHENNAI_FESTIVALS_GUIDE_PATH,
+            label: "Festivals calendar",
+            description: "Pongal to Margazhi — year-round seasons.",
           },
         ],
       },
