@@ -40,7 +40,7 @@ export function ReachGuideShell({
         </p>
       </header>
 
-      <HubCommunityStrip className="mt-6" />
+      <HubCommunityStrip businessVariant="default" className="mt-6" />
 
       <article className="prose prose-sm mt-10 max-w-3xl text-[var(--muted)] prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-strong:text-[var(--foreground)] prose-a:text-[var(--accent)]">
         {children}
