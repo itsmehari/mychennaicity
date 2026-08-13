@@ -88,11 +88,16 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
     (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(applyHref) ||
       applyHref.includes("whatsapp"));
   const isTel = !!applyHref && /^tel:/i.test(applyHref);
+  const isFacebook =
+    !!applyHref &&
+    /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref);
   const applyLabel = isWhatsApp
     ? "Apply via WhatsApp"
     : isTel
       ? "Call to apply"
-      : "Apply on employer / ATS";
+      : isFacebook
+        ? "Message on Facebook"
+        : "Apply on employer / ATS";
   const applyLinkProps = isTel
     ? ({} as const)
     : ({ target: "_blank", rel: "noopener noreferrer" } as const);

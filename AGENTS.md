@@ -30,6 +30,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`.
 
+**Compulsive / connective hubs (calculators, quizzes, culture desks):** registry **`src/content/compulsive/index.ts`** — Wave A–E paths, sitemap wiring, Disclaimer + AI fine print on money/civic pages.
+
 **Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
 
 **Non-negotiables in short:**

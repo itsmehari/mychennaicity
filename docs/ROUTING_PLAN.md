@@ -25,7 +25,7 @@
 | `/guides/bulk-waste-generator-readiness-checklist-2026` | BWG readiness guide + interactive self-assessment (SWM Rules 2026); `/chennai-guides/...` redirects here |
 | `/directory` | Directory hub — primarily mock/sample tiles until listings API is wired |
 | `/areas/[slug]` | Macro zone hubs (`chennaiZones`) |
-| `/civic-tools` | Civic interactive tools hub (10 tools) |
+| `/civic-tools` | Civic interactive tools hub (zone/ward + address fixer + streetlight desk) |
 | `/civic-tools/zone-ward-finder` | Current GCC zone & ward lookup |
 | `/civic-tools/zone-map` | 15 / 20 / 23 zone layer map |
 | `/civic-tools/ward-migration` | Ward migration lookup (verified data only) |
@@ -36,6 +36,10 @@
 | `/civic-tools/civic-card` | Printable My Chennai Civic Card |
 | `/civic-tools/area-sabha` | Area Sabha / ward committee tracker |
 | `/civic-tools/boundary-feedback` | Community boundary feedback map |
+| `/civic-tools/address-form-fixer` | Ward vs PIN / address form confusion fixer |
+| `/civic-tools/streetlight-dead-spots` | Editorial streetlight dead-spot desk + how to report |
+| `/chennai-today` | Daily 60-second Chennai card (weather + Metro + news + event) |
+| `/guides/chennai-petrol-vs-ev-cost` … (see `src/content/compulsive/index.ts`) | Compulsive connective hubs Waves A–E (calculators, quizzes, culture, money) |
 | `/about`, `/contact`, `/editorial-standards` | Static trust and info pages |
 | `/glossary` | Chennai entity glossary + SEO helpers (`src/lib/seo/chennai-glossary.ts`) |
 

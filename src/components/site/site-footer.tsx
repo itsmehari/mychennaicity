@@ -12,6 +12,7 @@ import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
+import { compulsivePath } from "@/content/compulsive/index";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
@@ -35,6 +36,11 @@ const discoverLinks = [
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
   { href: CHENNAI_FESTIVALS_GUIDE_PATH, label: "Festivals calendar" },
   { href: CHENNAI_EV_GUIDE_PATH, label: "EV charging guide" },
+  { href: compulsivePath("chennai-today"), label: "Chennai today (60s)" },
+  { href: compulsivePath("which-chennai"), label: "Which Chennai are you?" },
+  { href: compulsivePath("afford-area"), label: "Afford this area" },
+  { href: compulsivePath("filter-coffee"), label: "Filter coffee map" },
+  { href: compulsivePath("biryani"), label: "Biryani bracket" },
   { href: "/llms.txt", label: "AI / LLM site index" },
   { href: "/#areas", label: "Area map (home)" },
 ];

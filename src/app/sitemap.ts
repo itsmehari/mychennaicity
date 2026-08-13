@@ -28,6 +28,7 @@ import {
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
+import { COMPULSIVE_SITEMAP_ENTRIES } from "@/content/compulsive/index";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
@@ -237,6 +238,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.66,
     },
+    ...COMPULSIVE_SITEMAP_ENTRIES.map((entry) => ({
+      url: `${base}${entry.path}`,
+      lastModified: now,
+      changeFrequency: entry.changeFrequency,
+      priority: entry.priority,
+    })),
     {
       url: `${base}/guides/how-to-use-mychennaicity`,
       lastModified: now,

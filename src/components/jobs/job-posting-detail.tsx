@@ -98,7 +98,9 @@ export function JobPostingDetail({
     ? "Opens WhatsApp in a new tab."
     : applyHref?.startsWith("tel:")
       ? "Tap to call the employer directly."
-      : "Opens the employer careers page in a new tab.";
+      : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+        ? "Opens the poster’s Facebook profile so you can message them."
+        : "Opens the employer careers page in a new tab.";
 
   return (
     <article className="mcc-jobs-hub mx-auto w-full max-w-[1180px]">

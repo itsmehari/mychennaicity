@@ -186,6 +186,9 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-10:** Cross-network EB desks — MCC shock + bill-calc seeds link MyOMR (`tamil-nadu-high-electricity-bills-july-august-2026-tnpdcl-omr`, TNEB slabs, EB Bill Hub). MyOMR OMR article + hub cards link back to MCC statewide desk. **Rule:** when publishing utility/news twins, interlink both directions in the same session.
 - **2026-08-10:** Site modal system (MyOMR architecture → MCC) — `docs/SITE_MODAL_SYSTEM.md`; mount `SiteModalHost` in public layout; campaigns WhatsApp / newsletter / civic / events + top-story pool; `data-site-cta`; flag `NEXT_PUBLIC_SITE_MODAL_AUTO`. **Rule:** do not port OMR hire copy; cap auto-pops per session.
 - **2026-08-11:** Reach hubs batch — gold footer visibility; events Today/Weekend chips; festivals / salary / EV guides; WhatsApp admin toolkit; hospital directory seed (`db:seed:chennai-hospitals-directory:live`). Routes listed in `src/content/reach/reach-hubs.ts`.
+- **2026-08-12:** Jobs — female UKG shadow teacher (Orchids Pallikaranai) live via `db:seed:chennai-job:shadow-teacher-orchids-pallikaranai:live`; apply CTA is Facebook message ([profile](https://www.facebook.com/vivek.viswanathan.351/)). **Rule:** parent shadow-teacher hires are part-time onsite jobs with FB/phone apply — do not label the school as the verified employer.
+- **2026-08-13:** Directory — Hastina Café rooftop (Hastinapuram / Chromepet) live via `db:seed:hastina-cafe-rooftop-chromepet:live` → `/directory/restaurant/hastina-cafe-rooftop-hastinapuram-chromepet`. **Rule:** café/venue promos with phone + Maps go in **directory `restaurant`**, not news/classifieds; dated public nights can optionally also use events.
+- **2026-08-12:** Compulsive hubs Waves 0–E (18 connective pages) — registry `src/content/compulsive/index.ts`; `/chennai-today`; cost calcs (petrol/EV, AC bill, afford-area); identity (quiz, rivalries, moved checklist, PG red-flags, slang); civic (`address-form-fixer`, `streetlight-dead-spots`) + property-tax checklist; culture (filter coffee, biryani bracket, temple quiet hours, Margazhi); market pulse (used vehicle, wedding venues). Shared `GuideDisclaimer` / `GuideFinePrint` + WhatsApp copy share. **Rule:** interactive MVP first (no UGC votes/APIs); money/civic pages always carry Disclaimer + AI fine print; sitemap civic tools via `CIVIC_TOOL_PATHS`, other compulsive via `COMPULSIVE_SITEMAP_ENTRIES`.
 
 ---
 
@@ -240,3 +243,24 @@ Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcrip
 #### Not in today’s commits (context only)
 
 - Nilgiri EN/TA metro breakthrough articles were published **2026-08-06**; today’s Nilgiri chat work was policy/social/logging, not a new seed.
+
+### 2026-08-12 — 2026-08-13
+
+**Focus:** Compulsive hubs Waves 0–E (18 connective pages) + job Facebook apply label + Hastina / shadow-teacher seed scripts in tree.
+
+#### Chats
+| Chat | Transcript | Focus |
+| --- | --- | --- |
+| [Compulsive hubs plan + ship](7255b950-aa8f-42ea-bbca-88d717970b29) | `7255b950-…` | Plan + implement 18 hubs; registry; nav/sitemap; docs |
+
+#### Shipped / live (after commit/push)
+1. **`/chennai-today`** — 60-second morning card  
+2. Cost desks — petrol vs EV, AC bill, afford-area  
+3. Identity — which-Chennai quiz, rivalries, moved checklist, PG red-flags, slang  
+4. Civic — address-form-fixer, streetlight-dead-spots, property-tax checklist  
+5. Culture — filter coffee, biryani bracket, temple quiet hours, Margazhi  
+6. Market — used vehicle pulse, wedding venue costs  
+7. Registry: `src/content/compulsive/index.ts` · llms.txt flagship links  
+
+#### Pending uncommitted at log start
+- Compulsive hub source tree + wiring; seed scripts for Hastina café + Orchids shadow teacher; Facebook apply CTA on job detail.

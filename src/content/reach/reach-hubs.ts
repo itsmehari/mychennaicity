@@ -1,9 +1,8 @@
 /**
- * Reach hubs plan — gold visibility, events today/weekend, hospitals, festivals,
- * salary, EV charging, WhatsApp admin toolkit (Aug 2026).
- *
- * Status: implemented as MVP pages + filters + directory seed in this pass.
+ * Reach hubs (Aug 2026) + compulsive connective hubs registry pointer.
  */
+
+import { COMPULSIVE_HUBS } from "@/content/compulsive/index";
 
 export const REACH_HUBS = [
   {
@@ -38,3 +37,11 @@ export const REACH_HUBS = [
     route: "/chennai-whatsapp-group-admins",
   },
 ] as const;
+
+/** Compulsive hubs — see `src/content/compulsive/index.ts` for full metadata. */
+export const COMPULSIVE_REACH_POINTER = COMPULSIVE_HUBS.map((h) => ({
+  id: h.id,
+  route: h.path,
+  wave: h.wave,
+  idea: h.idea,
+}));

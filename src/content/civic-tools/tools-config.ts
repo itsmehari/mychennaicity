@@ -89,6 +89,22 @@ export const CIVIC_TOOLS: CivicToolDef[] = [
     status: "live",
     phase: "C",
   },
+  {
+    slug: "address-form-fixer",
+    title: "Ward vs PIN / address form fixer",
+    description:
+      "Why forms fail: PIN ≠ ward ≠ zone. Decision tree before you fight the dropdown.",
+    status: "live",
+    phase: "B",
+  },
+  {
+    slug: "streetlight-dead-spots",
+    title: "Streetlight dead-spots desk",
+    description:
+      "Editorial corridors + how to report — not a live complaint wall.",
+    status: "live",
+    phase: "C",
+  },
 ];
 
 export function civicToolPath(slug: string): string {

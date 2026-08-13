@@ -8,6 +8,7 @@ import type { MegaNavLiveKind } from "@/lib/nav/nav-preview-types";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
+import { compulsivePath } from "@/content/compulsive/index";
 
 export type MegaNavLink = {
   href: string;
@@ -148,6 +149,21 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             label: "EV charging guide",
             description: "Public chargers + home wallbox checklist.",
           },
+          {
+            href: compulsivePath("chennai-today"),
+            label: "Chennai today (60s)",
+            description: "Morning WhatsApp card — weather, Metro, news, event.",
+          },
+          {
+            href: compulsivePath("which-chennai"),
+            label: "Which Chennai are you?",
+            description: "Playful neighbourhood personality quiz.",
+          },
+          {
+            href: compulsivePath("filter-coffee"),
+            label: "Filter coffee map",
+            description: "Curated cups by corridor.",
+          },
         ],
       },
       {
@@ -226,6 +242,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             href: CHENNAI_SALARY_GUIDE_PATH,
             label: "Salary guide 2026",
             description: "Directional CTC bands by role and corridor.",
+          },
+          {
+            href: compulsivePath("afford-area"),
+            label: "Afford this area",
+            description: "CTC / take-home vs rent reality check.",
           },
           {
             href: "/guides/how-to-use-mychennaicity",

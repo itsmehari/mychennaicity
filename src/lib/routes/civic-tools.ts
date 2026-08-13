@@ -12,6 +12,8 @@ export const CIVIC_TOOL_PATHS = {
   civicCard: "/civic-tools/civic-card",
   areaSabha: "/civic-tools/area-sabha",
   boundaryFeedback: "/civic-tools/boundary-feedback",
+  addressFormFixer: "/civic-tools/address-form-fixer",
+  streetlightDeadSpots: "/civic-tools/streetlight-dead-spots",
 } as const;
 
 export const CIVIC_TOOL_SITEMAP_PATHS = Object.values(CIVIC_TOOL_PATHS);
