@@ -253,7 +253,7 @@ Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcrip
 | --- | --- | --- |
 | [Compulsive hubs plan + ship](7255b950-aa8f-42ea-bbca-88d717970b29) | `7255b950-…` | Plan + implement 18 hubs; registry; nav/sitemap; docs |
 
-#### Shipped / live (after commit/push)
+#### Shipped / live
 1. **`/chennai-today`** — 60-second morning card  
 2. Cost desks — petrol vs EV, AC bill, afford-area  
 3. Identity — which-Chennai quiz, rivalries, moved checklist, PG red-flags, slang  
@@ -261,6 +261,8 @@ Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcrip
 5. Culture — filter coffee, biryani bracket, temple quiet hours, Margazhi  
 6. Market — used vehicle pulse, wedding venue costs  
 7. Registry: `src/content/compulsive/index.ts` · llms.txt flagship links  
+8. **Commit/push:** `a20d713` → `main` (Vercel deploy)  
+9. **Live seeds refreshed:** shadow teacher job + Hastina Café Chromepet directory listing  
 
-#### Pending uncommitted at log start
-- Compulsive hub source tree + wiring; seed scripts for Hastina café + Orchids shadow teacher; Facebook apply CTA on job detail.
+#### Left untracked (junk)
+- Root QR crop PNGs (`HJxkR0AaMAARitn.png`, `qr_crop*.png`) — do not commit.
