@@ -63,21 +63,20 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  let featured: Awaited<
-    ReturnType<typeof homeNewsBulletinCached>
-  >["featured"] = [];
-  let latest: Awaited<ReturnType<typeof homeNewsBulletinCached>>["latest"] = [];
-  try {
-    ({ featured, latest } = await homeNewsBulletinCached());
-  } catch (err) {
-    /* DATABASE_URL unset, schema drift (run db:migrate / db:push), or DB unreachable */
-    console.error("[home] News query failed:", err);
-  }
+  const [bulletin, feed] = await Promise.all([
+    homeNewsBulletinCached().catch((err) => {
+      /* DATABASE_URL unset, schema drift (run db:migrate / db:push), or DB unreachable */
+      console.error("[home] News query failed:", err);
+      return { featured: [], latest: [] } as Awaited<
+        ReturnType<typeof homeNewsBulletinCached>
+      >;
+    }),
+    loadHomeFeedData(),
+  ]);
 
+  const { featured, latest } = bulletin;
   const editorPicks =
     featured.length > 0 ? featured : latest.slice(0, 3);
-
-  const feed = await loadHomeFeedData();
 
   return (
     <>

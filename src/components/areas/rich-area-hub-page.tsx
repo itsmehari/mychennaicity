@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { AreaHubToolsStrip } from "@/components/areas/area-hub-tools-strip";
 import { Section } from "@/components/home/section";
 import {
   InteriorCrossNav,
@@ -713,6 +714,8 @@ export function RichAreaHubPage({
           </ul>
         </Section>
       ) : null}
+
+      <AreaHubToolsStrip />
 
       {/* FAQ */}
       <Section

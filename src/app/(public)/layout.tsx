@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { NewsletterModalHost } from "@/components/newsletter/newsletter-modal-host";
 import { SiteModalHost } from "@/components/site-modals";
 import { WhatsAppCommunityFloat } from "@/components/community/whatsapp-community-float";
@@ -17,7 +18,9 @@ export default function PublicLayout({
       <main className="flex-1">{children}</main>
       <SiteFooter />
       <WhatsAppCommunityFloat />
-      <SiteModalHost />
+      <Suspense fallback={null}>
+        <SiteModalHost />
+      </Suspense>
       <NewsletterModalHost />
     </>
   );

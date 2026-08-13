@@ -12,7 +12,7 @@ export function GoogleAdSenseScripts({ clientId }: Props) {
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(clientId)}`}
       crossOrigin="anonymous"
-      strategy="beforeInteractive"
+      strategy="lazyOnload"
     />
   );
 }

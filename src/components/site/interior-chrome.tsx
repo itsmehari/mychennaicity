@@ -54,6 +54,11 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     hint: "Hero, map, and city pulse",
   },
   {
+    href: "/chennai-today",
+    label: "Chennai today",
+    hint: "Weather, gold, Metro, news, event",
+  },
+  {
     href: "/chennai-local-news",
     label: "Chennai local news",
     hint: "Front page and news topics",

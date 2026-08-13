@@ -59,10 +59,10 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 
 ## Optional
 
-- [Chennai today in 60 seconds](${base}/chennai-today): Morning card — weather cue, Metro note, news, event
+- [Chennai today in 60 seconds](${base}/chennai-today): Morning card — weather, gold, Metro, news, event (Tamil: ${base}/chennai-today-tamil)
 - [Petrol vs EV cost calculator](${base}/guides/chennai-petrol-vs-ev-cost): Shareable Chennai commute energy cost tool
-- [Afford this area calculator](${base}/guides/chennai-afford-area-calculator): Take-home vs directional rent by neighbourhood
-- [Which Chennai are you?](${base}/guides/which-chennai-are-you): Playful neighbourhood personality quiz
+- [Afford this area calculator](${base}/guides/chennai-afford-area-calculator): Take-home vs directional rent by neighbourhood (Tamil: ${base}/guides/chennai-afford-area-calculator-tamil)
+- [Which Chennai are you?](${base}/guides/which-chennai-are-you): Playful neighbourhood personality quiz (Tamil: ${base}/guides/which-chennai-are-you-tamil)
 - [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
@@ -166,6 +166,18 @@ Upcoming listings: [${base}/chennai-local-events](${base}/chennai-local-events)
 ${bullets(input.events, "Open the events hub for the current calendar.")}
 
 Confirm venue and tickets with the organiser before travelling.
+
+## Everyday Chennai tools
+
+- **What is happening in Chennai today?** [${base}/chennai-today](${base}/chennai-today) — 60-second card (weather, gold, Metro, one news cue, one event). Tamil: [${base}/chennai-today-tamil](${base}/chennai-today-tamil)
+- **Can I afford this neighbourhood on my salary?** [${base}/guides/chennai-afford-area-calculator](${base}/guides/chennai-afford-area-calculator) — take-home vs directional 2026 rent bands. Tamil: [${base}/guides/chennai-afford-area-calculator-tamil](${base}/guides/chennai-afford-area-calculator-tamil)
+- **Which Chennai neighbourhood energy fits me?** [${base}/guides/which-chennai-are-you](${base}/guides/which-chennai-are-you) — playful quiz. Tamil: [${base}/guides/which-chennai-are-you-tamil](${base}/guides/which-chennai-are-you-tamil)
+- **Petrol vs EV cost of a Chennai commute:** [${base}/guides/chennai-petrol-vs-ev-cost](${base}/guides/chennai-petrol-vs-ev-cost)
+- **AC bill stress test:** [${base}/guides/chennai-ac-bill-predictor](${base}/guides/chennai-ac-bill-predictor)
+- **Ward vs PIN vs zone (why forms fail):** [${base}/civic-tools/address-form-fixer](${base}/civic-tools/address-form-fixer)
+- **Chennai gold rate today:** [${base}/chennai-gold-rate](${base}/chennai-gold-rate)
+
+Figures on cost tools are illustrative planning numbers, not official invoices or listings.
 
 ## Machine feeds
 

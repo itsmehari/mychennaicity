@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -9,10 +10,9 @@ import {
   WHICH_CHENNAI_FAQ,
   WHICH_CHENNAI_PATH,
 } from "@/content/compulsive/which-chennai";
+import { WHICH_CHENNAI_TA_PATH } from "@/content/compulsive/which-chennai-ta";
 import { compulsivePath } from "@/content/compulsive/index";
-import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { getSiteUrl } from "@/lib/env";
-import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Which Chennai are you?";
@@ -21,7 +21,14 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Playful Chennai personality quiz — Mylapore, OMR, North pulse, or West planner. Shareable archetypes for residents and newcomers.",
-  alternates: { canonical: `${getSiteUrl()}${WHICH_CHENNAI_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${WHICH_CHENNAI_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${WHICH_CHENNAI_PATH}`,
+      "ta-IN": `${getSiteUrl()}${WHICH_CHENNAI_TA_PATH}`,
+      "x-default": `${getSiteUrl()}${WHICH_CHENNAI_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "A light city-desk quiz for your Chennai energy — not a ranking.",
@@ -45,11 +52,11 @@ export default function WhichChennaiAreYouPage() {
         { href: compulsivePath("rivalries"), label: "Area rivalry cards" },
         { href: compulsivePath("slang"), label: "Chennai slang decoder" },
         { href: compulsivePath("moved-checklist"), label: "Moved to Chennai checklist" },
-        { href: CHENNAI_SALARY_GUIDE_PATH, label: "Salary guide 2026" },
-        { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
-        { href: "/chennai-whatsapp-group-admins", label: "WhatsApp admin tips" },
+        { href: compulsivePath("chennai-today"), label: "Chennai today (60s)" },
+        { href: compulsivePath("afford-area"), label: "Afford this area" },
       ]}
     >
+      <BilingualToggle enHref={WHICH_CHENNAI_PATH} taHref={WHICH_CHENNAI_TA_PATH} current="en" />
       <GuideDisclaimer kind="culture" />
       <WhichChennaiQuiz />
       <h2>FAQ</h2>

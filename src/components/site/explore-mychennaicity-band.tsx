@@ -33,7 +33,7 @@ export function ExploreMyChennaiCityBand({
         More from mychennaicity.in
       </h2>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        Chennai local news, jobs, events, gold rate, and a moderated WhatsApp
+        Chennai today, local news, jobs, events, gold rate, and a moderated WhatsApp
         community — one city desk.
       </p>
       <ul className="mt-4 grid gap-2 sm:grid-cols-3">

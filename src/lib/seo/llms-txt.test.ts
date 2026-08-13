@@ -44,5 +44,8 @@ describe("llms.txt builders", () => {
     expect(md).toContain("# Chennai AEO digest");
     expect(md).toContain("Office manager");
     expect(md).toContain("Where is Chennai news today?");
+    expect(md).toContain("/chennai-today");
+    expect(md).toContain("/guides/chennai-afford-area-calculator");
+    expect(md).toContain("/guides/which-chennai-are-you");
   });
 });

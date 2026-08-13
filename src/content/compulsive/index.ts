@@ -196,3 +196,9 @@ export function compulsivePath(id: CompulsiveHubId): string {
   if (!hub) throw new Error(`Unknown compulsive hub: ${id}`);
   return hub.path;
 }
+
+export const COMPULSIVE_TAMIL_SITEMAP_PATHS = [
+  "/chennai-today-tamil",
+  "/guides/chennai-afford-area-calculator-tamil",
+  "/guides/which-chennai-are-you-tamil",
+] as const;

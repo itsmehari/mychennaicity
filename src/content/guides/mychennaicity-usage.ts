@@ -25,6 +25,11 @@ export type UsageAudience = {
 /** Primary “Explore” destinations shown on article footers and hubs. */
 export const EXPLORE_MYCHENNAICITY_LINKS: UsageFeatureLink[] = [
   {
+    href: "/chennai-today",
+    label: "Chennai today",
+    hint: "60-second morning card",
+  },
+  {
     href: "/chennai-whatsapp-group",
     label: "WhatsApp community",
     hint: "Moderated Chennai updates",
@@ -35,9 +40,19 @@ export const EXPLORE_MYCHENNAICITY_LINKS: UsageFeatureLink[] = [
     hint: "Civic desk & neighbourhood stories",
   },
   {
+    href: "/guides/chennai-afford-area-calculator",
+    label: "Afford this area",
+    hint: "Take-home vs rent check",
+  },
+  {
     href: "/chennai-jobs",
     label: "Jobs in Chennai",
     hint: "Open roles across the city",
+  },
+  {
+    href: "/guides/which-chennai-are-you",
+    label: "Which Chennai are you?",
+    hint: "Playful neighbourhood quiz",
   },
 ];
 
@@ -49,6 +64,11 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
     intro:
       "Use the site like a city desk: local news, your area hub, gold rate, and a moderated WhatsApp group for daily tips.",
     startHere: [
+      {
+        href: "/chennai-today",
+        label: "Chennai today",
+        hint: "60-second weather, gold, Metro, news",
+      },
       {
         href: "/chennai-local-news",
         label: "Chennai local news",

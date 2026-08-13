@@ -38,7 +38,10 @@
 | `/civic-tools/boundary-feedback` | Community boundary feedback map |
 | `/civic-tools/address-form-fixer` | Ward vs PIN / address form confusion fixer |
 | `/civic-tools/streetlight-dead-spots` | Editorial streetlight dead-spot desk + how to report |
-| `/chennai-today` | Daily 60-second Chennai card (weather + Metro + news + event) |
+| `/chennai-today` | Daily 60-second Chennai card (weather + gold + Metro + news + event) |
+| `/chennai-today-tamil` | Tamil twin of Chennai today (`hreflang` pair) |
+| `/guides/chennai-afford-area-calculator-tamil` | Tamil twin of afford-area calculator |
+| `/guides/which-chennai-are-you-tamil` | Tamil twin of Which Chennai quiz |
 | `/guides/chennai-petrol-vs-ev-cost` … (see `src/content/compulsive/index.ts`) | Compulsive connective hubs Waves A–E (calculators, quizzes, culture, money) |
 | `/about`, `/contact`, `/editorial-standards` | Static trust and info pages |
 | `/glossary` | Chennai entity glossary + SEO helpers (`src/lib/seo/chennai-glossary.ts`) |

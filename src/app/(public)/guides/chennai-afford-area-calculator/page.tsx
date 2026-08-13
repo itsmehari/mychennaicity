@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { AffordAreaCalculator } from "@/components/compulsive/afford-area-calculator";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
 } from "@/components/compulsive/guide-trust-blocks";
 import { ReachGuideShell } from "@/components/guides/reach-guide-shell";
 import { AFFORD_AREA_FAQ, AFFORD_AREA_PATH } from "@/content/compulsive/afford-area";
+import { AFFORD_AREA_TA_PATH } from "@/content/compulsive/afford-area-ta";
 import { compulsivePath } from "@/content/compulsive/index";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { getSiteUrl } from "@/lib/env";
@@ -18,7 +20,14 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Chennai afford-this-area calculator — compare take-home vs directional 2BHK rents for Adyar, OMR, Velachery, Anna Nagar and more.",
-  alternates: { canonical: `${getSiteUrl()}${AFFORD_AREA_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${AFFORD_AREA_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${AFFORD_AREA_PATH}`,
+      "ta-IN": `${getSiteUrl()}${AFFORD_AREA_TA_PATH}`,
+      "x-default": `${getSiteUrl()}${AFFORD_AREA_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "Salary × rent reality check for Chennai neighbourhoods.",
@@ -44,8 +53,10 @@ export default function AffordAreaPage() {
         { href: compulsivePath("petrol-vs-ev"), label: "Petrol vs EV calculator" },
         { href: compulsivePath("moved-checklist"), label: "Moved to Chennai checklist" },
         { href: "/areas/adyar-thiruvanmiyur", label: "Adyar area hub" },
+        { href: compulsivePath("chennai-today"), label: "Chennai today (60s)" },
       ]}
     >
+      <BilingualToggle enHref={AFFORD_AREA_PATH} taHref={AFFORD_AREA_TA_PATH} current="en" />
       <GuideDisclaimer kind="money" />
       <AffordAreaCalculator />
       <h2>FAQ</h2>

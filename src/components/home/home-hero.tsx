@@ -29,12 +29,9 @@ function getReducedMotionServerSnapshot() {
 }
 
 const HERO_IMAGES = {
-  metro:
-    "https://metrorailnews.in/wp-content/uploads/2022/07/Chennai-metrojpg-e1658991640382.jpg",
-  amazonJobs:
-    "https://static.amazon.jobs/locations/94/images/chennai-banner.jpg",
-  valluvarKottam:
-    "https://thumbs.dreamstime.com/b/valluvar-kottam-auditorium-monument-chennai-tamil-nadu-india-madras-194543886.jpg",
+  metro: "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.webp",
+  amazonJobs: "/images/explore-chennai-madras-high-court.jpg",
+  valluvarKottam: "/images/explore-chennai-kapaleeshwar-temple.jpg",
 } as const;
 
 const TOPICS = [
@@ -300,7 +297,8 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
           alt={slide.heroImageAlt}
           fill
           className="object-cover object-center"
-          sizes="(max-width: 1023px) min(100vw, 36rem) 50vw"
+          sizes="(max-width: 1023px) 100vw, 36rem"
+          quality={70}
           priority={slide.key === "news"}
         />
         <div
