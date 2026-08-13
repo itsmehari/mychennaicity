@@ -256,7 +256,7 @@ export function SiteModalOrchestrator({ pool }: Props) {
       if (pick < 0.45 && pool.length > 0) {
         if (showSlot("top-story", "first_visit", true)) return;
       }
-      const c = pickWeightedCampaign(["whatsapp", "newsletter", "events", "civic"]);
+      const c = pickWeightedCampaign(["whatsapp", "newsletter", "events", "civic", "today"]);
       showSlot(c.id, "first_visit", true);
     };
 
@@ -266,7 +266,7 @@ export function SiteModalOrchestrator({ pool }: Props) {
       const slot = rotationSlots[idx % rotationSlots.length];
       ssSet(storageKeys.rotationIndex, String(idx + 1));
       if (!showSlot(slot, "rotation", true) && slot === "top-story") {
-        const c = pickWeightedCampaign(["whatsapp", "newsletter", "civic"]);
+        const c = pickWeightedCampaign(["whatsapp", "newsletter", "civic", "today"]);
         showSlot(c.id, "rotation", true);
       }
     };

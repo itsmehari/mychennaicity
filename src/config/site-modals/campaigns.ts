@@ -87,7 +87,25 @@ export const siteModalCampaigns: SiteModalCampaign[] = [
       action: "dismiss",
     },
     priority: 1,
-    /** Prefer auto on home only (already policy); allow click anywhere. */
+  },
+  {
+    id: "today",
+    ctaKey: "today",
+    eyebrow: "Daily desk",
+    title: "Chennai today in 60 seconds",
+    body: "Weather cue, Metro note, one news headline, one upcoming event — the morning WhatsApp card for the city.",
+    image: HERO,
+    imageAlt: "Madras High Court, Chennai",
+    benefits: ["60-second read", "Copy for WhatsApp", "Links to live news & events"],
+    primaryCta: {
+      label: "Open Chennai today",
+      href: "/chennai-today",
+    },
+    secondaryCta: {
+      label: "Maybe later",
+      action: "dismiss",
+    },
+    priority: 3,
   },
 ];
 
@@ -101,7 +119,7 @@ export function campaignByCtaKey(key: string): SiteModalCampaign | undefined {
 
 /** Weighted random among campaigns (for first-visit pick excluding top-story). */
 export function pickWeightedCampaign(
-  ids: string[] = ["whatsapp", "newsletter", "events"],
+  ids: string[] = ["whatsapp", "newsletter", "events", "today"],
 ): SiteModalCampaign {
   const pool = ids
     .map((id) => campaignById(id))

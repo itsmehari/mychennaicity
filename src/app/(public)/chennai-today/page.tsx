@@ -150,7 +150,7 @@ export default async function ChennaiTodayPage() {
           </li>
         </ul>
         <div className="mt-5">
-          <CopyShareButton buildText={() => shareBody} />
+          <CopyShareButton hubId="chennai-today" buildText={() => shareBody} />
         </div>
       </section>
 

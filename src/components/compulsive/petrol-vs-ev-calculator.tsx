@@ -114,6 +114,7 @@ export function PetrolVsEvCalculator() {
       </p>
 
       <CopyShareButton
+        hubId="petrol-vs-ev"
         buildText={() =>
           `Chennai petrol vs EV (${km} km/day): petrol ~${inr(result.petrolDay)}/day, EV ~${inr(result.evDay)}/day. Calculator: ${getSiteUrl()}${path}`
         }

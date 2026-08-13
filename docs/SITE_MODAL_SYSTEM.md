@@ -15,7 +15,7 @@ Portable five-piece architecture adapted from MyOMR — **city goals**, not OMR 
 ## Product goals (current)
 
 1. **Primary conversion:** WhatsApp community join  
-2. **Secondary (rotation):** Top city news · Newsletter · Civic BWG readiness guide  
+2. **Secondary (rotation):** Top city news · Newsletter · Civic BWG readiness · **Chennai today** desk  
 3. **Auto-pop:** Homepage only (`autoHomeOnly`)  
 4. **Never interrupt:** contact, legal, WhatsApp landings, BWG checklist, boundary feedback, admin/api  
 
@@ -27,9 +27,10 @@ Portable five-piece architecture adapted from MyOMR — **city goals**, not OMR 
 <a data-site-cta="top-story" href="/chennai-local-news">…</a>
 <a data-site-cta="civic" href="…">…</a>
 <a data-site-cta="events" href="…">…</a>
+<a data-site-cta="today" href="/chennai-today">…</a>
 ```
 
-Or `dispatchOpenSiteModal("whatsapp")` from `@/components/site-modals`.
+Or `dispatchOpenSiteModal("whatsapp")` / `dispatchOpenSiteModal("today")` from `@/components/site-modals`.
 
 ## Policy defaults
 

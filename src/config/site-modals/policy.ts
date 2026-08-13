@@ -33,6 +33,7 @@ export const siteModalPolicy: SiteModalPolicy = {
     "top-story",
     "whatsapp",
     "top-story",
+    "today",
     "newsletter",
     "top-story",
     "civic",

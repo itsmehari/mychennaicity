@@ -21,6 +21,7 @@ import {
   HomeZoneShortcuts,
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
+import { HomeToolsStrip } from "@/components/home/home-tools-strip";
 import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
@@ -91,6 +92,9 @@ export default async function Home() {
             <AdSlot slotId="homepage-top" size="728x90" />
           </div>
           <HomeTrustStrip />
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <HomeToolsStrip />
         </HomeSectionFrame>
         <HomeSectionFrame>
           <div className="flex flex-col gap-12 sm:gap-14">

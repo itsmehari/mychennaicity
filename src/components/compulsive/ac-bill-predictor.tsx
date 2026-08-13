@@ -81,6 +81,7 @@ export function AcBillPredictor() {
       </div>
 
       <CopyShareButton
+        hubId="ac-bill"
         buildText={() =>
           `Chennai AC stress test: ${acs}×${tons}T, ${hours}h × ${days}d ≈ ${result.kwh} kWh/month → rough ₹${result.bill.low}–${result.bill.high}. Tool: ${getSiteUrl()}${path}`
         }

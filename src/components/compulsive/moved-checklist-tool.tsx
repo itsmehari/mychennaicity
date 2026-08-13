@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CopyShareButton } from "@/components/compulsive/copy-share-button";
 import {
   MOVED_CHECKLIST_SECTIONS,
   MOVED_CHECKLIST_STORAGE_KEY,
 } from "@/content/compulsive/moved-checklist";
 import { compulsivePath } from "@/content/compulsive/index";
+import { trackCompulsiveEvent } from "@/lib/analytics/compulsive-events";
 import { getSiteUrl } from "@/lib/env";
 
 function loadChecked(): Record<string, boolean> {
@@ -25,6 +26,7 @@ function loadChecked(): Record<string, boolean> {
 export function MovedChecklistTool() {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [ready, setReady] = useState(false);
+  const completedOnce = useRef(false);
   const path = compulsivePath("moved-checklist");
 
   useEffect(() => {
@@ -53,12 +55,27 @@ export function MovedChecklistTool() {
     return { done, total };
   }, [checked]);
 
+  useEffect(() => {
+    if (!ready || totals.total === 0) return;
+    if (totals.done === totals.total && !completedOnce.current) {
+      completedOnce.current = true;
+      trackCompulsiveEvent("compulsive_checklist_complete", {
+        hub_id: "moved-checklist",
+        progress: 100,
+      });
+    }
+    if (totals.done < totals.total) {
+      completedOnce.current = false;
+    }
+  }, [ready, totals.done, totals.total]);
+
   function toggle(id: string) {
     setChecked((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   function resetAll() {
     setChecked({});
+    completedOnce.current = false;
   }
 
   return (
@@ -128,6 +145,7 @@ export function MovedChecklistTool() {
       </div>
 
       <CopyShareButton
+        hubId="moved-checklist"
         buildText={() =>
           `Moved to Chennai checklist: ${totals.done}/${totals.total} done. Keep going: ${getSiteUrl()}${path}`
         }

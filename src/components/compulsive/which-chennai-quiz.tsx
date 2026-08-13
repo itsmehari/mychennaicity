@@ -12,6 +12,7 @@ import {
   type ChennaiArchetypeId,
 } from "@/content/compulsive/which-chennai";
 import { compulsivePath } from "@/content/compulsive/index";
+import { trackCompulsiveEvent } from "@/lib/analytics/compulsive-events";
 import { getSiteUrl } from "@/lib/env";
 
 type Phase = "quiz" | "result";
@@ -60,6 +61,7 @@ function ResultCard({
       ) : null}
       <div className="flex flex-wrap gap-2">
         <CopyShareButton
+          hubId="which-chennai"
           label="Share result"
           buildText={() =>
             `${archetype.shareLine} ${archetype.tagline} Take the quiz: ${shareUrl}`
@@ -116,6 +118,10 @@ function WhichChennaiQuizInner() {
     setScores(scored.scores);
     setResult(scored.winner);
     setPhase("result");
+    trackCompulsiveEvent("compulsive_quiz_complete", {
+      hub_id: "which-chennai",
+      archetype: scored.winner.id,
+    });
 
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);

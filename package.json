@@ -171,6 +171,8 @@
     "db:seed:tn-electricity-bill-calculation-2026:live": "tsx scripts/seed-tn-electricity-bill-calculation-2026.ts --live",
     "db:seed:tn-electricity-bill-shock-july-august-2026": "tsx scripts/seed-tn-electricity-bill-shock-july-august-2026.ts",
     "db:seed:tn-electricity-bill-shock-july-august-2026:live": "tsx scripts/seed-tn-electricity-bill-shock-july-august-2026.ts --live",
+    "db:seed:chennai-tools-funnel-desk-august-2026": "tsx scripts/seed-chennai-tools-funnel-desk-august-2026.ts",
+    "db:seed:chennai-tools-funnel-desk-august-2026:live": "tsx scripts/seed-chennai-tools-funnel-desk-august-2026.ts --live",
     "db:seed:namma-arasu-whatsapp-chatbot-2026": "tsx scripts/seed-namma-arasu-whatsapp-chatbot-2026.ts",
     "db:seed:namma-arasu-whatsapp-chatbot-2026:live": "tsx scripts/seed-namma-arasu-whatsapp-chatbot-2026.ts --live",
     "db:seed:ozone-greens-perumbakkam-power-crisis-2026": "tsx scripts/seed-ozone-greens-perumbakkam-power-crisis-2026.ts",

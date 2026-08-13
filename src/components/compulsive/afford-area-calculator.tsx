@@ -144,6 +144,7 @@ export function AffordAreaCalculator() {
       </div>
 
       <CopyShareButton
+        hubId="afford-area"
         buildText={() =>
           `Can I afford ${band.label}? Rent ~${inr(result.rent)} is ~${result.share.toFixed(0)}% of ${inr(result.monthly)} take-home → ${verdictLabel}. ${getSiteUrl()}${path}`
         }
