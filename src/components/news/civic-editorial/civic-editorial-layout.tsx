@@ -23,9 +23,15 @@ export type CivicEditorialSlots = {
   rightSidebar: ReactNode;
 };
 
-export function CivicEditorialLayout({ slots }: { slots: CivicEditorialSlots }) {
+export function CivicEditorialLayout({
+  slots,
+  lang,
+}: {
+  slots: CivicEditorialSlots;
+  lang?: string;
+}) {
   return (
-    <article className="civic-editorial-article">
+    <article className="civic-editorial-article" lang={lang}>
       <div className="civic-editorial-grid">
         <ArticleLeftRail
           toc={slots.leftRailToc}

@@ -7,6 +7,7 @@ import { chennaiZones } from "@/lib/chennai-zones";
 import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
 import { getSiteUrl } from "@/lib/env";
 import { normalizeAreaHubSlug } from "@/lib/news-area-hint";
+import { articleInLanguage } from "@/lib/seo/article-language";
 import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
 import { defaultOgImageAbsoluteUrl, orgSameAsUrls } from "@/lib/seo/site-defaults";
 
@@ -166,7 +167,7 @@ export function buildNewsArticleJsonLd(
       typeof primaryImage.url === "string" ? primaryImage.url : defaultOgImageAbsoluteUrl(),
     datePublished: published,
     dateModified: modified,
-    inLanguage: "en-IN",
+    inLanguage: articleInLanguage(article.slug),
     spatialCoverage: CHENNAI_PLACE_GRAPH,
     articleLocation,
     keywords: keywords.join(", "),
@@ -278,7 +279,7 @@ export function buildNewsArticleJsonLd(
     primaryImageOfPage: { "@id": primaryImageId },
     datePublished: published,
     dateModified: modified,
-    inLanguage: "en-IN",
+    inLanguage: articleInLanguage(article.slug),
   };
 
   const primaryImageNode: Record<string, unknown> = {

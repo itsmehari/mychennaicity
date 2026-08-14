@@ -104,6 +104,8 @@ export const CHENNAI_WEEK_DESK_AUGUST_2026: WeekDeskArticle[] = [
 - About **3.49 lakh** notices went out of roughly **14–14.5 lakh** assessments. Some households reported jumps of up to **400%**. About **30,520** had paid ~**₹11.10 crore** by Thursday.
 - GCC called it a correction of **under-assessed** properties, not a general rate hike. Revised demands were to apply from **H2 2025–26**. Mayor **R. Priya** said the **elected council was not consulted**.
 
+[Read in Tamil](/chennai-local-news/gcc-suspends-property-tax-reassessment-august-2026-tamil)
+
 ${DISCLAIMER}
 
 ## What happened
@@ -204,6 +206,8 @@ Property tax is how GCC pays for drains, roads, and monsoon pumps. A pause witho
 - Canal improvement: **21 of 33** canals done (**15,868 m** taken up; over **14%** of targeted length still open). Of **10,529 m** in the current improvement package, **8,985 m** was complete as of **1 August 2026**.
 - Desilting usually starts in **June**. This year tenders went out in **July** and work ramped in **August** — the Mayor called that late.
 - Mitigation at **Metro work sites** (Anna Nagar, Teynampet, Adyar) and **Puzhal surplus** belts in Manali is part of the plan; **115 motors** and sumps at **10** sites.
+
+[Read in Tamil](/chennai-local-news/chennai-mayor-el-nino-50cm-northeast-monsoon-warning-august-2026-tamil)
 
 ${DISCLAIMER}
 
@@ -537,6 +541,8 @@ Floods kill on **live wires**, **open manholes**, and **cratered junctions** as 
 - Possible stops named in TOI: Ennore, Tondiarpet, Basin Bridge, Chepauk, Foreshore Estate, Thiruvanmiyur, Perungudi, Sholinganallur, Navalur, Muttukadu, Kovalam, Mahabalipuram — with walkway links to Metro/MRTS at Thiruvanmiyur and Kotturpuram **if** built.
 - Officials: **restoring the canal is the massive work**. Study first, boats later. India’s only operating water metro is **Kochi**.
 - History: pleasure boats on Cooum (1973), NW-4 dredging ideas, CUMTA 2025 CMP (Central–Kovalam), PWD ~**₹2,388 crore** to restore **167 km** of Buckingham Canal (Pazhaverkadu–Marakkanam).
+
+[Read in Tamil](/chennai-local-news/cmrl-water-metro-ennore-mahabalipuram-feasibility-august-2026-tamil)
 
 ${DISCLAIMER}
 
@@ -905,6 +911,8 @@ Empty pots, AC trays, and terrace tanks twice a week. Don’t wade. If fever cro
 - **Red Zone**: Secretariat and the CM route from **Neelankarai**. Traffic restrictions from **6 a.m.** until the function ends.
 - Drone / RPAS ban in GCP limits **19 June–17 August** (BNSS §163); extra ban on **14–15 August** in the Red Zone except authorised flights.
 - Airport **high-security 10–20 August**. Air India told passengers to arrive early. Same week: **920 g gold paste (~₹1.4 crore)** and **4.033 kg hydroponic cannabis** (Malaysian national via Bangkok) seized — see also [seizures + Chromepet desk](${WEEK.safety}).
+
+[Read in Tamil](/chennai-local-news/chennai-independence-day-2026-security-airport-red-zone-tamil) · [Weekend / Monday watch desk](/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026)
 
 ${DISCLAIMER}
 

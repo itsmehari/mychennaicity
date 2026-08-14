@@ -49,6 +49,7 @@ import { SwmRulesAeoSection } from "./swm-rules-aeo-section";
 import { ArticleChennaiContextCluster } from "./article-chennai-context-cluster";
 import { isSwmRulesArticleSlug } from "@/content/civic-swm/swm-rules-aeo";
 import { readArticleCountdown } from "@/lib/article-countdown";
+import { isTamilArticleSlug } from "@/lib/seo/article-language";
 
 export async function EditorialArticle({
   article,
@@ -250,6 +251,7 @@ export async function EditorialArticle({
 
     return (
       <CivicEditorialLayout
+        lang={isTamilArticleSlug(article.slug) ? "ta" : "en"}
         slots={{
           leftRailToc: onThisPage?.length ? (
             <ArticleTocNav entries={onThisPage} variant="rail" />

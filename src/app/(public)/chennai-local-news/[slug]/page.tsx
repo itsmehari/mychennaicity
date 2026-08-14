@@ -13,6 +13,7 @@ import {
   getPublishedSlugsForChennai,
 } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
+import { articleLanguageAlternates } from "@/lib/seo/article-language";
 import {
   buildArticleSectionItemListJsonLd,
   buildArticleTocEntries,
@@ -79,6 +80,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const base = getSiteUrl();
   const url = `${base}/chennai-local-news/${article.slug}`;
+  const languageAlts = articleLanguageAlternates(article.slug);
   const desc = clipMetaDescription(
     article.summary ??
       article.dek ??
@@ -95,7 +97,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: titleSegment,
     description: desc,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      ...(languageAlts ? { languages: languageAlts } : {}),
+    },
     robots: {
       "max-image-preview": "large",
       googleBot: { "max-image-preview": "large" },
