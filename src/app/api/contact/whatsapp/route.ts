@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimitConsume } from "@/lib/rate-limit";
 import {
   buildWaMeRedirectUrl,
   sanitizeWaPrefillParam,
@@ -22,6 +23,20 @@ function sanitizeSourceParam(value: string | null): string | null {
 export function GET(request: NextRequest) {
   const origin = request.nextUrl.origin;
   const fallback = new URL("/contact", origin);
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+  const limit = rateLimitConsume(`contact-wa:${ip}`, 30, 60 * 60 * 1000);
+  if (!limit.ok) {
+    return NextResponse.redirect(fallback, {
+      status: 302,
+      headers: {
+        ...NOINDEX_HEADERS,
+        "Retry-After": String(limit.retryAfterSec),
+      },
+    });
+  }
   const source = sanitizeSourceParam(
     request.nextUrl.searchParams.get("source"),
   );

@@ -196,13 +196,34 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-15:** Weekend watch Saturday morning update (I-Day is *today*) — News18 flag-hoist report + GCTP curb plan + Skymet/IMD rain forecast; tax portal and Monday rain **not invented**. Pin on home tools strip + `/chennai-today` / `-tamil` via `WeekendWatchPin`. Reseed `db:seed:chennai-week-desk-lead-tamil-august-2026:live`. GSC: `npm run gsc:submit-sitemap` (sitemap + news-sitemap). **Rule:** mid-weekend watch updates use primary reports only; keep the Monday 17 Aug checkpoint empty until those reports exist.
 - **2026-08-15:** Tourism desk + TTDC ECR weekend — hub `/chennai-tourism`, itinerary `/chennai-tourism/this-weekend-ecr-plan` (poster unpack: Marundeeswarar, DakshinaChitra, Muttukkadu, ₹99 biryani, kite festival, UNESCO Shore Temple, WSL surf). News `db:seed:ttdc-ecr-weekend-plan-august-2026(:live)` → `/chennai-local-news/ttdc-this-weekend-ecr-plan-august-2026`. Events: kite festival + Shore Temple Classic via `db:seed:event:tn-international-kite-festival(:live)` and `db:seed:event:shore-temple-classic-surfing(:live)`. Poster under `public/images/tourism/` (+ articles/events copies). **Rule:** official tourism posters get a dedicated tourism page *and* a news desk; do not treat TTDC artwork as a bookable package; ₹99 biryani must stay “confirm the kitchen”.
 - **2026-08-15:** Dedicated kite-festival news — `db:seed:tn-international-kite-festival-august-2026(:live)` → `/chennai-local-news/tamil-nadu-international-kite-festival-mamallapuram-august-2026` (same slug as the event, different hub). Sources: [tnikf.com](https://tnikf.com/), DT Next, The Hindu (Poikkal Kuthirai kite). Hero `public/images/articles/tamil-nadu-international-kite-festival-mamallapuram-august-2026.png`. **Rule:** when a festival already has an event + tourism loop, still write a dedicated news desk if the user supplies a festival-specific poster; flag third-party wrong venues (Thiruvidanthai / 17 Aug) against the official site.
-- **2026-08-15:** Rolling recrawl sitemap `/sitemap-recent.xml` — last 20 days of articles/events/jobs/classifieds/directory plus recently shipped hubs. Listed in `robots.txt`. Submit in GSC: `https://mychennaicity.in/sitemap-recent.xml` (`npm run gsc:submit-sitemap` now includes it). **Rule:** after a publish burst, submit the recent sitemap in Search Console; do not replace `sitemap.xml`.
+- **2026-08-15:** Wave F habit tools + gold post-MVP + event submit + admin articles Phase A. Power/feeder, Metro Water, auto fare cards, dengue week, flood street-score; Tamil twins for petrol / AC / property-tax; gold history + buying guide + Tamil snippet; `/chennai-local-events/submit`; `/admin/articles`; civic directory batch; weekend follow-up news (I-Day wrap, TNPDCL still no scorecard, auto-fare pending). Meetup TBA notes re-checked 15 Aug — still no invented venues. **Rule:** skipped 30-list habit tools ship as editorial desks (no fake live APIs); Monday 17 Aug watch desk still waits for primary reports.
 
 ---
 
 ## 7. Daily work logs
 
 Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcripts under this project. Keep entries factual; link live URLs with the `.in` host only.
+
+### 2026-08-15
+
+**Focus:** Next-50 batch — Wave F habit tools, gold post-MVP, event submit, admin articles Phase A, civic directory + weekend follow-up seeds. Do **not** invent Monday 17 Aug watch-desk outcomes or a TNPDCL full 3.70-lakh scorecard.
+
+#### Chats
+| Chat | Transcript | Focus |
+| --- | --- | --- |
+| [Next 50 + ship batch](e79eb1bb-927e-475c-af3e-29adc96e0207) | `e79eb1bb-…` | Planner 50 + implement agent-owned items |
+
+#### Shipped in repo (live after commit/push + seeds)
+1. **Habit desks** — `/civic-tools/power-feeder-desk`, `/civic-tools/metro-water-schedule`, `/guides/chennai-auto-fare`, `/guides/chennai-dengue-week`, `/civic-tools/flood-street-score`
+2. **Gold** — Tamil snippet on hub; `/guides/buying-gold-in-chennai`; `/chennai-gold-rate/history`
+3. **Tamil twins** — petrol, AC, property-tax, slang, PG (`-tamil` + hreflang)
+4. **Event submit** — `/chennai-local-events/submit` (draft + IP rate limit)
+5. **Admin** — `/admin/articles` publish / unpublish / feature
+6. **Seeds** — `db:seed:chennai-civic-directory-batch(:live)`; `db:seed:chennai-weekend-followups-august-2026(:live)` (I-Day wrap; TNPDCL still no scorecard; auto-fare pending)
+7. **Ops** — `contact_intent_select` GA4; WhatsApp contact redirect rate limit; Meetup TBA notes re-checked (no invented venues)
+
+#### Operator still owns
+Vercel `NEXT_PUBLIC_SITE_MODAL_AUTO`, `REVALIDATE_SECRET`; WhatsApp notes already written; GSC MCP auth; GA4 dashboards; Monday 17 Aug watch desk after primary reports.
 
 ### 2026-08-08
 

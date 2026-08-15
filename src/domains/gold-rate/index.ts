@@ -4,6 +4,7 @@ export {
   getGoldRateSnapshotPairForChennai,
   getLatestGoldRateSnapshotForChennai,
   getPreviousGoldRateSnapshotForChennai,
+  listGoldRateHistoryForChennai,
   type GoldRateSnapshotRow,
   type GoldRateSnapshotView,
 } from "./queries";

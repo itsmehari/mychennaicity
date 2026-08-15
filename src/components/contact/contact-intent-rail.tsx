@@ -48,7 +48,22 @@ export function ContactIntentRail() {
               type="button"
               className="mcc-corp-toc__chip"
               aria-current={activeId === channel.id ? "true" : undefined}
-              onClick={() => goTo(channel.id)}
+              onClick={() => {
+                goTo(channel.id);
+                const gtag = (
+                  window as Window & {
+                    gtag?: (
+                      command: "event",
+                      name: string,
+                      params?: Record<string, string>,
+                    ) => void;
+                  }
+                ).gtag;
+                gtag?.("event", "contact_intent_select", {
+                  event_category: "contact",
+                  intent: channel.id,
+                });
+              }}
             >
               <span className="mcc-corp-toc__n" aria-hidden>
                 {String(index + 1).padStart(2, "0")}

@@ -37,7 +37,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): Open local jobs, walk-ins, and office roles — apply on the employer’s own channel
 - [Chennai local events](${base}/chennai-local-events): Upcoming concerts, comedy, exhibitions, temple and neighbourhood events
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
-- [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot page
+- [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
 - [Site search](${base}/search): Search news, jobs, events, and directory entries
 
 ## Machine-readable feeds
@@ -65,7 +65,10 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Afford this area calculator](${base}/guides/chennai-afford-area-calculator): Take-home vs directional rent by neighbourhood (Tamil: ${base}/guides/chennai-afford-area-calculator-tamil)
 - [Which Chennai are you?](${base}/guides/which-chennai-are-you): Playful neighbourhood personality quiz (Tamil: ${base}/guides/which-chennai-are-you-tamil)
 - [Chennai tourism](${base}/chennai-tourism): ECR weekend loops and Mamallapuram stops (this weekend: ${base}/chennai-tourism/this-weekend-ecr-plan)
-- [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk
+- [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk, [power/feeder](${base}/civic-tools/power-feeder-desk), [Metro Water](${base}/civic-tools/metro-water-schedule), [flood street-score](${base}/civic-tools/flood-street-score)
+- [Auto fare cards](${base}/guides/chennai-auto-fare): Official 2013 meter vs July 2026 proposals
+- [Dengue week desk](${base}/guides/chennai-dengue-week): GCC 2026 city totals + household checklist
+- [Submit a Chennai event](${base}/chennai-local-events/submit): Public draft form (moderated)
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
 - [WhatsApp community](${base}/chennai-whatsapp-group): City community landing (not a news source of record)
@@ -177,7 +180,12 @@ Confirm venue and tickets with the organiser before travelling.
 - **Petrol vs EV cost of a Chennai commute:** [${base}/guides/chennai-petrol-vs-ev-cost](${base}/guides/chennai-petrol-vs-ev-cost)
 - **AC bill stress test:** [${base}/guides/chennai-ac-bill-predictor](${base}/guides/chennai-ac-bill-predictor)
 - **Ward vs PIN vs zone (why forms fail):** [${base}/civic-tools/address-form-fixer](${base}/civic-tools/address-form-fixer)
-- **Chennai gold rate today:** [${base}/chennai-gold-rate](${base}/chennai-gold-rate)
+- **Chennai gold rate today:** [${base}/chennai-gold-rate](${base}/chennai-gold-rate) — history: [${base}/chennai-gold-rate/history](${base}/chennai-gold-rate/history)
+- **Auto fare (official 2013 vs July 2026 proposals):** [${base}/guides/chennai-auto-fare](${base}/guides/chennai-auto-fare)
+- **Power / feeder vs streetlight:** [${base}/civic-tools/power-feeder-desk](${base}/civic-tools/power-feeder-desk)
+- **Metro Water supply days:** [${base}/civic-tools/metro-water-schedule](${base}/civic-tools/metro-water-schedule)
+- **Flood street-score (editorial):** [${base}/civic-tools/flood-street-score](${base}/civic-tools/flood-street-score)
+- **Dengue week checklist:** [${base}/guides/chennai-dengue-week](${base}/guides/chennai-dengue-week)
 
 Figures on cost tools are illustrative planning numbers, not official invoices or listings.
 

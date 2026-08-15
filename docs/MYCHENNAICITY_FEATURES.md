@@ -50,7 +50,7 @@
 
 ## 4. Admin and authentication
 
-- **Admin shell** | `/admin` | Session-aware placeholder: sign-in link, user email/name, role display, sign-out (Auth.js v5).
+- **Admin** — `/admin` session shell + **`/admin/articles`** publish / unpublish / feature (Phase A). Events/jobs/directory still seed-script.
 - **Auth API** | `/api/auth/[...nextauth]` | NextAuth route handler.
 - **Middleware** | `/admin/*` | Redirects unauthenticated visitors to sign-in with `callbackUrl`.
 

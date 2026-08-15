@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import { PetrolVsEvCalculator } from "@/components/compulsive/petrol-vs-ev-calculator";
 import {
   GuideDisclaimer,
@@ -18,7 +19,14 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Chennai petrol vs EV cost-of-day calculator — edit km, mileage, and ₹/kWh for a shareable monthly comparison.",
-  alternates: { canonical: `${getSiteUrl()}${PETROL_VS_EV_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${PETROL_VS_EV_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${PETROL_VS_EV_PATH}`,
+      "ta-IN": `${getSiteUrl()}/guides/chennai-petrol-vs-ev-cost-tamil`,
+      "x-default": `${getSiteUrl()}${PETROL_VS_EV_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "Personal petrol vs EV rupee math for Chennai commutes.",
@@ -46,6 +54,11 @@ export default function PetrolVsEvPage() {
         { href: "/chennai-gold-rate", label: "Gold rate desk" },
       ]}
     >
+      <BilingualToggle
+        enHref={PETROL_VS_EV_PATH}
+        taHref="/guides/chennai-petrol-vs-ev-cost-tamil"
+        current="en"
+      />
       <GuideDisclaimer kind="money" />
       <PetrolVsEvCalculator />
       <h2>FAQ</h2>

@@ -142,9 +142,8 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 ## 7. Roadmap (not built)
 
-- Public **submit event** form (`/chennai-local-events/submit` or similar) + moderation ([`EXECUTION_ROADMAP.md`](EXECUTION_ROADMAP.md)).
 - DB columns for organiser, category, ticket URL, hero image (would simplify hub cards and JSON-LD).
-- Home “Featured events” strip reuse of hub card components.
+- Home “Featured events” strip reuse of hub card components (home already has a DB-backed featured strip).
 
 ---
 
@@ -157,3 +156,5 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-08-10 | Hub overhaul: above-the-fold hero + Next up + browse grid; ads/community CTAs below; sticky filters; dynamic meta; stronger FAQ/AEO. Components: `events-hub-hero.tsx`, `events-hub-aeo-strip.tsx`. |
 | 2026-08-10 | Meetup Aug–Sep batch (15 workshops/tech/networking/wellness) + thematic posters + AEO/FAQ meetup copy. |
 | 2026-08-15 | TTDC ECR weekend: kite festival (TNIKF, Ocean View, 14–16 Aug) + WSL Shore Temple Classic (12–16 Aug). Companion tourism page `/chennai-tourism/this-weekend-ecr-plan`. Dedicated news `db:seed:tn-international-kite-festival-august-2026(:live)` → `/chennai-local-news/tamil-nadu-international-kite-festival-mamallapuram-august-2026`. |
+| 2026-08-15 | Public submit form `/chennai-local-events/submit` — inserts `draft` rows, IP rate limit, IST datetime. Editors must schedule before the hub lists them. |
+

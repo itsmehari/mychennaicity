@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -14,12 +15,20 @@ import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Chennai slang decoder";
+const TA_PATH = "/guides/chennai-slang-decoder-tamil";
 
 export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Chennai Tamil–English slang decoder — search city desk terms like machan, filter coffee, current, only, and more with meanings and examples.",
-  alternates: { canonical: `${getSiteUrl()}${SLANG_DECODER_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${SLANG_DECODER_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${SLANG_DECODER_PATH}`,
+      "ta-IN": `${getSiteUrl()}${TA_PATH}`,
+      "x-default": `${getSiteUrl()}${SLANG_DECODER_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "Searchable Chennai slang for newcomers and long-timers.",
@@ -47,6 +56,7 @@ export default function ChennaiSlangDecoderPage() {
         { href: "/guides/how-to-use-mychennaicity", label: "How to use mychennaicity" },
       ]}
     >
+      <BilingualToggle enHref={SLANG_DECODER_PATH} taHref={TA_PATH} current="en" />
       <GuideDisclaimer kind="culture" />
       <SlangDecoderTool />
       <h2>FAQ</h2>

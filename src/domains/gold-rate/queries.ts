@@ -115,6 +115,21 @@ export async function getGoldRateSnapshotPairForChennai(): Promise<{
   return { latest, previous };
 }
 
+export async function listGoldRateHistoryForChennai(
+  limit = 30,
+): Promise<GoldRateSnapshotView[]> {
+  const cityId = await getChennaiCityId();
+  if (!cityId) return [];
+  const db = getDb();
+  const rows = await db
+    .select()
+    .from(goldRateSnapshots)
+    .where(eq(goldRateSnapshots.cityId, cityId))
+    .orderBy(desc(goldRateSnapshots.rateDate))
+    .limit(limit);
+  return rows.map(toView).reverse();
+}
+
 export async function getGoldRateLastModifiedForSitemap(): Promise<Date | null> {
   const latest = await getLatestGoldRateSnapshotForChennai();
   return latest?.fetchedAt ?? null;

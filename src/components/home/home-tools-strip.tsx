@@ -10,24 +10,24 @@ const TOOLS = [
     dek: "60-second morning card",
   },
   {
+    href: "/civic-tools/power-feeder-desk",
+    label: "Power / feeder",
+    dek: "Minnagam 94987 94987",
+  },
+  {
+    href: compulsivePath("auto-fare"),
+    label: "Auto fare cards",
+    dek: "2013 vs proposed",
+  },
+  {
     href: compulsivePath("afford-area"),
     label: "Afford this area",
     dek: "CTC vs rent check",
   },
   {
-    href: compulsivePath("petrol-vs-ev"),
-    label: "Petrol vs EV",
-    dek: "Cost of your km",
-  },
-  {
     href: "/civic-tools/address-form-fixer",
     label: "Ward vs PIN fixer",
     dek: "Why forms fail",
-  },
-  {
-    href: compulsivePath("which-chennai"),
-    label: "Which Chennai?",
-    dek: "Quick neighbourhood quiz",
   },
 ] as const;
 
@@ -40,7 +40,7 @@ export function HomeToolsStrip() {
     <Section
       eyebrow="Everyday tools"
       title="Tools Chennai uses"
-      subtitle="Morning brief, rent math, commute cost, and civic form help — built for WhatsApp forwards."
+      subtitle="Morning brief, outage desk, auto fare math, rent check, and civic form help."
       action={{ href: "/civic-tools", label: "All civic tools" }}
     >
       <div className="mb-4">

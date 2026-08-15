@@ -47,5 +47,7 @@ describe("llms.txt builders", () => {
     expect(md).toContain("/chennai-today");
     expect(md).toContain("/guides/chennai-afford-area-calculator");
     expect(md).toContain("/guides/which-chennai-are-you");
+    expect(md).toContain("/guides/chennai-auto-fare");
+    expect(md).toContain("/civic-tools/power-feeder-desk");
   });
 });

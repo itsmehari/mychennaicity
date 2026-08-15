@@ -29,8 +29,12 @@ export function GoldRateEditorialSections() {
             — dense jewellery retail corridor.
           </li>
           <li>
-            <Link href="/chennai-classifieds">Chennai classifieds</Link> — occasional
-            pre-owned or service listings from readers.
+            <Link href="/guides/buying-gold-in-chennai">Buying gold in Chennai</Link>{" "}
+            — invoice literacy (making, hallmark, buy-back).
+          </li>
+          <li>
+            <Link href="/chennai-gold-rate/history">Rate history</Link>{" "}
+            — recent daily 22K snapshots.
           </li>
           <li>
             <Link href="/chennai-local-news/topic/economy">Economy desk</Link> — macro

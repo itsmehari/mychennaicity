@@ -196,9 +196,24 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Assembly seats and curated candidates.",
           },
           {
-            href: "/chennai-map",
-            label: "Interactive map",
-            description: "Ward and Corporation zone explorer.",
+            href: "/civic-tools/power-feeder-desk",
+            label: "Power / feeder desk",
+            description: "Feeder vs streetlight vs house — Minnagam 94987 94987.",
+          },
+          {
+            href: "/civic-tools/metro-water-schedule",
+            label: "Metro Water desk",
+            description: "Supply-day patterns — not live valve timings.",
+          },
+          {
+            href: "/civic-tools/flood-street-score",
+            label: "Flood street-score",
+            description: "Editorial 1–10 from GCC’s 294 stagnation points.",
+          },
+          {
+            href: compulsivePath("auto-fare"),
+            label: "Auto fare cards",
+            description: "2013 meter vs July 2026 proposals.",
           },
         ],
       },
@@ -301,9 +316,14 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Saturday–Sunday listings.",
           },
           {
-            href: "/chennai-local-events#events-next-up",
-            label: "Next up",
-            description: "Soonest dates at a glance.",
+            href: "/chennai-local-events/submit",
+            label: "Submit an event",
+            description: "Draft listing — goes live after editors schedule it.",
+          },
+          {
+            href: "/contact#events",
+            label: "Events desk (WhatsApp)",
+            description: "Same intake via Contact if you prefer chat.",
           },
           {
             href: CHENNAI_FESTIVALS_GUIDE_PATH,

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AcBillPredictor } from "@/components/compulsive/ac-bill-predictor";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -16,7 +17,14 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Directional Chennai AC bill predictor — estimate monthly units from tonnage and hours, then stress-test summer habits.",
-  alternates: { canonical: `${getSiteUrl()}${AC_BILL_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${AC_BILL_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${AC_BILL_PATH}`,
+      "ta-IN": `${getSiteUrl()}/guides/chennai-ac-bill-predictor-tamil`,
+      "x-default": `${getSiteUrl()}${AC_BILL_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "If I run 2 ACs 8 hours, what’s my EB risk? Illustrative only.",
@@ -46,6 +54,11 @@ export default function AcBillPredictorPage() {
         { href: "/chennai-gold-rate", label: "Gold rate desk" },
       ]}
     >
+      <BilingualToggle
+        enHref={AC_BILL_PATH}
+        taHref="/guides/chennai-ac-bill-predictor-tamil"
+        current="en"
+      />
       <GuideDisclaimer
         kind="money"
         extra="Not an official TANGEDCO / TNPDCL estimate."

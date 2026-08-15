@@ -41,6 +41,15 @@ export const REACH_HUBS = [
     id: "wa-admins",
     route: "/chennai-whatsapp-group-admins",
   },
+  {
+    id: "auto-fare",
+    route: "/guides/chennai-auto-fare",
+    note: "2013 meter vs July 2026 proposals",
+  },
+  {
+    id: "power-feeder",
+    route: "/civic-tools/power-feeder-desk",
+  },
 ] as const;
 
 /** Compulsive hubs — see `src/content/compulsive/index.ts` for full metadata. */

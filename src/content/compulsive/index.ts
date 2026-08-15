@@ -1,9 +1,9 @@
 /**
- * Compulsive / connective hubs registry (ideas 1, 7–12, 14, 17, 20–23, 25–26, 28–30).
+ * Compulsive / connective hubs registry (ideas 1–3, 5, 7–12, 14, 16–18, 20–23, 25–26, 28–30).
  * Single source for paths, waves, and sitemap wiring.
  */
 
-export type CompulsiveWave = "A" | "B" | "C" | "D" | "E";
+export type CompulsiveWave = "A" | "B" | "C" | "D" | "E" | "F";
 
 export type CompulsiveHub = {
   id: string;
@@ -178,6 +178,51 @@ export const COMPULSIVE_HUBS = [
     sitemapPriority: 0.66,
     changeFrequency: "monthly",
   },
+  {
+    id: "power-feeder",
+    idea: 2,
+    wave: "F",
+    path: "/civic-tools/power-feeder-desk",
+    title: "Power / feeder outage desk",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "metro-water",
+    idea: 3,
+    wave: "F",
+    path: "/civic-tools/metro-water-schedule",
+    title: "Metro Water supply-day desk",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "auto-fare",
+    idea: 5,
+    wave: "F",
+    path: "/guides/chennai-auto-fare",
+    title: "Auto fare reality cards",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "dengue-week",
+    idea: 16,
+    wave: "F",
+    path: "/guides/chennai-dengue-week",
+    title: "Dengue / mosquito week",
+    sitemapPriority: 0.68,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "flood-street",
+    idea: 18,
+    wave: "F",
+    path: "/civic-tools/flood-street-score",
+    title: "Flood street-score",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
 ] as const satisfies readonly CompulsiveHub[];
 
 export type CompulsiveHubId = (typeof COMPULSIVE_HUBS)[number]["id"];
@@ -201,4 +246,9 @@ export const COMPULSIVE_TAMIL_SITEMAP_PATHS = [
   "/chennai-today-tamil",
   "/guides/chennai-afford-area-calculator-tamil",
   "/guides/which-chennai-are-you-tamil",
+  "/guides/chennai-petrol-vs-ev-cost-tamil",
+  "/guides/chennai-ac-bill-predictor-tamil",
+  "/guides/chennai-property-tax-checklist-tamil",
+  "/guides/chennai-slang-decoder-tamil",
+  "/guides/chennai-pg-flatmate-red-flags-tamil",
 ] as const;

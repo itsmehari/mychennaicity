@@ -38,5 +38,5 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Sitemap / news sitemap / recent sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/sitemap-recent.xml/`, `src/app/robots.ts` |
 | Static pages: about, contact, editorial standards, glossary | **Done** — under `src/app/(public)/` |
 | Newsletter signup UI | **Partial** — modal + config (`src/components/newsletter/`, `src/config/newsletter-modal.ts`); wire to provider when chosen |
-| Admin CRUD (articles, events, jobs, directory) | **Not started** — `/admin` placeholder; see [ADMIN_SYSTEM_PLAN.md](ADMIN_SYSTEM_PLAN.md) |
+| Admin CRUD (articles, events, jobs, directory) | **Partial** — `/admin/articles` publish/unpublish/feature; events/jobs/directory still seed scripts. See [ADMIN_SYSTEM_PLAN.md](ADMIN_SYSTEM_PLAN.md) |
 | GitHub remote / Vercel / Neon / DNS / GA / GSC | **Operator** completes using [DEPLOY.md](DEPLOY.md) |

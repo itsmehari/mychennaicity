@@ -164,7 +164,15 @@ export function JobPostingDetail({
             {applyHref ? (
               <JobsDetailApplyBand
                 title="Ready to apply?"
-                description="Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
+                description={
+                  isWhatsApp
+                    ? "This listing uses WhatsApp — message the poster; we do not process CVs."
+                    : applyHref?.startsWith("tel:")
+                      ? "This listing uses a phone number — call; we do not process CVs."
+                      : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+                        ? "This listing uses Facebook message — not a careers portal. Confirm the role before sharing documents."
+                        : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
+                }
                 href={applyHref}
                 label={applyLabel}
                 isWhatsApp={isWhatsApp}

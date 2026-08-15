@@ -26,6 +26,11 @@ export default async function AdminHome() {
           <p className="mt-1 text-zinc-600 dark:text-zinc-400">
             Role: {session.user.role ?? "reader"}
           </p>
+          <p className="mt-3 text-sm">
+            <Link href="/admin/articles" className="underline">
+              Articles (publish / feature)
+            </Link>
+          </p>
           <form className="mt-3" action={signOutAction}>
             <button
               type="submit"

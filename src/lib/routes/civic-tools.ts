@@ -14,6 +14,9 @@ export const CIVIC_TOOL_PATHS = {
   boundaryFeedback: "/civic-tools/boundary-feedback",
   addressFormFixer: "/civic-tools/address-form-fixer",
   streetlightDeadSpots: "/civic-tools/streetlight-dead-spots",
+  powerFeeder: "/civic-tools/power-feeder-desk",
+  metroWater: "/civic-tools/metro-water-schedule",
+  floodStreet: "/civic-tools/flood-street-score",
 } as const;
 
 export const CIVIC_TOOL_SITEMAP_PATHS = Object.values(CIVIC_TOOL_PATHS);

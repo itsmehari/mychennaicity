@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { GoldRateAnswerBox, buildGoldRateMetaDescription } from "@/components/gold-rate/gold-rate-answer-box";
@@ -6,7 +7,7 @@ import { GoldRateStaleNotice } from "@/components/gold-rate/gold-rate-stale-noti
 import { GoldRateCalculators } from "@/components/gold-rate/gold-rate-calculators";
 import { GoldRateCards } from "@/components/gold-rate/gold-rate-cards";
 import { GoldRateEditorialSections } from "@/components/gold-rate/gold-rate-editorial";
-import { GoldRateHubHero } from "@/components/gold-rate/gold-rate-hub-hero";
+import { GoldRateTamilSnippet } from "@/components/gold-rate/gold-rate-tamil-snippet";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -67,12 +68,22 @@ export default async function ChennaiGoldRatePage() {
       <div className="mt-6">
         <GoldRateAnswerBox snapshot={snapshot} />
         <GoldRateStaleNotice snapshot={snapshot} />
+        <GoldRateTamilSnippet />
       </div>
 
       <HubCommunityStrip businessVariant="default" className="mt-6" />
 
       <div className="mt-10 space-y-12">
         <GoldRateCards snapshot={snapshot} previous={previous} />
+        <p className="text-sm text-[var(--muted)]">
+          <Link href="/chennai-gold-rate/history" className="font-semibold text-[var(--accent)] hover:underline">
+            Rate history chart
+          </Link>
+          {" · "}
+          <Link href="/guides/buying-gold-in-chennai" className="font-semibold text-[var(--accent)] hover:underline">
+            Buying gold in Chennai
+          </Link>
+        </p>
         <GoldRateCalculators snapshot={snapshot} />
         <GoldRateEditorialSections />
       </div>

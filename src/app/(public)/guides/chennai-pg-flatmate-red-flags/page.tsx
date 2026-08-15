@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -15,12 +16,20 @@ import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Chennai PG / flatmate red flags";
+const TA_PATH = "/guides/chennai-pg-flatmate-red-flags-tamil";
 
 export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Chennai PG and flatmate red, amber, and green signals — deposits, agreements, utilities, and safety checks. Not legal advice.",
-  alternates: { canonical: `${getSiteUrl()}${PG_RED_FLAGS_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${PG_RED_FLAGS_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${PG_RED_FLAGS_PATH}`,
+      "ta-IN": `${getSiteUrl()}${TA_PATH}`,
+      "x-default": `${getSiteUrl()}${PG_RED_FLAGS_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description: "Interactive checklist for safer PG / flatmate hunts in Chennai.",
@@ -48,6 +57,7 @@ export default function ChennaiPgFlatmateRedFlagsPage() {
         { href: "/directory", label: "City directory" },
       ]}
     >
+      <BilingualToggle enHref={PG_RED_FLAGS_PATH} taHref={TA_PATH} current="en" />
       <GuideDisclaimer
         kind="money"
         extra="Not legal advice. Deposit disputes, tenancy rights, and contracts need a qualified professional and official channels — this page is practical resident guidance only."

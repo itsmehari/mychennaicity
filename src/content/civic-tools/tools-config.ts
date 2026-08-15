@@ -105,6 +105,30 @@ export const CIVIC_TOOLS: CivicToolDef[] = [
     status: "live",
     phase: "C",
   },
+  {
+    slug: "power-feeder-desk",
+    title: "Power / feeder outage desk",
+    description:
+      "Feeder vs streetlight vs house MCB — Minnagam 94987 94987. Not live SCADA.",
+    status: "live",
+    phase: "B",
+  },
+  {
+    slug: "metro-water-schedule",
+    title: "Metro Water supply-day desk",
+    description:
+      "How Chennai water usually works by corridor — not today’s valve timings.",
+    status: "live",
+    phase: "B",
+  },
+  {
+    slug: "flood-street-score",
+    title: "Flood street-score",
+    description:
+      "Editorial 1–10 from GCC’s 294 stagnation points. Not a live flood warning.",
+    status: "live",
+    phase: "C",
+  },
 ];
 
 export function civicToolPath(slug: string): string {

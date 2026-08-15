@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PropertyTaxChecklist } from "@/components/compulsive/property-tax-checklist";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -21,7 +22,14 @@ export const metadata: Metadata = {
   title: titleSegment,
   description:
     "Interactive Chennai property-tax checklist — early-bird windows, wrong classification, vacant land, and name mismatch. Verify every figure on the official GCC portal.",
-  alternates: { canonical: `${getSiteUrl()}${PROPERTY_TAX_PATH}` },
+  alternates: {
+    canonical: `${getSiteUrl()}${PROPERTY_TAX_PATH}`,
+    languages: {
+      "en-IN": `${getSiteUrl()}${PROPERTY_TAX_PATH}`,
+      "ta-IN": `${getSiteUrl()}/guides/chennai-property-tax-checklist-tamil`,
+      "x-default": `${getSiteUrl()}${PROPERTY_TAX_PATH}`,
+    },
+  },
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description:
@@ -50,6 +58,11 @@ export default function PropertyTaxChecklistPage() {
         { href: compulsivePath("ac-bill"), label: "AC bill predictor" },
       ]}
     >
+      <BilingualToggle
+        enHref={PROPERTY_TAX_PATH}
+        taHref="/guides/chennai-property-tax-checklist-tamil"
+        current="en"
+      />
       <GuideDisclaimer
         kind="money"
         extra={`${PROPERTY_TAX_OFFICIAL_NOTE} This is not tax, legal, or financial advice.`}

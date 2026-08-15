@@ -40,6 +40,18 @@ const publishedCond = and(
   isNotNull(articles.publishedAt),
 );
 
+export async function listAdminArticlesForChennai(limit = 60) {
+  const cityId = await getChennaiCityId();
+  if (!cityId) return [];
+  const db = getDb();
+  return db
+    .select()
+    .from(articles)
+    .where(eq(articles.cityId, cityId))
+    .orderBy(desc(articles.updatedAt))
+    .limit(limit);
+}
+
 export async function listPublishedArticlesForChennai(limit = 50) {
   const cityId = await getChennaiCityId();
   if (!cityId) return [];

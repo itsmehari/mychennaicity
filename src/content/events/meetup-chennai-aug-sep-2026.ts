@@ -44,7 +44,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=RPA&location=in--chennai",
     featured: false,
     notes:
-      "**Organiser:** Analytics for Business · Frequency often listed as every third Saturday. Confirm Explara registration on the live Meetup event page.",
+      "**Organiser:** Analytics for Business · Frequency often listed as every third Saturday. Explara URL was not stably published in the brief we have — confirm registration on the live Meetup event page (re-checked 15 Aug 2026).",
   },
   {
     slug: "meetup-new-business-circle-ronda-chennai-aug-2026",
@@ -62,7 +62,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=Ronda&location=in--chennai",
     featured: false,
     notes:
-      "**Organiser:** Ronda Night / Ronda Club · Recurring Saturdays (Meetup shows series into Dec 2026). Venue TBA until you join.",
+      "**Organiser:** Ronda Night / Ronda Club · Recurring Saturdays. Venue still TBA until you join (re-checked 15 Aug 2026).",
   },
   {
     slug: "meetup-breaking-code-workshop-iitm-research-park-aug-2026",
@@ -80,7 +80,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=Breaking%20Code&location=in--chennai",
     featured: true,
     notes:
-      "**Organiser:** Breaking Code · Confirm exact hall inside Research Park and ticket price on the live Meetup listing.",
+      "**Organiser:** Breaking Code · Confirm exact hall inside Research Park and ticket price on the live Meetup listing (fee still not stably published as of 15 Aug 2026).",
   },
   {
     slug: "meetup-board-games-banter-brews-funtunes-virugambakkam-aug-2026",
@@ -117,7 +117,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=Women%20Network&location=in--chennai",
     featured: false,
     notes:
-      "**Organiser:** Ronda Club / Ronda Night · Meetup shows recurring Saturdays (series into early 2027). Venue TBA until you RSVP/join.",
+      "**Organiser:** Ronda Club / Ronda Night · Recurring Saturdays. Venue still TBA until you RSVP/join (re-checked 15 Aug 2026).",
   },
   {
     slug: "meetup-texsas-holdem-chennai-poker-house-aug-2026",
@@ -135,7 +135,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=Poker&location=in--chennai",
     featured: false,
     notes:
-      "**Organiser:** Chennai Poker House Game · Every Sunday · Exact venue TBA. Verify legality/house rules with the host.",
+      "**Organiser:** Chennai Poker House Game · Every Sunday · Exact venue still TBA as of 15 Aug 2026. Verify legality/house rules with the host.",
   },
   {
     slug: "meetup-silent-sufi-meditation-taj-business-hub-santhome-aug-2026",
@@ -193,7 +193,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/technexus-community/",
     featured: true,
     notes:
-      "**Organiser:** TechNexus Community · Bring ID for campus entry; confirm RSVP cut-off on Meetup.",
+      "**Organiser:** TechNexus Community · Agenda/speakers still TBD on Meetup as of 15 Aug 2026. Bring ID for campus entry; confirm RSVP cut-off on Meetup.",
   },
   {
     slug: "meetup-ksug-ai-india-9-cloud-native-ai-cloudera-aug-2026",
@@ -211,7 +211,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/find/?keywords=KSUG&location=in--chennai",
     featured: false,
     notes:
-      "**Organiser:** KSUG.AI India · Exact Cloudera office address not fully published in the brief — verify on Meetup before travel.",
+      "**Organiser:** KSUG.AI India · Exact Cloudera tower/floor still not fully published as of 15 Aug 2026 — verify on Meetup before travel.",
   },
   {
     slug: "meetup-apache-kafka-chennai-facilio-guindy-aug-2026",
@@ -248,7 +248,7 @@ export const MEETUP_CHENNAI_AUG_SEP_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://www.meetup.com/makers-tribe/",
     featured: false,
     notes:
-      "**Organiser:** Makers Tribe · Confirm Aug 29 venue and ticket checkout URL on Meetup before paying. Distinct from the July Ticket9 listing.",
+      "**Organiser:** Makers Tribe · Aug 29 venue still TBA as of 15 Aug 2026 (July edition was M2P Fintech). Confirm ticket checkout URL on Meetup before paying.",
   },
   {
     slug: "meetup-expert-talks-ai-evaluation-auth-indiqube-ekkatuthangal-aug-2026",

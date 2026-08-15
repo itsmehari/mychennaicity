@@ -13,7 +13,7 @@ import { getSiteUrl } from "@/lib/env";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { getGoldRateLastModifiedForSitemap } from "@/domains/gold-rate";
-import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
+import { CHENNAI_GOLD_RATE_HUB_PATH, CHENNAI_GOLD_RATE_HISTORY_PATH, CHENNAI_BUYING_GOLD_GUIDE_PATH } from "@/lib/routes/chennai-gold-rate";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
@@ -217,6 +217,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: goldRateLastModified ?? now,
       changeFrequency: "daily",
       priority: 0.88,
+    },
+    {
+      url: `${base}${CHENNAI_GOLD_RATE_HISTORY_PATH}`,
+      lastModified: goldRateLastModified ?? now,
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
+    {
+      url: `${base}${CHENNAI_BUYING_GOLD_GUIDE_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.68,
+    },
+    {
+      url: `${base}/chennai-local-events/submit`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
     {
       url: `${base}/guides/chennai-tech-careers`,

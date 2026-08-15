@@ -73,6 +73,12 @@ const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
   { path: "/guides/bulk-waste-generator-readiness-checklist-2026", lastModified: "2026-08-08" },
   { path: "/civic-tools/address-form-fixer", lastModified: "2026-08-12" },
   { path: "/civic-tools/streetlight-dead-spots", lastModified: "2026-08-12" },
+  { path: "/civic-tools/power-feeder-desk", lastModified: "2026-08-15" },
+  { path: "/civic-tools/metro-water-schedule", lastModified: "2026-08-15" },
+  { path: "/civic-tools/flood-street-score", lastModified: "2026-08-15" },
+  { path: "/chennai-gold-rate/history", lastModified: "2026-08-15" },
+  { path: "/guides/buying-gold-in-chennai", lastModified: "2026-08-15" },
+  { path: "/chennai-local-events/submit", lastModified: "2026-08-15" },
   ...COMPULSIVE_SITEMAP_ENTRIES.map((entry) => ({
     path: entry.path,
     lastModified: "2026-08-12",

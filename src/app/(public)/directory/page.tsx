@@ -68,8 +68,9 @@ export default async function DirectoryPage() {
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
         We are building one Chennai-wide directory so schools, hospitals,
         food, parks, transit, and civic listings are not scattered across
-        different corners of the site. Pick a category, filter by area, then open
-        detail pages. Live counts will show once listings are connected.
+        different corners of the site. Pick a category, then open a detail
+        page. When live rows exist they appear below — civic offices and parks
+        first, then more neighbourhood listings.
       </p>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
         Also on this site:{" "}

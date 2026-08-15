@@ -7,6 +7,7 @@ export {
   getPublishedSlugsForChennai,
   homeNewsBulletinCached,
   latestArticlesForHome,
+  listAdminArticlesForChennai,
   listArticlesByCategoryForChennai,
   listArticlesForSitemap,
   listPublishedArticlesForChennai,
