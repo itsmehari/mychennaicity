@@ -55,6 +55,14 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/tabla-poetry-bhupendra-singh-september-2026.jpg",
     alt: "Tabla Poetry Live mood — Bhupendra Singh Khidia at Music Academy Mini Hall, Chennai, 20 September 2026",
   },
+  "tamil-nadu-international-kite-festival-mamallapuram-august-2026": {
+    src: "/images/events/ttdc-this-weekend-ecr-plan-august-2026.png",
+    alt: "Tamil Nadu Tourism This Weekend ECR Plan poster featuring the Mamallapuram kite festival, TTDC Ocean View, 14–16 August 2026",
+  },
+  "shore-temple-classic-qs-2000-mamallapuram-august-2026": {
+    src: "/images/events/ttdc-this-weekend-ecr-plan-august-2026.png",
+    alt: "Tamil Nadu Tourism This Weekend ECR Plan poster featuring the Mamallapuram surfing championship stop, August 2026",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",

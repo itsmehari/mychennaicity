@@ -13,6 +13,7 @@ import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { compulsivePath } from "@/content/compulsive/index";
+import { CHENNAI_TOURISM_HUB_PATH, ECR_WEEKEND_PLAN_PATH } from "@/content/tourism";
 
 const newsLinks = [
   { href: "/chennai-local-news", label: "Chennai local news" },
@@ -35,6 +36,8 @@ const discoverLinks = [
   { href: "/chennai-local-events#events-weekend", label: "Events this weekend" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
   { href: CHENNAI_FESTIVALS_GUIDE_PATH, label: "Festivals calendar" },
+  { href: CHENNAI_TOURISM_HUB_PATH, label: "Chennai tourism" },
+  { href: ECR_WEEKEND_PLAN_PATH, label: "This weekend ECR plan" },
   { href: CHENNAI_EV_GUIDE_PATH, label: "EV charging guide" },
   { href: compulsivePath("chennai-today"), label: "Chennai today (60s)" },
   { href: compulsivePath("which-chennai"), label: "Which Chennai are you?" },

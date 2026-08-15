@@ -47,7 +47,7 @@ export function CopyShareButton({
     <button
       type="button"
       onClick={() => void onClick()}
-      className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs font-bold text-[var(--foreground)] hover:border-[var(--accent)]"
+      className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs font-bold text-[var(--foreground)] hover:border-[var(--accent)] cursor-pointer"
     >
       {done ? "Copied" : label}
     </button>

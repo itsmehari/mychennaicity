@@ -9,6 +9,10 @@ import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { compulsivePath } from "@/content/compulsive/index";
+import {
+  CHENNAI_TOURISM_HUB_PATH,
+  ECR_WEEKEND_PLAN_PATH,
+} from "@/content/tourism";
 
 export type MegaNavLink = {
   href: string;
@@ -164,6 +168,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             label: "Filter coffee map",
             description: "Curated cups by corridor.",
           },
+          {
+            href: CHENNAI_TOURISM_HUB_PATH,
+            label: "Chennai tourism",
+            description: "ECR weekend loops and Mamallapuram stops.",
+          },
         ],
       },
       {
@@ -297,6 +306,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             href: CHENNAI_FESTIVALS_GUIDE_PATH,
             label: "Festivals calendar",
             description: "Pongal to Margazhi — year-round seasons.",
+          },
+          {
+            href: ECR_WEEKEND_PLAN_PATH,
+            label: "This weekend ECR plan",
+            description: "TTDC coastal loop — kites, temple, biryani.",
           },
         ],
       },

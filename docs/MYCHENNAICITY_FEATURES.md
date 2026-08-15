@@ -23,7 +23,7 @@
 | **Directory** | `/directory` | Vertical tiles and **mock** sample listings; `directory_entries` exists in schema for a future unified API. |
 | **Area (macro) pages** | `/areas/[slug]` | Greater Chennai zone hubs (`chennaiZones`): blurb, cross-links; area-scoped listing filters still planned. |
 | **About / contact / trust** | `/about`, `/contact`, `/editorial-standards` | Static pages for editorial positioning, contact, and standards. |
-| **Glossary** | `/glossary` | Chennai-focused glossary content and related SEO helpers. |
+| **Chennai tourism** | `/chennai-tourism`, `/chennai-tourism/this-weekend-ecr-plan` | Tourism desk unpacking Tamil Nadu Tourism / TTDC loops. First itinerary: Independence weekend ECR plan (temple, DakshinaChitra, boats, ₹99 biryani, kite festival, UNESCO Shore Temple, WSL surf). |
 
 ---
 

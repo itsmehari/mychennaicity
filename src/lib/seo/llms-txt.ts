@@ -63,6 +63,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Petrol vs EV cost calculator](${base}/guides/chennai-petrol-vs-ev-cost): Shareable Chennai commute energy cost tool
 - [Afford this area calculator](${base}/guides/chennai-afford-area-calculator): Take-home vs directional rent by neighbourhood (Tamil: ${base}/guides/chennai-afford-area-calculator-tamil)
 - [Which Chennai are you?](${base}/guides/which-chennai-are-you): Playful neighbourhood personality quiz (Tamil: ${base}/guides/which-chennai-are-you-tamil)
+- [Chennai tourism](${base}/chennai-tourism): ECR weekend loops and Mamallapuram stops (this weekend: ${base}/chennai-tourism/this-weekend-ecr-plan)
 - [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring

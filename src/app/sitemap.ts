@@ -30,6 +30,10 @@ import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { COMPULSIVE_SITEMAP_ENTRIES, COMPULSIVE_TAMIL_SITEMAP_PATHS } from "@/content/compulsive/index";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
+import {
+  CHENNAI_TOURISM_HUB_PATH,
+  ECR_WEEKEND_PLAN_PATH,
+} from "@/content/tourism";
 
 /** Always read Neon for open jobs / scheduled events — no stale build-time sitemap. */
 export const dynamic = "force-dynamic";
@@ -231,6 +235,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.68,
+    },
+    {
+      url: `${base}${CHENNAI_TOURISM_HUB_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.72,
+    },
+    {
+      url: `${base}${ECR_WEEKEND_PLAN_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.74,
     },
     {
       url: `${base}${CHENNAI_EV_GUIDE_PATH}`,

@@ -134,6 +134,8 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-frangipani-kaber-vasuki-august-2026.ts` | `db:seed:event:frangipani-kaber-vasuki:live` (enriches `ticket9-frangipani-tour-chennai`) |
 | `seed-event-sukoon-baithak-adyar-september-2026.ts` | `db:seed:event:sukoon-baithak-adyar:live` |
 | `seed-event-tabla-poetry-september-2026.ts` | `db:seed:event:tabla-poetry:live` |
+| `seed-event-tn-international-kite-festival-august-2026.ts` | `db:seed:event:tn-international-kite-festival:live` |
+| `seed-event-shore-temple-classic-surfing-august-2026.ts` | `db:seed:event:shore-temple-classic-surfing:live` |
 | `seed-meetup-chennai-aug-sep-2026.ts` | `db:seed:meetup-chennai-aug-sep:live` (15 Meetup/community rows) |
 
 ---
@@ -154,3 +156,4 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-08-10 | Four music listings: Jananiy Carnatic (Narada Gana Sabha), Frangipani/Kaber (enrich Ticket9), Sukoon baithak (Mathsya Adyar), Tabla Poetry (Music Academy Mini Hall). Self-hosted posters + live seeds. |
 | 2026-08-10 | Hub overhaul: above-the-fold hero + Next up + browse grid; ads/community CTAs below; sticky filters; dynamic meta; stronger FAQ/AEO. Components: `events-hub-hero.tsx`, `events-hub-aeo-strip.tsx`. |
 | 2026-08-10 | Meetup Aug–Sep batch (15 workshops/tech/networking/wellness) + thematic posters + AEO/FAQ meetup copy. |
+| 2026-08-15 | TTDC ECR weekend: kite festival (TNIKF, Ocean View, 14–16 Aug) + WSL Shore Temple Classic (12–16 Aug). Companion tourism page `/chennai-tourism/this-weekend-ecr-plan`. |

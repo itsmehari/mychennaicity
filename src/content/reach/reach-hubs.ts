@@ -25,6 +25,11 @@ export const REACH_HUBS = [
     route: "/guides/chennai-festivals-calendar",
   },
   {
+    id: "tourism-ecr",
+    route: "/chennai-tourism/this-weekend-ecr-plan",
+    note: "TTDC / Tamil Nadu Tourism ECR weekend loop",
+  },
+  {
     id: "salary",
     route: "/guides/chennai-salary-guide-2026",
   },
