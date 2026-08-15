@@ -162,7 +162,7 @@ Three layers — do **not** paste one-off partner markup on a page:
 
 **Shapes:** square = sticky rails / job + article sidebars; rectangle = full-width bands. Skip legal/auth/admin/contact. If a page already has `PageAdSlot`, do not also show the site-wide band.
 
-**Do not remount IAB `AdSlot` on public pages.** House partners go through `PageAdSlot`. `ArticleAdRegion` is AdSense-only (renders nothing until slot env is set). `AdvertisePanel` stays as the first-party “advertise with us” unit.
+**Do not remount IAB `AdSlot` on public pages.** House partners go through `PageAdSlot`. `ArticleAdRegion` is AdSense when slot env is set, otherwise the partner rotator. `AdvertisePanel` stays as the first-party “advertise with us” unit.
 
 ---
 

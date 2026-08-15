@@ -92,6 +92,7 @@ export function ArticleRightSidebar({
 
   return (
     <aside className="civic-right-sidebar" aria-label="Chennai updates and guides">
+      <PageAdSlot shape="square" placement="article_sidebar" />
       <SidebarArticleList
         title="Chennai updates"
         articles={latestArticles}
@@ -123,7 +124,6 @@ export function ArticleRightSidebar({
       <div className="civic-sidebar-module civic-sidebar-module--community">
         <JoinWhatsAppCommunityCard layout="inline" />
       </div>
-      <PageAdSlot shape="square" placement="article_sidebar" />
     </aside>
   );
 }

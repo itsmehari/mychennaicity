@@ -25,7 +25,6 @@ import {
 import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
 import { ArticleAdRegion } from "@/ads/article-ad-region";
-import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
@@ -318,26 +317,19 @@ export async function EditorialArticle({
               />
             ) : undefined,
           adAfterSummary: (
-            <>
-              <div className="civic-ad-slot">
-                <ArticleAdRegion
-                  slotId="article-top"
-                  size="728x90"
-                  adsenseSlotEnvKey="ARTICLE_TOP"
-                />
-              </div>
-              <div className="mt-6 lg:hidden">
-                <PageAdSlot shape="rectangle" placement="article_sidebar" />
-              </div>
-            </>
+            <div className="civic-ad-slot">
+              <ArticleAdRegion
+                adsenseSlotEnvKey="ARTICLE_TOP"
+                placement="article_top"
+              />
+            </div>
           ),
           main: mainBody,
           adMid: (
             <div className="civic-ad-slot">
               <ArticleAdRegion
-                slotId="article-mid"
-                size="300x250"
                 adsenseSlotEnvKey="ARTICLE_MID"
+                placement="article_mid"
               />
             </div>
           ),
@@ -357,9 +349,8 @@ export async function EditorialArticle({
           adEnd: (
             <div className="civic-ad-slot">
               <ArticleAdRegion
-                slotId="article-end"
-                size="320x50"
                 adsenseSlotEnvKey="ARTICLE_END"
+                placement="article_end"
               />
             </div>
           ),
@@ -432,29 +423,20 @@ export async function EditorialArticle({
         />
       ) : undefined,
     adTop: (
-      <div className="flex w-full flex-col items-center gap-6">
-        <ArticleAdRegion
-          slotId="article-top"
-          size="728x90"
-          adsenseSlotEnvKey="ARTICLE_TOP"
-        />
-        <div className="w-full lg:hidden">
-          <PageAdSlot shape="rectangle" placement="article_sidebar" />
-        </div>
-      </div>
+      <ArticleAdRegion
+        adsenseSlotEnvKey="ARTICLE_TOP"
+        placement="article_top"
+      />
     ),
     toc: onThisPage?.length ? (
       <ArticleTocNav entries={onThisPage} variant="inline" />
     ) : null,
     main: mainBody,
     adMid: (
-      <div className="flex w-full justify-center">
-        <ArticleAdRegion
-          slotId="article-mid"
-          size="300x250"
-          adsenseSlotEnvKey="ARTICLE_MID"
-        />
-      </div>
+      <ArticleAdRegion
+        adsenseSlotEnvKey="ARTICLE_MID"
+        placement="article_mid"
+      />
     ),
     attribution: (
       <OfficialSourcesBlock
@@ -465,13 +447,10 @@ export async function EditorialArticle({
     communityBand: <ArticleCommunityBand />,
     related: contextCluster,
     adEnd: (
-      <div className="flex w-full justify-center">
-        <ArticleAdRegion
-          slotId="article-end"
-          size="320x50"
-          adsenseSlotEnvKey="ARTICLE_END"
-        />
-      </div>
+      <ArticleAdRegion
+        adsenseSlotEnvKey="ARTICLE_END"
+        placement="article_end"
+      />
     ),
     back,
   };

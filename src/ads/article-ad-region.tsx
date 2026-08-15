@@ -1,12 +1,16 @@
 import { GoogleAdSenseSlot } from "@/components/analytics/google-adsense-slot";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { isAdSenseDisplayEnabled } from "@/lib/feature-flags";
+import type { PartnerAdPlacement, PartnerAdShape } from "@/lib/partner-ads";
 
 type Props = {
-  /** Kept for call-site compatibility; IAB house fallback was removed. */
+  adsenseSlotEnvKey: string;
+  /** Partner rotator placement when AdSense is not serving this slot. */
+  placement: PartnerAdPlacement;
+  shape?: PartnerAdShape;
+  /** Kept for older call sites. */
   slotId?: string;
   size?: string;
-  /** Maps to `NEXT_PUBLIC_ADSENSE_SLOT_*` when AdSense display is enabled. */
-  adsenseSlotEnvKey: string;
 };
 
 function adsenseSlotConfigured(envKey: string): boolean {
@@ -17,14 +21,17 @@ function adsenseSlotConfigured(envKey: string): boolean {
 }
 
 /**
- * AdSense display unit when client + slot env are set (post-approval).
- * Otherwise renders nothing — partner house ads use `<PageAdSlot />`.
+ * AdSense when client + slot env are set; otherwise the labeled partner rotator.
  */
-export function ArticleAdRegion({ adsenseSlotEnvKey }: Props) {
+export function ArticleAdRegion({
+  adsenseSlotEnvKey,
+  placement,
+  shape = "rectangle",
+}: Props) {
   if (isAdSenseDisplayEnabled() && adsenseSlotConfigured(adsenseSlotEnvKey)) {
     return (
       <GoogleAdSenseSlot slotEnvKey={adsenseSlotEnvKey} className="my-6" />
     );
   }
-  return null;
+  return <PageAdSlot shape={shape} placement={placement} />;
 }
