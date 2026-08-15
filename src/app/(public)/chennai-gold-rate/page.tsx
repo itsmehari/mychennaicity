@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { GoldRateAnswerBox, buildGoldRateMetaDescription } from "@/components/gold-rate/gold-rate-answer-box";
+import { GoldRateHubHero } from "@/components/gold-rate/gold-rate-hub-hero";
 import { GoldRateStaleNotice } from "@/components/gold-rate/gold-rate-stale-notice";
 import { GoldRateCalculators } from "@/components/gold-rate/gold-rate-calculators";
 import { GoldRateCards } from "@/components/gold-rate/gold-rate-cards";
