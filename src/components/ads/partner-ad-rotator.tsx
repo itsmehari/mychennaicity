@@ -90,8 +90,9 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
                 <span className="partner-ad__texture" aria-hidden />
               ) : null}
               <span className="partner-ad__copy">
-                <span className="partner-ad__eyebrow">{ad.eyebrow}</span>
-                <span className="partner-ad__kicker">{ad.kicker}</span>
+                <span className="partner-ad__kicker">
+                  {ad.eyebrow} · {ad.kicker}
+                </span>
                 <span className="partner-ad__headline">{ad.headline}</span>
                 <span className="partner-ad__body">{ad.body}</span>
               </span>

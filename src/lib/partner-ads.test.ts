@@ -23,8 +23,8 @@ describe("partnerAds", () => {
     const ads = partnerAds("home_after_areas");
     expect(ads).toHaveLength(3);
     expect(ads.map((a) => a.id)).toEqual([
-      "vacancychennai",
       "resumedoctor",
+      "vacancychennai",
       "agsunwin",
     ]);
     for (const ad of ads) {

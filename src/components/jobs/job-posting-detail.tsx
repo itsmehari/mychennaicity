@@ -182,6 +182,7 @@ export function JobPostingDetail({
         }
         aside={
           <>
+            <PageAdSlot shape="square" placement="job_detail_square" />
             <JobsDetailGlance rows={glanceRows} />
             {hubCard.tags.length > 0 ? (
               <div className="mcc-jobs-hub__job-tags">
@@ -203,7 +204,6 @@ export function JobPostingDetail({
                 />
               </div>
             ) : null}
-            <PageAdSlot shape="square" placement="job_detail_square" />
           </>
         }
       />
