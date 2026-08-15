@@ -24,7 +24,7 @@ export function buildTourismHubJsonLd() {
   };
 }
 
-export function buildEcrWeekendPlanJsonLdGraph(): Record<string, unknown>[] {
+export function buildEcrWeekendPlanJsonLdGraph(): unknown[] {
   const base = getSiteUrl();
   const page = `${base}${ECR_WEEKEND_PLAN_PATH}`;
 
@@ -79,7 +79,7 @@ export function buildEcrWeekendPlanJsonLdGraph(): Record<string, unknown>[] {
     fragment: "ecr-plan-faq",
   });
 
-  return [breadcrumb, trip, faq].filter(
-    (node): node is Record<string, unknown> => node != null,
-  );
+  const nodes: unknown[] = [breadcrumb, trip];
+  if (faq) nodes.push(faq);
+  return nodes;
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CopyShareButton } from "@/components/compulsive/copy-share-button";
+import { EcrShareButton } from "@/components/tourism/ecr-share-button";
 import {
   ECR_STOPS,
   ECR_SUGGESTED_DAY,
@@ -21,7 +21,7 @@ import { getSiteUrl } from "@/lib/env";
 const KIND_CLASS: Record<string, string> = {
   start: "bg-[color-mix(in_srgb,var(--foreground)_8%,var(--surface))] text-[var(--foreground)]",
   spiritual: "bg-[color-mix(in_srgb,var(--accent)_16%,var(--surface))] text-[var(--accent)]",
-  culture: "bg-[color-mix(in_srgb,#b45309_16%,var(--surface))] text-[var(--ecr-gold,#b45309)]",
+  culture: "bg-[color-mix(in_srgb,#b45309_16%,var(--surface))] text-[var(--ecr-gold)]",
   adventure: "bg-[color-mix(in_srgb,var(--accent-warm)_18%,var(--surface))] text-[var(--accent-warm)]",
   food: "bg-[color-mix(in_srgb,#b91c1c_14%,var(--surface))] text-[#b91c1c]",
   heritage: "bg-[color-mix(in_srgb,var(--accent)_16%,var(--surface))] text-[var(--accent)]",
@@ -54,14 +54,10 @@ export function EcrWeekendItinerary() {
       </figure>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--ecr-gold,#b45309)]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--ecr-gold)]">
           {ECR_WEEKEND_PILLARS.join(" · ")}
         </p>
-        <CopyShareButton
-          hubId="ecr-weekend-plan"
-          label="Copy weekend plan"
-          buildText={() => ecrWhatsAppShare(site)}
-        />
+        <EcrShareButton text={ecrWhatsAppShare(site)} />
       </div>
 
       <p className="rounded-xl border border-[var(--border)] bg-[var(--ecr-sand)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
