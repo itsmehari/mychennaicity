@@ -1,5 +1,4 @@
-import { AdSlot } from "@/ads/render-ad-slot";
-import { CHENNAI_JOBS_PARTNER_CREATIVE_IDS } from "@/ads/registry";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 
 type JobsBannerSlot =
   | "jobs-index-top"
@@ -7,9 +6,8 @@ type JobsBannerSlot =
   | "jobs-detail-mid";
 
 /**
- * Rotates [ResumeDoctor](https://www.resumedoctor.in/) and
- * [Vacancy Chennai](https://vacancychennai.in/) — new random pick each server
- * render (page load / visitor), independent per slot on the hub vs detail page.
+ * Jobs hub/detail partner unit. Prefer `<PageAdSlot />` on new pages.
+ * Kept so older jobs templates keep working.
  */
 export function ChennaiJobsPartnerBanner({
   slotId,
@@ -18,13 +16,20 @@ export function ChennaiJobsPartnerBanner({
   slotId: JobsBannerSlot;
   className?: string;
 }) {
-  return (
-    <div className={className}>
-      <AdSlot
-        slotId={slotId}
-        size="728x90"
-        creativeIds={CHENNAI_JOBS_PARTNER_CREATIVE_IDS}
+  if (slotId === "jobs-detail-mid") {
+    return (
+      <PageAdSlot
+        shape="square"
+        placement="job_detail_square"
+        className={className}
       />
-    </div>
+    );
+  }
+  return (
+    <PageAdSlot
+      shape="rectangle"
+      placement="jobs_hub_mid"
+      className={className}
+    />
   );
 }

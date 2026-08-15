@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { ClassifiedsHubCategoryNav } from "@/components/classifieds/classifieds-hub-category-nav";
 import {
   InteriorCrossNav,
@@ -157,7 +157,7 @@ export default async function ChennaiClassifiedsHubPage({
       <ClassifiedsHubCategoryNav activeCategory={category} />
 
       <div className="mt-8">
-        <AdSlot slotId="classified-ads-index-top" size="728x90" />
+        <PageAdSlot shape="rectangle" placement="classifieds_index" />
       </div>
 
       <AdvertisePanel variant="classifieds" layout="section" className="mt-8" />

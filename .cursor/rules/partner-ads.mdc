@@ -1,0 +1,17 @@
+---
+description: Partner ad rotator — change copy in partner-ads.ts; use PageAdSlot, never one-off markup.
+globs: src/lib/partner-ads.ts,src/components/ads/partner-*.tsx,src/components/ads/page-ad-slot.tsx,src/components/ads/site-wide-ad-band.tsx,src/styles/partner-ads.css
+alwaysApply: false
+---
+
+# Partner ad rotator
+
+When editing partner ads or dropping a unit on a page:
+
+1. **Copy/config** lives in `src/lib/partner-ads.ts` (`partnerAds(placement)`). Do not put headlines, URLs, or themes in the carousel.
+2. **UI:** `<PageAdSlot shape="square|rectangle" placement="…" />`. Catch-all: `<SiteWideAdBand />` (already in the public layout).
+3. **UTMs:** `utm_source=mychennaicity`, `utm_medium=referral`, `utm_campaign=partner_ad`, `utm_content=<placement>`.
+4. Update `hasDedicatedPartnerAdSlot()` / `shouldShowSiteWideAd()` when you add a new inline slot so the site-wide band does not double up.
+5. This is **not** IAB `src/ads/` (`AdSlot` — do not remount on public pages) and **not** `AdvertisePanel` (sell-side). `ArticleAdRegion` is AdSense-only.
+
+SOP K in `docs/AGENT_LEARNINGS_AND_SOPS.md`.

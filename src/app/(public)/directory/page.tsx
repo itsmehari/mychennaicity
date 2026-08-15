@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { Section } from "@/components/home/section";
@@ -97,8 +97,8 @@ export default async function DirectoryPage() {
         .
       </p>
 
-      <div className="mt-8 flex justify-center sm:mt-10">
-        <AdSlot slotId="listing-top" size="728x90" />
+      <div className="mt-8 sm:mt-10">
+        <PageAdSlot shape="rectangle" placement="directory_index" />
       </div>
 
       <div className="mt-6">

@@ -22,8 +22,8 @@ import {
 } from "@/components/home/home-content";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
 import { HomeToolsStrip } from "@/components/home/home-tools-strip";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HomeJsonLd } from "@/components/seo/home-json-ld";
 import { homeNewsBulletinCached } from "@/domains/news";
 import { getSiteUrl } from "@/lib/env";
@@ -89,9 +89,6 @@ export default async function Home() {
           <AdvertisePanel variant="home" layout="hero" />
         </div>
         <HomeSectionFrame>
-          <div className="mb-8 flex justify-center sm:mb-10">
-            <AdSlot slotId="homepage-top" size="728x90" />
-          </div>
           <HomeTrustStrip />
         </HomeSectionFrame>
         <HomeSectionFrame>
@@ -112,6 +109,9 @@ export default async function Home() {
           >
             <HomeAreaMap />
           </Section>
+        </HomeSectionFrame>
+        <HomeSectionFrame>
+          <PageAdSlot shape="rectangle" placement="home_after_areas" />
         </HomeSectionFrame>
         <HomeSectionFrame>
           <HomeStatsRibbon counts={feed.counts} />
@@ -147,9 +147,6 @@ export default async function Home() {
           <HomeSponsoredRow />
         </HomeSectionFrame>
         <HomeSectionFrame className="border-b border-[var(--home-section-border)] pb-12 sm:pb-16">
-          <div className="mb-10 flex justify-center sm:mb-12">
-            <AdSlot slotId="homepage-mid" size="728x90" />
-          </div>
           <HomeCommunityBand />
         </HomeSectionFrame>
       </div>

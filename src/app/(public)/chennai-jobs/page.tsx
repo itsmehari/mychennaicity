@@ -14,8 +14,8 @@ import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { buildJobsHubJsonLd } from "@/lib/seo/jobs-hub-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
-import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { ChennaiJobsHubHero } from "@/components/jobs/chennai-jobs-hub-hero";
@@ -150,7 +150,7 @@ export default async function ChennaiJobsHubPage() {
       <ChennaiJobsHubResources />
       <ChennaiJobsHubFaq />
 
-      <ChennaiJobsPartnerBanner slotId="jobs-index-mid" className="mt-14" />
+      <PageAdSlot shape="rectangle" placement="jobs_hub_mid" className="mt-14" />
 
       <InteriorCrossNav />
     </div>

@@ -1,11 +1,10 @@
-import type { AdSize } from "@/ads/registry";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { GoogleAdSenseSlot } from "@/components/analytics/google-adsense-slot";
 import { isAdSenseDisplayEnabled } from "@/lib/feature-flags";
 
 type Props = {
-  slotId: string;
-  size: AdSize;
+  /** Kept for call-site compatibility; IAB house fallback was removed. */
+  slotId?: string;
+  size?: string;
   /** Maps to `NEXT_PUBLIC_ADSENSE_SLOT_*` when AdSense display is enabled. */
   adsenseSlotEnvKey: string;
 };
@@ -18,13 +17,14 @@ function adsenseSlotConfigured(envKey: string): boolean {
 }
 
 /**
- * House banner by default; switches to AdSense unit when client + slot env are set (post-approval).
+ * AdSense display unit when client + slot env are set (post-approval).
+ * Otherwise renders nothing — partner house ads use `<PageAdSlot />`.
  */
-export function ArticleAdRegion({ slotId, size, adsenseSlotEnvKey }: Props) {
+export function ArticleAdRegion({ adsenseSlotEnvKey }: Props) {
   if (isAdSenseDisplayEnabled() && adsenseSlotConfigured(adsenseSlotEnvKey)) {
     return (
       <GoogleAdSenseSlot slotEnvKey={adsenseSlotEnvKey} className="my-6" />
     );
   }
-  return <AdSlot slotId={slotId} size={size} />;
+  return null;
 }

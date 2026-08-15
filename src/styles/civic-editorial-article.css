@@ -1413,6 +1413,11 @@
   margin-block: 2rem;
 }
 
+.civic-ad-slot:not(:has(*)) {
+  display: none;
+  margin: 0;
+}
+
 .civic-official-pdf {
   margin-bottom: 1.5rem;
 }

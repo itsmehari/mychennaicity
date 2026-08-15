@@ -34,6 +34,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
 
+**Partner ads (rotator):** data in **`src/lib/partner-ads.ts`**; UI is `<PageAdSlot />` / `<SiteWideAdBand />` — SOP K in AGENT_LEARNINGS. Distinct from IAB `src/ads/` and `AdvertisePanel`. Do not paste one-off partner cards on pages.
+
 **Non-negotiables in short:**
 
 - Keep **plan todos** in `.cursor/plans/` aligned with reality when the user tracks work there.

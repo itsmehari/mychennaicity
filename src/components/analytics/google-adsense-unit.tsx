@@ -20,7 +20,7 @@ declare global {
 
 /**
  * Single AdSense display unit. Loads only when `NEXT_PUBLIC_ADSENSE_CLIENT_ID` is set
- * (post-approval). Pair with house `AdSlot` banners or replace slots gradually.
+ * (post-approval). House partners use `<PageAdSlot />`; this unit is network display only.
  */
 export function GoogleAdSenseUnit({
   slotId,

@@ -29,6 +29,7 @@ When unsure what “done” means for a thread, check the matching plan file in 
 - Users often want **plain, searcher-aligned language** (“Chennai jobs”, “local news”) rather than internal marketing labels (“curated hiring desk”). Audit hub and news strings when asked.
 - **Greater Chennai** nuance belongs in supporting copy; **headlines and SEO-visible text** often should lead with **Chennai**.
 - **News articles:** always include a short **Disclaimer** (civic journalism / source scope / not official agency copy) near the top of the report, and a separate **Fine print — AI-assisted authoring** block (2–3 lines) at the end stating AI-assisted drafting, that AI can err, and that readers should verify with primary sources. Use headings that map to the disclaimer skin (`Disclaimer`, `Fine print`, Tamil `பொறுப்புத்துறப்பு` / `நுண்ணெழுத்து`, etc.).
+- **Partner ads:** reuse `PageAdSlot` + `partnerAds(placement)`. Do not invent per-page partner markup. Keep rotator UI copy-free. Site-wide band must skip pages that already have an inline slot.
 
 ### Technical
 
@@ -151,6 +152,18 @@ Cursor rule: **`.cursor/rules/activity-capture-and-news-ops.mdc`**.
 
 Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-metro-nilgiri-tbm-breakthrough-moolakadai-2026`, TA `…-tamil`.
 
+### SOP K — Partner ad rotator (house partners)
+
+Three layers — do **not** paste one-off partner markup on a page:
+
+1. **Data:** `src/lib/partner-ads.ts` — `partnerAds(placement)` returns the same 2–3 creatives with UTMs (`utm_source=mychennaicity`, `utm_medium=referral`, `utm_campaign=partner_ad`, `utm_content=<placement>`). Change partners/copy/themes here only.
+2. **Rotator:** `src/components/ads/partner-ad-rotator.tsx` — carousel UI (6.5s, pause on hover/focus, `prefers-reduced-motion`). No copy.
+3. **Slots:** `<PageAdSlot shape="square|rectangle" placement="…" />` on the page; `<SiteWideAdBand />` in the public layout is the catch-all rectangle (`site_band`) when `shouldShowSiteWideAd(pathname)` is true.
+
+**Shapes:** square = sticky rails / job + article sidebars; rectangle = full-width bands. Skip legal/auth/admin/contact. If a page already has `PageAdSlot`, do not also show the site-wide band.
+
+**Do not remount IAB `AdSlot` on public pages.** House partners go through `PageAdSlot`. `ArticleAdRegion` is AdSense-only (renders nothing until slot env is set). `AdvertisePanel` stays as the first-party “advertise with us” unit.
+
 ---
 
 ## 5. Where to look next
@@ -162,6 +175,7 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 | Content IA | `docs/CONTENT_ARCHITECTURE.md` |
 | **Add / seed Chennai events** | `docs/prompts/ADD_CHENNAI_EVENT.md`, `docs/CHENNAI_EVENTS.md`, `.cursor/rules/chennai-events.mdc` |
 | **Capture activities + news publish** | `.cursor/rules/activity-capture-and-news-ops.mdc`, SOP I / SOP J (this file) |
+| **Partner ad rotator** | `src/lib/partner-ads.ts`, `PageAdSlot` / `SiteWideAdBand`, SOP K (this file) |
 | **Daily work logs** | §7 below (cross-chat day summaries) |
 | Agent rules (short) | `AGENTS.md` |
 | Initiative plans | `.cursor/plans/*.plan.md` |
@@ -196,7 +210,11 @@ Example (Aug 2026): Nilgiri TBM Moolakadai — EN `/chennai-local-news/chennai-m
 - **2026-08-15:** Weekend watch Saturday morning update (I-Day is *today*) — News18 flag-hoist report + GCTP curb plan + Skymet/IMD rain forecast; tax portal and Monday rain **not invented**. Pin on home tools strip + `/chennai-today` / `-tamil` via `WeekendWatchPin`. Reseed `db:seed:chennai-week-desk-lead-tamil-august-2026:live`. GSC API submit failed (stale `GOOGLE_APPLICATION_CREDENTIALS` path) — resubmit sitemaps in the GSC UI until the SA JSON is restored. **Rule:** mid-weekend watch updates use primary reports only; keep the Monday 17 Aug checkpoint empty until those reports exist.
 - **2026-08-15:** Tourism desk + TTDC ECR weekend — hub `/chennai-tourism`, itinerary `/chennai-tourism/this-weekend-ecr-plan` (poster unpack: Marundeeswarar, DakshinaChitra, Muttukkadu, ₹99 biryani, kite festival, UNESCO Shore Temple, WSL surf). News `db:seed:ttdc-ecr-weekend-plan-august-2026(:live)` → `/chennai-local-news/ttdc-this-weekend-ecr-plan-august-2026`. Events: kite festival + Shore Temple Classic via `db:seed:event:tn-international-kite-festival(:live)` and `db:seed:event:shore-temple-classic-surfing(:live)`. Poster under `public/images/tourism/` (+ articles/events copies). **Rule:** official tourism posters get a dedicated tourism page *and* a news desk; do not treat TTDC artwork as a bookable package; ₹99 biryani must stay “confirm the kitchen”.
 - **2026-08-15:** Dedicated kite-festival news — `db:seed:tn-international-kite-festival-august-2026(:live)` → `/chennai-local-news/tamil-nadu-international-kite-festival-mamallapuram-august-2026` (same slug as the event, different hub). Sources: [tnikf.com](https://tnikf.com/), DT Next, The Hindu (Poikkal Kuthirai kite). Hero `public/images/articles/tamil-nadu-international-kite-festival-mamallapuram-august-2026.png`. **Rule:** when a festival already has an event + tourism loop, still write a dedicated news desk if the user supplies a festival-specific poster; flag third-party wrong venues (Thiruvidanthai / 17 Aug) against the official site.
+- **2026-08-15:** Jobs — More supermarket Store Manager / Duty Manager **walk-in** (Hotel Royal Plaza Koyambedu, **24 Aug 2026**, 10 AM–5 PM) via `db:seed:chennai-job:more-supermarket-walk-in-koyambedu:live` → `/chennai-jobs/more-supermarket-store-duty-manager-walk-in-koyambedu-aug-2026`. Flyer `public/images/listings/more-supermarket-walk-in-koyambedu-aug-2026.png`. Contacts 91108 67199 / 95918 91671. **Rule:** flyer walk-ins keep venue + date in the title so the hub Walk-in filter matches; do not invent salary or documents if the flyer omits them; flyer image needs a git push before Vercel can serve it.
+- **2026-08-15:** Jobs — MP Developers mega walk-in (Pallavaram interview · Guindy work; 5 roles) via `db:seed:chennai-job:mp-developers-mega-walk-in-pallavaram:live` → `/chennai-jobs/mp-developers-mega-walk-in-pallavaram-guindy`. Flyer `public/images/listings/mp-developers-mega-walk-in-pallavaram-aug-2026.png`. Apply `careers@mpdevelopers.com` / 78457 58753. **Rule:** keep flyer role names as printed (e.g. “3D Modular”); do not merge extra LinkedIn contacts that are not on the flyer.
 - **2026-08-15:** Wave F habit tools + gold post-MVP + event submit + admin articles Phase A. Power/feeder, Metro Water, auto fare cards, dengue week, flood street-score; Tamil twins for petrol / AC / property-tax; gold history + buying guide + Tamil snippet; `/chennai-local-events/submit`; `/admin/articles`; civic directory batch; weekend follow-up news (I-Day wrap, TNPDCL still no scorecard, auto-fare pending). Meetup TBA notes re-checked 15 Aug — still no invented venues. **Rule:** skipped 30-list habit tools ship as editorial desks (no fake live APIs); Monday 17 Aug watch desk still waits for primary reports.
+- **2026-08-15:** News — M.O.P. Vaishnav + AIMS workshop “Leaders for a Sustainable Future” (13–14 Aug 2026) via `db:seed:mop-vaishnav-leaders-sustainable-future-workshop-aug-2026(:live)` → `/chennai-local-news/mop-vaishnav-leaders-for-a-sustainable-future-workshop-august-2026`. Heroes under `public/images/articles/mop-vaishnav-leaders-sustainable-future-workshop-aug-2026-*.png`. **Rule:** campus workshop reports from organiser briefs keep Disclaimer + AI fine print; use organiser participant/session counts as attributed figures; self-host supplied event photos.
+- **2026-08-16:** Partner rotator is the public house-ad path — remaining IAB `AdSlot` mounts replaced with `PageAdSlot` (one unit per page). `ArticleAdRegion` is AdSense-only. `AdvertisePanel` unchanged. Catch-all `site_band` still covers pages without an inline slot.
 
 ---
 
@@ -213,6 +231,7 @@ Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcrip
 | --- | --- | --- |
 | [Next 50 + ship batch](e79eb1bb-927e-475c-af3e-29adc96e0207) | `e79eb1bb-…` | Planner 50 + implement agent-owned items |
 | [Week desk / Tamil / speed](7255b950-aa8f-42ea-bbca-88d717970b29) | `7255b950-…` | Saturday watch update, pin, GSC attempt |
+| [MOP Vaishnav workshop news](46f12827-f8a0-4b7c-a2ca-e0e99adb9ff3) | `46f12827-…` | Leaders for a Sustainable Future article (retry after resource exhaust) |
 
 #### Shipped in repo (live after commit/push + seeds)
 1. **Habit desks** — `/civic-tools/power-feeder-desk`, `/civic-tools/metro-water-schedule`, `/guides/chennai-auto-fare`, `/guides/chennai-dengue-week`, `/civic-tools/flood-street-score`
@@ -223,6 +242,10 @@ Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcrip
 6. **Seeds** — `db:seed:chennai-civic-directory-batch(:live)`; `db:seed:chennai-weekend-followups-august-2026(:live)` (I-Day wrap; TNPDCL still no scorecard; auto-fare pending)
 7. **Ops** — `contact_intent_select` GA4; WhatsApp contact redirect rate limit; Meetup TBA notes re-checked (no invented venues)
 8. **Watch Saturday update** — EN/TA weekend watch reseeded with News18 I-Day hoist + unconfirmed leftover closures; tax portal / Monday rain not invented. Pin: `WeekendWatchPin` on home tools strip + `/chennai-today` (EN/TA). GSC API submit failed (stale SA JSON path).
+9. **Jobs** — More supermarket walk-in (Store Manager / Duty Manager, Koyambedu 24 Aug 2026) via `db:seed:chennai-job:more-supermarket-walk-in-koyambedu:live` → https://mychennaicity.in/chennai-jobs/more-supermarket-store-duty-manager-walk-in-koyambedu-aug-2026 (flyer image needs git push)
+10. **Jobs** — MP Developers mega walk-in (Pallavaram / Guindy, 5 roles) via `db:seed:chennai-job:mp-developers-mega-walk-in-pallavaram:live` → https://mychennaicity.in/chennai-jobs/mp-developers-mega-walk-in-pallavaram-guindy (flyer image needs git push)
+11. **News** — M.O.P. Vaishnav + AIMS “Leaders for a Sustainable Future” (13–14 Aug 2026) via `db:seed:mop-vaishnav-leaders-sustainable-future-workshop-aug-2026(:live)` → https://mychennaicity.in/chennai-local-news/mop-vaishnav-leaders-for-a-sustainable-future-workshop-august-2026 (article images need git push)
+12. **Partner ad rotator** — `PageAdSlot` is the public house-ad path (IAB `AdSlot` mounts removed); AdSense-only `ArticleAdRegion`; `AdvertisePanel` unchanged; SOP K (not live until commit/push)
 
 #### Operator still owns
 Vercel `NEXT_PUBLIC_SITE_MODAL_AUTO`, `REVALIDATE_SECRET`; WhatsApp notes already written; GSC MCP auth + restore `GOOGLE_APPLICATION_CREDENTIALS` file then `npm run gsc:submit-sitemap`; GA4 dashboards; Monday 17 Aug watch desk after primary reports.

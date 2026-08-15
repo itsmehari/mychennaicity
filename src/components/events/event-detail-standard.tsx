@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
   EventAudienceBlock,
@@ -209,9 +209,7 @@ export function EventDetailStandard({
           <EventAudienceBlock ev={ev} />
 
           <div className="mt-10 space-y-6">
-            <div className="flex justify-center">
-              <AdSlot slotId="events-detail-mid" size="300x250" />
-            </div>
+            <PageAdSlot shape="rectangle" placement="events_detail" />
             <AdvertisePanel variant="events" layout="strip" />
             <BusinessWhatsAppCta variant="events" />
           </div>

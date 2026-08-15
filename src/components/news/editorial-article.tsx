@@ -25,6 +25,7 @@ import {
 import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
 import { ArticleAdRegion } from "@/ads/article-ad-region";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
@@ -317,13 +318,18 @@ export async function EditorialArticle({
               />
             ) : undefined,
           adAfterSummary: (
-            <div className="civic-ad-slot">
-              <ArticleAdRegion
-                slotId="article-top"
-                size="728x90"
-                adsenseSlotEnvKey="ARTICLE_TOP"
-              />
-            </div>
+            <>
+              <div className="civic-ad-slot">
+                <ArticleAdRegion
+                  slotId="article-top"
+                  size="728x90"
+                  adsenseSlotEnvKey="ARTICLE_TOP"
+                />
+              </div>
+              <div className="mt-6 lg:hidden">
+                <PageAdSlot shape="rectangle" placement="article_sidebar" />
+              </div>
+            </>
           ),
           main: mainBody,
           adMid: (
@@ -426,12 +432,15 @@ export async function EditorialArticle({
         />
       ) : undefined,
     adTop: (
-      <div className="flex w-full justify-center">
+      <div className="flex w-full flex-col items-center gap-6">
         <ArticleAdRegion
           slotId="article-top"
           size="728x90"
           adsenseSlotEnvKey="ARTICLE_TOP"
         />
+        <div className="w-full lg:hidden">
+          <PageAdSlot shape="rectangle" placement="article_sidebar" />
+        </div>
       </div>
     ),
     toc: onThisPage?.length ? (

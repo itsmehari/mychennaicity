@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   NewsAreaStrip,
@@ -184,11 +184,11 @@ export default async function ChennaiLocalNewsPage() {
 
         <NewsCategoryNav />
 
-        <div className="mt-2 flex justify-center">
-          <AdSlot slotId="content-top" size="728x90" />
-        </div>
-
         <NewsFeaturedBand lead={lead} secondary={secondary} />
+
+        <div className="mt-8">
+          <PageAdSlot shape="rectangle" placement="news_hub_mid" />
+        </div>
 
         <div className="mcc-news-layout">
           <div className="mcc-news-layout__main">

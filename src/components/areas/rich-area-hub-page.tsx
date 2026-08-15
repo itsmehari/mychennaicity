@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { AreaHubToolsStrip } from "@/components/areas/area-hub-tools-strip";
 import { Section } from "@/components/home/section";
@@ -558,8 +558,8 @@ export function RichAreaHubPage({
         )}
       </Section>
 
-      <div className="mt-14 flex justify-center">
-        <AdSlot slotId="content-mid" size="300x250" />
+      <div className="mt-14">
+        <PageAdSlot shape="rectangle" placement="area_hub" />
       </div>
 
       {/* Commute */}

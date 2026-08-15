@@ -1,9 +1,8 @@
-import Link from "next/link";
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { formatJobCompensation } from "@/lib/jobs/format-compensation";
 import { buildChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
-import { ChennaiJobsPartnerBanner } from "@/components/ads/chennai-jobs-partner-banner";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import {
   JobsDetailActionCta,
   JobsDetailApplyBand,
@@ -179,8 +178,6 @@ export function JobPostingDetail({
                 linkProps={applyLinkProps}
               />
             ) : null}
-
-            <ChennaiJobsPartnerBanner slotId="jobs-detail-mid" />
           </>
         }
         aside={
@@ -206,6 +203,7 @@ export function JobPostingDetail({
                 />
               </div>
             ) : null}
+            <PageAdSlot shape="square" placement="job_detail_square" />
           </>
         }
       />

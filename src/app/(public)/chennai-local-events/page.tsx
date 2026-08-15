@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { Section } from "@/components/home/section";
@@ -191,10 +191,6 @@ export default async function ChennaiLocalEventsPage() {
         </p>
       </Section>
 
-      <div className="mt-12 flex justify-center">
-        <AdSlot slotId="events-index-top" size="728x90" />
-      </div>
-
       <div className="mt-8">
         <WhatsAppCommunityCta variant="compact" utmContent="events-hub" />
       </div>
@@ -203,8 +199,8 @@ export default async function ChennaiLocalEventsPage() {
 
       <HubCommunityStrip businessVariant="events" />
 
-      <div className="mt-10 flex justify-center">
-        <AdSlot slotId="events-index-mid" size="300x250" />
+      <div className="mt-10">
+        <PageAdSlot shape="rectangle" placement="events_hub_mid" />
       </div>
 
       <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">

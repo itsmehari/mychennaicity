@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { PublicArticleRow } from "@/domains/news";
 import { categoryToTopicSlug } from "@/lib/news-topics";
-import { ArticleAdRegion } from "@/ads/article-ad-region";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 
 function formatSidebarDate(d: Date | null) {
@@ -123,13 +123,7 @@ export function ArticleRightSidebar({
       <div className="civic-sidebar-module civic-sidebar-module--community">
         <JoinWhatsAppCommunityCard layout="inline" />
       </div>
-      <div className="civic-sidebar-module civic-sidebar-module--ad">
-        <ArticleAdRegion
-          slotId="article-sidebar"
-          size="300x250"
-          adsenseSlotEnvKey="ARTICLE_MID"
-        />
-      </div>
+      <PageAdSlot shape="square" placement="article_sidebar" />
     </aside>
   );
 }

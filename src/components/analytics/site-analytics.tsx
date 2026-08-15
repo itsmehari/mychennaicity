@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { resolveAdsenseClientId } from "@/lib/adsense-config";
 import { GoogleAdSenseScripts } from "./google-adsense-scripts";
+import { PartnerOutboundClickTracker } from "@/components/ads/partner-outbound-analytics";
 import { GoogleAnalyticsRouteTracker } from "./google-analytics-route-tracker";
 import { GoogleAnalyticsScripts } from "./google-analytics-scripts";
 
@@ -37,6 +38,7 @@ export function SiteAnalytics({
       {loadGoogle && adsenseClientId ? (
         <GoogleAdSenseScripts clientId={adsenseClientId} />
       ) : null}
+      <PartnerOutboundClickTracker />
       <Analytics />
       <SpeedInsights />
     </>

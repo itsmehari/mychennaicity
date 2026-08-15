@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AdSlot } from "@/ads/render-ad-slot";
 import { AdvertisePanel } from "@/components/ads";
+import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import {
   NewsCategoryNav,
@@ -259,8 +259,8 @@ export default async function TopicPage({ params }: Props) {
           </p>
         </aside>
       ) : null}
-      <div className="mt-6 flex justify-center">
-        <AdSlot slotId="content-mid" size="300x250" />
+      <div className="mt-6">
+        <PageAdSlot shape="rectangle" placement="news_topic" />
       </div>
       <div className="mcc-news-latest mt-8">
         {items.map((a) => (
