@@ -17,7 +17,7 @@
 - **URL Inspection**: spot-check the home page and a sample article after deploys; confirm *View crawled page* shows the expected title and main content.
 - **Enhancements / Rich results**: if you use article JSON-LD, run [Rich Results Test](https://search.google.com/test/rich-results) on live URLs occasionally.
 
-Optional automation: `npm run gsc:submit-sitemap` (requires Search Console API credentials — see `.env.example`).
+Optional automation: `npm run gsc:submit-sitemap` (requires Search Console API credentials — see `.env.example`). If that script exits `ENOENT` on `GOOGLE_APPLICATION_CREDENTIALS`, the service-account JSON path is stale — restore the file or set `GSC_SERVICE_ACCOUNT_JSON`, then rerun. Until then, resubmit `https://mychennaicity.in/sitemap.xml` and `https://mychennaicity.in/news-sitemap.xml` in Search Console → Sitemaps.
 
 No API keys are required for basic URL inspection and sitemap submission.
 
