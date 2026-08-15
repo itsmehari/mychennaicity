@@ -16,7 +16,11 @@ import {
   requireDatabaseUrl,
   upsertEvent,
 } from "./lib/seed-event-shared";
-import { ECR_WEEKEND_PLAN_PATH, KITE_FESTIVAL_EVENT_SLUG } from "../src/content/tourism";
+import {
+  ECR_WEEKEND_PLAN_PATH,
+  KITE_FESTIVAL_EVENT_SLUG,
+  KITE_FESTIVAL_NEWS_PATH,
+} from "../src/content/tourism";
 
 const live = isLiveSeed();
 loadEventSeedEnv(live);
@@ -41,7 +45,7 @@ The **5th Tamil Nadu International Kite Festival (TNIKF)** fills the sky over **
 
 ### Chennai loop
 
-This festival is the afternoon beat on Tamil Nadu Tourism’s **This Weekend ECR Plan**. Stop-by-stop from the city: [ECR weekend plan](${ECR_WEEKEND_PLAN_PATH}). News desk: [TTDC ECR plan](/chennai-local-news/ttdc-this-weekend-ecr-plan-august-2026).
+This festival is the afternoon beat on Tamil Nadu Tourism’s **This Weekend ECR Plan**. Stop-by-stop from the city: [ECR weekend plan](${ECR_WEEKEND_PLAN_PATH}). News: [kite festival desk](${KITE_FESTIVAL_NEWS_PATH}) · [TTDC ECR plan](/chennai-local-news/ttdc-this-weekend-ecr-plan-august-2026).
 
 **Official:** [tnikf.com](https://tnikf.com/) · enquiries listed on that site (95000 90850)
 

@@ -16,7 +16,7 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 | `/aeo/chennai.md` | Answer-first Chennai digest |
 | `/humans.txt` | Human credits |
 | `/robots.txt` | Crawl policy + explicit AI-bot Allow |
-| `/sitemap.xml` + `/news-sitemap.xml` | Crawl inventory |
+| `/sitemap.xml` + `/news-sitemap.xml` + `/sitemap-recent.xml` | Crawl inventory (full + news + last 20 days) |
 | Hub RSS | `/chennai-local-news/feed.xml`, `/chennai-jobs/feed.xml`, `/chennai-local-events/feed.xml` |
 
 ## Content rules that move AEO
@@ -51,7 +51,7 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 ## Ops after deploy
 
 1. Confirm `https://mychennaicity.in/llms.txt` returns `text/plain` 200.
-2. Confirm `/robots.txt` lists AI bots and both sitemaps.
+2. Confirm `/robots.txt` lists AI bots and all three sitemaps (`sitemap.xml`, `news-sitemap.xml`, `sitemap-recent.xml`).
 3. Submit/refresh sitemaps in GSC (`npm run gsc:submit-sitemap` if configured).
 4. Spot-check JSON-LD with Rich Results Test on news, jobs, events hubs.
 5. Keep `llms.txt` hubs accurate when adding major public routes.

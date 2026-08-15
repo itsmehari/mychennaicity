@@ -297,7 +297,7 @@ function HeroImageBlock({ slide }: { slide: Slide }) {
           alt={slide.heroImageAlt}
           fill
           className="object-cover object-center"
-          sizes="(max-width: 1023px) 100vw, 36rem"
+          sizes="(max-width: 1023px) 100vw, 50vw"
           quality={70}
           priority={slide.key === "news"}
         />
@@ -402,7 +402,7 @@ export function HomeHero() {
     >
       <div
         key={slide.key}
-        className="relative px-5 pb-5 pt-6 sm:px-6 sm:pb-6 sm:pt-7 lg:px-10 lg:pb-6 lg:pt-8"
+        className="relative px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8 lg:px-12 lg:pb-7 lg:pt-10 xl:px-16"
       >
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-[0.12]"
@@ -413,7 +413,7 @@ export function HomeHero() {
           aria-hidden
         />
 
-        <div className="relative mx-auto grid max-w-6xl gap-6 lg:grid-cols-2 lg:items-start lg:gap-8 xl:gap-10">
+        <div className="relative grid w-full gap-6 lg:grid-cols-2 lg:items-start lg:gap-8 xl:gap-12">
           <div className="min-w-0 text-center lg:text-left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 sm:text-[11px] sm:tracking-[0.22em]">
               {slide.eyebrow}
@@ -508,11 +508,11 @@ export function HomeHero() {
       </div>
 
       <div
-        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-4 pt-3 sm:px-6 sm:pb-4 sm:pt-3.5 lg:px-10"
+        className="border-t border-white/10 bg-[color-mix(in_srgb,var(--hero-bg)_92%,black)] px-4 pb-4 pt-3 sm:px-8 sm:pb-4 sm:pt-3.5 lg:px-12 xl:px-16"
         role="tablist"
         aria-label="What do you want to explore?"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-2 lg:grid-cols-4 lg:gap-2.5">
+        <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-2 lg:grid-cols-4 lg:gap-2.5">
           {SLIDES.map((s, i) => {
             const selected = i === index;
             return (

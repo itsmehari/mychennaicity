@@ -156,4 +156,4 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-08-10 | Four music listings: Jananiy Carnatic (Narada Gana Sabha), Frangipani/Kaber (enrich Ticket9), Sukoon baithak (Mathsya Adyar), Tabla Poetry (Music Academy Mini Hall). Self-hosted posters + live seeds. |
 | 2026-08-10 | Hub overhaul: above-the-fold hero + Next up + browse grid; ads/community CTAs below; sticky filters; dynamic meta; stronger FAQ/AEO. Components: `events-hub-hero.tsx`, `events-hub-aeo-strip.tsx`. |
 | 2026-08-10 | Meetup Aug–Sep batch (15 workshops/tech/networking/wellness) + thematic posters + AEO/FAQ meetup copy. |
-| 2026-08-15 | TTDC ECR weekend: kite festival (TNIKF, Ocean View, 14–16 Aug) + WSL Shore Temple Classic (12–16 Aug). Companion tourism page `/chennai-tourism/this-weekend-ecr-plan`. |
+| 2026-08-15 | TTDC ECR weekend: kite festival (TNIKF, Ocean View, 14–16 Aug) + WSL Shore Temple Classic (12–16 Aug). Companion tourism page `/chennai-tourism/this-weekend-ecr-plan`. Dedicated news `db:seed:tn-international-kite-festival-august-2026(:live)` → `/chennai-local-news/tamil-nadu-international-kite-festival-mamallapuram-august-2026`. |

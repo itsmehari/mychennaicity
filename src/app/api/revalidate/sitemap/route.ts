@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidateSitemapSurfaces } from "@/lib/revalidate-sitemap-surfaces";
 
 /**
- * Bust cached sitemap.xml and news-sitemap.xml after bulk publishes or seeds.
+ * Bust cached sitemap.xml, news-sitemap.xml, and sitemap-recent.xml after bulk publishes or seeds.
  * POST /api/revalidate/sitemap?secret=…
  */
 export async function POST(request: NextRequest) {
@@ -16,6 +16,6 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     ok: true,
-    paths: ["/sitemap.xml", "/news-sitemap.xml"],
+    paths: ["/sitemap.xml", "/news-sitemap.xml", "/sitemap-recent.xml"],
   });
 }

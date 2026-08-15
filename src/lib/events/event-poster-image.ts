@@ -56,8 +56,8 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     alt: "Tabla Poetry Live mood — Bhupendra Singh Khidia at Music Academy Mini Hall, Chennai, 20 September 2026",
   },
   "tamil-nadu-international-kite-festival-mamallapuram-august-2026": {
-    src: "/images/events/ttdc-this-weekend-ecr-plan-august-2026.png",
-    alt: "Tamil Nadu Tourism This Weekend ECR Plan poster featuring the Mamallapuram kite festival, TTDC Ocean View, 14–16 August 2026",
+    src: "/images/events/tamil-nadu-international-kite-festival-mamallapuram-august-2026.png",
+    alt: "Tamil Nadu International Kite Festival poster — Mamallapuram, 14–16 August 2026, 2 pm until sunset",
   },
   "shore-temple-classic-qs-2000-mamallapuram-august-2026": {
     src: "/images/events/ttdc-this-weekend-ecr-plan-august-2026.png",

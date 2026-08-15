@@ -40,7 +40,7 @@ For Answer Engine / Generative Engine discovery (`llms.txt`, AI crawlers, hub FA
 | Step | What to do |
 |------|------------|
 | 1. Verify | Add the site in [Google Search Console](https://search.google.com/search-console) (URL-prefix or domain property). Optional: set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` in Vercel so Next.js emits the `<meta name="google-site-verification">` tag (see `.env.example` / `AGENTS.md`). |
-| 2. Submit sitemap | After deploy, submit `https://mychennaicity.in/sitemap.xml` in GSC → Sitemaps. For automation with a service account, configure env vars in `.env.example` and run `npm run gsc:submit-sitemap` (`scripts/gsc-submit-sitemap.ts`). |
+| 2. Submit sitemap | After deploy, submit `https://mychennaicity.in/sitemap.xml` in GSC → Sitemaps. Also submit **`https://mychennaicity.in/sitemap-recent.xml`** (rolling last 20 days) after a publish burst. Optional: `https://mychennaicity.in/news-sitemap.xml` for News surfaces. Automation: `npm run gsc:submit-sitemap` (`scripts/gsc-submit-sitemap.ts`) submits all three. |
 | 3. Queries to watch | Head: `chennai jobs`, `jobs in chennai`, `chennai job openings`. Long-tail: role + Chennai (e.g. `react developer chennai`). Branded: `mychennaicity`, `mychennaicity jobs`. |
 | 4. Enhancements | **Job postings** — fix errors/warnings when the report appears; correlate with Rich Results Test on live job URLs. |
 | 5. Cadence | Monthly: impressions/clicks for jobs hub + 2–3 sample job URLs + guide URL; note any crawl anomalies. |

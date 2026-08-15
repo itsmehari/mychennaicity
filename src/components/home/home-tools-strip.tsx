@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Section } from "@/components/home/section";
+import { WeekendWatchPin } from "@/components/site/weekend-watch-pin";
 import { compulsivePath } from "@/content/compulsive/index";
 
 const TOOLS = [
@@ -42,6 +43,9 @@ export function HomeToolsStrip() {
       subtitle="Morning brief, rent math, commute cost, and civic form help — built for WhatsApp forwards."
       action={{ href: "/civic-tools", label: "All civic tools" }}
     >
+      <div className="mb-4">
+        <WeekendWatchPin lang="en" />
+      </div>
       <ul className="flex flex-nowrap gap-3 overflow-x-auto pb-2 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] sm:grid sm:grid-cols-5 sm:overflow-visible sm:pb-0">
         {TOOLS.map((tool) => (
           <li key={tool.href} className="min-w-[10.5rem] shrink-0 sm:min-w-0">

@@ -50,6 +50,7 @@
 
 - **`/sitemap.xml`** — `src/app/sitemap.ts`: static hubs, areas, articles, topics, eligible events/jobs from DB (best-effort if DB unavailable).
 - **`/news-sitemap.xml`** — news sitemap route for eligible article URLs.
+- **`/sitemap-recent.xml`** — rolling last-20-days recrawl list (DB rows + recently shipped hubs). Submit in Search Console after a publish burst.
 - **`/robots.ts`** — crawler policy and sitemap reference.
 
 ## Admin

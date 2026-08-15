@@ -13,6 +13,7 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { WeekendWatchPin } from "@/components/site/weekend-watch-pin";
 import { CHENNAI_TODAY_FAQ, CHENNAI_TODAY_PATH } from "@/content/compulsive/chennai-today";
 import { CHENNAI_TODAY_TA_PATH } from "@/content/compulsive/chennai-today-ta";
 import { compulsivePath } from "@/content/compulsive/index";
@@ -77,6 +78,10 @@ export default async function ChennaiTodayPage() {
       </header>
 
       <HubCommunityStrip businessVariant="default" className="mt-6" />
+
+      <div className="mt-6 max-w-3xl">
+        <WeekendWatchPin lang="en" />
+      </div>
 
       <section className="mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6">
         <h2 className="text-lg font-bold text-[var(--foreground)]">60-second card</h2>
@@ -147,6 +152,11 @@ export default async function ChennaiTodayPage() {
           </li>
           <li>
             <a href={compulsivePath("which-chennai")}>Which Chennai are you?</a>
+          </li>
+          <li>
+            <a href="/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026">
+              Weekend watch — I-Day, tax portal, rain
+            </a>
           </li>
         </ul>
 

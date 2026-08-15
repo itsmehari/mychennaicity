@@ -63,7 +63,7 @@ Optional but recommended:
 
 ## 3. Search Console (domain or URL verified)
 
-Follow [SEARCH_CONSOLE.md](SEARCH_CONSOLE.md): add the property, verify (DNS TXT or HTML tag), submit `https://mychennaicity.in/sitemap.xml` (and optionally `news-sitemap.xml`). AdSense can use Search Console verification as an alternative to pasting code in some flows—see [Google Help](https://support.google.com/adsense/answer/12176698).
+Follow [SEARCH_CONSOLE.md](SEARCH_CONSOLE.md): add the property, verify (DNS TXT or HTML tag), submit `https://mychennaicity.in/sitemap.xml`, `https://mychennaicity.in/sitemap-recent.xml` (last 20 days), and optionally `news-sitemap.xml`. AdSense can use Search Console verification as an alternative to pasting code in some flows—see [Google Help](https://support.google.com/adsense/answer/12176698).
 
 ---
 

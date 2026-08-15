@@ -43,6 +43,7 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: [
       `${base}/sitemap.xml`,
       `${base}/news-sitemap.xml`,
+      `${base}/sitemap-recent.xml`,
     ],
     host: base.replace(/^https?:\/\//, ""),
   };

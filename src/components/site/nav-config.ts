@@ -35,6 +35,8 @@ export type MegaNavFeatured = {
 export type MegaNavSection = {
   id: string;
   label: string;
+  /** Compact header label when the full name would wrap the bar. */
+  shortLabel?: string;
   columns: MegaNavColumn[];
   featured?: MegaNavFeatured;
   /** Live rail kind — fetches `/api/nav/preview`. */
@@ -269,6 +271,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
   {
     id: "chennai-local-events",
     label: "Local events",
+    shortLabel: "Events",
     livePreview: "events",
     liveEventsPreview: true,
     featured: {

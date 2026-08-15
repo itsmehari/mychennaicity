@@ -19,6 +19,7 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 import {
   ECR_WEEKEND_PLAN_PATH,
   KITE_FESTIVAL_EVENT_SLUG,
+  KITE_FESTIVAL_NEWS_PATH,
   SURFING_EVENT_SLUG,
   TTDC_ECR_NEWS_SLUG,
 } from "../src/content/tourism";
@@ -173,7 +174,7 @@ The ₹99 biryani is the political-economy beat hiding in a food photo. TTDC is 
 ## Related reading on mychennaicity.in
 
 - **[This weekend ECR plan](${ECR_WEEKEND_PLAN_PATH})** — full stop cards, Saturday pacing, FAQ.
-- **[Kite festival event](${KITE_EVENT_PATH})** · **[Surf championship event](${SURF_EVENT_PATH})**
+- **[Kite festival news](${KITE_FESTIVAL_NEWS_PATH})** · **[Kite festival event](${KITE_EVENT_PATH})** · **[Surf championship event](${SURF_EVENT_PATH})**
 - **[Chennai local events — this weekend](/chennai-local-events#events-weekend)**
 - **[Temple quiet-hour guide](/guides/chennai-temple-quiet-hours)** · **[Festivals calendar](/guides/chennai-festivals-calendar)** · **[Biryani bracket](/guides/chennai-biryani-bracket)**
 

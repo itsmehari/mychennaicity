@@ -183,6 +183,8 @@
     "db:seed:chennai-week-desk-lead-tamil-august-2026:live": "tsx scripts/seed-chennai-week-desk-lead-tamil-august-2026.ts --live",
     "db:seed:ttdc-ecr-weekend-plan-august-2026": "tsx scripts/seed-ttdc-ecr-weekend-plan-august-2026.ts",
     "db:seed:ttdc-ecr-weekend-plan-august-2026:live": "tsx scripts/seed-ttdc-ecr-weekend-plan-august-2026.ts --live",
+    "db:seed:tn-international-kite-festival-august-2026": "tsx scripts/seed-tn-international-kite-festival-august-2026.ts",
+    "db:seed:tn-international-kite-festival-august-2026:live": "tsx scripts/seed-tn-international-kite-festival-august-2026.ts --live",
     "db:seed:namma-arasu-whatsapp-chatbot-2026": "tsx scripts/seed-namma-arasu-whatsapp-chatbot-2026.ts",
     "db:seed:namma-arasu-whatsapp-chatbot-2026:live": "tsx scripts/seed-namma-arasu-whatsapp-chatbot-2026.ts --live",
     "db:seed:ozone-greens-perumbakkam-power-crisis-2026": "tsx scripts/seed-ozone-greens-perumbakkam-power-crisis-2026.ts",

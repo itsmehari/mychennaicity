@@ -9,6 +9,10 @@ export const TTDC_ECR_POSTER_PATH =
 export const TTDC_ECR_NEWS_SLUG = "ttdc-this-weekend-ecr-plan-august-2026";
 export const TTDC_ECR_NEWS_PATH = `/chennai-local-news/${TTDC_ECR_NEWS_SLUG}`;
 
+export const KITE_FESTIVAL_NEWS_SLUG =
+  "tamil-nadu-international-kite-festival-mamallapuram-august-2026";
+export const KITE_FESTIVAL_NEWS_PATH = `/chennai-local-news/${KITE_FESTIVAL_NEWS_SLUG}`;
+
 export const KITE_FESTIVAL_EVENT_SLUG =
   "tamil-nadu-international-kite-festival-mamallapuram-august-2026";
 export const SURFING_EVENT_SLUG =

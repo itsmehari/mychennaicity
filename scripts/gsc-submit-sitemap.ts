@@ -69,19 +69,26 @@ async function main() {
   const webmasters = google.webmasters({ version: "v3", auth });
   await webmasters.sitemaps.submit({ siteUrl, feedpath });
 
-  const newsSitemap =
-    siteUrl.startsWith("sc-domain:")
-      ? `https://${siteUrl.slice("sc-domain:".length)}/news-sitemap.xml`
-      : `${siteUrl.replace(/\/$/, "")}/news-sitemap.xml`;
+  const origin = siteUrl.startsWith("sc-domain:")
+    ? `https://${siteUrl.slice("sc-domain:".length)}`
+    : siteUrl.replace(/\/$/, "");
+  const extraSitemaps = [
+    `${origin}/news-sitemap.xml`,
+    `${origin}/sitemap-recent.xml`,
+  ];
 
-  if (feedpath !== newsSitemap) {
-    await webmasters.sitemaps.submit({ siteUrl, feedpath: newsSitemap });
+  for (const extra of extraSitemaps) {
+    if (feedpath !== extra) {
+      await webmasters.sitemaps.submit({ siteUrl, feedpath: extra });
+    }
   }
 
-  console.log("Submitted sitemap to Search Console.");
+  console.log("Submitted sitemaps to Search Console.");
   console.log(`  property: ${siteUrl}`);
   console.log(`  sitemap:  ${feedpath}`);
-  console.log(`  sitemap:  ${newsSitemap}`);
+  for (const extra of extraSitemaps) {
+    console.log(`  sitemap:  ${extra}`);
+  }
 }
 
 main().catch((e) => {

@@ -47,6 +47,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Events RSS](${base}/chennai-local-events/feed.xml): Upcoming Chennai events
 - [XML sitemap](${base}/sitemap.xml): Full crawlable URL index
 - [Google News sitemap](${base}/news-sitemap.xml): Recent news article URLs
+- [Recent sitemap](${base}/sitemap-recent.xml): URLs published or updated in the last 20 days
 - [Full LLM digest](${base}/llms-full.txt): Longer Markdown digest with recent headlines
 - [AEO Chennai digest](${base}/aeo/chennai.md): Answer-oriented Chennai news/jobs/events digest
 

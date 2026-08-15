@@ -35,7 +35,7 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Civic tools: hub + 10 interactive apps (`/civic-tools/*`) | **Done** — `src/components/civic-tools/`, `public/data/civic-geo/` |
 | Guides: BWG readiness checklist 2026 | **Done** — `/guides/bulk-waste-generator-readiness-checklist-2026` (`/chennai-guides/...` redirects); localStorage assessment |
 | Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, `/chennai-jobs` routes (legacy `/jobs` → 301) |
-| Sitemap / news sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/robots.ts` |
+| Sitemap / news sitemap / recent sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/sitemap-recent.xml/`, `src/app/robots.ts` |
 | Static pages: about, contact, editorial standards, glossary | **Done** — under `src/app/(public)/` |
 | Newsletter signup UI | **Partial** — modal + config (`src/components/newsletter/`, `src/config/newsletter-modal.ts`); wire to provider when chosen |
 | Admin CRUD (articles, events, jobs, directory) | **Not started** — `/admin` placeholder; see [ADMIN_SYSTEM_PLAN.md](ADMIN_SYSTEM_PLAN.md) |

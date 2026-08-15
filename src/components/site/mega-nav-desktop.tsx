@@ -81,34 +81,35 @@ export function MegaNavDesktop() {
   return (
     <div
       ref={rootRef}
-      className="relative hidden min-w-0 flex-1 justify-center md:flex"
+      className="relative hidden min-w-0 w-full justify-center md:flex"
       onMouseLeave={scheduleClose}
     >
-      <div className="relative inline-flex max-w-full flex-col items-center">
+      <div className="relative flex w-full items-center justify-center">
         <ul
-          className="flex flex-wrap items-center justify-center gap-0.5"
+          className="flex flex-nowrap items-center justify-center"
           role="menubar"
           aria-label="Site sections"
         >
           {MEGA_NAV_SECTIONS.map((s) => {
             const isOpen = openId === s.id;
             return (
-              <li key={s.id} role="none" onMouseEnter={() => reveal(s.id)}>
+              <li key={s.id} role="none" className="shrink-0" onMouseEnter={() => reveal(s.id)}>
                 <button
                   type="button"
                   role="menuitem"
                   aria-expanded={isOpen}
                   aria-haspopup="true"
                   aria-controls={isOpen ? `mega-panel-${s.id}` : undefined}
+                  aria-label={s.label}
                   id={`mega-trigger-${s.id}`}
-                  className="focus-ring flex min-h-11 items-center gap-1 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[var(--muted)] transition hover:bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] hover:text-[var(--foreground)] data-[open=true]:bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] data-[open=true]:text-[var(--accent)]"
+                  className="focus-ring flex min-h-11 cursor-pointer items-center gap-0.5 whitespace-nowrap rounded-xl px-2 py-2 text-[13px] font-semibold text-[var(--muted)] transition hover:bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] hover:text-[var(--foreground)] data-[open=true]:bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] data-[open=true]:text-[var(--accent)] lg:gap-1 lg:px-2.5 xl:px-3.5 xl:text-sm"
                   data-open={isOpen}
                   onFocus={() => reveal(s.id)}
                   onClick={() =>
                     setOpenId((prev) => (prev === s.id ? null : s.id))
                   }
                 >
-                  {s.label}
+                  {s.shortLabel ?? s.label}
                   <Chevron open={isOpen} />
                 </button>
               </li>
@@ -130,7 +131,7 @@ export function MegaNavDesktop() {
               aria-labelledby={`mega-trigger-${active.id}`}
               onMouseEnter={clearCloseTimer}
             >
-              <div className="mega-nav-mesh mx-auto max-w-[1280px] px-4 py-5 sm:px-6 sm:py-6">
+              <div className="mega-nav-mesh mx-auto max-w-[1536px] px-4 py-5 sm:px-6 sm:py-6">
                 <div className="mega-nav-card">
                   <MegaNavPanel section={active} />
                 </div>

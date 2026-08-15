@@ -6,6 +6,7 @@
 import {
   ECR_WEEKEND_PLAN_PATH,
   KITE_FESTIVAL_EVENT_SLUG,
+  KITE_FESTIVAL_NEWS_PATH,
   SURFING_EVENT_SLUG,
   TTDC_ECR_NEWS_PATH,
   TTDC_ECR_POSTER_PATH,
@@ -132,8 +133,7 @@ export const ECR_STOPS: EcrStop[] = [
     kmFromChennai: "~50–55 km from central Chennai",
     blurb:
       "The 5th Tamil Nadu International Kite Festival (TNIKF) — 14 to 16 August 2026 — at TTDC Ocean View on ECR. Organised with the Department of Tourism, Tamil Nadu and Global Media Box. Professional flyers from Thailand, Singapore, Malaysia, Indonesia, Vietnam and India; giant and inflatable show kites; theme Save Marine Life. 16 August lists a Red Bull F1 static display.",
-    practical:
-      "Official site: **free beach-event entry**. Kites typically from **2:00 pm until sunset** (weather permitting); LED kites after sunset toward 7:00 pm. **Do not bring your own kite to fly** — this is a professional show. Parking and ECR southbound traffic will be heavy after lunch. Tourism minister S. Rajesh Kumar was scheduled to inaugurate on 14 August.",
+    practical: `Official site: **free beach-event entry**. Kites typically from **2:00 pm until sunset** (weather permitting); LED kites after sunset toward 7:00 pm. **Do not bring your own kite to fly** — this is a professional show. Parking and ECR southbound traffic will be heavy after lunch. Tourism minister S. Rajesh Kumar was scheduled to inaugurate on 14 August. Dedicated news: [kite festival this weekend](${KITE_FESTIVAL_NEWS_PATH}).`,
     mapsQuery: "TTDC Ocean View Mamallapuram ECR",
     officialHref: "https://tnikf.com/",
     officialLabel: "TNIKF official site",
@@ -267,6 +267,10 @@ export const ECR_WEEKEND_SOURCES = [
 
 export const ECR_WEEKEND_RELATED = [
   { href: TTDC_ECR_NEWS_PATH, label: "News desk: TTDC this-weekend ECR plan" },
+  {
+    href: KITE_FESTIVAL_NEWS_PATH,
+    label: "News: Tamil Nadu International Kite Festival",
+  },
   {
     href: `/chennai-local-events/${KITE_FESTIVAL_EVENT_SLUG}`,
     label: "Event: Tamil Nadu International Kite Festival",

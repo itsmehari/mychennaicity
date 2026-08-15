@@ -1,5 +1,5 @@
 /**
- * POST /api/revalidate/sitemap on production — refresh sitemap.xml + news-sitemap.xml.
+ * POST /api/revalidate/sitemap on production — refresh sitemap.xml + news-sitemap.xml + sitemap-recent.xml.
  *
  * Requires REVALIDATE_SECRET in .env.production.local (same as other revalidate routes).
  *
@@ -53,6 +53,7 @@ async function main() {
   console.log("Sitemaps revalidated:");
   console.log(`  ${site}/sitemap.xml`);
   console.log(`  ${site}/news-sitemap.xml`);
+  console.log(`  ${site}/sitemap-recent.xml`);
 }
 
 main().catch((e) => {

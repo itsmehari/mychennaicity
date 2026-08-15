@@ -81,9 +81,11 @@ export default async function Home() {
   return (
     <>
       <HomeJsonLd />
-      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
+      <div className="px-3 pt-4 sm:px-4 sm:pt-6 lg:px-6 xl:px-8">
         <HomeHero />
-        <div className="mt-8 sm:mt-10">
+      </div>
+      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
+        <div className="mt-2 sm:mt-4">
           <AdvertisePanel variant="home" layout="hero" />
         </div>
         <HomeSectionFrame>

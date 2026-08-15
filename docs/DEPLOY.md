@@ -78,7 +78,7 @@ Wait for DNS propagation; HTTPS certificates are issued by Vercel.
 
 1. Add a **Domain** or **URL-prefix** property for `mychennaicity.in`.
 2. Verify via DNS TXT (recommended with domain property) or HTML file.
-3. Submit sitemap: `https://mychennaicity.in/sitemap.xml`.
+3. Submit sitemaps: `https://mychennaicity.in/sitemap.xml` and `https://mychennaicity.in/sitemap-recent.xml` (last 20 days). Optional: `news-sitemap.xml`.
 
 ## 7. Auth.js OAuth (optional)
 

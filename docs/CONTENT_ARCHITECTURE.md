@@ -55,7 +55,7 @@
 
 ## Search measurement (ops)
 
-- Add the site in **Google Search Console** and **Bing Webmaster Tools**; submit `sitemap.xml` (and optionally `news-sitemap.xml` if you pursue News surfaces).
+- Add the site in **Google Search Console** and **Bing Webmaster Tools**; submit `sitemap.xml`, **`sitemap-recent.xml`** (last 20 days) after a publish burst, and optionally `news-sitemap.xml` if you pursue News surfaces.
 - Track branded and local queries (e.g. Chennai + desk names, OMR, GCC) in GSC; pair with **CWV** reports for LCP/CLS regressions after image or map changes.
 
 ## Events and jobs (public indexation)

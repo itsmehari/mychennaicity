@@ -5,13 +5,14 @@
    - **Domain** property: `mychennaicity.in` (covers all subdomains and paths) — verify via **DNS TXT** at your DNS host (BigRock or Vercel DNS).
    - Or **URL-prefix**: `https://mychennaicity.in/` — verify via HTML tag or file if you prefer.
 3. After verification, go to **Sitemaps** → submit: `https://mychennaicity.in/sitemap.xml`.
-4. Optional: If you pursue Google News / Publisher surfaces, also submit `https://mychennaicity.in/news-sitemap.xml` (generated from recent published articles; see `src/app/news-sitemap.xml/route.ts`).
-5. Optional: In GA4, **Admin → Product links → Search Console links** to link GA4 and GSC.
+4. **Recent recrawl (last 20 days):** also submit `https://mychennaicity.in/sitemap-recent.xml`. This is a rolling list of articles, events, jobs, classifieds, directory rows, and recently shipped hubs whose `lastmod` falls in the past 20 days. Use it after a publish burst so Google recrawls new URLs without waiting on the full sitemap.
+5. Optional: If you pursue Google News / Publisher surfaces, also submit `https://mychennaicity.in/news-sitemap.xml` (generated from recent published articles; see `src/app/news-sitemap.xml/route.ts`).
+6. Optional: In GA4, **Admin → Product links → Search Console links** to link GA4 and GSC.
 
 ## After submission (monitoring)
 
 - **Pages** (or **Indexing → Pages**): watch *Indexed* vs *Not indexed* and reasons (duplicate, crawled not indexed, etc.).
-- **Sitemaps**: confirm `sitemap.xml` shows *Success* and the discovered URL count is in line with expectations. If it drops sharply while the site is up, check production `DATABASE_URL` and server logs — [`src/app/sitemap.ts`](../src/app/sitemap.ts) still emits static URLs when the DB call fails but omits dynamic article/event/job URLs.
+- **Sitemaps**: confirm `sitemap.xml` shows *Success* and the discovered URL count is in line with expectations. If it drops sharply while the site is up, check production `DATABASE_URL` and server logs — [`src/app/sitemap.ts`](../src/app/sitemap.ts) still emits static URLs when the DB call fails but omits dynamic article/event/job URLs. After a publish burst, also confirm **`sitemap-recent.xml`** (last 20 days) is submitted and succeeds.
 - **Experience** (Core Web Vitals): use **Web Vitals** / **Page experience** reports for field data; cross-check **Vercel Speed Insights** if enabled.
 - **URL Inspection**: spot-check the home page and a sample article after deploys; confirm *View crawled page* shows the expected title and main content.
 - **Enhancements / Rich results**: if you use article JSON-LD, run [Rich Results Test](https://search.google.com/test/rich-results) on live URLs occasionally.

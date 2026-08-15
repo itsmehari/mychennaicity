@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type CSSProperties } from "react";
 import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
@@ -12,10 +12,13 @@ export function SiteHeader() {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
-    <header className="site-header-bar sticky top-0 z-[60] w-full border-b border-[var(--border)] border-t-[3px] border-t-[var(--accent)] bg-[color-mix(in_srgb,var(--surface)_92%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--surface)_78%,transparent)]">
+    <header
+      className="site-header-bar sticky top-0 z-[60] w-full border-b border-[var(--border)] border-t-[3px] border-t-[var(--accent)] bg-[color-mix(in_srgb,var(--surface)_92%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--surface)_78%,transparent)]"
+      style={{ "--site-header-offset": "4.25rem" } as CSSProperties}
+    >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color-mix(in_srgb,var(--accent)_35%,transparent)] to-transparent" />
 
-      <div className="relative mx-auto flex max-w-[1280px] items-center gap-3 px-4 py-4 md:gap-4 md:py-5">
+      <div className="relative mx-auto grid max-w-[1536px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-4 py-3 md:gap-3 md:py-3.5 lg:px-6">
         <Link
           href="/"
           className="group flex shrink-0 items-center gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
@@ -31,7 +34,7 @@ export function SiteHeader() {
             <span className="type-display text-base text-[var(--foreground)] md:text-lg">
               mychennaicity
             </span>
-            <span className="text-[11px] font-light text-[var(--muted)] md:text-xs">
+            <span className="hidden text-[11px] font-light text-[var(--muted)] xl:block">
               News · directory · jobs · local events
             </span>
           </span>
@@ -39,10 +42,10 @@ export function SiteHeader() {
 
         <MegaNavDesktop />
 
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Link
             href="/contact"
-            className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] text-[var(--accent)] transition hover:border-[var(--accent)] sm:min-w-0 sm:px-3.5 sm:py-2"
+            className="focus-ring inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] text-[var(--accent)] transition hover:border-[var(--accent)] lg:min-w-0 lg:px-3.5 lg:py-2"
             aria-label="Contact"
             title="Contact"
             onClick={closeMobile}
@@ -61,12 +64,12 @@ export function SiteHeader() {
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <path d="m22 6-10 7L2 6" />
             </svg>
-            <span className="hidden text-xs font-bold sm:inline">Contact</span>
+            <span className="hidden text-xs font-bold lg:inline">Contact</span>
           </Link>
           <Link
             href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=nav`}
             data-site-cta="whatsapp"
-            className="focus-ring hidden min-h-11 items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-4 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] sm:inline-flex"
+            className="focus-ring hidden min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-3.5 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] xl:inline-flex"
           >
             WhatsApp
           </Link>

@@ -41,6 +41,7 @@
 
 - **Sitemap** — `sitemap.ts`: static hubs (including about, contact, editorial-standards, glossary), areas, **article** and **topic** URLs, plus **eligible events and jobs** from DB when queryable.
 - **News sitemap** — `/news-sitemap.xml` for article URLs that meet the route’s rules.
+- **Recent sitemap** — `/sitemap-recent.xml` rolling last-20-days recrawl list for Search Console.
 - **Robots** — `robots.ts` policy for crawlers.
 - **Metadata** — Page titles, descriptions, Open Graph, canonical URLs where implemented; JSON-LD modules under `src/lib/seo/`.
 - **Analytics** — Optional **GA4** (`NEXT_PUBLIC_GA_MEASUREMENT_ID`), **Vercel Analytics**, **Vercel Speed Insights** (`SiteAnalytics`).

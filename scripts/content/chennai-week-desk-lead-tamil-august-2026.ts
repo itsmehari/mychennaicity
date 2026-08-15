@@ -35,7 +35,11 @@ const FINE_TA = `## நுண்ணெழுத்து — செயற்க�
 
 const DISCLAIMER_EN = `## Disclaimer
 
-This article is **civic journalism** for Chennai readers. It is a **weekend/Monday watch list**, not an official GCC, police, or airport notice. What actually happened on 15–17 August will be updated on this desk after primary reports land. Verify closures and tax figures on official channels before you travel or pay.`;
+This article is **civic journalism** for Chennai readers. It is a **weekend/Monday watch list**, not an official GCC, police, or airport notice. The **Saturday 15 August morning** section below is what primary reports had confirmed by late morning IST. **Monday 17 August outcomes are not invented here** — we will add them after those reports land. Verify closures and tax figures on official channels before you travel or pay.`;
+
+const WATCH_DISCLAIMER_TA = `## பொறுப்புத்துறப்பு (Disclaimer)
+
+இது சென்னை வாசகர்களுக்கான **குடிமை இதழியல்**. **வார இறுதி / திங்கள் கண்காணிப்புப் பட்டியல்** — ஜிசிசி / காவல் / விமான நிலைய அதிகாரப்பூர்வ அறிவிப்பு அல்ல. **சனி 15 ஆகஸ்ட் காலை** பகுதி, அன்று முற்பகல் ஐஎஸ்டி வரை கிடைத்த முதன்மை அறிக்கைகள். **திங்கள் 17 ஆகஸ்ட் முடிவுகளை இங்கே ஊகிக்கவில்லை** — அந்த அறிக்கைகள் வந்த பிறகு சேர்ப்போம். பயணம் அல்லது பணம் செலுத்துவதற்கு முன் அதிகாரப்பூர்வ சேனல்களில் உறுதிப்படுத்துங்கள்.`;
 
 const FINE_EN = `## Fine print — AI-assisted authoring
 
@@ -308,45 +312,58 @@ ${FINE_TA}`,
   {
     slug: "chennai-weekend-watch-independence-day-tax-rain-monday-august-2026",
     title:
-      "Chennai weekend watch: I-Day roads, tax portal, rain — what to verify by Monday 17 August",
+      "Chennai weekend watch: I-Day hoist reported — tax portal, rain, Monday 17 August still open",
     summary:
-      "A civic checklist for 15–17 August 2026: Fort St. George closures, GCC property-tax portal after the pause, airport queues through 20 August, and whether any rain tests the 294 flood-spot map. We will update this desk after Monday’s primary reports.",
-    dek: "Follow-up desk — three things to check before you travel, pay, or forward a WhatsApp chart.",
+      "Saturday 15 August morning update: News18 reported CM C. Joseph Vijay hoisted the Tricolour at Fort St. George. Traffic curbs ran from 6 a.m.; leftover closures are unconfirmed. GCC tax portal revert and Sunday–Monday rain are still open — we will not invent Monday outcomes.",
+    dek: "Saturday morning facts, then three things still to verify before you travel, pay, or forward a WhatsApp chart.",
     category: "Chennai",
     featured: true,
-    publishedAt: "2026-08-14T17:00:00.000+05:30",
+    publishedAt: "2026-08-15T11:20:00.000+05:30",
     heroImageUrl: "/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg",
-    sourceUrl: "https://mychennaicity.in/chennai-today",
-    sourceName: "mychennaicity.in weekend watch — compiled from this week’s civic desks",
+    sourceUrl:
+      "https://one.news18.com/english/article/tamil-nadu/independence-day-2026-chief-minister-vijay-hoists-national-flag-for-first-time-at-chennai-fort-tam-982187389",
+    sourceName:
+      "News18 I-Day report 15 Aug 2026; GCTP traffic plan (India Today / LatestLY); Skymet + IMD-linked rain forecast; GCC 13 Aug pause",
     authorByline: "mychennaicity.in editorial",
     areaHubSlug: null,
     reportBody: `## Key takeaways
 
-- **Saturday 15 August**: 80th Independence Day at Fort St. George. Expect a **Red Zone** and morning closures — full desk: [I-Day security](${IDAY_EN}).
-- **Tax**: GCC paused the reassessment on 13 August. By Monday, check whether the **official portal** shows the **old** demand. Desk: [property-tax pause](${TAX_EN}).
-- **Rain / trenches**: 398 roads are still open for SWD; Mayor warned of a possible **50 cm** spell. Photograph your street if it rains. Desk: [50 cm warning](${RAIN_EN}).
-- **Airport**: high security **through 20 August**. Add time.
-- This page is a **watch list**. After Monday 17 August we will add what actually happened (closures that stuck, portal glitches, rain) from primary reports.
+- **Saturday 15 August, this morning:** News18 (08:55 IST) reported Chief Minister **C. Joseph Vijay** hoisted the Tricolour at **Fort St. George** — his first Independence Day as CM — after a guard of honour and the anthem, then addressed the gathering. Guest names in that report (parents, Trisha, ministers Anand, Adhav Arjuna, Sengottaiyan) are **not independently verified** here. Full preview desk: [I-Day security](${IDAY_EN}).
+- **Roads:** Greater Chennai Traffic Police had closed **Kamarajar Salai** (Labour Statue to RBI Subway North on Rajaji Salai) and **Flag Staff Road** to general traffic from **6 a.m. until the function ended**. As of this **late-morning** update we do **not** have a primary confirmation that Beach Road / Fort diversions have fully lifted. Check traffic police before you drive that stretch.
+- **Tax:** No new Saturday circular found. The last official line is still the **13 August pause**. Whether the **portal** shows the **old** demand is **unverified** on this page — [property-tax pause](${TAX_EN}).
+- **Rain:** Saturday forecast is warm and humid (~27–37°C) with about a **60%** chance of **light** morning or evening showers (Skymet). IMD-linked reports: light rain possible in Chennai today; **moderate rain possible Sunday and Monday** for Chennai / Tiruvallur / Kancheepuram / Chengalpattu. That is **forecast**, not a Monday outcome. [50 cm warning](${RAIN_EN}).
+- **Airport:** high security **through 20 August**. Add time.
+- **Monday 17 August** remains the checkpoint for portal revert, lingering closures, and whether Sunday–Monday rain tested mapped flood spots. **Those outcomes are not written here in advance.**
 
 [தமிழில்](${WATCH_TA})
 
 ${DISCLAIMER_EN}
 
+## Saturday 15 August — what reports say so far
+
+| Item | Status as of late morning IST | Source scope |
+|---|---|---|
+| Flag hoist at Fort St. George | Reported done (~8:45 a.m. programme; News18 08:55) | News18 |
+| Red Zone / Fort–Beach Road curbs | In force from 6 a.m. until the function ended; **reopening not confirmed here** | GCTP plan via India Today / LatestLY (13 Aug) |
+| GCC tax portal = old demand | **Unverified** — 13 Aug press note still the last official line | GCC / TNIE / Hindu week-desk |
+| Saturday rain on mapped flood spots | **Not confirmed** — light showers possible, day likely hot | Skymet; IMD-linked News18 |
+| Sunday–Monday rain | **Forecast only** — moderate rain possible in Chennai and nearby districts | IMD-linked News18 |
+
 ## Saturday–Monday checklist
 
 | When | Check | Why |
 |---|---|---|
-| Sat 15 Aug, 6 a.m.–noon | Fort, Island, Beach Road, CM route from Neelankarai | Flag hoist + Red Zone |
-| Sat–Sun | GCC property-tax portal vs your 13 Aug notice | Pause should restore old demand |
-| Any rain | Your SWD trench + nearest flood spot | 230 severe spots still tagged |
+| Sat 15 Aug, rest of day | Fort, Island, Beach Road, CM route from Neelankarai | Confirm leftover closures after the hoist |
+| Sat–Sun | GCC property-tax portal vs your 13 Aug notice | Pause should restore old demand — screenshot it |
+| Any rain Sat–Mon | Your SWD trench + nearest flood spot | 294 mapped spots; moderate rain possible Sun–Mon |
 | Through 20 Aug | Airport arrival time | 11-day security window |
 | Mon 17 Aug | Ward / zone office if portal still shows the hike | Don’t pay a WhatsApp chart |
 
-## What we will update on Monday
+## Still open for Monday 17 August
 
-1. Did Fort-area diversions linger into the afternoon?
+1. Did Fort-area diversions linger into Saturday afternoon — and are they gone now?
 2. Did the tax portal actually revert, or only the press note?
-3. Any rain that tested Sholinganallur / Tondiarpet / Adyar mapped spots?
+3. Did Sunday–Monday rain test Sholinganallur / Tondiarpet / Adyar mapped spots?
 4. Any official GCC circular on advance-tax vs refund?
 
 Until then, use [Chennai today](${TODAY}) for the morning card.
@@ -363,18 +380,18 @@ ${FINE_EN}`,
       type: "checklist",
       title: "Verify before you act this weekend",
       items: [
-        { id: "iday-route", label: "I-Day: avoid Fort–Beach Road Saturday morning unless you must be there" },
+        { id: "iday-route", label: "I-Day: confirm leftover Fort–Beach Road closures before you drive that stretch" },
         { id: "tax-portal", label: "Open GCC property-tax portal — confirm old demand, keep screenshots" },
         { id: "tax-receipt", label: "If you already paid the hike, keep the receipt (advance, not assumed refund)" },
         { id: "airport", label: "Flying 10–20 Aug: add extra airport time" },
-        { id: "rain", label: "If it rains: photo the trench / drain mouth on your street" },
+        { id: "rain", label: "If it rains Sat–Mon: photo the trench / drain mouth on your street" },
         { id: "monday", label: "Monday: if the portal still shows the hike, go to the zone revenue counter" },
       ],
       countdown: {
         title: "Monday follow-up checkpoint",
-        subtitle: "17 August 2026 — we update this desk after primary reports.",
+        subtitle: "17 August 2026 — we add what actually happened after primary reports. Not invented today.",
         endsAt: "2026-08-17T09:00:00.000+05:30",
-        expiredLabel: "Monday checkpoint reached — refresh this desk for updates.",
+        expiredLabel: "Monday checkpoint reached — refresh this page for the next update.",
         ctaLabel: "Chennai today",
         ctaUrl: TODAY,
       },
@@ -383,37 +400,50 @@ ${FINE_EN}`,
   {
     slug: "chennai-weekend-watch-independence-day-tax-rain-monday-august-2026-tamil",
     title:
-      "சென்னை வார இறுதி கண்காணிப்பு: சுதந்திர தினச் சாலைகள், வரி தளம், மழை — திங்கள் 17க்குள் என்ன பார்ப்பது",
+      "சென்னை வார இறுதி: கொடி ஏற்றம் அறிக்கை — வரி தளம், மழை, திங்கள் 17 இன்னும் திறந்தவை",
     summary:
-      "15–17 ஆகஸ்ட் 2026 குடிமைப் பட்டியல்: கோட்டை மூடல்கள், சொத்து வரி தளம் பழைய தொகையைக் காட்டுகிறதா, 20 ஆகஸ்ட் வரை விமான நிலைய வரிசை, 294 வெள்ளப் புள்ளிகள். திங்கள் முதன்மை அறிக்கைகளுக்குப் பிறகு இம்மேசையைப் புதுப்பிப்போம்.",
-    dek: "பின்தொடர் மேசை — பயணம், பணம், வாட்ஸ்அப் அட்டவணைக்கு முன் மூன்று சரிபார்ப்புகள்.",
+      "சனி 15 ஆகஸ்ட் காலை புதுப்பிப்பு: நியூஸ்18 முதல்வர் சி. ஜோசப் விஜய் புனித ஜார்ஜ் கோட்டையில் கொடி ஏற்றினார் என அறிவித்தது. காலை 6 முதல் போக்குவரத்து கட்டுப்பாடு; மீதமுள்ள மூடல்கள் உறுதிப்படவில்லை. வரி தளம், ஞாயிறு–திங்கள் மழை — திங்கள் முடிவுகளை இங்கே ஊகிக்கவில்லை.",
+    dek: "சனி காலை உண்மைகள்; பயணம், பணம், வாட்ஸ்அப் அட்டவணைக்கு முன் இன்னும் மூன்று சரிபார்ப்புகள்.",
     category: "Chennai",
     featured: true,
-    publishedAt: "2026-08-14T17:10:00.000+05:30",
+    publishedAt: "2026-08-15T11:25:00.000+05:30",
     heroImageUrl: "/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg",
-    sourceUrl: "https://mychennaicity.in/chennai-today-tamil",
-    sourceName: "mychennaicity.in வார இறுதி கண்காணிப்பு",
+    sourceUrl:
+      "https://one.news18.com/english/article/tamil-nadu/independence-day-2026-chief-minister-vijay-hoists-national-flag-for-first-time-at-chennai-fort-tam-982187389",
+    sourceName:
+      "நியூஸ்18 சுதந்திர தினம் 15 ஆகஸ்ட் 2026; போக்குவரத்து திட்டம்; ஸ்கைமெட் / வானிலை முன்னறிவிப்பு; ஜிசிசி 13 ஆகஸ்ட் நிறுத்தம்",
     authorByline: "mychennaicity.in editorial",
     areaHubSlug: null,
     reportBody: `## முக்கியப் புள்ளிகள்
 
-- **சனி 15 ஆகஸ்ட்**: புனித ஜார்ஜ் கோட்டையில் 80-வது சுதந்திர தினம். **சிவப்பு மண்டலம்**. முழு மேசை: [சுதந்திர தினப் பாதுகாப்பு](${IDAY_TA}).
-- **வரி**: 13 ஆகஸ்ட் மறுமதிப்பீடு நிறுத்தம். திங்களுக்குள் அதிகாரப்பூர்வ தளம் **பழைய** தொகையைக் காட்டுகிறதா எனப் பாருங்கள். [வரி நிறுத்தம்](${TAX_TA}).
-- **மழை / குழி**: 398 சாலைகள் இன்னும் திறந்திருக்கின்றன; மேயர் **50 செ.மீ.** எச்சரிக்கை. [மழை மேசை](${RAIN_TA}).
-- **விமான நிலையம்**: **20 ஆகஸ்ட்** வரை உயர் பாதுகாப்பு.
-- இது **கண்காணிப்புப் பட்டியல்**. திங்கள் 17க்குப் பிறகு நிஜத்தில் நடந்ததைச் சேர்ப்போம்.
+- **சனி 15 ஆகஸ்ட், இன்று காலை:** நியூஸ்18 (08:55 ஐஎஸ்டி) முதல்வர் **சி. ஜோசப் விஜய்** **புனித ஜார்ஜ் கோட்டையில்** தேசியக் கொடியை ஏற்றினார் என அறிவித்தது — முதல்வராக முதல் சுதந்திர தினம். காவல் மரியாதை, தேசிய கீதம், பிறகு உரை. அந்த அறிக்கையில் உள்ள விருந்தினர் பெயர்கள் (பெற்றோர், த்ரிஷா, அமைச்சர்கள் ஆனந்த், ஆதவ அர்ஜுனா, செங்கோட்டையன்) இங்கே **தனியாக உறுதிப்படுத்தப்படவில்லை**. முழு முன்னோட்டம்: [சுதந்திர தினப் பாதுகாப்பு](${IDAY_TA}).
+- **சாலைகள்:** பெருநகர் போக்குவரத்து காவல் **காமராஜர் சாலை** (தொழிலாளர் சிலை முதல் ராஜாஜி சாலை ஆர்பிஐ சப்வே வடக்கு) மற்றும் **ஃபிளாக் ஸ்டாஃப் சாலை**யை பொது வாகனங்களுக்கு **காலை 6 முதல் நிகழ்ச்சி முடியும் வரை** மூடியது. இந்த **முற்பகல்** புதுப்பிப்பில் பீச் சாலை / கோட்டை வழிகள் முழுவதும் திறந்ததா என **முதன்மை உறுதி இல்லை**. அந்த வழியில் செல்வதற்கு முன் போக்குவரத்து காவலைப் பாருங்கள்.
+- **வரி:** சனிக்கிழமை புதிய சுற்றறிக்கை இல்லை. கடைசி அதிகாரப்பூர்வ வரி **13 ஆகஸ்ட் நிறுத்தம்**. தளம் **பழைய** தொகையைக் காட்டுகிறதா என்பது இப்பக்கத்தில் **உறுதிப்படவில்லை** — [வரி நிறுத்தம்](${TAX_TA}).
+- **மழை:** சனி முன்னறிவிப்பு வெப்பம் + ஈரப்பதம் (~27–37°C); காலை அல்லது மாலை **லேசான** மழைக்கு சுமார் **60%** வாய்ப்பு (ஸ்கைமெட்). வானிலை அறிக்கைகள்: இன்று சென்னையில் லேசான மழை சாத்தியம்; **ஞாயிறு–திங்கள் மிதமான மழை** சென்னை / திருவள்ளூர் / காஞ்சிபுரம் / செங்கல்பட்டுக்கு சாத்தியம். இது **முன்னறிவிப்பு**, திங்கள் முடிவு அல்ல. [மழை எச்சரிக்கை](${RAIN_TA}).
+- **விமான நிலையம்:** **20 ஆகஸ்ட்** வரை உயர் பாதுகாப்பு.
+- **திங்கள் 17 ஆகஸ்ட்** இன்னும் சரிபார்ப்பு நாள் — தளம், மீதமுள்ள மூடல்கள், ஞாயிறு–திங்கள் மழை. **அந்த முடிவுகளை இன்று எழுதவில்லை.**
 
 [English version](${WATCH_EN})
 
-${DISCLAIMER_TA}
+${WATCH_DISCLAIMER_TA}
+
+## சனி 15 ஆகஸ்ட் — இதுவரை அறிக்கைகள்
+
+| பொருள் | முற்பகல் ஐஎஸ்டி நிலை | ஆதார வரம்பு |
+|---|---|---|
+| கோட்டையில் கொடி ஏற்றம் | நடந்ததாக அறிக்கை (~காலை 8:45 நிகழ்ச்சி; நியூஸ்18 08:55) | நியூஸ்18 |
+| சிவப்பு மண்டலம் / கோட்டை–பீச் சாலை | காலை 6 முதல் நிகழ்ச்சி முடியும் வரை; **திறப்பு இங்கே உறுதி இல்லை** | 13 ஆகஸ்ட் போக்குவரத்து திட்டம் |
+| ஜிசிசி வரி தளம் = பழைய தொகை | **உறுதிப்படவில்லை** — 13 ஆகஸ்ட் அறிக்கையே கடைசி | ஜிசிசி வார மேசை |
+| சனி மழை வெள்ளப் புள்ளிகளில் | **உறுதி இல்லை** — லேசான மழை சாத்தியம், நாள் வெப்பம் | ஸ்கைமெட் / வானிலை |
+| ஞாயிறு–திங்கள் மழை | **முன்னறிவிப்பு மட்டும்** | வானிலை அறிக்கைகள் |
 
 ## சனி–திங்கள் பட்டியல்
 
 | எப்போது | என்ன பார்ப்பது |
 |---|---|
-| சனி காலை 6–12 | கோட்டை, ஐஸ்லாந்து, பீச் சாலை, நீலங்கரை வழி |
+| சனி மீதி நாள் | கோட்டை, ஐஸ்லாந்து, பீச் சாலை, நீலங்கரை வழி — மீதமுள்ள மூடல் |
 | சனி–ஞாயிறு | ஜிசிசி சொத்து வரி தளம் vs 13 ஆகஸ்ட் அறிவிப்பு |
-| மழை வந்தால் | உங்கள் வடிகால் குழி + அருகிலுள்ள வெள்ளப் புள்ளி |
+| சனி–திங்கள் மழை | உங்கள் வடிகால் குழி + அருகிலுள்ள வெள்ளப் புள்ளி |
 | 20 ஆகஸ்ட் வரை | விமான நிலைய நேரம் |
 | திங்கள் 17 | தளம் இன்னும் உயர்வைக் காட்டினால் மண்டல வருவாய் அலுவலகம் |
 
@@ -431,18 +461,18 @@ ${FINE_TA}`,
       type: "checklist",
       title: "இந்த வார இறுதியில் செயல்படுவதற்கு முன்",
       items: [
-        { id: "iday-route", label: "சனி காலை கோட்டை–பீச் சாலையைத் தவிருங்கள்" },
+        { id: "iday-route", label: "கோட்டை–பீச் சாலையில் மீதமுள்ள மூடலை உறுதிப்படுத்திவிட்டுச் செல்லுங்கள்" },
         { id: "tax-portal", label: "ஜிசிசி சொத்து வரி தளத்தில் பழைய தொகையை உறுதிப்படுத்துங்கள்" },
         { id: "tax-receipt", label: "உயர்வைச் செலுத்தியிருந்தால் ரசீதை வைத்திருங்கள்" },
         { id: "airport", label: "10–20 ஆகஸ்ட் விமானம்: கூடுதல் நேரம்" },
-        { id: "rain", label: "மழை வந்தால் தெரு வடிகாலைப் புகைப்படம் எடுங்கள்" },
+        { id: "rain", label: "சனி–திங்கள் மழை வந்தால் தெரு வடிகாலைப் புகைப்படம் எடுங்கள்" },
         { id: "monday", label: "திங்கள்: தளம் மாறவில்லை என்றால் மண்டல அலுவலகம்" },
       ],
       countdown: {
         title: "திங்கள் பின்தொடர் புள்ளி",
-        subtitle: "17 ஆகஸ்ட் 2026 — முதன்மை அறிக்கைகளுக்குப் பிறகு புதுப்பிப்பு.",
+        subtitle: "17 ஆகஸ்ட் 2026 — நிஜத்தில் நடந்ததை முதன்மை அறிக்கைகளுக்குப் பிறகு சேர்ப்போம். இன்று ஊகிக்கவில்லை.",
         endsAt: "2026-08-17T09:00:00.000+05:30",
-        expiredLabel: "திங்கள் புள்ளி வந்தது — இம்மேசையைப் புதுப்பித்துப் பாருங்கள்.",
+        expiredLabel: "திங்கள் புள்ளி வந்தது — அடுத்த புதுப்பிப்புக்கு இப்பக்கத்தைப் புதுப்பித்துப் பாருங்கள்.",
         ctaLabel: "சென்னை இன்று",
         ctaUrl: TODAY_TA,
       },
@@ -556,24 +586,24 @@ export const WEEK_DESK_SOCIAL_POSTS: {
     id: "watch-x-en",
     channel: "x",
     lang: "en",
-    text: `Chennai weekend watch (15–17 Aug): I-Day road closures, GCC tax portal after the pause, airport queues, rain vs 294 flood spots. Checklist — we’ll update Monday.\n\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026\n\n#Chennai #IndependenceDay #mychennaicity`,
+    text: `Chennai weekend watch (Sat morning): I-Day hoist reported at Fort St. George. Leftover road closures unconfirmed. GCC tax portal + Sun–Mon rain still open — we will not invent Monday.\n\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026\n\n#Chennai #IndependenceDay #mychennaicity`,
   },
   {
     id: "watch-wa-en",
     channel: "whatsapp",
     lang: "en",
-    text: `Chennai — what to check this weekend\n\n1. Sat 15 Aug morning: Fort / Beach Road / Neelankarai route (I-Day)\n2. Tax portal: old demand after GCC pause?\n3. Flying till 20 Aug: extra airport time\n4. If it rains: photo your street trench\n\nWe’ll update this desk on Monday 17 Aug.\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026`,
+    text: `Chennai — Saturday 15 Aug morning update\n\n1. I-Day hoist *reported* at Fort St. George — confirm leftover Fort / Beach Road closures before you drive\n2. Tax portal: old demand after GCC pause? Still unverified\n3. Flying till 20 Aug: extra airport time\n4. Light showers possible today; moderate rain *forecast* Sun–Mon — photo your street if it rains\n\nMonday 17 Aug still open — we will not invent it.\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026`,
   },
   {
     id: "watch-x-ta",
     channel: "x",
     lang: "ta",
-    text: `சென்னை வார இறுதி: சுதந்திர தினச் சாலைகள், வரி தளம், விமான நிலையம், மழை. திங்கள் 17 அன்று புதுப்பிப்போம்.\n\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026-tamil\n\n#சென்னை #சுதந்திரதினம் #mychennaicity`,
+    text: `சென்னை வார இறுதி (சனி காலை): கோட்டையில் கொடி ஏற்றம் அறிக்கை. மீதமுள்ள சாலை மூடல் உறுதி இல்லை. வரி தளம் + ஞாயிறு–திங்கள் மழை இன்னும் திறந்தவை — திங்களை ஊகிக்கவில்லை.\n\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026-tamil\n\n#சென்னை #சுதந்திரதினம் #mychennaicity`,
   },
   {
     id: "watch-wa-ta",
     channel: "whatsapp",
     lang: "ta",
-    text: `சென்னை — இந்த வார இறுதியில் பாருங்கள்\n\n1. சனி காலை: கோட்டை / பீச் சாலை / நீலங்கரை வழி\n2. சொத்து வரி தளம் பழைய தொகையைக் காட்டுகிறதா\n3. 20 ஆகஸ்ட் வரை விமானம்: கூடுதல் நேரம்\n4. மழை வந்தால் தெருவைப் படம் எடுங்கள்\n\nதிங்கள் 17 அன்று இம்மேசையைப் புதுப்பிப்போம்.\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026-tamil`,
+    text: `சென்னை — சனி 15 ஆகஸ்ட் காலை புதுப்பிப்பு\n\n1. கோட்டையில் கொடி ஏற்றம் *அறிக்கை* — மீதமுள்ள கோட்டை / பீச் சாலை மூடலை உறுதிப்படுத்துங்கள்\n2. சொத்து வரி தளம் பழைய தொகையைக் காட்டுகிறதா — இன்னும் உறுதி இல்லை\n3. 20 ஆகஸ்ட் வரை விமானம்: கூடுதல் நேரம்\n4. இன்று லேசான மழை சாத்தியம்; ஞாயிறு–திங்கள் மிதமான மழை *முன்னறிவிப்பு*\n\nதிங்கள் 17 இன்னும் திறந்தது — ஊகிக்கவில்லை.\nhttps://mychennaicity.in/chennai-local-news/chennai-weekend-watch-independence-day-tax-rain-monday-august-2026-tamil`,
   },
 ];
