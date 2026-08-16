@@ -136,9 +136,9 @@ These are independent **local blogs and city desks** many Chennai / Tamil Nadu r
 
 [MyChennaiCity Jobs](https://mychennaicity.in/chennai-jobs) is the Chennai-focused jobs hub on this city site: open listings, walk-ins, and hiring context next to local news. Useful when you want candidates who already follow Chennai civic and neighbourhood coverage. Job seekers can also start at [Looking for work](https://mychennaicity.in/chennai-jobs/looking-for-work).
 
-### MyNangnallur
+### MyNanganallur
 
-[MyNangnallur](https://mynangnallur.in/) is a **South Chennai neighbourhood blog** covering Nanganallur and nearby belts. Worth following when your hire is south-Chennai based — local readers often trust neighbourhood desks for “near home” roles.
+[MyNanganallur](https://mynanganallur.in/) is a **South Chennai neighbourhood blog** covering Nanganallur and nearby belts. Worth following when your hire is south-Chennai based — local readers often trust neighbourhood desks for “near home” roles.
 
 ### MyOMR
 
@@ -181,7 +181,7 @@ If you are looking for work in Chennai, prefer listings that name a **real area 
 
 ## Sources
 
-Public product sites linked above (Vacancy Chennai, MyChennaiCity Jobs, MyNangnallur, MyOMR, MyCovai, Apna, Freshersworld). Platform features change; confirm current posting rules on each site.`.trim();
+Public product sites linked above (Vacancy Chennai, MyChennaiCity Jobs, MyNanganallur, MyOMR, MyCovai, Apna, Freshersworld). Platform features change; confirm current posting rules on each site.`.trim();
 
   const analysisBody = `## Analysis — why locality still wins for TN hiring
 
@@ -235,7 +235,7 @@ Please cross-check posting rules, fees, and contacts on each linked site before 
           question:
             "Where should business owners and HR post Chennai neighbourhood jobs first?",
           answer:
-            "Start with local blogs and city job desks that use place-specific language — for example Vacancy Chennai and the MyChennaiCity jobs hub — then add neighbourhood blogs such as MyNangnallur or MyOMR when the workplace sits in those belts.",
+            "Start with local blogs and city job desks that use place-specific language — for example Vacancy Chennai and the MyChennaiCity jobs hub — then add neighbourhood blogs such as MyNanganallur or MyOMR when the workplace sits in those belts.",
         },
         {
           question: "When should I use Apna or Freshersworld?",

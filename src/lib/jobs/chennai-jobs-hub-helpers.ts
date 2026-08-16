@@ -123,6 +123,11 @@ export const CHENNAI_JOBS_CAREER_RESOURCES = [
     href: "/guides/chennai-tech-careers",
   },
   {
+    title: "Local job ads for owners and HR",
+    description: "Write clearer neighbourhood ads, then add national boards if you still need volume.",
+    href: "/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr",
+  },
+  {
     title: "How to avoid fake job offers",
     description: "What we remove from listings and what to watch for.",
     href: "/community-guidelines",
