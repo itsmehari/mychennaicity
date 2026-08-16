@@ -29,7 +29,7 @@ import {
 } from "@/lib/compulsive/load-chennai-today";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const titleSegment = "சென்னை இன்று — 60 வினாடிகள்";
 
@@ -119,7 +119,7 @@ export default async function ChennaiTodayTamilPage() {
           </li>
         </ul>
         <div className="mt-5">
-          <CopyShareButton hubId="chennai-today" label="வாட்ஸ்அப் முன்னனுப்புதல் நகலெடு" buildText={() => forward} />
+          <CopyShareButton hubId="chennai-today" label="வாட்ஸ்அப் முன்னனுப்புதல் நகலெடு" text={forward} />
         </div>
         <WhatsAppDraftBox
           hubId="chennai-today"

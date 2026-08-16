@@ -5,10 +5,14 @@ import { trackCompulsiveEvent } from "@/lib/analytics/compulsive-events";
 
 export function CopyShareButton({
   buildText,
+  text,
   label = "Copy for WhatsApp",
   hubId,
 }: {
-  buildText: () => string;
+  /** Client-only: do not pass a function from a Server Component. */
+  buildText?: () => string;
+  /** Safe to pass from a Server Component. */
+  text?: string;
   label?: string;
   /** When set, fires GA4 `compulsive_share` on successful share/copy. */
   hubId?: string;
@@ -16,11 +20,11 @@ export function CopyShareButton({
   const [done, setDone] = useState(false);
 
   async function onClick() {
-    const text = buildText();
+    const value = text ?? buildText?.() ?? "";
     let shared = false;
     try {
       if (navigator.share) {
-        await navigator.share({ text, title: "mychennaicity.in" });
+        await navigator.share({ text: value, title: "mychennaicity.in" });
         shared = true;
       }
     } catch {
@@ -28,10 +32,10 @@ export function CopyShareButton({
     }
     if (!shared) {
       try {
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(value);
         shared = true;
       } catch {
-        alert(text);
+        alert(value);
       }
     }
     if (shared) {

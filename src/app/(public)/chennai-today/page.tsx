@@ -25,7 +25,7 @@ import {
 } from "@/lib/compulsive/load-chennai-today";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const titleSegment = "Chennai today in 60 seconds";
 
@@ -114,7 +114,7 @@ export default async function ChennaiTodayPage() {
           </li>
         </ul>
         <div className="mt-5 flex flex-wrap gap-2">
-          <CopyShareButton hubId="chennai-today" label="Copy WhatsApp forward" buildText={() => forward} />
+          <CopyShareButton hubId="chennai-today" label="Copy WhatsApp forward" text={forward} />
         </div>
         <WhatsAppDraftBox
           hubId="chennai-today"
