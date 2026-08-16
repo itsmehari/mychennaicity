@@ -1,5 +1,4 @@
 import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
-import { WHATSAPP_COMMUNITY_GROUP_NAME } from "@/lib/whatsapp-community";
 import { WhatsAppCommunityJoinLink, WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
 
 const joinBtnClass =
@@ -8,12 +7,20 @@ const joinBtnClass =
 export function JoinWhatsAppCommunityCard({
   layout = "card",
 }: {
-  /** `inline` = tighter band for article foot; `card` = hub / home panels */
-  layout?: "card" | "inline";
+  /** `inline` = tighter band for article foot; `card` = hub / home panels; `sidebar` = article rail */
+  layout?: "card" | "inline" | "sidebar";
 }) {
   const enabled = isWhatsAppCommunityInviteConfigured();
 
   if (!enabled) {
+    if (layout === "sidebar") {
+      return (
+        <p className="civic-sidebar-wa__text">
+          A moderated Chennai reader group is being set up — the invite will
+          land here once the desk is ready.
+        </p>
+      );
+    }
     return (
       <div
         className={
@@ -42,6 +49,22 @@ export function JoinWhatsAppCommunityCard({
           </>
         )}
       </div>
+    );
+  }
+
+  if (layout === "sidebar") {
+    return (
+      <>
+        <p className="civic-sidebar-wa__text">
+          Short civic notes and civil discussion — same standards as the site.
+        </p>
+        <WhatsAppCommunityJoinLink
+          utmContent="article_sidebar"
+          className="civic-sidebar-wa__btn"
+        >
+          Join the reader group
+        </WhatsAppCommunityJoinLink>
+      </>
     );
   }
 

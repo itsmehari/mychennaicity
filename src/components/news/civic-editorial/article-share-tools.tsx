@@ -19,6 +19,44 @@ function shareButtonClass(variant: ShareToolsProps["variant"]) {
   return "civic-share-btn civic-share-btn--inline";
 }
 
+function ShareGlyph() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="civic-share-btn__icon"
+      aria-hidden
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="18" cy="5" r="2.6" />
+      <circle cx="6" cy="12" r="2.6" />
+      <circle cx="18" cy="19" r="2.6" />
+      <path d="M8.7 13.4 15.3 17.4M15.3 6.6 8.7 10.6" />
+    </svg>
+  );
+}
+
+function CopyGlyph() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="civic-share-btn__icon"
+      aria-hidden
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="8.5" y="8.5" width="11" height="11" rx="1.6" />
+      <path d="M5.5 15.5V6.2A1.7 1.7 0 0 1 7.2 4.5H16" />
+    </svg>
+  );
+}
+
 export function ArticleShareTools({
   title,
   text,
@@ -61,13 +99,17 @@ export function ArticleShareTools({
 
   return (
     <div className={`civic-share-tools civic-share-tools--${variant} ${className}`.trim()}>
+      {variant === "rail" ? (
+        <p className="civic-share-tools__kicker">Pass it on</p>
+      ) : null}
       <button
         type="button"
         onClick={onShare}
         className={shareButtonClass(variant)}
         aria-label="Share article"
       >
-        Share
+        <ShareGlyph />
+        <span>Share</span>
       </button>
       <button
         type="button"
@@ -75,7 +117,8 @@ export function ArticleShareTools({
         className={shareButtonClass(variant)}
         aria-label="Copy article link"
       >
-        Copy link
+        <CopyGlyph />
+        <span>Copy link</span>
       </button>
       {statusLabel ? (
         <span className="civic-share-status" role="status" aria-live="polite">
@@ -117,11 +160,20 @@ export function ArticleReadingProgress({
     };
   }, [targetId]);
 
+  const pct = Math.round(progress);
+
   return (
-    <div className="civic-reading-progress" aria-hidden>
+    <div
+      className="civic-reading-progress"
+      role="progressbar"
+      aria-label="Reading progress"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={pct}
+    >
       <div
         className="civic-reading-progress__bar"
-        style={{ width: `${progress}%` }}
+        style={{ height: `${progress}%` }}
       />
     </div>
   );
@@ -138,14 +190,20 @@ export function ArticleLeftRail({
 }) {
   return (
     <aside className="civic-left-rail" aria-label="Article tools">
-      <ArticleReadingProgress />
-      <div className="civic-left-rail__inner">
-        {toc}
-        <ArticleShareTools
-          title={shareTitle}
-          text={shareText}
-          variant="rail"
-        />
+      <p className="civic-left-rail__masthead">
+        <span className="civic-left-rail__masthead-mark" aria-hidden />
+        Story index
+      </p>
+      <div className="civic-left-rail__stage">
+        <ArticleReadingProgress />
+        <div className="civic-left-rail__inner">
+          {toc}
+          <ArticleShareTools
+            title={shareTitle}
+            text={shareText}
+            variant="rail"
+          />
+        </div>
       </div>
     </aside>
   );

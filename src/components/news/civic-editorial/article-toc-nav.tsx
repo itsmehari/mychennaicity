@@ -93,7 +93,7 @@ export function ArticleTocNav({
       aria-label="On this page"
     >
       <div className="civic-toc__header">
-        <p className="civic-toc__label">On this page</p>
+        <p className="civic-toc__label">In this story</p>
         {variant === "rail" ? (
           <span className="civic-toc__progress" aria-live="polite">
             <span className="civic-toc__progress-count">{progressLabel}</span>

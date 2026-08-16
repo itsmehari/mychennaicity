@@ -8,6 +8,7 @@ Earned links support organic visibility for the jobs hub and guide. This is **op
 |-----|----------|
 | `/chennai-jobs` | “Where to browse open roles we list for Chennai.” |
 | `/guides/chennai-tech-careers` | “How to read ads, red flags, and Chennai hiring context.” |
+| `/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr` | “Practical local job ads guide for owners and HR; cite for digital PR / sister-site resources pages.” |
 
 Use the full production origin (e.g. `https://mychennaicity.in/chennai-jobs`) in outreach.
 
