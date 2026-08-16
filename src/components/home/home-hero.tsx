@@ -29,7 +29,7 @@ function getReducedMotionServerSnapshot() {
 }
 
 const HERO_IMAGES = {
-  metro: "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.webp",
+  metro: "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.jpg",
   amazonJobs: "/images/explore-chennai-madras-high-court.jpg",
   valluvarKottam: "/images/explore-chennai-kapaleeshwar-temple.jpg",
 } as const;

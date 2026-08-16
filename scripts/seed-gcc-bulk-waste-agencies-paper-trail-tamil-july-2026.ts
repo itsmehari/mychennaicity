@@ -15,7 +15,7 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 /** Representational waste-segregation illustration; not evidence of an alleged incident. */
 const HERO_IMAGE_URL =
-  "/images/articles/chennai-bulk-waste-generators-swm-rules-2026-registration-deadline.jpg";
+  "/images/articles/gcc-bulk-waste-agencies-paper-trail-july-2026-hero.jpg";
 
 const TNIE_URL =
   "https://www.newindianexpress.com/cities/chennai/2026/Jul/30/chennai-scraps-waste-collection-agencies-for-dumping-bulk-garbage-into-roadside-compactor-bins";

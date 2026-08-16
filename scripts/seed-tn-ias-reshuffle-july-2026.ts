@@ -12,7 +12,7 @@ import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
-const HERO_IMAGE_URL = "/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg";
+const HERO_IMAGE_URL = "/images/articles/tamil-nadu-ias-reshuffle-july-2026-hero.jpg";
 
 const HINDU_URL =
   "https://www.thehindu.com/news/national/tamil-nadu/ias-officers-reshuffled-in-tamil-nadu-j-radhakrishnan-supriya-sahu-transferred/article71226990.ece";

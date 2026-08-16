@@ -132,7 +132,7 @@ ${FINE_TA}`,
     featured: true,
     publishedAt: "2026-08-14T16:10:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-wrd-5000-crore-water-security-project-cma.webp",
+      "/images/articles/chennai-wrd-5000-crore-water-security-project-cma.jpg",
     sourceUrl:
       "https://www.thehindu.com/news/cities/chennai/el-nino-could-bring-over-50-cm-of-rain-says-chennai-mayor-as-gcc-races-to-complete-canal-improvement-works/article71314475.ece",
     sourceName: "இந்து — மேயர் ஆர். பிரியா நேர்காணல், ஆகஸ்ட் 2026",
@@ -189,7 +189,7 @@ ${FINE_TA}`,
     featured: true,
     publishedAt: "2026-08-14T16:20:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.webp",
+      "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.jpg",
     sourceUrl:
       "https://www.thehindu.com/news/cities/chennai/cmrl-floats-bids-to-study-feasibility-of-water-metro-between-ennore-and-mamallapuram/article71341475.ece",
     sourceName: "இந்து / புதிய இந்தியன் எக்ஸ்பிரஸ் / TOI — 13–14 ஆகஸ்ட் 2026",

@@ -13,7 +13,8 @@ import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
-const HERO_IMAGE_URL = "/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg";
+const HERO_IMAGE_URL =
+  "/images/articles/tamil-nadu-ias-prakash-malarvizhi-august-2026-hero.jpg";
 
 const OFFICIAL_GO_SCAN =
   "/documents/tn-ias-prakash-malarvizhi-go-rt-2892-07-08-2026.png";

@@ -13,7 +13,7 @@ import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const HERO_IMAGE_URL =
-  "/images/articles/chennai-bulk-waste-generators-swm-rules-2026-registration-deadline.jpg";
+  "/images/articles/chennai-waste-rules-2026-gcc-must-explain-hero.jpg";
 
 const TNIE_URL =
   "https://www.newindianexpress.com/cities/chennai/2026/Jul/30/chennai-scraps-waste-collection-agencies-for-dumping-bulk-garbage-into-roadside-compactor-bins";

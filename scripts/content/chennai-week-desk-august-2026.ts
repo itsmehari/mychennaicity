@@ -193,7 +193,7 @@ Property tax is how GCC pays for drains, roads, and monsoon pumps. A pause witho
     featured: true,
     publishedAt: "2026-08-11T08:30:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-wrd-5000-crore-water-security-project-cma.webp",
+      "/images/articles/chennai-wrd-5000-crore-water-security-project-cma.jpg",
     sourceUrl:
       "https://www.thehindu.com/news/cities/chennai/el-nino-could-bring-over-50-cm-of-rain-says-chennai-mayor-as-gcc-races-to-complete-canal-improvement-works/article71314475.ece",
     sourceName: "The Hindu interview with Mayor R. Priya — August 2026",
@@ -345,7 +345,7 @@ Photograph the trench outside your gate, note the package board, and keep a nigh
     featured: false,
     publishedAt: "2026-08-08T06:41:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.webp",
+      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.jpg",
     sourceUrl:
       "https://www.thehindu.com/todays-paper/tp-national/tp-tamilnadu/gcc-sets-august-end-as-deadline-for-pre-monsoon-preparedness-work/article71318402.ece",
     sourceName: "The Hindu — GCC August-end SWD deadline, 8 Aug 2026",
@@ -528,7 +528,7 @@ Floods kill on **live wires**, **open manholes**, and **cratered junctions** as 
     featured: true,
     publishedAt: "2026-08-13T20:40:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.webp",
+      "/images/articles/chennai-metro-may-2026-ridership-90-lakh-passengers.jpg",
     sourceUrl:
       "https://www.thehindu.com/news/cities/chennai/cmrl-floats-bids-to-study-feasibility-of-water-metro-between-ennore-and-mamallapuram/article71341475.ece",
     sourceName: "The Hindu / TNIE / TOI — CMRL Water Metro tender, 13–14 Aug 2026",
@@ -1028,7 +1028,7 @@ ${FINE}`,
     featured: false,
     publishedAt: "2026-08-13T18:28:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-looped-water-grid-cmwssb-wabag-project-2026.webp",
+      "/images/articles/chennai-looped-water-grid-cmwssb-wabag-project-2026.jpg",
     sourceUrl:
       "https://www.oneindia.com/chennai/chennai-power-cut-on-august-14-over-25-locations-to-be-hit-8175439.html",
     sourceName: "Times Now / Oneindia — TANGEDCO schedules, 13–14 Aug 2026",
@@ -1139,7 +1139,7 @@ ${FINE}`,
     featured: false,
     publishedAt: "2026-08-09T03:19:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.webp",
+      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.jpg",
     sourceUrl:
       "https://www.newindianexpress.com/cities/chennai/2026/Aug/09/debris-cleared-from-buckingham-canal-stretch-near-landfill",
     sourceName: "The New Indian Express — Kodungaiyur canal, 9 Aug 2026",
@@ -1185,7 +1185,7 @@ ${FINE}`,
     featured: false,
     publishedAt: "2026-08-13T00:38:00.000+05:30",
     heroImageUrl:
-      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.webp",
+      "/images/articles/chennai-gcc-blue-green-restoration-three-lakes-35-crore.jpg",
     sourceUrl:
       "https://www.thehindu.com/news/cities/chennai/keelkattalai-lake-restored-eco-park-work-completed/article71337539.ece",
     sourceName: "The Hindu — Keelkattalai eco-park, 13 Aug 2026",

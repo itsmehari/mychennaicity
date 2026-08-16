@@ -13,7 +13,7 @@ import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 const HERO_IMAGE_URL =
-  "/images/articles/chennai-bulk-waste-generators-swm-rules-2026-registration-deadline.jpg";
+  "/images/articles/chennai-swm-bye-laws-2019-vs-2026-hero.jpg";
 
 const GCC_SITE = "https://chennaicorporation.gov.in/";
 const GCC_PORTAL = "https://gccservices.in/bulkwaste/register";

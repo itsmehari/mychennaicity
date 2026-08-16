@@ -12,7 +12,7 @@ import * as schema from "../src/db/schema";
 import { articles, cities } from "../src/db/schema/tables";
 import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
-const HERO_IMAGE_URL = "/images/articles/tamil-nadu-cabinet-portfolios-hero.jpg";
+const HERO_IMAGE_URL = "/images/articles/tamil-nadu-ias-reshuffle-may-2026-hero.jpg";
 
 const OFFICIAL_GO_PDF =
   "/documents/Tamilnadu-Collectors-Reshuffle-May-2026-IAS TN_1780065440019.pdf";

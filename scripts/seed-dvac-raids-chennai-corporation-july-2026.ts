@@ -14,7 +14,7 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 /** Representational civic-administration image — not a photo of any accused official or raid. */
 const HERO_IMAGE_URL =
-  "/images/articles/chennai-gcc-competitive-tenders-civic-works-savings-2026.jpg";
+  "/images/articles/dvac-raids-chennai-corporation-july-2026-hero.jpg";
 
 const DVAC_SITE = "https://www.dvac.tn.gov.in/";
 const GCC_SITE = "https://chennaicorporation.gov.in/";

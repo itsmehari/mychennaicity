@@ -1,5 +1,10 @@
 /**
- * Replace TOI/outlet-branded OG heroes with site-owned thematic images.
+ * DEPRECATED — do not re-run.
+ * This script copied the same 3–4 local assets under many civic slugs, which
+ * made news cards look identical. Use `replace-civic-news-hero-images.ts`
+ * (unique Wikimedia Commons downloads) instead.
+ *
+ * Historical: Replace TOI/outlet-branded OG heroes with site-owned thematic images.
  * Run: npx tsx scripts/fix-civic-hero-images-local.ts
  * Then: npm run db:seed:chennai-civic-news-batch-2026:live
  */
