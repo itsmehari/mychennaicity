@@ -219,6 +219,8 @@
     "db:seed:mop-vaishnav-leaders-sustainable-future-workshop-aug-2026:live": "tsx scripts/seed-mop-vaishnav-leaders-sustainable-future-workshop-aug-2026.ts --live",
     "db:seed:chennai-local-job-ads-guide-business-owners-hr": "tsx scripts/seed-chennai-local-job-ads-guide-business-owners-hr.ts",
     "db:seed:chennai-local-job-ads-guide-business-owners-hr:live": "tsx scripts/seed-chennai-local-job-ads-guide-business-owners-hr.ts --live",
+    "db:seed:fssai-tasmac-11-liquor-brands-ban-revoked-august-2026": "tsx scripts/seed-fssai-tasmac-11-liquor-brands-ban-revoked-august-2026.ts",
+    "db:seed:fssai-tasmac-11-liquor-brands-ban-revoked-august-2026:live": "tsx scripts/seed-fssai-tasmac-11-liquor-brands-ban-revoked-august-2026.ts --live",
     "db:seed:savukku-shankar-son-condolences-august-2026": "tsx scripts/seed-savukku-shankar-son-condolences-august-2026.ts",
     "db:seed:savukku-shankar-son-condolences-august-2026:live": "tsx scripts/seed-savukku-shankar-son-condolences-august-2026.ts --live",
     "db:seed:whatsapp-spam-report-platform-chennai-admins-august-2026": "tsx scripts/seed-whatsapp-spam-report-platform-chennai-admins-august-2026.ts",

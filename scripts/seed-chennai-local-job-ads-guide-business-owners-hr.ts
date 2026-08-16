@@ -16,8 +16,9 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 
 export const SLUG = "chennai-local-job-ads-guide-business-owners-hr";
 
+/** Unsplash — “We are hiring” sign (free licence): https://unsplash.com/photos/B3UFXwcVbc4 */
 const HERO =
-  "/images/articles/chennai-local-job-ads-guide-business-owners-hr-hero.png";
+  "/images/articles/chennai-local-job-ads-guide-business-owners-hr-hero.jpg";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -79,9 +80,9 @@ Links to third-party sites are for reader convenience. Features, fees, and listi
 
 This practical guide is for **business owners and HR professionals** who need the **right candidates** — not just more CVs. It covers how to write a local job ad, which kinds of Chennai- and Tamil Nadu–focused blogs are worth checking, and when to add large platforms like Apna or Freshersworld at the end of your mix.
 
-![Neighbourhood shopfront with job vacancy notices in Chennai](${HERO})
+![We are hiring — Apply today sign on a shop window](${HERO})
 
-*Local hiring still starts on the street and in the neighbourhood — then moves online. Photo: editorial illustration.*
+*A local “We are hiring” notice — the kind of neighbourhood vacancy signal owners and HR still rely on. Photo: [Unsplash](https://unsplash.com/photos/B3UFXwcVbc4) (free licence).*
 
 ## What “hyperlocal hiring” means in Chennai
 
