@@ -1,0 +1,22 @@
+---
+description: TN Council of Ministers government desk — routes, content, disclaimers
+globs:
+  - src/content/government/**
+  - src/components/government/**
+  - src/app/(public)/guides/tn-council-of-ministers/**
+  - src/app/(public)/guides/tn-council-of-ministers-tamil/**
+---
+
+# TN Council of Ministers government desk
+
+Read **`.cursor/plans/tn-council-of-ministers.plan.md`** before adding routes or copy.
+
+Non-negotiables:
+
+- **Roster source of truth:** `src/content/government/ministers-may-2026.ts` — update on reshuffle with Lok Bhavan PDF.
+- **Hybrid model:** evergreen `/guides/tn-council-of-ministers/*` + dated `/chennai-local-news/*` seeds.
+- **Disclaimer + AI fine print** on every public page (`GuideDisclaimer kind="civic"`).
+- **Bilingual** = EN hub + `-tamil` twin + `hreflang`. Do not mix languages on one URL.
+- **No fake Person JSON-LD** for ministers in v1.
+- **Self-host** Lok Bhavan PDFs under `public/documents/`.
+- Canonical host **https://mychennaicity.in** only.

@@ -127,7 +127,9 @@ Portfolio allocation is not only an administrative formality — it tells citize
 
 **For civic groups:** Municipal Administration (with the CM), Rural Development and Water Resources, and Public Works cover much of what neighbourhood groups track on roads, water, and local bodies.
 
-**Editorial read:** The distribution places **command-centre governance** with the Chief Minister while spreading **sector delivery** across named ministers. The next test is execution — department priorities, public communication, and visible administrative action in the first weeks.`.trim();
+**Editorial read:** The distribution places **command-centre governance** with the Chief Minister while spreading **sector delivery** across named ministers. The next test is execution — department priorities, public communication, and visible administrative action in the first weeks.
+
+**Updated roster:** The cabinet expanded to **35 ministers** on 21 May 2026 — see the living guide at [/guides/tn-council-of-ministers](https://mychennaicity.in/guides/tn-council-of-ministers) and [expansion news desk](/chennai-local-news/tamil-nadu-cabinet-expansion-35-ministers-may-2026).`.trim();
 
   const body = `${reportBody}\n\n---\n\n${analysisBody}`;
 

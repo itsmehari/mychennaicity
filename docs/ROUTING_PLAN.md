@@ -43,6 +43,18 @@
 | `/guides/chennai-afford-area-calculator-tamil` | Tamil twin of afford-area calculator |
 | `/guides/which-chennai-are-you-tamil` | Tamil twin of Which Chennai quiz |
 | `/guides/chennai-petrol-vs-ev-cost` … (see `src/content/compulsive/index.ts`) | Compulsive connective hubs Waves A–E (calculators, quizzes, culture, money) |
+| `/guides/tn-plus-two` | TN Plus Two group-selection hub (Wave A) |
+| `/guides/tn-plus-two/groups/[code]` | Groups 2502, 2503, 2702, 2708, 2804, 2802 |
+| `/guides/tn-plus-two/compare` | Five-group comparison matrix |
+| `/guides/tn-plus-two/hse-structure` | Part I / II / III + six papers |
+| `/guides/tn-plus-two/how-to-choose` | Five-step group choice + HowTo JSON-LD |
+| `/guides/tn-council-of-ministers` | TN Council of Ministers hub (35 ministers, May 2026) |
+| `/guides/tn-council-of-ministers/ministers/[slug]` | Individual minister portfolios |
+| `/guides/tn-council-of-ministers/departments` | Department reverse lookup |
+| `/guides/tn-council-of-ministers/chennai` | Chennai citizen minister shelf |
+| `/guides/tn-council-of-ministers/ias-leadership` | IAS reshuffle news cluster |
+| `/guides/tn-council-of-ministers/official-sources` | Lok Bhavan PR 38 + PR 40 PDFs |
+| `/guides/tn-council-of-ministers-tamil` | Tamil twin (+ matching sub-routes) |
 | `/about`, `/contact`, `/editorial-standards` | Static trust and info pages |
 | `/glossary` | Chennai entity glossary + SEO helpers (`src/lib/seo/chennai-glossary.ts`) |
 
@@ -62,3 +74,7 @@
 
 - **Middleware** — protects `/admin` routes; extend for locale or city segment normalization if needed later.
 - **Multi-city (future)** — e.g. `/{citySlug}/chennai-local-news/...` or subdomain `chennai.mychennaicity.in`; keep `city_id` on all scoped entities regardless of URL choice.
+
+## Planned — TN Plus Two education desk (later waves)
+
+Wave A is live (see public routes above). Remaining inventory (textbooks P4, science/commerce/after-12th pillars, M1/M2, Tamil twins): [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).

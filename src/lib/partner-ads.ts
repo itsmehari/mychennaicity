@@ -32,6 +32,7 @@ export const PARTNER_AD_PLACEMENTS = [
   "area_hub",
   "elections_hub",
   "tech_careers",
+  "tn_plus_two",
   "site_band",
 ] as const;
 
@@ -177,6 +178,19 @@ export function hasDedicatedPartnerAdSlot(pathname: string): boolean {
   if (path.startsWith("/chennai-classifieds/")) return true;
 
   if (path.startsWith("/areas/") && path !== "/areas") return true;
+
+  if (path === "/guides/tn-plus-two" || path.startsWith("/guides/tn-plus-two/")) {
+    return true;
+  }
+
+  if (
+    path === "/guides/tn-council-of-ministers" ||
+    path.startsWith("/guides/tn-council-of-ministers/") ||
+    path === "/guides/tn-council-of-ministers-tamil" ||
+    path.startsWith("/guides/tn-council-of-ministers-tamil/")
+  ) {
+    return true;
+  }
 
   return false;
 }

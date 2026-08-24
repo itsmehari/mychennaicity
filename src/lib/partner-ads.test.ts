@@ -79,6 +79,11 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/elections-2026")).toBe(false);
     expect(shouldShowSiteWideAd("/areas/adyar-thiruvanmiyur")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/chennai-tech-careers")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-plus-two")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-plus-two/groups/2502")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers/ministers/n-anand")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers-tamil")).toBe(false);
   });
 
   it("shows on public pages without a dedicated slot", () => {

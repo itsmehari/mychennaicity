@@ -71,6 +71,8 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Submit a Chennai event](${base}/chennai-local-events/submit): Public draft form (moderated)
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
+- [Tamil Nadu Plus Two group guide](${base}/guides/tn-plus-two): Class 11–12 group codes 2502, 2503, 2702, 2708 and humanities — confirm the school offer
+- [Tamil Nadu Council of Ministers](${base}/guides/tn-council-of-ministers): 35 ministers and portfolios (May 2026, Lok Bhavan PR 40); Tamil: ${base}/guides/tn-council-of-ministers-tamil
 - [WhatsApp community](${base}/chennai-whatsapp-group): City community landing (not a news source of record)
 - [humans.txt](${base}/humans.txt): Human-readable site credits
 - [Alias llm.txt](${base}/llm.txt): Redirects to this llms.txt file

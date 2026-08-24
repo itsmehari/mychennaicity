@@ -89,6 +89,16 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
         label: "WhatsApp community",
         hint: "Official my chennai city group",
       },
+      {
+        href: "/guides/tn-plus-two",
+        label: "Plus Two group guide",
+        hint: "TN Class 11–12 group codes after 10th",
+      },
+      {
+        href: "/guides/tn-council-of-ministers",
+        label: "TN Council of Ministers",
+        hint: "35 ministers and portfolios (May 2026)",
+      },
     ],
     tips: [
       "Bookmark your area hub and the news topic you care about most (civic, mobility, consumer).",

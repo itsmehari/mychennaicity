@@ -18,6 +18,8 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | GA4 in app | gtag + optional Data API | **P1** | Measurement ID in env; Data API for internal dashboards only. |
 | Elections / campaign hubs | `elections-2026` | **Later** | Only if editorial priority. |
 | Civic interactive tools (10) | Zone/ward finder, maps, router | **P0** | `/civic-tools/*` — see civic-geo bundle. |
+| TN Plus Two education desk | Group selection + textbook finders | **P1** | Planned — `.cursor/plans/tn-plus-two-education-desk.plan.md` (31 EN URLs). |
+| TN Council of Ministers desk | State cabinet roster + Chennai lookup | **P1** | **Live** — `/guides/tn-council-of-ministers` (80 URLs EN+TA). Plan: `.cursor/plans/tn-council-of-ministers.plan.md`. |
 
 ## Explicitly out of v1
 
@@ -33,6 +35,8 @@ Legend: **P0** ship first, **P1** next, **Later** backlog.
 | Public news: hub, topic desks, detail, RSS, dynamic rendering, JSON-LD | **Done** — `src/app/(public)/chennai-local-news/`, `src/domains/news/` |
 | Home: DB news sections + map/explore + mock-backed jobs/events/directory previews | **Done** — `src/app/(public)/page.tsx`, `src/components/home/` |
 | Civic tools: hub + 10 interactive apps (`/civic-tools/*`) | **Done** — `src/components/civic-tools/`, `public/data/civic-geo/` |
+| TN Plus Two education desk | **Wave A in repo** — hub + 6 groups + compare/structure/choose. Later waves: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md) |
+| TN Council of Ministers desk | **Live** — hub, 35 minister pages, departments, Chennai shelf, IAS shelf, official PDFs, Tamil twin. [`.cursor/plans/tn-council-of-ministers.plan.md`](../.cursor/plans/tn-council-of-ministers.plan.md) |
 | Guides: BWG readiness checklist 2026 | **Done** — `/guides/bulk-waste-generator-readiness-checklist-2026` (`/chennai-guides/...` redirects); localStorage assessment |
 | Events & jobs: hub + detail from DB when rows exist; mock editorial fallback when hub would be empty; hub JSON-LD only when DB-backed | **Done** — `src/domains/events/`, `src/domains/jobs/`, `/chennai-jobs` routes (legacy `/jobs` → 301) |
 | Sitemap / news sitemap / recent sitemap / robots | **Done** — `src/app/sitemap.ts`, `src/app/news-sitemap.xml/`, `src/app/sitemap-recent.xml/`, `src/app/robots.ts` |

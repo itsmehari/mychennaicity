@@ -32,6 +32,10 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Compulsive / connective hubs (calculators, quizzes, culture desks):** registry **`src/content/compulsive/index.ts`** — Wave A–F paths (F = power/feeder, Metro Water, auto fare, dengue week, flood street-score), sitemap wiring, Disclaimer + AI fine print on money/civic pages. Tamil twins (`-tamil` + `hreflang`): today / afford / which-Chennai / petrol / AC / property-tax / slang / PG. Time-boxed weekend watch pin: `WeekendWatchPin` on home tools strip + `/chennai-today` (EN/TA). Event submit: `/chennai-local-events/submit` (draft + IP rate limit).
 
+**TN Plus Two education desk (Wave A live):** group selection hub **`/guides/tn-plus-two`** — **`.cursor/plans/tn-plus-two-education-desk.plan.md`**. 5 pillars / 25 pages / 2 marketing landings still staged as later waves. Rule: **`.cursor/rules/tn-plus-two-education.mdc`**. Do not rehost Tamil Nadu textbooks; do not clone the print booklet as one article.
+
+**TN Council of Ministers desk (live):** roster hub **`/guides/tn-council-of-ministers`** — 35 ministers (May 2026, Lok Bhavan PR 40), minister pages, department lookup, Chennai shelf, IAS links, Tamil twin **`/guides/tn-council-of-ministers-tamil`**. Plan: **`.cursor/plans/tn-council-of-ministers.plan.md`**. Rule: **`.cursor/rules/tn-government-desk.mdc`**. News: `db:seed:tn-cabinet-expansion-may-2026(:live)`.
+
 **Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
 
 **Partner ads (rotator):** data in **`src/lib/partner-ads.ts`**; UI is `<PageAdSlot />` / `<SiteWideAdBand />` — SOP K in AGENT_LEARNINGS. Distinct from IAB `src/ads/` and `AdvertisePanel`. Do not paste one-off partner cards on pages.
