@@ -166,6 +166,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Natural Resources",
     ministryTitle: "Natural Resources",
     portfolios: ["Minerals and Mines"],
+    chennaiRelevance:
+      "Mines and minerals policy sets the statewide frame for construction aggregate and coastal sand — Chennai building and infrastructure projects sit downstream of that policy. This page does not track individual quarry licences.",
   },
   {
     order: 10,
@@ -216,6 +218,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Minorities Welfare",
     ministryTitle: "Minorities Welfare",
     portfolios: ["Minorities Welfare and Wakf Board"],
+    chennaiRelevance:
+      "Wakf Board administration and minorities-welfare schemes include institutions and properties inside Chennai city limits. Confirm board notices on official channels; this roster page is not a property record.",
   },
   {
     order: 14,
@@ -225,6 +229,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Social Justice",
     ministryTitle: "Social Justice",
     portfolios: ["Adi Dravidar Welfare and Hill Tribes"],
+    chennaiRelevance:
+      "Adi Dravidar welfare hostels, scholarships, and related schemes operate in the capital as well as in the districts. Use official department counters for eligibility — this page is a ministry pointer only.",
   },
   {
     order: 15,
@@ -272,6 +278,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
       "Backward Classes Welfare",
       "Most Backward Classes Welfare and De-notified Communities Welfare",
     ],
+    chennaiRelevance:
+      "Backward Classes welfare hostels and scholarship counters in Chennai are the city-facing end of this portfolio. Scheme rules live on official department pages, not on this roster card.",
   },
   {
     order: 18,
@@ -281,6 +289,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Handlooms, Textiles and Khadi",
     ministryTitle: "Handlooms & Textiles",
     portfolios: ["Handlooms and Textiles, Khadi and Village Industries Board"],
+    chennaiRelevance:
+      "Handloom showrooms and Co-optex retail in Chennai are the city-visible face of textiles policy. Festival-season silk shopping on T. Nagar streets is consumer context — not a ministry circular.",
   },
   {
     order: 19,
@@ -291,6 +301,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     ministryTitle: "Prohibition & Excise",
     portfolios: ["Prohibition and Excise"],
     chennaiTags: ["TASMAC"],
+    chennaiRelevance:
+      "TASMAC retail shops and excise enforcement are everyday Chennai facts; hours, dry days, and brand lists change by official notice. Related reporting on this site covers consumer-facing TASMAC news when it is public.",
     newsSlugs: ["fssai-tasmac-11-liquor-brands-ban-revoked-enrica-august-2026"],
   },
   {
@@ -301,6 +313,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Non-Resident Tamils Welfare",
     ministryTitle: "Non-Resident Tamils Welfare",
     portfolios: ["Non-Resident Tamils Welfare, Refugees & evacuees"],
+    chennaiRelevance:
+      "NRI facilitation and overseas-Tamil welfare desks that residents use are concentrated in the capital. This page is not a visa or attestation counter — use the official NRT / consular channels named on government sites.",
   },
   {
     order: 21,
@@ -326,6 +340,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Co-operation",
     ministryTitle: "Co-operation",
     portfolios: ["Co-operation"],
+    chennaiRelevance:
+      "Urban co-operative banks and fair-price / PDS-linked co-operative outlets in Chennai sit under co-operation policy. Branch-level disputes belong with the registrar and the bank — not with this roster card.",
   },
   {
     order: 23,
@@ -354,6 +370,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
       "Agriculture, Agricultural Engineering, Agro Service Co-operatives",
       "Horticulture, Sugar, Sugarcane Excise, Sugarcane Development and Waste Land Development",
     ],
+    chennaiRelevance:
+      "Chennai eats what the hinterland grows — Koyambedu and other perishable markets are the city end of agriculture marketing. This ministry is not GCC’s market-licence desk; treat wholesale-price chatter as trade news, not a G.O.",
   },
   {
     order: 25,
@@ -375,6 +393,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Human Resources Management",
     ministryTitle: "Human Resources Management",
     portfolios: ["Human Resources Management & Ex-Servicemen Welfare"],
+    chennaiRelevance:
+      "State HR and secretariat staffing decisions are taken in Chennai. This is not a public vacancy board — live openings we list stay on the jobs hub, not on minister pages.",
   },
   {
     order: 27,
@@ -396,6 +416,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Micro, Small and Medium Enterprises",
     ministryTitle: "MSME",
     portfolios: ["Rural Industries including Cottage Industries, Small Industries"],
+    chennaiRelevance:
+      "Guindy and Ambattur industrial estates are the Chennai-facing MSME geography readers ask about. Estate-level licences and SIDCO notices stay on official industrial pages.",
   },
   {
     order: 29,
@@ -431,6 +453,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Animal Husbandry",
     ministryTitle: "Animal Husbandry",
     portfolios: ["Animal Husbandry"],
+    chennaiRelevance:
+      "Veterinary services and livestock policy touch urban dairies and Aavin-adjacent supply into the city. This is not a pet-clinic directory — use GCC and department helplines for local animal-control questions.",
   },
   {
     order: 32,
@@ -454,6 +478,8 @@ export const MINISTERS_MAY_2026: MinisterRow[] = [
     designation: "Minister for Forests",
     ministryTitle: "Forests",
     portfolios: ["Forests"],
+    chennaiRelevance:
+      "Urban tree cover and Guindy National Park sit at the city edge of the forests portfolio. Felling, park rules, and sanctuary notices belong on official forest / GCC pages — this card does not map every avenue tree.",
   },
   {
     order: 34,

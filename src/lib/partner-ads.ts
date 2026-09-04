@@ -3,6 +3,8 @@
  * Copy and themes live here — the rotator only renders `{ ads, shape, placement }`.
  */
 
+import { CIVIC_TOOL_PREVIEW_PATHS } from "@/lib/routes/civic-tools";
+
 export const PARTNER_AD_UTM_SOURCE = "mychennaicity";
 export const PARTNER_AD_UTM_MEDIUM = "referral";
 export const PARTNER_AD_UTM_CAMPAIGN = "partner_ad";
@@ -204,7 +206,11 @@ const BLOCKED_EXACT = new Set([
   "/contact",
   "/about",
   "/glossary",
+  "/search",
+  "/whatsapp-community/partners",
 ]);
+
+const BLOCKED_CIVIC_PREVIEW = new Set(CIVIC_TOOL_PREVIEW_PATHS);
 
 const BLOCKED_PREFIXES = [
   "/admin",
@@ -223,6 +229,7 @@ const BLOCKED_PREFIXES = [
 function isBlockedPartnerAdPath(pathname: string): boolean {
   const path = normalizeAdPathname(pathname);
   if (BLOCKED_EXACT.has(path)) return true;
+  if (BLOCKED_CIVIC_PREVIEW.has(path)) return true;
   if (path === "/chennai-local-events/submit") return true;
   return BLOCKED_PREFIXES.some(
     (prefix) => path === prefix.replace(/\/+$/, "") || path.startsWith(prefix),

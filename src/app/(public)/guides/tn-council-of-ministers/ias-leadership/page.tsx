@@ -11,8 +11,11 @@ import {
   GOVERNMENT_FINE_PRINT_EXTRA,
 } from "@/content/government/disclaimers";
 import {
+  IAS_SHELF_HOWTO_EN,
+  IAS_SHELF_LEDE_EN,
+} from "@/content/government/ias-shelf";
+import {
   GOVERNMENT_HUB_PATH,
-  GOVERNMENT_HUB_TA_PATH,
   GOVERNMENT_IAS_PATH,
   GOVERNMENT_IAS_TA_PATH,
   governmentHreflang,
@@ -24,7 +27,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "IAS leadership shelf — Tamil Nadu";
 const description =
-  "Links to mychennaicity.in reporting on Tamil Nadu IAS reshuffles — collectors, secretaries and targeted postings. Not a live cadre database.";
+  "How Tamil Nadu IAS postings relate to the Council of Ministers — a news cluster of reshuffles and G.O.s, not a live cadre database.";
 
 export const metadata: Metadata = {
   title: titleSegment,
@@ -62,7 +65,7 @@ export default function IasLeadershipPage() {
         ]}
         eyebrow="Government desk · Cadre reporting"
         title="IAS reshuffle cluster"
-        dek="Ministers set policy; IAS officers run departments. These news desks track posted Government Orders and reshuffles — verify against official G.O. scans."
+        dek="Ministers set policy; IAS officers run departments. This page is a news cluster — verify every posting against the official G.O. scan."
         related={[{ href: GOVERNMENT_HUB_PATH, label: "Minister roster" }]}
       >
         <BilingualToggle
@@ -73,6 +76,17 @@ export default function IasLeadershipPage() {
 
         <GuideDisclaimer kind="civic" extra={GOVERNMENT_DISCLAIMER_EXTRA} />
 
+        <h2>What this page is</h2>
+        {IAS_SHELF_LEDE_EN.split("\n\n").map((para) => (
+          <p key={para.slice(0, 48)}>{para}</p>
+        ))}
+
+        <h2>How to find a Government Order</h2>
+        {IAS_SHELF_HOWTO_EN.split("\n\n").map((para) => (
+          <p key={para.slice(0, 48)}>{para}</p>
+        ))}
+
+        <h2>Related reporting</h2>
         <ul>
           {IAS_ARTICLE_LINKS.map((a) => (
             <li key={a.slug} className="mb-4">

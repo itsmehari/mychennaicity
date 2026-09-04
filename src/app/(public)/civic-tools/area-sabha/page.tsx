@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Ward committee and Area Sabha meetings, agendas, minutes, and project status for Greater Chennai.",
   alternates: { canonical: `${getSiteUrl()}${CIVIC_TOOL_PATHS.areaSabha}` },
+  robots: { index: false, follow: true },
 };
 
 export default function AreaSabhaPage() {

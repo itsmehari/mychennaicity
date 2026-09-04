@@ -331,6 +331,14 @@ export const WHICH_CHENNAI_FAQ = [
     q: "What if I live in one place and work in another?",
     a: "That is normal Chennai. Answer with how you actually spend weekends and evenings — the quiz is vibe, not your pin code.",
   },
+  {
+    q: "Does this rank Chennai neighbourhoods?",
+    a: "No. Archetypes are playful editorial shorthand, not a league table or property advice.",
+  },
+  {
+    q: "Should I use this to choose a rental area?",
+    a: "No. Use the afford-area calculator and area hubs for planning. This quiz is vibe only.",
+  },
 ];
 
 export function scoreWhichChennai(

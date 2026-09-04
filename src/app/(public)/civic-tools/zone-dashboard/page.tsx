@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Zone-wise civic metrics for Greater Chennai with source, methodology, and missing-data indicators.",
   alternates: { canonical: `${getSiteUrl()}${CIVIC_TOOL_PATHS.zoneDashboard}` },
+  robots: { index: false, follow: true },
 };
 
 export default function ZoneDashboardPage() {

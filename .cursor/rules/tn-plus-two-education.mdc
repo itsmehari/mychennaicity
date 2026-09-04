@@ -1,0 +1,19 @@
+---
+description: Tamil Nadu Plus Two education desk — groups, textbooks, SEO cluster
+globs: src/content/education/**,src/components/education/**,src/app/(public)/guides/tn-plus-two/**,src/app/(public)/class-11-groups-chennai/**,src/app/(public)/plus-two-textbooks-pdf/**
+---
+
+# TN Plus Two education desk
+
+Read **`.cursor/plans/tn-plus-two-education-desk.plan.md`** before adding routes or copy.
+
+Non-negotiables:
+
+- **31 English URLs** as inventoried in the plan (5 pillars + 25 content + 2 marketing). Do not invent extra group codes in v1.
+- **Official textbook PDFs only** — link SCERT / Textbook Corporation URLs. Never upload scanned +1/+2 books to `public/`.
+- **Thin shells** — copy lives in `src/content/education/*.ts`. Three templates only (group / explainer / textbook finder).
+- **M1 ≠ P1, M2 ≠ P4** — marketing landings must not reuse pillar titles.
+- **Disclaimer + AI fine print** on every public page (`education` kind).
+- **Bilingual** = EN URL + `-tamil` twin + `hreflang`. Do not mix English and Tamil on one page.
+- **JSON-LD** only for real FAQ/HowTo/official PDF URLs. No fake eligibility schema.
+- Canonical host **https://mychennaicity.in** only.

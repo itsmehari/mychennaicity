@@ -53,6 +53,11 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/api/auth/signin")).toBe(false);
     expect(shouldShowSiteWideAd("/contact")).toBe(false);
     expect(shouldShowSiteWideAd("/chennai-local-events/submit")).toBe(false);
+    expect(shouldShowSiteWideAd("/search")).toBe(false);
+    expect(shouldShowSiteWideAd("/whatsapp-community/partners")).toBe(false);
+    expect(shouldShowSiteWideAd("/civic-tools/area-sabha")).toBe(false);
+    expect(shouldShowSiteWideAd("/civic-tools/zone-dashboard")).toBe(false);
+    expect(shouldShowSiteWideAd("/civic-tools/zonal-office-access")).toBe(false);
   });
 
   it("hides when the page already has an inline slot", () => {

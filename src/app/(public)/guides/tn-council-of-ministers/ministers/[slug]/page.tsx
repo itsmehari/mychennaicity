@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "x-default": url,
       },
     },
+    robots: { index: false, follow: true },
     openGraph: {
       title: fullSiteTitle(title),
       description: minister.ministryTitle,

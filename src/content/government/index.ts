@@ -143,10 +143,13 @@ export const GOVERNMENT_PAGES = [
   ...MINISTER_PAGES_TA,
 ] as const satisfies readonly GovernmentHubEntry[];
 
+/** Hubs + IAS shelf. Minister pages stay off sitemap (noindex stubs). */
 export const GOVERNMENT_SITEMAP_ENTRIES = GOVERNMENT_PAGES.filter((p) =>
   GOVERNMENT_SHIPPED_WAVES.includes(p.wave),
-).map((p) => ({
-  path: p.path,
-  priority: p.sitemapPriority,
-  changeFrequency: p.changeFrequency,
-}));
+)
+  .filter((p) => !p.id.startsWith("minister-"))
+  .map((p) => ({
+    path: p.path,
+    priority: p.sitemapPriority,
+    changeFrequency: p.changeFrequency,
+  }));

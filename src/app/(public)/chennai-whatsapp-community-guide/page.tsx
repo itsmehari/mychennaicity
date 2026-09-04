@@ -75,16 +75,17 @@ export default function ChennaiWhatsappCommunityGuidePage() {
         {titleSegment}
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        Neighbourhood WhatsApp groups can be genuinely useful — for civic alerts, job leads,
-        and event tips. They can also be spam traps. This guide helps Chennai residents
-        evaluate a group before joining, and points to our{" "}
+        This page is not the join button. To join the official my chennai city
+        group, use{" "}
         <Link
           href={WHATSAPP_COMMUNITY_PAGE_PATH}
           className="font-semibold text-[var(--accent)] hover:underline"
         >
-          official community page
+          /chennai-whatsapp-group
         </Link>
-        .
+        . Neighbourhood WhatsApp groups can be genuinely useful — for civic alerts, job leads,
+        and event tips. They can also be spam traps. This guide helps Chennai residents
+        evaluate a group before joining.
       </p>
 
       <div className="mt-10 space-y-10">

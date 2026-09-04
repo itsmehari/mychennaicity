@@ -48,6 +48,54 @@ export const CHENNAI_GLOSSARY: GlossaryEntry[] = [
     definition:
       "GCC sometimes groups wards into numbered zones for administration. Zone numbers in press releases may not match older resident mental maps — confirm against GCC ward lookup tools when filing complaints.",
   },
+  {
+    term: "CMDA (Chennai Metropolitan Development Authority)",
+    slug: "cmda",
+    definition:
+      "The planning authority for the Chennai Metropolitan Area — master plans, land-use, and many building-permission questions. It is not Greater Chennai Corporation; ward complaints still go to GCC.",
+  },
+  {
+    term: "TANGEDCO / TNPDCL (electricity)",
+    slug: "tangedco",
+    definition:
+      "The names residents still use for Tamil Nadu’s electricity distribution utilities. Bills and outage desks may show TANGEDCO, TNPCL, or TNPDCL depending on the year of the notice — verify the helpline printed on your current bill.",
+  },
+  {
+    term: "CMWSSB / Metro Water",
+    slug: "cmwssb",
+    definition:
+      "Chennai Metropolitan Water Supply and Sewerage Board — piped water and sewerage for much of the city. Supply-day patterns are not the same as GCC storm-water drains; check Metro Water notices for your depot, not only the Corporation app.",
+  },
+  {
+    term: "Minnagam (power outage desk)",
+    slug: "minnagam",
+    definition:
+      "The widely used Tamil Nadu electricity outage / complaint helpline (94987 94987 as printed on many TANGEDCO consumer notices). Confirm the number on your latest official bill or utility page before you call — this glossary is not the utility.",
+  },
+  {
+    term: "GCC ward (vs zone vs PIN)",
+    slug: "gcc-ward",
+    definition:
+      "The civic unit GCC uses for many complaints and elections. A PIN code is postal; a zone is an administrative grouping of wards. Apartment addresses often span ward boundaries — look up the ward number before you file.",
+  },
+  {
+    term: "MTC (Metropolitan Transport Corporation)",
+    slug: "mtc",
+    definition:
+      "Chennai’s city bus operator. Route numbers, last-mile stops, and festival diversions change by official MTC / traffic notice — screenshot forwards are not a timetable.",
+  },
+  {
+    term: "ECR (East Coast Road)",
+    slug: "ecr",
+    definition:
+      "The coastal highway from Chennai toward Mamallapuram and beyond. Weekend beach and tourism traffic on ECR is a different jam pattern from OMR’s IT-corridor peaks.",
+  },
+  {
+    term: "TIDEL Park",
+    slug: "tidel",
+    definition:
+      "The well-known IT campus at Taramani / Guindy-edge Chennai — a landmark for tech commuting, not a GCC ward name. Neighbouring OMR parks are a different corridor; do not treat “TIDEL” as a substitute for your office address on forms.",
+  },
 ];
 
 export function buildGlossaryDefinedTermSetJsonLd(base: string) {

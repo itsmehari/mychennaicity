@@ -21,12 +21,10 @@ const newsLinks = [
   { href: "/chennai-local-news/topic/mobility", label: "Mobility & Metro" },
   { href: "/chennai-local-news/topic/consumer", label: "Consumer" },
   { href: "/chennai-local-news/topic/elections", label: "Elections" },
-  { href: "/chennai-local-news", label: "Editor’s picks" },
 ];
 
 const discoverLinks = [
   { href: "/search", label: "Search the site" },
-  { href: MYCHENNAICITY_USAGE_GUIDE_PATH, label: "How to use this site" },
   { href: "/glossary", label: "Chennai & GCC glossary" },
   { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
   { href: WHATSAPP_ADMINS_TOOLKIT_PATH, label: "WhatsApp admin toolkit" },
@@ -61,8 +59,7 @@ const companyLinks = [
   { href: MYCHENNAICITY_USAGE_GUIDE_PATH, label: "How to use this site" },
   { href: "/contact", label: "Contact & tips" },
   { href: "/editorial-standards", label: "Editorial standards" },
-  { href: "/contact", label: "Advertise" },
-  { href: "/contact", label: "Careers" },
+  { href: "/contact#advertise", label: "Advertise" },
 ];
 
 const legalLinks = [
@@ -77,12 +74,12 @@ const legalLinks = [
 const tagLinks = [
   { href: "/chennai-local-news/topic/mobility", label: "Metro" },
   { href: "/chennai-local-news/topic/chennai", label: "GCC" },
-  { href: "/chennai-local-news/topic/chennai", label: "Monsoon" },
   { href: "/areas/omr-perungudi-sholinganallur", label: "OMR" },
-  { href: "/chennai-local-news/topic/chennai", label: "Marina" },
-  { href: CHENNAI_JOBS_HUB_PATH, label: "Startups" },
   { href: "/chennai-local-events#events-weekend", label: "Weekend" },
-  { href: CHENNAI_JOBS_HUB_PATH, label: "Remote" },
+  { href: "/civic-tools/flood-street-score", label: "Flood" },
+  { href: CHENNAI_JOBS_HUB_PATH, label: "Jobs" },
+  { href: CHENNAI_GOLD_RATE_HUB_PATH, label: "Gold" },
+  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp" },
 ];
 
 function FooterColumn({

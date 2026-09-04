@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import {
+  GuideDisclaimer,
+  GuideFinePrint,
+} from "@/components/compulsive/guide-trust-blocks";
 import { ReachGuideShell } from "@/components/guides/reach-guide-shell";
 import {
   CHENNAI_SALARY_BANDS_2026,
   CHENNAI_SALARY_GUIDE_PATH,
   SALARY_CORRIDOR_NOTES,
+  SALARY_CTC_VS_TAKEHOME,
+  SALARY_SOURCE_NOTE,
+  SALARY_WHEN_NOT_TO_USE,
 } from "@/content/guides/chennai-salary-guide-2026";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
@@ -42,11 +49,7 @@ export default function ChennaiSalaryGuidePage() {
         { href: "/chennai-jobs/looking-for-work", label: "Looking for work board" },
       ]}
     >
-      <p>
-        <strong>Disclaimer:</strong> Figures are synthesised from public 2026 city salary models
-        and market write-ups (percentile-style bands). Actual offers depend on company tier,
-        skills, hybrid policy, and bonus/ESOP. Always get the offer in writing.
-      </p>
+      <GuideDisclaimer kind="money" extra={SALARY_SOURCE_NOTE} />
 
       <h2>Tech CTC bands (annual, indicative)</h2>
       <div className="not-prose overflow-x-auto rounded-xl border border-[var(--border)]">
@@ -83,6 +86,20 @@ export default function ChennaiSalaryGuidePage() {
         ))}
       </ul>
 
+      <h2>CTC vs take-home</h2>
+      <ul>
+        {SALARY_CTC_VS_TAKEHOME.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
+      <h2>When not to use this page</h2>
+      <ul>
+        {SALARY_WHEN_NOT_TO_USE.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
       <h2>Negotiation checklist</h2>
       <ul>
         <li>Ask for <strong>CTC vs take-home</strong> and variable pay %</li>
@@ -93,6 +110,8 @@ export default function ChennaiSalaryGuidePage() {
           <a href={CHENNAI_JOBS_HUB_PATH}>Chennai jobs hub</a>
         </li>
       </ul>
+
+      <GuideFinePrint />
     </ReachGuideShell>
   );
 }

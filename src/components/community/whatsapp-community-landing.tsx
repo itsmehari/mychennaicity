@@ -62,7 +62,14 @@ export function WhatsAppCommunityLanding() {
           Free moderated city-wide community —{" "}
           <strong className="text-[var(--foreground)]">{WHATSAPP_COMMUNITY_GROUP_NAME}</strong>.
           One official group for news, jobs, events, civic alerts, and neighbour help across
-          Greater Chennai.
+          Greater Chennai. For how to evaluate any Chennai group before you join, see the{" "}
+          <Link
+            href={WHATSAPP_COMMUNITY_GUIDE_PATH}
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            WhatsApp community guide
+          </Link>
+          — this page is the join landing only.
         </p>
         <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-[var(--muted)]">
           {["Free", "All Chennai", "Moderated", "No spam"].map((chip) => (

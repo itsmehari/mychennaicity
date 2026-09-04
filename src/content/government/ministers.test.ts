@@ -13,9 +13,17 @@ describe("TN Council of Ministers desk data", () => {
     expect(getMinister("n-marie-wilson")?.ministryTitle).toContain("Finance");
   });
 
-  it("registers sitemap entries for all waves", () => {
-    expect(GOVERNMENT_SITEMAP_ENTRIES.length).toBeGreaterThan(70);
+  it("registers sitemap entries for hubs and IAS (minister pages stay off sitemap)", () => {
+    expect(GOVERNMENT_SITEMAP_ENTRIES.some((e) => e.path.includes("/ministers/"))).toBe(false);
+    expect(GOVERNMENT_SITEMAP_ENTRIES.some((e) => e.path.endsWith("/ias-leadership"))).toBe(true);
+    expect(GOVERNMENT_SITEMAP_ENTRIES).toHaveLength(10);
     expect(GOVERNMENT_SITEMAP_ENTRIES.some((e) => e.path === "/guides/tn-council-of-ministers")).toBe(true);
-    expect(GOVERNMENT_SITEMAP_ENTRIES.some((e) => e.path.includes("/ministers/c-joseph-vijay"))).toBe(true);
+  });
+
+  it("has a Chennai relevance paragraph on every minister", () => {
+    for (const slug of MINISTER_SLUGS) {
+      const row = getMinister(slug);
+      expect(row?.chennaiRelevance?.trim().length).toBeGreaterThan(40);
+    }
   });
 });

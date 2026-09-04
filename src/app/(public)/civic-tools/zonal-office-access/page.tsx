@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${getSiteUrl()}${CIVIC_TOOL_PATHS.zonalOfficeAccess}`,
   },
+  robots: { index: false, follow: true },
 };
 
 export default function ZonalOfficeAccessPage() {

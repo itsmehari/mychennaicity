@@ -20,8 +20,24 @@ const CHECKS: Check[] = [
     name: "Privacy policy",
     url: `${SITE}/privacy`,
     expectStatus: 200,
-    bodyIncludes: ["AdSense", "Privacy policy"],
+    bodyIncludes: [
+      "AdSense",
+      "Privacy policy",
+      "policies.google.com/technologies/partner-sites",
+      "adssettings.google.com",
+      "aboutads.info",
+    ],
     bodyExcludes: ["coming soon", "Coming soon"],
+  },
+  {
+    name: "Cookies + ads disclosure",
+    url: `${SITE}/cookies`,
+    expectStatus: 200,
+    bodyIncludes: [
+      "partner-sites",
+      "adssettings.google.com",
+      "aboutads.info",
+    ],
   },
   {
     name: "Terms + disclaimer",
@@ -39,6 +55,18 @@ const CHECKS: Check[] = [
     name: "Contact",
     url: `${SITE}/contact`,
     expectStatus: 200,
+    bodyIncludes: ['id="advertise"'],
+  },
+  {
+    name: "Community guidelines",
+    url: `${SITE}/community-guidelines`,
+    expectStatus: 200,
+  },
+  {
+    name: "Area Sabha preview noindex",
+    url: `${SITE}/civic-tools/area-sabha`,
+    expectStatus: 200,
+    bodyIncludes: ["noindex"],
   },
   {
     name: "News hub",
@@ -56,6 +84,7 @@ const CHECKS: Check[] = [
     url: `${SITE}/sitemap.xml`,
     expectStatus: 200,
     bodyIncludes: ["<urlset"],
+    bodyExcludes: ["/civic-tools/area-sabha", "/ministers/"],
   },
   {
     name: "ads.txt",

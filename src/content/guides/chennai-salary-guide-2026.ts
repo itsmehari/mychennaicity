@@ -68,3 +68,21 @@ export const SALARY_CORRIDOR_NOTES = [
     tip: "Factory + auto + EV supply chain; shift allowances can matter more than base",
   },
 ];
+
+/** Public 2026 city models; not NCC / recruiter census. Bands are annual CTC, not take-home. */
+export const SALARY_SOURCE_NOTE =
+  "These bands are synthesised from public 2026 Chennai market write-ups (percentile-style city guides). They are not an NCC survey, not a recruiter census, and not an offer letter. Figures are annual CTC. Take-home is lower after PF, professional tax, and variable pay. We do not invent new rupee rows without updating this note.";
+
+export const SALARY_CTC_VS_TAKEHOME = [
+  "CTC includes employer PF, gratuity accruals, and sometimes joining bonuses that never hit your monthly account.",
+  "Employee PF and professional tax come off the cash you actually see; ask HR for a month-1 payslip simulation.",
+  "Variable / performance pay is often a percentage of CTC that is not guaranteed — treat it as a separate conversation.",
+  "ESOPs and RSUs (common at senior product roles) are not the same as salary; vesting and tax events sit outside this table.",
+  "OMR and Guindy commute cost (bus, cab, Metro, extra hours) can erase a small CTC gap — run the rupees, do not assume the higher letter wins.",
+];
+
+export const SALARY_WHEN_NOT_TO_USE = [
+  "Campus / internship stipends and first-job “package” posters that mix CTC with one-time joining cash.",
+  "Tamil Nadu government pay matrices, DA, and secretariat grades — those are not private-sector CTC bands.",
+  "Gig, daily-wage, and shop-floor cash jobs — use the Chennai jobs hub and the listing itself, not this table.",
+];

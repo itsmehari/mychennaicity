@@ -2,6 +2,10 @@
 
 Use this after code for legal pages, `ads.txt`, and optional AdSense script is merged and deployed. Google approval still depends on live content and policies—this list is operational only.
 
+**Page-wise content / UX audit (unique copy, thin pages, nav, 404s):** [ADSENSE_CONTENT_UX_AUDIT.md](ADSENSE_CONTENT_UX_AUDIT.md).
+
+**Fix plan (P0–P2):** [`.cursor/plans/adsense-content-ux-gaps.plan.md`](../.cursor/plans/adsense-content-ux-gaps.plan.md) — footer accuracy, ads deny-list, empty civic `noindex`, cabinet/Plus Two sitemap gates. Legal/`ads.txt` work from the earlier readiness plan is **done**.
+
 **Automated checks (after deploy):**
 
 ```bash
@@ -43,7 +47,7 @@ In [Vercel → Project → Settings → Environment Variables](https://vercel.co
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 `G-…` if you use Analytics |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | GSC HTML-tag **content** value; `metadata` in `src/app/layout.tsx` emits the tag |
 
-Leave **`NEXT_PUBLIC_NEWSLETTER_AUTO_MODAL` unset or `false`** until after approval (auto modal is off by default in code).
+Leave **`NEXT_PUBLIC_NEWSLETTER_AUTO_MODAL` and `NEXT_PUBLIC_SITE_MODAL_AUTO` unset or `false`** until after approval (auto modals are off by default in code). First-visit interstitials can fail Better Ads / “abusive experiences” review.
 
 Optional post-approval display slots: `NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_TOP`, `_MID`, `_END` (see `.env.example`).
 

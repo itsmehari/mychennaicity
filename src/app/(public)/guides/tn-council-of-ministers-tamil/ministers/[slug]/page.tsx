@@ -6,6 +6,7 @@ import {
   MINISTER_SLUGS,
   ministerDisplayName,
 } from "@/content/government/ministers-may-2026";
+import { getMinisterTamil } from "@/content/government/ministers-ta";
 import { ministerPath } from "@/content/government/paths";
 import { getSiteUrl } from "@/lib/env";
 import { buildGovernmentMinisterJsonLd } from "@/lib/seo/government-jsonld";
@@ -23,8 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!minister) return { title: "Minister not found" };
   const url = `${getSiteUrl()}${ministerPath(slug, "ta")}`;
   const title = `${ministerDisplayName(minister)} — ${minister.ministryTitle}`;
+  const ta = getMinisterTamil(slug);
+  const description =
+    ta?.portfolios.join(". ") || minister.portfolios.join(". ");
   return {
     title,
+    description,
     alternates: {
       canonical: url,
       languages: {
@@ -33,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "x-default": `${getSiteUrl()}${ministerPath(slug, "en")}`,
       },
     },
+    robots: { index: false, follow: true },
     openGraph: {
       title: fullSiteTitle(title),
       url,

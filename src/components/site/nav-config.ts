@@ -93,11 +93,6 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Subscribe in your reader.",
           },
           {
-            href: "/news",
-            label: "News index",
-            description: "Alternate entry to coverage.",
-          },
-          {
             href: "/contact",
             label: "Send a tip",
             description: "Civic leads and corrections welcome.",

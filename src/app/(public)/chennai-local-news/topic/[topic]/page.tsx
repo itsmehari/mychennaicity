@@ -101,9 +101,8 @@ export default async function TopicPage({ params }: Props) {
           {category}
         </h1>
         <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed">
-          No stories in this section yet. Try another topic below, open the main
-          news page, or connect the database and add articles so posts show up
-          here automatically.
+          No stories are filed under {category} yet. Browse all Chennai local
+          news or pick another topic.
         </p>
         {topic === "economy" ? (
           <aside
@@ -146,12 +145,14 @@ export default async function TopicPage({ params }: Props) {
             ))}
           </ul>
         </div>
-        <AdvertisePanel
-          variant="news"
-          layout="section"
-          className="mt-8"
-          source="news_topic_hub"
-        />
+        <p className="mt-6">
+          <Link
+            href="/chennai-local-news"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            All Chennai local news
+          </Link>
+        </p>
         <InteriorCrossNav />
       </div>
       </div>

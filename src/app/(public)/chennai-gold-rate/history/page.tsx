@@ -64,6 +64,29 @@ export default async function GoldRateHistoryPage() {
           Buying guide
         </Link>
       </p>
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        A snapshot is the IST calendar date we recorded on the Chennai gold-rate
+        hub — one pair of 22K and 24K per-gram figures for that day. It is not a
+        tick-by-tick feed and it is not updated every hour.
+      </p>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        It is not IBJA, not a jeweller invoice, and not a buy or sell signal.
+        Use the{" "}
+        <Link href={CHENNAI_GOLD_RATE_HUB_PATH} className="font-semibold text-[var(--accent)] hover:underline">
+          today’s hub
+        </Link>{" "}
+        for the latest snapshot and the{" "}
+        <Link href={CHENNAI_BUYING_GOLD_GUIDE_PATH} className="font-semibold text-[var(--accent)] hover:underline">
+          buying-gold guide
+        </Link>{" "}
+        for making charges, hallmarking, and what to ask at the counter.
+      </p>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        Read the table as 24K versus 22K per gram on that IST date. Wastage,
+        making charges, and buy-back live at the shop — they are not in this
+        chart. If the table is empty, no snapshots are in the database yet; open
+        today’s hub instead.
+      </p>
 
       <div className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6">
         <GoldRateHistoryChart
