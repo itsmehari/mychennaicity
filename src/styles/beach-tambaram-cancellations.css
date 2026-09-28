@@ -1,0 +1,475 @@
+/* Beach–Tambaram commute alert — platform-board utility article */
+
+.emu-alert {
+  --emu-ink: #1c140c;
+  --emu-paper: #f6f1e7;
+  --emu-board: #24180f;
+  --emu-board-ink: #f6edd9;
+  --emu-amber: #e2a12b;
+  --emu-cancel: #8d2b24;
+  --emu-cancel-bg: #f8e4df;
+  --emu-ok: #1f6a4a;
+  --emu-ok-bg: #e5f3eb;
+  --emu-na: #6d645b;
+  --emu-line: #c4b6a4;
+  color: var(--emu-ink);
+  margin-top: -0.5rem;
+}
+
+.emu-alert__tonight {
+  position: sticky;
+  top: 4.25rem;
+  z-index: 40;
+  margin: 0 -1rem 1.25rem;
+  padding: 0.85rem 1rem 1rem;
+  background: var(--emu-board);
+  color: var(--emu-board-ink);
+  border-bottom: 3px solid var(--emu-amber);
+}
+
+.emu-alert__tonight-kicker,
+.emu-alert__count-kicker,
+.emu-alert__eyebrow,
+.emu-alert__stop-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.emu-alert__tonight-kicker {
+  color: var(--emu-amber);
+}
+
+.emu-alert__tonight-title {
+  margin: 0.2rem 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.emu-alert__tonight-list {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.emu-alert__tonight-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.emu-alert__tonight-list li[data-state="cancelled"] strong {
+  color: #ffb4a8;
+}
+
+.emu-alert__tonight-list li[data-state="not-listed"] strong {
+  color: #b7e4c7;
+}
+
+.emu-alert__tonight-list li[data-state="na"] strong {
+  color: #d9cbb8;
+}
+
+.emu-alert__tonight-note,
+.emu-alert__saved {
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+}
+
+.emu-alert__hero {
+  max-width: 46rem;
+  padding: 0.25rem 0 0.5rem;
+}
+
+.emu-alert__eyebrow {
+  color: var(--emu-cancel);
+}
+
+.emu-alert__hero h1 {
+  margin: 0.35rem 0 0.7rem;
+  font-size: clamp(1.7rem, 4vw, 2.45rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.emu-alert__dek {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.emu-alert__meta,
+.emu-alert__updated {
+  margin: 0.75rem 0 0;
+  color: var(--emu-na);
+  font-size: 0.88rem;
+}
+
+.emu-alert__disclaimer,
+.emu-alert__fineprint,
+.emu-alert__official {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--emu-line);
+  background: var(--emu-paper);
+}
+
+.emu-alert__disclaimer p,
+.emu-alert__fineprint p,
+.emu-alert__official p,
+.emu-alert__prose p,
+.emu-alert__section-lead {
+  margin: 0 0 0.8rem;
+  line-height: 1.6;
+}
+
+.emu-alert__checker,
+.emu-alert__journey,
+.emu-alert__alts,
+.emu-alert__notes,
+.emu-alert__count {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--emu-line);
+  background: #fffdf8;
+}
+
+.emu-alert__checker h2,
+.emu-alert__journey h2,
+.emu-alert__alts h2,
+.emu-alert__notes h2,
+.emu-alert__section h2,
+.emu-alert__faq h2,
+.emu-alert__glance h2,
+.emu-alert__prose h2,
+.emu-alert__official h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.emu-alert__checker-fields {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.8rem 0;
+}
+
+@media (min-width: 720px) {
+  .emu-alert__checker-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.emu-alert label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.emu-alert select,
+.emu-alert input[type="time"] {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--emu-line);
+  background: #fff;
+  color: var(--emu-ink);
+  font: inherit;
+  font-weight: 500;
+}
+
+.emu-alert__result {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.8rem 0.9rem;
+  line-height: 1.45;
+}
+
+.emu-alert__result[data-tone="cancel"] {
+  background: var(--emu-cancel-bg);
+  color: var(--emu-cancel);
+}
+
+.emu-alert__result[data-tone="clear"] {
+  background: var(--emu-ok-bg);
+  color: #143d2c;
+}
+
+.emu-alert__result[data-tone="na"] {
+  background: #f3eee6;
+  color: var(--emu-ink);
+}
+
+.emu-alert__checker-actions,
+.emu-alert__note-options,
+.emu-alert__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+
+.emu-alert button {
+  min-height: 2.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--emu-ink);
+  background: var(--emu-board);
+  color: var(--emu-board-ink);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.emu-alert__tabs button[aria-selected="true"],
+.emu-alert__rail button[aria-pressed="true"] {
+  background: var(--emu-amber);
+  color: var(--emu-ink);
+  border-color: var(--emu-amber);
+}
+
+.emu-alert__remember {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+
+.emu-alert__glance dl {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .emu-alert__glance dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.emu-alert__glance div {
+  padding: 0.7rem 0.75rem;
+  background: var(--emu-paper);
+}
+
+.emu-alert__glance dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--emu-na);
+}
+
+.emu-alert__glance dd {
+  margin: 0.2rem 0 0;
+  font-weight: 650;
+}
+
+.emu-alert__photo {
+  margin: 1.25rem 0;
+}
+
+.emu-alert__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--emu-board);
+}
+
+.emu-alert__photo figcaption,
+.emu-alert__note,
+.emu-alert__section-lead {
+  margin-top: 0.45rem;
+  color: var(--emu-na);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.emu-alert__prose {
+  max-width: 42rem;
+}
+
+.emu-alert__cal-wrap {
+  overflow-x: auto;
+}
+
+.emu-alert__cal {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.emu-alert__cal caption {
+  caption-side: bottom;
+  padding-top: 0.45rem;
+  color: var(--emu-na);
+  text-align: left;
+}
+
+.emu-alert__cal th,
+.emu-alert__cal td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--emu-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.emu-alert__cal td[data-state="cancelled"] {
+  background: var(--emu-cancel-bg);
+  color: var(--emu-cancel);
+  font-weight: 700;
+}
+
+.emu-alert__cal td[data-state="not-listed"] {
+  background: var(--emu-ok-bg);
+  color: var(--emu-ok);
+  font-weight: 700;
+}
+
+.emu-alert__cal td[data-state="na"] {
+  color: var(--emu-na);
+}
+
+.emu-alert__rail {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0 0 0.8rem;
+  padding: 0.4rem 0 0.8rem;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.emu-alert__rail li {
+  flex: 0 0 auto;
+}
+
+.emu-alert__rail button {
+  display: grid;
+  justify-items: center;
+  width: 7.2rem;
+  min-height: 4.6rem;
+  background: #fffdf8;
+  color: var(--emu-ink);
+}
+
+.emu-alert__rail button[data-maintenance="true"] .emu-alert__dot {
+  background: var(--emu-cancel);
+  box-shadow: 0 0 0 0 rgba(141, 43, 36, 0.55);
+  animation: emu-pulse 1.8s ease-out infinite;
+}
+
+.emu-alert__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: var(--emu-ink);
+}
+
+.emu-alert__stop-name {
+  font-size: 0.78rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.emu-alert__stop-index {
+  font-size: 0.68rem;
+  color: var(--emu-na);
+}
+
+.emu-alert__stop-card {
+  padding: 0.85rem 0.95rem;
+  background: var(--emu-paper);
+}
+
+.emu-alert__stop-card h3 {
+  margin: 0.15rem 0 0.4rem;
+  font-size: 1.25rem;
+}
+
+.emu-alert__stop-card p {
+  margin: 0 0 0.45rem;
+  line-height: 1.5;
+}
+
+.emu-alert__official ul {
+  margin: 0 0 0.8rem;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+}
+
+.emu-alert__official a {
+  color: var(--emu-cancel);
+  font-weight: 700;
+}
+
+.emu-alert__faq details {
+  border-bottom: 1px solid var(--emu-line);
+  padding: 0.65rem 0;
+}
+
+.emu-alert__faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.emu-alert__faq p {
+  margin: 0.45rem 0 0;
+  line-height: 1.55;
+}
+
+.emu-alert__notes select {
+  max-width: 18rem;
+  margin-bottom: 0.7rem;
+}
+
+@keyframes emu-pulse {
+  70% {
+    box-shadow: 0 0 0 8px rgba(141, 43, 36, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(141, 43, 36, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emu-alert__rail button[data-maintenance="true"] .emu-alert__dot {
+    animation: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .emu-alert {
+    --emu-ink: #f3ecdf;
+    --emu-paper: #2a2118;
+    --emu-line: #5c4e3e;
+    --emu-na: #cbbba6;
+    --emu-cancel-bg: #4a2420;
+    --emu-ok-bg: #1a3328;
+    --emu-ok: #b7e4c7;
+  }
+
+  .emu-alert__checker,
+  .emu-alert__journey,
+  .emu-alert__alts,
+  .emu-alert__notes,
+  .emu-alert__count,
+  .emu-alert__rail button,
+  .emu-alert select,
+  .emu-alert input[type="time"] {
+    background: #1a140e;
+    color: var(--emu-ink);
+  }
+
+  .emu-alert__result[data-tone="clear"] {
+    color: #d8f3e2;
+  }
+}

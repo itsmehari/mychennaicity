@@ -1,9 +1,11 @@
 import type { PublicArticleRow } from "@/domains/news";
 import type { ComponentType } from "react";
+import { BeachTambaramCancellationsArticle } from "@/components/news/special/beach-tambaram-cancellations-article";
 import { ChennaiCorporationZonesArticle } from "@/components/news/special/chennai-corporation-zones-article";
 import { FiscalWhitePaperArticle } from "@/components/news/special/fiscal-white-paper-article";
 import { TiruvallurAmmoniaLeak2026Article } from "@/components/news/special/tiruvallur-ammonia-leak-2026-article";
 import { YogaDay2026Article } from "@/components/news/special/yoga-day-2026-article";
+import { BEACH_TAMBARAM_CANCELLATIONS_SLUG } from "./beach-tambaram-guindy-cancellations-2026";
 import { CHENNAI_ZONES_SLUG } from "./chennai-corporation-zones-15-vs-20";
 import { YOGA_DAY_2026_SLUG } from "./international-yoga-day-2026-chennai";
 import { TN_FISCAL_WHITE_PAPER_SLUG } from "./tn-fiscal-white-paper-2026";
@@ -15,6 +17,10 @@ export type SpecialArticleEntry = {
 };
 
 const registry: SpecialArticleEntry[] = [
+  {
+    slug: BEACH_TAMBARAM_CANCELLATIONS_SLUG,
+    Component: BeachTambaramCancellationsArticle,
+  },
   {
     slug: TN_FISCAL_WHITE_PAPER_SLUG,
     Component: FiscalWhitePaperArticle,
