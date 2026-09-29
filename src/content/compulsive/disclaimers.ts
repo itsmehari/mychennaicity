@@ -9,5 +9,8 @@ export const COMPULSIVE_CIVIC_DISCLAIMER =
 export const COMPULSIVE_CULTURE_DISCLAIMER =
   "Editorial, playful city desk — not a ranking contest or certified review. Timings and menus change; confirm with venues and temple authorities.";
 
+export const COMPULSIVE_EDUCATION_DISCLAIMER =
+  "Education guidance for students and parents choosing Tamil Nadu Higher Secondary groups. This is civic journalism, not a Directorate of Government Examinations circular or a school prospectus. Group codes, subject combinations, and undergraduate eligibility change — confirm the current offer with the admitting school and official admission notifications before you decide.";
+
 export const COMPULSIVE_AI_FINE_PRINT =
   "This page was drafted with AI-assisted tools and human editorial review for mychennaicity.in. AI can miss updates or local nuance — cross-check primary sources and your own documents before decisions.";
