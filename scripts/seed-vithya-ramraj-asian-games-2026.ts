@@ -120,6 +120,10 @@ Anu Raghavan’s fifth place was itself a personal best. For Vithya, the bronze 
 
 After the race she said she felt a **54.5** or **54.4** was still in her. Her coach, **Nehpal Singh Rathore**, has described the longer target as the **low-54** range associated with reaching a World Championships final — a different conversation from matching a 1984 national mark.
 
+Union sports minister Mansukh Mandaviya posted the hurdles finish the same day.
+
+https://x.com/mansukhmandviya/status/2104533321585967223
+
 ## Medal 3 — gold in the women’s 4x400m relay
 
 On **29 September** Vithya was back on the same track for the women’s 4x400m relay.
@@ -137,6 +141,10 @@ Kiran handed over in third. Poovamma moved India into the lead. Prachi held it. 
 
 This was **India’s only athletics gold** at Aichi-Nagoya. India last won the women’s 4x400m at the Asian Games in **Jakarta in 2018**, then finished second in Hangzhou. P.T. Usha was part of India’s gold-medal quartet in the same event at **Seoul in 1986**. A day after Vithya replaced Usha’s individual record, she helped add another gold to an event Usha had already marked.
 
+The Athletics Federation of India posted the quartet’s barefoot celebration on the Nagoya track.
+
+https://x.com/afiindia/status/2104917539935695295
+
 ## Three races, three colours
 
 | Event | Date | Performance | Medal |
@@ -146,6 +154,10 @@ This was **India’s only athletics gold** at Aichi-Nagoya. India last won the w
 | Women’s 4x400m relay | 29 Sep | India **3:29.69** | Gold |
 
 The three medals asked for different things: a mixed relay fightback, an individual hurdles final, and an anchor leg the next day. Hangzhou had already given her a hurdles bronze and relay medals. Nagoya showed she could do it again across a full championship week.
+
+India Today posted Vithya with the gold, silver and bronze together on 30 September.
+
+https://x.com/IndiaToday/status/2105110988169351226
 
 ## Tamil Nadu
 
