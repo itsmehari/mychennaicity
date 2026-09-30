@@ -16,7 +16,6 @@ import {
 /** Skins where an inline “Also Read” would interrupt legal/meta chrome. */
 const ALSO_READ_SKIP_SKINS = new Set<ProseSectionSkin>([
   "disclaimer",
-  "fineprint",
   "sources",
   "takeaways",
   "factbox",
