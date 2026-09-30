@@ -63,6 +63,30 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/ttdc-this-weekend-ecr-plan-august-2026.png",
     alt: "Tamil Nadu Tourism This Weekend ECR Plan poster featuring the Mamallapuram surfing championship stop, August 2026",
   },
+  "madras-day-chennai-to-madras-photo-exhibition-august-2026": {
+    src: "/images/events/madras-day-chennai-to-madras-photo-exhibition-august-2026.png",
+    alt: "Madras Day 2026 Chennai-to-Madras photo exhibition poster — L Ramachandran at Anna Centenary Library, 22–31 August 2026",
+  },
+  "made-of-chennai-food-music-festival-august-2026": {
+    src: "/images/events/made-of-chennai-food-music-festival-august-2026.png",
+    alt: "Made of Chennai Food and Music Festival poster — Chinmayi Sripada at YMCA Nandanam, 29 August 2026",
+  },
+  "sri-kala-sudha-telugu-association-krishnaashtami-september-2026": {
+    src: "/images/events/sri-kala-sudha-telugu-association-krishnaashtami-september-2026.png",
+    alt: "Sri Kala Sudha Telugu Association Krishnaashtami and 28th anniversary poster — The Music Academy, TTK Road, Chennai, 13 September 2026",
+  },
+  "dharma-rakshana-mahotsava-kilpauk-october-2026": {
+    src: "/images/events/dharma-rakshana-mahotsava-kilpauk-october-2026.jpg",
+    alt: "Dharma Rakshana Mahotsava poster — Dashamanotsava of Sri Sri Vidyashreesha Tirtha Swamiji at B V Bhavan's Rajaji Vidyashram, Kilpauk, Chennai, 4 October 2026",
+  },
+  "chennai-organic-market-perungudi-october-2026": {
+    src: "/images/events/chennai-organic-market-perungudi-october-2026.jpg",
+    alt: "Chennai Organic Market poster — OFM and TNIVF, Vallalar Sanmargam Arangam, Perungudi, Sunday 11 October 2026, 10:00 AM to 5:00 PM",
+  },
+  "folk-arts-parai-workshop-anna-nagar-october-2026": {
+    src: "/images/events/folk-arts-parai-workshop-anna-nagar-october-2026.jpg",
+    alt: "Student Artists Federation free folk arts training workshop poster — parai drumming at Anna Nagar Tower Park, Sunday 4 October 2026, 11:00 AM to 3:00 PM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",
