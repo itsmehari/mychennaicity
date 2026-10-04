@@ -56,6 +56,8 @@
     "db:seed:event:madras-day-chennai-to-madras:live": "tsx scripts/seed-event-madras-day-chennai-to-madras-august-2026.ts --live",
     "db:seed:event:made-of-chennai-food-music": "tsx scripts/seed-event-made-of-chennai-food-music-festival-august-2026.ts",
     "db:seed:event:made-of-chennai-food-music:live": "tsx scripts/seed-event-made-of-chennai-food-music-festival-august-2026.ts --live",
+    "db:seed:event:saturangam-tn-childrens-chess": "tsx scripts/seed-event-saturangam-tn-childrens-chess-november-2026.ts",
+    "db:seed:event:saturangam-tn-childrens-chess:live": "tsx scripts/seed-event-saturangam-tn-childrens-chess-november-2026.ts --live",
     "db:seed:meetup-chennai-aug-sep": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts",
     "db:seed:meetup-chennai-aug-sep:live": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts --live",
     "db:seed:chennai-discovery-events": "tsx scripts/seed-chennai-discovery-events-2026.ts",

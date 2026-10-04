@@ -87,6 +87,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/folk-arts-parai-workshop-anna-nagar-october-2026.jpg",
     alt: "Student Artists Federation free folk arts training workshop poster — parai drumming at Anna Nagar Tower Park, Sunday 4 October 2026, 11:00 AM to 3:00 PM",
   },
+  "saturangam-360-tn-state-childrens-chess-perungudi-november-2026": {
+    src: "/images/events/saturangam-360-tn-state-childrens-chess-perungudi-november-2026.jpg",
+    alt: "Saturangam 360 Academy save-the-date poster — 4th Tamil Nadu State Level Children's Chess Tournament at BVM Global Perungudi, Sunday 15 November 2026",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",
