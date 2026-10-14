@@ -83,6 +83,18 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/chennai-organic-market-perungudi-october-2026.jpg",
     alt: "Chennai Organic Market poster — OFM and TNIVF, Vallalar Sanmargam Arangam, Perungudi, Sunday 11 October 2026, 10:00 AM to 5:00 PM",
   },
+  "chennai-organic-market-shenoy-nagar-november-2026": {
+    src: "/images/events/chennai-organic-market-three-locations-2026.jpg",
+    alt: "Chennai Organic Market poster — three locations: Shenoy Nagar, Velachery, and OMR Perungudi",
+  },
+  "chennai-organic-market-velachery-november-2026": {
+    src: "/images/events/chennai-organic-market-three-locations-2026.jpg",
+    alt: "Chennai Organic Market poster — three locations: Shenoy Nagar, Velachery, and OMR Perungudi",
+  },
+  "chennai-organic-market-perungudi-november-2026": {
+    src: "/images/events/chennai-organic-market-three-locations-2026.jpg",
+    alt: "Chennai Organic Market poster — three locations: Shenoy Nagar, Velachery, and OMR Perungudi",
+  },
   "folk-arts-parai-workshop-anna-nagar-october-2026": {
     src: "/images/events/folk-arts-parai-workshop-anna-nagar-october-2026.jpg",
     alt: "Student Artists Federation free folk arts training workshop poster — parai drumming at Anna Nagar Tower Park, Sunday 4 October 2026, 11:00 AM to 3:00 PM",
@@ -90,6 +102,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   "saturangam-360-tn-state-childrens-chess-perungudi-november-2026": {
     src: "/images/events/saturangam-360-tn-state-childrens-chess-perungudi-november-2026.jpg",
     alt: "Saturangam 360 Academy save-the-date poster — 4th Tamil Nadu State Level Children's Chess Tournament at BVM Global Perungudi, Sunday 15 November 2026",
+  },
+  "rotary-chennai-galaxy-mega-job-fair-madras-seva-sadan-october-2026": {
+    src: "/images/events/rotary-chennai-galaxy-mega-job-fair-october-2026.jpg",
+    alt: "Rotary Club of Chennai Galaxy Mega Job Fair 2026 poster — The Madras Seva Sadan, Chennai, Saturday 17 October 2026, 8:00 AM to 2:00 PM",
   },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
