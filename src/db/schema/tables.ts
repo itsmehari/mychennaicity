@@ -153,6 +153,27 @@ export const eventPageViewers = pgTable(
   }),
 );
 
+/** One row per anonymous visitor (`mcc_vid` cookie) per job — unique page views. */
+export const jobPageViewers = pgTable(
+  "job_page_viewers",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    jobId: uuid("job_id")
+      .notNull()
+      .references(() => jobPostings.id, { onDelete: "cascade" }),
+    visitorId: text("visitor_id").notNull(),
+    viewedAt: timestamp("viewed_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => ({
+    jobVisitorUidx: uniqueIndex("job_page_viewers_job_visitor_uidx").on(
+      t.jobId,
+      t.visitorId,
+    ),
+  }),
+);
+
 export const jobPostings = pgTable(
   "job_postings",
   {
@@ -278,6 +299,10 @@ export const classifiedListings = pgTable(
     locationLabel: text("location_label"),
     contactPhone: text("contact_phone"),
     areaHubSlug: text("area_hub_slug"),
+    /** Pin on the classifieds hub and homepage spotlight. */
+    featured: boolean("featured").notNull().default(false),
+    /** Self-hosted or https photo URLs, first image is the cover. */
+    imageUrls: jsonb("image_urls").$type<string[] | null>(),
     status: classifiedListingStatusEnum("status").notNull().default("draft"),
     publishedAt: timestamp("published_at", { withTimezone: true }),
     expiresAt: timestamp("expires_at", { withTimezone: true }),

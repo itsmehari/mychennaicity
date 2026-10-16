@@ -2,7 +2,10 @@ import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { formatJobCompensation } from "@/lib/jobs/format-compensation";
 import { buildChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
+import Link from "next/link";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { JobReaderViews } from "@/components/jobs/job-reader-views";
+import { isTamilJobSlug } from "@/lib/jobs/job-language";
 import {
   JobsDetailActionCta,
   JobsDetailApplyBand,
@@ -80,12 +83,16 @@ export function JobPostingDetail({
   applyLabel,
   applyLinkProps,
   isWhatsApp,
+  uniqueViews,
+  languageAlternate,
 }: {
   row: JobPostingWithEmployer;
   applyHref: string | null;
   applyLabel: string;
   applyLinkProps: { target?: string; rel?: string };
   isWhatsApp: boolean;
+  uniqueViews: number;
+  languageAlternate?: { href: string; label: string } | null;
 }) {
   const { job, employer } = row;
   const hubCard = buildChennaiJobsHubCard(row);
@@ -93,18 +100,22 @@ export function JobPostingDetail({
   const showPay =
     job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null;
 
+  const tamil = isTamilJobSlug(job.slug);
+  const isContactForm = !!applyHref && /\/contact#jobs/i.test(applyHref);
   const ctaHint = isWhatsApp
     ? "Opens WhatsApp in a new tab."
     : applyHref?.startsWith("tel:")
       ? "Tap to call the employer directly."
       : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
         ? "Opens the poster’s Facebook profile so you can message them."
-        : "Opens the employer careers page in a new tab.";
+        : isContactForm
+          ? "Opens our jobs contact form — this listing has no public employer phone yet."
+          : "Opens the employer careers page in a new tab.";
 
   return (
     <article className="mcc-jobs-hub mx-auto w-full max-w-[1180px]">
       <JobsDetailHero
-        eyebrow="Chennai job"
+        eyebrow={tamil ? "சென்னை வேலை" : "Chennai job"}
         title={job.title}
         badge={hubCard.initials}
         meta={
@@ -131,6 +142,18 @@ export function JobPostingDetail({
           </>
         }
       >
+        <JobReaderViews slug={job.slug} initialCount={uniqueViews} className="mt-2" />
+        {languageAlternate ? (
+          <p className="mt-2 text-sm">
+            <Link
+              href={languageAlternate.href}
+              hrefLang={tamil ? "en" : "ta"}
+              className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            >
+              {languageAlternate.label}
+            </Link>
+          </p>
+        ) : null}
         {showPay ? (
           <p className="mcc-jobs-detail__pay">
             <span className="mcc-jobs-detail__pay-badge">Pay disclosed</span>
@@ -170,7 +193,9 @@ export function JobPostingDetail({
                       ? "This listing uses a phone number — call; we do not process CVs."
                       : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
                         ? "This listing uses Facebook message — not a careers portal. Confirm the role before sharing documents."
-                        : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
+                        : isContactForm
+                          ? "The source ad did not include a public phone. Use the form so we can pass on a hiring contact if we get one."
+                          : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
                 }
                 href={applyHref}
                 label={applyLabel}

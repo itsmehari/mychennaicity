@@ -13,7 +13,15 @@ import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
 import { ChennaiJobsHubSafety } from "@/components/jobs/chennai-jobs-hub-sections";
 import { JobsDetailBackLink } from "@/components/jobs/chennai-jobs-detail-parts";
 import { getOpenJobPostingWithEmployerBySlug } from "@/domains/jobs";
+import { getJobUniqueViewCount } from "@/domains/jobs/view-tracking";
 import { getSiteUrl } from "@/lib/env";
+import { extractJobFaqs } from "@/lib/jobs/job-faq";
+import {
+  isTamilJobSlug,
+  jobEnglishSlug,
+  jobTamilSlug,
+} from "@/lib/jobs/job-language";
+import { buildFaqPageJsonLdFromItems } from "@/lib/seo/faq-jsonld";
 import {
   CHENNAI_JOBS_HUB_PATH,
   chennaiJobsDetailPath,
@@ -50,6 +58,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base = getSiteUrl();
   const url = `${base}${chennaiJobsDetailPath(row.job.slug)}`;
   const desc = clipDesc(row.job.body) || row.job.title;
+  const enSlug = jobEnglishSlug(row.job.slug);
+  const taSlug = jobTamilSlug(row.job.slug);
+  const twinSlug = isTamilJobSlug(row.job.slug) ? enSlug : taSlug;
+  let twinExists = false;
+  try {
+    twinExists = !!(await getOpenJobPostingWithEmployerBySlug(twinSlug));
+  } catch {
+    twinExists = false;
+  }
+  const languages = twinExists
+    ? {
+        en: `${base}${chennaiJobsDetailPath(enSlug)}`,
+        ta: `${base}${chennaiJobsDetailPath(taSlug)}`,
+        "x-default": `${base}${chennaiJobsDetailPath(enSlug)}`,
+      }
+    : undefined;
   const titleSegment = buildClippedTitleSegment(
     row.job.title,
     ` · ${row.employer.name}`,
@@ -58,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: titleSegment,
     description: desc,
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(languages ? { languages } : {}) },
     openGraph: {
       title: docTitle,
       description: desc,
@@ -82,6 +106,19 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
 
   const jobLd = buildJobPostingJsonLd(row);
   const crumbLd = buildJobBreadcrumbJsonLd(row.job.slug, row.job.title);
+  const faqItems = extractJobFaqs(row.job.body);
+  const faqLd = buildFaqPageJsonLdFromItems(faqItems, {
+    pageUrl: `${getSiteUrl()}${chennaiJobsDetailPath(row.job.slug)}`,
+  });
+  const tamil = isTamilJobSlug(row.job.slug);
+  const twinSlug = tamil ? jobEnglishSlug(row.job.slug) : jobTamilSlug(row.job.slug);
+  const twin = await getOpenJobPostingWithEmployerBySlug(twinSlug);
+  let uniqueViews = 0;
+  try {
+    uniqueViews = await getJobUniqueViewCount(row.job.id);
+  } catch {
+    uniqueViews = 0;
+  }
   const applyHref = row.job.applicationUrl?.trim();
   const isWhatsApp =
     !!applyHref &&
@@ -91,16 +128,21 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
   const isFacebook =
     !!applyHref &&
     /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref);
+  const isContactForm =
+    !!applyHref && /\/contact#jobs/i.test(applyHref);
   const applyLabel = isWhatsApp
     ? "Apply via WhatsApp"
     : isTel
       ? "Call to apply"
       : isFacebook
         ? "Message on Facebook"
-        : "Apply on employer / ATS";
-  const applyLinkProps = isTel
-    ? ({} as const)
-    : ({ target: "_blank", rel: "noopener noreferrer" } as const);
+        : isContactForm
+          ? "Ask us for the hiring contact"
+          : "Apply on employer / ATS";
+  const applyLinkProps =
+    isTel || isContactForm
+      ? ({} as const)
+      : ({ target: "_blank", rel: "noopener noreferrer" } as const);
 
   return (
     <>
@@ -112,6 +154,12 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbLd) }}
       />
+      {faqLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      ) : null}
       <div className={interiorMainClassName}>
         <PageBreadcrumbs
           items={[
@@ -131,6 +179,15 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           applyLabel={applyLabel}
           applyLinkProps={applyLinkProps}
           isWhatsApp={isWhatsApp}
+          uniqueViews={uniqueViews}
+          languageAlternate={
+            twin
+              ? {
+                  href: chennaiJobsDetailPath(twin.job.slug),
+                  label: tamil ? "Read in English" : "தமிழில் படிக்க",
+                }
+              : null
+          }
         />
         <ChennaiJobsHubSafety />
         <JobsDetailBackLink href={CHENNAI_JOBS_HUB_PATH} label="All jobs in Chennai" />

@@ -153,6 +153,48 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/chennai-jobs/ac-technician-helper-madipakkam-chennai",
+        destination:
+          "/chennai-jobs/ac-technician-helper-50-vacancies-madipakkam-chennai",
+        permanent: true,
+      },
+      {
+        source: "/chennai-jobs/ac-technician-helper-madipakkam-chennai-tamil",
+        destination:
+          "/chennai-jobs/ஏசி-டெக்னீஷன்-ஹெல்பர்-50-காலியிடம்-மடிப்பாக்கம்-சென்னை",
+        permanent: true,
+      },
+      {
+        source: "/chennai-jobs/hr-recruiter-sembakkam-chennai",
+        destination: "/chennai-jobs/hr-recruiter-10-vacancies-sembakkam-chennai",
+        permanent: true,
+      },
+      {
+        source: "/chennai-jobs/hr-recruiter-5-vacancies-sembakkam-chennai",
+        destination: "/chennai-jobs/hr-recruiter-10-vacancies-sembakkam-chennai",
+        permanent: true,
+      },
+      {
+        source:
+          "/chennai-jobs/எச்ஆர்-ரெக்ரூட்டர்-செம்பாக்கம்-சென்னை",
+        destination:
+          "/chennai-jobs/எச்ஆர்-ரெக்ரூட்டர்-10-காலியிடம்-செம்பாக்கம்-சென்னை",
+        permanent: true,
+      },
+      {
+        source:
+          "/chennai-jobs/எச்ஆர்-ரெக்ரூட்டர்-5-காலியிடம்-செம்பாக்கம்-சென்னை",
+        destination:
+          "/chennai-jobs/எச்ஆர்-ரெக்ரூட்டர்-10-காலியிடம்-செம்பாக்கம்-சென்னை",
+        permanent: true,
+      },
+      {
+        source: "/chennai-jobs/pgt-computer-science-t-nagar-placenet",
+        destination:
+          "/chennai-jobs/pgt-computer-science-chembarambakkam-placenet",
+        permanent: true,
+      },
+      {
         source: "/international-yoga-day-2026-chennai-yoga-for-healthy-ageing",
         destination:
           "/chennai-local-news/international-yoga-day-2026-chennai-yoga-for-healthy-ageing",

@@ -54,7 +54,7 @@ export default function CookiesPage() {
           site (for example CSRF or rate limiting). These are typically
           first-party and limited to our domain. We also set an anonymous{" "}
           <strong className="text-[var(--foreground)]">mcc_vid</strong> cookie on
-          event listing pages to count unique readers (no name, email, or phone).
+          event and job pages to count unique readers (no name, email, or phone).
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Analytics.</strong> If
@@ -81,9 +81,20 @@ export default function CookiesPage() {
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Advertising.</strong> If
-          we use Google AdSense or other ad networks, those partners may set
-          third-party cookies or use advertising identifiers to serve and
-          measure ads. See{" "}
+          we use Google AdSense or other ad networks, third parties (including
+          Google) may place and read cookies on your browser, or use web
+          beacons, IP addresses, or advertising identifiers, to serve and
+          measure ads — including ads based on your prior visits to this site
+          or other sites. See{" "}
+          <a
+            href="https://policies.google.com/technologies/partner-sites"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            How Google uses data when you use our partners&apos; sites or apps
+          </a>{" "}
+          and{" "}
           <a
             href="https://policies.google.com/technologies/ads"
             className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
@@ -97,8 +108,26 @@ export default function CookiesPage() {
         <p>
           <strong className="text-[var(--foreground)]">Your choices.</strong>{" "}
           Most browsers let you block or delete cookies. Blocking cookies may
-          break sign-in or some features. Ad personalisation controls may also
-          be available in your Google account or device settings.
+          break sign-in or some features. You can opt out of personalised
+          Google ads in{" "}
+          <a
+            href="https://adssettings.google.com"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ads Settings
+          </a>
+          , or opt out of some third-party advertising cookies at{" "}
+          <a
+            href="https://www.aboutads.info"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            www.aboutads.info
+          </a>
+          .
         </p>
         <p>
           For how we use personal data overall, see our{" "}
@@ -111,7 +140,7 @@ export default function CookiesPage() {
           .
         </p>
         <p className="text-xs text-[var(--muted)]">
-          Last updated: March 2026.
+          Last updated: August 2026.
         </p>
       </div>
       <InteriorCrossNav />

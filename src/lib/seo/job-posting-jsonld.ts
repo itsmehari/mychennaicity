@@ -1,6 +1,8 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
+import { extractJobBenefits } from "@/lib/jobs/job-faq";
 import { isMonthlyJobSalary } from "@/lib/jobs/format-compensation";
+import { jobInLanguage } from "@/lib/jobs/job-language";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
 const EMPLOYMENT_MAP: Record<string, string> = {
@@ -39,11 +41,6 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
     description: plainBody(job.body),
     datePosted: posted.toISOString(),
     hiringOrganization,
-    employmentType:
-      job.employmentType?.trim() &&
-      EMPLOYMENT_MAP[job.employmentType.trim().toUpperCase()]
-        ? EMPLOYMENT_MAP[job.employmentType.trim().toUpperCase()]
-        : "https://schema.org/FULL_TIME",
     jobLocation: {
       "@type": "Place",
       address: {
@@ -54,9 +51,23 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
       },
     },
     url,
+    inLanguage: jobInLanguage(job.slug),
+    identifier: {
+      "@type": "PropertyValue",
+      name: "MyChennaiCity",
+      value: job.slug,
+    },
     /** Google: true only when apply is frictionless on this URL; we usually send candidates to ATS. */
     directApply: false,
   };
+
+  const benefits = extractJobBenefits(job.body);
+  if (benefits) jp.jobBenefits = benefits;
+
+  const employmentKey = job.employmentType?.trim().toUpperCase();
+  if (employmentKey && EMPLOYMENT_MAP[employmentKey]) {
+    jp.employmentType = EMPLOYMENT_MAP[employmentKey];
+  }
 
   const apply = job.applicationUrl?.trim();
   if (apply) {

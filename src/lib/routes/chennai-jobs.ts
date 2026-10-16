@@ -8,7 +8,10 @@ export const CHENNAI_JOBS_LOOKING_PATH = "/chennai-jobs/looking-for-work";
 export const CHENNAI_JOBS_LEGACY_HUB_PATH = "/jobs";
 
 export function chennaiJobsDetailPath(slug: string): string {
-  return `${CHENNAI_JOBS_HUB_PATH}/${encodeURIComponent(slug)}`;
+  // Tamil-script slugs are stored already percent-encoded, because the live
+  // route param arrives encoded. Encoding them again would break the URL.
+  const segment = /%[0-9A-Fa-f]{2}/.test(slug) ? slug : encodeURIComponent(slug);
+  return `${CHENNAI_JOBS_HUB_PATH}/${segment}`;
 }
 
 export function chennaiJobSeekerDetailPath(slug: string): string {
