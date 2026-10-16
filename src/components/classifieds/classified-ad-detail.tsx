@@ -1,6 +1,9 @@
 import type { ClassifiedListingRow } from "@/domains/classifieds";
+import { ClassifiedPhoneGate } from "@/components/classifieds/classified-phone-gate";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
+import { classifiedImageUrls } from "@/lib/classifieds/images";
+import Image from "next/image";
 import Link from "next/link";
 
 function GlanceRow({ label, value }: { label: string; value: string }) {
@@ -84,14 +87,47 @@ function AtAGlance({ listing }: { listing: ClassifiedListingRow }) {
   );
 }
 
+function PhotoGallery({
+  urls,
+  title,
+}: {
+  urls: string[];
+  title: string;
+}) {
+  if (urls.length === 0) return null;
+  return (
+    <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label="Listing photos">
+      {urls.map((src, i) => (
+        <figure
+          key={src}
+          className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]"
+        >
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={src}
+              alt={`${title} — photo ${i + 1}`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 520px"
+              className="object-cover"
+              priority={i === 0}
+            />
+          </div>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow }) {
-  const phone = listing.contactPhone?.trim();
+  const phoneGated = Boolean(listing.contactPhoneGated && listing.contactPhone?.trim());
+  const phone = phoneGated ? "" : listing.contactPhone?.trim();
   const phoneDigits = phone?.replace(/\D/g, "") ?? "";
-  const phoneHref = phoneDigits
-    ? `tel:+91${phoneDigits.replace(/^91/, "")}`
-    : null;
+  const localTen = phoneDigits.replace(/^91/, "").slice(-10);
+  const phoneHref = localTen.length === 10 ? `tel:+91${localTen}` : null;
+  const waHref = localTen.length === 10 ? `https://wa.me/91${localTen}` : null;
   const posterUrl = listing.posterUrl?.trim() || null;
   const posterName = listing.posterName?.trim() || "Reader";
+  const photos = classifiedImageUrls(listing.imageUrls);
 
   return (
     <article className="mx-auto w-full max-w-[1100px]">
@@ -117,11 +153,15 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             </span>
           ) : null}
         </p>
+        <PhotoGallery urls={photos} title={listing.title} />
       </header>
 
       {phoneHref ? (
-        <div className="mt-5 lg:hidden">
+        <div className="mt-5 flex flex-col gap-3 lg:hidden">
           <ContactCta href={phoneHref} label="Call to enquire" />
+          {waHref ? (
+            <ContactCta href={waHref} label="WhatsApp the seller" />
+          ) : null}
         </div>
       ) : null}
 
@@ -142,18 +182,27 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             </div>
           </section>
 
-          {(phoneHref || posterUrl) ? (
+          {(phoneGated || phoneHref || waHref || posterUrl) ? (
             <div className="mt-8 rounded-2xl border border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-6 sm:p-7">
               <p className="text-base font-semibold text-[var(--foreground)]">
                 Interested?
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                Contact {posterName} directly. Confirm fees, timings, and location
-                before you agree.
+                {phoneGated
+                  ? `Message ${posterName} after you share your number. Agree rent and house rules before you pay or visit.`
+                  : `Contact ${posterName} directly. Confirm papers, price, and a test ride before you pay.`}
               </p>
               <div className="mt-5 flex max-w-md flex-col gap-3">
+                {phoneGated ? (
+                  <div className="lg:hidden">
+                    <ClassifiedPhoneGate slug={listing.slug} />
+                  </div>
+                ) : null}
                 {phoneHref ? (
                   <ContactCta href={phoneHref} label="Call to enquire" />
+                ) : null}
+                {waHref ? (
+                  <ContactCta href={waHref} label="WhatsApp the seller" />
                 ) : null}
                 {posterUrl ? (
                   <ContactCta
@@ -180,9 +229,18 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
         <aside className="min-w-0 lg:order-2 lg:sticky lg:top-24 lg:self-start">
           <div className="flex flex-col gap-4">
             <AtAGlance listing={listing} />
-            {phoneHref ? (
+            {phoneGated ? (
+              <div className="hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 lg:block">
+                <ClassifiedPhoneGate slug={listing.slug} />
+              </div>
+            ) : phoneHref ? (
               <div className="hidden lg:block">
                 <ContactCta href={phoneHref} label="Call to enquire" />
+              </div>
+            ) : null}
+            {waHref ? (
+              <div className="hidden lg:block">
+                <ContactCta href={waHref} label="WhatsApp the seller" />
               </div>
             ) : null}
             {posterUrl ? (

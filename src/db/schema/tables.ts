@@ -298,6 +298,11 @@ export const classifiedListings = pgTable(
     posterUrl: text("poster_url"),
     locationLabel: text("location_label"),
     contactPhone: text("contact_phone"),
+    /**
+     * When true, the public page must not render `contact_phone`.
+     * The number is returned only after the enquirer submits their own mobile.
+     */
+    contactPhoneGated: boolean("contact_phone_gated").notNull().default(false),
     areaHubSlug: text("area_hub_slug"),
     /** Pin on the classifieds hub and homepage spotlight. */
     featured: boolean("featured").notNull().default(false),
@@ -311,6 +316,25 @@ export const classifiedListings = pgTable(
   },
   (t) => ({
     citySlug: uniqueIndex("classified_listings_city_slug_uidx").on(t.cityId, t.slug),
+  }),
+);
+
+/** Enquirer mobiles collected before a gated classified phone is shown. */
+export const classifiedPhoneReveals = pgTable(
+  "classified_phone_reveals",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    listingId: uuid("listing_id")
+      .notNull()
+      .references(() => classifiedListings.id, { onDelete: "cascade" }),
+    enquirerPhone: text("enquirer_phone").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    listingPhone: uniqueIndex("classified_phone_reveals_listing_phone_uidx").on(
+      t.listingId,
+      t.enquirerPhone,
+    ),
   }),
 );
 
