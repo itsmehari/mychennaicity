@@ -67,13 +67,13 @@ async function main() {
   const expiresAt = new Date(now);
   expiresAt.setDate(expiresAt.getDate() + 90);
 
-  const body = `## Room wanted — Padappai
+  const body = `## Room sharing or small 1RK room needed for working woman
 
-A woman is looking for accommodation in **Padappai**, Chennai.
+A working woman is looking for accommodation in **Padappai**, Chennai.
 
 ### What she needs
-- A **single room for rent**, or
-- A **private room** in an existing flat (any BHK) shared with a **female flatmate**
+- **Room sharing** with a female flatmate, or
+- A **small 1RK** for rent
 
 ### Contact
 Her mobile number is hidden on this page. Enter your own number on the form to see it. Mention that you saw the post on MyChennaiCity.
@@ -83,10 +83,10 @@ Agree rent, deposit, and house rules directly with her before you pay or share t
   const values = {
     cityId: city.id,
     slug: SLUG,
-    title: "Room wanted in Padappai — woman seeking a single or private room",
+    title: "Room sharing or small 1RK room needed for working woman",
     body,
     category: "flatmates-roommates",
-    posterName: "Woman seeking a room",
+    posterName: "Working woman",
     posterUrl: null,
     locationLabel: "Padappai, Chennai",
     contactPhone: CONTACT_PHONE,
