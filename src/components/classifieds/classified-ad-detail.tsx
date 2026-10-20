@@ -3,6 +3,7 @@ import { ClassifiedPhoneGate } from "@/components/classifieds/classified-phone-g
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { classifiedImageUrls } from "@/lib/classifieds/images";
+import { normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -147,10 +148,9 @@ function PhotoGallery({
 export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow }) {
   const phoneGated = Boolean(listing.contactPhoneGated && listing.contactPhone?.trim());
   const phone = phoneGated ? "" : listing.contactPhone?.trim();
-  const phoneDigits = phone?.replace(/\D/g, "") ?? "";
-  const localTen = phoneDigits.replace(/^91/, "").slice(-10);
-  const phoneHref = localTen.length === 10 ? `tel:+91${localTen}` : null;
-  const waHref = localTen.length === 10 ? `https://wa.me/91${localTen}` : null;
+  const localTen = phone ? normalizeIndianMobile(phone) : null;
+  const phoneHref = localTen ? `tel:+91${localTen}` : null;
+  const waHref = localTen ? `https://wa.me/91${localTen}` : null;
   const posterUrl = listing.posterUrl?.trim() || null;
   const posterName = listing.posterName?.trim() || "Reader";
   const photos = classifiedImageUrls(listing.imageUrls);

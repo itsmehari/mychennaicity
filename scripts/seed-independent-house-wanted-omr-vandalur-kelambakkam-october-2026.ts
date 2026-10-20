@@ -46,7 +46,6 @@ const SLUG = "independent-house-wanted-omr-vandalur-kelambakkam-october-2026";
 
 const PHONE = "9176691715";
 const PHONE_DISPLAY = "91766 91715";
-const PHONE_TEL = "tel:+919176691715";
 const PHONE_WA = "https://wa.me/919176691715";
 
 const POSTER_IMAGE =
@@ -87,7 +86,7 @@ A buyer is looking to **purchase** an independent house. This is a requirement, 
 **Up to ₹90 lakh.** No minimum was stated.
 
 ### Contact
-Call **[${PHONE_DISPLAY}](${PHONE_TEL})** or WhatsApp **[${PHONE_DISPLAY}](${PHONE_WA})**. Mention that you saw this requirement on MyChennaiCity.
+Call or WhatsApp **[${PHONE_DISPLAY}](${PHONE_WA})**. Mention that you saw this requirement on MyChennaiCity.
 
 If you have a suitable house, or know someone selling one, genuine leads are welcome.
 
