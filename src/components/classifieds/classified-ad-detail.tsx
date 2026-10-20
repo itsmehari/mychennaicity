@@ -19,6 +19,26 @@ function GlanceRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+function enquiryCopy(category: string | null | undefined, posterName: string) {
+  const cat = category?.trim().toLowerCase() ?? "";
+  if (cat === "vehicles") {
+    return {
+      whatsappLabel: "WhatsApp the seller",
+      blurb: `Contact ${posterName} directly. Confirm papers, price, and a test ride before you pay.`,
+    };
+  }
+  if (cat === "property") {
+    return {
+      whatsappLabel: "WhatsApp",
+      blurb: `Contact ${posterName} directly. Confirm papers, price, and a visit before you pay or share documents.`,
+    };
+  }
+  return {
+    whatsappLabel: "WhatsApp",
+    blurb: `Contact ${posterName} directly. Agree the terms before you pay.`,
+  };
+}
+
 function ContactCta({
   href,
   label,
@@ -102,13 +122,19 @@ function PhotoGallery({
           key={src}
           className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]"
         >
-          <div className="relative aspect-[4/3]">
+          <div
+            className={
+              urls.length === 1
+                ? "relative aspect-square bg-[var(--background)]"
+                : "relative aspect-[4/3]"
+            }
+          >
             <Image
               src={src}
-              alt={`${title} — photo ${i + 1}`}
+              alt={urls.length === 1 ? title : `${title} — photo ${i + 1}`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 520px"
-              className="object-cover"
+              className={urls.length === 1 ? "object-contain" : "object-cover"}
               priority={i === 0}
             />
           </div>
@@ -128,6 +154,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
   const posterUrl = listing.posterUrl?.trim() || null;
   const posterName = listing.posterName?.trim() || "Reader";
   const photos = classifiedImageUrls(listing.imageUrls);
+  const enquiry = enquiryCopy(listing.category, posterName);
 
   return (
     <article className="mx-auto w-full max-w-[1100px]">
@@ -160,7 +187,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
         <div className="mt-5 flex flex-col gap-3 lg:hidden">
           <ContactCta href={phoneHref} label="Call to enquire" />
           {waHref ? (
-            <ContactCta href={waHref} label="WhatsApp the seller" />
+            <ContactCta href={waHref} label={enquiry.whatsappLabel} />
           ) : null}
         </div>
       ) : null}
@@ -190,7 +217,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
                 {phoneGated
                   ? `Message ${posterName} after you share your number. Agree rent and house rules before you pay or visit.`
-                  : `Contact ${posterName} directly. Confirm papers, price, and a test ride before you pay.`}
+                  : enquiry.blurb}
               </p>
               <div className="mt-5 flex max-w-md flex-col gap-3">
                 {phoneGated ? (
@@ -202,7 +229,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
                   <ContactCta href={phoneHref} label="Call to enquire" />
                 ) : null}
                 {waHref ? (
-                  <ContactCta href={waHref} label="WhatsApp the seller" />
+                  <ContactCta href={waHref} label={enquiry.whatsappLabel} />
                 ) : null}
                 {posterUrl ? (
                   <ContactCta
@@ -240,7 +267,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             ) : null}
             {waHref ? (
               <div className="hidden lg:block">
-                <ContactCta href={waHref} label="WhatsApp the seller" />
+                <ContactCta href={waHref} label={enquiry.whatsappLabel} />
               </div>
             ) : null}
             {posterUrl ? (

@@ -1,4 +1,5 @@
 import type { ClassifiedListingRow } from "@/domains/classifieds";
+import { classifiedCoverAbsoluteUrl } from "@/lib/classifieds/images";
 import { getSiteUrl } from "@/lib/env";
 import {
   CHENNAI_CLASSIFIEDS_HUB_PATH,
@@ -15,6 +16,7 @@ export function buildClassifiedAdJsonLd(listing: ClassifiedListingRow) {
   const base = getSiteUrl();
   const url = `${base}${chennaiClassifiedDetailPath(listing.slug)}`;
   const description = clipText(listing.body) || listing.title;
+  const image = classifiedCoverAbsoluteUrl(listing.imageUrls);
 
   return {
     "@context": "https://schema.org",
@@ -27,6 +29,7 @@ export function buildClassifiedAdJsonLd(listing: ClassifiedListingRow) {
     isPartOf: { "@id": `${base}/#website` },
     datePublished: listing.publishedAt?.toISOString(),
     dateModified: listing.updatedAt.toISOString(),
+    ...(image ? { image } : {}),
   };
 }
 

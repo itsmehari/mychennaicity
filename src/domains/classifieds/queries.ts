@@ -42,6 +42,7 @@ export async function listOpenClassifiedListingsForChennaiHub(
     .from(classifiedListings)
     .where(openClassifiedConditions(cityId, category))
     .orderBy(
+      desc(classifiedListings.featured),
       desc(classifiedListings.publishedAt),
       desc(classifiedListings.createdAt),
     )

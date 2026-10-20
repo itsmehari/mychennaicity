@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
@@ -17,6 +18,7 @@ import {
   formatClassifiedCategoryLabel,
   parseClassifiedCategoryParam,
 } from "@/lib/classifieds/categories";
+import { classifiedCoverSrc } from "@/lib/classifieds/images";
 import { getSiteUrl } from "@/lib/env";
 import {
   CHENNAI_CLASSIFIEDS_HUB_PATH,
@@ -154,6 +156,17 @@ export default async function ChennaiClassifiedsHubPage({
         </p>
       </header>
 
+      <p className="mt-4 max-w-3xl text-sm text-[var(--muted)]">
+        <Link
+          href={chennaiClassifiedsHubPath({ category: "property" })}
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          Property ads
+        </Link>
+        {" "}
+        cover sale, rent, plot, commercial, and buyer requirements.
+      </p>
+
       <ClassifiedsHubCategoryNav activeCategory={category} />
 
       <div className="mt-8">
@@ -168,12 +181,26 @@ export default async function ChennaiClassifiedsHubPage({
             {total} open {total === 1 ? "ad" : "ads"} · snapshot {snapshotAsOf}
           </p>
           <ul className="mt-6 divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-            {listings.map((listing) => (
+            {listings.map((listing) => {
+              const cover = classifiedCoverSrc(listing.imageUrls);
+              return (
               <li key={listing.id}>
                 <Link
                   href={chennaiClassifiedDetailPath(listing.slug)}
-                  className="block px-5 py-5 transition hover:bg-[color-mix(in_srgb,var(--accent)_4%,var(--surface))] sm:px-6"
+                  className="flex gap-4 px-5 py-5 transition hover:bg-[color-mix(in_srgb,var(--accent)_4%,var(--surface))] sm:px-6"
                 >
+                  {cover ? (
+                    <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-[var(--background)] ring-1 ring-[var(--border)]">
+                      <Image
+                        src={cover}
+                        alt=""
+                        fill
+                        sizes="112px"
+                        className="object-cover"
+                      />
+                    </span>
+                  ) : null}
+                  <span className="min-w-0">
                   <h2 className="text-base font-semibold text-[var(--foreground)]">
                     {listing.title}
                   </h2>
@@ -185,10 +212,13 @@ export default async function ChennaiClassifiedsHubPage({
                     {listing.category
                       ? ` · ${formatClassifiedCategoryLabel(listing.category)}`
                       : ""}
+                    {listing.featured ? " · Featured" : ""}
                   </p>
+                  </span>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
 
           {(hasPrev || hasNext) && (

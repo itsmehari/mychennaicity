@@ -1,10 +1,12 @@
 /** Reader-submitted classified ad categories (stored in `classified_listings.category`). */
 export const CLASSIFIED_CATEGORY_IDS = [
+  "vehicles",
   "tuition",
   "services",
   "partnership",
   "flatmates-roommates",
   "wanted",
+  "property",
 ] as const;
 
 export type ClassifiedCategoryId = (typeof CLASSIFIED_CATEGORY_IDS)[number];
@@ -21,7 +23,13 @@ export const CLASSIFIED_HUB_CATEGORIES: ClassifiedHubCategory[] = [
     id: "all",
     label: "All ads",
     description:
-      "Reader-submitted wanted posts and local listings — tuition, services, flatmates & roommates, and neighbourhood needs.",
+      "Reader-submitted wanted posts and local listings — vehicles, tuition, services, flatmates & roommates, and neighbourhood needs.",
+  },
+  {
+    id: "vehicles",
+    label: "Vehicles",
+    description:
+      "Used two-wheelers and cars for sale in Chennai — inspect RC, insurance, and the vehicle before you pay.",
   },
   {
     id: "flatmates-roommates",
@@ -49,14 +57,22 @@ export const CLASSIFIED_HUB_CATEGORIES: ClassifiedHubCategory[] = [
     label: "Wanted",
     description: "General wanted posts and reader requests across Chennai.",
   },
+  {
+    id: "property",
+    label: "Property",
+    description:
+      "Sale, rent, plot, commercial, and buyer-requirement ads in Chennai. MyChennaiCity places the listing after you send the details.",
+  },
 ];
 
 const LABEL_BY_ID: Record<ClassifiedCategoryId, string> = {
+  vehicles: "Vehicles",
   tuition: "Tuition",
   services: "Services",
   partnership: "Partnership",
   "flatmates-roommates": "Flatmates & Roommates",
   wanted: "Wanted",
+  property: "Property",
 };
 
 export function isClassifiedCategoryId(value: string): value is ClassifiedCategoryId {

@@ -200,6 +200,8 @@
     "db:takedown:classified-privacy:live": "tsx scripts/takedown-classified-privacy-request.ts --live",
     "db:seed:hero-pleasure-2015-kk-nagar": "tsx scripts/seed-hero-pleasure-2015-kk-nagar.ts",
     "db:seed:hero-pleasure-2015-kk-nagar:live": "tsx scripts/seed-hero-pleasure-2015-kk-nagar.ts --live",
+    "db:seed:independent-house-wanted-omr-kelambakkam": "tsx scripts/seed-independent-house-wanted-omr-vandalur-kelambakkam-october-2026.ts",
+    "db:seed:independent-house-wanted-omr-kelambakkam:live": "tsx scripts/seed-independent-house-wanted-omr-vandalur-kelambakkam-october-2026.ts --live",
     "db:seed:pallikaranai-ms-homemade-food": "tsx scripts/seed-pallikaranai-ms-homemade-food.ts",
     "db:seed:pallikaranai-ms-homemade-food:live": "tsx scripts/seed-pallikaranai-ms-homemade-food.ts --live",
     "db:seed:hastina-cafe-rooftop-chromepet": "tsx scripts/seed-hastina-cafe-rooftop-chromepet.ts",
