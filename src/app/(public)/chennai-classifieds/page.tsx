@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { ClassifiedHubListingCards } from "@/components/classifieds/classified-hub-cards";
 import { ClassifiedsHubCategoryNav } from "@/components/classifieds/classifieds-hub-category-nav";
 import {
   InteriorCrossNav,
@@ -15,14 +15,11 @@ import {
 } from "@/domains/classifieds";
 import {
   classifiedHubCategoryMeta,
-  formatClassifiedCategoryLabel,
   parseClassifiedCategoryParam,
 } from "@/lib/classifieds/categories";
-import { classifiedCoverSrc } from "@/lib/classifieds/images";
 import { getSiteUrl } from "@/lib/env";
 import {
   CHENNAI_CLASSIFIEDS_HUB_PATH,
-  chennaiClassifiedDetailPath,
   chennaiClassifiedsHubPath,
 } from "@/lib/routes/chennai-classifieds";
 import { buildClassifiedsHubJsonLd } from "@/lib/seo/classified-jsonld";
@@ -169,57 +166,14 @@ export default async function ChennaiClassifiedsHubPage({
 
       <ClassifiedsHubCategoryNav activeCategory={category} />
 
-      <div className="mt-8">
-        <PageAdSlot shape="rectangle" placement="classifieds_index" />
-      </div>
-
-      <AdvertisePanel variant="classifieds" layout="section" className="mt-8" />
-
       {useDb ? (
-        <section className="mt-10" aria-label="Open classified ads">
-          <p className="text-xs text-[var(--muted)]">
+        <section className="mt-8" aria-label="Open classified ads">
+          <p className="text-xs font-medium tracking-wide text-[var(--muted)]">
             {total} open {total === 1 ? "ad" : "ads"} · snapshot {snapshotAsOf}
           </p>
-          <ul className="mt-6 divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-            {listings.map((listing) => {
-              const cover = classifiedCoverSrc(listing.imageUrls);
-              return (
-              <li key={listing.id}>
-                <Link
-                  href={chennaiClassifiedDetailPath(listing.slug)}
-                  className="flex gap-4 px-5 py-5 transition hover:bg-[color-mix(in_srgb,var(--accent)_4%,var(--surface))] sm:px-6"
-                >
-                  {cover ? (
-                    <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-[var(--background)] ring-1 ring-[var(--border)]">
-                      <Image
-                        src={cover}
-                        alt=""
-                        fill
-                        sizes="112px"
-                        className="object-cover"
-                      />
-                    </span>
-                  ) : null}
-                  <span className="min-w-0">
-                  <h2 className="text-base font-semibold text-[var(--foreground)]">
-                    {listing.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    {listing.posterName?.trim() || "Reader"}
-                    {listing.locationLabel
-                      ? ` · ${listing.locationLabel}`
-                      : " · Chennai"}
-                    {listing.category
-                      ? ` · ${formatClassifiedCategoryLabel(listing.category)}`
-                      : ""}
-                    {listing.featured ? " · Featured" : ""}
-                  </p>
-                  </span>
-                </Link>
-              </li>
-              );
-            })}
-          </ul>
+          <div className="mt-4">
+            <ClassifiedHubListingCards listings={listings} />
+          </div>
 
           {(hasPrev || hasNext) && (
             <nav
@@ -283,6 +237,12 @@ export default async function ChennaiClassifiedsHubPage({
           page to suggest a listing.
         </p>
       )}
+
+      <div className="mt-10">
+        <PageAdSlot shape="rectangle" placement="classifieds_index" />
+      </div>
+
+      <AdvertisePanel variant="classifieds" layout="section" className="mt-8" />
 
       <InteriorCrossNav />
     </div>

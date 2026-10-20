@@ -1,0 +1,236 @@
+/* Classifieds hub — property-board cards */
+
+.mcc-classified-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mcc-classified-board,
+.mcc-classified-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--accent-warm) 26%, var(--border));
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 55%, transparent) inset,
+    0 16px 36px color-mix(in srgb, var(--foreground) 6%, transparent);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.mcc-classified-board:hover,
+.mcc-classified-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 55%, transparent) inset,
+    0 22px 44px color-mix(in srgb, var(--foreground) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+.mcc-classified-board:focus-visible,
+.mcc-classified-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.mcc-classified-board {
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--accent-warm) 10%, var(--surface)) 0%,
+      var(--surface) 42%
+    );
+}
+
+@media (min-width: 860px) {
+  .mcc-classified-board {
+    display: grid;
+    grid-template-columns: minmax(17rem, 0.92fr) minmax(0, 1.08fr);
+    align-items: stretch;
+  }
+}
+
+.mcc-classified-board__media,
+.mcc-classified-card__media {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      90% 80% at 12% 0%,
+      color-mix(in srgb, var(--accent-warm) 22%, transparent),
+      transparent 58%
+    ),
+    color-mix(in srgb, var(--accent-warm) 7%, var(--background));
+}
+
+.mcc-classified-board__media {
+  min-height: 22rem;
+  padding: 1.1rem;
+}
+
+@media (min-width: 860px) {
+  .mcc-classified-board__media {
+    min-height: 32rem;
+    padding: 1.35rem;
+  }
+}
+
+.mcc-classified-board__media img,
+.mcc-classified-card__media img {
+  object-fit: contain;
+}
+
+.mcc-classified-card__media--photo img {
+  object-fit: cover;
+}
+
+.mcc-classified-card__media {
+  aspect-ratio: 4 / 3.15;
+  padding: 0.85rem;
+}
+
+.mcc-classified-card__media--photo {
+  padding: 0;
+}
+
+.mcc-classified-board__flag,
+.mcc-classified-card__flag {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 1;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  padding: 0.28rem 0.7rem;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mcc-classified-board__body,
+.mcc-classified-card__body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.25rem 1.3rem 1.35rem;
+}
+
+@media (min-width: 860px) {
+  .mcc-classified-board__body {
+    justify-content: center;
+    padding: 1.75rem 1.85rem 1.85rem 0.4rem;
+  }
+}
+
+.mcc-classified-board__kicker,
+.mcc-classified-card__kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mcc-classified-board__title,
+.mcc-classified-card__title {
+  margin: 0.45rem 0 0;
+  color: var(--foreground);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.mcc-classified-board__title {
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+}
+
+.mcc-classified-card__title {
+  font-size: 1.12rem;
+}
+
+.mcc-classified-board__place,
+.mcc-classified-card__place {
+  margin: 0.7rem 0 0;
+  color: var(--foreground);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.mcc-classified-board__place::before,
+.mcc-classified-card__place::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  transform: translateY(-0.08rem);
+}
+
+.mcc-classified-board__blurb,
+.mcc-classified-card__blurb {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.mcc-classified-board__cta,
+.mcc-classified-card__cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: 1.15rem;
+  border-radius: 999px;
+  background: var(--accent);
+  padding: 0.7rem 1.05rem;
+  color: var(--accent-fg);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mcc-classified-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .mcc-classified-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mcc-classified-card__mast {
+  display: flex;
+  min-height: 7.5rem;
+  align-items: flex-end;
+  padding: 1.1rem 1.2rem;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--accent) 16%, var(--surface)),
+      color-mix(in srgb, var(--accent-warm) 12%, var(--surface))
+    );
+}
