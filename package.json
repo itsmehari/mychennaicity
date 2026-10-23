@@ -148,6 +148,8 @@
     "db:seed:chennai-job:more-supermarket-walk-in-koyambedu:live": "tsx scripts/seed-chennai-job-more-supermarket-walk-in-koyambedu.ts --live",
     "db:seed:chennai-job:mp-developers-mega-walk-in-pallavaram": "tsx scripts/seed-chennai-job-mp-developers-mega-walk-in-pallavaram.ts",
     "db:seed:chennai-job:mp-developers-mega-walk-in-pallavaram:live": "tsx scripts/seed-chennai-job-mp-developers-mega-walk-in-pallavaram.ts --live",
+    "db:seed:chennai-job:nyx-ar-caller": "tsx scripts/seed-chennai-job-nyx-ar-caller-fresher-triplicane.ts",
+    "db:seed:chennai-job:nyx-ar-caller:live": "tsx scripts/seed-chennai-job-nyx-ar-caller-fresher-triplicane.ts --live",
     "db:seed:chennai-job:turf-caretaker-weekend-maduravoyal": "tsx scripts/seed-chennai-job-turf-caretaker-weekend-maduravoyal.ts",
     "db:seed:chennai-job:turf-caretaker-weekend-maduravoyal:live": "tsx scripts/seed-chennai-job-turf-caretaker-weekend-maduravoyal.ts --live",
     "db:seed:chennai-job:south-indian-restaurant-navalur": "tsx scripts/seed-chennai-job-south-indian-restaurant-navalur.ts",
