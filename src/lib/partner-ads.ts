@@ -51,11 +51,48 @@ export type PartnerAdCreative = {
   cta: string;
   href: string;
   theme: PartnerAdTheme;
+  /** Self-hosted photo. When set, the photo layout replaces the gradient banner. */
+  image?: string;
+  /** Dark panel the photo fades into. */
+  ink?: string;
+  /** Button dot and arrow. */
+  accent?: string;
+  /** 2–3 word uppercase label. Glass pill on the square. */
+  photoLabel?: string;
+  /** 1–3 word italic line. */
+  offer?: string;
+  /** Quiet line under the offer, about 8 words. Hidden when there is no photo. */
+  support?: string;
+  /** 2–3 word button on the wide band and the square. */
+  photoCta?: string;
+  /** Shorter button on the phone strip. */
+  ctaShort?: string;
+  /**
+   * Offer size multiplier for this partner only.
+   * Use when a long brand name is the offer. Omit to keep the shared size.
+   */
+  offerScale?: number;
+  /** CSS object-position so the subject survives the square, strip, and thumbnail. */
+  photoPosition?: string;
 };
 
 type PartnerAdSource = Omit<PartnerAdCreative, "href"> & {
   url: string;
 };
+
+/** Photo layout is on only when the image and the four short lines are all set. */
+export function isPartnerPhotoAd(ad: PartnerAdCreative): boolean {
+  return Boolean(
+    ad.image &&
+      ad.ink &&
+      ad.accent &&
+      ad.photoLabel &&
+      ad.offer &&
+      ad.support &&
+      ad.photoCta &&
+      ad.ctaShort,
+  );
+}
 
 const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
   {
@@ -68,6 +105,15 @@ const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
     cta: "Make my resume — ₹49",
     url: "https://www.resumedoctor.in/",
     theme: "resume",
+    image: "/images/partner-ads/resumedoctor.webp",
+    ink: "#431407",
+    accent: "#f59e0b",
+    photoLabel: "Resume help",
+    offer: "₹49 résumé",
+    support: "A neat PDF in five minutes.",
+    photoCta: "Make mine",
+    ctaShort: "Start",
+    photoPosition: "center 34%",
   },
   {
     id: "vacancychennai",
@@ -79,6 +125,15 @@ const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
     cta: "Browse Vacancy Chennai",
     url: "https://vacancychennai.in/",
     theme: "vacancy",
+    image: "/images/partner-ads/vacancychennai.webp",
+    ink: "#14532d",
+    accent: "#059669",
+    photoLabel: "Chennai jobs",
+    offer: "Local jobs",
+    support: "OMR, Tambaram, and Porur.",
+    photoCta: "Browse jobs",
+    ctaShort: "Browse",
+    photoPosition: "68% 46%",
   },
   {
     id: "agsunwin",
@@ -90,6 +145,15 @@ const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
     cta: "Get a free quote",
     url: "https://agsunwinenergysolutions.com/",
     theme: "solar",
+    image: "/images/partner-ads/agsunwin.webp",
+    ink: "#1c1917",
+    accent: "#ea580c",
+    photoLabel: "Home solar",
+    offer: "Subsidy help",
+    support: "Survey, design, net-metering.",
+    photoCta: "Free quote",
+    ctaShort: "Quote",
+    photoPosition: "center 72%",
   },
 ];
 
@@ -132,6 +196,16 @@ export function partnerAds(placement: PartnerAdPlacement): PartnerAdCreative[] {
     cta: ad.cta,
     theme: ad.theme,
     href: withPartnerUtm(ad.url, slot),
+    image: ad.image,
+    ink: ad.ink,
+    accent: ad.accent,
+    photoLabel: ad.photoLabel,
+    offer: ad.offer,
+    support: ad.support,
+    photoCta: ad.photoCta,
+    ctaShort: ad.ctaShort,
+    offerScale: ad.offerScale,
+    photoPosition: ad.photoPosition,
   }));
 }
 
@@ -181,7 +255,16 @@ export function hasDedicatedPartnerAdSlot(pathname: string): boolean {
 
   if (path.startsWith("/areas/") && path !== "/areas") return true;
 
-  if (path === "/guides/tn-plus-two" || path.startsWith("/guides/tn-plus-two/")) {
+  if (
+    path === "/guides/tn-plus-two" ||
+    path.startsWith("/guides/tn-plus-two/") ||
+    path === "/guides/tn-plus-two-tamil" ||
+    path.startsWith("/guides/tn-plus-two-tamil/") ||
+    path === "/class-11-groups-chennai" ||
+    path === "/class-11-groups-chennai-tamil" ||
+    path === "/plus-two-textbooks-pdf" ||
+    path === "/plus-two-textbooks-pdf-tamil"
+  ) {
     return true;
   }
 

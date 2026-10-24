@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   hasDedicatedPartnerAdSlot,
   isPartnerAdHost,
+  isPartnerPhotoAd,
   partnerAds,
   shouldShowSiteWideAd,
   withPartnerUtm,
@@ -30,7 +31,20 @@ describe("partnerAds", () => {
     for (const ad of ads) {
       expect(ad.href).toContain("utm_content=home_after_areas");
       expect(ad.href).toContain("utm_source=mychennaicity");
+      expect(isPartnerPhotoAd(ad)).toBe(true);
+      expect(ad.body.length).toBeGreaterThan(ad.support!.length);
+      expect(ad.support!.length).toBeLessThanOrEqual(32);
     }
+  });
+
+  it("keeps the gradient banner when a record has no photo", () => {
+    const [ad] = partnerAds("site_band");
+    expect(
+      isPartnerPhotoAd({
+        ...ad,
+        image: undefined,
+      }),
+    ).toBe(false);
   });
 });
 
@@ -55,9 +69,6 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/chennai-local-events/submit")).toBe(false);
     expect(shouldShowSiteWideAd("/search")).toBe(false);
     expect(shouldShowSiteWideAd("/whatsapp-community/partners")).toBe(false);
-    expect(shouldShowSiteWideAd("/civic-tools/area-sabha")).toBe(false);
-    expect(shouldShowSiteWideAd("/civic-tools/zone-dashboard")).toBe(false);
-    expect(shouldShowSiteWideAd("/civic-tools/zonal-office-access")).toBe(false);
   });
 
   it("hides when the page already has an inline slot", () => {
@@ -86,6 +97,9 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/guides/chennai-tech-careers")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/tn-plus-two")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/tn-plus-two/groups/2502")).toBe(false);
+    expect(shouldShowSiteWideAd("/guides/tn-plus-two-tamil")).toBe(false);
+    expect(shouldShowSiteWideAd("/plus-two-textbooks-pdf")).toBe(false);
+    expect(shouldShowSiteWideAd("/class-11-groups-chennai")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers/ministers/n-anand")).toBe(false);
     expect(shouldShowSiteWideAd("/guides/tn-council-of-ministers-tamil")).toBe(false);

@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import {
   PARTNER_AD_ROTATE_MS,
+  isPartnerPhotoAd,
   type PartnerAdCreative,
   type PartnerAdPlacement,
   type PartnerAdShape,
 } from "@/lib/partner-ads";
+
+const PartnerAdPhotoBody = dynamic(() =>
+  import("@/components/ads/partner-ad-photo-body").then(
+    (mod) => mod.PartnerAdPhotoBody,
+  ),
+);
 
 type Props = {
   ads: PartnerAdCreative[];
@@ -14,6 +22,16 @@ type Props = {
   placement: PartnerAdPlacement;
   className?: string;
 };
+
+function photoSlideStyle(ad: PartnerAdCreative): CSSProperties | undefined {
+  if (!isPartnerPhotoAd(ad)) return undefined;
+  return {
+    "--partner-ad-ink": ad.ink,
+    "--partner-ad-accent": ad.accent,
+    "--partner-ad-offer-scale": String(ad.offerScale ?? 1),
+    "--partner-ad-photo-position": ad.photoPosition ?? "center 42%",
+  } as CSSProperties;
+}
 
 function prefersReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
@@ -77,26 +95,37 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
             <a
               key={ad.id}
               href={ad.href}
-              className={`partner-ad__slide partner-ad--theme-${ad.theme}${isActive ? " is-active" : ""}`}
+              className={`partner-ad__slide partner-ad--theme-${ad.theme}${isPartnerPhotoAd(ad) ? " partner-ad__slide--photo" : ""}${isActive ? " is-active" : ""}`}
+              style={photoSlideStyle(ad)}
               target="_blank"
               rel="noopener noreferrer"
               data-partner-link={ad.partner}
               data-utm-content={placement}
-              aria-label={`${ad.headline}. ${ad.cta}`}
+              aria-label={
+                isPartnerPhotoAd(ad)
+                  ? `${ad.offer}. ${ad.support} ${ad.photoCta}`
+                  : `${ad.headline}. ${ad.cta}`
+              }
               aria-hidden={isActive ? undefined : true}
               tabIndex={isActive ? 0 : -1}
             >
-              {ad.theme === "resume" ? (
-                <span className="partner-ad__texture" aria-hidden />
-              ) : null}
-              <span className="partner-ad__copy">
-                <span className="partner-ad__kicker">
-                  {ad.eyebrow} · {ad.kicker}
-                </span>
-                <span className="partner-ad__headline">{ad.headline}</span>
-                <span className="partner-ad__body">{ad.body}</span>
-              </span>
-              <span className="partner-ad__cta">{ad.cta}</span>
+              {isPartnerPhotoAd(ad) ? (
+                <PartnerAdPhotoBody ad={ad} />
+              ) : (
+                <>
+                  {ad.theme === "resume" ? (
+                    <span className="partner-ad__texture" aria-hidden />
+                  ) : null}
+                  <span className="partner-ad__copy">
+                    <span className="partner-ad__kicker">
+                      {ad.eyebrow} · {ad.kicker}
+                    </span>
+                    <span className="partner-ad__headline">{ad.headline}</span>
+                    <span className="partner-ad__body">{ad.body}</span>
+                  </span>
+                  <span className="partner-ad__cta">{ad.cta}</span>
+                </>
+              )}
             </a>
           );
         })}

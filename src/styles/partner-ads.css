@@ -249,7 +249,296 @@
 
 @media (prefers-reduced-motion: reduce) {
   .partner-ad__slide,
-  .partner-ad__dot {
+  .partner-ad__dot,
+  .partner-ad__photo img {
     transition: none;
+  }
+
+  .partner-ad__slide--photo:hover .partner-ad__photo img,
+  .partner-ad__slide--photo:focus-visible .partner-ad__photo img {
+    transform: scale(1.04);
+  }
+}
+
+/* Photo banner — one shared layout. Ink and accent come from the ad record. */
+
+.partner-ad--rectangle .partner-ad__slide.partner-ad__slide--photo {
+  display: block;
+  height: 90px;
+  min-height: 90px;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  background: var(--partner-ad-ink, #111);
+  color: #fff;
+  --partner-ad-offer-size: 1.45rem;
+}
+
+.partner-ad--square .partner-ad__slide.partner-ad__slide--photo {
+  display: block;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  background: #0b0b0b;
+  color: #fff;
+  --partner-ad-offer-size: 2rem;
+}
+
+.partner-ad__photo-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  color: #fff;
+}
+
+.partner-ad__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.partner-ad--rectangle .partner-ad__photo {
+  right: auto;
+  width: 196px;
+}
+
+.partner-ad__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--partner-ad-photo-position, center 42%);
+  transform: scale(1.04);
+  transition: transform 0.7s ease;
+}
+
+.partner-ad__slide--photo:hover .partner-ad__photo img,
+.partner-ad__slide--photo:focus-visible .partner-ad__photo img {
+  transform: scale(1.1);
+}
+
+.partner-ad--rectangle .partner-ad__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 42%,
+    var(--partner-ad-ink, #111) 100%
+  );
+}
+
+.partner-ad--square .partner-ad__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.08) 0%,
+    rgb(0 0 0 / 0.04) 36%,
+    rgb(0 0 0 / 0.55) 70%,
+    rgb(0 0 0 / 0.84) 100%
+  );
+}
+
+.partner-ad--rectangle .partner-ad__scrim {
+  display: none;
+}
+
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__photo-root {
+  padding: 0 0.85rem 0 158px;
+  gap: 0.75rem;
+}
+
+.partner-ad__slide--photo .partner-ad__stack {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  gap: 0.12rem;
+}
+
+.partner-ad__slide--photo .partner-ad__copy {
+  max-width: none;
+  gap: 0.12rem;
+}
+
+.partner-ad__slide--photo .partner-ad__kicker {
+  margin: 0;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.88);
+  opacity: 1;
+}
+
+.partner-ad__slide--photo .partner-ad__offer {
+  margin: 0;
+  font-family: var(--font-partner-ad-offer), Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-synthesis: none;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #fff;
+  font-size: calc(
+    var(--partner-ad-offer-size, 1.45rem) * var(--partner-ad-offer-scale, 1)
+  );
+}
+
+.partner-ad__slide--photo .partner-ad__support {
+  margin: 0;
+  max-width: none;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: rgb(255 255 255 / 0.8);
+  opacity: 1;
+}
+
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__support {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.partner-ad__slide--photo .partner-ad__cta {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  flex-shrink: 0;
+  gap: 0.4rem;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 0.4rem 0.72rem;
+  border: 1px solid rgb(255 255 255 / 0.72);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+  color: #fff;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.partner-ad__cta-dot {
+  width: 0.38rem;
+  height: 0.38rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--partner-ad-accent, #fff);
+}
+
+.partner-ad__cta-arrow {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+  color: var(--partner-ad-accent, #fff);
+}
+
+.partner-ad__cta-short {
+  display: none;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__stack {
+  display: contents;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__kicker {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  left: 0.85rem;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid rgb(255 255 255 / 0.38);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+  color: #fff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__copy {
+  position: absolute;
+  z-index: 2;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  left: 0.9rem;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__support {
+  max-width: calc(100% - 8.6rem);
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__support {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__cta {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.9rem;
+  width: auto;
+}
+
+@media (max-width: 767px) {
+  .partner-ad--rectangle .partner-ad__slide.partner-ad__slide--photo {
+    height: 64px;
+    min-height: 64px;
+    --partner-ad-offer-size: 1.1rem;
+  }
+
+  .partner-ad--rectangle .partner-ad__photo {
+    width: 76px;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__photo-root {
+    padding: 0 0.5rem 0 68px;
+    gap: 0.4rem;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__kicker,
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__support {
+    display: none;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__offer {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .partner-ad--rectangle .partner-ad__cta-label {
+    display: none;
+  }
+
+  .partner-ad--rectangle .partner-ad__cta-short {
+    display: inline;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta {
+    padding: 0.28rem 0.5rem;
+    font-size: 0.68rem;
   }
 }
