@@ -17,7 +17,13 @@ export function ChennaiJobsHubCardView({ card }: { card: ChennaiJobsHubCard }) {
   ].filter(Boolean);
 
   return (
-    <article className="mcc-jobs-hub__job-card">
+    <article
+      className={
+        card.featured
+          ? "mcc-jobs-hub__job-card mcc-jobs-hub__job-card--featured"
+          : "mcc-jobs-hub__job-card"
+      }
+    >
       <div className="mcc-jobs-hub__job-card-inner">
         <div
           className="mcc-jobs-hub__job-badge"
@@ -27,6 +33,9 @@ export function ChennaiJobsHubCardView({ card }: { card: ChennaiJobsHubCard }) {
           {card.initials}
         </div>
         <div className="min-w-0">
+          {card.featured ? (
+            <p className="mcc-jobs-hub__job-kicker">Featured</p>
+          ) : null}
           <h2 className="mcc-jobs-hub__job-title">
             <Link href={card.href}>{card.title}</Link>
           </h2>

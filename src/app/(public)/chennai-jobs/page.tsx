@@ -21,7 +21,9 @@ import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { ChennaiJobsHubHero } from "@/components/jobs/chennai-jobs-hub-hero";
 import { ChennaiJobsHubFaq } from "@/components/jobs/chennai-jobs-hub-faq";
 import { ChennaiJobsHubAeoStrip } from "@/components/jobs/chennai-jobs-hub-aeo-strip";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ChennaiJobsHubListing } from "@/components/jobs/chennai-jobs-hub-listing";
+import { ChennaiJobsHubScrollCue } from "@/components/jobs/chennai-jobs-hub-scroll-cue";
 import {
   ChennaiJobsHubEmployerCta,
   ChennaiJobsHubResources,
@@ -115,6 +117,7 @@ export default async function ChennaiJobsHubPage() {
       />
 
       <ChennaiJobsHubHero totalJobs={total} hasLiveJobs={useDb} />
+      {useDb ? <ChennaiJobsHubScrollCue /> : null}
 
       <ChennaiJobsHubAeoStrip openJobsCount={total} />
 
@@ -127,6 +130,8 @@ export default async function ChennaiJobsHubPage() {
       <AdvertisePanel variant="jobs" layout="section" className="mt-8" />
 
       <HubCommunityStrip businessVariant="jobs" className="mt-6" />
+
+      <FeaturedJobsRail placement="jobs_hub" className="mt-8" />
 
       <ChennaiJobsHubListing
         cards={hubCards}

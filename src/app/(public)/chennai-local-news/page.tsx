@@ -15,6 +15,7 @@ import {
   countStoriesPublishedToday,
   shouldShowBreaking,
 } from "@/components/news/chennai-news-hub";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ChennaiNewsHubFaq } from "@/components/news/chennai-news-hub-faq";
 import {
   InteriorCrossNav,
@@ -120,6 +121,7 @@ export default async function ChennaiLocalNewsPage() {
           <NewsCategoryNav />
           <AdvertisePanel variant="news" layout="section" className="mt-8" />
           <HubCommunityStrip businessVariant="news" />
+          <FeaturedJobsRail placement="news_hub" className="mt-8" />
           <div className="mcc-news-empty">
             <h1>Chennai Local News</h1>
             <p>

@@ -20,6 +20,7 @@ import type {
   NavPreviewResponse,
   NavPreviewSectionPayload,
 } from "@/lib/nav/nav-preview-types";
+import { loadFeaturedJobsRail } from "@/lib/jobs/featured-jobs";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +43,7 @@ export async function GET() {
     const [
       articles,
       jobs,
+      featuredJobs,
       jobCount,
       seekerCount,
       events,
@@ -52,6 +54,7 @@ export async function GET() {
     ] = await Promise.all([
       listPublishedArticlesForChennai(5),
       listOpenJobPostingsForChennaiHub(5, 0),
+      loadFeaturedJobsRail({ language: "en" }).catch(() => null),
       countOpenJobPostingsForChennaiHub(),
       countOpenJobSeekerPostsForChennaiHub(),
       listPublicEventsForChennaiHub(5),
@@ -87,14 +90,27 @@ export async function GET() {
       eyebrow: "Hiring board",
       title: "Open jobs in Chennai",
       countLabel: `${jobCount} open · ${seekerCount} seeking`,
-      items: jobs.map(({ job, employer }) => ({
-        href: `${CHENNAI_JOBS_HUB_PATH}/${job.slug}`,
-        title: job.title,
-        meta: employer.name?.trim() || "Employer",
-        sub: [job.locationLabel, job.employmentType]
-          .filter(Boolean)
-          .join(" · ") || undefined,
-      })),
+      items: [
+        ...(featuredJobs?.cards ?? []).map((card) => ({
+          href: card.href,
+          title: card.title,
+          meta: "Featured",
+          sub: [card.location, card.pay, card.company].filter(Boolean).join(" · "),
+        })),
+        ...jobs
+          .filter(
+            ({ job }) =>
+              !(featuredJobs?.cards ?? []).some((card) => card.slug === job.slug),
+          )
+          .map(({ job, employer }) => ({
+            href: `${CHENNAI_JOBS_HUB_PATH}/${job.slug}`,
+            title: job.title,
+            meta: employer.name?.trim() || "Employer",
+            sub:
+              [job.locationLabel, job.employmentType].filter(Boolean).join(" · ") ||
+              undefined,
+          })),
+      ].slice(0, 5),
       ctaHref: CHENNAI_JOBS_HUB_PATH,
       ctaLabel: "Browse all jobs",
     };

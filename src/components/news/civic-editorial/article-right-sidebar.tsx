@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { PublicArticleRow } from "@/domains/news";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 
 function formatSidebarDate(d: Date | null) {
@@ -112,6 +113,11 @@ export function ArticleRightSidebar({
 
   return (
     <aside className="civic-right-sidebar" aria-label="Chennai updates and guides">
+      <FeaturedJobsRail
+        placement="article_sidebar"
+        variant="aside"
+        className="civic-sidebar-module"
+      />
       <div className="civic-sidebar-ad">
         <PageAdSlot shape="square" placement="article_sidebar" />
       </div>

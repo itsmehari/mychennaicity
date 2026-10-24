@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { GoldRateAnswerBox, buildGoldRateMetaDescription } from "@/components/gold-rate/gold-rate-answer-box";
 import { GoldRateHubHero } from "@/components/gold-rate/gold-rate-hub-hero";
@@ -88,6 +89,8 @@ export default async function ChennaiGoldRatePage() {
         <GoldRateCalculators snapshot={snapshot} />
         <GoldRateEditorialSections />
       </div>
+
+      <FeaturedJobsRail placement="gold_rate" className="mt-10" />
 
       <AdvertisePanel variant="directory" layout="section" className="mt-10" />
 

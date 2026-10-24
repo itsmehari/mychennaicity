@@ -8,6 +8,7 @@ import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ChennaiSeekersHubHero } from "@/components/jobs/chennai-seekers-hub-hero";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ChennaiSeekersHubListing } from "@/components/jobs/chennai-seekers-hub-listing";
 import {
   ChennaiSeekersHubEmployerCta,
@@ -131,6 +132,8 @@ export default async function ChennaiJobsLookingForWorkPage() {
       />
 
       <HubCommunityStrip businessVariant="jobs" className="mt-6" />
+
+      <FeaturedJobsRail placement="looking_for_work" className="mt-8" />
 
       <ChennaiSeekersHubListing
         cards={hubCards}

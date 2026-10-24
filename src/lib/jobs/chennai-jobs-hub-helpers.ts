@@ -1,3 +1,4 @@
+import { isActiveFeaturedJobSlug } from "@/content/jobs/featured-job-campaigns";
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { formatJobCompensation } from "@/lib/jobs/format-compensation";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
@@ -20,6 +21,7 @@ export type ChennaiJobsHubCard = {
   sortDate: number;
   isWalkIn: boolean;
   isFresherFriendly: boolean;
+  featured: boolean;
   hasTamil: boolean;
   hasEnglish: boolean;
   salaryMin: number | null;
@@ -58,7 +60,7 @@ export const CHENNAI_JOBS_LOCATIONS = [
   { id: "anna-nagar", label: "Anna Nagar", match: ["anna nagar"] },
   { id: "velachery", label: "Velachery", match: ["velachery"] },
   { id: "tambaram", label: "Tambaram", match: ["tambaram"] },
-  { id: "porur", label: "Porur", match: ["porur"] },
+  { id: "porur", label: "Porur", match: ["porur", "maduravoyal"] },
   { id: "guindy", label: "Guindy", match: ["guindy"] },
   { id: "ambattur", label: "Ambattur", match: ["ambattur"] },
 ] as const;
@@ -298,6 +300,7 @@ export function buildChennaiJobsHubCard(row: JobPostingWithEmployer): ChennaiJob
     sortDate: (job.publishedAt ?? job.createdAt).getTime(),
     isWalkIn,
     isFresherFriendly,
+    featured: isActiveFeaturedJobSlug(job.slug),
     hasTamil,
     hasEnglish,
     salaryMin: job.salaryDisclosed ? job.salaryMin : null,
@@ -379,7 +382,10 @@ export function sortChennaiJobsHubCards(
       });
     case "latest":
     default:
-      return list.sort((a, b) => b.sortDate - a.sortDate);
+      return list.sort((a, b) => {
+        if (a.featured !== b.featured) return a.featured ? -1 : 1;
+        return b.sortDate - a.sortDate;
+      });
   }
 }
 

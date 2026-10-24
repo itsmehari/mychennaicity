@@ -12,6 +12,7 @@ import {
 } from "@/lib/article-reading-time";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { areaHubSlugForArticle } from "@/lib/news-area-hint";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 import {
   CHENNAI_JOBS_HUB_PATH,
@@ -421,9 +422,10 @@ export function NewsSidebar({
       <div className="mcc-news-panel mcc-news-jobs-panel">
         <h2 className="mcc-news-panel__title">Work in Chennai</h2>
         <p>
-          Looking for work in Chennai? Browse verified vacancies across IT,
-          retail, healthcare, education and services.
+          Two roles are pinned on the jobs board this week. The rest of the
+          openings are on the jobs page.
         </p>
+        <FeaturedJobsRail placement="news_sidebar" variant="links" />
         <div className="mcc-news-jobs-panel__actions">
           <Link
             href={CHENNAI_JOBS_HUB_PATH}

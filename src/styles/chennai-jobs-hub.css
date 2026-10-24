@@ -509,6 +509,20 @@
   }
 }
 
+.mcc-jobs-hub__job-card--featured {
+  border-color: color-mix(in srgb, var(--accent) 42%, #e4e8e5);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.mcc-jobs-hub__job-kicker {
+  margin: 0 0 0.2rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .mcc-jobs-hub__job-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 32px rgba(25, 35, 30, 0.08);
@@ -1159,6 +1173,94 @@
   }
 }
 
+#chennai-jobs-board {
+  scroll-margin-top: 5.5rem;
+}
+
+.mcc-jobs-hub__scroll-cue {
+  position: fixed;
+  z-index: 45;
+  left: 50%;
+  bottom: 5.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.45rem 0.95rem 0.45rem 1.05rem;
+  border: 1px solid #b7e0d3;
+  border-radius: 999px;
+  background: #fff;
+  color: #05624d;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 28px rgba(16, 42, 32, 0.16);
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.mcc-jobs-hub__scroll-cue:hover {
+  background: #f3fbf8;
+  border-color: #008f6b;
+}
+
+.mcc-jobs-hub__scroll-cue:focus-visible {
+  outline: 2px solid #008f6b;
+  outline-offset: 3px;
+}
+
+.mcc-jobs-hub__scroll-cue-chevron {
+  display: inline-flex;
+  color: #008f6b;
+}
+
+@media (min-width: 640px) {
+  .mcc-jobs-hub__scroll-cue {
+    bottom: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mcc-jobs-hub__scroll-cue {
+    animation: mcc-jobs-scroll-cue-in 0.45s ease both;
+  }
+
+  .mcc-jobs-hub__scroll-cue-chevron {
+    animation: mcc-jobs-scroll-cue-bob 1.35s ease-in-out infinite;
+  }
+}
+
+@keyframes mcc-jobs-scroll-cue-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes mcc-jobs-scroll-cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
+@media print {
+  .mcc-jobs-hub__scroll-cue {
+    display: none;
+  }
+}
+
 .mcc-jobs-guide__hero {
   margin-top: 1.5rem;
 }
@@ -1211,6 +1313,17 @@
   .mcc-jobs-hub__safety {
     background: color-mix(in srgb, #fff8e7 15%, var(--surface));
     border-color: color-mix(in srgb, #eed8a4 40%, var(--border));
+  }
+
+  .mcc-jobs-hub__scroll-cue {
+    background: var(--surface);
+    color: var(--foreground);
+    border-color: var(--border);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  .mcc-jobs-hub__scroll-cue:hover {
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface));
   }
 
   .mcc-jobs-detail__hero,

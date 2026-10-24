@@ -4,6 +4,7 @@ import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { ClassifiedHubListingCards } from "@/components/classifieds/classified-hub-cards";
 import { ClassifiedsHubCategoryNav } from "@/components/classifieds/classifieds-hub-category-nav";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -165,6 +166,8 @@ export default async function ChennaiClassifiedsHubPage({
       </p>
 
       <ClassifiedsHubCategoryNav activeCategory={category} />
+
+      <FeaturedJobsRail placement="classifieds_hub" className="mt-8" />
 
       {useDb ? (
         <section className="mt-8" aria-label="Open classified ads">

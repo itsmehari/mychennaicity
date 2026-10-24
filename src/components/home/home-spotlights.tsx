@@ -65,7 +65,7 @@ export function JobsSpotlightList({ jobs }: { jobs: HomeSpotlightJob[] }) {
           <>
             <div className={i === 0 ? "lg:max-w-md" : ""}>
               <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-                {i === 0 ? "Featured role" : "Open role"}
+                {j.featured ? "Featured role" : "Open role"}
               </p>
               <p
                 className={`mt-1 font-semibold text-[var(--foreground)] ${
@@ -81,7 +81,8 @@ export function JobsSpotlightList({ jobs }: { jobs: HomeSpotlightJob[] }) {
                 i === 0 ? "lg:ml-auto lg:text-sm" : ""
               }`}
             >
-              {j.location} · View listing
+              {j.location}
+              {j.openings ? ` · ${j.openings} openings` : ""} · View listing
             </p>
           </>
         );

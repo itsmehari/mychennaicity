@@ -25,6 +25,7 @@ import {
 import type { ArticleHeadingAnchor } from "./article-prose";
 import { ArticleProse } from "./article-prose";
 import { ArticleAdRegion } from "@/ads/article-ad-region";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
@@ -456,6 +457,9 @@ export async function EditorialArticle({
   };
 
   return (
-    <ArticleDetailLayout variant={layoutVariant} slots={legacySlots} />
+    <>
+      <ArticleDetailLayout variant={layoutVariant} slots={legacySlots} />
+      <FeaturedJobsRail placement="article_end" className="mx-auto mt-10 max-w-3xl px-4" />
+    </>
   );
 }

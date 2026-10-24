@@ -13,6 +13,7 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { WeekendWatchPin } from "@/components/site/weekend-watch-pin";
 import { CHENNAI_TODAY_FAQ, CHENNAI_TODAY_PATH } from "@/content/compulsive/chennai-today";
 import { CHENNAI_TODAY_TA_PATH } from "@/content/compulsive/chennai-today-ta";
@@ -82,6 +83,8 @@ export default async function ChennaiTodayPage() {
       <div className="mt-6 max-w-3xl">
         <WeekendWatchPin lang="en" />
       </div>
+
+      <FeaturedJobsRail placement="chennai_today" className="mt-8 max-w-3xl" />
 
       <section className="mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6">
         <h2 className="text-lg font-bold text-[var(--foreground)]">60-second card</h2>

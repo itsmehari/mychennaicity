@@ -4,6 +4,7 @@ import { SiteModalHost } from "@/components/site-modals";
 import { WhatsAppCommunityFloat } from "@/components/community/whatsapp-community-float";
 import { AlertBar } from "@/components/site/alert-bar";
 import { SiteWideAdBand } from "@/components/ads/site-wide-ad-band";
+import { FeaturedJobsCatchAll } from "@/components/jobs/featured-jobs-rail";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 
@@ -17,6 +18,7 @@ export default function PublicLayout({
       <AlertBar />
       <SiteHeader />
       <main className="flex-1">{children}</main>
+      <FeaturedJobsCatchAll />
       <SiteWideAdBand />
       <SiteFooter />
       <WhatsAppCommunityFloat />

@@ -24,7 +24,10 @@ import { getChennaiZoneBySlug } from "@/lib/chennai-zones";
 import type { RichAreaHubContent } from "@/lib/area-hubs/types";
 import { buildAreaHubJsonLd } from "@/lib/seo/area-hub-jsonld";
 import { homeMapUrlForHub, relatedHubsFor } from "@/lib/area-hubs/geography";
+import { classifiedCoverSrc } from "@/lib/classifieds/images";
+import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 
@@ -125,13 +128,22 @@ function ArticleMiniCard({ article }: { article: PublicArticleRow }) {
 }
 
 function ClassifiedMiniCard({ listing }: { listing: ClassifiedListingRow }) {
+  const cover = classifiedCoverSrc(listing.imageUrls);
   return (
     <Link
       href={chennaiClassifiedDetailPath(listing.slug)}
-      className="block rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 transition hover:border-[var(--accent)]"
+      className="block overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition hover:border-[var(--accent)]"
     >
+      {cover ? (
+        <span className="relative block aspect-[16/9] bg-[var(--background)]">
+          <Image src={cover} alt="" fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
+        </span>
+      ) : null}
+      <span className="block px-4 py-4">
       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--accent-warm)]">
-        {listing.category}
+        {listing.category
+          ? formatClassifiedCategoryLabel(listing.category)
+          : "Classified"}
       </p>
       <h3 className="mt-1 text-sm font-semibold leading-snug text-[var(--foreground)]">
         {listing.title}
@@ -139,6 +151,7 @@ function ClassifiedMiniCard({ listing }: { listing: ClassifiedListingRow }) {
       {listing.locationLabel ? (
         <p className="mt-2 text-xs text-[var(--muted)]">{listing.locationLabel}</p>
       ) : null}
+      </span>
     </Link>
   );
 }
@@ -506,6 +519,12 @@ export function RichAreaHubPage({
           </p>
         )}
       </Section>
+
+      <FeaturedJobsRail
+        placement="area_hub"
+        areaHubSlug={zone.slug}
+        className="mt-14"
+      />
 
       {/* Jobs */}
       {jobs.length > 0 ? (

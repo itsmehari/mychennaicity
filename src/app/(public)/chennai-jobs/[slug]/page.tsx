@@ -9,6 +9,7 @@ import {
 } from "@/components/site/interior-chrome";
 import { JobDetailResumeDoctorStrip } from "@/components/jobs/job-detail-resumedoctor-strip";
 import { JobDetailWhatsAppCommunityStrip } from "@/components/jobs/job-detail-whatsapp-community-strip";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { JobPostingDetail } from "@/components/jobs/job-posting-detail";
 import { ChennaiJobsHubSafety } from "@/components/jobs/chennai-jobs-hub-sections";
 import { JobsDetailBackLink } from "@/components/jobs/chennai-jobs-detail-parts";
@@ -21,6 +22,11 @@ import {
   jobEnglishSlug,
   jobTamilSlug,
 } from "@/lib/jobs/job-language";
+import {
+  jobSearchDescription,
+  jobSearchTitleSegment,
+} from "@/lib/jobs/job-search-meta";
+import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { buildFaqPageJsonLdFromItems } from "@/lib/seo/faq-jsonld";
 import {
   CHENNAI_JOBS_HUB_PATH,
@@ -30,20 +36,11 @@ import {
   buildJobBreadcrumbJsonLd,
   buildJobPostingJsonLd,
 } from "@/lib/seo/job-posting-jsonld";
-import {
-  buildClippedTitleSegment,
-  fullSiteTitle,
-} from "@/lib/seo/site-titles";
+import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamic = "force-dynamic";
-
-function clipDesc(s: string, max = 155): string {
-  const t = s.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
-  if (t.length <= max) return t;
-  return `${t.slice(0, max - 1).trimEnd()}…`;
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -56,11 +53,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   if (!row) return { title: { absolute: fullSiteTitle("Job not found") } };
   const base = getSiteUrl();
+  const tamil = isTamilJobSlug(row.job.slug);
   const url = `${base}${chennaiJobsDetailPath(row.job.slug)}`;
-  const desc = clipDesc(row.job.body) || row.job.title;
+  const desc = jobSearchDescription({
+    title: row.job.title,
+    body: row.job.body,
+    employerName: row.employer.name,
+    locationLabel: row.job.locationLabel,
+  });
   const enSlug = jobEnglishSlug(row.job.slug);
   const taSlug = jobTamilSlug(row.job.slug);
-  const twinSlug = isTamilJobSlug(row.job.slug) ? enSlug : taSlug;
+  const twinSlug = tamil ? enSlug : taSlug;
   let twinExists = false;
   try {
     twinExists = !!(await getOpenJobPostingWithEmployerBySlug(twinSlug));
@@ -74,20 +77,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "x-default": `${base}${chennaiJobsDetailPath(enSlug)}`,
       }
     : undefined;
-  const titleSegment = buildClippedTitleSegment(
-    row.job.title,
-    ` · ${row.employer.name}`,
-  );
+  const titleSegment = jobSearchTitleSegment(row.job.title);
   const docTitle = fullSiteTitle(titleSegment);
   return {
     title: titleSegment,
     description: desc,
     alternates: { canonical: url, ...(languages ? { languages } : {}) },
+    other: { ...CHENNAI_GEO_META },
     openGraph: {
       title: docTitle,
       description: desc,
       url,
       type: "website",
+      locale: tamil ? "ta_IN" : "en_IN",
+      alternateLocale: languages ? [tamil ? "en_IN" : "ta_IN"] : undefined,
       images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     },
     twitter: {
@@ -130,15 +133,25 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
     /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref);
   const isContactForm =
     !!applyHref && /\/contact#jobs/i.test(applyHref);
-  const applyLabel = isWhatsApp
-    ? "Apply via WhatsApp"
-    : isTel
-      ? "Call to apply"
-      : isFacebook
-        ? "Message on Facebook"
-        : isContactForm
-          ? "Ask us for the hiring contact"
-          : "Apply on employer / ATS";
+  const applyLabel = tamil
+    ? isWhatsApp
+      ? "WhatsApp-ல் விண்ணப்பிக்க"
+      : isTel
+        ? "அழைத்து விண்ணப்பிக்க"
+        : isFacebook
+          ? "Facebook-ல் செய்தி அனுப்ப"
+          : isContactForm
+            ? "ஆட்சேர்ப்பு தொடர்பை கேட்க"
+            : "நிறுவன பக்கத்தில் விண்ணப்பிக்க"
+    : isWhatsApp
+      ? "Apply via WhatsApp"
+      : isTel
+        ? "Call to apply"
+        : isFacebook
+          ? "Message on Facebook"
+          : isContactForm
+            ? "Ask us for the hiring contact"
+            : "Apply on employer / ATS";
   const applyLinkProps =
     isTel || isContactForm
       ? ({} as const)
@@ -160,11 +173,14 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
       ) : null}
-      <div className={interiorMainClassName}>
+      <div className={interiorMainClassName} lang={tamil ? "ta" : undefined}>
         <PageBreadcrumbs
           items={[
-            { label: "Home", href: "/" },
-            { label: "Jobs in Chennai", href: CHENNAI_JOBS_HUB_PATH },
+            { label: tamil ? "முகப்பு" : "Home", href: "/" },
+            {
+              label: tamil ? "சென்னை வேலைகள்" : "Jobs in Chennai",
+              href: CHENNAI_JOBS_HUB_PATH,
+            },
             { label: row.job.title },
           ]}
         />
@@ -189,8 +205,17 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
               : null
           }
         />
+        <FeaturedJobsRail
+          placement="job_detail"
+          language={tamil ? "ta" : "en"}
+          excludeSlug={row.job.slug}
+          className="mt-10"
+        />
         <ChennaiJobsHubSafety />
-        <JobsDetailBackLink href={CHENNAI_JOBS_HUB_PATH} label="All jobs in Chennai" />
+        <JobsDetailBackLink
+          href={CHENNAI_JOBS_HUB_PATH}
+          label={tamil ? "சென்னை வேலைகள் அனைத்தும்" : "All jobs in Chennai"}
+        />
         <div className="mt-8 max-w-2xl space-y-6">
           <AdvertisePanel variant="jobs" layout="strip" />
           <BusinessWhatsAppCta variant="jobs" />

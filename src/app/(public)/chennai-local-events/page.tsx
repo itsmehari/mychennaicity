@@ -15,6 +15,7 @@ import { EventsHubFaq } from "@/components/events/events-hub-faq";
 import { EventsHubHero } from "@/components/events/events-hub-hero";
 import { EventsHubListing } from "@/components/events/events-hub-listing";
 import { EventsHubThisWeekDigest } from "@/components/events/events-hub-this-week-digest";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
 import { buildHubCardFromDb } from "@/lib/events/event-hub-helpers";
@@ -203,15 +204,17 @@ export default async function ChennaiLocalEventsPage() {
         <PageAdSlot shape="rectangle" placement="events_hub_mid" />
       </div>
 
-      <p className="mt-10 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        Job hunting around the same dates? See{" "}
+      <FeaturedJobsRail placement="events_hub" className="mt-10" />
+
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        More openings are on{" "}
         <Link
           href={CHENNAI_JOBS_HUB_PATH}
           className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
         >
           jobs in Chennai
-        </Link>{" "}
-        and{" "}
+        </Link>
+        . For tech ads, see{" "}
         <Link
           href="/guides/chennai-tech-careers"
           className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EventDetailStandard } from "@/components/events/event-detail-standard";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import {
   getPublicEventBySlug,
   getEventUniqueReaderViewCount,
@@ -143,6 +144,9 @@ export default async function EventDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
         <Page event={ev} content={content} uniqueReaderViews={uniqueReaderViews} />
+        <div className="mx-auto w-full max-w-[1280px] px-4 pb-10">
+          <FeaturedJobsRail placement="events_detail" />
+        </div>
       </>
     );
   }

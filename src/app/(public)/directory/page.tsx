@@ -5,6 +5,7 @@ import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
 import { Section } from "@/components/home/section";
+import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -96,6 +97,8 @@ export default async function DirectoryPage() {
         </Link>
         .
       </p>
+
+      <FeaturedJobsRail placement="directory" className="mt-8" />
 
       <div className="mt-8 sm:mt-10">
         <PageAdSlot shape="rectangle" placement="directory_index" />
