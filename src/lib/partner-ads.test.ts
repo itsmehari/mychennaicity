@@ -3,6 +3,7 @@ import {
   hasDedicatedPartnerAdSlot,
   isPartnerAdHost,
   isPartnerPhotoAd,
+  partnerAdWithLine,
   partnerAds,
   shouldShowSiteWideAd,
   withPartnerUtm,
@@ -34,9 +35,27 @@ describe("partnerAds", () => {
       expect(ad.href).toContain("utm_content=home_after_areas");
       expect(ad.href).toContain("utm_source=mychennaicity");
       expect(isPartnerPhotoAd(ad)).toBe(true);
-      expect(ad.body.length).toBeGreaterThan(ad.support!.length);
-      expect(ad.support!.length).toBeLessThanOrEqual(32);
+      expect(ad.lines?.length).toBeGreaterThanOrEqual(3);
+      const seen = new Set<string>();
+      for (const line of ad.lines ?? []) {
+        expect(line.support.length).toBeLessThanOrEqual(32);
+        expect(line.offer.trim().split(/\s+/).length).toBeLessThanOrEqual(3);
+        expect(line.photoCta.trim().split(/\s+/).length).toBeLessThanOrEqual(3);
+        expect(line.body.length).toBeGreaterThan(line.support.length);
+        seen.add(`${line.offer}|${line.support}`);
+      }
+      expect(seen.size).toBe(ad.lines?.length);
+      expect(ad.offer).toBe(ad.lines?.[0]?.offer);
     }
+  });
+
+  it("wraps to the next marketing line for the same advertiser", () => {
+    const [ad] = partnerAds("site_band");
+    const second = partnerAdWithLine(ad, 1);
+    const wrapped = partnerAdWithLine(ad, ad.lines!.length);
+    expect(second.offer).toBe(ad.lines?.[1]?.offer);
+    expect(second.offer).not.toBe(ad.offer);
+    expect(wrapped.offer).toBe(ad.offer);
   });
 
   it("keeps the gradient banner when a record has no photo", () => {

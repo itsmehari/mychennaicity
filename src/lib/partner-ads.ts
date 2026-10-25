@@ -74,10 +74,25 @@ export type PartnerAdCreative = {
   offerScale?: number;
   /** CSS object-position so the subject survives the square, strip, and thumbnail. */
   photoPosition?: string;
+  /** Marketing lines for this advertiser. The rotator advances one line per visit. */
+  lines?: readonly PartnerAdLine[];
 };
 
-type PartnerAdSource = Omit<PartnerAdCreative, "href"> & {
+export type PartnerAdLine = {
+  headline: string;
+  body: string;
+  cta: string;
+  photoLabel: string;
+  offer: string;
+  support: string;
+  photoCta: string;
+  ctaShort: string;
+  offerScale?: number;
+};
+
+type PartnerAdSource = Omit<PartnerAdCreative, "href" | "headline" | "body" | "cta" | "photoLabel" | "offer" | "support" | "photoCta" | "ctaShort" | "offerScale" | "lines"> & {
   url: string;
+  lines: readonly PartnerAdLine[];
 };
 
 /** Photo layout is on only when the image and the four short lines are all set. */
@@ -94,108 +109,235 @@ export function isPartnerPhotoAd(ad: PartnerAdCreative): boolean {
   );
 }
 
-/** Copy matches MyOMR’s ad registry (`core/ad-registry.php`): headline, offer, price hook, tagline, buttons. */
+/**
+ * Three lines per advertiser, all from MyOMR’s registry facts:
+ * ResumeDoctor — minutes, a resume you can send, pick a layout, add details, download.
+ * MyCovai — Coimbatore, news and local talk, the city in one place.
+ * Colourchemist — design studio, logos, sites, campaigns, print and the web.
+ * BSERI — ISO 9001, 27001, 22301, implementer courses for working teams.
+ * AG Sunwin — ₹1 lakh, central and state subsidy, eligible homes, survey, design, net metering.
+ */
 const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
   {
     id: "resumedoctor",
     partner: "ResumeDoctor",
     eyebrow: "Partner",
     kicker: "resumedoctor.in",
-    headline: "ResumeDoctor",
-    body: "Pick a layout, add your details, download.",
-    cta: "Build my resume",
     url: "https://www.resumedoctor.in/",
     theme: "resume",
     image: "/images/partner-ads/resumedoctor.webp",
     ink: "#0f172a",
     accent: "#22d3ee",
-    photoLabel: "ResumeDoctor",
-    offer: "In minutes",
-    support: "A resume you can send",
-    photoCta: "Build my resume",
-    ctaShort: "Build resume",
     photoPosition: "center 42%",
+    lines: [
+      {
+        headline: "A resume you can send",
+        body: "Pick a layout, add your details, download.",
+        cta: "Build my resume",
+        photoLabel: "Resume help",
+        offer: "In minutes",
+        support: "A resume you can send",
+        photoCta: "Build my resume",
+        ctaShort: "Build resume",
+      },
+      {
+        headline: "Pick a layout",
+        body: "Add your details, then download a resume you can send.",
+        cta: "Build my resume",
+        photoLabel: "Your layout",
+        offer: "Pick a layout",
+        support: "Add your details, download.",
+        photoCta: "Build my resume",
+        ctaShort: "Build resume",
+      },
+      {
+        headline: "Ready to send",
+        body: "In minutes: pick a layout, add your details, download.",
+        cta: "Build my resume",
+        photoLabel: "Ready to send",
+        offer: "Send it today",
+        support: "A resume you can send",
+        photoCta: "Build my resume",
+        ctaShort: "Build resume",
+      },
+    ],
   },
   {
     id: "mycovai",
     partner: "MyCovai",
     eyebrow: "Partner",
     kicker: "mycovai.in",
-    headline: "Coimbatore",
-    body: "The city, in one place.",
-    cta: "Explore Covai",
     url: "https://mycovai.in/",
     theme: "covai",
     image: "/images/partner-ads/mycovai.webp",
     ink: "#312e81",
     accent: "#c084fc",
-    photoLabel: "Coimbatore",
-    offer: "MyCovai",
-    support: "News and local talk",
-    photoCta: "Explore Covai",
-    ctaShort: "Explore",
     photoPosition: "center 48%",
+    lines: [
+      {
+        headline: "Coimbatore",
+        body: "The city, in one place. News and local talk.",
+        cta: "Explore Covai",
+        photoLabel: "Coimbatore",
+        offer: "MyCovai",
+        support: "News and local talk",
+        photoCta: "Explore Covai",
+        ctaShort: "Explore",
+      },
+      {
+        headline: "The city, in one place",
+        body: "News and local talk for Coimbatore, in one place.",
+        cta: "Explore Covai",
+        photoLabel: "One city",
+        offer: "One place",
+        support: "The city, in one place.",
+        photoCta: "Explore Covai",
+        ctaShort: "Explore",
+      },
+      {
+        headline: "News and local talk",
+        body: "Coimbatore news and local talk, in one place.",
+        cta: "Explore Covai",
+        photoLabel: "Local talk",
+        offer: "Local news",
+        support: "News and local talk",
+        photoCta: "Explore Covai",
+        ctaShort: "Explore",
+      },
+    ],
   },
   {
     id: "colourchemist",
     partner: "Colourchemist",
     eyebrow: "Partner",
     kicker: "colourchemist.co.in",
-    headline: "Design studio",
-    body: "Branding for print and the web.",
-    cta: "See the work",
     url: "https://colourchemist.co.in/",
     theme: "studio",
     image: "/images/partner-ads/colourchemist.webp",
     ink: "#1e1b4b",
     accent: "#fb7185",
-    photoLabel: "Design studio",
-    offer: "Colourchemist",
-    support: "Logos, sites, campaigns",
-    photoCta: "See the work",
-    ctaShort: "See work",
-    offerScale: 0.78,
     photoPosition: "center 55%",
+    lines: [
+      {
+        headline: "Design studio",
+        body: "Branding for print and the web. Logos, sites, campaigns.",
+        cta: "See the work",
+        photoLabel: "Design studio",
+        offer: "Colourchemist",
+        support: "Logos, sites, campaigns",
+        photoCta: "See the work",
+        ctaShort: "See work",
+        offerScale: 0.78,
+      },
+      {
+        headline: "Branding for print and the web",
+        body: "Logos, sites, and campaigns for print and the web.",
+        cta: "See the work",
+        photoLabel: "Print and web",
+        offer: "Print and web",
+        support: "Logos, sites, campaigns",
+        photoCta: "See the work",
+        ctaShort: "See work",
+      },
+      {
+        headline: "Logos, sites, campaigns",
+        body: "A design studio for branding, print, and the web.",
+        cta: "See the work",
+        photoLabel: "Logos, sites",
+        offer: "Brand work",
+        support: "Branding for print and the web.",
+        photoCta: "See the work",
+        ctaShort: "See work",
+      },
+    ],
   },
   {
     id: "bseri",
     partner: "BSERI",
     eyebrow: "Partner",
     kicker: "bseri.net",
-    headline: "ISO training",
-    body: "Implementer courses for working teams.",
-    cta: "View courses",
     url: "https://bseri.net/",
     theme: "iso",
     image: "/images/partner-ads/bseri.webp",
     ink: "#0f172a",
     accent: "#fbbf24",
-    photoLabel: "ISO training",
-    offer: "ISO courses",
-    support: "9001, 27001, 22301",
-    photoCta: "View courses",
-    ctaShort: "Courses",
     photoPosition: "42% 55%",
+    lines: [
+      {
+        headline: "ISO training",
+        body: "Implementer courses for working teams.",
+        cta: "View courses",
+        photoLabel: "ISO training",
+        offer: "ISO courses",
+        support: "9001, 27001, 22301",
+        photoCta: "View courses",
+        ctaShort: "Courses",
+      },
+      {
+        headline: "Courses for working teams",
+        body: "Implementer courses for working teams on 9001, 27001, and 22301.",
+        cta: "View courses",
+        photoLabel: "Working teams",
+        offer: "For teams",
+        support: "Courses for working teams.",
+        photoCta: "View courses",
+        ctaShort: "Courses",
+      },
+      {
+        headline: "9001, 27001, 22301",
+        body: "Implementer courses covering 9001, 27001, and 22301.",
+        cta: "View courses",
+        photoLabel: "Three standards",
+        offer: "Three ISOs",
+        support: "9001, 27001, 22301",
+        photoCta: "View courses",
+        ctaShort: "Courses",
+      },
+    ],
   },
   {
     id: "agsunwin",
     partner: "AG Sunwin",
     eyebrow: "Partner",
     kicker: "agsunwinenergysolutions.com",
-    headline: "Home solar · Chennai",
-    body: "For eligible homes. Survey, design and net metering.",
-    cta: "Check subsidy",
     url: "https://agsunwinenergysolutions.com/",
     theme: "solar",
     image: "/images/partner-ads/agsunwin.webp",
     ink: "#0c4a6e",
     accent: "#f59e0b",
-    photoLabel: "Home solar",
-    offer: "₹1 lakh",
-    support: "Central + state subsidy",
-    photoCta: "Check subsidy",
-    ctaShort: "Check subsidy",
     photoPosition: "center 62%",
+    lines: [
+      {
+        headline: "Home solar · Chennai",
+        body: "For eligible homes. Survey, design and net metering.",
+        cta: "Check subsidy",
+        photoLabel: "Home solar",
+        offer: "₹1 lakh",
+        support: "Central + state subsidy",
+        photoCta: "Check subsidy",
+        ctaShort: "Check subsidy",
+      },
+      {
+        headline: "For eligible homes",
+        body: "Survey, design and net metering for eligible homes.",
+        cta: "Check subsidy",
+        photoLabel: "Eligible homes",
+        offer: "For homes",
+        support: "Survey, design, net metering.",
+        photoCta: "Check subsidy",
+        ctaShort: "Check subsidy",
+      },
+      {
+        headline: "Central + state subsidy",
+        body: "Central and state subsidy for eligible homes. Survey, design and net metering.",
+        cta: "Check subsidy",
+        photoLabel: "Chennai homes",
+        offer: "Net metering",
+        support: "Central + state subsidy",
+        photoCta: "Check subsidy",
+        ctaShort: "Check subsidy",
+      },
+    ],
   },
 ];
 
@@ -225,30 +367,49 @@ export function withPartnerUtm(href: string, placement: string): string {
   return url.toString();
 }
 
+/** Applies one marketing line. Index wraps. The first line is the default. */
+export function partnerAdWithLine(
+  ad: PartnerAdCreative,
+  lineIndex = 0,
+): PartnerAdCreative {
+  const lines = ad.lines;
+  if (!lines?.length) return ad;
+  const line = lines[((lineIndex % lines.length) + lines.length) % lines.length];
+  return {
+    ...ad,
+    headline: line.headline,
+    body: line.body,
+    cta: line.cta,
+    photoLabel: line.photoLabel,
+    offer: line.offer,
+    support: line.support,
+    photoCta: line.photoCta,
+    ctaShort: line.ctaShort,
+    offerScale: line.offerScale,
+  };
+}
+
 /** Same creative list for every slot; UTMs change with `placement`. */
 export function partnerAds(placement: PartnerAdPlacement): PartnerAdCreative[] {
   const slot = placement.trim() || "site_band";
-  return PARTNER_AD_SOURCES.map((ad) => ({
-    id: ad.id,
-    partner: ad.partner,
-    eyebrow: ad.eyebrow,
-    kicker: ad.kicker,
-    headline: ad.headline,
-    body: ad.body,
-    cta: ad.cta,
-    theme: ad.theme,
-    href: withPartnerUtm(ad.url, slot),
-    image: ad.image,
-    ink: ad.ink,
-    accent: ad.accent,
-    photoLabel: ad.photoLabel,
-    offer: ad.offer,
-    support: ad.support,
-    photoCta: ad.photoCta,
-    ctaShort: ad.ctaShort,
-    offerScale: ad.offerScale,
-    photoPosition: ad.photoPosition,
-  }));
+  return PARTNER_AD_SOURCES.map((ad) =>
+    partnerAdWithLine({
+      id: ad.id,
+      partner: ad.partner,
+      eyebrow: ad.eyebrow,
+      kicker: ad.kicker,
+      headline: "",
+      body: "",
+      cta: "",
+      theme: ad.theme,
+      href: withPartnerUtm(ad.url, slot),
+      image: ad.image,
+      ink: ad.ink,
+      accent: ad.accent,
+      photoPosition: ad.photoPosition,
+      lines: ad.lines,
+    }),
+  );
 }
 
 export function normalizeAdPathname(pathname: string): string {
