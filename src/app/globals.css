@@ -94,7 +94,7 @@ body {
 /*
  * Typography system (matches home hero):
  * - All UI type: Geist Sans (--font-sans) only — no serif stack.
- * - Exception: the partner photo offer (`.partner-ad__slide--photo .partner-ad__offer`) uses Fraunces italic, loaded only with that banner.
+ * - Partner photo banners use this same sans. The offer is bold Geist on the white card.
  * - Eyebrows: 11px, uppercase, ~0.22em tracking, semibold, muted.
  * - Display titles: font-bold, tracking-tight.
  * - Supporting / deck: font-light, color muted.

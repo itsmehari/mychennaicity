@@ -1,11 +1,10 @@
 "use client";
 
-import { partnerAdOfferFont } from "@/components/ads/partner-ad-offer-font";
 import type { PartnerAdCreative } from "@/lib/partner-ads";
 
 export function PartnerAdPhotoBody({ ad }: { ad: PartnerAdCreative }) {
   return (
-    <span className={`partner-ad__photo-root ${partnerAdOfferFont.variable}`}>
+    <span className="partner-ad__photo-root">
       <span className="partner-ad__photo" aria-hidden="true">
         <img src={ad.image} alt="" />
       </span>

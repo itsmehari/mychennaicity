@@ -591,3 +591,192 @@
     box-shadow: none;
   }
 }
+
+/* Moneycontrol native card: white ground, photo crop, black headline, outline pill. */
+
+.partner-ad:has(.partner-ad__slide--photo) {
+  --partner-ad-chrome: #fff;
+  --partner-ad-label: #a3a3a3;
+  --partner-ad-dot: #d4d4d4;
+  --partner-ad-dot-active: #171717;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+.partner-ad:has(.partner-ad__slide--photo) .partner-ad__label {
+  letter-spacing: 0.16em;
+  font-size: 9px;
+}
+
+.partner-ad__slide--photo .partner-ad__photo-root {
+  color: #171717;
+}
+
+.partner-ad--rectangle .partner-ad__slide.partner-ad__slide--photo {
+  background: #fff;
+  color: #171717;
+}
+
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__photo-root {
+  padding: 0.45rem 0.85rem 0.45rem 0.45rem;
+  gap: 0.85rem;
+}
+
+.partner-ad--rectangle .partner-ad__photo {
+  width: 176px;
+  border-radius: 8px;
+}
+
+.partner-ad--rectangle .partner-ad__photo::after {
+  display: none;
+}
+
+.partner-ad__slide--photo .partner-ad__kicker {
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 500;
+  font-size: 0.68rem;
+  color: #737373;
+}
+
+.partner-ad__slide--photo .partner-ad__offer {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #171717;
+}
+
+.partner-ad--rectangle .partner-ad__slide.partner-ad__slide--photo {
+  --partner-ad-offer-size: 1.45rem;
+}
+
+.partner-ad__slide--photo .partner-ad__support {
+  font-size: 0.78rem;
+  color: #525252;
+}
+
+.partner-ad__slide--photo .partner-ad__cta-dot {
+  display: none;
+}
+
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta {
+  margin-left: 0.85rem;
+  border: 1px solid #171717;
+  background: #fff;
+  color: #171717;
+  box-shadow: none;
+}
+
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta-label,
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta-short,
+.partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta-arrow {
+  color: #171717;
+}
+
+.partner-ad--square .partner-ad__slide.partner-ad__slide--photo {
+  background: #fff;
+  color: #171717;
+  --partner-ad-offer-size: 1.2rem;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__photo-root {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.partner-ad--square .partner-ad__photo {
+  position: relative;
+  inset: auto;
+  grid-row: 1;
+  width: auto;
+  height: 100%;
+  min-height: 0;
+  margin: 0.45rem 0.45rem 0;
+  border-radius: 10px;
+}
+
+.partner-ad--square .partner-ad__scrim {
+  display: none;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__stack {
+  display: flex;
+  position: static;
+  grid-row: 2;
+  height: auto;
+  min-width: 0;
+  max-width: none;
+  justify-content: flex-start;
+  padding: 0.45rem 0.7rem 0.15rem;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__kicker {
+  position: static;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #737373;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__copy {
+  position: static;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__support {
+  max-width: none;
+  color: #525252;
+}
+
+.partner-ad--square .partner-ad__slide--photo .partner-ad__cta {
+  position: static;
+  grid-row: 3;
+  right: auto;
+  bottom: auto;
+  align-self: start;
+  justify-self: start;
+  width: auto;
+  margin: 0.35rem 0.7rem 0.6rem;
+  border: 1px solid #171717;
+  background: #fff;
+  color: #171717;
+  box-shadow: none;
+}
+
+@media (max-width: 767px) {
+  .partner-ad--rectangle .partner-ad__slide.partner-ad__slide--photo {
+    height: 64px;
+    min-height: 64px;
+    background: #fff;
+    --partner-ad-offer-size: 1.05rem;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__photo-root {
+    padding: 0 0.45rem 0 64px;
+    gap: 0.35rem;
+  }
+
+  .partner-ad--rectangle .partner-ad__photo {
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: 56px;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .partner-ad--rectangle .partner-ad__slide--photo .partner-ad__cta {
+    margin-left: 0;
+    border: 1px solid #171717;
+    background: #fff;
+    color: #171717;
+    box-shadow: none;
+  }
+}
