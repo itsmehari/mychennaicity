@@ -10,7 +10,7 @@ import {
 
 describe("withPartnerUtm", () => {
   it("bakes source, medium, campaign, and placement content", () => {
-    const href = withPartnerUtm("https://vacancychennai.in/", "job_detail_square");
+    const href = withPartnerUtm("https://mycovai.in/", "job_detail_square");
     const url = new URL(href);
     expect(url.searchParams.get("utm_source")).toBe("mychennaicity");
     expect(url.searchParams.get("utm_medium")).toBe("referral");
@@ -22,10 +22,12 @@ describe("withPartnerUtm", () => {
 describe("partnerAds", () => {
   it("returns the same partners with placement-specific UTMs", () => {
     const ads = partnerAds("home_after_areas");
-    expect(ads).toHaveLength(3);
+    expect(ads).toHaveLength(5);
     expect(ads.map((a) => a.id)).toEqual([
       "resumedoctor",
-      "vacancychennai",
+      "mycovai",
+      "colourchemist",
+      "bseri",
       "agsunwin",
     ]);
     for (const ad of ads) {
@@ -50,9 +52,12 @@ describe("partnerAds", () => {
 
 describe("isPartnerAdHost", () => {
   it("matches partner hosts with or without www", () => {
-    expect(isPartnerAdHost("vacancychennai.in")).toBe(true);
     expect(isPartnerAdHost("www.resumedoctor.in")).toBe(true);
+    expect(isPartnerAdHost("mycovai.in")).toBe(true);
+    expect(isPartnerAdHost("colourchemist.co.in")).toBe(true);
+    expect(isPartnerAdHost("bseri.net")).toBe(true);
     expect(isPartnerAdHost("agsunwinenergysolutions.com")).toBe(true);
+    expect(isPartnerAdHost("vacancychennai.in")).toBe(false);
     expect(isPartnerAdHost("mychennaicity.in")).toBe(false);
   });
 });

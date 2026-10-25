@@ -220,11 +220,25 @@
   --partner-ad-dot-active: #f59e0b;
 }
 
-.partner-ad--theme-vacancy {
-  --partner-ad-gradient: linear-gradient(165deg, #ecfdf5 0%, #6ee7b7 48%, #34d399 100%);
-  --partner-ad-cta-bg: #14532d;
-  --partner-ad-cta-fg: #f0fdf4;
-  --partner-ad-dot-active: #059669;
+.partner-ad--theme-covai {
+  --partner-ad-gradient: linear-gradient(165deg, #6366f1 0%, #8b5cf6 52%, #a855f7 100%);
+  --partner-ad-cta-bg: #1e1b4b;
+  --partner-ad-cta-fg: #faf5ff;
+  --partner-ad-dot-active: #c084fc;
+}
+
+.partner-ad--theme-studio {
+  --partner-ad-gradient: linear-gradient(165deg, #1e1b4b 0%, #be185d 58%, #ea580c 100%);
+  --partner-ad-cta-bg: #1e1b4b;
+  --partner-ad-cta-fg: #fff1f2;
+  --partner-ad-dot-active: #fb7185;
+}
+
+.partner-ad--theme-iso {
+  --partner-ad-gradient: linear-gradient(165deg, #0f172a 0%, #1e293b 55%, #334155 100%);
+  --partner-ad-cta-bg: #fbbf24;
+  --partner-ad-cta-fg: #0f172a;
+  --partner-ad-dot-active: #fbbf24;
 }
 
 .partner-ad--theme-solar {

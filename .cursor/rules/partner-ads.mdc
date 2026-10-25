@@ -8,7 +8,7 @@ alwaysApply: false
 
 When editing partner ads or dropping a unit on a page:
 
-1. **Copy/config** lives in `src/lib/partner-ads.ts` (`partnerAds(placement)`). Do not put headlines, URLs, or themes in the carousel. A photo record adds `image`, `ink`, `accent`, `photoLabel`, `offer`, `support`, `photoCta`, and `ctaShort`. The photo layout turns on only when those are set (`isPartnerPhotoAd`). `headline`, `body`, and `cta` stay for the gradient banner. One shared layout — do not add a theme-specific photo skin. Fraunces italic is only the offer line.
+1. **Copy/config** lives in `src/lib/partner-ads.ts` (`partnerAds(placement)`). Take the words from MyOMR’s ad registry. Do not put headlines, URLs, or themes in the carousel. A photo record adds `image`, `ink`, `accent`, `photoLabel`, `offer`, `support`, `photoCta`, and `ctaShort`. The photo layout turns on only when those are set (`isPartnerPhotoAd`). `headline`, `body`, and `cta` stay for the gradient banner. One shared layout — do not add a theme-specific photo skin. Fraunces italic is only the offer line.
 2. **UI:** `<PageAdSlot shape="square|rectangle" placement="…" />`. Catch-all: `<SiteWideAdBand />` (already in the public layout).
 3. **UTMs:** `utm_source=mychennaicity`, `utm_medium=referral`, `utm_campaign=partner_ad`, `utm_content=<placement>`.
 4. Update `hasDedicatedPartnerAdSlot()` / `shouldShowSiteWideAd()` when you add a new inline slot so the site-wide band does not double up.
