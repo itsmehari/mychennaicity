@@ -1,9 +1,7 @@
 import Link from "next/link";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
-import {
-  businessWhatsAppHref,
-  getBusinessWhatsAppCopy,
-} from "@/lib/whatsapp-cta-copy";
+import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 import { isWhatsAppBusinessConfigured } from "@/lib/whatsapp-server";
 
 export function ChennaiJobsHubSafety() {
@@ -41,7 +39,6 @@ export function ChennaiJobsHubSafety() {
 export function ChennaiJobsHubEmployerCta() {
   const jobsCopy = getBusinessWhatsAppCopy("jobs");
   const waConfigured = isWhatsAppBusinessConfigured();
-  const waHref = waConfigured ? businessWhatsAppHref(jobsCopy) : "/contact";
 
   return (
     <section className="mcc-jobs-hub__employer-cta" aria-labelledby="chennai-jobs-employer-title">
@@ -58,9 +55,22 @@ export function ChennaiJobsHubEmployerCta() {
         <Link href="/contact" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline">
           Contact page
         </Link>
-        <a href={waHref} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline">
-          WhatsApp
-        </a>
+        {waConfigured ? (
+          <WhatsAppDeskButton
+            text={jobsCopy.prefill}
+            source="jobs_hub"
+            className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline"
+          >
+            WhatsApp
+          </WhatsAppDeskButton>
+        ) : (
+          <Link
+            href="/contact#jobs"
+            className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline"
+          >
+            WhatsApp
+          </Link>
+        )}
       </div>
     </section>
   );

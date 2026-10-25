@@ -1,8 +1,9 @@
 "use client";
 
 import type { PublicEventRow } from "@/domains/events";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
-  buildEventEnquireHref,
+  eventEnquireDesk,
   buildGoogleCalendarUrl,
   buildMapsSearchUrl,
   plainEventShareText,
@@ -10,12 +11,11 @@ import {
 import { EventShareButton } from "@/components/events/event-share-button";
 
 export function EventMobileActions({ ev }: { ev: PublicEventRow }) {
-  const enquireHref = buildEventEnquireHref();
+  const enquire = eventEnquireDesk();
   const mapsUrl = buildMapsSearchUrl(ev);
   const calendarUrl = buildGoogleCalendarUrl(ev);
   const shareText = plainEventShareText(ev);
 
-  const primaryHref = enquireHref;
   const primaryLabel = "Contact / enquire";
 
   return (
@@ -24,9 +24,13 @@ export function EventMobileActions({ ev }: { ev: PublicEventRow }) {
       role="toolbar"
       aria-label="Event actions"
     >
-      <a href={primaryHref} className="mcc-event-btn mcc-event-btn--primary">
+      <WhatsAppDeskButton
+        text={enquire.text}
+        source={enquire.source}
+        className="mcc-event-btn mcc-event-btn--primary"
+      >
         {primaryLabel}
-      </a>
+      </WhatsAppDeskButton>
       <EventShareButton
         title={ev.title}
         text={shareText}

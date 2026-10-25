@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
-  businessWhatsAppHref,
   getBusinessWhatsAppCopy,
   type BusinessWhatsAppCtaVariant,
 } from "@/lib/whatsapp-cta-copy";
@@ -21,7 +21,6 @@ export function BusinessWhatsAppCta({
 }) {
   const row = getBusinessWhatsAppCopy(variant);
   const wa = isWhatsAppBusinessConfigured();
-  const href = wa ? businessWhatsAppHref(row) : "/contact";
 
   const shell = embedded
     ? `space-y-2 ${className}`.trim()
@@ -37,11 +36,15 @@ export function BusinessWhatsAppCta({
       </p>
       <p className="mt-4">
         {wa ? (
-          <a href={href} className={ctaBase}>
+          <WhatsAppDeskButton
+            text={row.prefill}
+            source={`desk_${variant}`}
+            className={ctaBase}
+          >
             {row.buttonWhatsApp}
-          </a>
+          </WhatsAppDeskButton>
         ) : (
-          <Link href={href} className={ctaBase}>
+          <Link href="/contact" className={ctaBase}>
             {row.buttonFallback}
           </Link>
         )}

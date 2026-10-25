@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
   advertiseDetailSources,
-  advertisePanelHref,
   getAdvertisePanelCopy,
   type AdvertisePanelLayout,
   type AdvertisePanelVariant,
@@ -40,21 +40,23 @@ function MegaphoneIcon({ className = "" }: { className?: string }) {
 }
 
 function PanelCta({
-  href,
+  source,
+  text,
   label,
   className = "ad-panel__btn",
 }: {
-  href: string;
+  source: string;
+  text: string;
   label: string;
   className?: string;
 }) {
   const wa = isWhatsAppBusinessConfigured();
   if (wa) {
     return (
-      <a href={href} className={className}>
+      <WhatsAppDeskButton text={text} source={source} className={className}>
         <WhatsAppIcon className="ad-panel__btn-icon" />
         {label}
-      </a>
+      </WhatsAppDeskButton>
     );
   }
   return (
@@ -87,11 +89,13 @@ function panelClass(
 
 function HeroLayout({
   row,
-  href,
+  source,
+  text,
   areaLabel,
 }: {
   row: ReturnType<typeof getAdvertisePanelCopy>;
-  href: string;
+  source: string;
+  text: string;
   areaLabel?: string;
 }) {
   const headline =
@@ -132,7 +136,12 @@ function HeroLayout({
         {row.ctaSideBody ? (
           <p className="ad-panel__cta-card-body">{row.ctaSideBody}</p>
         ) : null}
-        <PanelCta href={href} label={row.ctaLabel} className="ad-panel__btn ad-panel__btn--wa" />
+        <PanelCta
+          source={source}
+          text={text}
+          label={row.ctaLabel}
+          className="ad-panel__btn ad-panel__btn--wa"
+        />
         <p className="ad-panel__note">
           No phone number shown here — tap the button to open a secure WhatsApp
           enquiry.
@@ -144,11 +153,13 @@ function HeroLayout({
 
 function SectionLayout({
   row,
-  href,
+  source,
+  text,
   areaLabel,
 }: {
   row: ReturnType<typeof getAdvertisePanelCopy>;
-  href: string;
+  source: string;
+  text: string;
   areaLabel?: string;
 }) {
   const headline =
@@ -163,16 +174,18 @@ function SectionLayout({
         <h2 className="ad-panel__section-headline">{headline}</h2>
         <p className="ad-panel__section-body">{row.body}</p>
       </div>
-      <PanelCta href={href} label={row.ctaLabel} />
+      <PanelCta source={source} text={text} label={row.ctaLabel} />
     </div>
   );
 }
 
 function StripLayout({
-  href,
+  source,
+  text,
   ctaLabel,
 }: {
-  href: string;
+  source: string;
+  text: string;
   ctaLabel: string;
 }) {
   return (
@@ -190,7 +203,7 @@ function StripLayout({
           </p>
         </div>
       </div>
-      <PanelCta href={href} label={ctaLabel} />
+      <PanelCta source={source} text={text} label={ctaLabel} />
     </div>
   );
 }
@@ -205,7 +218,7 @@ function StripLayout({
  * ```
  *
  * Layouts: `hero` (home-style), `section` (hub band), `strip` (compact).
- * WhatsApp via `/api/contact/whatsapp` (number never in HTML; API in robots.txt).
+ * WhatsApp opens after a click. The desk number is not in the page.
  */
 export function AdvertisePanel({
   variant,
@@ -224,7 +237,6 @@ export function AdvertisePanel({
 }) {
   const row = getAdvertisePanelCopy(variant);
   const trackingSource = resolveSource(variant, layout, source);
-  const href = advertisePanelHref(trackingSource, row.prefill);
 
   return (
     <section
@@ -232,11 +244,21 @@ export function AdvertisePanel({
       aria-label="Advertise on My Chennai City"
     >
       {layout === "hero" ? (
-        <HeroLayout row={row} href={href} areaLabel={areaLabel} />
+        <HeroLayout
+          row={row}
+          source={trackingSource}
+          text={row.prefill}
+          areaLabel={areaLabel}
+        />
       ) : layout === "strip" ? (
-        <StripLayout href={href} ctaLabel={row.ctaLabel} />
+        <StripLayout source={trackingSource} text={row.prefill} ctaLabel={row.ctaLabel} />
       ) : (
-        <SectionLayout row={row} href={href} areaLabel={areaLabel} />
+        <SectionLayout
+          row={row}
+          source={trackingSource}
+          text={row.prefill}
+          areaLabel={areaLabel}
+        />
       )}
     </section>
   );

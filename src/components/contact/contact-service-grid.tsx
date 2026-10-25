@@ -1,23 +1,14 @@
 import Link from "next/link";
-import { ContactCopyEmail } from "@/components/contact/contact-copy-email";
 import { ContactIntentRail } from "@/components/contact/contact-intent-rail";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
   WhatsAppCommunityJoinLink,
   WhatsAppCommunityPageLink,
 } from "@/components/community/whatsapp-community-join-link";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
-import { getPublicContactEmail } from "@/lib/env";
-import {
-  businessWhatsAppHref,
-  getBusinessWhatsAppCopy,
-} from "@/lib/whatsapp-cta-copy";
-import { isWhatsAppBusinessConfigured, isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
+import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
+import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import { WHATSAPP_COMMUNITY_GROUP_NAME } from "@/lib/whatsapp-community";
-
-function mailtoHref(email: string, subject?: string): string {
-  if (!subject?.trim()) return `mailto:${email}`;
-  return `mailto:${email}?${new URLSearchParams({ subject: subject.trim() }).toString()}`;
-}
 
 function WhatsAppIcon() {
   return (
@@ -28,12 +19,8 @@ function WhatsAppIcon() {
 }
 
 export function ContactServiceGrid() {
-  const contactEmail = getPublicContactEmail();
-  const waDesk = isWhatsAppBusinessConfigured();
   const communityOn = isWhatsAppCommunityInviteConfigured();
-  const defaultWa = waDesk
-    ? businessWhatsAppHref(getBusinessWhatsAppCopy("default"))
-    : null;
+  const defaultPrefill = getBusinessWhatsAppCopy("default").prefill;
 
   return (
     <div className="mcc-corp">
@@ -51,19 +38,14 @@ export function ContactServiceGrid() {
               inquiry type — we route every message to the right desk.
             </p>
             <div className="mcc-corp-hero__actions">
-              {defaultWa ? (
-                <a href={defaultWa} className="mcc-corp-btn mcc-corp-btn--wa">
-                  <WhatsAppIcon />
-                  Message now
-                </a>
-              ) : contactEmail ? (
-                <a
-                  href={mailtoHref(contactEmail, "General enquiry")}
-                  className="mcc-corp-btn mcc-corp-btn--solid"
-                >
-                  Email headquarters
-                </a>
-              ) : null}
+              <WhatsAppDeskButton
+                text={defaultPrefill}
+                source="contact_hero"
+                className="mcc-corp-btn mcc-corp-btn--wa"
+              >
+                <WhatsAppIcon />
+                Message on WhatsApp
+              </WhatsAppDeskButton>
               <a href="#engagement" className="mcc-corp-btn mcc-corp-btn--ghost">
                 View inquiry paths
               </a>
@@ -83,7 +65,7 @@ export function ContactServiceGrid() {
               </li>
               <li className="mcc-corp-hero__stat">
                 <strong>03</strong>
-                <span>WhatsApp for speed · email for formal briefs</span>
+                <span>WhatsApp for tips, jobs, events, and listings</span>
               </li>
             </ul>
           </aside>
@@ -97,7 +79,7 @@ export function ContactServiceGrid() {
         </div>
         <div className="mcc-corp-trust__item">
           <strong>Response</strong>
-          We read all mail; replies depend on verification needs
+          We read every message; replies depend on verification needs
         </div>
         <div className="mcc-corp-trust__item">
           <strong>Standards</strong>
@@ -125,8 +107,7 @@ export function ContactServiceGrid() {
               {CONTACT_CHANNELS.map((channel, index) => {
                 const waCopy = channel.whatsappVariant
                   ? getBusinessWhatsAppCopy(channel.whatsappVariant)
-                  : null;
-                const waHref = waCopy && waDesk ? businessWhatsAppHref(waCopy) : null;
+                  : getBusinessWhatsAppCopy("default");
                 const n = String(index + 1).padStart(2, "0");
 
                 return (
@@ -154,30 +135,14 @@ export function ContactServiceGrid() {
                       </ul>
                     </div>
                     <div className="mcc-corp-lane__actions">
-                      {waHref ? (
-                        <a
-                          href={waHref}
-                          className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm mcc-corp-btn--block"
-                        >
-                          <WhatsAppIcon />
-                          {channel.primaryLabel}
-                        </a>
-                      ) : contactEmail ? (
-                        <a
-                          href={mailtoHref(contactEmail, channel.emailSubject)}
-                          className="mcc-corp-btn mcc-corp-btn--ink mcc-corp-btn--sm mcc-corp-btn--block"
-                        >
-                          {channel.emailLabel}
-                        </a>
-                      ) : null}
-                      {contactEmail && waHref ? (
-                        <a
-                          href={mailtoHref(contactEmail, channel.emailSubject)}
-                          className="mcc-corp-btn mcc-corp-btn--outline-ink mcc-corp-btn--sm mcc-corp-btn--block"
-                        >
-                          Email instead
-                        </a>
-                      ) : null}
+                      <WhatsAppDeskButton
+                        text={waCopy.prefill}
+                        source={`contact_${channel.id}`}
+                        className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm mcc-corp-btn--block"
+                      >
+                        <WhatsAppIcon />
+                        {channel.primaryLabel}
+                      </WhatsAppDeskButton>
                       {channel.hub ? (
                         <Link
                           href={channel.hub.href}
@@ -186,9 +151,7 @@ export function ContactServiceGrid() {
                           {channel.hub.label}
                         </Link>
                       ) : null}
-                      {waHref ? (
-                        <p className="mcc-corp-lane__hint">Prefills WhatsApp</p>
-                      ) : null}
+                      <p className="mcc-corp-lane__hint">Opens WhatsApp with a starter message</p>
                     </div>
                   </article>
                 );
@@ -196,33 +159,29 @@ export function ContactServiceGrid() {
             </div>
 
             <div className="mcc-corp-direct">
-              {contactEmail ? (
-                <aside
-                  className="mcc-corp-direct__panel"
-                  aria-labelledby="contact-email-title"
-                >
-                  <p className="mcc-corp-direct__eyebrow">Formal channel</p>
-                  <h3 id="contact-email-title" className="mcc-corp-direct__title">
-                    Corporate email
-                  </h3>
-                  <p className="mcc-corp-direct__body">
-                    Prefer a written record? Use a precise subject line — tip,
-                    job, event, or advertise — so routing is immediate.
-                  </p>
-                  <div className="mcc-corp-direct__addr">
-                    <a href={mailtoHref(contactEmail)}>{contactEmail}</a>
-                    <ContactCopyEmail email={contactEmail} />
-                  </div>
-                  <div className="mcc-corp-direct__actions">
-                    <a
-                      href={mailtoHref(contactEmail, "General enquiry")}
-                      className="mcc-corp-btn mcc-corp-btn--ink mcc-corp-btn--sm"
-                    >
-                      Open mail client
-                    </a>
-                  </div>
-                </aside>
-              ) : null}
+              <aside
+                className="mcc-corp-direct__panel"
+                aria-labelledby="contact-desk-title"
+              >
+                <p className="mcc-corp-direct__eyebrow">Desk</p>
+                <h3 id="contact-desk-title" className="mcc-corp-direct__title">
+                  WhatsApp
+                </h3>
+                <p className="mcc-corp-direct__body">
+                  Send the details for a story, job, event, listing, or
+                  partnership. Pick a topic above, or start from here.
+                </p>
+                <div className="mcc-corp-direct__actions">
+                  <WhatsAppDeskButton
+                    text={defaultPrefill}
+                    source="contact_desk"
+                    className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm"
+                  >
+                    <WhatsAppIcon />
+                    Message on WhatsApp
+                  </WhatsAppDeskButton>
+                </div>
+              </aside>
 
               <aside
                 className="mcc-corp-direct__panel mcc-corp-direct__panel--ink"

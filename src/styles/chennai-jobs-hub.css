@@ -777,6 +777,7 @@
   padding: 0.625rem 1.125rem;
   font-size: 0.875rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .mcc-jobs-hub__employer-btn--solid {
@@ -786,6 +787,7 @@
 
 .mcc-jobs-hub__employer-btn--outline {
   border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
   color: #fff;
 }
 

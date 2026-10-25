@@ -118,10 +118,3 @@ export function getAdvertisePanelCopy(
   return copy[variant] ?? copy.home;
 }
 
-export function advertisePanelHref(
-  source: string,
-  prefill: string,
-): string {
-  const params = new URLSearchParams({ source, text: prefill });
-  return `/api/contact/whatsapp?${params.toString()}`;
-}

@@ -4,6 +4,7 @@ export type BusinessWhatsAppCtaVariant =
   | "directory"
   | "events"
   | "news"
+  | "property"
   | "default";
 
 export type BusinessWhatsAppCopy = {
@@ -11,7 +12,7 @@ export type BusinessWhatsAppCopy = {
   body: string;
   buttonWhatsApp: string;
   buttonFallback: string;
-  /** Optional wa.me prefill (server adds via `?text=` on `/api/contact/whatsapp`). */
+  /** Starter message. Sent only after a click. Do not put a phone number here. */
   prefill?: string;
 };
 
@@ -44,6 +45,14 @@ const copy: Record<BusinessWhatsAppCtaVariant, BusinessWhatsAppCopy> = {
     buttonFallback: "Contact page",
     prefill: "Hi — I would like to suggest a Chennai event listing on mychennaicity.in.",
   },
+  property: {
+    title: "Post a Chennai property ad",
+    body: "Sale, rent, plot, or commercial. Send photos, area, price, size, and a phone number. We place the ad. This page does not publish it.",
+    buttonWhatsApp: "Message us on WhatsApp",
+    buttonFallback: "Contact page",
+    prefill:
+      "Hi — I would like to post a property ad on mychennaicity.in.\nType (sale / rent / plot / commercial):\nArea:\nPrice:\nSize:\nPhone:\nPhotos: I will send them in this chat.",
+  },
   news: {
     title: "Tip the Chennai desk",
     body: "Spotted something we should look at — safety, civic works, consumer rip-offs, or a human story? A short message is enough; links and dates help.",
@@ -66,8 +75,3 @@ export function getBusinessWhatsAppCopy(
   return copy[variant] ?? copy.default;
 }
 
-export function businessWhatsAppHref(copyRow: BusinessWhatsAppCopy): string {
-  const t = copyRow.prefill?.trim();
-  if (!t) return "/api/contact/whatsapp";
-  return `/api/contact/whatsapp?${new URLSearchParams({ text: t }).toString()}`;
-}

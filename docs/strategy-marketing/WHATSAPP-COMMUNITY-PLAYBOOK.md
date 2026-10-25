@@ -35,7 +35,7 @@ Always share the **landing page URL**, not the raw `chat.whatsapp.com` link in p
 ## 1:1 vs group
 
 - **Group invite:** `/chennai-whatsapp-group` → tracked join → env invite URL
-- **Admin / business desk:** `/api/contact/whatsapp` (unchanged)
+- **Admin / business desk:** a click POSTs to `/api/contact/whatsapp`. A normal visit to that address goes back to `/contact` and does not reveal the desk number.
 
 ## Pin message
 

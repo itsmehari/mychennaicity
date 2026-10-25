@@ -1,5 +1,5 @@
 import type { PublicEventRow } from "@/domains/events";
-import { businessWhatsAppHref, getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
+import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 
 /** Dedicated public submission route — not live yet; use contact/WhatsApp flow. */
 export const EVENT_POST_SUBMIT_PATH = "/contact";
@@ -189,9 +189,9 @@ export function buildGoogleCalendarUrl(ev: PublicEventRow): string | null {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-export function buildEventEnquireHref(): string {
+export function eventEnquireDesk(): { text: string; source: string } {
   const row = getBusinessWhatsAppCopy("events");
-  return businessWhatsAppHref(row);
+  return { text: row.prefill ?? "", source: "event_detail" };
 }
 
 export function buildEventDetailRows(ev: PublicEventRow): EventDetailRow[] {

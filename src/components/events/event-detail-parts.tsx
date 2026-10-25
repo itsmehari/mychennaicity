@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { PublicEventRow } from "@/domains/events";
+import { EventShareButton } from "@/components/events/event-share-button";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
   buildEventDetailRows,
-  buildEventEnquireHref,
+  eventEnquireDesk,
   buildGoogleCalendarUrl,
   buildMapsSearchUrl,
   EVENT_POST_SUBMIT_PATH,
@@ -12,7 +14,6 @@ import {
   getEventAudienceTags,
   getEventCategoryLabel,
 } from "@/lib/events/event-detail-helpers";
-import { EventShareButton } from "@/components/events/event-share-button";
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
@@ -203,7 +204,7 @@ export function EventHostingCta({ className = "" }: { className?: string }) {
 export function EventDesktopSidebar({ ev }: { ev: PublicEventRow }) {
   const mapsUrl = buildMapsSearchUrl(ev);
   const calendarUrl = buildGoogleCalendarUrl(ev);
-  const enquireHref = buildEventEnquireHref();
+  const enquire = eventEnquireDesk();
 
   return (
     <aside
@@ -217,9 +218,13 @@ export function EventDesktopSidebar({ ev }: { ev: PublicEventRow }) {
             Quick actions
           </p>
           <div className="mt-4 flex flex-col gap-2.5">
-            <a href={enquireHref} className="mcc-event-btn mcc-event-btn--primary">
+            <WhatsAppDeskButton
+              text={enquire.text}
+              source={enquire.source}
+              className="mcc-event-btn mcc-event-btn--primary"
+            >
               Contact / enquire
-            </a>
+            </WhatsAppDeskButton>
             {mapsUrl ? (
               <a
                 href={mapsUrl}

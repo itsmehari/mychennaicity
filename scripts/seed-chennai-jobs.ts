@@ -151,9 +151,7 @@ Original post on partner site MyOMR.in: [Personal Assistant (Part-Time / Flexibl
 **Safety:** Do **not** pay any fee to apply. If anything looks off, stop and recheck you are messaging the **same** employer contact as on the original listing.`,
     locationLabel: "Chennai (OMR Road)",
     salaryDisclosed: false,
-    applicationUrl: `https://wa.me/917200101497?text=${encodeURIComponent(
-      'Hi, I found the "Personal Assistant (Part-Time / Flexible)" role for Direct hire — Chennai OMR on mychennaicity.in and I\'d like to apply. Could you share more details?',
-    )}`,
+    applicationUrl: "/contact#jobs",
     employmentType: "PART_TIME",
     validThroughEnd: "2026-06-02T18:29:59.000Z",
   },
