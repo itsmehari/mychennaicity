@@ -53,6 +53,64 @@ describe("buildHubCardFromDb", () => {
       "/images/events/tote-bag-paint-and-play-thinnai-porur-june-2026.jpg",
     );
   });
+
+  it("tags Madras Day photo exhibitions as culture + festivals and uses the poster", () => {
+    const card = buildHubCardFromDb({
+      ...sampleEvent,
+      slug: "madras-day-chennai-to-madras-photo-exhibition-august-2026",
+      title:
+        "Madras Day 2026: Chennai-to-Madras Photo Exhibition — Anna Centenary Library",
+      description: "Photo exhibition by L Ramachandran at Anna Centenary Library.",
+      presentationKey: null,
+      contentRef: null,
+      featured: true,
+    });
+    expect(card.imageSrc).toBe(
+      "/images/events/madras-day-chennai-to-madras-photo-exhibition-august-2026.png",
+    );
+    expect(card.tags).toContain("culture");
+    expect(card.tags).toContain("festivals");
+    expect(card.tags).toContain("featured");
+  });
+
+  it("tags Made of Chennai food and music as festivals + culture and uses the poster", () => {
+    const card = buildHubCardFromDb({
+      ...sampleEvent,
+      slug: "made-of-chennai-food-music-festival-august-2026",
+      title: "Made of Chennai Food and Music Festival — YMCA Nandanam",
+      description:
+        "The Hindu Made of Chennai food stalls and live music at YMCA Nandanam.",
+      presentationKey: null,
+      contentRef: null,
+      featured: true,
+    });
+    expect(card.imageSrc).toBe(
+      "/images/events/made-of-chennai-food-music-festival-august-2026.png",
+    );
+    expect(card.tags).toContain("festivals");
+    expect(card.tags).toContain("culture");
+    expect(card.tags).toContain("featured");
+  });
+
+  it("tags Krishnaashtami association nights as festivals + community and uses the poster", () => {
+    const card = buildHubCardFromDb({
+      ...sampleEvent,
+      slug: "sri-kala-sudha-telugu-association-krishnaashtami-september-2026",
+      title:
+        "Sri Kala Sudha Telugu Association Krishnaashtami — Music Academy (13 Sep 2026)",
+      description:
+        "A community Krishnaashtami gathering at The Music Academy, TTK Road.",
+      presentationKey: null,
+      contentRef: null,
+      featured: true,
+    });
+    expect(card.imageSrc).toBe(
+      "/images/events/sri-kala-sudha-telugu-association-krishnaashtami-september-2026.png",
+    );
+    expect(card.tags).toContain("festivals");
+    expect(card.tags).toContain("community");
+    expect(card.tags).toContain("featured");
+  });
 });
 
 describe("buildHubCardFromMock", () => {

@@ -1,5 +1,5 @@
 /**
- * Rolling “last 20 days” sitemap for Search Console recrawl.
+ * Rolling “last 30 days” sitemap for Search Console recrawl.
  * Live URL: /sitemap-recent.xml
  *
  * Includes indexable DB rows whose lastmod falls in the window, plus hubs
@@ -12,6 +12,11 @@ import { listJobSeekerPostsForSitemap } from "@/domains/job-seekers";
 import { listJobsForSitemap } from "@/domains/jobs";
 import { listArticlesForSitemap } from "@/domains/news";
 import { COMPULSIVE_SITEMAP_ENTRIES, COMPULSIVE_TAMIL_SITEMAP_PATHS } from "@/content/compulsive/index";
+import {
+  EDUCATION_SITEMAP_ENTRIES,
+  EDUCATION_TAMIL_SITEMAP_PATHS,
+} from "@/content/education/index";
+import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
@@ -34,7 +39,7 @@ import {
   WHATSAPP_SPAMMERS_PAGE_PATH,
 } from "@/lib/whatsapp-community";
 
-export const RECENT_SITEMAP_WINDOW_DAYS = 20;
+export const RECENT_SITEMAP_WINDOW_DAYS = 30;
 export const RECENT_SITEMAP_PATH = "/sitemap-recent.xml";
 
 export type RecentSitemapUrl = {
@@ -58,7 +63,9 @@ const DAILY_HUB_PATHS = [
 
 /**
  * One-shot launches / substantial updates. Drop out of the recent sitemap
- * automatically once lastmod ages past the 20-day window.
+ * automatically once lastmod ages past the 30-day window.
+ *
+ * Dates below are when the page was shipped or last rewritten, not “today”.
  */
 const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
   { path: "/chennai-today-tamil", lastModified: "2026-08-14" },
@@ -87,6 +94,31 @@ const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
     path,
     lastModified: "2026-08-14",
   })),
+  ...EDUCATION_SITEMAP_ENTRIES.map((entry) => ({
+    path: entry.path,
+    lastModified: "2026-09-29",
+  })),
+  ...EDUCATION_TAMIL_SITEMAP_PATHS.map((path) => ({
+    path,
+    lastModified: "2026-09-29",
+  })),
+  ...GOVERNMENT_SITEMAP_ENTRIES.map((entry) => ({
+    path: entry.path,
+    lastModified: "2026-09-04",
+  })),
+  { path: "/civic-tools", lastModified: "2026-09-12" },
+  { path: "/civic-tools/area-sabha", lastModified: "2026-09-12" },
+  { path: "/civic-tools/zone-dashboard", lastModified: "2026-09-12" },
+  { path: "/civic-tools/zonal-office-access", lastModified: "2026-09-12" },
+  { path: "/areas/adyar-thiruvanmiyur", lastModified: "2026-09-04" },
+  { path: "/areas/ambattur-annanagar", lastModified: "2026-09-04" },
+  { path: "/areas/kodambakkam-t-nagar", lastModified: "2026-09-04" },
+  { path: "/areas/tiruvottiyur-manali-belt", lastModified: "2026-09-30" },
+  { path: "/areas/madhavaram-madhavaram", lastModified: "2026-09-30" },
+  { path: "/areas/royapuram-tondiarpet", lastModified: "2026-09-30" },
+  { path: "/areas/teynampet-nungambakkam", lastModified: "2026-09-30" },
+  { path: "/areas/saidapet-guindy-alandur", lastModified: "2026-09-30" },
+  { path: "/areas/valasaravakkam-porur", lastModified: "2026-09-30" },
 ];
 
 export function recentSitemapSince(now = new Date()): Date {

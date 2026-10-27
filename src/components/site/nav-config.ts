@@ -1,7 +1,7 @@
 import { chennaiZones } from "@/lib/chennai-zones";
 import {
   WHATSAPP_ADMINS_TOOLKIT_PATH,
-  WHATSAPP_COMMUNITY_PAGE_PATH,
+  whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
 import { TOPIC_SLUG_TO_CATEGORY } from "@/lib/news-topics";
 import type { MegaNavLiveKind } from "@/lib/nav/nav-preview-types";
@@ -136,9 +136,9 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Today's 24K and 22K plus calculator.",
           },
           {
-            href: WHATSAPP_COMMUNITY_PAGE_PATH,
+            href: whatsappCommunityJoinHref("nav"),
             label: "WhatsApp community",
-            description: "Official my chennai city reader group.",
+            description: "Request to join the reader group.",
           },
           {
             href: WHATSAPP_ADMINS_TOOLKIT_PATH,

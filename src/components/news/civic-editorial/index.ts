@@ -7,6 +7,7 @@ export {
   ArticleReadingProgress,
   ArticleShareTools,
 } from "./article-share-tools";
+export { ArticleAlsoRead } from "./article-also-read";
 export { ArticleRelatedGrid } from "./article-related-grid";
 export { ArticleRightSidebar, OfficialSourcesBlock } from "./article-right-sidebar";
 export { CivicEditorialLayout } from "./civic-editorial-layout";

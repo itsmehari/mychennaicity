@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 import { formatInrPerGram } from "@/lib/gold-rate/format-inr";
 import type { GoldRateSnapshotView } from "@/domains/gold-rate";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
@@ -29,7 +29,7 @@ export function GoldRateHubHero({ snapshot }: Props) {
           Open calculator
         </a>
         <Link
-          href={WHATSAPP_COMMUNITY_PAGE_PATH}
+          href={whatsappCommunityJoinHref("seo")}
           className="rounded-xl border border-[var(--border)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)]"
         >
           Join reader WhatsApp

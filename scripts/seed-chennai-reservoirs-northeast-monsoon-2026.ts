@@ -72,6 +72,10 @@ async function main() {
 
 This is a MyChennaiCity civic report on Chennai’s drinking-water reservoirs. Storage figures are taken from the Chennai Metropolitan Water Supply and Sewerage Board lake-level table dated 29 September 2026, and from this desk’s 28 September graphic of the same five lakes. It is not an official Metro Water notice. Lake levels change daily. Check the board’s table before you treat any number here as today’s storage.
 
+## Update — 17 October 2026
+
+This page is the 29 September position. Storage has fallen since then. The Northeast Monsoon began on 15 October, and on the 16 October CMWSSB table the five lakes were lower, not higher. The follow-up is [The monsoon has started, and Chennai’s five reservoirs are lower than in September](/chennai-local-news/chennai-reservoirs-34-percent-october-17-2026).
+
 ## Summary
 
 **Chennai, 29 September 2026** — The city is entering the Northeast Monsoon with its five principal drinking-water reservoirs at **4,569 million cubic feet**, or **38.9%** of their **11,757 mcft** combined capacity.

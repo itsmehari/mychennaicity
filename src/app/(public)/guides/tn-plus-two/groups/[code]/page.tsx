@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EducationGroupPage } from "@/components/education/education-group-page";
 import { getHseGroup, HSE_GROUP_CODES } from "@/content/education/hse-groups";
-import { educationGroupPath } from "@/content/education/paths";
+import { educationGroupPath, educationHreflang } from "@/content/education/paths";
 import { getSiteUrl } from "@/lib/env";
 import { buildEducationGroupJsonLd } from "@/lib/seo/education-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: group.seoTitle,
     description: group.seoDescription,
-    alternates: { canonical: url },
+    alternates: educationHreflang(educationGroupPath(group.code), educationGroupPath(group.code, "ta"), getSiteUrl()),
     openGraph: {
       title: fullSiteTitle(group.seoTitle),
       description: group.seoDescription,

@@ -30,6 +30,7 @@ import { ArticleCommunityBand } from "@/components/community/article-community-b
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
 import {
+  ArticleAlsoRead,
   ArticleIdentityHeader,
   ArticleKeyDetailsStrip,
   ArticleLocationTag,
@@ -175,6 +176,14 @@ export async function EditorialArticle({
     <SwmRulesAeoSection slug={article.slug} />
   ) : null;
 
+  const alsoReadArticle = relatedRows[0] ?? null;
+  const alsoReadLabel = isTamilArticleSlug(article.slug)
+    ? "இதையும் படிக்க:"
+    : "Also Read:";
+  const inlineAlsoRead = alsoReadArticle ? (
+    <ArticleAlsoRead article={alsoReadArticle} label={alsoReadLabel} />
+  ) : null;
+
   const mainBody = (
     <>
       {swmAeoBlock}
@@ -191,6 +200,7 @@ export async function EditorialArticle({
         <ArticleProse
           content={reportBody}
           headingAnchors={reportHeadingAnchors}
+          inlineAlsoRead={inlineAlsoRead}
         />
       </section>
 

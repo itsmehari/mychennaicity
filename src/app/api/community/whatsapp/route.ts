@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { appendWhatsappCommunityUtms } from "@/lib/whatsapp-community";
-import { getWhatsAppCommunityInviteUrl } from "@/lib/whatsapp-server";
+import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Old public invite redirect. It now sends people to the join form.
+ * The group invite is not on this response.
+ */
 export function GET(req: NextRequest) {
-  const origin = req.nextUrl.origin;
-  const fallback = new URL("/contact", origin);
-  const invite = getWhatsAppCommunityInviteUrl();
-  if (!invite) {
-    return NextResponse.redirect(fallback, 302);
-  }
-  const utmContent =
-    req.nextUrl.searchParams.get("utm_content")?.trim() || "direct";
-  const target = appendWhatsappCommunityUtms(invite, utmContent);
-  return NextResponse.redirect(target, 302);
+  const src =
+    req.nextUrl.searchParams.get("src") ||
+    req.nextUrl.searchParams.get("utm_content");
+  const dest = new URL(whatsappCommunityJoinHref(src), req.nextUrl.origin);
+  return NextResponse.redirect(dest, 302);
 }

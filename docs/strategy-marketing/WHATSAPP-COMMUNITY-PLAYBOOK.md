@@ -1,52 +1,48 @@
 # WhatsApp Community Playbook — Chennai
 
 **Group:** my chennai city  
-**Landing:** https://mychennaicity.in/chennai-whatsapp-group  
+**Join form (share this):** https://mychennaicity.in/whatsapp-community/join  
+**Rules:** https://mychennaicity.in/chennai-whatsapp-group  
+**Decision log:** `docs/strategy-marketing/WHATSAPP-GROUPS.md`  
 **Scope:** One city-wide group (not per-topic splinters)
 
 ## Weekly share cadence
 
-| Day | Channel | Action |
-|-----|---------|--------|
-| Monday | Site news hub + WhatsApp | Top civic / mobility story link |
-| Wednesday | Jobs hub + WhatsApp | 1–2 verified Chennai roles |
-| Friday | Events hub + WhatsApp | Weekend picks |
-| Sunday | Landing page social | Remind rules + canonical URL |
+| Day | Where | What to share |
+|-----|--------|----------------|
+| Monday | News hub, then the group | One civic or mobility story. Paste the story URL with `utm_source=whatsapp&utm_medium=group&utm_campaign=community_share` |
+| Wednesday | Jobs hub, then the group | One or two verified Chennai roles, same UTM tags |
+| Friday | Events hub, then the group | Weekend picks, same UTM tags |
+| Sunday | Group pin | Rules reminder. Link the rules page and the join form. Do not paste the group invite |
 
-Always share the **landing page URL**, not the raw `chat.whatsapp.com` link in public posts.
+Public posts, bios, and partner sites use the **join form**, not the invite.
 
-## Moderation
+## Pinned group rules
 
-- Enforce rules on the landing page (also pinned in group)
-- Warn → remove for spam, hate, unverified forwards, political campaigning
-- Jobs: require role + area + contact; max one repost/week per vacancy
-- Business: Chennai-relevant only; max once/week per business
+Use `dev-tools/whatsapp-community-pinned-message.txt`.
+
+- Chennai-relevant posts only: news, jobs, events, civic notes, neighbour help
+- No investment, crypto, gambling, or hate
+- Jobs need a role, an area, and a contact. One repost a week per vacancy
+- A business may post once a week, and only if it is relevant to Chennai
 - No cold DMs
+- English, Tamil, and Tanglish are welcome
 
 ## When the group is full
 
-1. WhatsApp member cap blocks new joins on the invite link
-2. Direct waitlist traffic to:
-   - Site contact email (`NEXT_PUBLIC_CONTACT_EMAIL`)
-   - Admin WhatsApp on `/contact` (1:1 desk — separate from group invite)
-3. Update landing page waitlist section if process changes
-4. Consider overflow group only after documenting on the landing page
+1. WhatsApp stops accepting new members on the invite.
+2. Keep the public join form. It becomes the waitlist. Do not paste the invite on the homepage, news, footer, or the rules page.
+3. Tell people who submit that the group is full and that the queue is the waitlist. Email from the contact page if you need a 1:1 reply. The desk WhatsApp on `/contact` is separate from the group invite.
+4. Open an overflow group only after the rules page says so, and still collect the form before sharing that invite.
 
-## 1:1 vs group
+## Moderation lookup
 
-- **Group invite:** `/chennai-whatsapp-group` → tracked join → env invite URL
-- **Admin / business desk:** a click POSTs to `/api/contact/whatsapp`. A normal visit to that address goes back to `/contact` and does not reveal the desk number.
+1. WhatsApp shows a pending request.
+2. Search `/admin/whatsapp-join-requests` by the last 4 digits.
+3. Approve in WhatsApp and in the queue, or decline both.
+4. If there is no row, they have not used the form. Do not approve them from a profile photo.
 
-## Pin message
+## 1:1 desk vs group
 
-Use copy from `dev-tools/whatsapp-community-pinned-message.txt`.
-
-## Target search intents
-
-**English:** Chennai WhatsApp group, local WhatsApp community Chennai, join Chennai community group, neighbourhood WhatsApp Chennai, my chennai city WhatsApp
-
-**Tamil:** சென்னை வாட்ஸ்அப் குழு, Chennai WhatsApp group Tamil
-
-## Localities (body copy)
-
-OMR, Adyar, T Nagar, Anna Nagar, Velachery, Tambaram, Porur, Chrompet, Sholinganallur, Perungudi, and all Greater Chennai zones on area pages.
+- **Group:** `/whatsapp-community/join` → success screen → env invite.
+- **Desk:** a click POSTs to `/api/contact/whatsapp`. A normal visit to that address returns to `/contact` and does not reveal the desk number.

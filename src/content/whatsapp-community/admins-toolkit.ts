@@ -3,6 +3,7 @@ import {
   WHATSAPP_COMMUNITY_GUIDE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_SPAMMERS_PAGE_PATH,
+  whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
 
 export { WHATSAPP_ADMINS_TOOLKIT_PATH };
@@ -33,6 +34,7 @@ export const WA_ADMIN_PLAYBOOK = [
 export const WA_ADMIN_LINKS = [
   { href: WHATSAPP_SPAMMERS_PAGE_PATH, label: "Flagged spam numbers (admins)" },
   { href: WHATSAPP_COMMUNITY_GUIDE_PATH, label: "WhatsApp community SEO / join guide" },
-  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "Join mychennaicity WhatsApp group" },
+  { href: whatsappCommunityJoinHref("seo"), label: "Request to join the group" },
+  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "Group rules" },
   { href: "/contact#news", label: "Tip us a neighbourhood scam pattern" },
 ];

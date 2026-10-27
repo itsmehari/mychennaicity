@@ -1,4 +1,3 @@
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import { WhatsAppCommunityJoinLink, WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
 
 const joinBtnClass =
@@ -10,48 +9,6 @@ export function JoinWhatsAppCommunityCard({
   /** `inline` = tighter band for article foot; `card` = hub / home panels; `sidebar` = article rail */
   layout?: "card" | "inline" | "sidebar";
 }) {
-  const enabled = isWhatsAppCommunityInviteConfigured();
-
-  if (!enabled) {
-    if (layout === "sidebar") {
-      return (
-        <p className="civic-sidebar-wa__text">
-          A moderated Chennai reader group is being set up — the invite will
-          land here once the desk is ready.
-        </p>
-      );
-    }
-    return (
-      <div
-        className={
-          layout === "inline"
-            ? "text-sm leading-relaxed text-[var(--muted)]"
-            : "rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6"
-        }
-      >
-        {layout === "inline" ? (
-          <p>
-            <span className="font-semibold text-[var(--foreground)]">
-              WhatsApp community:
-            </span>{" "}
-            We are finalising a moderated Chennai reader group — the invite will
-            land here once moderation rules are set.
-          </p>
-        ) : (
-          <>
-            <h2 className="text-sm font-semibold text-[var(--foreground)]">
-              WhatsApp community
-            </h2>
-            <p className="type-lede mt-2 text-sm leading-relaxed text-[var(--muted)]">
-              We are finalising a moderated Chennai reader group — the invite
-              will appear here once moderation and signup are ready.
-            </p>
-          </>
-        )}
-      </div>
-    );
-  }
-
   if (layout === "sidebar") {
     return (
       <>
@@ -95,14 +52,14 @@ export function JoinWhatsAppCommunityCard({
         ) : null}{" "}
         The <strong className="font-semibold text-[var(--foreground)]">my chennai city</strong>{" "}
         reader group — short updates and civil discussion, same standards as the
-        site. Opens WhatsApp after you tap.
+        site. The group link appears after you send your name and number.
       </p>
       <p className={layout === "inline" ? "mt-3" : "mt-4"}>
         <WhatsAppCommunityJoinLink
           utmContent={layout === "inline" ? "inline" : "card"}
           className={joinBtnClass}
         >
-          Join on WhatsApp
+          Request to join
         </WhatsAppCommunityJoinLink>
         {layout !== "inline" ? (
           <>

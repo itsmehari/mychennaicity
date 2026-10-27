@@ -31,6 +31,16 @@ export default async function AdminHome() {
               Articles (publish / feature)
             </Link>
           </p>
+          <p className="mt-2 text-sm">
+            <Link href="/admin/jobs" className="underline">
+              Jobs (list / create / publish / close)
+            </Link>
+          </p>
+          <p className="mt-2 text-sm">
+            <Link href="/admin/whatsapp-join-requests" className="underline">
+              WhatsApp join requests
+            </Link>
+          </p>
           <form className="mt-3" action={signOutAction}>
             <button
               type="submit"

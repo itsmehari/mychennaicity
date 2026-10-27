@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { loadCivicGeoBundle } from "@/lib/civic-geo/load-civic-geo-bundle";
 import {
   estimateTravelMinutes,
@@ -10,6 +11,15 @@ import {
 import type { ZonalOfficeRecord } from "@/lib/civic-geo/types";
 import { ProvenanceBadge } from "../shared/provenance-badge";
 import { MissingDataNote } from "../shared/provenance-badge";
+import { CIVIC_TOOL_PATHS } from "@/lib/routes/civic-tools";
+
+function mapsSearchUrl(address: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
+function mapsDirectionsUrl(lat: number, lng: number): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+}
 
 export function ZonalOfficeAccess() {
   const searchParams = useSearchParams();
@@ -30,9 +40,7 @@ export function ZonalOfficeAccess() {
         )
           ? zoneParam
           : null;
-        setSelectedZone(
-          requestedZone ?? bundle.zones15[0]?.zoneId ?? "",
-        );
+        setSelectedZone(requestedZone ?? bundle.zones15[0]?.zoneId ?? "");
         setDataError(null);
       })
       .catch(() => setDataError("Could not load zonal-office data."));
@@ -41,7 +49,10 @@ export function ZonalOfficeAccess() {
   const office = offices.find((o) => o.zoneId === selectedZone) ?? null;
 
   const distanceKm =
-    office?.lat != null && office?.lng != null && userLat != null && userLng != null
+    office?.lat != null &&
+    office?.lng != null &&
+    userLat != null &&
+    userLng != null
       ? haversineKm(userLat, userLng, office.lat, office.lng)
       : null;
 
@@ -63,9 +74,25 @@ export function ZonalOfficeAccess() {
   };
 
   return (
-    <div className="max-w-2xl space-y-4">
+    <div className="max-w-2xl space-y-6">
+      <p className="text-sm leading-relaxed text-[var(--muted)]">
+        Addresses, emails, and landlines below are transcribed from the Greater
+        Chennai Corporation{" "}
+        <a
+          href="https://chennaicorporation.gov.in/gcc/who-is-who/index_data.jsp"
+          className="text-[var(--accent)] hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Who is Who
+        </a>{" "}
+        directory (Zonal Officer rows, checked 12 Sep 2026). Officer names are
+        omitted because they rotate. Map pins are approximate — confirm the door
+        number on the GCC page before you travel.
+      </p>
+
       <label className="block text-sm">
-        <span className="text-[var(--muted)]">Zone</span>
+        <span className="text-[var(--muted)]">GCC zone (operational 15)</span>
         <select
           value={selectedZone}
           onChange={(e) => setSelectedZone(e.target.value)}
@@ -73,25 +100,35 @@ export function ZonalOfficeAccess() {
         >
           {offices.map((o) => (
             <option key={o.zoneId} value={o.zoneId}>
-              {o.zoneLabel}
+              {o.officeName.replace("GCC ", "")}
             </option>
           ))}
         </select>
       </label>
 
-      <button
-        type="button"
-        onClick={useLocation}
-        className="rounded-lg border border-[var(--border)] px-3 py-2 text-sm font-medium"
-      >
-        Use my location for distance
-      </button>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={useLocation}
+          className="rounded-lg border border-[var(--border)] px-3 py-2 text-sm font-medium"
+        >
+          Use my location for distance
+        </button>
+        <Link
+          href={CIVIC_TOOL_PATHS.zoneWardFinder}
+          className="rounded-lg border border-[var(--border)] px-3 py-2 text-sm font-medium text-[var(--accent)]"
+        >
+          Find my zone first
+        </Link>
+      </div>
       {geoError ? <p className="text-xs text-amber-700">{geoError}</p> : null}
       {dataError ? <p className="text-sm text-red-600">{dataError}</p> : null}
 
       {office ? (
         <div className="space-y-3 rounded-xl border border-[var(--border)] p-4">
-          <h2 className="font-semibold text-[var(--foreground)]">{office.officeName}</h2>
+          <h2 className="font-semibold text-[var(--foreground)]">
+            {office.officeName}
+          </h2>
           <ProvenanceBadge provenance={office.provenance} />
           <dl className="grid gap-2 text-sm">
             <div>
@@ -100,7 +137,22 @@ export function ZonalOfficeAccess() {
             </div>
             <div>
               <dt className="text-[var(--muted)]">Phone</dt>
-              <dd>{office.phone ?? "—"}</dd>
+              <dd>{office.phone ?? "1913"}</dd>
+            </div>
+            <div>
+              <dt className="text-[var(--muted)]">Email</dt>
+              <dd>
+                {office.email ? (
+                  <a
+                    className="text-[var(--accent)] hover:underline"
+                    href={`mailto:${office.email}`}
+                  >
+                    {office.email}
+                  </a>
+                ) : (
+                  "—"
+                )}
+              </dd>
             </div>
             <div>
               <dt className="text-[var(--muted)]">Working hours</dt>
@@ -110,7 +162,7 @@ export function ZonalOfficeAccess() {
               <dt className="text-[var(--muted)]">Wheelchair access</dt>
               <dd>
                 {office.wheelchairAccessible === null
-                  ? "Not verified"
+                  ? "Not verified — call the landline before you visit if access is essential"
                   : office.wheelchairAccessible
                     ? "Reported accessible"
                     : "Reported not accessible"}
@@ -122,13 +174,17 @@ export function ZonalOfficeAccess() {
             </div>
             <div>
               <dt className="text-[var(--muted)]">Flood-risk route note</dt>
-              <dd>{office.floodRiskRouteNote ?? "No seasonal warning on file"}</dd>
+              <dd>
+                {office.floodRiskRouteNote ?? "No seasonal warning on file"}
+              </dd>
             </div>
             {distanceKm != null ? (
               <>
                 <div>
                   <dt className="text-[var(--muted)]">Distance</dt>
-                  <dd>{distanceKm.toFixed(1)} km (straight-line)</dd>
+                  <dd>
+                    {distanceKm.toFixed(1)} km (straight-line, estimated pin)
+                  </dd>
                 </div>
                 <div>
                   <dt className="text-[var(--muted)]">Estimated travel</dt>
@@ -136,11 +192,63 @@ export function ZonalOfficeAccess() {
                 </div>
               </>
             ) : (
-              <MissingDataNote label="Distance requires verified office coordinates and your location." />
+              <MissingDataNote label="Tap “Use my location” for an approximate straight-line distance. This is not turn-by-turn traffic." />
             )}
           </dl>
+          <div className="flex flex-wrap gap-3 pt-2 text-sm">
+            {office.address ? (
+              <a
+                className="text-[var(--accent)] hover:underline"
+                href={mapsSearchUrl(office.address)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Maps
+              </a>
+            ) : null}
+            {office.lat != null && office.lng != null ? (
+              <a
+                className="text-[var(--accent)] hover:underline"
+                href={mapsDirectionsUrl(office.lat, office.lng)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Directions
+              </a>
+            ) : null}
+            <a
+              className="text-[var(--accent)] hover:underline"
+              href={office.gccComplaintUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GCC civic services
+            </a>
+            <a
+              className="text-[var(--accent)] hover:underline"
+              href={office.officialVerificationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Verify on GCC Who is Who
+            </a>
+          </div>
         </div>
       ) : null}
+
+      <section className="space-y-2 text-sm text-[var(--muted)]">
+        <h2 className="text-base font-semibold text-[var(--foreground)]">
+          Before you go
+        </h2>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>Carry a photo ID and the ward number from the Zone & Ward Finder.</li>
+          <li>For overflowing drains, streetlights, or garbage tonight, call 1913 first.</li>
+          <li>
+            Reorganisation into 20 zones is not operational — this list is the
+            current 15-zone counter network.
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }

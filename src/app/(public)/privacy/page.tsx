@@ -99,19 +99,61 @@ export default function PrivacyPage() {
           >
             Google AdSense
           </a>{" "}
-          or similar programmes. Ad partners may use cookies or similar
-          technologies to measure delivery and relevance. See our{" "}
+          or similar programmes. Third-party vendors, including Google, may
+          place and read cookies on your browser, or use web beacons, IP
+          addresses, or other identifiers, to collect information as a result of
+          ads serving on this site. Those vendors may use cookies to serve ads
+          based on your prior visits to this site or other sites. Google&apos;s
+          use of advertising cookies enables it and its partners to serve ads
+          based on your visit here and/or elsewhere on the internet. We do not
+          pass information to Google that Google could use or recognise as
+          personally identifiable information. See{" "}
+          <a
+            href="https://policies.google.com/technologies/partner-sites"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            How Google uses data when you use our partners&apos; sites or apps
+          </a>
+          . More detail is on our{" "}
           <Link
             href="/cookies"
             className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
           >
             Cookies
           </Link>{" "}
-          page for more detail.
+          page.
+        </p>
+        <p>
+          <strong className="text-[var(--foreground)]">
+            Ad personalisation choices.
+          </strong>{" "}
+          You can opt out of personalised advertising in{" "}
+          <a
+            href="https://adssettings.google.com"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Google Ads Settings
+          </a>
+          . You can also opt out of some third-party vendors&apos; use of
+          cookies for personalised advertising at{" "}
+          <a
+            href="https://www.aboutads.info"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            www.aboutads.info
+          </a>
+          .
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Cookies.</strong> We and
-          third parties may set cookies or use local storage as described on{" "}
+          third parties may set cookies, use local storage, or use pixels as
+          described on{" "}
           <Link
             href="/cookies"
             className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
@@ -140,13 +182,21 @@ export default function PrivacyPage() {
           and we will respond within reasonable timelines.
         </p>
         <p>
-          <strong className="text-[var(--foreground)]">Children.</strong> The
-          site is not directed at children under 18 for commercial profiling. If
-          you believe we have collected a minor&apos;s data in error, contact
-          us to remove it.
+          <strong className="text-[var(--foreground)]">Children.</strong> This
+          site is not directed at children under 13 (COPPA) and is not intended
+          for commercial profiling of anyone under 18. We do not use Google ads
+          or audience lists to target users we know are under 13, or activity on
+          child-directed areas. If you believe we have collected a minor&apos;s
+          data in error, contact us to remove it.
+        </p>
+        <p>
+          <strong className="text-[var(--foreground)]">Location.</strong> We do
+          not collect precise GPS, wifi, or cell-tower location for ads. Server
+          logs may include a coarse IP-based location used for hosting, security,
+          and approximate analytics.
         </p>
         <p className="text-xs text-[var(--muted)]">
-          Last updated: March 2026.
+          Last updated: August 2026.
         </p>
       </div>
       <InteriorCrossNav />

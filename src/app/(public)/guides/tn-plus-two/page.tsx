@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { BilingualToggle } from "@/components/compulsive/bilingual-toggle";
 import {
   GuideDisclaimer,
   GuideFinePrint,
@@ -15,14 +16,21 @@ import { HSE_GROUPS } from "@/content/education/hse-groups";
 import { streamLabel } from "@/content/education/hse-compare";
 import {
   DGE_HOME_URL,
+  EDUCATION_AFTER_12TH_PATH,
   EDUCATION_CHOOSE_PATH,
+  EDUCATION_COMMERCE_PATH,
   EDUCATION_COMPARE_PATH,
   EDUCATION_EDITION,
   EDUCATION_HUB_PATH,
+  EDUCATION_HUB_TA_PATH,
   EDUCATION_ISSUED,
+  EDUCATION_M1_PATH,
+  EDUCATION_SCIENCE_PATH,
   EDUCATION_STRUCTURE_PATH,
+  EDUCATION_TEXTBOOKS_PATH,
   EDUCATION_VERSION,
   educationGroupPath,
+  educationHreflang,
 } from "@/content/education/paths";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import { getSiteUrl } from "@/lib/env";
@@ -37,7 +45,7 @@ const description =
 export const metadata: Metadata = {
   title: titleSegment,
   description,
-  alternates: { canonical: `${getSiteUrl()}${EDUCATION_HUB_PATH}` },
+  alternates: educationHreflang(EDUCATION_HUB_PATH, EDUCATION_HUB_TA_PATH, getSiteUrl()),
   openGraph: {
     title: fullSiteTitle(titleSegment),
     description,
@@ -72,13 +80,23 @@ export default function TnPlusTwoHubPage() {
         title="Higher Secondary group selection"
         dek="After Class 10, the Tamil Nadu State Board group you pick sets four Part III subjects for Classes XI and XII. This desk covers five preferred current DGE combinations for students and parents in Chennai and across Tamil Nadu."
         related={[
+          { href: EDUCATION_SCIENCE_PATH, label: "Science desk" },
+          { href: EDUCATION_COMMERCE_PATH, label: "Commerce desk" },
+          { href: EDUCATION_TEXTBOOKS_PATH, label: "Textbook catalogue" },
+          { href: EDUCATION_AFTER_12TH_PATH, label: "After 12th" },
           { href: EDUCATION_STRUCTURE_PATH, label: "HSE structure — six papers" },
           { href: EDUCATION_CHOOSE_PATH, label: "How to choose a group" },
           { href: EDUCATION_COMPARE_PATH, label: "Compare all five" },
+          { href: EDUCATION_M1_PATH, label: "Class 11 in Chennai" },
           { href: "/guides/chennai-tech-careers", label: "Chennai tech careers" },
           { href: CHENNAI_JOBS_HUB_PATH, label: "Jobs in Chennai" },
         ]}
       >
+        <BilingualToggle
+          enHref={EDUCATION_HUB_PATH}
+          taHref={EDUCATION_HUB_TA_PATH}
+          current="en"
+        />
         <p className="text-xs uppercase tracking-wide text-[var(--muted)]">
           Issued {EDUCATION_ISSUED} · Student &amp; parent guidance · Not a DGE circular
         </p>

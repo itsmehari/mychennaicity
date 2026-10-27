@@ -1,4 +1,3 @@
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import {
   WhatsAppCommunityJoinLink,
   WhatsAppCommunityPageLink,
@@ -29,25 +28,6 @@ export function JobDetailWhatsAppCommunityStrip({
 }: {
   className?: string;
 }) {
-  const enabled = isWhatsAppCommunityInviteConfigured();
-
-  if (!enabled) {
-    return (
-      <section
-        className={`mt-6 rounded-2xl border border-dashed border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_94%,#25D366_3%)] px-4 py-4 sm:px-5 sm:py-5 ${className}`.trim()}
-        aria-label="WhatsApp community"
-      >
-        <p className="text-sm leading-relaxed text-[var(--muted)]">
-          <span className="font-semibold text-[var(--foreground)]">
-            WhatsApp group:
-          </span>{" "}
-          We are finalising a moderated Chennai jobs reader group — the invite
-          will appear here once it is ready.
-        </p>
-      </section>
-    );
-  }
-
   return (
     <section
       className={`relative mt-6 overflow-hidden rounded-2xl border border-[color-mix(in_srgb,#25D366_28%,var(--border))] bg-[color-mix(in_srgb,var(--surface)_88%,#25D366_8%)] shadow-sm ring-1 ring-[color-mix(in_srgb,#25D366_12%,transparent)] ${className}`.trim()}
@@ -71,7 +51,7 @@ export function JobDetailWhatsAppCommunityStrip({
             </h2>
             <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
               Fresh Chennai job alerts, hiring tips, and civil discussion — same
-              standards as the site. Tap to open WhatsApp.
+              standards as the site. Request with your name and number.
             </p>
           </div>
         </div>

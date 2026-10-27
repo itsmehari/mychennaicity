@@ -27,6 +27,9 @@ const LOCALITY_GEO: Record<string, { lat: number; lng: number }> = {
   thoraipakkam: { lat: 12.945, lng: 80.238 },
   taramani: { lat: 13.011, lng: 80.237 },
   anna: { lat: 13.085, lng: 80.27 },
+  siruseri: { lat: 12.892, lng: 80.23 },
+  /** South OMR belt. The road is long; this pin is nearer Siruseri than central Chennai. */
+  omr: { lat: 12.9, lng: 80.227 },
 };
 
 function plainDescription(raw: string | null | undefined, max = 5000): string {

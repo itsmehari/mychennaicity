@@ -5,7 +5,6 @@ import {
 } from "@/content/whatsapp-community/localities";
 import { WHATSAPP_COMMUNITY_RULES } from "@/content/whatsapp-community/rules";
 import { getPublicContactEmail } from "@/lib/env";
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import {
   WHATSAPP_COMMUNITY_GROUP_NAME,
   WHATSAPP_COMMUNITY_LAST_UPDATED,
@@ -26,15 +25,14 @@ const joinBtnClass =
   "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]";
 
 const JOIN_STEPS = [
-  "Open this page on your phone (or scan a link we share on mychennaicity.in).",
-  "Tap Join on WhatsApp — you will leave the browser and open the WhatsApp app.",
-  "Confirm joining the group named my chennai city.",
-  "Read the pinned rules and introduce yourself with your area if you like.",
-  "Turn on mute if volume is high — admins post only Chennai-relevant updates.",
+  "Open the request form and add your name, WhatsApp number, and Chennai area.",
+  "After you submit, the group link appears on that screen.",
+  "Tap Join on WhatsApp, then tap Join inside the app.",
+  "Wait for an admin to match your number and approve you. The site cannot approve the group for you.",
+  "Read the pinned rules. Mute the chat if the volume is high.",
 ];
 
 export function WhatsAppCommunityLanding() {
-  const enabled = isWhatsAppCommunityInviteConfigured();
   const contactEmail = getPublicContactEmail();
 
   return (
@@ -82,15 +80,9 @@ export function WhatsAppCommunityLanding() {
           ))}
         </div>
         <p className="mt-6 flex flex-wrap items-center gap-4">
-          {enabled ? (
-            <WhatsAppCommunityJoinLink utmContent="hero" className={joinBtnClass}>
-              Join on WhatsApp
-            </WhatsAppCommunityJoinLink>
-          ) : (
-            <Link href="/contact" className={joinBtnClass}>
-              Contact us — group opening soon
-            </Link>
-          )}
+          <WhatsAppCommunityJoinLink utmContent="hero" className={joinBtnClass}>
+            Request to join
+          </WhatsAppCommunityJoinLink>
           <Link
             href={WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL}
             className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
@@ -314,18 +306,16 @@ export function WhatsAppCommunityLanding() {
           Ready to join Chennai&apos;s reader group?
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-sm text-white/90">
-          One tap opens WhatsApp. Official link only from mychennaicity.in.
+          Send your name, number, and area. The group link appears after that.
         </p>
-        {enabled ? (
-          <p className="mt-6">
-            <WhatsAppCommunityJoinLink
-              utmContent="final"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-bold text-[#128C7E] shadow-md transition hover:bg-white/95"
-            >
-              Join on WhatsApp
-            </WhatsAppCommunityJoinLink>
-          </p>
-        ) : null}
+        <p className="mt-6">
+          <WhatsAppCommunityJoinLink
+            utmContent="final"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-bold text-[#128C7E] shadow-md transition hover:bg-white/95"
+          >
+            Request to join
+          </WhatsAppCommunityJoinLink>
+        </p>
         <p className="mt-6 text-xs text-white/75">
           Not affiliated with WhatsApp LLC or Meta.{" "}
           <Link
@@ -345,7 +335,7 @@ export function WhatsAppCommunityLanding() {
       </section>
 
       <InteriorCrossNav />
-      {enabled ? <WhatsAppCommunityStickyBar /> : null}
+      <WhatsAppCommunityStickyBar />
     </div>
   );
 }

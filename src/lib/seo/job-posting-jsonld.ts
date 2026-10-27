@@ -12,6 +12,34 @@ const EMPLOYMENT_MAP: Record<string, string> = {
   INTERN: "https://schema.org/INTERN",
 };
 
+/** City for Google JobPosting. Neighbourhood stays in streetAddress. */
+export function jobPostalAddress(locationLabel: string | null): {
+  "@type": "PostalAddress";
+  streetAddress?: string;
+  addressLocality: string;
+  addressRegion: string;
+  addressCountry: string;
+} {
+  const label = locationLabel?.trim() || "";
+  const parts = label
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  const last = parts[parts.length - 1] ?? "";
+  const lastIsChennai = /chennai/i.test(last) || last === "சென்னை";
+  const street =
+    parts.length >= 2 && lastIsChennai
+      ? parts.slice(0, -1).join(", ")
+      : undefined;
+  return {
+    "@type": "PostalAddress",
+    ...(street ? { streetAddress: street } : {}),
+    addressLocality: "Chennai",
+    addressRegion: "Tamil Nadu",
+    addressCountry: "IN",
+  };
+}
+
 function plainBody(body: string, max = 8000): string {
   return body
     .replace(/\*\*(.+?)\*\*/g, "$1")
@@ -43,12 +71,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
     hiringOrganization,
     jobLocation: {
       "@type": "Place",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: job.locationLabel?.trim() || "Chennai",
-        addressRegion: "Tamil Nadu",
-        addressCountry: "IN",
-      },
+      address: jobPostalAddress(job.locationLabel),
     },
     url,
     inLanguage: jobInLanguage(job.slug),
@@ -107,6 +130,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
 
 export function buildJobBreadcrumbJsonLd(slug: string, title: string) {
   const base = getSiteUrl();
+  const tamil = jobInLanguage(slug) === "ta-IN";
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -114,13 +138,13 @@ export function buildJobBreadcrumbJsonLd(slug: string, title: string) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: tamil ? "முகப்பு" : "Home",
         item: base,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Jobs in Chennai",
+        name: tamil ? "சென்னை வேலைகள்" : "Jobs in Chennai",
         item: `${base}${CHENNAI_JOBS_HUB_PATH}`,
       },
       {

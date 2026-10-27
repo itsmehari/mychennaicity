@@ -30,11 +30,11 @@
 | `/civic-tools/zone-map` | 15 / 20 / 23 zone layer map |
 | `/civic-tools/ward-migration` | Ward migration lookup (verified data only) |
 | `/civic-tools/responsibility-router` | Civic complaint authority router |
-| `/civic-tools/zonal-office-access` | Zonal office distance & access |
-| `/civic-tools/zone-dashboard` | Zone-wise civic metrics dashboard |
+| `/civic-tools/zonal-office-access` | GCC Zone I–XV office directory + approximate distance |
+| `/civic-tools/zone-dashboard` | Verified ward counts + unpublished-stats list |
 | `/civic-tools/reorg-tracker` | Zone reorganisation update tracker |
 | `/civic-tools/civic-card` | Printable My Chennai Civic Card |
-| `/civic-tools/area-sabha` | Area Sabha / ward committee tracker |
+| `/civic-tools/area-sabha` | Ward Committee / Area Sabha desk (verified meetings only) |
 | `/civic-tools/boundary-feedback` | Community boundary feedback map |
 | `/civic-tools/address-form-fixer` | Ward vs PIN / address form confusion fixer |
 | `/civic-tools/streetlight-dead-spots` | Editorial streetlight dead-spot desk + how to report |
@@ -43,11 +43,17 @@
 | `/guides/chennai-afford-area-calculator-tamil` | Tamil twin of afford-area calculator |
 | `/guides/which-chennai-are-you-tamil` | Tamil twin of Which Chennai quiz |
 | `/guides/chennai-petrol-vs-ev-cost` … (see `src/content/compulsive/index.ts`) | Compulsive connective hubs Waves A–E (calculators, quizzes, culture, money) |
-| `/guides/tn-plus-two` | TN Plus Two group-selection hub (Wave A) |
+| `/guides/tn-plus-two` | TN Plus Two group-selection hub |
+| `/guides/tn-plus-two/science` `/commerce` `/textbooks` `/after-12th` | Pillars P2–P5 |
 | `/guides/tn-plus-two/groups/[code]` | Groups 2502, 2503, 2702, 2708, 2804, 2802 |
 | `/guides/tn-plus-two/compare` | Five-group comparison matrix |
 | `/guides/tn-plus-two/hse-structure` | Part I / II / III + six papers |
 | `/guides/tn-plus-two/how-to-choose` | Five-step group choice + HowTo JSON-LD |
+| `/guides/tn-plus-two/2502-vs-2503` `/2702-vs-2708` `/worksheet` | Splits + ranking sheet |
+| `/guides/tn-plus-two/engineering` `/medicine` `/ca-finance` `/law-civil-services` `/it-degrees` | After-12th pathways |
+| `/guides/tn-plus-two/textbooks/*` | Official PDF finders (no hosted books) |
+| `/class-11-groups-chennai` `/plus-two-textbooks-pdf` | M1 / M2 campaign landings |
+| `/guides/tn-plus-two-tamil` + twins | Wave E Tamil (`hreflang`) |
 | `/guides/tn-council-of-ministers` | TN Council of Ministers hub (35 ministers, May 2026) |
 | `/guides/tn-council-of-ministers/ministers/[slug]` | Individual minister portfolios |
 | `/guides/tn-council-of-ministers/departments` | Department reverse lookup |
@@ -62,7 +68,7 @@
 
 - **`/sitemap.xml`** — `src/app/sitemap.ts`: static hubs, areas, articles, topics, eligible events/jobs from DB (best-effort if DB unavailable).
 - **`/news-sitemap.xml`** — news sitemap route for eligible article URLs.
-- **`/sitemap-recent.xml`** — rolling last-20-days recrawl list (DB rows + recently shipped hubs). Submit in Search Console after a publish burst.
+- **`/sitemap-recent.xml`** — rolling last-30-days recrawl list (DB rows + recently shipped hubs). Submit in Search Console after a publish burst.
 - **`/robots.ts`** — crawler policy and sitemap reference.
 
 ## Admin
@@ -75,6 +81,6 @@
 - **Middleware** — protects `/admin` routes; extend for locale or city segment normalization if needed later.
 - **Multi-city (future)** — e.g. `/{citySlug}/chennai-local-news/...` or subdomain `chennai.mychennaicity.in`; keep `city_id` on all scoped entities regardless of URL choice.
 
-## Planned — TN Plus Two education desk (later waves)
+## TN Plus Two education desk
 
-Wave A is live (see public routes above). Remaining inventory (textbooks P4, science/commerce/after-12th pillars, M1/M2, Tamil twins): [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).
+Waves A–E are in the repo (31+ English URLs + Tamil twins). **Production HEAD was 404 on 2026-09-12** — do not treat as live on mychennaicity.in until a Vercel deploy. Plan: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).

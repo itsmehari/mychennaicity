@@ -6,10 +6,16 @@ const CUSTOM_SLUGS = [
   "adyar-thiruvanmiyur",
   "kodambakkam-t-nagar",
   "ambattur-annanagar",
+  "tiruvottiyur-manali-belt",
+  "madhavaram-madhavaram",
+  "royapuram-tondiarpet",
+  "teynampet-nungambakkam",
+  "saidapet-guindy-alandur",
+  "valasaravakkam-porur",
 ] as const;
 
 describe("custom area hub packs", () => {
-  it("overrides doorway FAQ on the three P1 hubs plus OMR", () => {
+  it("overrides doorway FAQ on every canonical hub pack", () => {
     for (const slug of CUSTOM_SLUGS) {
       const pack = getRichAreaHubContent(slug);
       expect(pack).toBeDefined();

@@ -119,13 +119,14 @@ export function buildEducationGroupJsonLd(group: HseGroup) {
   };
 }
 
-export function buildEducationExplainerJsonLd(opts: {
+export function buildEducationCollectionJsonLd(opts: {
   path: string;
   name: string;
   description: string;
   faq?: EducationFaqItem[];
   faqFragment?: string;
-  howTo?: boolean;
+  children: { name: string; path: string }[];
+  speakable?: boolean;
 }) {
   const base = getSiteUrl();
   const pageUrl = `${base}${opts.path}`;
@@ -136,12 +137,135 @@ export function buildEducationExplainerJsonLd(opts: {
       })
     : null;
 
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: opts.name,
+        description: opts.description,
+        isPartOf: { "@id": `${base}/#website` },
+        inLanguage: "en-IN",
+        about: ABOUT_TN,
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        ...(opts.speakable
+          ? {
+              speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: [
+                  "[data-speakable=\"hub-aeo-answer\"]",
+                  `[id$="-heading"]`,
+                ],
+              },
+            }
+          : {}),
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${pageUrl}#collection`,
+        url: pageUrl,
+        name: opts.name,
+        isPartOf: { "@id": `${pageUrl}#webpage` },
+        inLanguage: "en-IN",
+        about: ABOUT_TN,
+      },
+      breadcrumbs(pageUrl, [
+        { name: "TN Plus Two", path: EDUCATION_HUB_PATH },
+        { name: opts.name, path: opts.path },
+      ]),
+      {
+        "@type": "ItemList",
+        "@id": `${pageUrl}#children`,
+        name: opts.name,
+        numberOfItems: opts.children.length,
+        itemListElement: opts.children.map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.name,
+          url: `${base}${c.path}`,
+        })),
+      },
+      ...(faq ? [faq] : []),
+    ],
+  };
+}
+
+export function buildEducationTextbookJsonLd(opts: {
+  path: string;
+  name: string;
+  description: string;
+  faq?: EducationFaqItem[];
+  faqFragment?: string;
+  officialPdfUrls: string[];
+}) {
+  const base = getSiteUrl();
+  const pageUrl = `${base}${opts.path}`;
+  const faq = opts.faq?.length
+    ? buildFaqPageJsonLdFromItems(faqToJsonLdItems(opts.faq), {
+        pageUrl,
+        fragment: opts.faqFragment,
+      })
+    : null;
+  const docs = opts.officialPdfUrls.map((url, i) => ({
+    "@type": "DigitalDocument",
+    "@id": `${pageUrl}#doc-${i + 1}`,
+    url,
+    encodingFormat: "application/pdf",
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: opts.name,
+        description: opts.description,
+        isPartOf: { "@id": `${base}/#website` },
+        inLanguage: "en-IN",
+        about: ABOUT_TN,
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+      },
+      breadcrumbs(pageUrl, [
+        { name: "TN Plus Two", path: EDUCATION_HUB_PATH },
+        { name: "Textbooks", path: `${EDUCATION_HUB_PATH}/textbooks` },
+        { name: opts.name, path: opts.path },
+      ]),
+      ...docs,
+      ...(faq ? [faq] : []),
+    ],
+  };
+}
+
+export function buildEducationExplainerJsonLd(opts: {
+  path: string;
+  name: string;
+  description: string;
+  faq?: EducationFaqItem[];
+  faqFragment?: string;
+  howTo?: boolean;
+  howToName?: string;
+  howToSteps?: { name: string; text: string }[];
+}) {
+  const base = getSiteUrl();
+  const pageUrl = `${base}${opts.path}`;
+  const faq = opts.faq?.length
+    ? buildFaqPageJsonLdFromItems(faqToJsonLdItems(opts.faq), {
+        pageUrl,
+        fragment: opts.faqFragment,
+      })
+    : null;
+
+  const steps = opts.howToSteps ?? HSE_CHOOSE_STEPS;
   const howTo = opts.howTo
     ? {
         "@type": "HowTo",
-        name: "How to choose a Tamil Nadu Higher Secondary group",
+        name: opts.howToName ?? "How to choose a Tamil Nadu Higher Secondary group",
         description: opts.description,
-        step: HSE_CHOOSE_STEPS.map((s, i) => ({
+        step: steps.map((s, i) => ({
           "@type": "HowToStep",
           position: i + 1,
           name: s.name,

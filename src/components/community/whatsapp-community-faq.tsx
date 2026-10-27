@@ -55,7 +55,7 @@ export function WhatsAppCommunityFaq() {
                       utmContent="faq"
                       className="font-semibold text-[#128C7E] underline-offset-4 hover:underline"
                     >
-                      Join on WhatsApp →
+                      Request to join →
                     </WhatsAppCommunityJoinLink>
                   </p>
                 ) : null}

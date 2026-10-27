@@ -16,6 +16,7 @@ export function revalidateListingsSurfaces(options?: {
   directorySlug?: string;
 }): void {
   revalidateSitemapSurfaces();
+  revalidatePath("/");
   revalidatePath(CHENNAI_JOBS_HUB_PATH);
   revalidatePath(CHENNAI_JOBS_LOOKING_PATH);
   revalidatePath(CHENNAI_CLASSIFIEDS_HUB_PATH);

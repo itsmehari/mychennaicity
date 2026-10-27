@@ -225,6 +225,9 @@ async function main() {
       )
       .limit(1);
 
+    const status =
+      validThrough.getTime() > now.getTime() ? ("open" as const) : ("closed" as const);
+
     const baseValues = {
       employerId,
       cityId: city.id,
@@ -235,7 +238,7 @@ async function main() {
       salaryMin: s.salaryMin ?? null,
       salaryMax: s.salaryMax ?? null,
       salaryDisclosed: s.salaryDisclosed,
-      status: "open" as const,
+      status,
       employmentType: s.employmentType,
       validThrough,
       publishedAt: now,
@@ -248,7 +251,7 @@ async function main() {
         .update(jobPostings)
         .set(baseValues)
         .where(eq(jobPostings.id, existingJob.id));
-      console.log("[seed-jobs] Refreshed open job:", s.slug);
+      console.log("[seed-jobs] Refreshed job:", s.slug, status);
     } else {
       await db.insert(jobPostings).values({
         ...baseValues,

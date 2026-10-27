@@ -9,7 +9,6 @@ import {
 } from "@/components/site/interior-chrome";
 import { WHATSAPP_COMMUNITY_RULES } from "@/content/whatsapp-community/rules";
 import { getSiteUrl } from "@/lib/env";
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import {
   WHATSAPP_COMMUNITY_GEO_META,
@@ -52,8 +51,6 @@ const joinBtnClass =
   "inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md";
 
 export default function ChennaiWhatsappGroupTamilPage() {
-  const enabled = isWhatsAppCommunityInviteConfigured();
-
   return (
     <>
       <WhatsAppCommunityJsonLd page="ta" />
@@ -74,15 +71,9 @@ export default function ChennaiWhatsappGroupTamilPage() {
           பொதுவான அறிவிப்புகள், அண்டை உதவி. இலவசம் · மிதமானது · spam இல்லை.
         </p>
         <p className="mt-6">
-          {enabled ? (
-            <WhatsAppCommunityJoinLink utmContent="hero-ta" className={joinBtnClass}>
-              WhatsApp-ல் சேருங்கள்
-            </WhatsAppCommunityJoinLink>
-          ) : (
-            <Link href="/contact" className={joinBtnClass}>
-              தொடர்பு கொள்ளுங்கள்
-            </Link>
-          )}
+          <WhatsAppCommunityJoinLink utmContent="hero-ta" className={joinBtnClass}>
+            சேர கோரிக்கை
+          </WhatsAppCommunityJoinLink>
         </p>
         <p className="mt-4 text-sm">
           <Link
@@ -123,7 +114,7 @@ export default function ChennaiWhatsappGroupTamilPage() {
           </p>
         </section>
 
-        {enabled ? <WhatsAppCommunityStickyBar /> : null}
+        <WhatsAppCommunityStickyBar />
       </div>
     </>
   );

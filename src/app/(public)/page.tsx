@@ -20,6 +20,8 @@ import {
   HomeTrustStrip,
   HomeZoneShortcuts,
 } from "@/components/home/home-content";
+import { HomeClassifiedsSpotlight } from "@/components/home/home-classifieds-spotlight";
+import { HomeListingPitchLinks } from "@/components/home/home-listing-pitch-links";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
 import { HomeToolsStrip } from "@/components/home/home-tools-strip";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
@@ -117,7 +119,18 @@ export default async function Home() {
           <HomeStatsRibbon counts={feed.counts} />
         </HomeSectionFrame>
         <HomeSectionFrame>
-          <HomeJobsSpotlight jobs={feed.jobs} total={feed.counts.jobs} />
+          <HomeListingPitchLinks />
+          <HomeClassifiedsSpotlight
+            listings={feed.classifieds}
+            total={feed.counts.classifieds}
+          />
+          {feed.classifieds.length > 0 ? (
+            <HomeSectionInnerRule>
+              <HomeJobsSpotlight jobs={feed.jobs} total={feed.counts.jobs} />
+            </HomeSectionInnerRule>
+          ) : (
+            <HomeJobsSpotlight jobs={feed.jobs} total={feed.counts.jobs} />
+          )}
           <HomeSectionInnerRule>
             <HomeEventsFeatured
               events={feed.events}

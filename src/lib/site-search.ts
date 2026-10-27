@@ -1,6 +1,7 @@
 import { and, count, eq, ilike, isNotNull, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { articles, cities, directoryEntries, events, jobPostings, jobSeekerPosts } from "@/db/schema/tables";
+import { publiclyOpenJobSql } from "@/domains/jobs/public-open";
 
 const CHENNAI_SLUG = "chennai";
 
@@ -76,7 +77,7 @@ export async function searchSite(query: string, limitPerKind = 8): Promise<SiteS
     .where(
       and(
         eq(jobPostings.cityId, cityId),
-        eq(jobPostings.status, "open"),
+        publiclyOpenJobSql(),
         or(
           ilike(jobPostings.title, pattern),
           ilike(jobPostings.body, pattern),

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { normalizeArticleMarkdown } from "@/lib/normalize-article-markdown";
 
@@ -45,6 +45,9 @@ export function ArticleMarkdown({
     <div className={proseClass}>
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
+      urlTransform={(url) =>
+        /^tel:/i.test(url) ? url : defaultUrlTransform(url)
+      }
       components={{
         h2: () => null,
         h3: ({ children }) => {

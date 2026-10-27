@@ -18,7 +18,7 @@ import {
   CHENNAI_JOBS_HUB_PATH,
   CHENNAI_JOBS_LOOKING_PATH,
 } from "@/lib/routes/chennai-jobs";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 
 const IST = "Asia/Kolkata";
 
@@ -513,7 +513,7 @@ export function NewsSidebar({
           Get Chennai&apos;s important updates without social-media noise.
         </p>
         <Link
-          href={WHATSAPP_COMMUNITY_PAGE_PATH}
+          href={whatsappCommunityJoinHref("seo")}
           className="mcc-news-btn mcc-news-btn--primary"
         >
           Join WhatsApp Updates

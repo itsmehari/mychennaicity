@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 import { isWhatsAppBusinessConfigured } from "@/lib/whatsapp-server";
 
@@ -49,7 +50,7 @@ export function ChennaiJobsHubEmployerCta() {
         walk-ins and local business hiring.
       </p>
       <div className="mcc-jobs-hub__employer-actions">
-        <Link href="/contact#jobs" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
+        <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
           Post a job
         </Link>
         <Link href="/contact" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline">

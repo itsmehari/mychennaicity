@@ -2,7 +2,7 @@
  * Campaign copy for mychennaicity.in — city goals, not OMR hiring.
  */
 
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 import type { SiteModalCampaign } from "./types";
 
 const HERO = "/images/explore-chennai-madras-high-court.jpg";
@@ -23,7 +23,7 @@ export const siteModalCampaigns: SiteModalCampaign[] = [
     ],
     primaryCta: {
       label: "Join WhatsApp",
-      href: `${WHATSAPP_COMMUNITY_PAGE_PATH}?src=site_modal`,
+      href: whatsappCommunityJoinHref("modal"),
     },
     secondaryCta: {
       label: "Maybe later",

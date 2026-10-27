@@ -11,22 +11,27 @@ export type ProseSectionSkin =
   | "advisory"
   | "analysis"
   | "steps"
-  | "disclaimer";
+  | "disclaimer"
+  | "fineprint";
 
 export function proseSectionSkin(headingText: string): ProseSectionSkin {
   const h = headingText.toLowerCase().replace(/\*\*/g, "");
   if (h.includes("key takeaway")) return "takeaways";
+  /* Quiet end-matter — smaller than the boxed Disclaimer skin. */
+  if (
+    h.includes("fine print") ||
+    h.includes("ai-assisted") ||
+    h.includes("ai assisted") ||
+    h.includes("நுண்ணெழுத்து")
+  )
+    return "fineprint";
   /* Before other keyword matches — legal notices must not look like body copy. */
   if (
     h.includes("disclaimer") ||
     h.includes("legal note") ||
     h.startsWith("editorial note") ||
-    h.includes("fine print") ||
-    h.includes("ai-assisted") ||
-    h.includes("ai assisted") ||
     h.includes("பொறுப்புத்துறப்பு") ||
-    h.includes("தலையங்கக் குறிப்பு") ||
-    h.includes("நுண்ணெழுத்து")
+    h.includes("தலையங்கக் குறிப்பு")
   )
     return "disclaimer";
   if (h.includes("fact box") || h.includes("fact check") || h.includes("at a glance"))
@@ -62,6 +67,8 @@ function shellClass(skin: ProseSectionSkin): string {
       return "civic-prose-factbox scroll-mt-28";
     case "disclaimer":
       return "civic-prose-disclaimer scroll-mt-28";
+    case "fineprint":
+      return "civic-prose-fineprint scroll-mt-28";
     case "advisory":
     case "analysis":
       return "civic-prose-advisory scroll-mt-28";
@@ -113,6 +120,19 @@ export function ProseSectionShell({
         <p className="civic-prose-disclaimer__eyebrow">Legal notice</p>
         {heading}
         <div className="civic-prose-disclaimer__body">{children}</div>
+      </aside>
+    );
+  }
+
+  if (skin === "fineprint") {
+    return (
+      <aside
+        className={shellClass(skin)}
+        aria-labelledby={headingId}
+        role="note"
+      >
+        {heading}
+        <div className="civic-prose-fineprint__body">{children}</div>
       </aside>
     );
   }

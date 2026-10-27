@@ -214,7 +214,7 @@ export function ChennaiJobsHubListing({
   }
 
   return (
-    <div className="mcc-jobs-hub">
+    <div className="mcc-jobs-hub" id="chennai-jobs-board">
       <div className="mcc-jobs-hub__search-card">
         <div className="mcc-jobs-hub__search-grid">
           <div className="mcc-jobs-hub__field">

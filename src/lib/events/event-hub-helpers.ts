@@ -108,11 +108,15 @@ function inferTagsFromText(
   if (presentationKey === "festival_rich") tags.add("festivals");
 
   const text = `${title} ${description ?? ""}`.toLowerCase();
-  if (/festival|utsavam|temple|panguni|ther|kapaleeshwar|peruvizha|vaibhavam/.test(text)) {
+  if (
+    /festival|utsavam|mahotsava|temple|panguni|ther|kapaleeshwar|peruvizha|vaibhavam|madras day|krishnaashtami|krishnashtami|janmashtami|krishna jayanthi/.test(
+      text,
+    )
+  ) {
     tags.add("festivals");
   }
   if (
-    /concert|theatre|theater|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal|stand-up|stand up|comedy|open mic|comedian|puppet|singalong|rave|dj|orchestra|grammy|carnatic|kutcheri|ghazal|baithak|mehfil|tabla|spoken.?word|indie/.test(
+    /concert|theatre|theater|music|dance|art|paint|creative|bollywood|candlelight|musical|sam vishal|stand-up|stand up|comedy|open mic|comedian|puppet|singalong|rave|dj|orchestra|grammy|carnatic|kutcheri|ghazal|baithak|mehfil|tabla|bhajan|spoken.?word|indie|photo exhibition|photography|photobook/.test(
       text,
     )
   ) {
@@ -126,7 +130,7 @@ function inferTagsFromText(
     tags.add("business");
   }
   if (
-    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon|board games|meditation|wellness|baking|poker/.test(
+    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon|board games|meditation|wellness|baking|poker|chess/.test(
       text,
     )
   ) {

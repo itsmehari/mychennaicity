@@ -14,52 +14,75 @@ import {
   JobsDetailHero,
   JobsDetailLayout,
 } from "@/components/jobs/chennai-jobs-detail-parts";
+import { ShakzOdcCallSheet } from "@/components/jobs/shakz-odc-call-sheet";
+import { SHAKZ_ODC_SLUG } from "@/content/jobs/shakz-events-odc-boys";
 
-function employmentTypeLabel(raw: string | null): string | null {
+function employmentTypeLabel(raw: string | null, tamil: boolean): string | null {
   if (!raw?.trim()) return null;
   const u = raw.trim().toUpperCase();
-  const map: Record<string, string> = {
-    FULL_TIME: "Full-time",
-    PART_TIME: "Part-time",
-    CONTRACTOR: "Contract",
-    INTERN: "Internship",
-  };
+  const map: Record<string, string> = tamil
+    ? {
+        FULL_TIME: "முழு நேரம்",
+        PART_TIME: "பகுதி நேரம்",
+        CONTRACTOR: "ஒப்பந்தம்",
+        INTERN: "பயிற்சி",
+      }
+    : {
+        FULL_TIME: "Full-time",
+        PART_TIME: "Part-time",
+        CONTRACTOR: "Contract",
+        INTERN: "Internship",
+      };
   return map[u] ?? null;
 }
 
-function workModeLabel(raw: string | null): string | null {
+function workModeLabel(raw: string | null, tamil: boolean): string | null {
   if (!raw?.trim()) return null;
-  const map: Record<string, string> = {
-    onsite: "Office",
-    remote: "Work from home",
-    hybrid: "Hybrid",
-    field: "Field",
-  };
+  const map: Record<string, string> = tamil
+    ? {
+        onsite: "அலுவலகம்",
+        remote: "வீட்டிலிருந்து",
+        hybrid: "கலப்பு",
+        field: "கள வேலை",
+      }
+    : {
+        onsite: "Office",
+        remote: "Work from home",
+        hybrid: "Hybrid",
+        field: "Field",
+      };
   return map[raw.trim().toLowerCase()] ?? null;
 }
 
-function buildGlanceRows(row: JobPostingWithEmployer): { label: string; value: string }[] {
+function buildGlanceRows(
+  row: JobPostingWithEmployer,
+  tamil: boolean,
+): { label: string; value: string }[] {
   const { job } = row;
   const rows: { label: string; value: string }[] = [];
-  const et = employmentTypeLabel(job.employmentType);
-  if (et) rows.push({ label: "Role type", value: et });
-  const wm = workModeLabel(job.remotePolicy);
-  if (wm) rows.push({ label: "Work mode", value: wm });
+  const dateLocale = tamil ? "ta-IN" : "en-IN";
+  const et = employmentTypeLabel(job.employmentType, tamil);
+  if (et) rows.push({ label: tamil ? "வேலை வகை" : "Role type", value: et });
+  const wm = workModeLabel(job.remotePolicy, tamil);
+  if (wm) rows.push({ label: tamil ? "பணி முறை" : "Work mode", value: wm });
   const loc = job.locationLabel?.trim();
-  if (loc) rows.push({ label: "Location", value: loc });
+  if (loc) rows.push({ label: tamil ? "இடம்" : "Location", value: loc });
   if (job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null) {
     rows.push({
-      label: "Pay band",
+      label: tamil ? "சம்பளம்" : "Pay band",
       value: formatJobCompensation(job.salaryMin, job.salaryMax),
     });
   }
   if (job.openingsCount > 1) {
-    rows.push({ label: "Openings", value: String(job.openingsCount) });
+    rows.push({
+      label: tamil ? "காலியிடம்" : "Openings",
+      value: String(job.openingsCount),
+    });
   }
   if (job.validThrough) {
     rows.push({
-      label: "Apply by",
-      value: job.validThrough.toLocaleString("en-IN", {
+      label: tamil ? "கடைசி நாள்" : "Apply by",
+      value: job.validThrough.toLocaleString(dateLocale, {
         dateStyle: "medium",
         timeZone: "Asia/Kolkata",
       }),
@@ -67,8 +90,8 @@ function buildGlanceRows(row: JobPostingWithEmployer): { label: string; value: s
   }
   if (job.publishedAt) {
     rows.push({
-      label: "Listed",
-      value: job.publishedAt.toLocaleString("en-IN", {
+      label: tamil ? "வெளியிட்ட நாள்" : "Listed",
+      value: job.publishedAt.toLocaleString(dateLocale, {
         dateStyle: "medium",
         timeZone: "Asia/Kolkata",
       }),
@@ -95,22 +118,28 @@ export function JobPostingDetail({
   languageAlternate?: { href: string; label: string } | null;
 }) {
   const { job, employer } = row;
+  const tamil = isTamilJobSlug(job.slug);
   const hubCard = buildChennaiJobsHubCard(row);
-  const glanceRows = buildGlanceRows(row);
+  const glanceRows = buildGlanceRows(row, tamil);
   const showPay =
     job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null;
 
-  const tamil = isTamilJobSlug(job.slug);
   const isContactForm = !!applyHref && /\/contact#jobs/i.test(applyHref);
-  const ctaHint = isWhatsApp
-    ? "Opens WhatsApp in a new tab."
-    : applyHref?.startsWith("tel:")
-      ? "Tap to call the employer directly."
-      : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
-        ? "Opens the poster’s Facebook profile so you can message them."
-        : isContactForm
-          ? "Opens our jobs contact form — this listing has no public employer phone yet."
-          : "Opens the employer careers page in a new tab.";
+  const ctaHint = tamil
+    ? isWhatsApp
+      ? "WhatsApp புதிய தாவலில் திறக்கும்."
+      : applyHref?.startsWith("tel:")
+        ? "அழைக்க இந்த எண்ணைத் தட்டவும்."
+        : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
+    : isWhatsApp
+      ? "Opens WhatsApp in a new tab."
+      : applyHref?.startsWith("tel:")
+        ? "Tap to call the employer directly."
+        : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+          ? "Opens the poster’s Facebook profile so you can message them."
+          : isContactForm
+            ? "Opens our jobs contact form — this listing has no public employer phone yet."
+            : "Opens the employer careers page in a new tab.";
 
   return (
     <article className="mcc-jobs-hub mx-auto w-full max-w-[1180px]">
@@ -122,7 +151,9 @@ export function JobPostingDetail({
           <>
             <span className="font-semibold text-[var(--foreground)]">{employer.name}</span>
             {employer.verified ? (
-              <span className="font-medium text-[var(--accent)]"> · Checked by us</span>
+              <span className="font-medium text-[var(--accent)]">
+                {tamil ? " · எங்களால் சரிபார்க்கப்பட்டது" : " · Checked by us"}
+              </span>
             ) : null}
             {" · "}
             {job.locationLabel ?? "Chennai"}
@@ -135,7 +166,7 @@ export function JobPostingDetail({
                   rel="noopener noreferrer"
                   className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
                 >
-                  Employer site
+                  {tamil ? "நிறுவன தளம்" : "Employer site"}
                 </a>
               </>
             ) : null}
@@ -156,7 +187,9 @@ export function JobPostingDetail({
         ) : null}
         {showPay ? (
           <p className="mcc-jobs-detail__pay">
-            <span className="mcc-jobs-detail__pay-badge">Pay disclosed</span>
+            <span className="mcc-jobs-detail__pay-badge">
+              {tamil ? "சம்பளம்" : "Pay disclosed"}
+            </span>
             <span className="font-semibold text-[var(--foreground)]">
               {formatJobCompensation(job.salaryMin!, job.salaryMax!)}
             </span>
@@ -179,23 +212,40 @@ export function JobPostingDetail({
       <JobsDetailLayout
         main={
           <>
-            <JobsDetailBody title="Role details" id="job-full-desc-heading">
-              <JobPostingProse content={job.body} />
+            <JobsDetailBody
+              title={
+                job.slug === SHAKZ_ODC_SLUG
+                  ? "Sunday shift"
+                  : tamil
+                    ? "வேலை விவரம்"
+                    : "Role details"
+              }
+              id="job-full-desc-heading"
+            >
+              {job.slug === SHAKZ_ODC_SLUG ? (
+                <ShakzOdcCallSheet />
+              ) : (
+                <JobPostingProse content={job.body} />
+              )}
             </JobsDetailBody>
 
             {applyHref ? (
               <JobsDetailApplyBand
-                title="Ready to apply?"
+                title={tamil ? "விண்ணப்பிக்க தயாரா?" : "Ready to apply?"}
                 description={
-                  isWhatsApp
-                    ? "This listing uses WhatsApp — message the poster; we do not process CVs."
-                    : applyHref?.startsWith("tel:")
-                      ? "This listing uses a phone number — call; we do not process CVs."
-                      : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
-                        ? "This listing uses Facebook message — not a careers portal. Confirm the role before sharing documents."
-                        : isContactForm
-                          ? "The source ad did not include a public phone. Use the form so we can pass on a hiring contact if we get one."
-                          : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
+                  tamil
+                    ? isWhatsApp
+                      ? "இந்த அறிவிப்பு WhatsApp வழியாக. எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம். நேரடியாக செய்தி அனுப்புங்கள்."
+                      : "பதவி, சம்பளம், இடம் ஆகியவற்றை உறுதி செய்த பிறகு விண்ணப்பியுங்கள்."
+                    : isWhatsApp
+                      ? "This listing uses WhatsApp — message the poster; we do not process CVs."
+                      : applyHref?.startsWith("tel:")
+                        ? "This listing uses a phone number — call; we do not process CVs."
+                        : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+                          ? "This listing uses Facebook message — not a careers portal. Confirm the role before sharing documents."
+                          : isContactForm
+                            ? "The source ad did not include a public phone. Use the form so we can pass on a hiring contact if we get one."
+                            : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
                 }
                 href={applyHref}
                 label={applyLabel}
@@ -208,7 +258,10 @@ export function JobPostingDetail({
         aside={
           <>
             <PageAdSlot shape="square" placement="job_detail_square" />
-            <JobsDetailGlance rows={glanceRows} />
+            <JobsDetailGlance
+              title={tamil ? "சுருக்கம்" : "At a glance"}
+              rows={glanceRows}
+            />
             {hubCard.tags.length > 0 ? (
               <div className="mcc-jobs-hub__job-tags">
                 {hubCard.tags.map((tag) => (

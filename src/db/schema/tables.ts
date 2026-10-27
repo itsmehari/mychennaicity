@@ -7,6 +7,7 @@ import {
   pgTable,
   text,
   timestamp,
+  index,
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
@@ -42,6 +43,13 @@ export const classifiedListingStatusEnum = pgEnum("classified_listing_status", [
   "draft",
   "open",
   "closed",
+]);
+
+export const whatsappJoinStatusEnum = pgEnum("whatsapp_join_status", [
+  "submitted",
+  "approved",
+  "declined",
+  "spam",
 ]);
 
 export const cities = pgTable("cities", {
@@ -334,6 +342,42 @@ export const classifiedPhoneReveals = pgTable(
     listingPhone: uniqueIndex("classified_phone_reveals_listing_phone_uidx").on(
       t.listingId,
       t.enquirerPhone,
+    ),
+  }),
+);
+
+/**
+ * WhatsApp community join gate. One row per phone. Not an article.
+ * Admins match `phone_last4` to WhatsApp's pending-request list.
+ */
+export const whatsappJoinVerifications = pgTable(
+  "whatsapp_join_verifications",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    displayName: text("display_name").notNull(),
+    phoneRaw: text("phone_raw").notNull(),
+    phoneE164: text("phone_e164").notNull(),
+    phoneLast4: text("phone_last4").notNull(),
+    locality: text("locality").notNull(),
+    intent: text("intent").notNull(),
+    intro: text("intro"),
+    status: whatsappJoinStatusEnum("status").notNull().default("submitted"),
+    source: text("source"),
+    ipHash: text("ip_hash"),
+    userAgent: text("user_agent"),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    approvedAt: timestamp("approved_at", { withTimezone: true }),
+    approvedBy: text("approved_by"),
+    lastContactedAt: timestamp("last_contacted_at", { withTimezone: true }),
+  },
+  (t) => ({
+    phoneUnique: uniqueIndex("whatsapp_join_verifications_phone_uidx").on(t.phoneE164),
+    last4: index("whatsapp_join_verifications_last4_idx").on(t.phoneLast4),
+    statusCreated: index("whatsapp_join_verifications_status_created_idx").on(
+      t.status,
+      t.createdAt,
     ),
   }),
 );

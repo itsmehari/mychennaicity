@@ -1,7 +1,4 @@
-import Link from "next/link";
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import {
-  WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_GROUP_NAME,
 } from "@/lib/whatsapp-community";
 import {
@@ -39,36 +36,14 @@ export function WhatsAppCommunityCta({
   utmContent?: string;
   src?: string;
 }) {
-  const enabled = isWhatsAppCommunityInviteConfigured();
-
   if (variant === "inline") {
     return (
-      <WhatsAppCommunityPageLink
-        src={src}
+      <WhatsAppCommunityJoinLink
+        utmContent={src || utmContent}
         className="font-semibold text-[#128C7E] underline-offset-4 hover:underline"
       >
         Chennai WhatsApp community
-      </WhatsAppCommunityPageLink>
-    );
-  }
-
-  if (!enabled) {
-    return (
-      <div
-        className={
-          variant === "compact"
-            ? "rounded-xl border border-dashed border-[var(--border)] px-4 py-3 text-sm text-[var(--muted)]"
-            : "rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6"
-        }
-      >
-        We are finalising the moderated{" "}
-        <strong className="text-[var(--foreground)]">{WHATSAPP_COMMUNITY_GROUP_NAME}</strong>{" "}
-        group — check back soon or{" "}
-        <Link href="/contact" className="font-semibold text-[var(--accent)] hover:underline">
-          contact us
-        </Link>
-        .
-      </div>
+      </WhatsAppCommunityJoinLink>
     );
   }
 
@@ -128,7 +103,7 @@ export function WhatsAppCommunityCta({
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
           <WhatsAppCommunityJoinLink utmContent={utmContent} className={joinBtnClass}>
             <WhatsAppMark className="h-5 w-5" />
-            Join on WhatsApp
+            Request to join
           </WhatsAppCommunityJoinLink>
           <WhatsAppCommunityPageLink src={src} className={outlineBtnClass}>
             About the group

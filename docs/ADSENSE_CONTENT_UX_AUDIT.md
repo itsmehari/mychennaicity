@@ -146,7 +146,7 @@ Listing pages are unique **when rows exist**. Empty detail pages would be thin.
 
 ## Civic tools (biggest thin-content risk on the live site)
 
-Hub copy still says “ten civic tools”; there are more than ten. `/civic-tools/area-sabha` is live but **`AREA_SABHA_MEETINGS` is an empty array** (~555 words including nav/footer). That matches Google’s “pages with little to no content.”
+Hub copy now uses `CIVIC_TOOLS.length` (15 live apps). `/civic-tools/area-sabha` is a how-to + official-channels desk; **`AREA_SABHA_MEETINGS` stays empty until a notice is verified** — do not invent minutes to fatten the page.
 
 | Page | Unique content | Duplicate / thin | Nav / UX | Verdict |
 | --- | --- | --- | --- | --- |
@@ -155,11 +155,11 @@ Hub copy still says “ten civic tools”; there are more than ten. `/civic-tool
 | `/civic-tools/zone-map` | Map | Tool | Accurate | **Ready** |
 | `/civic-tools/ward-migration` | Migration data | Thin if few rows | Accurate | **Watch** |
 | `/civic-tools/responsibility-router` | Complaint routing | Tool | Accurate | **Ready** |
-| `/civic-tools/zonal-office-access` | Office finder | Tool | Accurate | **Ready** |
-| `/civic-tools/zone-dashboard` | Metrics UI | Empty/estimated cells | Accurate | **Watch** |
+| `/civic-tools/zonal-office-access` | GCC who-is-who directory + maps | Approximate pins labelled | Accurate | **Ready** |
+| `/civic-tools/zone-dashboard` | Verified ward counts + unpublished list | Does not invent GCC stats | Accurate | **Ready** |
 | `/civic-tools/reorg-tracker` | Tracker | Thin until GOs ingested | Accurate | **Watch** |
 | `/civic-tools/civic-card` | Printable card | Utility, little article | Accurate | **Watch** |
-| `/civic-tools/area-sabha` | Empty state only | **Little to no content** | Promises meetings/minutes | **Fix** — noindex or fill, no ads |
+| `/civic-tools/area-sabha` | How-to desk + official channels | Meetings list empty until verified | Accurate | **Ready** |
 | `/civic-tools/boundary-feedback` | Report map | Form-like | Accurate | **Watch** |
 | `/civic-tools/address-form-fixer` | Ward vs pincode | Tool + FAQ | Accurate | **Ready** |
 | `/civic-tools/streetlight-dead-spots` | Editorial map | Tool | Accurate | **Ready** |
@@ -272,7 +272,7 @@ Minister pages are the largest **“similar pages / little content”** cluster 
 ## What to do before “Submit your site for review”
 
 1. **Reviewer path:** home → news hub → one long article → one area hub (OMR) → civic finder → privacy. Those are the strongest unique-content pages.
-2. **`/civic-tools/area-sabha`:** fill meetings or `noindex` until it has records. Same for any civic tracker that is still an empty shell.
+2. **Empty civic shells:** do not invent meetings or GCC zone-wise stats. Area Sabha, zone dashboard, and zonal office are live how-to / directory desks — `noindex` only if a tracker is still a blank list with no editorial desk around it.
 3. **Footer:** make every label go where it says (Monsoon ≠ generic Chennai topic; Advertise ≠ generic Contact unless the page says so).
 4. **Do not deploy** 70 minister URLs into production sitemap until they are expanded — or ship the hub only.
 5. **If Plus Two / cabinet should be live:** deploy them so they stop 404ing, then keep ads off the thinnest URLs.

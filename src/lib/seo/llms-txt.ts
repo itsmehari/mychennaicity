@@ -35,6 +35,9 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 
 - [Chennai local news](${base}/chennai-local-news): Civic, neighbourhood, transport, and public-interest reporting for Greater Chennai
 - [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): Open local jobs, walk-ins, and office roles — apply on the employer’s own channel
+- [Post a job](${base}/advertise/jobs): Employer pitch — we place the listing; Tamil: ${base}/advertise/jobs-tamil
+- [Post a property](${base}/advertise/property): Sale, rent, plot, commercial — we place the ad; Tamil: ${base}/advertise/property-tamil
+- [Classifieds](${base}/chennai-classifieds): Reader listings, including property
 - [Chennai local events](${base}/chennai-local-events): Upcoming concerts, comedy, exhibitions, temple and neighbourhood events
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
@@ -47,7 +50,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Events RSS](${base}/chennai-local-events/feed.xml): Upcoming Chennai events
 - [XML sitemap](${base}/sitemap.xml): Full crawlable URL index
 - [Google News sitemap](${base}/news-sitemap.xml): Recent news article URLs
-- [Recent sitemap](${base}/sitemap-recent.xml): URLs published or updated in the last 20 days
+- [Recent sitemap](${base}/sitemap-recent.xml): URLs published or updated in the last 30 days
 - [Full LLM digest](${base}/llms-full.txt): Longer Markdown digest with recent headlines
 - [AEO Chennai digest](${base}/aeo/chennai.md): Answer-oriented Chennai news/jobs/events digest
 
@@ -72,6 +75,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
 - [Tamil Nadu Plus Two group guide](${base}/guides/tn-plus-two): Class 11–12 group codes 2502, 2503, 2702, 2708 and humanities — confirm the school offer
+- [TN Plus Two official textbooks](${base}/guides/tn-plus-two/textbooks): Class 11–12 catalogue — official Textbook Corporation / SCERT links only; we do not host PDFs
 - [Tamil Nadu Council of Ministers](${base}/guides/tn-council-of-ministers): 35 ministers and portfolios (May 2026, Lok Bhavan PR 40); Tamil: ${base}/guides/tn-council-of-ministers-tamil
 - [WhatsApp community](${base}/chennai-whatsapp-group): City community landing (not a news source of record)
 - [humans.txt](${base}/humans.txt): Human-readable site credits
@@ -188,6 +192,8 @@ Confirm venue and tickets with the organiser before travelling.
 - **Metro Water supply days:** [${base}/civic-tools/metro-water-schedule](${base}/civic-tools/metro-water-schedule)
 - **Flood street-score (editorial):** [${base}/civic-tools/flood-street-score](${base}/civic-tools/flood-street-score)
 - **Dengue week checklist:** [${base}/guides/chennai-dengue-week](${base}/guides/chennai-dengue-week)
+- **Which Plus Two group after Class 10?** [${base}/guides/tn-plus-two](${base}/guides/tn-plus-two) — DGE codes 2502, 2503, 2702, 2708, 2804, 2802; confirm the school offer. Tamil: [${base}/guides/tn-plus-two-tamil](${base}/guides/tn-plus-two-tamil)
+- **Where are TN Plus Two textbook PDFs?** [${base}/guides/tn-plus-two/textbooks](${base}/guides/tn-plus-two/textbooks) — official Textbook Corporation / SCERT links only; this site does not host the books.
 
 Figures on cost tools are illustrative planning numbers, not official invoices or listings.
 

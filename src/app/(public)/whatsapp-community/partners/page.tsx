@@ -8,22 +8,23 @@ import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import {
   WHATSAPP_COMMUNITY_BADGE_IMAGE,
+  WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
-  siteWhatsappCommunityPageUrl,
+  siteWhatsappCommunityJoinUrl,
 } from "@/lib/whatsapp-community";
 
 const path = WHATSAPP_COMMUNITY_PARTNERS_PATH;
-const landingUrl = siteWhatsappCommunityPageUrl();
+const joinUrl = siteWhatsappCommunityJoinUrl("partners");
 
 export const metadata: Metadata = {
   title: "WhatsApp community partner badge",
   description:
-    "Embed the my chennai city WhatsApp community badge on your site — links to the official landing page, not a raw invite.",
+    "Badge for RWAs, colleges, and neighbourhood sites. It links to the Chennai join form, not a raw group invite.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   robots: { index: true, follow: true },
 };
 
-const embedCode = `<a href="${landingUrl}" title="Join my chennai city on WhatsApp" rel="noopener">
+const embedCode = `<a href="${joinUrl}" title="Request to join my chennai city on WhatsApp" rel="noopener">
   <img src="${getSiteUrl()}${WHATSAPP_COMMUNITY_BADGE_IMAGE}" alt="my chennai city WhatsApp community" width="240" height="72" loading="lazy" />
 </a>`;
 
@@ -41,8 +42,12 @@ export default function WhatsappCommunityPartnersPage() {
         Partner badge &amp; embed
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm text-[var(--muted)]">
-        Link to our canonical Chennai WhatsApp landing page — not the raw group invite.
-        We can update moderation and waitlist info in one place.
+        RWAs, colleges, and campus groups can embed this badge. It opens the join
+        form. Rules stay on{" "}
+        <a href={WHATSAPP_COMMUNITY_PAGE_PATH} className="font-semibold text-[var(--accent)] hover:underline">
+          the group page
+        </a>
+        . Do not paste the group invite on a public site.
       </p>
 
       <section className="mt-10" aria-labelledby="badge-preview">
@@ -68,7 +73,7 @@ export default function WhatsappCommunityPartnersPage() {
           {embedCode}
         </pre>
         <p className="mt-3 text-xs text-[var(--muted)]">
-          Landing URL: <code className="text-[var(--foreground)]">{landingUrl}</code>
+          Join form: <code className="text-[var(--foreground)]">{joinUrl}</code>
         </p>
       </section>
 

@@ -7,7 +7,9 @@
 
 ## Current state (repo)
 
-- **`/admin`** — Auth-gated placeholder: session display, sign-out, link to sign-in (`middleware` + Auth.js). No article/event/job CRUD UI yet.
+- **`/admin`** — Auth-gated home: session display, sign-out, links to articles and jobs (`middleware` + Auth.js).
+- **`/admin/articles`** — Phase A: publish / unpublish / feature (new stories still via seeds).
+- **`/admin/jobs`** — Jobs CRUD: list (open/closed/draft/expired), create/edit, publish/unpublish/close, close-expired button. Role is shown on `/admin` but mutations still match articles (any signed-in user).
 
 ## Target model
 

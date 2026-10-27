@@ -28,13 +28,9 @@ describe("HSE groups", () => {
 });
 
 describe("education sitemap", () => {
-  it("ships Wave A routes only", () => {
-    expect(EDUCATION_SITEMAP_ENTRIES).toHaveLength(10);
-    expect(EDUCATION_SITEMAP_ENTRIES.map((e) => e.path)).toContain(
-      "/guides/tn-plus-two",
-    );
-    expect(EDUCATION_SITEMAP_ENTRIES.map((e) => e.path)).not.toContain(
-      "/plus-two-textbooks-pdf",
-    );
+  it("includes Wave A hub and later-wave magnets", () => {
+    const paths = EDUCATION_SITEMAP_ENTRIES.map((e) => e.path);
+    expect(paths).toContain("/guides/tn-plus-two");
+    expect(paths).toContain("/plus-two-textbooks-pdf");
   });
 });

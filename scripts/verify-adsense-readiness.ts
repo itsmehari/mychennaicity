@@ -63,10 +63,10 @@ const CHECKS: Check[] = [
     expectStatus: 200,
   },
   {
-    name: "Area Sabha preview noindex",
+    name: "Area Sabha civic desk",
     url: `${SITE}/civic-tools/area-sabha`,
     expectStatus: 200,
-    bodyIncludes: ["noindex"],
+    bodyIncludes: ["Ward Committee"],
   },
   {
     name: "News hub",
@@ -84,7 +84,7 @@ const CHECKS: Check[] = [
     url: `${SITE}/sitemap.xml`,
     expectStatus: 200,
     bodyIncludes: ["<urlset"],
-    bodyExcludes: ["/civic-tools/area-sabha", "/ministers/"],
+    bodyExcludes: ["/ministers/"],
   },
   {
     name: "ads.txt",

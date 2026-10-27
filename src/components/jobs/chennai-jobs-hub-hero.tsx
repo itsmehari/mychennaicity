@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 
 type Props = {
   totalJobs: number;
@@ -54,7 +55,7 @@ export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
             internships and local hiring opportunities across Chennai.
           </p>
           <div className="mcc-jobs-hub__hero-actions">
-            <Link href="/contact#jobs" className="mcc-jobs-hub__btn-primary">
+            <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__btn-primary">
               Post a Chennai Job
             </Link>
             <WhatsAppCommunityJoinLink

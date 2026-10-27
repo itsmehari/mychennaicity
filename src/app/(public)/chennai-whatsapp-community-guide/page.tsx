@@ -11,9 +11,9 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 import {
   WHATSAPP_COMMUNITY_GEO_META,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
-  WHATSAPP_COMMUNITY_PAGE_PATH,
+  WHATSAPP_COMMUNITY_JOIN_PATH,
   WHATSAPP_SPAMMERS_PAGE_PATH,
-  siteWhatsappCommunityPageUrl,
+  siteWhatsappCommunityJoinUrl,
 } from "@/lib/whatsapp-community";
 
 const path = WHATSAPP_COMMUNITY_GUIDE_PATH;
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const SECTIONS = [
   {
     title: "Start with a canonical landing page",
-    body: "Trusted city portals publish one official join URL — not a raw chat.whatsapp.com link scattered in footers. For Chennai, mychennaicity.in/chennai-whatsapp-group is the canonical destination with rules, FAQ, and moderation contact.",
+    body: "Trusted city portals publish one official join form — not a raw group invite scattered in footers. For Chennai, mychennaicity.in/whatsapp-community/join is the request form. Rules and FAQ stay on mychennaicity.in/chennai-whatsapp-group.",
   },
   {
     title: "Verify who runs the group",
@@ -78,10 +78,10 @@ export default function ChennaiWhatsappCommunityGuidePage() {
         This page is not the join button. To join the official my chennai city
         group, use{" "}
         <Link
-          href={WHATSAPP_COMMUNITY_PAGE_PATH}
+          href={WHATSAPP_COMMUNITY_JOIN_PATH}
           className="font-semibold text-[var(--accent)] hover:underline"
         >
-          /chennai-whatsapp-group
+          /whatsapp-community/join
         </Link>
         . Neighbourhood WhatsApp groups can be genuinely useful — for civic alerts, job leads,
         and event tips. They can also be spam traps. This guide helps Chennai residents
@@ -117,12 +117,12 @@ export default function ChennaiWhatsappCommunityGuidePage() {
       </p>
 
       <p className="mt-8 text-xs text-[var(--muted)]">
-        Canonical community URL:{" "}
+        Canonical join URL:{" "}
         <a
-          href={siteWhatsappCommunityPageUrl()}
+          href={siteWhatsappCommunityJoinUrl("seo")}
           className="font-mono text-[var(--foreground)]"
         >
-          {siteWhatsappCommunityPageUrl()}
+          {siteWhatsappCommunityJoinUrl("seo")}
         </a>
       </p>
 

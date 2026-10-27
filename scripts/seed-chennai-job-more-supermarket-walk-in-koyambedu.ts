@@ -159,7 +159,10 @@ Mention that you saw the opening on MyChennaiCity jobs.
     body,
     locationLabel:
       "Walk-in at Koyambedu · hiring for Chennai, Pondicherry, Vellore, Thiruvannamalai & TN",
-    status: "open" as const,
+    status:
+      validThrough.getTime() > now.getTime()
+        ? ("open" as const)
+        : ("closed" as const),
     employmentType: "FULL_TIME",
     validThrough,
     publishedAt: now,

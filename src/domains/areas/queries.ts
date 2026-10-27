@@ -9,6 +9,7 @@ import {
 } from "@/db/schema/tables";
 import { reviveArticleRow, type PublicArticleRow } from "@/domains/news/queries";
 import type { ClassifiedListingRow } from "@/domains/classifieds/queries";
+import { publiclyOpenJobSql } from "@/domains/jobs/public-open";
 import type { JobPostingWithEmployer } from "@/domains/jobs/queries";
 
 const CHENNAI_CITY_SLUG = "chennai";
@@ -74,6 +75,7 @@ export async function listClassifiedsByAreaHubForChennai(
       ),
     )
     .orderBy(
+      desc(classifiedListings.featured),
       desc(classifiedListings.publishedAt),
       desc(classifiedListings.createdAt),
     )
@@ -98,7 +100,7 @@ export async function listOmrCorridorJobsForChennai(
     .where(
       and(
         eq(jobPostings.cityId, cityId),
-        eq(jobPostings.status, "open"),
+        publiclyOpenJobSql(),
         locationMatch,
       ),
     )

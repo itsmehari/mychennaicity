@@ -51,11 +51,12 @@
 - **Rich snippets (JSON-LD):** Article pages emit `NewsArticle`, `BreadcrumbList`, optional TOC `ItemList`, plus `buildArticleSupplementalJsonLd`. **FAQPage:** exactly one block, only when `interactive_json.type === "faq"` and Q&A is rendered on the page (do not duplicate with `faqItems` or auto-generated fact-box FAQs). Validate in [Google Rich Results Test](https://search.google.com/test/rich-results) after publish.
 - **SWM Rules AEO block:** Solid-waste / SWM Rules articles listed in [`src/content/civic-swm/swm-rules-aeo.ts`](../src/content/civic-swm/swm-rules-aeo.ts) render a factual “Quick answers” section (`#swm-rules-aeo`) with a direct answer, definitions, series links, Speakable markup, and `about` entities. Keep copy aligned with published reporting — no new claims.
 - **AI discovery:** Keep [`/llms.txt`](../src/app/llms.txt/route.ts) hubs accurate when adding major public routes. Full plan: [`AEO_GEO_PLAN.md`](AEO_GEO_PLAN.md).
-- **Hub AEO strips:** Jobs and events hubs use shared [`AeoAnswerBlock`](../src/components/seo/aeo-answer-block.tsx). Article pages end with [`ArticleChennaiContextCluster`](../src/components/news/article-chennai-context-cluster.tsx) (related news + area/jobs/events hubs).
+- **Hub AEO strips:** Jobs and events hubs use shared [`AeoAnswerBlock`](../src/components/seo/aeo-answer-block.tsx). Article pages use a Hindu-style mid-report [`ArticleAlsoRead`](../src/components/news/civic-editorial/article-also-read.tsx) (first category-related story) and end with [`ArticleChennaiContextCluster`](../src/components/news/article-chennai-context-cluster.tsx) (related news + area/jobs/events hubs).
+- **Education desk:** TN Plus Two cluster (Waves A–E in repo) uses answer-first + FAQPage-only-when-visible. Production not live until deploy. IA: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).
 
 ## Search measurement (ops)
 
-- Add the site in **Google Search Console** and **Bing Webmaster Tools**; submit `sitemap.xml`, **`sitemap-recent.xml`** (last 20 days) after a publish burst, and optionally `news-sitemap.xml` if you pursue News surfaces.
+- Add the site in **Google Search Console** and **Bing Webmaster Tools**; submit `sitemap.xml`, **`sitemap-recent.xml`** (last 30 days) after a publish burst, and optionally `news-sitemap.xml` if you pursue News surfaces.
 - Track branded and local queries (e.g. Chennai + desk names, OMR, GCC) in GSC; pair with **CWV** reports for LCP/CLS regressions after image or map changes.
 
 ## Events and jobs (public indexation)

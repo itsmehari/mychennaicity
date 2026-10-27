@@ -45,16 +45,16 @@ export const CIVIC_TOOLS: CivicToolDef[] = [
     slug: "zonal-office-access",
     title: "Zonal Office Accessibility",
     description:
-      "Distance, travel time, and access notes for GCC zonal offices.",
-    status: "preview",
+      "Official GCC Zone I–XV office addresses, emails, and landlines, plus approximate distance.",
+    status: "live",
     phase: "C",
   },
   {
     slug: "zone-dashboard",
     title: "Zone Data Dashboard",
     description:
-      "Zone-wise civic metrics with source, methodology, and missing-data flags.",
-    status: "preview",
+      "Verified ward counts by GCC zone, plus an honest list of statistics the Corporation has not published zone-wise.",
+    status: "live",
     phase: "C",
   },
   {
@@ -77,8 +77,8 @@ export const CIVIC_TOOLS: CivicToolDef[] = [
     slug: "area-sabha",
     title: "Area Sabha Tracker",
     description:
-      "Ward committee meetings, agendas, minutes, and project status.",
-    status: "preview",
+      "How GCC Ward Committees and Area Sabhas work, plus official notice channels — minutes listed only when verified.",
+    status: "live",
     phase: "C",
   },
   {

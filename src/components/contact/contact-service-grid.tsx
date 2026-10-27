@@ -7,7 +7,6 @@ import {
 } from "@/components/community/whatsapp-community-join-link";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
-import { isWhatsAppCommunityInviteConfigured } from "@/lib/whatsapp-server";
 import { WHATSAPP_COMMUNITY_GROUP_NAME } from "@/lib/whatsapp-community";
 
 function WhatsAppIcon() {
@@ -19,7 +18,6 @@ function WhatsAppIcon() {
 }
 
 export function ContactServiceGrid() {
-  const communityOn = isWhatsAppCommunityInviteConfigured();
   const defaultPrefill = getBusinessWhatsAppCopy("default").prefill;
 
   return (
@@ -196,25 +194,17 @@ export function ContactServiceGrid() {
                   corporate desk used for listings and tips.
                 </p>
                 <div className="mcc-corp-direct__actions">
-                  {communityOn ? (
-                    <>
-                      <WhatsAppCommunityJoinLink
-                        utmContent="contact-corp"
-                        className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm"
-                      >
-                        Join community
-                      </WhatsAppCommunityJoinLink>
-                      <WhatsAppCommunityPageLink
-                        className="mcc-corp-btn mcc-corp-btn--ghost mcc-corp-btn--sm"
-                      >
-                        About the group
-                      </WhatsAppCommunityPageLink>
-                    </>
-                  ) : (
-                    <p className="mcc-corp-direct__body">
-                      Community invite opens here once moderation is ready.
-                    </p>
-                  )}
+                  <WhatsAppCommunityJoinLink
+                    utmContent="contact"
+                    className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm"
+                  >
+                    Request to join
+                  </WhatsAppCommunityJoinLink>
+                  <WhatsAppCommunityPageLink
+                    className="mcc-corp-btn mcc-corp-btn--ghost mcc-corp-btn--sm"
+                  >
+                    About the group
+                  </WhatsAppCommunityPageLink>
                 </div>
               </aside>
             </div>

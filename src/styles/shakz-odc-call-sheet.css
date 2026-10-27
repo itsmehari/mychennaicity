@@ -1,0 +1,208 @@
+/* Shakz Events ODC call sheet — only the markup in shakz-odc-call-sheet.tsx */
+
+.mcc-shakz-odc {
+  --shakz-ink: #1c1915;
+  --shakz-muted: #5c564c;
+  --shakz-paper: #f6f1e7;
+  --shakz-line: #e4d9c8;
+  --shakz-chili: #9f2d1f;
+  color: var(--shakz-ink);
+}
+
+.mcc-shakz-odc__banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  margin: -0.25rem 0 1rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--shakz-ink);
+  color: #f6f1e7;
+  border-radius: 12px;
+}
+
+.mcc-shakz-odc__banner-kicker {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f0c7a0;
+}
+
+.mcc-shakz-odc__banner-total {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.mcc-shakz-odc__lead {
+  margin: 0 0 1rem;
+  font-size: 0.975rem;
+  line-height: 1.55;
+}
+
+.mcc-shakz-odc__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .mcc-shakz-odc__facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.mcc-shakz-odc__fact {
+  padding: 0.75rem 0.8rem;
+  background: var(--shakz-paper);
+  border: 1px solid var(--shakz-line);
+  border-radius: 12px;
+}
+
+.mcc-shakz-odc__fact dt {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--shakz-chili);
+}
+
+.mcc-shakz-odc__fact dd {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.mcc-shakz-odc__roster-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  margin: 0 0 0.65rem;
+}
+
+.mcc-shakz-odc__roster-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.mcc-shakz-odc__roster-head p {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--shakz-muted);
+}
+
+.mcc-shakz-odc__roster {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 560px) {
+  .mcc-shakz-odc__roster {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mcc-shakz-odc__outlet {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--shakz-line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.mcc-shakz-odc__code {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--shakz-muted);
+}
+
+.mcc-shakz-odc__area {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.mcc-shakz-odc__count {
+  min-width: 4.5rem;
+  text-align: right;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--shakz-chili);
+}
+
+.mcc-shakz-odc__note {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--shakz-muted);
+}
+
+.mcc-shakz-odc__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  margin-top: 0.85rem;
+}
+
+.mcc-shakz-odc__contact-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mcc-shakz-odc__contacts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--shakz-ink);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--shakz-ink);
+  text-decoration: none;
+}
+
+.mcc-shakz-odc__contacts a:hover {
+  background: var(--shakz-ink);
+  color: #f6f1e7;
+}
+
+.mcc-shakz-odc__faqs {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.mcc-shakz-odc__faqs details {
+  border-top: 1px solid var(--shakz-line);
+  padding-top: 0.55rem;
+}
+
+.mcc-shakz-odc__faqs summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.mcc-shakz-odc__faqs p {
+  margin: 0.35rem 0 0.2rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--shakz-muted);
+}

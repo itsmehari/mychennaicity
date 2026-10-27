@@ -136,6 +136,18 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-tabla-poetry-september-2026.ts` | `db:seed:event:tabla-poetry:live` |
 | `seed-event-tn-international-kite-festival-august-2026.ts` | `db:seed:event:tn-international-kite-festival:live` |
 | `seed-event-shore-temple-classic-surfing-august-2026.ts` | `db:seed:event:shore-temple-classic-surfing:live` |
+| `seed-event-madras-day-chennai-to-madras-august-2026.ts` | `db:seed:event:madras-day-chennai-to-madras:live` |
+| `seed-event-made-of-chennai-food-music-festival-august-2026.ts` | `db:seed:event:made-of-chennai-food-music:live` |
+| `seed-event-sri-kala-sudha-krishnaashtami-september-2026.ts` | `db:seed:event:sri-kala-sudha-krishnaashtami:live` |
+| `seed-event-dharma-rakshana-mahotsava-october-2026.ts` | `db:seed:event:dharma-rakshana-mahotsava:live` |
+| `seed-event-idhu-ungal-sothu-property-expo-october-2026.ts` | `db:seed:event:idhu-ungal-sothu-property-expo:live` |
+| `seed-event-easwari-startup-peravai-october-2026.ts` | `db:seed:event:easwari-startup-peravai:live` |
+| `seed-event-chennai-organic-market-perungudi-october-2026.ts` | `db:seed:event:chennai-organic-market-perungudi:live` |
+| `seed-event-folk-arts-parai-workshop-anna-nagar-october-2026.ts` | `db:seed:event:folk-arts-parai-anna-nagar:live` |
+| `seed-event-saturangam-tn-childrens-chess-november-2026.ts` | `db:seed:event:saturangam-tn-childrens-chess:live` |
+| `seed-event-india-retail-investors-expo-october-2026.ts` | `db:seed:event:india-retail-investors-expo:live` |
+| `seed-event-strings-of-rasa-siruseri-november-2026.ts` | `db:seed:event:strings-of-rasa:live` |
+| `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
 | `seed-meetup-chennai-aug-sep-2026.ts` | `db:seed:meetup-chennai-aug-sep:live` (15 Meetup/community rows) |
 
 ---
@@ -157,4 +169,16 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-08-10 | Meetup Aug–Sep batch (15 workshops/tech/networking/wellness) + thematic posters + AEO/FAQ meetup copy. |
 | 2026-08-15 | TTDC ECR weekend: kite festival (TNIKF, Ocean View, 14–16 Aug) + WSL Shore Temple Classic (12–16 Aug). Companion tourism page `/chennai-tourism/this-weekend-ecr-plan`. Dedicated news `db:seed:tn-international-kite-festival-august-2026(:live)` → `/chennai-local-news/tamil-nadu-international-kite-festival-mamallapuram-august-2026`. |
 | 2026-08-15 | Public submit form `/chennai-local-events/submit` — inserts `draft` rows, IP rate limit, IST datetime. Editors must schedule before the hub lists them. |
+| 2026-08-21 | Madras Day 2026 Chennai-to-Madras photo exhibition (L Ramachandran, Anna Centenary Library, 22–31 Aug) via `db:seed:event:madras-day-chennai-to-madras(:live)`. Poster `public/images/events/madras-day-chennai-to-madras-photo-exhibition-august-2026.png`. |
+| 2026-08-23 | Made of Chennai Food and Music Festival (The Hindu / Casagrand; YMCA Nandanam, 29 Aug, 4 PM onwards) via `db:seed:event:made-of-chennai-food-music(:live)`. Poster `public/images/events/made-of-chennai-food-music-festival-august-2026.png`. |
+| 2026-09-13 | Sri Kala Sudha Telugu Association Krishnaashtami & 28th anniversary (Music Academy, TTK Road, 13 Sep 2026, 5:00 PM) via `db:seed:event:sri-kala-sudha-krishnaashtami(:live)`. Poster `public/images/events/sri-kala-sudha-telugu-association-krishnaashtami-september-2026.png`. |
+| 2026-09-29 | Dharma Rakshana Mahotsava / Dashamanotsava of Sri Sri Vidyashreesha Tirtha Swamiji (B V Bhavan's Rajaji Vidyashram, Kilpauk, 4 Oct 2026, 4:00–8:00 PM) via `db:seed:event:dharma-rakshana-mahotsava(:live)`. Poster `public/images/events/dharma-rakshana-mahotsava-kilpauk-october-2026.jpg`. |
+| 2026-09-30 | Idhu Ungal Sothu Mega Property Expo (ARK Eventz, 18th edition; 10–11 Oct 2026; Arul Murugan Towers, Old Pallavaram, and Swapna Thirumana Maaligai, Urapakkam) via `db:seed:event:idhu-ungal-sothu-property-expo(:live)`. No poster supplied. |
+| 2026-09-30 | Chennai Organic Market (OFM / TNIVF marks; Vallalar Sanmargam Arangam, Perungudi; Sunday 11 Oct 2026, 10:00 AM–5:00 PM) via `db:seed:event:chennai-organic-market-perungudi(:live)`. Poster `public/images/events/chennai-organic-market-perungudi-october-2026.jpg`. |
+| 2026-09-30 | Student Artists Federation free parai drumming workshop (Anna Nagar Tower Park, Sunday 4 Oct 2026, 11:00 AM–3:00 PM; Mr. Prem Kumar, 97898 49501) via `db:seed:event:folk-arts-parai-anna-nagar(:live)`. Poster `public/images/events/folk-arts-parai-workshop-anna-nagar-october-2026.jpg`. |
+| 2026-10-04 | Saturangam 360 — 4th Tamil Nadu State Level Children's Chess Tournament (BVM Global Perungudi; Sunday 15 Nov 2026; reporting 8.30 am, first round 9.00 am; entry not open) via `db:seed:event:saturangam-tn-childrens-chess(:live)`. Poster `public/images/events/saturangam-360-tn-state-childrens-chess-perungudi-november-2026.jpg`. |
+| 2026-10-18 | Easwari Startup Peravai (Easwari Engineering College, Bharathi Salai, Ramapuram; 30–31 Oct 2026; visitor pass free, event pass ₹499; seven catalogue sessions) via `db:seed:event:easwari-startup-peravai(:live)`. Poster `public/images/events/easwari-startup-peravai-october-2026.jpg`. Companion news `db:seed:easwari-startup-peravai-october-2026(:live)`. |
+| 2026-10-19 | India Retail Investors Expo Season 3 (DFAIRS; D7 Auditorium, IIT Madras Research Park, Taramani; 31 Oct–1 Nov 2026, 10:00 AM–6:30 PM on MeetGrow, session grid to 6:00 PM; MeetGrow passes Gold ₹99 / Diamond ₹699 / Platinum ₹1,399; community code CMNITY100 from WhatsApp, not on the official pages) via `db:seed:event:india-retail-investors-expo(:live)`. |
+| 2026-10-25 | Strings of Rasa (Ramana Balachandhran; Mohamad Satak Auditorium, Siruseri; Sun 1 Nov 2026, 5:30 PM; calendar held to 8:30 PM because the poster has no finish time; patron 88389 73850; tickets on MDnD, fare unprinted) via `db:seed:event:strings-of-rasa(:live)`. Poster not on the live CDN until this file is deployed. |
+| 2026-10-25 | Tricku or Murukku (Curious Korner; ages 5–12; Sat 31 Oct 2026, 10:00 AM–1:00 PM; hall after RSVP; FOMRRA ₹200 off via the form’s FOMRRA WhatsApp group option; +91 90475 83033) via `db:seed:event:tricku-or-murukku(:live)`. Poster not on the live CDN until this file is deployed. |
 

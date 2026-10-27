@@ -7,7 +7,7 @@ import {
 export const dynamic = "force-dynamic";
 
 /**
- * Rolling last-20-days sitemap for Google Search Console recrawl.
+ * Rolling last-30-days sitemap for Google Search Console recrawl.
  * Submit: https://mychennaicity.in/sitemap-recent.xml
  */
 export async function GET() {

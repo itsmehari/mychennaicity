@@ -38,12 +38,19 @@ MCC outbound + jobs-hub related card are in-repo. Place **one** editorial inboun
 | Site | Suggested placement | Paste-ready blurb | Status |
 |------|---------------------|-------------------|--------|
 | mychennaicity.in `/chennai-jobs` | Career resources strip (`CHENNAI_JOBS_CAREER_RESOURCES`) | In code — “Local job ads for owners and HR” | **Done** |
-| vacancychennai.in | Employer resources / hiring tip post | “Practical guide for Chennai business owners and HR on writing neighbourhood job ads: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | Operator — pending |
-| mynanganallur.in | Related reading / local hiring note | “South Chennai owners hiring near home — see the Chennai local job ads guide for owners and HR: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | Operator — pending |
-| myomr.in | OMR hiring / also-read | “OMR corridor hires still need clear locality and shift language — Chennai local job ads guide: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | Operator — pending |
-| mycovai.in | TN cities / related | “Multi-city TN hiring tip — Chennai local job ads guide for owners and HR: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | Operator — pending |
+| vacancychennai.in | Employer resources / hiring tip post | “Practical guide for Chennai business owners and HR on writing neighbourhood job ads: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | **Done** — in repo `E:\OneDrive\_vacancychennai.in\vacancychennai` (not live-deployed from this session) |
+| mynanganallur.in | Related reading / local hiring note | “South Chennai owners hiring near home — see the Chennai local job ads guide for owners and HR: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | **Done** — in repo `E:\OneDrive\_my nanganallur\_root_mynanganallur` (not live-deployed from this session) |
+| myomr.in | OMR hiring / also-read | “OMR corridor hires still need clear locality and shift language — Chennai local job ads guide: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | **Done** — in repo `E:\OneDrive\_myomr\_Myomr_root` (not live-deployed from this session) |
+| mycovai.in | TN cities / related | “Multi-city TN hiring tip — Chennai local job ads guide for owners and HR: https://mychennaicity.in/chennai-local-news/chennai-local-job-ads-guide-business-owners-hr” | **Done** — in repo `E:\OneDrive\_mycovai\_mycovai_Root` (not live-deployed from this session) |
 
 **Log columns when placed:** domain · page URL · date · anchor text · notes.
+
+| Domain | Page URL (canonical) | Date | Anchor text | Notes |
+|--------|----------------------|------|-------------|-------|
+| vacancychennai.in | https://vacancychennai.in/blog/top-it-companies-hiring-omr | 2026-09-12 | Chennai local job ads guide for owners and HR | Editorial section + cross-link in `src/lib/blog-posts.ts`. Deploy sister repo to float. |
+| mynanganallur.in | https://mynanganallur.in/jobs | 2026-09-12 | Chennai local job ads guide for owners and HR | Related-reading paragraph on jobs hub (`src/app/(public)/jobs/page.tsx`). Deploy sister repo to float. |
+| myomr.in | https://myomr.in/discover-myomr/it-careers-omr.php | 2026-09-12 | Chennai local job ads guide | Also-read under Hiring on OMR aside. Deploy sister repo to float. |
+| mycovai.in | https://mycovai.in/jobs/ | 2026-09-12 | Chennai local job ads guide for owners and HR | Related reading block on public jobs index. Deploy sister repo to float. |
 
 ## Social draft (X)
 

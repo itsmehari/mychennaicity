@@ -42,6 +42,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Jobs admin + hygiene:** `/admin/jobs` (Auth.js, same gate as articles). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or admin **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 
+**WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL` and is shown only after the form, plus the admin Message link. Queue: `/admin/whatsapp-join-requests`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Do not put join requests in articles.
+
 **Non-negotiables in short:**
 
 - Keep **plan todos** in `.cursor/plans/` aligned with reality when the user tracks work there.

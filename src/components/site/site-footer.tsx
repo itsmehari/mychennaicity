@@ -4,8 +4,12 @@ import { chennaiZones } from "@/lib/chennai-zones";
 import { getOrgSocialLinks } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 import {
+  ADVERTISE_JOBS_PATH,
+  ADVERTISE_PROPERTY_PATH,
+} from "@/lib/routes/advertise-listings";
+import {
   WHATSAPP_ADMINS_TOOLKIT_PATH,
-  WHATSAPP_COMMUNITY_PAGE_PATH,
+  whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
 import { MYCHENNAICITY_USAGE_GUIDE_PATH } from "@/content/guides/mychennaicity-usage";
 import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
@@ -26,7 +30,7 @@ const newsLinks = [
 const discoverLinks = [
   { href: "/search", label: "Search the site" },
   { href: "/glossary", label: "Chennai & GCC glossary" },
-  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp community" },
+  { href: whatsappCommunityJoinHref("footer"), label: "WhatsApp community" },
   { href: WHATSAPP_ADMINS_TOOLKIT_PATH, label: "WhatsApp admin toolkit" },
   { href: "/directory", label: "Full directory" },
   { href: CHENNAI_GOLD_RATE_HUB_PATH, label: "Chennai gold & silver rate" },
@@ -49,7 +53,8 @@ const discoverLinks = [
 const workLinks = [
   { href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" },
   { href: CHENNAI_SALARY_GUIDE_PATH, label: "Salary guide 2026" },
-  { href: "/contact#jobs", label: "Post a job" },
+  { href: ADVERTISE_JOBS_PATH, label: "Post a job" },
+  { href: ADVERTISE_PROPERTY_PATH, label: "Post a property" },
   { href: "/contact#directory", label: "List your business" },
   { href: "/contact#events", label: "Submit an event" },
 ];
@@ -79,7 +84,7 @@ const tagLinks = [
   { href: "/civic-tools/flood-street-score", label: "Flood" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Jobs" },
   { href: CHENNAI_GOLD_RATE_HUB_PATH, label: "Gold" },
-  { href: WHATSAPP_COMMUNITY_PAGE_PATH, label: "WhatsApp" },
+  { href: whatsappCommunityJoinHref("footer"), label: "WhatsApp" },
 ];
 
 function FooterColumn({
@@ -156,7 +161,7 @@ export function SiteFooter() {
               Email digest
             </NewsletterFooterTrigger>
             <Link
-              href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=footer`}
+              href={whatsappCommunityJoinHref("footer")}
               data-site-cta="whatsapp"
               className="inline-flex items-center justify-center rounded-full border-2 border-[color-mix(in_srgb,#25D366_40%,var(--footer-border))] bg-[color-mix(in_srgb,#25D366_10%,transparent)] px-6 py-3 text-sm font-bold text-[#7dcea0] transition hover:border-[#25D366] hover:text-[#a8e6cf]"
             >
@@ -197,7 +202,7 @@ export function SiteFooter() {
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link
-                  href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=footer-social`}
+                  href={whatsappCommunityJoinHref("footer")}
                   className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,#25D366_40%,var(--footer-border))] bg-[color-mix(in_srgb,#25D366_12%,var(--footer-elevated))] px-3 py-1.5 text-xs font-semibold text-[#a8e6cf] transition hover:border-[#25D366]"
                 >
                   WhatsApp

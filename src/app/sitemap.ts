@@ -15,11 +15,14 @@ import { categoryToTopicSlug } from "@/lib/news-topics";
 import { getGoldRateLastModifiedForSitemap } from "@/domains/gold-rate";
 import { CHENNAI_GOLD_RATE_HUB_PATH, CHENNAI_GOLD_RATE_HISTORY_PATH, CHENNAI_BUYING_GOLD_GUIDE_PATH } from "@/lib/routes/chennai-gold-rate";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
+import { ADVERTISE_LISTING_PATHS } from "@/lib/routes/advertise-listings";
+import { bilingualJobSitemapLanguages } from "@/lib/jobs/job-language";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
 import {
   WHATSAPP_ADMINS_TOOLKIT_PATH,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
+  WHATSAPP_COMMUNITY_JOIN_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
@@ -29,7 +32,10 @@ import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { COMPULSIVE_SITEMAP_ENTRIES, COMPULSIVE_TAMIL_SITEMAP_PATHS } from "@/content/compulsive/index";
-import { EDUCATION_SITEMAP_ENTRIES } from "@/content/education/index";
+import {
+  EDUCATION_SITEMAP_ENTRIES,
+  EDUCATION_TAMIL_SITEMAP_PATHS,
+} from "@/content/education/index";
 import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 import {
@@ -214,6 +220,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.66,
     },
+    ...ADVERTISE_LISTING_PATHS.map((path) => ({
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
     {
       url: `${base}${CHENNAI_GOLD_RATE_HUB_PATH}`,
       lastModified: goldRateLastModified ?? now,
@@ -291,6 +303,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: entry.changeFrequency,
       priority: entry.priority,
+    })),
+    ...EDUCATION_TAMIL_SITEMAP_PATHS.map((path) => ({
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.68,
     })),
     ...GOVERNMENT_SITEMAP_ENTRIES.map((entry) => ({
       url: `${base}${entry.path}`,
@@ -377,6 +395,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.35,
     },
     {
+      url: `${base}${WHATSAPP_COMMUNITY_JOIN_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${base}${WHATSAPP_COMMUNITY_PAGE_PATH}`,
       lastModified: now,
       changeFrequency: "weekly",
@@ -453,12 +477,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  const jobEntries: MetadataRoute.Sitemap = jobRows.map((j) => ({
-    url: `${base}${chennaiJobsDetailPath(j.slug)}`,
-    lastModified: j.lastModified,
-    changeFrequency: "weekly" as const,
-    priority: 0.65,
-  }));
+  const jobSlugSet = new Set(jobRows.map((j) => j.slug));
+  const jobEntries: MetadataRoute.Sitemap = jobRows.map((j) => {
+    const languages = bilingualJobSitemapLanguages(
+      j.slug,
+      jobSlugSet,
+      (slug) => `${base}${chennaiJobsDetailPath(slug)}`,
+    );
+    return {
+      url: `${base}${chennaiJobsDetailPath(j.slug)}`,
+      lastModified: j.lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.65,
+      ...(languages ? { alternates: { languages } } : {}),
+    };
+  });
 
   const directoryEntries: MetadataRoute.Sitemap = directoryRows.map((d) => ({
     url: `${base}${directoryDetailPath(d.type, d.slug)}`,

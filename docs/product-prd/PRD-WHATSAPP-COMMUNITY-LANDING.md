@@ -2,8 +2,10 @@
 
 **Product:** mychennaicity.in  
 **Canonical URL:** `/chennai-whatsapp-group`  
-**Invite (env):** `WHATSAPP_COMMUNITY_INVITE_URL`  
-**Group name:** my chennai city
+**Invite (env):** `WHATSAPP_COMMUNITY_INVITE_URL` — success screen and admin Message only  
+**Public join:** `/whatsapp-community/join`  
+**Group name:** my chennai city  
+**Operator record:** `docs/strategy-marketing/WHATSAPP-GROUPS.md`
 
 ## 18-step implementation checklist
 
@@ -22,7 +24,7 @@
 | 11 | Main nav links | Done |
 | 12 | Footer link + prefooter mention | Done |
 | 13 | About + directory page CTAs | Done |
-| 14 | Unified join links (tracked `/api/community/whatsapp?utm_content=…`) | Done |
+| 14 | Unified join links go to `/whatsapp-community/join` (old `/api/community/whatsapp` redirects there) | Done |
 | 15 | Global float → community page (`?src=float`) | Done |
 | 16 | SEO guide `/chennai-whatsapp-community-guide` | Done |
 | 17 | Partner badge/embed `/whatsapp-community/partners` | Done |
@@ -51,7 +53,7 @@ GA4 event on join clicks: `whatsapp_community_click` with `event_label` = hero |
 
 ## Deploy checklist
 
-1. Set `WHATSAPP_COMMUNITY_INVITE_URL=https://chat.whatsapp.com/CnxfxABnv3YCgxhdSqEigd` on Vercel Production
+1. Set `WHATSAPP_COMMUNITY_INVITE_URL` on Vercel Production to the Chennai group invite the owner already uses. Do not commit that URL. If it is empty, the form still saves and the Join button stays hidden.
 2. Redeploy
 3. Pin message from `dev-tools/whatsapp-community-pinned-message.txt`
 4. Resubmit `https://mychennaicity.in/sitemap.xml` in Google Search Console

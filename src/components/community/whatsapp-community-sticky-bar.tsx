@@ -28,7 +28,7 @@ export function WhatsAppCommunityStickyBar() {
         className="flex w-full min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white shadow-md"
       >
         <WhatsAppMark className="h-5 w-5" />
-        Join on WhatsApp
+        Request to join
       </WhatsAppCommunityJoinLink>
     </div>
   );

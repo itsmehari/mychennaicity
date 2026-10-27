@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useState, type CSSProperties } from "react";
-import { WHATSAPP_COMMUNITY_PAGE_PATH } from "@/lib/whatsapp-community";
+import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
 import { SiteSearchForm } from "./site-search-form";
@@ -67,7 +67,7 @@ export function SiteHeader() {
             <span className="hidden text-xs font-bold lg:inline">Contact</span>
           </Link>
           <Link
-            href={`${WHATSAPP_COMMUNITY_PAGE_PATH}?src=nav`}
+            href={whatsappCommunityJoinHref("nav")}
             data-site-cta="whatsapp"
             className="focus-ring hidden min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-3.5 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] xl:inline-flex"
           >

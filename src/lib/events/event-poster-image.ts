@@ -107,6 +107,18 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/rotary-chennai-galaxy-mega-job-fair-october-2026.jpg",
     alt: "Rotary Club of Chennai Galaxy Mega Job Fair 2026 poster — The Madras Seva Sadan, Chennai, Saturday 17 October 2026, 8:00 AM to 2:00 PM",
   },
+  "easwari-startup-peravai-october-2026": {
+    src: "/images/events/easwari-startup-peravai-october-2026.jpg",
+    alt: "Easwari Startup Peravai poster — student startup summit at Easwari Engineering College, Ramapuram, Chennai, 30 and 31 October 2026",
+  },
+  "strings-of-rasa-ramana-balachandhran-siruseri-november-2026": {
+    src: "/images/events/strings-of-rasa-ramana-balachandhran-siruseri-november-2026.png",
+    alt: "Strings of Rasa poster — Ramana Balachandhran veena evening at Mohamad Satak Auditorium, Siruseri, Sunday 1 November 2026, 5:30 PM",
+  },
+  "tricku-or-murukku-halloween-curious-korner-october-2026": {
+    src: "/images/events/tricku-or-murukku-halloween-curious-korner-october-2026.jpg",
+    alt: "Tricku or Murukku poster — Curious Korner Halloween ghost party for ages 5 to 12, Saturday 31 October 2026, 10 AM to 1 PM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",

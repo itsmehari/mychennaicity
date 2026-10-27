@@ -2,10 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import {
+  WHATSAPP_COMMUNITY_JOIN_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
 } from "@/lib/whatsapp-community";
-import { WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
+import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -21,6 +22,7 @@ function WhatsAppMark({ className = "" }: { className?: string }) {
 }
 
 const HIDE_FLOAT_PREFIXES = [
+  WHATSAPP_COMMUNITY_JOIN_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   "/privacy",
@@ -41,13 +43,13 @@ export function WhatsAppCommunityFloat() {
       className="fixed bottom-5 right-4 z-50 sm:bottom-6 sm:right-6"
       aria-label="WhatsApp community shortcut"
     >
-      <WhatsAppCommunityPageLink
-        src="float"
+      <WhatsAppCommunityJoinLink
+        utmContent="float"
         className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-[color-mix(in_srgb,#25D366_25%,transparent)] transition hover:scale-105 hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
       >
-        <span className="sr-only">Chennai WhatsApp community</span>
+        <span className="sr-only">Request to join the Chennai WhatsApp group</span>
         <WhatsAppMark className="h-7 w-7" />
-      </WhatsAppCommunityPageLink>
+      </WhatsAppCommunityJoinLink>
     </div>
   );
 }

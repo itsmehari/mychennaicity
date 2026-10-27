@@ -9,6 +9,7 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { getOpenClassifiedListingBySlug } from "@/domains/classifieds";
+import { classifiedCoverAbsoluteUrl } from "@/lib/classifieds/images";
 import { getSiteUrl } from "@/lib/env";
 import {
   CHENNAI_CLASSIFIEDS_HUB_PATH,
@@ -48,6 +49,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const desc = clipDesc(listing.body) || listing.title;
   const titleSegment = buildClippedTitleSegment(listing.title, " · Classified");
   const docTitle = fullSiteTitle(titleSegment);
+  const ogImage = classifiedCoverAbsoluteUrl(listing.imageUrls);
+  const ogImages = ogImage
+    ? [{ url: ogImage }]
+    : [{ url: "/opengraph-image", width: 1200, height: 630 }];
   return {
     title: titleSegment,
     description: desc,
@@ -57,13 +62,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: desc,
       url,
       type: "article",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+      images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
       title: docTitle,
       description: desc,
-      images: ["/twitter-image"],
+      images: ogImage ? [ogImage] : ["/twitter-image"],
     },
   };
 }

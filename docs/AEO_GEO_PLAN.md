@@ -16,7 +16,7 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 | `/aeo/chennai.md` | Answer-first Chennai digest |
 | `/humans.txt` | Human credits |
 | `/robots.txt` | Crawl policy + explicit AI-bot Allow |
-| `/sitemap.xml` + `/news-sitemap.xml` + `/sitemap-recent.xml` | Crawl inventory (full + news + last 20 days) |
+| `/sitemap.xml` + `/news-sitemap.xml` + `/sitemap-recent.xml` | Crawl inventory (full + news + last 30 days) |
 | Hub RSS | `/chennai-local-news/feed.xml`, `/chennai-jobs/feed.xml`, `/chennai-local-events/feed.xml` |
 
 ## Content rules that move AEO
@@ -37,6 +37,8 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 | News | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Jobs | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Events | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+Planned: TN Plus Two education desk pillars (`/guides/tn-plus-two`, `/guides/tn-plus-two/textbooks`) get the same AEO strip + GEO meta + FAQ/Speakable pattern when Wave D ships. Do not list all 31 cluster URLs in `llms.txt` — only P1 and P4. Inventory: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).
 
 ## On-page AEO modules (code)
 

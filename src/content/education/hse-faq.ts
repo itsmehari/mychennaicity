@@ -42,7 +42,7 @@ export const HSE_CHOOSE_FAQ: EducationFaqItem[] = [
   },
   {
     q: "What if my parent wants a different group?",
-    a: "Use the five-factor check together: interest, ability, eligibility, career direction, and whether the school offers the group. The worksheet page (later wave) is for that conversation. For now, read the group pages side by side.",
+    a: "Use the five-factor check together: interest, ability, eligibility, career direction, and whether the school offers the group. The worksheet page is for that conversation. Read the group pages side by side.",
   },
   {
     q: "What if the school does not offer my first choice?",

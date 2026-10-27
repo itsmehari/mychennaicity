@@ -4,11 +4,25 @@
  */
 
 import {
+  EDUCATION_2502_VS_2503_PATH,
+  EDUCATION_2702_VS_2708_PATH,
+  EDUCATION_AFTER_12TH_PATH,
   EDUCATION_CHOOSE_PATH,
+  EDUCATION_COMMERCE_PATH,
   EDUCATION_COMPARE_PATH,
   EDUCATION_HUB_PATH,
+  EDUCATION_HUB_TA_PATH,
+  EDUCATION_M1_PATH,
+  EDUCATION_M1_TA_PATH,
+  EDUCATION_M2_PATH,
+  EDUCATION_M2_TA_PATH,
+  EDUCATION_SCIENCE_PATH,
   EDUCATION_STRUCTURE_PATH,
+  EDUCATION_TEXTBOOKS_PATH,
+  EDUCATION_WORKSHEET_PATH,
+  educationClusterPath,
   educationGroupPath,
+  educationTextbookPath,
 } from "@/content/education/paths";
 
 export type EducationWave = "A" | "B" | "C" | "D" | "E";
@@ -22,8 +36,8 @@ export type EducationHubEntry = {
   changeFrequency: "weekly" | "monthly";
 };
 
-/** Waves that have live routes. Expand when later waves ship. */
-export const EDUCATION_SHIPPED_WAVES: readonly EducationWave[] = ["A"];
+/** Waves that have live routes. */
+export const EDUCATION_SHIPPED_WAVES: readonly EducationWave[] = ["A", "B", "C", "D", "E"];
 
 export const EDUCATION_PAGES = [
   {
@@ -106,6 +120,182 @@ export const EDUCATION_PAGES = [
     sitemapPriority: 0.72,
     changeFrequency: "monthly",
   },
+  {
+    id: "textbooks",
+    wave: "B",
+    path: EDUCATION_TEXTBOOKS_PATH,
+    title: "Official Plus Two textbook catalogue",
+    sitemapPriority: 0.85,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-class-11",
+    wave: "B",
+    path: educationTextbookPath("class-11"),
+    title: "Class XI official textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-class-12",
+    wave: "B",
+    path: educationTextbookPath("class-12"),
+    title: "Class XII official textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-physics",
+    wave: "B",
+    path: educationTextbookPath("physics"),
+    title: "Physics textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-chemistry",
+    wave: "B",
+    path: educationTextbookPath("chemistry"),
+    title: "Chemistry textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-mathematics",
+    wave: "B",
+    path: educationTextbookPath("mathematics"),
+    title: "Mathematics textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-biology",
+    wave: "B",
+    path: educationTextbookPath("biology"),
+    title: "Biology textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-commerce",
+    wave: "B",
+    path: educationTextbookPath("commerce"),
+    title: "Commerce-subject textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "textbooks-computer",
+    wave: "B",
+    path: educationTextbookPath("computer"),
+    title: "Computer textbook finder",
+    sitemapPriority: 0.72,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "m2",
+    wave: "B",
+    path: EDUCATION_M2_PATH,
+    title: "How to download Plus Two textbooks (official PDF)",
+    sitemapPriority: 0.85,
+    changeFrequency: "weekly",
+  },
+  {
+    id: "science",
+    wave: "C",
+    path: EDUCATION_SCIENCE_PATH,
+    title: "Science groups after Class 10",
+    sitemapPriority: 0.8,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "commerce",
+    wave: "C",
+    path: EDUCATION_COMMERCE_PATH,
+    title: "Commerce groups after Class 10",
+    sitemapPriority: 0.8,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "after-12th",
+    wave: "C",
+    path: EDUCATION_AFTER_12TH_PATH,
+    title: "After Class 12 — doors from each group",
+    sitemapPriority: 0.8,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "2502-vs-2503",
+    wave: "C",
+    path: EDUCATION_2502_VS_2503_PATH,
+    title: "2502 vs 2503",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "2702-vs-2708",
+    wave: "C",
+    path: EDUCATION_2702_VS_2708_PATH,
+    title: "2702 vs 2708",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "worksheet",
+    wave: "C",
+    path: EDUCATION_WORKSHEET_PATH,
+    title: "Student–parent ranking worksheet",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "engineering",
+    wave: "C",
+    path: educationClusterPath("engineering"),
+    title: "Engineering after Higher Secondary",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "medicine",
+    wave: "C",
+    path: educationClusterPath("medicine"),
+    title: "Medicine and life sciences after Higher Secondary",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "ca-finance",
+    wave: "C",
+    path: educationClusterPath("ca-finance"),
+    title: "CA, CMA, CS and finance",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "law-civil-services",
+    wave: "C",
+    path: educationClusterPath("law-civil-services"),
+    title: "Law and civil-services foundation",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "it-degrees",
+    wave: "C",
+    path: educationClusterPath("it-degrees"),
+    title: "IT and computing degrees",
+    sitemapPriority: 0.7,
+    changeFrequency: "monthly",
+  },
+  {
+    id: "m1",
+    wave: "D",
+    path: EDUCATION_M1_PATH,
+    title: "Class 11 group admission in Chennai",
+    sitemapPriority: 0.8,
+    changeFrequency: "weekly",
+  },
 ] as const satisfies readonly EducationHubEntry[];
 
 export const EDUCATION_SITEMAP_ENTRIES = EDUCATION_PAGES.filter((p) =>
@@ -115,3 +305,22 @@ export const EDUCATION_SITEMAP_ENTRIES = EDUCATION_PAGES.filter((p) =>
   priority: p.sitemapPriority,
   changeFrequency: p.changeFrequency,
 }));
+
+/** Wave E Tamil twins — 5 pillars + M1/M2 + groups 01–06 + class-11/12. */
+export const EDUCATION_TAMIL_SITEMAP_PATHS = [
+  EDUCATION_HUB_TA_PATH,
+  educationClusterPath("science", "ta"),
+  educationClusterPath("commerce", "ta"),
+  educationClusterPath("textbooks", "ta"),
+  educationClusterPath("after-12th", "ta"),
+  EDUCATION_M1_TA_PATH,
+  EDUCATION_M2_TA_PATH,
+  educationGroupPath("2502", "ta"),
+  educationGroupPath("2503", "ta"),
+  educationGroupPath("2702", "ta"),
+  educationGroupPath("2708", "ta"),
+  educationGroupPath("2804", "ta"),
+  educationGroupPath("2802", "ta"),
+  educationTextbookPath("class-11", "ta"),
+  educationTextbookPath("class-12", "ta"),
+] as const;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
-import { WHATSAPP_COMMUNITY_PAGE_PATH, WHATSAPP_SPAMMERS_PAGE_PATH } from "@/lib/whatsapp-community";
+import { WHATSAPP_SPAMMERS_PAGE_PATH, whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 import { MYCHENNAICITY_USAGE_GUIDE_PATH } from "@/content/guides/mychennaicity-usage";
 import { SiteUsageAudienceSection } from "@/components/site/site-usage-audience-section";
@@ -84,7 +84,7 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
     hint: "Guides for residents, job seekers, admins",
   },
   {
-    href: WHATSAPP_COMMUNITY_PAGE_PATH,
+    href: whatsappCommunityJoinHref("seo"),
     label: "WhatsApp community",
     hint: "Official my chennai city group",
   },

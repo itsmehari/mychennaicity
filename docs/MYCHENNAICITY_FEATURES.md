@@ -11,9 +11,9 @@
 | Area | Route(s) | What it does today |
 |------|----------|-------------------|
 | **Home** | `/` | City positioning, interactive **Explore Chennai** map, stat ribbon, DB-backed **news** sections when Neon has published articles, plus mock-backed jobs/events/directory spotlights when those hubs have no DB rows (see hub pages). |
-| **Civic tools** | `/civic-tools` and `/civic-tools/*` | 15 apps in the registry (zone & ward finder, maps, router, civic card, flood street-score, and more). Three preview shells (`area-sabha`, zone dashboard, zonal office access) stay `noindex` and off the sitemap until they have verified data. Data bundle: `public/data/civic-geo/`. |
+| **Civic tools** | `/civic-tools` and `/civic-tools/*` | 15 live apps (zone & ward finder, maps, router, civic card, zonal offices, zone dashboard, Area Sabha desk, flood street-score, and more). Area Sabha does not invent meetings. Data bundle: `public/data/civic-geo/`. |
 | **Guides** | `/guides/chennai-tech-careers`, `/guides/bulk-waste-generator-readiness-checklist-2026` | Evergreen careers guide; BWG readiness article + interactive self-assessment (browser-local). Legacy `/chennai-guides/...` redirects to the BWG guide. |
-| **TN Plus Two education desk** | Wave A in repo: `/guides/tn-plus-two`, `/groups/2502`–`2802`, compare, HSE structure, how-to-choose | Group selection (DGE codes). Confirm production HEAD 200 before claiming live. Textbooks + Tamil still planned. See [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md). |
+| **TN Plus Two education desk** | Waves A–E in repo: pillars, 25 content pages, M1/M2, Tamil twins | Group selection + official textbook finders (no hosted PDFs). **Production HEAD 404 as of 2026-09-12** — deploy required. Plan: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md). |
 | **TN Council of Ministers desk** | `/guides/tn-council-of-ministers`, `/ministers/[slug]`, departments, Chennai, IAS, official-sources; Tamil twin | 35 ministers (May 2026, Lok Bhavan PR 40). **In repo; confirm production HEAD 200.** Filterable roster + department lookup. Minister/IAS pages are `noindex` and off the public sitemap until copy is expanded. |
 | **Chennai local news — hub** | `/chennai-local-news` | Newspaper-style listing; **published articles from Neon** when `DATABASE_URL` is available, otherwise mock articles. `force-dynamic` so production sees live DB without a rebuild. |
 | **Article detail** | `/chennai-local-news/[slug]` | Story page with metadata, **layout variants** (`src/lib/news-article-layout.ts`, `article-detail-layouts.tsx`), hero image handling, and news JSON-LD. |
@@ -43,7 +43,7 @@
 
 - **Sitemap** — `sitemap.ts`: static hubs (including about, contact, editorial-standards, glossary), areas, **article** and **topic** URLs, plus **eligible events and jobs** from DB when queryable.
 - **News sitemap** — `/news-sitemap.xml` for article URLs that meet the route’s rules.
-- **Recent sitemap** — `/sitemap-recent.xml` rolling last-20-days recrawl list for Search Console.
+- **Recent sitemap** — `/sitemap-recent.xml` rolling last-30-days recrawl list for Search Console.
 - **Robots** — `robots.ts` policy for crawlers.
 - **Metadata** — Page titles, descriptions, Open Graph, canonical URLs where implemented; JSON-LD modules under `src/lib/seo/`.
 - **Analytics** — Optional **GA4** (`NEXT_PUBLIC_GA_MEASUREMENT_ID`), **Vercel Analytics**, **Vercel Speed Insights** (`SiteAnalytics`).

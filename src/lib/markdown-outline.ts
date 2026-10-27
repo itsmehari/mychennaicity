@@ -63,6 +63,18 @@ export type ArticleTocEntry = {
   domId: string;
 };
 
+function isLegalEndMatterHeading(text: string): boolean {
+  const h = stripInlineBoldForSlug(text).toLowerCase();
+  return (
+    h.includes("disclaimer") ||
+    h.includes("fine print") ||
+    h.includes("legal note") ||
+    h.startsWith("editorial note") ||
+    h.includes("ai-assisted") ||
+    h.includes("ai assisted")
+  );
+}
+
 export function buildArticleTocEntries(
   report: string,
   analysis: string,
@@ -80,7 +92,7 @@ export function buildArticleTocEntries(
       text: o.text,
       domId: `analysis-${o.baseId}`,
     })),
-  ];
+  ].filter((e) => !isLegalEndMatterHeading(e.text));
 }
 
 export function shouldShowArticleToc(report: string, analysis: string): boolean {

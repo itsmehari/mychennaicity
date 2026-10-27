@@ -30,6 +30,43 @@ export function getWhatsAppCommunityInviteUrl(): string | null {
 }
 
 /**
+ * TODO(owner): set WHATSAPP_COMMUNITY_INVITE_URL to the Chennai group invite.
+ * Do not paste another city's invite and do not generate a new one here.
+ * Until the env var is set, the success screen hides "Join on WhatsApp".
+ */
+export const WHATSAPP_COMMUNITY_INVITE_TODO =
+  "Set WHATSAPP_COMMUNITY_INVITE_URL to the Chennai group invite before the success screen can show Join on WhatsApp.";
+
+/**
+ * Invite UTMs. `utm_content=join-verified` after the form; `admin-nudge` on the admin Message link.
+ */
+export function appendWhatsappCommunityUtms(
+  inviteUrl: string,
+  utmContent: string,
+  medium: "join_form" | "admin" = "join_form",
+): string | null {
+  try {
+    const u = new URL(inviteUrl);
+    u.searchParams.set("utm_source", "mychennaicity");
+    u.searchParams.set("utm_medium", medium);
+    u.searchParams.set("utm_campaign", "whatsapp_community");
+    u.searchParams.set("utm_content", utmContent.slice(0, 80));
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+export function trackedWhatsappCommunityInvite(
+  utmContent: string,
+  medium: "join_form" | "admin" = "join_form",
+): string | null {
+  const invite = getWhatsAppCommunityInviteUrl();
+  if (!invite) return null;
+  return appendWhatsappCommunityUtms(invite, utmContent, medium);
+}
+
+/**
  * Accepts +91…, 91…, spaces; returns digits suitable for https://wa.me/{digits}
  * (country code + national number, no leading +).
  */

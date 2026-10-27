@@ -25,6 +25,7 @@ import {
 } from "@/lib/routes/chennai-classifieds";
 import { buildClassifiedsHubJsonLd } from "@/lib/seo/classified-jsonld";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
+import { ADVERTISE_PROPERTY_PATH } from "@/lib/routes/advertise-listings";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const hubTitleBase = "Chennai classified ads";
@@ -162,7 +163,11 @@ export default async function ChennaiClassifiedsHubPage({
           Property ads
         </Link>
         {" "}
-        cover sale, rent, plot, commercial, and buyer requirements.
+        cover sale, rent, plot, commercial, and buyer requirements.{" "}
+        <Link href={ADVERTISE_PROPERTY_PATH} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
+          Post a property
+        </Link>
+        . We place the ad after you send the details.
       </p>
 
       <ClassifiedsHubCategoryNav activeCategory={category} />

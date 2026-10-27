@@ -7,7 +7,7 @@ import { CIVIC_TOOLS_HUB_PATH } from "@/lib/routes/civic-tools";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Civic interactive tools";
-const description = `${CIVIC_TOOLS.length} civic tools for Greater Chennai: zone and ward finder, boundary maps, complaint routing, and more. Preview tools are labelled until they have verified data.`;
+const description = `${CIVIC_TOOLS.length} civic tools for Greater Chennai: zone and ward finder, zonal offices, ward-count dashboard, complaint routing, and more.`;
 
 export const metadata: Metadata = {
   title: titleSegment,

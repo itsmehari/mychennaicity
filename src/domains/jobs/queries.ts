@@ -1,6 +1,8 @@
-import { and, count, desc, eq } from "drizzle-orm";
+import { and, count, desc, eq, inArray } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, employers, jobPostings } from "@/db/schema/tables";
+import { jobSlugLookupCandidates } from "@/lib/jobs/job-language";
+import { publiclyOpenJobSql } from "./public-open";
 
 export const CHENNAI_CITY_SLUG = "chennai";
 
@@ -33,9 +35,7 @@ export async function listOpenJobPostingsForChennaiHub(
     .select({ job: jobPostings, employer: employers })
     .from(jobPostings)
     .innerJoin(employers, eq(jobPostings.employerId, employers.id))
-    .where(
-      and(eq(jobPostings.cityId, cityId), eq(jobPostings.status, "open")),
-    )
+    .where(and(eq(jobPostings.cityId, cityId), publiclyOpenJobSql()))
     .orderBy(desc(employers.verified), desc(jobPostings.createdAt))
     .limit(limit)
     .offset(offset);
@@ -49,9 +49,7 @@ export async function countOpenJobPostingsForChennaiHub(): Promise<number> {
   const [row] = await db
     .select({ n: count() })
     .from(jobPostings)
-    .where(
-      and(eq(jobPostings.cityId, cityId), eq(jobPostings.status, "open")),
-    );
+    .where(and(eq(jobPostings.cityId, cityId), publiclyOpenJobSql()));
   return Number(row?.n ?? 0);
 }
 
@@ -60,6 +58,7 @@ export async function getOpenJobPostingWithEmployerBySlug(
 ): Promise<JobPostingWithEmployer | null> {
   const cityId = await getChennaiCityId();
   if (!cityId) return null;
+  const candidates = jobSlugLookupCandidates(slug);
   const db = getDb();
   const rows = await db
     .select({ job: jobPostings, employer: employers })
@@ -68,12 +67,12 @@ export async function getOpenJobPostingWithEmployerBySlug(
     .where(
       and(
         eq(jobPostings.cityId, cityId),
-        eq(jobPostings.slug, slug),
-        eq(jobPostings.status, "open"),
+        inArray(jobPostings.slug, candidates),
+        publiclyOpenJobSql(),
       ),
     )
-    .limit(1);
-  const row = rows[0];
+    .limit(candidates.length);
+  const row = rows.find((r) => r.job.slug === slug) ?? rows[0] ?? null;
   if (!row) return null;
   return { job: row.job, employer: row.employer };
 }
@@ -91,7 +90,7 @@ export async function listJobsForSitemap(): Promise<
     })
     .from(jobPostings)
     .where(
-      and(eq(jobPostings.cityId, cityId), eq(jobPostings.status, "open")),
+      and(eq(jobPostings.cityId, cityId), publiclyOpenJobSql()),
     );
   return rows.map((r) => ({
     slug: r.slug,

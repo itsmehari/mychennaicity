@@ -1,6 +1,6 @@
 /**
- * Single source of truth for the Chennai WhatsApp community landing funnel.
- * Invite URLs stay server-only — UI links to /api/community/whatsapp or these page paths.
+ * Public WhatsApp community paths. Join CTAs use `whatsappCommunityJoinHref`.
+ * The group invite is never exported from this module.
  */
 
 import { getSiteUrl } from "@/lib/env";
@@ -17,6 +17,9 @@ export const WHATSAPP_COMMUNITY_GUIDE_PATH = "/chennai-whatsapp-community-guide"
 /** Partner badge / embed */
 export const WHATSAPP_COMMUNITY_PARTNERS_PATH = "/whatsapp-community/partners";
 
+/** Form gate. The invite is shown only after a successful submit. */
+export const WHATSAPP_COMMUNITY_JOIN_PATH = "/whatsapp-community/join";
+
 /** Flagged invite-flood / spam numbers for group admins */
 export const WHATSAPP_SPAMMERS_PAGE_PATH = "/chennai-whatsapp-spammers";
 
@@ -29,17 +32,9 @@ export const WHATSAPP_COMMUNITY_OG_IMAGE =
 export const WHATSAPP_COMMUNITY_BADGE_IMAGE =
   "/images/mychennaicity-whatsapp-community-badge.svg";
 
-/** Documented default — production uses WHATSAPP_COMMUNITY_INVITE_URL env. */
-export const WHATSAPP_COMMUNITY_INVITE_URL_DEFAULT =
-  "https://chat.whatsapp.com/CnxfxABnv3YCgxhdSqEigd";
-
 export const WHATSAPP_COMMUNITY_GROUP_NAME = "my chennai city";
 
 export const WHATSAPP_COMMUNITY_LAST_UPDATED = "18 June 2026";
-
-const UTM_SOURCE = "mychennaicity";
-const UTM_MEDIUM = "landing";
-const UTM_CAMPAIGN = "whatsapp_community";
 
 export function siteWhatsappCommunityPageUrl(
   query?: Record<string, string>,
@@ -66,32 +61,46 @@ export function siteWhatsappSpammersUrl(): string {
   return `${getSiteUrl()}${WHATSAPP_SPAMMERS_PAGE_PATH}`;
 }
 
-/**
- * Server-side redirect path with UTM content label for GA4 (`event_label`).
- * Client components should use this — never embed the raw chat.whatsapp.com URL.
- */
-export function whatsappCommunityJoinRedirectPath(utmContent: string): string {
-  const params = new URLSearchParams({ utm_content: utmContent });
-  return `/api/community/whatsapp?${params.toString()}`;
+/** Keep CTA labels short and free of characters that would break a query string. */
+export function sanitizeWhatsappJoinSource(raw: string | null | undefined): string {
+  const cleaned = (raw ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "")
+    .slice(0, 40);
+  return cleaned || "join-page";
+}
+
+/** Shared public join URL. Every nav, footer, float, modal, and page CTA uses this. */
+export function whatsappCommunityJoinHref(source?: string | null): string {
+  const src = sanitizeWhatsappJoinSource(source);
+  return `${WHATSAPP_COMMUNITY_JOIN_PATH}?src=${encodeURIComponent(src)}`;
+}
+
+export function siteWhatsappCommunityJoinUrl(source?: string | null): string {
+  return `${getSiteUrl()}${whatsappCommunityJoinHref(source)}`;
 }
 
 /**
- * Append standard UTMs to the invite URL (used by the API redirect handler).
+ * Older call sites passed a GA label here. It now opens the form, not the invite.
  */
-export function appendWhatsappCommunityUtms(
-  inviteUrl: string,
-  utmContent: string,
-): string {
-  try {
-    const u = new URL(inviteUrl);
-    u.searchParams.set("utm_source", UTM_SOURCE);
-    u.searchParams.set("utm_medium", UTM_MEDIUM);
-    u.searchParams.set("utm_campaign", UTM_CAMPAIGN);
-    u.searchParams.set("utm_content", utmContent);
-    return u.toString();
-  } catch {
-    return inviteUrl;
-  }
+export function whatsappCommunityJoinRedirectPath(utmContent: string): string {
+  return whatsappCommunityJoinHref(utmContent);
+}
+
+/**
+ * UTMs for a mychennaicity.in link that will be pasted inside the group later.
+ * This is not the group invite.
+ */
+export function withWhatsappGroupShareUtms(pathOrUrl: string): string {
+  const absolute = pathOrUrl.startsWith("http")
+    ? pathOrUrl
+    : `${getSiteUrl()}${pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`}`;
+  const u = new URL(absolute);
+  u.searchParams.set("utm_source", "whatsapp");
+  u.searchParams.set("utm_medium", "group");
+  u.searchParams.set("utm_campaign", "community_share");
+  return u.toString();
 }
 
 /** GEO meta tags for Chennai landing pages */
