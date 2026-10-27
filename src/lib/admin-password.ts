@@ -1,22 +1,30 @@
 import { randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
-import { promisify } from "node:util";
 import { neon } from "@neondatabase/serverless";
-
-const scrypt = promisify(scryptCb);
 
 const SCRYPT_N = 16384;
 const SCRYPT_R = 8;
 const SCRYPT_P = 1;
 const KEY_LEN = 32;
 
+function scryptKey(
+  password: string,
+  salt: Buffer,
+  n: number,
+  r: number,
+  p: number,
+): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    scryptCb(password, salt, KEY_LEN, { N: n, r, p }, (err, key) => {
+      if (err) reject(err);
+      else resolve(key);
+    });
+  });
+}
+
 /** scrypt$N$r$p$saltHex$keyHex — store this, never the password. */
 export async function hashAdminPassword(password: string): Promise<string> {
   const salt = randomBytes(16);
-  const key = (await scrypt(password, salt, KEY_LEN, {
-    N: SCRYPT_N,
-    r: SCRYPT_R,
-    p: SCRYPT_P,
-  })) as Buffer;
+  const key = await scryptKey(password, salt, SCRYPT_N, SCRYPT_R, SCRYPT_P);
   return `scrypt:${SCRYPT_N}:${SCRYPT_R}:${SCRYPT_P}:${salt.toString("hex")}:${key.toString("hex")}`;
 }
 
@@ -34,7 +42,7 @@ export async function verifyAdminPassword(
   const salt = Buffer.from(parts[4], "hex");
   const expected = Buffer.from(parts[5], "hex");
   if (salt.length < 8 || expected.length !== KEY_LEN) return false;
-  const key = (await scrypt(password, salt, expected.length, { N: n, r, p })) as Buffer;
+  const key = await scryptKey(password, salt, n, r, p);
   if (key.length !== expected.length) return false;
   return timingSafeEqual(key, expected);
 }
