@@ -59,7 +59,7 @@ export const SHAKZ_ODC_TOTAL_BOYS = SHAKZ_ODC_OUTLETS.reduce(
   0,
 );
 
-export function shakzOdcWhatsAppUrl(whatsapp = SHAKZ_ODC_WHATSAPP): string {
+export function shakzOdcWhatsAppUrl(whatsapp: string = SHAKZ_ODC_WHATSAPP): string {
   const text =
     "Hi, I saw the Shakz Events catering ODC shift for Sunday 18 October 2026 on MyChennaiCity. I can work. Please share the outlet and the spot-payment amount.";
   return `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
