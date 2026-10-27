@@ -2,6 +2,12 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "allowScripts": {
+    "esbuild": true,
+    "fsevents": true,
+    "sharp": true,
+    "unrs-resolver": true
+  },
   "scripts": {
     "dev": "next dev",
     "prebuild": "tsx scripts/sync-ads-txt.ts",

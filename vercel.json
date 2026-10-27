@@ -1,4 +1,5 @@
 {
+  "installCommand": "unset NPM_CONFIG_CACHE_DIR npm_config_cache_dir && npm install",
   "crons": [
     {
       "path": "/api/cron/gold-rate",
