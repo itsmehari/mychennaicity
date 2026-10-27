@@ -14,7 +14,7 @@
 ## Target model
 
 - **Single admin app section** under `src/app/admin/` with shared layout (URL `/admin`).
-- **Authentication:** **Auth.js (NextAuth v5)** is in use with optional Google/GitHub OAuth; extend with email provider or stricter RBAC as needed. Minimum: secure session cookies, CSRF on mutations, role in session/JWT.
+- **Authentication:** **Auth.js (NextAuth v5)** email + password at `/login`. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD_HASH` (scrypt from `src/lib/admin-password.ts`) in Vercel. Do not commit the password. Google/GitHub stay optional. Session is a JWT cookie. Minimum: secure session cookies, CSRF on mutations, role in session/JWT.
 - **Authorization:** RBAC — `reader`, `contributor`, `editor`, `admin` (exact roles TBD). Store in `users` or `user_roles` table.
 - **Audit:** Persist mutations to `audit_log` (see `ENTITY_MODEL.md`).
 

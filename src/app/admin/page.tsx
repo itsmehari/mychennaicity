@@ -58,7 +58,7 @@ export default async function AdminHome() {
           >
             Sign in
           </Link>{" "}
-          (configure OAuth in Vercel and docs/DEPLOY.md).
+          with the admin email and password.
         </p>
       )}
     </div>

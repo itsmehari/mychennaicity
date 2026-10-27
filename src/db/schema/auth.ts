@@ -20,6 +20,8 @@ export const users = pgTable("user", {
   image: text("image"),
   /** App RBAC: reader | contributor | editor | admin */
   role: text("role").notNull().default("reader"),
+  /** scrypt hash for the email/password dashboard. Never a plain password. */
+  passwordHash: text("password_hash"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });

@@ -47,7 +47,9 @@ git push -u origin main
 | `NEXT_PUBLIC_SITE_URL` | `https://mychennaicity.in` (prod); preview can use the Vercel preview URL if you prefer |
 | `AUTH_SECRET` | `openssl rand -base64 32` |
 | `AUTH_URL` | `https://mychennaicity.in` (match deployed URL) |
-| `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | Optional OAuth |
+| `ADMIN_EMAIL` | Dashboard sign-in email |
+| `ADMIN_PASSWORD_HASH` | scrypt hash from `hashAdminPassword()` in `src/lib/admin-password.ts`. Never the plain password |
+| `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | Optional. The dashboard does not need Google |
 | `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` | Optional OAuth |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 `G-…` (optional) |
 
