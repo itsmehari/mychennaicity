@@ -509,6 +509,7 @@ const BLOCKED_PREFIXES = [
   "/settings",
   "/checkout",
   "/billing",
+  "/business-profile/",
   "/dashboard",
 ];
 

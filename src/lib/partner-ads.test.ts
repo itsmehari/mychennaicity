@@ -93,6 +93,12 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/chennai-local-events/submit")).toBe(false);
     expect(shouldShowSiteWideAd("/search")).toBe(false);
     expect(shouldShowSiteWideAd("/whatsapp-community/partners")).toBe(false);
+    expect(shouldShowSiteWideAd("/business-profile/visu-iyer-kolathur")).toBe(
+      false,
+    );
+    expect(shouldShowSiteWideAd("/business-profile/abk-liaison-llp")).toBe(
+      false,
+    );
   });
 
   it("hides when the page already has an inline slot", () => {

@@ -40,6 +40,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Partner ads (rotator):** data in **`src/lib/partner-ads.ts`**; UI is `<PageAdSlot />` / `<SiteWideAdBand />` — SOP K in AGENT_LEARNINGS. Distinct from IAB `src/ads/` and `AdvertisePanel`. Do not paste one-off partner cards on pages.
 
+**Paid business listings:** standalone `/business-profile/[slug]` (Visu Iyer is the first ₹365 page). No partner band, no AdSense script, no invented street, fee, or expiry. One footer line to `/contact#advertise`. SOP N in AGENT_LEARNINGS.
+
 **Admin login:** `/login` email + password (`ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`). Google is not required. Never commit the password.
 
 **Jobs admin + hygiene:** `/admin/jobs` (Auth.js, same gate as articles). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or admin **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
