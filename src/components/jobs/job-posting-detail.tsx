@@ -130,12 +130,16 @@ export function JobPostingDetail({
       ? "WhatsApp புதிய தாவலில் திறக்கும்."
       : applyHref?.startsWith("tel:")
         ? "அழைக்க இந்த எண்ணைத் தட்டவும்."
-        : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
+        : applyHref?.startsWith("mailto:")
+          ? "மின்னஞ்சல் செயலி திறக்கும்."
+          : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
     : isWhatsApp
       ? "Opens WhatsApp in a new tab."
       : applyHref?.startsWith("tel:")
         ? "Tap to call the employer directly."
-        : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+        : applyHref?.startsWith("mailto:")
+          ? "Opens your email app with the resume address filled in."
+          : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
           ? "Opens the poster’s Facebook profile so you can message them."
           : isContactForm
             ? "Opens our jobs contact form — this listing has no public employer phone yet."
@@ -241,7 +245,9 @@ export function JobPostingDetail({
                       ? "This listing uses WhatsApp — message the poster; we do not process CVs."
                       : applyHref?.startsWith("tel:")
                         ? "This listing uses a phone number — call; we do not process CVs."
-                        : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
+                        : applyHref?.startsWith("mailto:")
+                          ? "This listing uses email — send your resume to the address in the note; we do not process CVs."
+                          : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
                           ? "This listing uses Facebook message — not a careers portal. Confirm the role before sharing documents."
                           : isContactForm
                             ? "The source ad did not include a public phone. Use the form so we can pass on a hiring contact if we get one."

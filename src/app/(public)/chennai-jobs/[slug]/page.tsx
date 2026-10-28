@@ -128,6 +128,7 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
     (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(applyHref) ||
       applyHref.includes("whatsapp"));
   const isTel = !!applyHref && /^tel:/i.test(applyHref);
+  const isMailto = !!applyHref && /^mailto:/i.test(applyHref);
   const isFacebook =
     !!applyHref &&
     /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref);
@@ -138,7 +139,9 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
       ? "WhatsApp-ல் விண்ணப்பிக்க"
       : isTel
         ? "அழைத்து விண்ணப்பிக்க"
-        : isFacebook
+        : isMailto
+          ? "மின்னஞ்சலில் விண்ணப்பிக்க"
+          : isFacebook
           ? "Facebook-ல் செய்தி அனுப்ப"
           : isContactForm
             ? "ஆட்சேர்ப்பு தொடர்பை கேட்க"
@@ -147,13 +150,15 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
       ? "Apply via WhatsApp"
       : isTel
         ? "Call to apply"
-        : isFacebook
+        : isMailto
+          ? "Email your resume"
+          : isFacebook
           ? "Message on Facebook"
           : isContactForm
             ? "Ask us for the hiring contact"
             : "Apply on employer / ATS";
   const applyLinkProps =
-    isTel || isContactForm
+    isTel || isMailto || isContactForm
       ? ({} as const)
       : ({ target: "_blank", rel: "noopener noreferrer" } as const);
 
