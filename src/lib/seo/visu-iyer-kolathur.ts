@@ -2,8 +2,9 @@ import {
   VISU_IYER_OG_IMAGE,
   VISU_IYER_PHONE_DISPLAY,
   VISU_IYER_PHONE_E164,
-  VISU_IYER_PORTRAIT_BACK,
-  VISU_IYER_PORTRAIT_FRONT,
+  VISU_IYER_SHRINE_FACE,
+  VISU_IYER_SHRINE_FLOWERS,
+  VISU_IYER_SHRINE_WIDE,
   VISU_IYER_PROFILE_PATH,
 } from "@/content/business-profiles/visu-iyer-kolathur";
 import { getSiteUrl } from "@/lib/env";
@@ -68,7 +69,12 @@ export function buildVisuIyerJsonLd() {
     name: "Visu Iyer",
     alternateName: "விசு ஐயர்",
     url: pageUrl,
-    image: [`${base}${VISU_IYER_PORTRAIT_FRONT}`, `${base}${VISU_IYER_PORTRAIT_BACK}`, image],
+    image: [
+      `${base}${VISU_IYER_SHRINE_FLOWERS}`,
+      `${base}${VISU_IYER_SHRINE_FACE}`,
+      `${base}${VISU_IYER_SHRINE_WIDE}`,
+      image,
+    ],
     telephone: VISU_IYER_PHONE_E164,
     description: DESCRIPTION,
     areaServed: [

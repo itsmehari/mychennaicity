@@ -10,10 +10,12 @@ const WHATSAPP_TEXT = "வணக்கம் விசு ஐயர். பூ�
 
 export const VISU_IYER_WHATSAPP_HREF = `https://wa.me/919629612501?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
-export const VISU_IYER_PORTRAIT_FRONT =
-  "/images/business-profile/visu-iyer-kolathur/portrait-front.jpg";
-export const VISU_IYER_PORTRAIT_BACK =
-  "/images/business-profile/visu-iyer-kolathur/portrait-back.jpg";
+export const VISU_IYER_SHRINE_FLOWERS =
+  "/images/business-profile/visu-iyer-kolathur/shrine-flowers.jpg";
+export const VISU_IYER_SHRINE_FACE =
+  "/images/business-profile/visu-iyer-kolathur/shrine-face.jpg";
+export const VISU_IYER_SHRINE_WIDE =
+  "/images/business-profile/visu-iyer-kolathur/shrine-wide.jpg";
 export const VISU_IYER_OG_IMAGE =
   "/images/business-profile/visu-iyer-kolathur/og.jpg";
 

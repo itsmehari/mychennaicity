@@ -185,8 +185,7 @@
 }
 
 .heroFrame,
-.stageFrame,
-.bubble {
+.stageFrame {
   position: relative;
   overflow: hidden;
 }
@@ -197,8 +196,22 @@
   background: #4a2c30;
 }
 
-.cover {
+.coverHero,
+.coverFace,
+.coverWide {
   object-fit: cover;
+}
+
+.coverHero {
+  object-position: center 46%;
+}
+
+.coverFace {
+  object-position: center 28%;
+}
+
+.coverWide {
+  object-position: center 40%;
 }
 
 .chips {
@@ -239,18 +252,17 @@
 
 .stage {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  min-height: 380px;
-  padding: 36px 28px 0;
+  padding: 28px;
   border-radius: 28px;
   background: #1c1917;
 }
 
 .stageFrame {
-  width: min(100%, 240px);
-  aspect-ratio: 4 / 5;
-  border-radius: 18px 18px 0 0;
+  width: min(100%, 340px);
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
 }
 
 .rows,
@@ -317,21 +329,12 @@
   margin-top: 18px;
 }
 
-.bubbles {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 16px;
-  align-items: center;
-  min-height: 280px;
-  padding: 28px;
+.shrine {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
   border-radius: 28px;
-  background: var(--sand);
-}
-
-.bubble {
-  aspect-ratio: 1;
-  border-radius: 999px;
-  background: #4a2c30;
+  background: #3a2426;
 }
 
 .band {

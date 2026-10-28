@@ -5,8 +5,9 @@ import {
   VISU_IYER_PHONE_DISPLAY,
   VISU_IYER_PHONE_TEL,
   VISU_IYER_POOJAS,
-  VISU_IYER_PORTRAIT_BACK,
-  VISU_IYER_PORTRAIT_FRONT,
+  VISU_IYER_SHRINE_FACE,
+  VISU_IYER_SHRINE_FLOWERS,
+  VISU_IYER_SHRINE_WIDE,
   VISU_IYER_WHATSAPP_HREF,
 } from "@/content/business-profiles/visu-iyer-kolathur";
 import styles from "./visu-iyer-kolathur-profile.module.css";
@@ -75,12 +76,12 @@ export function VisuIyerKolathurProfile({ className }: Props) {
           <div className={styles.heroVisual}>
             <div className={styles.heroFrame}>
               <Image
-                src={VISU_IYER_PORTRAIT_FRONT}
-                alt="விசு ஐயரின் அட்டையில் உள்ள பூஜைப் படம்"
+                src={VISU_IYER_SHRINE_FLOWERS}
+                alt="மலர் அலங்காரத்தில் பூஜை விக்கிரகம்"
                 fill
                 priority
                 sizes="(max-width: 800px) 92vw, 420px"
-                className={styles.cover}
+                className={styles.coverHero}
               />
             </div>
             <ul className={styles.chips}>
@@ -95,11 +96,11 @@ export function VisuIyerKolathurProfile({ className }: Props) {
           <div className={styles.stage}>
             <div className={styles.stageFrame}>
               <Image
-                src={VISU_IYER_PORTRAIT_BACK}
-                alt="விசு ஐயரின் அட்டையில் உள்ள இரண்டாவது பூஜைப் படம்"
+                src={VISU_IYER_SHRINE_FACE}
+                alt="மலர் மாலையுடன் பூஜை விக்கிரகம்"
                 fill
-                sizes="(max-width: 800px) 70vw, 240px"
-                className={styles.cover}
+                sizes="(max-width: 800px) 80vw, 340px"
+                className={styles.coverFace}
               />
             </div>
           </div>
@@ -151,25 +152,14 @@ export function VisuIyerKolathurProfile({ className }: Props) {
               </li>
             </ul>
           </div>
-          <div className={styles.bubbles}>
-            <div className={styles.bubble}>
-              <Image
-                src={VISU_IYER_PORTRAIT_FRONT}
-                alt=""
-                fill
-                sizes="180px"
-                className={styles.cover}
-              />
-            </div>
-            <div className={styles.bubble}>
-              <Image
-                src={VISU_IYER_PORTRAIT_BACK}
-                alt=""
-                fill
-                sizes="180px"
-                className={styles.cover}
-              />
-            </div>
+          <div className={styles.shrine}>
+            <Image
+              src={VISU_IYER_SHRINE_WIDE}
+              alt="பூஜை அலங்காரம், கொளத்தூர்"
+              fill
+              sizes="(max-width: 800px) 92vw, 480px"
+              className={styles.coverWide}
+            />
           </div>
         </section>
 
