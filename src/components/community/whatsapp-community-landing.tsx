@@ -51,7 +51,7 @@ export function WhatsAppCommunityLanding() {
           id="wa-hero-heading"
           className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl lg:text-[2.75rem]"
         >
-          Join the My Chennai City WhatsApp Group
+          Join the mychennaicity.in reader group on WhatsApp
         </h1>
         <p
           id="wa-hero-lede"

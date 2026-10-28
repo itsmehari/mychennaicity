@@ -17,26 +17,26 @@ export function featuredJobsRailCopy(
     switch (placement) {
       case "job_detail":
         return {
-          eyebrow: "முன்னிலை வேலை",
-          title: "இந்த வாரம் இன்னும் திறந்திருப்பவை",
+          eyebrow: "வேலை வாய்ப்பு",
+          title: "வேறு புதிய வேலை காலியிடங்கள்",
           lede: through,
         };
       case "area_hub":
         return {
           eyebrow: "இந்த பகுதி",
-          title: "அருகில் திறந்திருக்கும் வேலைகள்",
+          title: "அருகில் புதிய வேலை காலியிடங்கள்",
           lede: through,
         };
       case "chennai_today":
         return {
           eyebrow: "வேலை",
-          title: "இன்று முன்னிலையில்",
+          title: "இன்றைய புதிய வேலை காலியிடங்கள்",
           lede: through,
         };
       default:
         return {
-          eyebrow: "முன்னிலை வேலை",
-          title: "இந்த வாரம் திறந்த வேலைகள்",
+          eyebrow: "வேலை வாய்ப்பு",
+          title: "புதிய வேலை காலியிடங்கள்",
           lede: through,
         };
     }
@@ -47,68 +47,69 @@ export function featuredJobsRailCopy(
     case "jobs_hub":
       return {
         eyebrow: "Featured hiring",
-        title: "Pinned this week",
+        title: "Latest job vacancies",
         lede: through,
       };
     case "looking_for_work":
       return {
-        eyebrow: "Employers",
-        title: "Hiring now",
-        lede: "If you are looking for work, these roles are pinned on the board this week.",
+        eyebrow: "Open roles",
+        title: "Latest job vacancies",
+        lede:
+          "Featured vacancies this week — read the listing, then apply with the employer.",
       };
     case "job_detail":
       return {
         eyebrow: "Featured hiring",
-        title: "Other openings pinned this week",
+        title: "Other openings to check",
         lede: through,
       };
     case "area_hub":
       return {
         eyebrow: "Hiring",
-        title: "Open roles on this belt",
-        lede: "Madipakkam and Sembakkam sit south of Guindy. These listings are pinned with the area page.",
+        title: "Latest vacancies near this area",
+        lede: "Open roles linked to this neighbourhood page.",
       };
     case "chennai_today":
       return {
         eyebrow: "Hiring",
-        title: "Open roles today",
+        title: "Latest job vacancies today",
         lede: through,
       };
     case "events_hub":
     case "events_detail":
       return {
         eyebrow: "While you are here",
-        title: "Hiring this week",
+        title: "Latest job vacancies",
         lede: through,
       };
     case "classifieds_hub":
       return {
         eyebrow: "Also on the board",
-        title: "Open roles this week",
+        title: "Latest job vacancies",
         lede: "Classifieds are local ads. These job listings are pinned beside them through the same window.",
       };
     case "directory":
       return {
         eyebrow: "Work",
-        title: "Open roles this week",
+        title: "Latest job vacancies",
         lede: through,
       };
     case "gold_rate":
       return {
         eyebrow: "After the rate",
-        title: "Hiring this week",
+        title: "Latest job vacancies",
         lede: through,
       };
     case "article_sidebar":
       return {
         eyebrow: "Hiring",
-        title: "Open this week",
+        title: "Latest job vacancies",
         lede: `Pinned through ${untilLabel}.`,
       };
     default:
       return {
         eyebrow: "Hiring",
-        title: "Open roles this week",
+        title: "Latest job vacancies",
         lede: through,
       };
   }

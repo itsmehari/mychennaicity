@@ -20,7 +20,7 @@ export const CHENNAI_JOBS_HUB_AEO: HubAeoContent = {
   id: "jobs-hub-aeo",
   eyebrow: "Jobs in Chennai",
   title: "Who this board is for",
-  dek: "A short, plain answer for jobseekers and employers — the same text search and answer engines can quote.",
+  dek: "Plain summary for jobseekers and employers.",
   directAnswer:
     "mychennaicity.in/chennai-jobs is a Chennai-focused community job notice board. Browse open local roles here, then apply only on the employer’s own page or form. We publish notices; we do not process CVs, run interviews, or collect application fees.",
   contextParagraphs: [
@@ -51,7 +51,7 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
   id: "events-hub-aeo",
   eyebrow: "Chennai local events",
   title: "Where to find what’s on",
-  dek: "Direct answer for residents planning a weekend — and for answer engines citing Chennai events.",
+  dek: "Plain summary for residents planning a weekend in Chennai.",
   directAnswer:
     "mychennaicity.in/chennai-local-events lists upcoming concerts, comedy, exhibitions, temple and neighbourhood events across Greater Chennai. Browsing is free; tickets and registration are handled by each organiser — confirm on their booking page before you pay or travel.",
   contextParagraphs: [

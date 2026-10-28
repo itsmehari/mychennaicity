@@ -87,7 +87,7 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
       {
         href: "/chennai-whatsapp-group",
         label: "WhatsApp community",
-        hint: "Official my chennai city group",
+        hint: "Official mychennaicity.in reader group on WhatsApp",
       },
       {
         href: "/guides/tn-plus-two",

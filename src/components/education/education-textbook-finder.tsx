@@ -113,7 +113,7 @@ export function EducationTextbookFinder({
         },
         { label: heading },
       ]}
-      eyebrow={locale === "ta" ? "கல்வி மேடை · பாடநூல்" : "Education desk · Textbooks"}
+      eyebrow={locale === "ta" ? "பள்ளி கல்வி · பாடநூல்" : "School books · Textbooks"}
       title={heading}
       dek={lead}
       related={[
@@ -210,7 +210,7 @@ export function EducationTextbooksHub({
         },
         { label: locale === "ta" ? "பாடநூல்கள்" : "Textbooks" },
       ]}
-      eyebrow={locale === "ta" ? "கல்வி மேடை · பட்டியல்" : "Education desk · Catalogue"}
+      eyebrow={locale === "ta" ? "பள்ளி கல்வி · பட்டியல்" : "School books · Catalogue"}
       title={title}
       dek={dek}
       related={[

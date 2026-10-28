@@ -48,7 +48,7 @@ export default function TnPlusTwoTamilHubPage() {
         { label: "வழிகாட்டிகள்" },
         { label: "மேல்நிலைக் குழுக்கள்" },
       ]}
-      eyebrow="கல்வி மேடை"
+      eyebrow="+2 குழு தேர்வு"
       title={HSE_HUB_TA.title}
       dek={HSE_HUB_TA.dek}
       related={[

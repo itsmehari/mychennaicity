@@ -25,7 +25,7 @@ const titleSegment = "Chennai directory — schools, services & places";
 export const metadata: Metadata = {
   title: titleSegment,
   description:
-    "Schools, hospitals, food, transit, and civic listings across Chennai and nearby — browse verified entries on mychennaicity.in.",
+    "Schools, services, and places across Chennai — growing neighbourhood by neighbourhood.",
   alternates: { canonical: `${getSiteUrl()}/directory` },
   openGraph: {
     title: fullSiteTitle(titleSegment),

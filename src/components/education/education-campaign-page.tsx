@@ -30,7 +30,7 @@ export function EducationCampaignPage({
         { label: locale === "ta" ? "முகப்பு" : "Home", href: "/" },
         { label: page.crumb },
       ]}
-      eyebrow={locale === "ta" ? "கல்வி மேடை · சென்னை" : "Education desk · Campaign"}
+      eyebrow={locale === "ta" ? "பள்ளி கல்வி · சென்னை" : "School guide · Campaign"}
       title={title ?? page.title}
       dek={dek ?? page.dek}
       related={page.related}

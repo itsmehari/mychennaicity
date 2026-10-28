@@ -32,8 +32,8 @@ const TABS: {
     id: "seeking",
     href: CHENNAI_JOBS_LOOKING_PATH,
     label: "Looking for work",
-    shortLabel: "Seeking",
-    description: "People available to hire",
+    shortLabel: "Looking for work",
+    description: "People looking for jobs",
   },
 ];
 

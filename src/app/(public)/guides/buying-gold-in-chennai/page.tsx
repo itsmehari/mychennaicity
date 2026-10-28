@@ -36,7 +36,7 @@ export default function BuyingGoldInChennaiPage() {
         { label: "Guides" },
         { label: "Buying gold" },
       ]}
-      eyebrow="Money desk · jewellery"
+      eyebrow="Gold · jewellery"
       title="Buying gold in Chennai"
       dek="The gram rate on our daily desk is a starting point. Most Chennai bills are jewellery — making, wastage, stones, GST."
       related={[

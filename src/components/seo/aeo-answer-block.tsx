@@ -28,7 +28,7 @@ export function AeoAnswerBlock({ content, extraFacts, className }: Props) {
       <p className="mcc-aeo__dek">{content.dek}</p>
 
       <div className="mcc-aeo__answer-block">
-        <p className="mcc-aeo__answer-label">Direct answer</p>
+        <p className="mcc-aeo__answer-label">In short</p>
         <p className="mcc-aeo__answer" data-speakable="hub-aeo-answer">
           {content.directAnswer}
         </p>

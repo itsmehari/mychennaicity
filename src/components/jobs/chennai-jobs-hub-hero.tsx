@@ -51,8 +51,8 @@ export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
             Jobs in Chennai
           </h1>
           <p className="mcc-jobs-hub__hero-lede">
-            Find curated job openings, walk-in updates, office roles, field jobs,
-            internships and local hiring opportunities across Chennai.
+            Local openings, walk-ins, and internships — we list them; employers
+            handle applications.
           </p>
           <div className="mcc-jobs-hub__hero-actions">
             <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__btn-primary">

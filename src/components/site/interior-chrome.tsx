@@ -86,7 +86,7 @@ const CROSS_LINKS: { href: string; label: string; hint: string }[] = [
   {
     href: whatsappCommunityJoinHref("seo"),
     label: "WhatsApp community",
-    hint: "Official my chennai city group",
+    hint: "Official mychennaicity.in reader group on WhatsApp",
   },
   {
     href: WHATSAPP_SPAMMERS_PAGE_PATH,

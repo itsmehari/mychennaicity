@@ -54,7 +54,7 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
             data-speakable="hub-aeo-answer"
           >
             <span className="mcc-events-hub-hero__answer-label">
-              Direct answer
+              In short
             </span>
             {hasEvents
               ? ` mychennaicity.in/chennai-local-events currently lists ${eventCount} upcoming event${eventCount === 1 ? "" : "s"}. Browsing is free; tickets stay with each organiser — confirm on their page before you pay or travel.`

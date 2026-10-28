@@ -49,7 +49,7 @@ const topicLinks: MegaNavLink[] = Object.entries(TOPIC_SLUG_TO_CATEGORY).map(
   ([slug, category]) => ({
     href: `/chennai-local-news/topic/${slug}`,
     label: category,
-    description: `Stories filed under ${category}`,
+    description: `Chennai stories: ${category}`,
   }),
 );
 
@@ -72,9 +72,9 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
     label: "News",
     livePreview: "news",
     featured: {
-      title: "Chennai newsroom",
+      title: "Chennai local news",
       description:
-        "GCC beats, mobility, elections, and neighbourhood explainers — updated on a living hub.",
+        "GCC, Metro, elections, and neighbourhood stories — updated on the news hub.",
       href: "/chennai-local-news",
       cta: "Open latest",
     },
@@ -85,7 +85,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/chennai-local-news",
             label: "All local news",
-            description: "Reverse-chronological feed and signals.",
+            description: "Latest stories, newest first.",
           },
           {
             href: "/chennai-local-news/feed.xml",
@@ -197,7 +197,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           },
           {
             href: "/civic-tools/metro-water-schedule",
-            label: "Metro Water desk",
+            label: "Metro Water guide",
             description: "Supply-day patterns — not live valve timings.",
           },
           {
@@ -223,7 +223,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
       description:
         "Open roles and looking-for-work notices — browse free; apply only on the employer’s own page.",
       href: "/chennai-jobs",
-      cta: "Open jobs hub",
+      cta: "Browse jobs",
     },
     columns: [
       {
@@ -289,7 +289,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
       description:
         "Concerts, Meetup workshops, comedy, temple dates and neighbourhood gatherings — free to browse; tickets stay with organisers.",
       href: "/chennai-local-events",
-      cta: "Open events hub",
+      cta: "See events",
     },
     columns: [
       {

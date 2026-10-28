@@ -27,13 +27,13 @@ export function ContactServiceGrid() {
           <div>
             <p className="mcc-corp-kicker">
               <span className="mcc-corp-kicker__rule" aria-hidden />
-              mychennaicity.in · Corporate desk
+              Contact · mychennaicity.in
             </p>
-            <h1 className="mcc-corp-hero__title">Engage with our team</h1>
+            <h1 className="mcc-corp-hero__title">Get in touch</h1>
             <p className="mcc-corp-hero__lede">
               A single point of contact for news tips, hiring, events, directory
               listings, and partnerships across Greater Chennai. Select your
-              inquiry type — we route every message to the right desk.
+              inquiry type — we route every message to the right team.
             </p>
             <div className="mcc-corp-hero__actions">
               <WhatsAppDeskButton
@@ -91,7 +91,7 @@ export function ContactServiceGrid() {
 
           <div>
             <header className="mcc-corp-section-head">
-              <p className="mcc-corp-section-head__eyebrow">Engagement centre</p>
+              <p className="mcc-corp-section-head__eyebrow">How to reach us</p>
               <h2 id="engagement-title" className="mcc-corp-section-head__title">
                 How can we help?
               </h2>

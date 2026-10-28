@@ -57,7 +57,7 @@ export default function PropertyTaxChecklistTamilPage() {
           { label: "வழிகாட்டிகள்" },
           { label: "சொத்து வரி" },
         ]}
-        eyebrow="பண மேசை · GCC வரி"
+        eyebrow="GCC சொத்து வரி · சரிபார்ப்பு"
         title="சொத்து வரி அதிகக் கட்டணப் பட்டியல்"
         dek="GCC போர்ட்டலில் சரிபார்க்க நான்கு பொதுவான பிழைகள். முன்னேற்றம் இந்த உலாவியில் மட்டும்."
         related={[

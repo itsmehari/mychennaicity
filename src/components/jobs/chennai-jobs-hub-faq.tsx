@@ -19,8 +19,8 @@ export function ChennaiJobsHubFaq() {
         Chennai jobs — common questions
       </h2>
       <p className="type-lede mt-2 max-w-2xl text-sm text-[var(--muted)]">
-        How hiring works on this board — the same answers appear in our
-        structured data for search and answer engines.
+        How hiring works on this board — fees, applications, and what we do not
+        handle.
       </p>
       <div className="mt-6 divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
         {CHENNAI_JOBS_HUB_FAQ.map((item, i) => {

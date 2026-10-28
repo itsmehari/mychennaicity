@@ -205,8 +205,7 @@ export function NewsHubHero({
           <p className="mcc-news-hero__eyebrow">mychennaicity.in</p>
           <h1 className="mcc-news-hero__title">Chennai Local News</h1>
           <p className="mcc-news-hero__lede">
-            Latest civic updates, public-interest reports, neighbourhood
-            developments, government announcements and stories that affect
+            Civic news, GCC and Metro updates, and neighbourhood stories for
             Chennai residents.
           </p>
           <div className="mcc-news-hero__meta">
@@ -217,10 +216,10 @@ export function NewsHubHero({
           </div>
         </div>
       </header>
-      <div className="mcc-news-utility" aria-label="Newsroom status">
+      <div className="mcc-news-utility" aria-label="News status">
         {latestPublishedAt ? (
           <span>
-            Desk clock{" "}
+            Last updated{" "}
             <strong>
               {latestPublishedAt.toLocaleTimeString("en-IN", {
                 hour: "2-digit",
@@ -234,7 +233,7 @@ export function NewsHubHero({
         ) : null}
         <span>
           <strong>{storyCountToday}</strong>{" "}
-          {storyCountToday === 1 ? "story" : "stories"} in today&apos;s file
+          {storyCountToday === 1 ? "story" : "stories"} published today
         </span>
         <Link href="/chennai-local-news/feed.xml">RSS feed</Link>
       </div>

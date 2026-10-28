@@ -18,8 +18,7 @@ export function ChennaiNewsHubFaq() {
         </span>
       </h2>
       <p className="mcc-news-area-strip__intro">
-        Plain answers for residents and search — the same text we publish in
-        structured data for answer engines.
+        Plain answers for residents — how we cover Chennai and handle corrections.
       </p>
       <div
         className="divide-y rounded-2xl border bg-[var(--mcc-news-surface,#fff)]"

@@ -37,7 +37,7 @@ export function EducationTamilPillar({
         { label: "மேல்நிலை", href: EDUCATION_HUB_TA_PATH },
         { label: crumb },
       ]}
-      eyebrow="கல்வி மேடை"
+      eyebrow="பள்ளி கல்வி · மேல்நிலை"
       title={title}
       dek={dek}
       related={[

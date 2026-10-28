@@ -52,7 +52,7 @@ export function SwmRulesAeoSection({ slug }: { slug: string }) {
       </p>
 
       <div className="swm-aeo__answer-block">
-        <p className="swm-aeo__answer-label">Direct answer</p>
+        <p className="swm-aeo__answer-label">In short</p>
         <p
           className="swm-aeo__answer"
           data-speakable="swm-aeo-answer"

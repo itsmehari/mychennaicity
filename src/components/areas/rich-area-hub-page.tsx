@@ -423,7 +423,7 @@ export function RichAreaHubPage({
         id="localities"
         eyebrow="Neighbourhoods"
         title="Localities on this hub"
-        subtitle="GCC ward labels and corridor tags from our Chennai map catalog."
+        subtitle="Locality names and wards as on our Chennai map."
         className="mt-14"
       >
         {content.localityCards.length > 0 ? (
@@ -494,7 +494,7 @@ export function RichAreaHubPage({
         id="local-news"
         eyebrow="From mychennaicity.in"
         title="Local news for this area"
-        subtitle="Editorial stories tagged for this hub."
+        subtitle="News stories connected to this area."
         action={{ href: "/chennai-local-news", label: "All Chennai news" }}
         className="mt-14"
       >
@@ -595,7 +595,7 @@ export function RichAreaHubPage({
       {/* Civic watchlist */}
       <Section
         id="civic"
-        eyebrow="Civic desk"
+        eyebrow="Civic life"
         title={content.civicTitle}
         subtitle="Recurring themes in local civic reporting — not an official bulletin."
         className="mt-14"

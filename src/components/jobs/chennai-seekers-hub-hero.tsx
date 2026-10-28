@@ -43,9 +43,9 @@ export function ChennaiSeekersHubHero({ totalProfiles, hasLiveProfiles }: Props)
             Looking for work in Chennai
           </h1>
           <p className="mcc-jobs-hub__hero-lede">
-            People in Chennai posting that they are available to hire — watchmen,
-            caretakers, household help, and similar roles. Employers can read profiles
-            and reach out directly.
+            Residents posting that they are looking for work — watchmen, caretakers,
+            household help, and similar roles. Employers can read profiles and reach
+            out directly.
           </p>
           <div className="mcc-jobs-hub__hero-actions">
             <Link href="/contact#jobs" className="mcc-jobs-hub__btn-primary">

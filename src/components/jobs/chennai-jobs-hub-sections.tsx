@@ -28,7 +28,7 @@ export function ChennaiJobsHubSafety() {
             href="/contact#jobs"
             className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
           >
-            contact MyChennaiCity
+            contact us
           </Link>
           .
         </li>
@@ -45,7 +45,7 @@ export function ChennaiJobsHubEmployerCta() {
     <section className="mcc-jobs-hub__employer-cta" aria-labelledby="chennai-jobs-employer-title">
       <h2 id="chennai-jobs-employer-title">Hiring in Chennai?</h2>
       <p>
-        Post your vacancy on MyChennaiCity and reach local candidates across Chennai
+        Post your vacancy on mychennaicity.in and reach local candidates across Chennai
         areas. Suitable for office staff, sales roles, field jobs, internships,
         walk-ins and local business hiring.
       </p>

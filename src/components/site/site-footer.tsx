@@ -221,7 +221,7 @@ export function SiteFooter() {
               </div>
             </div>
             <p className="mt-8 text-xs text-[var(--footer-muted)]">
-              Web-first · English (தமிழ் pages in progress).
+              English first · தமிழ் on key guides and tools (more coming).
             </p>
           </div>
 

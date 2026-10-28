@@ -47,7 +47,7 @@ export default function PropertyTaxChecklistPage() {
         { label: "Guides" },
         { label: "Property tax checklist" },
       ]}
-      eyebrow="Money desk · GCC tax"
+      eyebrow="Property tax · GCC"
       title="Property tax overpay checklist"
       dek="Four common Chennai assessment mismatches — tick what you have verified on the official GCC portal. Progress stays in this browser only."
       related={[
