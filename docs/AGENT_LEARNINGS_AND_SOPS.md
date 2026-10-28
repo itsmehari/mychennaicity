@@ -194,7 +194,7 @@ Three layers — do **not** paste one-off partner markup on a page:
 
 ### SOP N — Paid business listing page
 
-1. **Route:** a standalone page at `/business-profile/[slug]`, same route group as ABK. Do not put a paid profile on `/directory`, which carries house ads and the wrong categories.
+1. **Route:** `/business-profile/[slug]`. Use the public layout so the page has the site header, footer, alert bar, and explore links. Do not put a paid profile on `/directory`, which carries house ads and the wrong categories. ABK can stay in the standalone group.
 2. **Copy:** only what the customer printed (card, flyer, or note). Do not invent a street, a fee, a temple title, or a listing end date. Record the paid-on date before printing “listed through”.
 3. **Ads:** no `PageAdSlot`, no `AdvertisePanel`, no partner band. `/business-profile/` is a blocked prefix in `shouldShowSiteWideAd`. `AdSensePathGate` skips the AdSense script on that prefix.
 4. **Footer:** one quiet line to `/contact#advertise` with the published price (₹365 a year until that price changes). No second advertiser on the page.
@@ -225,6 +225,7 @@ Three layers — do **not** paste one-off partner markup on a page:
 
 ## 6. Changelog
 
+- **2026-10-28:** Visu Iyer listing uses the public site header, footer, breadcrumbs, and explore links. Partner ads and the AdSense script stay off `/business-profile`.
 - **2026-10-28:** Visu Iyer listing photos replaced with the three shrine photographs he sent (flower shrine, close portrait, full altar). Card crops are no longer on the page.
 - **2026-10-28:** Paid business listing — **Visu Iyer** (விஷ் அர்ச்சகர்), Kolathur, ₹365. Standalone page `/business-profile/visu-iyer-kolathur`. Card phone +91 96296 12501. Services are the printed muhurtham, marriage, griha pravesam, Ganapati / Lakshmi / Kubera / Navagraha / Durga homams, and other poojas. Invocation: Sri Varasakthi Vinayagar and Sri Bhavani Amman, Kolathur. No street, no dakshina, no end date (paid-on date not on the card). Portraits cropped from the card. Footer line points at `/contact#advertise`. AdSense script is skipped on `/business-profile`. **Rule:** SOP N.
 - **2026-10-27:** Classifieds — **3.5 BHK luxury apartments for sale**, Radha Nagar, Chromepet (new build; stilt parking; 6 flats, 2 available; 1st and 2nd floor north facing; 1,700 sq ft plinth; 3 BHK + study; furnished; ₹9,000/sq ft negotiable; Metro Water + 2 borewells; Chromepet station ~1.5 km; WhatsApp 91766 91715) via `db:seed:luxury-apartments-radha-nagar-chromepet(:live)` → `/chennai-classifieds/luxury-apartments-sale-radha-nagar-chromepet-october-2026`. Poster `public/images/classifieds/luxury-apartments-radha-nagar-chromepet-october-2026.jpg`. **Rule:** one `property` row for the sale flyer; keep the printed phone in the body; do not invent a builder name or a total sale price beyond the per-sq-ft rate; poster is not on the live CDN until deployed.

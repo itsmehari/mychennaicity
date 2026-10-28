@@ -10,6 +10,7 @@ import {
   VISU_IYER_SHRINE_WIDE,
   VISU_IYER_WHATSAPP_HREF,
 } from "@/content/business-profiles/visu-iyer-kolathur";
+import { InteriorCrossNav, PageBreadcrumbs } from "@/components/site/interior-chrome";
 import styles from "./visu-iyer-kolathur-profile.module.css";
 
 type Props = { className?: string };
@@ -32,23 +33,24 @@ const STEPS = [
 export function VisuIyerKolathurProfile({ className }: Props) {
   return (
     <div className={[styles.root, className].filter(Boolean).join(" ")} lang="ta">
-      <header className={styles.nav}>
-        <div className={styles.wrapNav}>
-          <Link href="/" className={styles.logo}>
-            mychennaicity.in
-          </Link>
-          <nav className={styles.navLinks} aria-label="பக்க இணைப்புகள்">
-            <a href="#poojai">பூஜைகள்</a>
-            <a href="#kolathur">கொளத்தூர்</a>
-            <a href="#contact">தொடர்பு</a>
-          </nav>
+      <div className={styles.top}>
+        <PageBreadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "விசு ஐயர்" },
+          ]}
+        />
+        <nav className={styles.anchors} aria-label="பக்க இணைப்புகள்">
+          <a href="#poojai">பூஜைகள்</a>
+          <a href="#kolathur">கொளத்தூர்</a>
+          <a href="#contact">தொடர்பு</a>
           <a className={styles.navCall} href={VISU_IYER_PHONE_TEL}>
             அழைக்க
           </a>
-        </div>
-      </header>
+        </nav>
+      </div>
 
-      <main>
+      <div>
         <section className={styles.hero} aria-labelledby="hero-title">
           <div className={styles.heroCopy}>
             <p className={styles.kicker}>விஷ் அர்ச்சகர் · கொளத்தூர்</p>
@@ -183,7 +185,7 @@ export function VisuIyerKolathurProfile({ className }: Props) {
             அழைக்க · {VISU_IYER_PHONE_DISPLAY}
           </a>
         </section>
-      </main>
+      </div>
 
       <footer className={styles.foot}>
         <p>
@@ -204,6 +206,10 @@ export function VisuIyerKolathurProfile({ className }: Props) {
           Paid listing taken from his card. Confirm the date, dakshina, and time with Visu Iyer. mychennaicity.in does not perform the pooja.
         </p>
       </footer>
+
+      <div className={styles.explore}>
+        <InteriorCrossNav />
+      </div>
     </div>
   );
 }
