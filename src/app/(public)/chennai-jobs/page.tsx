@@ -117,7 +117,7 @@ export default async function ChennaiJobsHubPage() {
       />
 
       <ChennaiJobsHubHero totalJobs={total} hasLiveJobs={useDb} />
-      {useDb ? <ChennaiJobsHubScrollCue /> : null}
+      {useDb ? <ChennaiJobsHubScrollCue totalJobs={total} /> : null}
 
       <ChennaiJobsHubAeoStrip openJobsCount={total} />
 

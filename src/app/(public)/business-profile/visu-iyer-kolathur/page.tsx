@@ -7,15 +7,15 @@ import {
 } from "@/lib/seo/visu-iyer-kolathur";
 
 const visuSans = Noto_Sans_Tamil({
-  subsets: ["tamil", "latin"],
-  weight: ["400", "500", "600"],
+  subsets: ["tamil"],
+  weight: ["400", "600"],
   variable: "--font-visu-sans",
   display: "swap",
 });
 
 const visuSerif = Noto_Serif_Tamil({
-  subsets: ["tamil", "latin"],
-  weight: ["600", "700"],
+  subsets: ["tamil"],
+  weight: "700",
   variable: "--font-visu-serif",
   display: "swap",
 });
