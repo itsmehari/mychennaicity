@@ -88,6 +88,8 @@
     "db:seed:event:tricku-or-murukku:live": "tsx scripts/seed-event-tricku-or-murukku-october-2026.ts --live",
     "db:seed:event:gojobsync-mega-job-fair": "tsx scripts/seed-event-gojobsync-mega-job-fair-december-2026.ts",
     "db:seed:event:gojobsync-mega-job-fair:live": "tsx scripts/seed-event-gojobsync-mega-job-fair-december-2026.ts --live",
+    "db:seed:event:tiruvallur-farmers-grievance-day": "tsx scripts/seed-event-tiruvallur-farmers-grievance-day-october-2026.ts",
+    "db:seed:event:tiruvallur-farmers-grievance-day:live": "tsx scripts/seed-event-tiruvallur-farmers-grievance-day-october-2026.ts --live",
     "db:seed:meetup-chennai-aug-sep": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts",
     "db:seed:meetup-chennai-aug-sep:live": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts --live",
     "db:seed:chennai-discovery-events": "tsx scripts/seed-chennai-discovery-events-2026.ts",

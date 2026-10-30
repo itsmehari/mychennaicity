@@ -123,6 +123,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/gojobsync-mega-job-fair-maduravoyal-december-2026.jpg",
     alt: "Go JobSync Mega Job Fair 2026 poster — Dr. M.G.R. University, Maduravoyal, Chennai, Saturday 12 December 2026. The private WhatsApp group code is not shown.",
   },
+  "farmers-grievance-day-meeting-tiruvallur-october-2026": {
+    src: "/images/events/farmers-grievance-day-meeting-tiruvallur-october-2026.jpg",
+    alt: "Tamil Nadu DIPR poster — farmers' welfare grievance day meeting at the Tiruvallur District Collectorate, Friday 30 October 2026, 10:00 AM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",

@@ -130,7 +130,7 @@ function inferTagsFromText(
     tags.add("business");
   }
   if (
-    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon|board games|meditation|wellness|baking|poker|chess/.test(
+    /exhibition|shopping|bazaar|market|craft|sale|festival|property|lifestyle|open mic for words|poetry|community|neighbourhood|gathering|local|marathon|run for|awareness run|kidzathon|kidathon|board games|meditation|wellness|baking|poker|chess|farmers|agriculture|grievance day/.test(
       text,
     )
   ) {
