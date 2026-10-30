@@ -41,6 +41,11 @@ export default async function AdminHome() {
               WhatsApp join requests
             </Link>
           </p>
+          <p className="mt-2 text-sm">
+            <Link href="/admin/classified-phone-reveals" className="underline">
+              Classified contact requests
+            </Link>
+          </p>
           <form className="mt-3" action={signOutAction}>
             <button
               type="submit"

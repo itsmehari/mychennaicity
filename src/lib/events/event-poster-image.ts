@@ -119,6 +119,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/tricku-or-murukku-halloween-curious-korner-october-2026.jpg",
     alt: "Tricku or Murukku poster — Curious Korner Halloween ghost party for ages 5 to 12, Saturday 31 October 2026, 10 AM to 1 PM",
   },
+  "gojobsync-mega-job-fair-maduravoyal-december-2026": {
+    src: "/images/events/gojobsync-mega-job-fair-maduravoyal-december-2026.jpg",
+    alt: "Go JobSync Mega Job Fair 2026 poster — Dr. M.G.R. University, Maduravoyal, Chennai, Saturday 12 December 2026. The private WhatsApp group code is not shown.",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",

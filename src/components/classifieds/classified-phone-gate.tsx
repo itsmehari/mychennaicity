@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { formatIndianMobile } from "@/lib/classifieds/phone-gate";
 
-export function ClassifiedPhoneGate({ slug }: { slug: string }) {
+export function ClassifiedPhoneGate({
+  slug,
+  mode,
+}: {
+  slug: string;
+  /** reveal: a poster number is stored and returned after the request is saved. */
+  mode: "reveal" | "request";
+}) {
+  const baseId = useId();
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [revealed, setRevealed] = useState<string | null>(null);
+  const [requested, setRequested] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -17,16 +27,28 @@ export function ClassifiedPhoneGate({ slug }: { slug: string }) {
       const res = await fetch("/api/classifieds/reveal-phone", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, phone }),
+        body: JSON.stringify({ slug, name, phone }),
       });
-      const data = (await res.json()) as { phone?: string; error?: string };
-      if (!res.ok || !data.phone) {
-        setError(data.error || "Could not show the number. Try again.");
+      const data = (await res.json()) as {
+        phone?: string;
+        requested?: boolean;
+        error?: string;
+      };
+      if (!res.ok) {
+        setError(data.error || "Could not save the request. Try again.");
         return;
       }
-      setRevealed(data.phone);
+      if (data.phone) {
+        setRevealed(data.phone);
+        return;
+      }
+      if (data.requested || mode === "request") {
+        setRequested(true);
+        return;
+      }
+      setError(data.error || "Could not show the number. Try again.");
     } catch {
-      setError("Could not show the number. Try again.");
+      setError("Could not save the request. Try again.");
     } finally {
       setPending(false);
     }
@@ -57,17 +79,48 @@ export function ClassifiedPhoneGate({ slug }: { slug: string }) {
     );
   }
 
-  return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-3">
-      <p className="text-sm leading-relaxed text-[var(--muted)]">
-        The poster&apos;s number stays hidden until you share yours. We store
-        the number you enter with this ad.
+  if (requested) {
+    return (
+      <p className="text-sm leading-relaxed text-[var(--foreground)]">
+        Request saved. Your name and mobile are stored for this ad.
       </p>
-      <label className="text-xs font-medium text-[var(--foreground)]" htmlFor={`reveal-${slug}`}>
+    );
+  }
+
+  return (
+    <form
+      method="post"
+      action="/api/classifieds/reveal-phone"
+      onSubmit={onSubmit}
+      className="flex flex-col gap-3"
+    >
+      <p className="text-sm leading-relaxed text-[var(--muted)]">
+        {mode === "reveal"
+          ? "The poster’s number stays hidden until you share your name and mobile. We store both with this ad."
+          : "Share your name and mobile. We store both with this ad so the poster can see who asked."}
+      </p>
+      <input type="hidden" name="slug" value={slug} />
+      <label className="text-xs font-medium text-[var(--foreground)]" htmlFor={`${baseId}-name`}>
+        Your name
+      </label>
+      <input
+        id={`${baseId}-name`}
+        name="name"
+        type="text"
+        autoComplete="name"
+        required
+        minLength={2}
+        maxLength={80}
+        value={name}
+        onChange={(ev) => setName(ev.target.value)}
+        placeholder="Name"
+        className="w-full rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm text-[var(--foreground)]"
+      />
+      <label className="text-xs font-medium text-[var(--foreground)]" htmlFor={`${baseId}-phone`}>
         Your mobile number
       </label>
       <input
-        id={`reveal-${slug}`}
+        id={`${baseId}-phone`}
         name="phone"
         type="tel"
         inputMode="numeric"
@@ -84,7 +137,7 @@ export function ClassifiedPhoneGate({ slug }: { slug: string }) {
         disabled={pending}
         className="inline-flex w-full items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3.5 text-sm font-semibold text-[var(--accent-fg)] disabled:opacity-60"
       >
-        {pending ? "Checking…" : "Show contact number"}
+        {pending ? "Saving…" : mode === "reveal" ? "Show contact number" : "Send request"}
       </button>
     </form>
   );

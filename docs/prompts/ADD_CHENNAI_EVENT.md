@@ -16,7 +16,7 @@
 4. **Times** are stored as UTC but must represent **Asia/Kolkata** wall clock — use `istToUtcDate()` from `scripts/lib/seed-event-shared.ts`.
 5. **Public visibility** requires `status: "scheduled"` and end (or start) ≥ now.
 6. **No fake pricing** in UI or JSON-LD; no fake `organizer` URL.
-7. **Images:** if using `next/image`, add remote host to `next.config.ts` or self-host under `public/`.
+7. **Images:** if using `next/image`, add remote host to `next.config.ts` or self-host under `public/`. If a flyer says its WhatsApp QR is private, cover that code on the public file and do not put a `chat.whatsapp.com` link in the description.
 8. **Idempotent seeds:** skip insert when `(city_id, slug)` exists; log and exit cleanly.
 9. After **live** seed, verify hub card + detail page on production URL.
 10. **Rich festival?** Only use `presentation_key: "festival_rich"` when you will add the full content bundle (schedule, PDF, FAQ). Otherwise use standard prose layout.

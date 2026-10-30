@@ -112,9 +112,10 @@ Pattern: `scripts/seed-event-{short-name}.ts` + `package.json` scripts:
 2. `vercel env pull .env.production.local --environment=production` (gitignored).
 3. `npm run db:seed:event:{name}:live`
 4. Verify: `npm run db:check:live` (if events counted) + open live hub and detail URL.
-5. **Redeploy Vercel** if you changed code (not required for DB-only inserts on `force-dynamic` routes).
-6. Optional: companion **news article** seed (see `scripts/seed-edii-tn-ecommerce-training-2026.ts`).
-7. New remote images → add host to `next.config.ts` `images.remotePatterns`.
+5. **Redeploy Vercel** if you changed code (not required for DB-only inserts on `force-dynamic` routes). A new poster file is not on the live CDN until that deploy.
+6. **Private WhatsApp QR:** if the flyer says the group code is private, do not publish that code. Cover it on the self-hosted poster and do not put a `chat.whatsapp.com` link in the description.
+7. Optional: companion **news article** seed (see `scripts/seed-edii-tn-ecommerce-training-2026.ts`).
+8. New remote images → add host to `next.config.ts` `images.remotePatterns`.
 
 ### IST → UTC
 
@@ -148,6 +149,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-india-retail-investors-expo-october-2026.ts` | `db:seed:event:india-retail-investors-expo:live` |
 | `seed-event-strings-of-rasa-siruseri-november-2026.ts` | `db:seed:event:strings-of-rasa:live` |
 | `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
+| `seed-event-gojobsync-mega-job-fair-december-2026.ts` | `db:seed:event:gojobsync-mega-job-fair:live` |
 | `seed-meetup-chennai-aug-sep-2026.ts` | `db:seed:meetup-chennai-aug-sep:live` (15 Meetup/community rows) |
 
 ---
@@ -181,4 +183,5 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | 2026-10-19 | India Retail Investors Expo Season 3 (DFAIRS; D7 Auditorium, IIT Madras Research Park, Taramani; 31 Oct–1 Nov 2026, 10:00 AM–6:30 PM on MeetGrow, session grid to 6:00 PM; MeetGrow passes Gold ₹99 / Diamond ₹699 / Platinum ₹1,399; community code CMNITY100 from WhatsApp, not on the official pages) via `db:seed:event:india-retail-investors-expo(:live)`. |
 | 2026-10-25 | Strings of Rasa (Ramana Balachandhran; Mohamad Satak Auditorium, Siruseri; Sun 1 Nov 2026, 5:30 PM; calendar held to 8:30 PM because the poster has no finish time; patron 88389 73850; tickets on MDnD, fare unprinted) via `db:seed:event:strings-of-rasa(:live)`. Poster not on the live CDN until this file is deployed. |
 | 2026-10-25 | Tricku or Murukku (Curious Korner; ages 5–12; Sat 31 Oct 2026, 10:00 AM–1:00 PM; hall after RSVP; FOMRRA ₹200 off via the form’s FOMRRA WhatsApp group option; +91 90475 83033) via `db:seed:event:tricku-or-murukku(:live)`. Poster not on the live CDN until this file is deployed. |
+| 2026-10-30 | Go JobSync Mega Job Fair (Dr. M.G.R. Educational and Research Institute, Maduravoyal; Sat 12 Dec 2026; hours unprinted so the calendar is all day; poster 500+ companies; note says 25,000+ openings; register page ₹99 vs note ₹100; poster enquiries 90320 73539 and Chandrapalreddyhr@gmail.com; register page also prints 73059 40312) via `db:seed:event:gojobsync-mega-job-fair(:live)`. Poster hides the private WhatsApp QR. Poster not on the live CDN until this file is deployed. Hub “Business & talks” now also matches “job fair” and “career fair”. |
 

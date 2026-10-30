@@ -9,3 +9,11 @@ export function normalizeIndianMobile(raw: string): string | null {
 export function formatIndianMobile(localTen: string): string {
   return `${localTen.slice(0, 5)} ${localTen.slice(5)}`;
 }
+
+/** Person's name for a reveal request. Letters, spaces, and simple punctuation. */
+export function normalizeEnquirerName(raw: string): string | null {
+  const name = raw.replace(/\s+/g, " ").trim();
+  if (name.length < 2 || name.length > 80) return null;
+  if (!/^[\p{L}\p{M}][\p{L}\p{M} .'-]{1,79}$/u.test(name)) return null;
+  return name;
+}

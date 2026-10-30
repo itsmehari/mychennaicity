@@ -123,7 +123,7 @@ function inferTagsFromText(
     tags.add("culture");
   }
   if (
-    /award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur|meetup|magento|storage|seminar|tech|snia|property expo|rpa|kafka|freelancer|claude code|data science/.test(
+    /award|lions|council|networking|startup|workshop|training|ecommerce|business|entrepreneur|meetup|magento|storage|seminar|tech|snia|property expo|rpa|kafka|freelancer|claude code|data science|job fair|career fair/.test(
       text,
     )
   ) {

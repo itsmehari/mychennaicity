@@ -308,7 +308,8 @@ export const classifiedListings = pgTable(
     contactPhone: text("contact_phone"),
     /**
      * When true, the public page must not render `contact_phone`.
-     * The number is returned only after the enquirer submits their own mobile.
+     * The enquirer submits their name and mobile first. If a poster number
+     * is stored, the API returns it only after that row is saved.
      */
     contactPhoneGated: boolean("contact_phone_gated").notNull().default(false),
     areaHubSlug: text("area_hub_slug"),
@@ -316,6 +317,8 @@ export const classifiedListings = pgTable(
     featured: boolean("featured").notNull().default(false),
     /** Self-hosted or https photo URLs, first image is the cover. */
     imageUrls: jsonb("image_urls").$type<string[] | null>(),
+    /** Self-hosted walkthrough, under /videos/classifieds/. */
+    videoUrl: text("video_url"),
     status: classifiedListingStatusEnum("status").notNull().default("draft"),
     publishedAt: timestamp("published_at", { withTimezone: true }),
     expiresAt: timestamp("expires_at", { withTimezone: true }),
@@ -327,7 +330,7 @@ export const classifiedListings = pgTable(
   }),
 );
 
-/** Enquirer mobiles collected before a gated classified phone is shown. */
+/** Name and mobile collected before a gated classified contact is shown. */
 export const classifiedPhoneReveals = pgTable(
   "classified_phone_reveals",
   {
@@ -336,6 +339,7 @@ export const classifiedPhoneReveals = pgTable(
       .notNull()
       .references(() => classifiedListings.id, { onDelete: "cascade" }),
     enquirerPhone: text("enquirer_phone").notNull(),
+    enquirerName: text("enquirer_name"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({

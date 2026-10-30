@@ -15,6 +15,14 @@ export function classifiedCoverSrc(
   return classifiedImageUrls(imageUrls)[0] ?? null;
 }
 
+/** Walkthrough hosted under /videos/classifieds/ and ending in .mp4. */
+export function classifiedVideoSrc(url: string | null | undefined): string | null {
+  const value = url?.trim() ?? "";
+  if (!value.startsWith("/videos/classifieds/") || !value.endsWith(".mp4")) return null;
+  if (value.includes("..") || value.includes("//")) return null;
+  return value;
+}
+
 export function classifiedCoverAbsoluteUrl(
   imageUrls: string[] | null | undefined,
 ): string | null {

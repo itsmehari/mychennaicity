@@ -2,9 +2,9 @@ import type { ClassifiedListingRow } from "@/domains/classifieds";
 import { ClassifiedPhoneGate } from "@/components/classifieds/classified-phone-gate";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
-import { classifiedImageUrls } from "@/lib/classifieds/images";
+import { ClassifiedListingMedia } from "@/components/classifieds/classified-listing-media";
+import { classifiedImageUrls, classifiedVideoSrc } from "@/lib/classifieds/images";
 import { normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
-import Image from "next/image";
 import Link from "next/link";
 
 function GlanceRow({ label, value }: { label: string; value: string }) {
@@ -108,45 +108,9 @@ function AtAGlance({ listing }: { listing: ClassifiedListingRow }) {
   );
 }
 
-function PhotoGallery({
-  urls,
-  title,
-}: {
-  urls: string[];
-  title: string;
-}) {
-  if (urls.length === 0) return null;
-  return (
-    <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label="Listing photos">
-      {urls.map((src, i) => (
-        <figure
-          key={src}
-          className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]"
-        >
-          <div
-            className={
-              urls.length === 1
-                ? "relative aspect-square bg-[var(--background)]"
-                : "relative aspect-[4/3]"
-            }
-          >
-            <Image
-              src={src}
-              alt={urls.length === 1 ? title : `${title} — photo ${i + 1}`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 520px"
-              className={urls.length === 1 ? "object-contain" : "object-cover"}
-              priority={i === 0}
-            />
-          </div>
-        </figure>
-      ))}
-    </div>
-  );
-}
-
 export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow }) {
-  const phoneGated = Boolean(listing.contactPhoneGated && listing.contactPhone?.trim());
+  const phoneGated = Boolean(listing.contactPhoneGated);
+  const gateMode = listing.contactPhone?.trim() ? "reveal" : "request";
   const phone = phoneGated ? "" : listing.contactPhone?.trim();
   const localTen = phone ? normalizeIndianMobile(phone) : null;
   const phoneHref = localTen ? `tel:+91${localTen}` : null;
@@ -154,6 +118,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
   const posterUrl = listing.posterUrl?.trim() || null;
   const posterName = listing.posterName?.trim() || "Reader";
   const photos = classifiedImageUrls(listing.imageUrls);
+  const videoSrc = classifiedVideoSrc(listing.videoUrl);
   const enquiry = enquiryCopy(listing.category, posterName);
 
   return (
@@ -180,7 +145,11 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             </span>
           ) : null}
         </p>
-        <PhotoGallery urls={photos} title={listing.title} />
+        <ClassifiedListingMedia
+          photos={photos}
+          videoSrc={videoSrc}
+          title={listing.title}
+        />
       </header>
 
       {phoneHref ? (
@@ -216,13 +185,15 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
                 {phoneGated
-                  ? `Message ${posterName} after you share your number. Agree rent and house rules before you pay or visit.`
+                  ? gateMode === "reveal"
+                    ? `Message ${posterName} after you share your name and number. Agree rent and house rules before you pay or visit.`
+                    : "Send your name and mobile. The request is stored for this ad. Agree rent and house rules before you pay or visit."
                   : enquiry.blurb}
               </p>
               <div className="mt-5 flex max-w-md flex-col gap-3">
                 {phoneGated ? (
                   <div className="lg:hidden">
-                    <ClassifiedPhoneGate slug={listing.slug} />
+                    <ClassifiedPhoneGate slug={listing.slug} mode={gateMode} />
                   </div>
                 ) : null}
                 {phoneHref ? (
@@ -258,7 +229,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
             <AtAGlance listing={listing} />
             {phoneGated ? (
               <div className="hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 lg:block">
-                <ClassifiedPhoneGate slug={listing.slug} />
+                <ClassifiedPhoneGate slug={listing.slug} mode={gateMode} />
               </div>
             ) : phoneHref ? (
               <div className="hidden lg:block">

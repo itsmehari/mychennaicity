@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import { classifiedListings, classifiedPhoneReveals, cities } from "@/db/schema/tables";
 import { getDb } from "@/db/client";
-import { normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
+import { normalizeEnquirerName, normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
 import { rateLimitConsume } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
@@ -25,16 +25,40 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: { slug?: unknown; phone?: unknown };
+  const contentType = request.headers.get("content-type") ?? "";
+  let slugRaw: unknown;
+  let phoneRaw: unknown;
+  let nameRaw: unknown;
   try {
-    body = (await request.json()) as { slug?: unknown; phone?: unknown };
+    if (contentType.includes("application/json")) {
+      const body = (await request.json()) as {
+        slug?: unknown;
+        phone?: unknown;
+        name?: unknown;
+      };
+      slugRaw = body.slug;
+      phoneRaw = body.phone;
+      nameRaw = body.name;
+    } else {
+      const form = await request.formData();
+      slugRaw = form.get("slug");
+      phoneRaw = form.get("phone");
+      nameRaw = form.get("name");
+    }
   } catch {
-    return NextResponse.json({ error: "Send a mobile number." }, { status: 400, headers: NO_STORE });
+    return NextResponse.json({ error: "Send your name and mobile number." }, { status: 400, headers: NO_STORE });
   }
 
-  const slug = typeof body.slug === "string" ? body.slug.trim() : "";
-  const enquirer = typeof body.phone === "string" ? normalizeIndianMobile(body.phone) : null;
-  if (!slug || slug.length > 180 || !enquirer) {
+  const slug = typeof slugRaw === "string" ? slugRaw.trim() : "";
+  const enquirer = typeof phoneRaw === "string" ? normalizeIndianMobile(phoneRaw) : null;
+  const name = typeof nameRaw === "string" ? normalizeEnquirerName(nameRaw) : null;
+  if (!slug || slug.length > 180 || !name) {
+    return NextResponse.json(
+      { error: "Enter your name." },
+      { status: 400, headers: NO_STORE },
+    );
+  }
+  if (!enquirer) {
     return NextResponse.json(
       { error: "Enter a valid 10-digit Indian mobile number." },
       { status: 400, headers: NO_STORE },
@@ -54,8 +78,7 @@ export async function POST(request: NextRequest) {
     .where(and(eq(cities.slug, "chennai"), eq(classifiedListings.slug, slug)))
     .limit(1);
 
-  const poster = row?.contactPhone ? normalizeIndianMobile(row.contactPhone) : null;
-  if (!row || row.status !== "open" || !row.gated || !poster) {
+  if (!row || row.status !== "open" || !row.gated) {
     return NextResponse.json(
       { error: "This contact is not available." },
       { status: 404, headers: NO_STORE },
@@ -64,8 +87,16 @@ export async function POST(request: NextRequest) {
 
   await db
     .insert(classifiedPhoneReveals)
-    .values({ listingId: row.id, enquirerPhone: enquirer })
-    .onConflictDoNothing();
+    .values({ listingId: row.id, enquirerPhone: enquirer, enquirerName: name })
+    .onConflictDoUpdate({
+      target: [classifiedPhoneReveals.listingId, classifiedPhoneReveals.enquirerPhone],
+      set: { enquirerName: name },
+    });
+
+  const poster = row.contactPhone ? normalizeIndianMobile(row.contactPhone) : null;
+  if (!poster) {
+    return NextResponse.json({ requested: true }, { headers: NO_STORE });
+  }
 
   return NextResponse.json({ phone: poster }, { headers: NO_STORE });
 }
