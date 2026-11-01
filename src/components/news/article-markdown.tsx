@@ -105,6 +105,15 @@ export function ArticleMarkdown({
         p: ({ children }) => (
           <p className="my-4 leading-relaxed">{children}</p>
         ),
+        img: ({ src, alt }) =>
+          src ? (
+            // eslint-disable-next-line @next/next/no-img-element -- article bodies mix self-hosted stills
+            <img
+              src={src}
+              alt={alt ?? ""}
+              className="my-4 h-auto w-full rounded-lg ring-1 ring-[var(--border)]"
+            />
+          ) : null,
         a: ({ href, children }) => {
           const external = href?.startsWith("http");
           return (

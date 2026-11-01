@@ -18,10 +18,12 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 const SLUG = "vibrant-hues-art-exhibition-virugambakkam-november-2026";
 const EVENT =
   "/chennai-local-events/vibrant-hues-art-cube-gallery-virugambakkam-november-2026";
-const HERO =
+const POSTER =
   "/images/articles/vibrant-hues-art-cube-gallery-virugambakkam-november-2026.png";
-const WALL1 = "/images/articles/vibrant-hues-art-cube-gallery-wall-1.jpg";
-const WALL2 = "/images/articles/vibrant-hues-art-cube-gallery-wall-2.jpg";
+const WALL1 = "/images/articles/vibrant-hues-art-cube-gallery-main-hang.jpg";
+const WALL2 =
+  "/images/articles/vibrant-hues-art-cube-gallery-round-canvases.jpg";
+const HERO = WALL1;
 const SITE = "https://www.artcubegallery.biz";
 
 const live =
@@ -75,7 +77,17 @@ The poster puts the run at **31 October to 7 November 2026**, **11:00 AM to 6:00
 
 The practical listing, with map and calendar, is on the [events page](${EVENT}).
 
-![Art Cube Gallery poster for Vibrant Hues, Virugambakkam](${HERO})
+## Photos from the gallery
+
+![Paintings, wood relief and sculpture on the main wall at Art Cube Gallery](${WALL1})
+
+*The main hang this week: framed paintings, a gold-ground portrait, carved wood, and a low plinth of sculpture.*
+
+![Circular canvases and portraits on a second wall](${WALL2})
+
+*A second wall of round canvases, portraits, and a lotus study.*
+
+![Art Cube Gallery poster for Vibrant Hues, Virugambakkam](${POSTER})
 
 *The organiser poster: Art Cube Gallery presents Vibrant Hues, paintings and sculptures, 31 October to 7 November, 11 AM to 6 PM.*
 
@@ -84,14 +96,6 @@ The practical listing, with map and calendar, is on the [events page](${EVENT}).
 This is a neighbourhood gallery hang, not a trade fair. The poster’s own line is **celebration of life**. The two rooms photographed this week mix framed oils and watercolours with wood relief, circular canvases, and a few sculptural pieces on a low plinth.
 
 One wall leans toward temple streets, a Ganesha panel, a seated Buddha, and a shivalingam study. Another hangs three round canvases over portrait and lotus works. The poster does not name the 32 artists, so this note does not invent a roll call.
-
-![Paintings and wood relief on the main wall at Art Cube Gallery](${WALL1})
-
-*The main hang this week: framed paintings, a gold-ground portrait, and carved wood reliefs.*
-
-![Circular canvases and portraits on a second wall](${WALL2})
-
-*A second wall of round canvases, portraits, and a lotus study.*
 
 ## Where to go
 
