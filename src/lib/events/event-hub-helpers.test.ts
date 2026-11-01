@@ -54,6 +54,25 @@ describe("buildHubCardFromDb", () => {
     );
   });
 
+  it("tags Vibrant Hues as culture and uses the gallery poster", () => {
+    const card = buildHubCardFromDb({
+      ...sampleEvent,
+      slug: "vibrant-hues-art-cube-gallery-virugambakkam-november-2026",
+      title:
+        "Vibrant Hues — paintings and sculptures at Art Cube Gallery, Virugambakkam",
+      description:
+        "Art Cube Gallery presents Vibrant Hues, a paintings and sculptures exhibition.",
+      presentationKey: null,
+      contentRef: null,
+      featured: true,
+    });
+    expect(card.imageSrc).toBe(
+      "/images/events/vibrant-hues-art-cube-gallery-virugambakkam-november-2026.png",
+    );
+    expect(card.tags).toContain("culture");
+    expect(card.tags).toContain("featured");
+  });
+
   it("tags Madras Day photo exhibitions as culture + festivals and uses the poster", () => {
     const card = buildHubCardFromDb({
       ...sampleEvent,

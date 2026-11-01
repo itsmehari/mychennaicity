@@ -127,6 +127,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/farmers-grievance-day-meeting-tiruvallur-october-2026.jpg",
     alt: "Tamil Nadu DIPR poster — farmers' welfare grievance day meeting at the Tiruvallur District Collectorate, Friday 30 October 2026, 10:00 AM",
   },
+  "vibrant-hues-art-cube-gallery-virugambakkam-november-2026": {
+    src: "/images/events/vibrant-hues-art-cube-gallery-virugambakkam-november-2026.png",
+    alt: "Vibrant Hues poster — Art Cube Gallery group exhibition of paintings and sculptures, Virugambakkam, Chennai, 31 October to 7 November 2026, 11 AM to 6 PM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",

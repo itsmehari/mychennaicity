@@ -523,4 +523,24 @@ export const CHENNAI_DISCOVERY_EVENTS_2026: ChennaiDiscoveryEvent[] = [
     targetAudience: "Young professionals, students, comedy fans",
     bookingLink: "https://in.bookmyshow.com/explore/home/chennai",
   },
+  {
+    slug: "vibrant-hues-art-cube-gallery-virugambakkam-november-2026",
+    title:
+      "Vibrant Hues — paintings and sculptures at Art Cube Gallery, Virugambakkam",
+    category: "Art exhibitions",
+    date: "2026-10-31 to 2026-11-07",
+    time: "11:00:00 to 18:00:00",
+    venueName: "Art Cube Gallery",
+    address:
+      "Plot No. 13, 2nd Street, Elango Nagar, Virugambakkam, Chennai, Tamil Nadu 600092",
+    locality: "Virugambakkam",
+    description:
+      "Art Cube Gallery presents Vibrant Hues — Celebration of life, a week of paintings and sculptures by 32 artists. Hours on the poster: 11 AM to 6 PM. Ticket price not printed.",
+    ticketPrice: "Not printed on the poster — confirm at the gallery",
+    targetAudience: "Art visitors, west Chennai residents, families",
+    bookingLink: "https://www.artcubegallery.biz",
+    featured: true,
+    notes:
+      "Organiser: Art Cube Gallery. Phone printed on the poster: 87545 55769. Companion news: /chennai-local-news/vibrant-hues-art-exhibition-virugambakkam-november-2026.",
+  },
 ];
