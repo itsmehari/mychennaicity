@@ -4,6 +4,7 @@ import {
   CANONICAL_SITE_HOST,
   isWrongSiteHost,
 } from "@/lib/canonical-site";
+import { markdownTwinPath, prefersMarkdown } from "@/lib/seo/content-markdown";
 
 /**
  * Session cookies for Auth.js v5 (names vary by dev/prod/https).
@@ -43,6 +44,26 @@ export function middleware(request: NextRequest) {
     signIn.searchParams.set("callbackUrl", request.nextUrl.pathname);
     return NextResponse.redirect(signIn);
   }
+
+  const twin = markdownTwinPath(request.nextUrl.pathname);
+  if (twin && (request.method === "GET" || request.method === "HEAD")) {
+    if (prefersMarkdown(request.headers.get("accept"))) {
+      const url = request.nextUrl.clone();
+      url.pathname = twin;
+      const rewritten = NextResponse.rewrite(url);
+      rewritten.headers.set("Vary", "Accept");
+      return rewritten;
+    }
+    const next = NextResponse.next();
+    const markdownUrl = new URL(twin, request.nextUrl.origin);
+    next.headers.set(
+      "Link",
+      `<${markdownUrl.href}>; rel="alternate"; type="text/markdown"`,
+    );
+    next.headers.set("Vary", "Accept");
+    return next;
+  }
+
   return NextResponse.next();
 }
 

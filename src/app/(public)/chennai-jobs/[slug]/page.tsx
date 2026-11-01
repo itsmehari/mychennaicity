@@ -38,6 +38,7 @@ import {
   buildJobPostingJsonLd,
 } from "@/lib/seo/job-posting-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { withMarkdownAlternate } from "@/lib/seo/content-markdown";
 
 const GUINDY_OFFICE_ASSISTANT_SLUG = "male-office-assistant-guindy-race-course";
 
@@ -99,7 +100,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: titleSegment,
     description: desc,
-    alternates: { canonical: url, ...(languages ? { languages } : {}) },
+    alternates: withMarkdownAlternate(
+      { canonical: url, ...(languages ? { languages } : {}) },
+      chennaiJobsDetailPath(row.job.slug),
+    ),
     other: { ...CHENNAI_GEO_META },
     openGraph: {
       title: docTitle,

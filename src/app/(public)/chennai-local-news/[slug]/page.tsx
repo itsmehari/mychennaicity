@@ -24,6 +24,7 @@ import {
 import { articleLayoutVariantForSlug } from "@/lib/news-article-layout";
 import { categoryToTopicSlug } from "@/lib/news-topics";
 import { buildArticleSupplementalJsonLd } from "@/lib/seo/article-rich-snippets";
+import { withMarkdownAlternate } from "@/lib/seo/content-markdown";
 import {
   buildBreadcrumbJsonLd,
   buildNewsArticleJsonLd,
@@ -98,10 +99,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: titleSegment,
     description: desc,
-    alternates: {
-      canonical: url,
-      ...(languageAlts ? { languages: languageAlts } : {}),
-    },
+    alternates: withMarkdownAlternate(
+      {
+        canonical: url,
+        ...(languageAlts ? { languages: languageAlts } : {}),
+      },
+      `/chennai-local-news/${article.slug}`,
+    ),
     robots: {
       "max-image-preview": "large",
       googleBot: { "max-image-preview": "large" },

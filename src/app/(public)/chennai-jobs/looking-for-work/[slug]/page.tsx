@@ -17,6 +17,7 @@ import { getSiteUrl } from "@/lib/env";
 import {
   CHENNAI_JOBS_HUB_PATH,
   CHENNAI_JOBS_LOOKING_PATH,
+  chennaiJobSeekerDetailPath,
 } from "@/lib/routes/chennai-jobs";
 import {
   buildJobSeekerBreadcrumbJsonLd,
@@ -26,6 +27,7 @@ import {
   buildClippedTitleSegment,
   fullSiteTitle,
 } from "@/lib/seo/site-titles";
+import { withMarkdownAlternate } from "@/lib/seo/content-markdown";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -54,7 +56,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: titleSegment,
     description: desc,
-    alternates: { canonical: url },
+    alternates: withMarkdownAlternate(
+      { canonical: url },
+      chennaiJobSeekerDetailPath(post.slug),
+    ),
     openGraph: {
       title: docTitle,
       description: desc,

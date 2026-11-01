@@ -11,6 +11,8 @@ import {
 export type LlmsDigestItem = {
   title: string;
   url: string;
+  /** Same page as Markdown, without the site layout. */
+  plainTextUrl?: string | null;
   summary?: string | null;
   date?: string | null;
 };
@@ -48,7 +50,10 @@ function renderDigestSection(
     .map((item) => {
       const date = item.date ? ` (${item.date})` : "";
       const summary = item.summary?.trim() ? `\n  ${item.summary.trim()}` : "";
-      return `- [${item.title}](${abs(item.url)})${date}${summary}`;
+      const plain = item.plainTextUrl
+        ? `\n  Plain text: ${abs(item.plainTextUrl)}`
+        : "";
+      return `- [${item.title}](${abs(item.url)})${date}${summary}${plain}`;
     })
     .join("\n");
   return `## ${heading}\n\n${intro}\n\n${lines}${extra}\n`;
@@ -130,7 +135,7 @@ ${
 
 # Live Chennai jobs and events
 
-These three sections are read from the public database when this file is requested. They list what is open or still upcoming. Cite the specific URL. Confirm pay, timing, tickets, and how to apply on that page before acting. Phone numbers and email addresses are left on the listing page.
+These three sections are read from the public database when this file is requested. They list what is open or still upcoming. Cite the specific URL. Each line names a plain-text twin of that page. Confirm pay, timing, tickets, and how to apply on that page before acting. Phone numbers and email addresses are left on the listing page.
 
 ${renderDigestSection(
   "Open Chennai jobs",
@@ -208,7 +213,10 @@ export function buildAeoChennaiMarkdown(input: {
       ? items
           .map((i) => {
             const s = i.summary?.trim() ? ` — ${i.summary.trim()}` : "";
-            return `- **${i.title}**${s} ([source](${abs(i.url)}))`;
+            const plain = i.plainTextUrl
+              ? ` ([plain text](${abs(i.plainTextUrl)}))`
+              : "";
+            return `- **${i.title}**${s} ([source](${abs(i.url)}))${plain}`;
           })
           .join("\n")
       : `- ${empty}`;

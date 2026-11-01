@@ -1,5 +1,6 @@
 import { listPublicEventsForChennaiHub } from "@/domains/events";
 import { getSiteUrl } from "@/lib/env";
+import { LLMS_CATALOG_LIMIT } from "@/lib/seo/llms-live-catalog";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +9,7 @@ export async function GET() {
   const base = getSiteUrl();
   let items: Awaited<ReturnType<typeof listPublicEventsForChennaiHub>> = [];
   try {
-    items = await listPublicEventsForChennaiHub(40);
+    items = await listPublicEventsForChennaiHub(LLMS_CATALOG_LIMIT);
   } catch {
     items = [];
   }

@@ -118,6 +118,7 @@ export function jobRowsToLlmsDigests(rows: JobPostingWithEmployer[]): LlmsDigest
     return {
       title: row.job.title,
       url: chennaiJobsDetailPath(row.job.slug),
+      plainTextUrl: `${chennaiJobsDetailPath(row.job.slug)}/markdown`,
       date: card.publishedAt,
       summary: joinFacts([
         featured.has(englishSlug) ? `Featured: ${featured.get(englishSlug)}` : null,
@@ -143,6 +144,7 @@ export function seekerRowsToLlmsDigests(rows: JobSeekerPostRow[]): LlmsDigestIte
     return {
       title: post.title,
       url: chennaiJobSeekerDetailPath(post.slug),
+      plainTextUrl: `${chennaiJobSeekerDetailPath(post.slug)}/markdown`,
       date: formatIstDate(posted),
       summary: joinFacts([
         card.seekerLabel,
@@ -168,6 +170,7 @@ export function eventRowsToLlmsDigests(rows: PublicEventRow[]): LlmsDigestItem[]
   return rows.map((event) => ({
     title: event.title,
     url: `/chennai-local-events/${event.slug}`,
+    plainTextUrl: `/chennai-local-events/${event.slug}/markdown`,
     date: eventWhen(event),
     summary: joinFacts([
       event.venueName,

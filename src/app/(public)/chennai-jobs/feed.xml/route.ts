@@ -1,6 +1,7 @@
 import { listOpenJobPostingsForChennaiHub } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
+import { LLMS_CATALOG_LIMIT } from "@/lib/seo/llms-live-catalog";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +10,7 @@ export async function GET() {
   const base = getSiteUrl();
   let items: Awaited<ReturnType<typeof listOpenJobPostingsForChennaiHub>> = [];
   try {
-    items = await listOpenJobPostingsForChennaiHub(40, 0);
+    items = await listOpenJobPostingsForChennaiHub(LLMS_CATALOG_LIMIT, 0);
   } catch {
     items = [];
   }

@@ -17,4 +17,10 @@ export function revalidateNewsSurfaces(articleSlug?: string): void {
   }
   revalidateSitemapSurfaces();
   revalidatePath("/chennai-local-news/feed.xml");
+  revalidatePath("/llms.txt");
+  revalidatePath("/llms-full.txt");
+  revalidatePath("/aeo/chennai.md");
+  if (articleSlug?.trim()) {
+    revalidatePath(`/chennai-local-news/${articleSlug.trim()}/markdown`);
+  }
 }

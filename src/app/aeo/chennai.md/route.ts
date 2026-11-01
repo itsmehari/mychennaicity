@@ -16,6 +16,7 @@ export async function GET() {
     news = articles.map((article) => ({
       title: article.title,
       url: `/chennai-local-news/${article.slug}`,
+      plainTextUrl: `/chennai-local-news/${article.slug}/markdown`,
       summary: article.summary ?? article.dek,
     }));
   } catch {

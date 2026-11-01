@@ -100,27 +100,24 @@ Code lives under `src/lib/seo/`, `src/app/llms.txt/`, `src/app/llms-full.txt/`, 
 
 Ordered by how directly they help a Chennai reader get a cited answer from this site. None of these are guaranteed ranking factors. The first group is the one worth doing next.
 
+Shipped on 1 November 2026, after the catalog:
+
+- **Markdown twins** of each open job, looking-for-work notice, upcoming event, and published news story, at the page URL plus `/markdown`. A client that sends `Accept: text/markdown` ahead of HTML is rewritten to that twin. The HTML page stays canonical and advertises the twin with a `Link` header. `llms.txt` names the plain-text URL on each line.
+- **Refresh** of `/llms.txt`, `/llms-full.txt`, `/aeo/chennai.md`, and the jobs and events RSS feeds inside `revalidateListingsSurfaces()` and `revalidateNewsSurfaces()`.
+- **Jobs and events RSS** now use the same 400-row cap as the catalog, instead of the latest 40.
+
 ### Do these next
 
-1. **Markdown for the page itself, not only the index.**  
-   `llms.txt` is a directory. The article, job, and event pages are still HTML. An agent that follows a link then has to parse navigation, ads, and layout. A clean Markdown twin (content negotiation on `Accept: text/markdown`, or a stable `/chennai-local-news/[slug].md` style URL) lets the model read the disclaimer, the source, the pay, and the venue without the chrome. Keep one generator per template so the Markdown cannot drift from the HTML.
-
-2. **Put today’s civic facts in the same file.**  
+1. **Put today’s civic facts in the same file.**  
    The catalog is jobs and events. Questions about the gold rate, Metro Water, a fare card, or “what is happening in Chennai this morning” still depend on `/chennai-today` and `/chennai-gold-rate`. A short “Today in Chennai” section, generated with those pages, would answer the query the file currently only links.
 
-3. **IndexNow when a row is published or closed.**  
+2. **IndexNow when a row is published or closed.**  
    Bing, and other engines that share the IndexNow protocol, can be told about a new or expired URL immediately instead of waiting for the next sitemap read. Ping the detail URL, the hub, and `/llms.txt` from the existing seed and admin publish path. Submit the sitemaps in Bing Webmaster Tools as well. `docs/CONTENT_ARCHITECTURE.md` already names Bing; the repo has a Google Search Console submit script and no IndexNow client.
 
-4. **Refresh the AI URLs in the same breath as the sitemap.**  
-   `revalidateListingsSurfaces()` refreshes hubs and sitemap routes. It does not mention `/llms.txt`, `/llms-full.txt`, `/aeo/chennai.md`, or the jobs and events RSS feeds. The routes are dynamic, and the CDN may still serve the previous body for up to a few minutes. Add those paths, and ping IndexNow, inside that helper.
-
-5. **A quote box on civic stories.**  
+3. **A quote box on civic stories.**  
    Generative engines prefer a sentence that already contains the number, the date, the place, and the named source. Many of our articles have that in the lead. It is not a required block. A visible “Key facts” list (three to six lines, each with a date and a source) that matches the prose gives the model something safe to quote. Do not add a fact that is not in the story.
 
-6. **Raise the jobs RSS cap to the open set.**  
-   `/chennai-jobs/feed.xml` still stops at 40. The text file lists every open role. Anything that reads RSS instead of `llms.txt` still sees a partial board. The events feed should be checked for the same gap.
-
-7. **Classifieds in the catalog, with the same contact rule.**  
+4. **Classifieds in the catalog, with the same contact rule.**  
    Property and other reader listings are a public hub and are absent from `llms.txt`. Add open classifieds as their own section: title, locality, asking price only when we actually publish one, and the URL. Keep phone numbers on the page, behind the existing reveal gate. Do not describe a draft or a taken-down ad.
 
 ### Worth doing after that

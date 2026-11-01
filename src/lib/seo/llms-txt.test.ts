@@ -49,6 +49,7 @@ describe("llms.txt builders", () => {
           {
             title: "Office assistant — Guindy",
             url: "/chennai-jobs/male-office-assistant-guindy-race-course",
+            plainTextUrl: "/chennai-jobs/male-office-assistant-guindy-race-course/markdown",
             summary: "Individual employer · Guindy · ₹15,000 / month",
             date: "1 Nov 2026",
           },
@@ -73,6 +74,9 @@ describe("llms.txt builders", () => {
     });
     expect(md).toContain(
       "https://mychennaicity.in/chennai-jobs/male-office-assistant-guindy-race-course",
+    );
+    expect(md).toContain(
+      "Plain text: https://mychennaicity.in/chennai-jobs/male-office-assistant-guindy-race-course/markdown",
     );
     expect(md).toContain("₹15,000 / month");
     expect(md).toContain("https://mychennaicity.in/chennai-jobs/looking-for-work/watchman-porur");

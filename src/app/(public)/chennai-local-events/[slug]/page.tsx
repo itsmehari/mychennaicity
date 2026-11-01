@@ -22,6 +22,7 @@ import {
   fullSiteTitle,
 } from "@/lib/seo/site-titles";
 import { eventPosterAbsoluteUrl } from "@/lib/events/event-poster-image";
+import { withMarkdownAlternate } from "@/lib/seo/content-markdown";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -45,7 +46,10 @@ function standardMetadataForEvent(
   return {
     title: titleSegment,
     description: desc,
-    alternates: { canonical: url },
+    alternates: withMarkdownAlternate(
+      { canonical: url },
+      `/chennai-local-events/${ev.slug}`,
+    ),
     openGraph: {
       title: docTitle,
       description: desc,
@@ -81,7 +85,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: content.seo.metaTitle,
       description: content.seo.metaDescription.slice(0, 160),
-      alternates: { canonical: url },
+      alternates: withMarkdownAlternate(
+        { canonical: url },
+        `/chennai-local-events/${ev.slug}`,
+      ),
       robots: {
         index: true,
         follow: true,
