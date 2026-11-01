@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
@@ -98,7 +99,9 @@ export default async function ChennaiJobSeekerDetailPage({ params }: Props) {
           ]}
         />
         <JobDetailResumeDoctorStrip audience="job-seeker" />
-        <JobSeekerPostDetail post={post} />
+        <ContentEngagementScope kind="job_seeker" slug={post.slug}>
+          <JobSeekerPostDetail post={post} />
+        </ContentEngagementScope>
         <ChennaiSeekersHubSafety />
         <JobsDetailBackLink href={CHENNAI_JOBS_LOOKING_PATH} label="All looking-for-work profiles" />
         <div className="mt-8 max-w-2xl space-y-6">

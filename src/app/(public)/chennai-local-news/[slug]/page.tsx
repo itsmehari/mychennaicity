@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { EditorialArticle } from "@/components/news/editorial-article";
 import { getSpecialArticleEntry } from "@/content/special-articles";
 import {
@@ -233,17 +234,19 @@ export default async function ArticlePage({ params }: Props) {
       })}
       <div className={interiorMainClassName}>
         <PageBreadcrumbs items={crumbs} />
-        {specialArticle ? (
-          <specialArticle.Component article={article} />
-        ) : (
-          <EditorialArticle
-            article={article}
-            layoutVariant={articleLayoutVariantForSlug(article.slug)}
-            onThisPage={showToc ? tocEntriesWithAeo : null}
-            reportHeadingAnchors={showToc ? reportAnchors : undefined}
-            analysisHeadingAnchors={showToc ? analysisAnchors : undefined}
-          />
-        )}
+        <ContentEngagementScope kind="news" slug={article.slug}>
+          {specialArticle ? (
+            <specialArticle.Component article={article} />
+          ) : (
+            <EditorialArticle
+              article={article}
+              layoutVariant={articleLayoutVariantForSlug(article.slug)}
+              onThisPage={showToc ? tocEntriesWithAeo : null}
+              reportHeadingAnchors={showToc ? reportAnchors : undefined}
+              analysisHeadingAnchors={showToc ? analysisAnchors : undefined}
+            />
+          )}
+        </ContentEngagementScope>
         <InteriorCrossNav />
       </div>
     </>

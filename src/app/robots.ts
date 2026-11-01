@@ -8,7 +8,7 @@ import { getSiteUrl } from "@/lib/env";
  */
 export default function robots(): MetadataRoute.Robots {
   const base = getSiteUrl();
-  const disallow = ["/admin", "/api/"] as const;
+  const disallow = ["/admin", "/super-admin", "/api/"] as const;
 
   const shared = {
     allow: "/" as const,

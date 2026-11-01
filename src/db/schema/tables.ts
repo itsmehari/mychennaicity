@@ -330,6 +330,39 @@ export const classifiedListings = pgTable(
   }),
 );
 
+/**
+ * First-party counts for news, jobs, events, and classifieds.
+ * Anonymous visitor cookie only. No IP address.
+ */
+export const contentEngagementEvents = pgTable(
+  "content_engagement_events",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    /** news | job | event | classified | job_seeker */
+    contentKind: text("content_kind").notNull(),
+    contentSlug: text("content_slug").notNull(),
+    /** pageview | call_click | whatsapp_click */
+    eventKind: text("event_kind").notNull(),
+    visitorId: text("visitor_id").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    lookup: index("content_engagement_events_lookup_idx").on(
+      t.contentKind,
+      t.contentSlug,
+      t.eventKind,
+      t.createdAt,
+    ),
+    visitorRecent: index("content_engagement_events_visitor_idx").on(
+      t.contentKind,
+      t.contentSlug,
+      t.eventKind,
+      t.visitorId,
+      t.createdAt,
+    ),
+  }),
+);
+
 /** Name and mobile collected before a gated classified contact is shown. */
 export const classifiedPhoneReveals = pgTable(
   "classified_phone_reveals",

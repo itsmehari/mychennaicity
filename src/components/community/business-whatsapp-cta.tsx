@@ -27,7 +27,7 @@ export function BusinessWhatsAppCta({
     : `rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_92%,var(--accent)_5%)] p-5 ring-1 ring-[color-mix(in_srgb,var(--foreground)_4%,transparent)] sm:p-6 ${className}`.trim();
 
   return (
-    <div className={shell}>
+    <div className={shell} data-engagement-ignore="">
       <h2 className="text-sm font-semibold text-[var(--foreground)]">
         {row.title}
       </h2>

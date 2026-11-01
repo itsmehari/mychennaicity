@@ -86,7 +86,10 @@ export default function PrivacyPage() {
           </a>{" "}
           (GA4) when configured, to understand traffic and improve the product.
           Google&apos;s terms and privacy policy apply to how they process data
-          on our behalf.
+          on our behalf. We also count page views and clicks on call and
+          WhatsApp buttons on news, jobs, events, and classifieds. Those counts
+          use an anonymous visitor cookie. We do not store your IP address in
+          that count.
         </p>
         <p>
           <strong className="text-[var(--foreground)]">Advertising.</strong> We
@@ -196,7 +199,7 @@ export default function PrivacyPage() {
           and approximate analytics.
         </p>
         <p className="text-xs text-[var(--muted)]">
-          Last updated: August 2026.
+          Last updated: November 2026.
         </p>
       </div>
       <InteriorCrossNav />

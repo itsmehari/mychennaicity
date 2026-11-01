@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { EventDetailStandard } from "@/components/events/event-detail-standard";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import {
@@ -143,7 +144,9 @@ export default async function EventDetailPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
-        <Page event={ev} content={content} uniqueReaderViews={uniqueReaderViews} />
+        <ContentEngagementScope kind="event" slug={ev.slug}>
+          <Page event={ev} content={content} uniqueReaderViews={uniqueReaderViews} />
+        </ContentEngagementScope>
         <div className="mx-auto w-full max-w-[1280px] px-4 pb-10">
           <FeaturedJobsRail placement="events_detail" />
         </div>
@@ -164,7 +167,9 @@ export default async function EventDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbLd) }}
       />
-      <EventDetailStandard ev={ev} uniqueReaderViews={uniqueReaderViews} />
+      <ContentEngagementScope kind="event" slug={ev.slug}>
+        <EventDetailStandard ev={ev} uniqueReaderViews={uniqueReaderViews} />
+      </ContentEngagementScope>
     </>
   );
 }

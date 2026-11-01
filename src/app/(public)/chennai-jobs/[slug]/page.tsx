@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
@@ -214,6 +215,7 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           audience="employer-job"
           isWhatsAppApply={isWhatsApp}
         />
+        <ContentEngagementScope kind="job" slug={row.job.slug}>
         <JobPostingDetail
           row={row}
           applyHref={applyHref ?? null}
@@ -232,6 +234,7 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
               : null
           }
         />
+        </ContentEngagementScope>
         <FeaturedJobsRail
           placement="job_detail"
           language={tamil ? "ta" : "en"}

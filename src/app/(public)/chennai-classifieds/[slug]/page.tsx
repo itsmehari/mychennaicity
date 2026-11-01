@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { ClassifiedAdDetail } from "@/components/classifieds/classified-ad-detail";
@@ -103,7 +104,9 @@ export default async function ChennaiClassifiedDetailPage({ params }: Props) {
           <PageAdSlot shape="rectangle" placement="classifieds_detail" />
         </div>
         <div className="mt-8">
-          <ClassifiedAdDetail listing={listing} />
+          <ContentEngagementScope kind="classified" slug={listing.slug}>
+            <ClassifiedAdDetail listing={listing} />
+          </ContentEngagementScope>
         </div>
         <div className="mt-10 max-w-2xl">
           <AdvertisePanel variant="classifieds" layout="strip" />
