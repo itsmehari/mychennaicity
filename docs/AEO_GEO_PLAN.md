@@ -1,6 +1,6 @@
 # AEO / GEO plan — mychennaicity.in
 
-Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Chennai news, jobs, and events. Complements classic SEO in `SEO_ENGINE_PLAN.md`.
+Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Chennai news, jobs, and events. Complements classic SEO in `SEO_ENGINE_PLAN.md`. How the live `llms.txt` catalog works, and the mechanisms not built yet, are in [`LLMS_TXT_AND_AEO_GEO.md`](LLMS_TXT_AND_AEO_GEO.md).
 
 ## Important honesty note
 
@@ -61,6 +61,6 @@ Planned: TN Plus Two education desk pillars (`/guides/tn-plus-two`, `/guides/tn-
 ## What not to do
 
 - Do not keyword-stuff `llms.txt` descriptions.
-- Do not list every URL — keep the index curated; put volume in sitemap + `llms-full.txt`.
+- Do not list every guide URL in the curated index. Open jobs, looking-for-work notices, and upcoming events belong in the live catalog on `llms.txt`. Everything else stays in the sitemap.
 - Do not block GPTBot/ClaudeBot/Perplexity if citation is the goal.
 - Do not emit JobPosting/Event/NewsArticle schema for mock or unpublished rows.
