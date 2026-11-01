@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { redactListingContacts } from "./llms-live-catalog";
+import { listingSnippet, redactListingContacts } from "./llms-live-catalog";
 import {
   buildAeoChennaiMarkdown,
   buildLlmsFullMarkdown,
@@ -85,6 +85,9 @@ describe("llms.txt builders", () => {
   it("strips phone numbers and emails from catalog snippets", () => {
     expect(redactListingContacts("Call 76710 65348 or write jobs@example.com today.")).toBe(
       "Call or write today.",
+    );
+    expect(listingSnippet("![Flyer](https://mychennaicity.in/a.jpg) Hiring in Navalur.")).toBe(
+      "Hiring in Navalur.",
     );
   });
 

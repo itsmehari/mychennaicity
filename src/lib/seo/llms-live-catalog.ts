@@ -59,7 +59,8 @@ export function listingSnippet(text: string | null | undefined, max = 220): stri
     text
       .replace(/<[^>]+>/g, " ")
       .replace(/```[\s\S]*?```/g, " ")
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
       .replace(/[#*_`>]/g, "")
       .replace(/\s+/g, " ")
       .trim(),
