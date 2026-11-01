@@ -25,12 +25,12 @@ if (live) {
   loadEnv({ path: ".env" });
 }
 
-const databaseUrl = process.env.DATABASE_URL;
-const email = process.env.SUPER_ADMIN_EMAIL?.trim().toLowerCase();
-if (!databaseUrl) {
+if (!process.env.DATABASE_URL) {
   console.error(live ? "DATABASE_URL missing (.env.production.local)." : "DATABASE_URL missing.");
   process.exit(1);
 }
+const databaseUrl: string = process.env.DATABASE_URL;
+const email = process.env.SUPER_ADMIN_EMAIL?.trim().toLowerCase();
 if (!email) {
   console.error("SUPER_ADMIN_EMAIL is missing.");
   process.exit(1);
