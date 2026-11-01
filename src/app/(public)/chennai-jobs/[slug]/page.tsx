@@ -38,6 +38,22 @@ import {
 } from "@/lib/seo/job-posting-jsonld";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
+const GUINDY_OFFICE_ASSISTANT_SLUG = "male-office-assistant-guindy-race-course";
+
+/** Call button for this vacancy only. Number comes from its WhatsApp apply link. */
+function directCallFromWhatsAppUrl(url: string | null | undefined): {
+  href: string;
+  label: string;
+} | null {
+  const match = url?.match(/wa\.me\/(91\d{10})\b/i);
+  if (!match) return null;
+  const local = match[1].slice(2);
+  return {
+    href: `tel:+${match[1]}`,
+    label: `Call ${local.slice(0, 5)} ${local.slice(5)}`,
+  };
+}
+
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamic = "force-dynamic";
@@ -161,6 +177,10 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
     isTel || isMailto || isContactForm
       ? ({} as const)
       : ({ target: "_blank", rel: "noopener noreferrer" } as const);
+  const directCall =
+    row.job.slug === GUINDY_OFFICE_ASSISTANT_SLUG
+      ? directCallFromWhatsAppUrl(applyHref)
+      : null;
 
   return (
     <>
@@ -200,6 +220,8 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
           applyLabel={applyLabel}
           applyLinkProps={applyLinkProps}
           isWhatsApp={isWhatsApp}
+          callHref={directCall?.href}
+          callLabel={directCall?.label}
           uniqueViews={uniqueViews}
           languageAlternate={
             twin

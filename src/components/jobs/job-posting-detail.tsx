@@ -106,6 +106,8 @@ export function JobPostingDetail({
   applyLabel,
   applyLinkProps,
   isWhatsApp,
+  callHref,
+  callLabel,
   uniqueViews,
   languageAlternate,
 }: {
@@ -114,6 +116,8 @@ export function JobPostingDetail({
   applyLabel: string;
   applyLinkProps: { target?: string; rel?: string };
   isWhatsApp: boolean;
+  callHref?: string | null;
+  callLabel?: string;
   uniqueViews: number;
   languageAlternate?: { href: string; label: string } | null;
 }) {
@@ -126,14 +130,18 @@ export function JobPostingDetail({
 
   const isContactForm = !!applyHref && /\/contact#jobs/i.test(applyHref);
   const ctaHint = tamil
-    ? isWhatsApp
+    ? callHref
+      ? "அழைப்பு இந்த எண்ணைத் திறக்கும். WhatsApp புதிய தாவலில் திறக்கும்."
+      : isWhatsApp
       ? "WhatsApp புதிய தாவலில் திறக்கும்."
       : applyHref?.startsWith("tel:")
         ? "அழைக்க இந்த எண்ணைத் தட்டவும்."
         : applyHref?.startsWith("mailto:")
           ? "மின்னஞ்சல் செயலி திறக்கும்."
           : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
-    : isWhatsApp
+    : callHref
+      ? "Call opens the phone dialler. WhatsApp opens in a new tab."
+      : isWhatsApp
       ? "Opens WhatsApp in a new tab."
       : applyHref?.startsWith("tel:")
         ? "Tap to call the employer directly."
@@ -208,6 +216,8 @@ export function JobPostingDetail({
             label={applyLabel}
             isWhatsApp={isWhatsApp}
             linkProps={applyLinkProps}
+            callHref={callHref}
+            callLabel={callLabel}
             hint={ctaHint}
           />
         </div>
@@ -238,10 +248,14 @@ export function JobPostingDetail({
                 title={tamil ? "விண்ணப்பிக்க தயாரா?" : "Ready to apply?"}
                 description={
                   tamil
-                    ? isWhatsApp
+                    ? callHref
+                      ? "அழைக்கவும் அல்லது WhatsApp செய்யவும். எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம்."
+                      : isWhatsApp
                       ? "இந்த அறிவிப்பு WhatsApp வழியாக. எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம். நேரடியாக செய்தி அனுப்புங்கள்."
                       : "பதவி, சம்பளம், இடம் ஆகியவற்றை உறுதி செய்த பிறகு விண்ணப்பியுங்கள்."
-                    : isWhatsApp
+                    : callHref
+                      ? "Call or WhatsApp the employer. We do not process CVs."
+                      : isWhatsApp
                       ? "This listing uses WhatsApp — message the poster; we do not process CVs."
                       : applyHref?.startsWith("tel:")
                         ? "This listing uses a phone number — call; we do not process CVs."
@@ -257,12 +271,27 @@ export function JobPostingDetail({
                 label={applyLabel}
                 isWhatsApp={isWhatsApp}
                 linkProps={applyLinkProps}
+                callHref={callHref}
+                callLabel={callLabel}
               />
             ) : null}
           </>
         }
         aside={
           <>
+            {applyHref ? (
+              <div className="mcc-jobs-detail__desktop-cta">
+                <JobsDetailActionCta
+                  href={applyHref}
+                  label={applyLabel}
+                  isWhatsApp={isWhatsApp}
+                  linkProps={applyLinkProps}
+                  callHref={callHref}
+                  callLabel={callLabel}
+                  hint={ctaHint}
+                />
+              </div>
+            ) : null}
             <PageAdSlot shape="square" placement="job_detail_square" />
             <JobsDetailGlance
               title={tamil ? "சுருக்கம்" : "At a glance"}
@@ -275,17 +304,6 @@ export function JobPostingDetail({
                     {tag}
                   </span>
                 ))}
-              </div>
-            ) : null}
-            {applyHref ? (
-              <div className="mcc-jobs-detail__desktop-cta">
-                <JobsDetailActionCta
-                  href={applyHref}
-                  label={applyLabel}
-                  isWhatsApp={isWhatsApp}
-                  linkProps={applyLinkProps}
-                  hint={ctaHint}
-                />
               </div>
             ) : null}
           </>

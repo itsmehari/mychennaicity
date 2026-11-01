@@ -1125,6 +1125,12 @@
   color: var(--mcj-muted);
 }
 
+.mcc-jobs-detail__cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .mcc-jobs-detail__cta {
   width: 100%;
   min-height: 44px;
@@ -1166,6 +1172,7 @@
 
   .mcc-jobs-detail__desktop-cta {
     display: block;
+    margin-bottom: 1rem;
   }
 }
 

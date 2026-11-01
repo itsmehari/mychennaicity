@@ -62,6 +62,8 @@ export function JobsDetailActionCta({
   isWhatsApp,
   linkProps,
   hint,
+  callHref,
+  callLabel,
   className = "",
 }: {
   href: string;
@@ -69,17 +71,26 @@ export function JobsDetailActionCta({
   isWhatsApp: boolean;
   linkProps: { target?: string; rel?: string };
   hint?: string;
+  callHref?: string | null;
+  callLabel?: string;
   className?: string;
 }) {
   return (
     <div className={className}>
-      <a
-        href={href}
-        {...linkProps}
-        className={`mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--primary mcc-jobs-detail__cta${isWhatsApp ? " mcc-jobs-detail__cta--whatsapp" : ""}`}
-      >
-        {label}
-      </a>
+      <div className="mcc-jobs-detail__cta-stack">
+        <a
+          href={href}
+          {...linkProps}
+          className={`mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--primary mcc-jobs-detail__cta${isWhatsApp ? " mcc-jobs-detail__cta--whatsapp" : ""}`}
+        >
+          {label}
+        </a>
+        {callHref ? (
+          <a href={callHref} className="mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--ghost mcc-jobs-detail__cta">
+            {callLabel ?? "Call"}
+          </a>
+        ) : null}
+      </div>
       {hint ? <p className="mcc-jobs-detail__cta-hint">{hint}</p> : null}
     </div>
   );
@@ -92,6 +103,8 @@ export function JobsDetailApplyBand({
   label,
   isWhatsApp,
   linkProps,
+  callHref,
+  callLabel,
 }: {
   title: string;
   description: string;
@@ -99,6 +112,8 @@ export function JobsDetailApplyBand({
   label: string;
   isWhatsApp: boolean;
   linkProps: { target?: string; rel?: string };
+  callHref?: string | null;
+  callLabel?: string;
 }) {
   return (
     <section className="mcc-jobs-detail__apply-band">
@@ -109,6 +124,8 @@ export function JobsDetailApplyBand({
         label={label}
         isWhatsApp={isWhatsApp}
         linkProps={linkProps}
+        callHref={callHref}
+        callLabel={callLabel}
         className="mt-4 max-w-md"
       />
     </section>
