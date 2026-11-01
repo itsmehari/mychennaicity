@@ -3,7 +3,10 @@
  * Spec: https://llmstxt.org — curated Markdown index for AI systems.
  */
 import { getSiteUrl } from "@/lib/env";
-import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
+import {
+  CHENNAI_JOBS_HUB_PATH,
+  CHENNAI_JOBS_LOOKING_PATH,
+} from "@/lib/routes/chennai-jobs";
 
 export type LlmsDigestItem = {
   title: string;
@@ -12,15 +15,49 @@ export type LlmsDigestItem = {
   date?: string | null;
 };
 
+export type LlmsLiveCatalog = {
+  jobs: LlmsDigestItem[];
+  seekers: LlmsDigestItem[];
+  events: LlmsDigestItem[];
+  /** Open rows past the file cap, still on the hub. */
+  jobsOmitted?: number;
+  seekersOmitted?: number;
+  eventsOmitted?: number;
+};
+
 function abs(path: string): string {
   const base = getSiteUrl().replace(/\/$/, "");
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** Curated site map for AI agents — keep under ~20 KB. */
+function renderDigestSection(
+  heading: string,
+  items: LlmsDigestItem[],
+  intro: string,
+  omitted?: number,
+): string {
+  const extra =
+    omitted && omitted > 0
+      ? `\n\n_${omitted} more ${omitted === 1 ? "row is" : "rows are"} on the hub and were left out of this snapshot._`
+      : "";
+  if (!items.length) {
+    return `## ${heading}\n\n${intro}\n\n_None listed at generation time. Use the hub URL above._${extra}\n`;
+  }
+  const lines = items
+    .map((item) => {
+      const date = item.date ? ` (${item.date})` : "";
+      const summary = item.summary?.trim() ? `\n  ${item.summary.trim()}` : "";
+      return `- [${item.title}](${abs(item.url)})${date}${summary}`;
+    })
+    .join("\n");
+  return `## ${heading}\n\n${intro}\n\n${lines}${extra}\n`;
+}
+
+/** Curated site map plus the live jobs and events catalog. */
 export function buildLlmsTxtMarkdown(options?: {
   generatedAt?: Date;
+  catalog?: LlmsLiveCatalog;
 }): string {
   const generated = (options?.generatedAt ?? new Date()).toISOString();
   const base = getSiteUrl().replace(/\/$/, "");
@@ -35,6 +72,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 
 - [Chennai local news](${base}/chennai-local-news): Civic, neighbourhood, transport, and public-interest reporting for Greater Chennai
 - [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): Open local jobs, walk-ins, and office roles — apply on the employer’s own channel
+- [Looking for work](${base}${CHENNAI_JOBS_LOOKING_PATH}): People in Chennai who have posted that they are available to hire
 - [Post a job](${base}/advertise/jobs): Employer pitch — we place the listing; Tamil: ${base}/advertise/jobs-tamil
 - [Post a property](${base}/advertise/property): Sale, rent, plot, commercial — we place the ad; Tamil: ${base}/advertise/property-tamil
 - [Classifieds](${base}/chennai-classifieds): Reader listings, including property
@@ -85,43 +123,69 @@ Generated: ${generated}
 Canonical site: ${base}
 Preferred language: en-IN
 Geographic focus: Chennai / Greater Chennai, Tamil Nadu, India
-`;
+${
+  options?.catalog
+    ? `
+---
+
+# Live Chennai jobs and events
+
+These three sections are read from the public database when this file is requested. They list what is open or still upcoming. Cite the specific URL. Confirm pay, timing, tickets, and how to apply on that page before acting. Phone numbers and email addresses are left on the listing page.
+
+${renderDigestSection(
+  "Open Chennai jobs",
+  options.catalog.jobs,
+  `Every publicly open role on [${base}${CHENNAI_JOBS_HUB_PATH}](${base}${CHENNAI_JOBS_HUB_PATH}). English pages are listed once; a Tamil page is named on the same line when that twin is also open. Expired listings are omitted.`,
+  options.catalog.jobsOmitted,
+)}
+${renderDigestSection(
+  "People looking for work in Chennai",
+  options.catalog.seekers,
+  `Open notices on [${base}${CHENNAI_JOBS_LOOKING_PATH}](${base}${CHENNAI_JOBS_LOOKING_PATH}). These are job seekers, not employer vacancies. Reach them only through the listing page.`,
+  options.catalog.seekersOmitted,
+)}
+${renderDigestSection(
+  "Upcoming Chennai events",
+  options.catalog.events,
+  `Scheduled events that have not ended, soonest first, from [${base}/chennai-local-events](${base}/chennai-local-events). Times are India Standard Time. Confirm the venue and tickets with the organiser.`,
+  options.catalog.eventsOmitted,
+)}`
+    : ""
+}`;
 }
 
 /** Longer digest for offline / RAG-style ingestion. */
 export function buildLlmsFullMarkdown(input: {
   news: LlmsDigestItem[];
-  jobs: LlmsDigestItem[];
-  events: LlmsDigestItem[];
+  jobs?: LlmsDigestItem[];
+  events?: LlmsDigestItem[];
+  catalog?: LlmsLiveCatalog;
   generatedAt?: Date;
 }): string {
   const generated = (input.generatedAt ?? new Date()).toISOString();
-  const index = buildLlmsTxtMarkdown({ generatedAt: input.generatedAt });
-
-  const section = (heading: string, items: LlmsDigestItem[]) => {
-    if (!items.length) {
-      return `## ${heading}\n\n_No live rows available at generation time. Use the hub URL in llms.txt._\n`;
-    }
-    return `## ${heading}\n\n${items
-      .map((item) => {
-        const date = item.date ? ` (${item.date})` : "";
-        const summary = item.summary?.trim()
-          ? `\n  ${item.summary.trim()}`
-          : "";
-        return `- [${item.title}](${abs(item.url)})${date}${summary}`;
-      })
-      .join("\n")}\n`;
-  };
+  const catalog =
+    input.catalog ??
+    ({
+      jobs: input.jobs ?? [],
+      seekers: [],
+      events: input.events ?? [],
+    } satisfies LlmsLiveCatalog);
+  const index = buildLlmsTxtMarkdown({
+    generatedAt: input.generatedAt,
+    catalog,
+  });
 
   return `${index}
 
 ---
 
-# Recent Chennai content digest
+# Recent Chennai news
 
-${section("Latest Chennai news", input.news)}
-${section("Open Chennai jobs", input.jobs)}
-${section("Upcoming Chennai events", input.events)}
+${renderDigestSection(
+  "Latest Chennai news",
+  input.news,
+  "Recently published civic and neighbourhood stories. The jobs and events catalog is in the section above.",
+)}
 
 ## Citation note
 
@@ -133,6 +197,7 @@ export function buildAeoChennaiMarkdown(input: {
   news: LlmsDigestItem[];
   jobs: LlmsDigestItem[];
   events: LlmsDigestItem[];
+  seekers?: LlmsDigestItem[];
   generatedAt?: Date;
 }): string {
   const base = getSiteUrl().replace(/\/$/, "");
@@ -169,6 +234,14 @@ Browse open roles: [${base}${CHENNAI_JOBS_HUB_PATH}](${base}${CHENNAI_JOBS_HUB_P
 ${bullets(input.jobs, "Open the jobs hub for current openings.")}
 
 Always confirm salary, timing, and application steps on the employer’s own page or form.
+
+## Who is looking for work in Chennai?
+
+Open notices: [${base}${CHENNAI_JOBS_LOOKING_PATH}](${base}${CHENNAI_JOBS_LOOKING_PATH})
+
+${bullets(input.seekers ?? [], "Open the looking-for-work board for current notices.")}
+
+Contact details stay on each notice. These posts are not employer vacancies.
 
 ## What events are on in Chennai?
 

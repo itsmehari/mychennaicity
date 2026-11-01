@@ -10,9 +10,9 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 
 | URL | Role |
 | --- | --- |
-| `/llms.txt` | Curated Markdown index (llmstxt.org style) |
+| `/llms.txt` | Curated Markdown index plus the live open-job, looking-for-work, and upcoming-event catalog |
 | `/llm.txt` | 308 alias → `/llms.txt` |
-| `/llms-full.txt` | Index + recent news/jobs/events digests |
+| `/llms-full.txt` | Same live catalog plus recent news |
 | `/aeo/chennai.md` | Answer-first Chennai digest |
 | `/humans.txt` | Human credits |
 | `/robots.txt` | Crawl policy + explicit AI-bot Allow |
@@ -26,7 +26,7 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 3. **Speakable selectors** — only for real DOM nodes (title, lede, FAQ).
 4. **Attribution** — official claims stay attributed; no fake conclusions in digests.
 5. **Entity grounding** — Chennai / Greater Chennai Place graph; Organization `sameAs` via env.
-6. **Freshness** — force-dynamic hubs + RSS + digest routes; revalidate after seeds.
+6. **Freshness** — force-dynamic hubs + RSS + digest routes; revalidate after seeds. `/llms.txt` (and `/llm.txt`, which redirects there) lists every current open job, looking-for-work notice, and upcoming event from the database, up to 400 rows per section. English job pages are listed once, with the Tamil twin linked on the same line. Phone numbers and email addresses stay on the listing page.
 7. **Internal links** — news ↔ jobs ↔ events ↔ areas so crawlers see topical clusters.
 8. **Canonical host** — always `https://mychennaicity.in` (never `.com`).
 
