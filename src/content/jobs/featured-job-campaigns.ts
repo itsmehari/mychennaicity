@@ -8,6 +8,8 @@ import { jobEnglishSlug } from "@/lib/jobs/job-language";
 export type FeaturedJobCampaign = {
   id: string;
   englishSlug: string;
+  /** Inclusive first day, YYYY-MM-DD, Asia/Kolkata. Omit to start immediately. */
+  from?: string;
   /** Inclusive last day, YYYY-MM-DD, Asia/Kolkata. */
   until: string;
   /** Area hubs where the workplace sits in or beside the belt. */
@@ -16,8 +18,19 @@ export type FeaturedJobCampaign = {
   contextTa: string;
 };
 
-/** VV Placement Services — AC technician / helper and HR recruiter. Through 12 Nov 2026. */
+/** Guindy office assistant through 1 Dec 2026. VV Placement roles through 12 Nov 2026. */
 export const FEATURED_JOB_CAMPAIGNS: readonly FeaturedJobCampaign[] = [
+  {
+    id: "guindy-male-office-assistant-2026-11",
+    englishSlug: "male-office-assistant-guindy-race-course",
+    from: "2026-11-01",
+    until: "2026-12-01",
+    areaHubSlugs: ["saidapet-guindy-alandur"],
+    contextEn:
+      "Male office assistant at Guindy Race Course. Tamil with Hindi, or Tamil with Telugu. Six hours a day, ₹15,000 a month.",
+    contextTa:
+      "கிண்டி ரேஸ் கோர்ஸில் ஆண் ஆபிஸ் அசிஸ்டென்ட். தமிழ் மற்றும் ஹிந்தி, அல்லது தமிழ் மற்றும் தெலுங்கு. நாள் ஒன்றுக்கு 6 மணி. மாதம் ₹15,000.",
+  },
   {
     id: "vv-ac-madipakkam-2026-10",
     englishSlug: "ac-technician-helper-50-vacancies-madipakkam-chennai",
@@ -53,15 +66,18 @@ export function istCalendarDate(now: Date = new Date()): string {
 export function isFeaturedJobCampaignActive(
   until: string,
   now: Date = new Date(),
+  from?: string,
 ): boolean {
-  return istCalendarDate(now) <= until;
+  const today = istCalendarDate(now);
+  if (from && today < from) return false;
+  return today <= until;
 }
 
 export function activeFeaturedJobCampaigns(
   now: Date = new Date(),
 ): FeaturedJobCampaign[] {
   return FEATURED_JOB_CAMPAIGNS.filter((campaign) =>
-    isFeaturedJobCampaignActive(campaign.until, now),
+    isFeaturedJobCampaignActive(campaign.until, now, campaign.from),
   );
 }
 
