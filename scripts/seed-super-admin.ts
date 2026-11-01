@@ -25,9 +25,9 @@ if (live) {
   loadEnv({ path: ".env" });
 }
 
-const url = process.env.DATABASE_URL;
+const databaseUrl = process.env.DATABASE_URL;
 const email = process.env.SUPER_ADMIN_EMAIL?.trim().toLowerCase();
-if (!url) {
+if (!databaseUrl) {
   console.error(live ? "DATABASE_URL missing (.env.production.local)." : "DATABASE_URL missing.");
   process.exit(1);
 }
@@ -66,7 +66,7 @@ async function main() {
     process.exit(1);
   }
 
-  const db = drizzle(neon(url), { schema });
+  const db = drizzle(neon(databaseUrl), { schema });
   const rows = await db
     .select({ id: users.id, role: users.role })
     .from(users)
