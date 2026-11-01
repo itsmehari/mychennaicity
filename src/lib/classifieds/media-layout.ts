@@ -2,6 +2,14 @@ export type ClassifiedMediaMode = "none" | "photos" | "video" | "mixed";
 
 export type VideoOrientation = "portrait" | "landscape" | "square";
 
+/** Responsive gallery pattern from photo count. */
+export type PhotoGalleryLayout =
+  | "single"
+  | "duo"
+  | "feature"
+  | "quad"
+  | "masonry";
+
 /** How a listing header should treat uploaded media. */
 export function resolveClassifiedMediaMode(
   photoCount: number,
@@ -11,6 +19,14 @@ export function resolveClassifiedMediaMode(
   if (hasVideo && photoCount <= 0) return "video";
   if (hasVideo && photoCount > 0) return "mixed";
   return "photos";
+}
+
+export function photoGalleryLayout(photoCount: number): PhotoGalleryLayout {
+  if (photoCount <= 1) return "single";
+  if (photoCount === 2) return "duo";
+  if (photoCount === 3) return "feature";
+  if (photoCount === 4) return "quad";
+  return "masonry";
 }
 
 export function videoOrientationFromDimensions(
@@ -52,50 +68,54 @@ export function mediaSectionClassName(mode: ClassifiedMediaMode): string {
   return "mt-5";
 }
 
-export function photoGalleryGridClassName(
-  count: number,
-  mode: ClassifiedMediaMode,
-): string {
-  if (count <= 0) return "";
-  if (count === 1) return "grid grid-cols-1";
-  if (count === 2) return "grid grid-cols-2 gap-3";
-  if (count === 3) return "grid grid-cols-2 gap-3";
-  return "grid grid-cols-2 gap-3";
+export function photoGalleryGridClassName(layout: PhotoGalleryLayout): string {
+  switch (layout) {
+    case "single":
+      return "grid grid-cols-1";
+    case "duo":
+      return "grid grid-cols-1 gap-3 sm:grid-cols-2";
+    case "feature":
+      return "grid grid-cols-1 gap-3 sm:grid-cols-2";
+    case "quad":
+      return "grid grid-cols-2 gap-3";
+    case "masonry":
+      return "columns-2 gap-3 sm:columns-2 lg:columns-3 [&>*]:mb-3";
+    default:
+      return "grid grid-cols-1 gap-3";
+  }
+}
+
+export function photoTileUsesMasonry(layout: PhotoGalleryLayout): boolean {
+  return layout === "masonry";
 }
 
 export function photoTileLayout(
-  count: number,
+  layout: PhotoGalleryLayout,
   index: number,
 ): { frameClass: string; objectFit: "cover" | "contain" } {
-  if (count <= 0) {
-    return { frameClass: "relative aspect-[4/3]", objectFit: "cover" };
-  }
-  if (count === 1) {
+  if (layout === "single") {
     return {
       frameClass:
         "relative aspect-[4/3] max-h-[28rem] bg-[var(--background)] sm:aspect-[16/10]",
       objectFit: "contain",
     };
   }
-  if (count === 2) {
-    return { frameClass: "relative aspect-[4/3]", objectFit: "cover" };
+  if (layout === "duo") {
+    return { frameClass: "relative aspect-[4/3] sm:aspect-[3/4]", objectFit: "cover" };
   }
-  if (count === 3) {
+  if (layout === "feature") {
     if (index === 0) {
       return {
-        frameClass: "relative col-span-2 aspect-[16/10]",
+        frameClass: "relative aspect-[16/10] sm:col-span-2",
         objectFit: "cover",
       };
     }
     return { frameClass: "relative aspect-[4/3]", objectFit: "cover" };
   }
-  if (count >= 5 && index === 0) {
-    return {
-      frameClass: "relative col-span-2 aspect-[16/10]",
-      objectFit: "cover",
-    };
+  if (layout === "quad") {
+    return { frameClass: "relative aspect-square sm:aspect-[4/3]", objectFit: "cover" };
   }
-  return { frameClass: "relative aspect-[4/3]", objectFit: "cover" };
+  return { frameClass: "", objectFit: "cover" };
 }
 
 export function photoGalleryAriaLabel(

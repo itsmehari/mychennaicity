@@ -18,7 +18,7 @@ export function ClassifiedMixedMedia({
 
   const sectionClass =
     orientation === "portrait" && photos.length > 0
-      ? "flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(240px,360px)_minmax(0,1fr)] lg:items-start lg:gap-5"
+      ? "flex flex-col gap-4 md:grid md:grid-cols-[minmax(220px,340px)_minmax(0,1fr)] md:items-start md:gap-5 lg:grid-cols-[minmax(240px,360px)_minmax(0,1fr)]"
       : "flex flex-col gap-4";
 
   return (
