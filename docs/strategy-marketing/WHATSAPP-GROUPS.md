@@ -23,7 +23,7 @@ Join rows live in `whatsapp_join_verifications`. They are not articles.
 | Partners (RWAs, colleges) | https://mychennaicity.in/whatsapp-community/partners |
 | **Admin lookup** | https://mychennaicity.in/admin/whatsapp-join-requests |
 | Invite | `WHATSAPP_COMMUNITY_INVITE_URL` only. Shown after a successful submit, and inside the admin Message link. |
-| Bengaluru community (different group) | https://mychennaicity.in/community/mybangalore-whatsapp-community — operator-supplied invite for MyBangalore.in only. Do not put that link in the Chennai nav, footer, float, or join form. |
+| Bengaluru WhatsApp community group | https://mychennaicity.in/community/mybangalore-whatsapp-community-group — operator-supplied invite for MyBangalore.in only. Do not put that link in the Chennai nav, footer, float, or join form. |
 
 Helper for every public CTA: `whatsappCommunityJoinHref()` in `src/lib/whatsapp-community.ts`.
 

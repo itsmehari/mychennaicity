@@ -133,6 +133,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/community/mybangalore-whatsapp-community",
+        destination: "/community/mybangalore-whatsapp-community-group",
+        permanent: true,
+      },
+      {
+        source: "/community/mybangalore-whatsapp-community/markdown",
+        destination: "/community/mybangalore-whatsapp-community-group/markdown",
+        permanent: true,
+      },
+      {
         source: "/events",
         destination: "/chennai-local-events",
         permanent: true,

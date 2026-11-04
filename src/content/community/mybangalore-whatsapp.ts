@@ -5,7 +5,10 @@
  */
 
 export const MYBANGALORE_COMMUNITY_PATH =
-  "/community/mybangalore-whatsapp-community";
+  "/community/mybangalore-whatsapp-community-group";
+
+export const MYBANGALORE_COVAI_PAGE_URL =
+  "https://mycovai.in/community/mybangalore-whatsapp-community-group/";
 
 export const MYBANGALORE_SITE_URL = "https://mybanglore.in";
 
@@ -15,13 +18,13 @@ export const MYBANGALORE_WHATSAPP_INVITE_URL =
 export const MYBANGALORE_COMMUNITY_UPDATED = "4 November 2026";
 
 export const MYBANGALORE_COMMUNITY_TITLE =
-  "Bengaluru WhatsApp community for Chennai readers";
+  "Bengaluru WhatsApp community and WhatsApp group for Chennai readers";
 
 export const MYBANGALORE_COMMUNITY_DESCRIPTION =
-  "Chennai readers moving to, working in, or visiting Bengaluru can join the MyBangalore.in WhatsApp community for city news, Metro and traffic notes, jobs, events, and local services. Independent community. Not a BBMP or BMRCL channel.";
+  "Join the MyBangalore.in WhatsApp community — the Bengaluru WhatsApp group for city news, Namma Metro and traffic, jobs, events, and local services. Written for Chennai readers. Independent. Not a BBMP or BMRCL channel.";
 
 export const MYBANGALORE_DIRECT_ANSWER =
-  "The MyBangalore.in WhatsApp community is a voluntary Bengaluru residents' group for city news, Namma Metro and traffic notes, jobs, events, and local services. Chennai readers use this page to see what the group is for and join with the operator's invite. It is an independent community, not an official BBMP, BMRCL, or Karnataka government channel. The city website at mybanglore.in is still being published.";
+  "The MyBangalore.in WhatsApp community is one Bengaluru WhatsApp group for city news, Namma Metro and traffic notes, jobs, events, and local services. Chennai readers use this page to see what the WhatsApp community group covers and to join with the operator's invite. It is an independent community, not an official BBMP, BMRCL, or Karnataka government channel. The city website at mybanglore.in is still being published.";
 
 export const MYBANGALORE_GEO_META = {
   "geo.region": "IN-KA",
@@ -53,24 +56,29 @@ export const MYBANGALORE_AREAS = [
 
 export const MYBANGALORE_FAQ = [
   {
-    question: "Is this the Chennai WhatsApp group?",
+    question: "Is the Bengaluru WhatsApp community the same as the WhatsApp group?",
     answer:
-      "No. mychennaicity.in runs a separate Chennai group. Join that one from /whatsapp-community/join. This page is only for the Bengaluru community.",
+      "Yes. There is one MyBangalore.in WhatsApp group. WhatsApp community and WhatsApp group are two names for that same chat.",
   },
   {
-    question: "Who runs the Bengaluru group?",
+    question: "Is this the Chennai WhatsApp group?",
+    answer:
+      "No. mychennaicity.in runs a separate Chennai WhatsApp group. Join that one from /whatsapp-community/join. This page is only for the Bengaluru WhatsApp community.",
+  },
+  {
+    question: "Who runs the Bengaluru WhatsApp group?",
     answer:
       "It is an independent community information initiative under the MyBangalore.in name, from the same family of city desks as mychennaicity.in and mycovai.in. It is not the Bruhat Bengaluru Mahanagara Palike, BMRCL, BMTC, or the Karnataka government.",
   },
   {
-    question: "What will I receive if I join?",
+    question: "What will I receive if I join the WhatsApp community?",
     answer:
-      "Member posts and admin shares about Bengaluru news, traffic and Metro, jobs, events, local services, rentals, education notices, and city developments. Volume depends on what members share. Treat job leads and civic alerts as leads to verify, not as official orders.",
+      "Member posts and admin shares in the WhatsApp group about Bengaluru news, traffic and Metro, jobs, events, local services, rentals, education notices, and city developments. Volume depends on what members share. Treat job leads and civic alerts as leads to verify, not as official orders.",
   },
   {
     question: "Do I have to join before reading Chennai pages?",
     answer:
-      "No. News, jobs, and events on mychennaicity.in stay open. Joining this Bengaluru group is optional.",
+      "No. News, jobs, and events on mychennaicity.in stay open. Joining this Bengaluru WhatsApp group is optional.",
   },
   {
     question: "Where is the city website?",
@@ -103,7 +111,7 @@ export function buildMybangaloreCommunityMarkdown(origin: string): string {
 
 ${MYBANGALORE_DIRECT_ANSWER}
 
-## What the community is for
+## What the WhatsApp community group is for
 
 ${topics}
 
@@ -115,7 +123,7 @@ Open ${MYBANGALORE_WHATSAPP_INVITE_URL} and request to join. Membership is volun
 
 The Chennai group is separate: ${base}/whatsapp-community/join
 
-A Coimbatore reader's version of this introduction is at https://mycovai.in/community/mybangalore-whatsapp-community/
+A Coimbatore reader's version of this introduction is at ${MYBANGALORE_COVAI_PAGE_URL}
 
 ## FAQ
 

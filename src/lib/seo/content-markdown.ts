@@ -30,9 +30,9 @@ export function markdownTwinPath(pathname: string): string | null {
   if (
     parts.length === 2 &&
     parts[0] === "community" &&
-    parts[1] === "mybangalore-whatsapp-community"
+    parts[1] === "mybangalore-whatsapp-community-group"
   ) {
-    return "/community/mybangalore-whatsapp-community/markdown";
+    return "/community/mybangalore-whatsapp-community-group/markdown";
   }
   return null;
 }

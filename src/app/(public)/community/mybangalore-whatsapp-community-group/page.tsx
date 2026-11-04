@@ -10,6 +10,7 @@ import {
 } from "@/components/site/interior-chrome";
 import {
   MYBANGALORE_AREAS,
+  MYBANGALORE_COVAI_PAGE_URL,
   MYBANGALORE_COMMUNITY_DESCRIPTION,
   MYBANGALORE_COMMUNITY_PATH,
   MYBANGALORE_COMMUNITY_TITLE,
@@ -101,7 +102,7 @@ function jsonLd() {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Bengaluru WhatsApp community",
+            name: "Bengaluru WhatsApp community group",
             item: pageUrl,
           },
         ],
@@ -111,7 +112,7 @@ function jsonLd() {
         name: "MyBangalore.in",
         url: MYBANGALORE_SITE_URL,
         description:
-          "Independent Bengaluru community information initiative. The public website is still being published.",
+          "Independent Bengaluru WhatsApp community and WhatsApp group. The public website is still being published.",
       },
       ...(faqNode ? [faqNode] : []),
     ],
@@ -128,12 +129,12 @@ export default function MyBangaloreWhatsappCommunityPage() {
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Bengaluru WhatsApp community" },
+          { label: "Bengaluru WhatsApp community group" },
         ]}
       />
 
       <p className="type-eyebrow text-[var(--accent)]">
-        Chennai readers · Bengaluru community
+        Chennai readers · Bengaluru WhatsApp community and group
       </p>
       <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
         {MYBANGALORE_COMMUNITY_TITLE}
@@ -157,7 +158,7 @@ export default function MyBangaloreWhatsappCommunityPage() {
           rel="noopener noreferrer"
           className="inline-flex items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white"
         >
-          Join the Bengaluru WhatsApp community
+          Join the Bengaluru WhatsApp group
         </a>
         <a
           href={MYBANGALORE_SITE_URL}
@@ -172,7 +173,7 @@ export default function MyBangaloreWhatsappCommunityPage() {
       <div className="mt-8 max-w-2xl">
       <GuideDisclaimer
         kind="civic"
-        extra="This page introduces a Bengaluru community for Chennai readers. It is not a BBMP, BMRCL, BMTC, or Karnataka government channel. Confirm traffic, jobs, rents, and civic notices before you act on them."
+        extra="This page introduces one Bengaluru WhatsApp community, which is also the Bengaluru WhatsApp group, for Chennai readers. It is not a BBMP, BMRCL, BMTC, or Karnataka government channel. Confirm traffic, jobs, rents, and civic notices before you act on them."
       />
       </div>
 
@@ -185,7 +186,7 @@ export default function MyBangaloreWhatsappCommunityPage() {
           week: a job shift, a family visit, a college move, or a weekend trip.
           People already in Whitefield, Electronic City, Koramangala, Jayanagar,
           Yelahanka, Hebbal, or anywhere else in the city can join the same
-          group. Readers who want Chennai updates stay on the{" "}
+          WhatsApp community group. Readers who want Chennai updates stay on the{" "}
           <Link
             href={WHATSAPP_COMMUNITY_JOIN_PATH}
             className="font-semibold text-[var(--accent)] hover:underline"
@@ -201,11 +202,11 @@ export default function MyBangaloreWhatsappCommunityPage() {
           id="what-you-get"
           className="type-display text-xl text-[var(--foreground)]"
         >
-          What the community is for
+          What the WhatsApp community group is for
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          The group is a single place for Bengaluru updates instead of hunting
-          across many pages. Members and admins share:
+          One WhatsApp group is the whole community. Members and admins share
+          Bengaluru updates in that chat instead of hunting across many pages:
         </p>
         <ul className="mt-4 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--muted)]">
           {MYBANGALORE_TOPICS.map((topic) => (
@@ -225,10 +226,11 @@ export default function MyBangaloreWhatsappCommunityPage() {
           id="how-to-join"
           className="type-display text-xl text-[var(--foreground)]"
         >
-          How to join
+          How to join the WhatsApp group
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          Open the invite and request to join in WhatsApp. You can read every
+          Open the invite and request to join the WhatsApp community group.
+          You can read every
           page on mychennaicity.in without joining. This page does not ask for
           your phone number, and nobody should add numbers that were collected
           for something else.
@@ -250,7 +252,7 @@ export default function MyBangaloreWhatsappCommunityPage() {
           The city website
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          The community&apos;s website address is{" "}
+          The WhatsApp community&apos;s website address is{" "}
           <a
             href={MYBANGALORE_SITE_URL}
             className="font-semibold text-[var(--accent)] hover:underline"
@@ -262,10 +264,11 @@ export default function MyBangaloreWhatsappCommunityPage() {
           . On {MYBANGALORE_COMMUNITY_UPDATED} that site was still being
           published, so this page and the WhatsApp group are the live
           introductions. When the site is up, it is the home for Bengaluru
-          news and the community landing. This Chennai page stays a guide for
-          Chennai readers. Coimbatore readers have a separate introduction at{" "}
+          news and the WhatsApp community landing. This Chennai page stays a
+          guide for Chennai readers. Coimbatore readers have a separate
+          introduction at{" "}
           <a
-            href="https://mycovai.in/community/mybangalore-whatsapp-community/"
+            href={MYBANGALORE_COVAI_PAGE_URL}
             className="font-semibold text-[var(--accent)] hover:underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -284,9 +287,10 @@ export default function MyBangaloreWhatsappCommunityPage() {
           Short note you can forward
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          Living in Bengaluru, or heading there from Chennai? The MyBangalore.in
-          WhatsApp community collects city news, traffic, Metro, jobs, events,
-          and local services in one group. Join here:{" "}
+          Living in Bengaluru, or heading there from Chennai? Join the
+          MyBangalore.in WhatsApp community — one Bengaluru WhatsApp group for
+          city news, traffic, Metro, jobs, events, and local services. Join
+          here:{" "}
           {MYBANGALORE_WHATSAPP_INVITE_URL}. City site: {MYBANGALORE_SITE_URL}.
           Independent community, not an official agency channel.
         </p>
@@ -313,7 +317,7 @@ export default function MyBangaloreWhatsappCommunityPage() {
                     >
                       /whatsapp-community/join
                     </Link>
-                    . This page is only for the Bengaluru community.
+                    . This page is only for the Bengaluru WhatsApp community group.
                   </>
                 ) : (
                   item.answer

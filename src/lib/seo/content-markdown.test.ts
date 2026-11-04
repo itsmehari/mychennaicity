@@ -23,8 +23,8 @@ describe("content markdown twins", () => {
     expect(markdownTwinPath("/chennai-local-news/feed.xml")).toBeNull();
     expect(markdownTwinPath("/chennai-jobs/office-assistant/markdown")).toBeNull();
     expect(
-      markdownTwinPath("/community/mybangalore-whatsapp-community"),
-    ).toBe("/community/mybangalore-whatsapp-community/markdown");
+      markdownTwinPath("/community/mybangalore-whatsapp-community-group"),
+    ).toBe("/community/mybangalore-whatsapp-community-group/markdown");
   });
 
   it("serves Markdown only when it outranks HTML", () => {
