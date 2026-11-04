@@ -121,6 +121,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [TN Plus Two official textbooks](${base}/guides/tn-plus-two/textbooks): Class 11–12 catalogue — official Textbook Corporation / SCERT links only; we do not host PDFs
 - [Tamil Nadu Council of Ministers](${base}/guides/tn-council-of-ministers): 35 ministers and portfolios (May 2026, Lok Bhavan PR 40); Tamil: ${base}/guides/tn-council-of-ministers-tamil
 - [WhatsApp community](${base}/chennai-whatsapp-group): City community landing (not a news source of record)
+- [Bengaluru WhatsApp community for Chennai readers](${base}/community/mybangalore-whatsapp-community): Independent MyBangalore.in group (invite on that page). Plain text: ${base}/community/mybangalore-whatsapp-community/markdown. Not the Chennai group. City site https://mybanglore.in was still being published on 4 November 2026.
 - [humans.txt](${base}/humans.txt): Human-readable site credits
 - [Alias llm.txt](${base}/llm.txt): Redirects to this llms.txt file
 
@@ -273,6 +274,7 @@ Confirm venue and tickets with the organiser before travelling.
 - **Metro Water supply days:** [${base}/civic-tools/metro-water-schedule](${base}/civic-tools/metro-water-schedule)
 - **Flood street-score (editorial):** [${base}/civic-tools/flood-street-score](${base}/civic-tools/flood-street-score)
 - **Dengue week checklist:** [${base}/guides/chennai-dengue-week](${base}/guides/chennai-dengue-week)
+- **Bengaluru WhatsApp community for someone in Chennai:** [${base}/community/mybangalore-whatsapp-community](${base}/community/mybangalore-whatsapp-community) — independent MyBangalore.in group. Join link is on that page. Not the Chennai group, and not a BBMP or BMRCL channel. Plain text: [${base}/community/mybangalore-whatsapp-community/markdown](${base}/community/mybangalore-whatsapp-community/markdown)
 - **Which Plus Two group after Class 10?** [${base}/guides/tn-plus-two](${base}/guides/tn-plus-two) — DGE codes 2502, 2503, 2702, 2708, 2804, 2802; confirm the school offer. Tamil: [${base}/guides/tn-plus-two-tamil](${base}/guides/tn-plus-two-tamil)
 - **Where are TN Plus Two textbook PDFs?** [${base}/guides/tn-plus-two/textbooks](${base}/guides/tn-plus-two/textbooks) — official Textbook Corporation / SCERT links only; this site does not host the books.
 

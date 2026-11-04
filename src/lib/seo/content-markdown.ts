@@ -27,6 +27,13 @@ export function markdownTwinPath(pathname: string): string | null {
     if (parts[1] === "feed.xml") return null;
     return `/${parts[0]}/${parts[1]}/markdown`;
   }
+  if (
+    parts.length === 2 &&
+    parts[0] === "community" &&
+    parts[1] === "mybangalore-whatsapp-community"
+  ) {
+    return "/community/mybangalore-whatsapp-community/markdown";
+  }
   return null;
 }
 

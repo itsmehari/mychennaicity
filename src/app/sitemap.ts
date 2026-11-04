@@ -37,6 +37,7 @@ import {
   EDUCATION_TAMIL_SITEMAP_PATHS,
 } from "@/content/education/index";
 import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
+import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 import {
   CHENNAI_TOURISM_HUB_PATH,
@@ -405,6 +406,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      url: `${base}${MYBANGALORE_COMMUNITY_PATH}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
       url: `${base}${WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL}`,
