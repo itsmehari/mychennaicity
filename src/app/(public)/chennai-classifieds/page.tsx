@@ -144,15 +144,20 @@ export default async function ChennaiClassifiedsHubPage({
         ]}
       />
 
-      <header className="mt-6 max-w-3xl">
-        <p className="type-eyebrow text-[var(--accent)]">Classifieds</p>
-        <h1 className="type-display mt-2 text-[2rem] leading-tight text-[var(--foreground)] sm:text-[2.35rem]">
-          {hubHeading}
-        </h1>
-        <p className="type-lede mt-4 text-base leading-relaxed text-[var(--muted)]">
-          {categoryMeta.description} Contact the advertiser directly; we do not
-          broker deals.
-        </p>
+      <header className="mt-6 flex max-w-5xl flex-wrap items-end justify-between gap-4">
+        <div className="max-w-3xl">
+          <p className="type-eyebrow text-[var(--accent)]">Classifieds</p>
+          <h1 className="type-display mt-2 text-[2rem] leading-tight text-[var(--foreground)] sm:text-[2.35rem]">
+            {hubHeading}
+          </h1>
+          <p className="type-lede mt-4 text-base leading-relaxed text-[var(--muted)]">
+            {categoryMeta.description} Contact the advertiser directly; we do not
+            broker deals.
+          </p>
+        </div>
+        <Link href={ADVERTISE_PROPERTY_PATH} className="mcc-supply-cta">
+          Post a property
+        </Link>
       </header>
 
       <p className="mt-4 max-w-3xl text-sm text-[var(--muted)]">
@@ -163,11 +168,8 @@ export default async function ChennaiClassifiedsHubPage({
           Property ads
         </Link>
         {" "}
-        cover sale, rent, plot, commercial, and buyer requirements.{" "}
-        <Link href={ADVERTISE_PROPERTY_PATH} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
-          Post a property
-        </Link>
-        . We place the ad after you send the details.
+        cover sale, rent, plot, commercial, and buyer requirements. We place
+        the ad after you send the details.
       </p>
 
       <ClassifiedsHubCategoryNav activeCategory={category} />

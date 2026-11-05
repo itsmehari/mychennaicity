@@ -291,7 +291,7 @@
 
 @media (min-width: 640px) {
   .mcc-jobs-hub__summary-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

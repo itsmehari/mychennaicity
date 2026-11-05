@@ -61,6 +61,12 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
               : " mychennaicity.in/chennai-local-events lists upcoming Chennai concerts, comedy, exhibitions, and meetups when organisers share dates. Browsing is free; we are not the ticket seller."}
           </p>
 
+          <div className="mt-4">
+            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+              Submit an event
+            </Link>
+          </div>
+
           <nav className="mcc-events-hub-hero__jumps" aria-label="On this page">
             <a href="#browse-events" className="mcc-events-hub-hero__jump is-primary">
               Browse listings
@@ -71,9 +77,6 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
             <a href="#events-hub-faq" className="mcc-events-hub-hero__jump">
               FAQ
             </a>
-            <Link href="/contact#events" className="mcc-events-hub-hero__jump">
-              Submit an event
-            </Link>
             <a href="/chennai-local-events/feed.xml" className="mcc-events-hub-hero__jump">
               RSS
             </a>

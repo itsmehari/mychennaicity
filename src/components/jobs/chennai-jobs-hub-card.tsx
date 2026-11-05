@@ -68,14 +68,11 @@ export function ChennaiJobsHubCardView({ card }: { card: ChennaiJobsHubCard }) {
               <span />
             )}
             <div className="mcc-jobs-hub__job-actions">
-              <Link href={card.href} className="mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--ghost">
-                Read more
-              </Link>
               <Link
                 href={card.href}
                 className="mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--primary"
               >
-                Apply / Contact
+                View job
               </Link>
             </div>
           </div>

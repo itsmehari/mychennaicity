@@ -114,21 +114,12 @@ export default async function ChennaiLocalEventsPage() {
           id="browse-events"
           className="mt-8 scroll-mt-28 rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] px-5 py-8 text-sm text-[var(--muted)]"
         >
-          No events are listed yet. Share date, venue, and ticket link via{" "}
-          <Link
-            href="/chennai-local-events/submit"
-            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-          >
-            Submit an event
-          </Link>{" "}
-          or{" "}
-          <Link
-            href="/contact#events"
-            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-          >
-            Contact → Local events
-          </Link>
-          .
+          No events are listed yet. Share a date, venue, and ticket link.
+          <span className="mt-3 block">
+            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+              Submit an event
+            </Link>
+          </span>
         </div>
       )}
 
@@ -157,23 +148,14 @@ export default async function ChennaiLocalEventsPage() {
           </li>
           <li>
             <strong className="text-[var(--foreground)]">Submit yours.</strong>{" "}
-            Organisers can send listings via{" "}
-            <Link
-              href="/chennai-local-events/submit"
-              className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              the event form
-            </Link>
-            {" "}or{" "}
-            <Link
-              href="/contact#events"
-              className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              Contact &amp; tips
-            </Link>
-            . Drafts stay off the hub until an editor schedules them.
+            Drafts stay off the hub until an editor schedules them.
           </li>
         </ul>
+        <p className="mt-4">
+          <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+            Submit an event
+          </Link>
+        </p>
         <p className="mt-4 text-sm text-[var(--muted)]">
           Area guides:{" "}
           <Link

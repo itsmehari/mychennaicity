@@ -10,6 +10,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 const AUTO_MS = 7000;
@@ -60,7 +61,7 @@ type Slide = {
   searchMode: "topic" | "link";
   hrefOnSubmit: string;
   primaryCta: { href: string; label: string };
-  secondaryCta: { href: string; label: string };
+  secondaryCta: { href: string; label: string; emphasis?: boolean };
   statLabel: string;
   statValue: string;
   statHint: string;
@@ -145,7 +146,7 @@ const SLIDES: Slide[] = [
     searchMode: "link",
     hrefOnSubmit: "/directory",
     primaryCta: { href: "/directory", label: "Search the directory" },
-    secondaryCta: { href: "/contact", label: "List your business" },
+    secondaryCta: { href: "/contact#directory", label: "List your business", emphasis: true },
     statLabel: "Area hubs",
     statValue: "10",
     statHint: "Macro zones you can open in one tap",
@@ -175,8 +176,9 @@ const SLIDES: Slide[] = [
     hrefOnSubmit: CHENNAI_JOBS_HUB_PATH,
     primaryCta: { href: CHENNAI_JOBS_HUB_PATH, label: "Go to Chennai jobs" },
     secondaryCta: {
-      href: "/contact",
+      href: ADVERTISE_JOBS_PATH,
       label: "Post a job",
+      emphasis: true,
     },
     statLabel: "Open roles",
     statValue: "Live",
@@ -487,12 +489,21 @@ export function HomeHero() {
                 {slide.primaryCta.label}
               </Link>
               <span className="hidden text-white/25 sm:inline">|</span>
-              <Link
-                href={slide.secondaryCta.href}
-                className="text-sm font-light text-white/60 underline-offset-4 hover:text-white hover:underline"
-              >
-                {slide.secondaryCta.label}
-              </Link>
+              {slide.secondaryCta.emphasis ? (
+                <Link
+                  href={slide.secondaryCta.href}
+                  className="mcc-supply-cta mcc-supply-cta--on-dark"
+                >
+                  {slide.secondaryCta.label}
+                </Link>
+              ) : (
+                <Link
+                  href={slide.secondaryCta.href}
+                  className="text-sm font-light text-white/60 underline-offset-4 hover:text-white hover:underline"
+                >
+                  {slide.secondaryCta.label}
+                </Link>
+              )}
             </div>
 
             <p className="relative mx-auto mt-3 max-w-2xl text-center text-xs font-light leading-snug text-white/55 sm:text-sm lg:mx-0 lg:text-left">

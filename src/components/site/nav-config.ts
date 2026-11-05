@@ -240,7 +240,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Candidate notices for hiring managers.",
           },
           {
-            href: "/contact#jobs",
+            href: "/advertise/jobs",
             label: "Post a job",
             description: "Free qualifying local listings.",
           },

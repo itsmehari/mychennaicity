@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { useEffect, useMemo, useState } from "react";
 import { ChennaiJobsHubCardView } from "@/components/jobs/chennai-jobs-hub-card";
 import {
@@ -204,9 +205,9 @@ export function ChennaiJobsHubListing({
   if (cards.length === 0) {
     return (
       <div className="mcc-jobs-hub__empty mt-10">
-        No job listings yet. Employers can submit via{" "}
-        <Link href="/contact#jobs" className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
-          Contact → Jobs
+        No job listings yet. Employers can{" "}
+        <Link href={ADVERTISE_JOBS_PATH} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
+          post a job
         </Link>
         .
       </div>
@@ -313,12 +314,18 @@ export function ChennaiJobsHubListing({
           <p className="mcc-jobs-hub__summary-value">{walkInCount}</p>
           <p className="mcc-jobs-hub__summary-hint">Immediate interview opportunities</p>
         </div>
-        <Link href="/contact#jobs" className="mcc-jobs-hub__summary-card mcc-jobs-hub__summary-card--link">
-          <p className="mcc-jobs-hub__summary-label">Post a job</p>
-          <p className="mcc-jobs-hub__summary-value">List here</p>
-          <p className="mcc-jobs-hub__summary-hint">Reach Chennai job seekers</p>
-        </Link>
       </div>
+
+      <aside className="mcc-supply-band" aria-label="Post a job">
+        <div>
+          <p className="mcc-supply-band__kicker">Hiring</p>
+          <p className="mcc-supply-band__title">Post a job on this board</p>
+          <p className="mcc-supply-band__hint">We place the listing. There is no login.</p>
+        </div>
+        <Link href={ADVERTISE_JOBS_PATH} className="mcc-supply-cta">
+          Post a job
+        </Link>
+      </aside>
 
       <div className="mcc-jobs-hub__layout">
         <aside className="mcc-jobs-hub__filter-sidebar" aria-label="Filter jobs">

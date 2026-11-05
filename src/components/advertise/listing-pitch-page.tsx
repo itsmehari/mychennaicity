@@ -131,26 +131,22 @@ export function ListingPitchPage({
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="mt-5">
           <WhatsAppDeskButton
             text={wa.prefill}
             source={kind === "jobs" ? "advertise_jobs" : "advertise_property"}
-            className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-fg)]"
+            className="mcc-supply-cta"
           >
             {ta ? "WhatsApp-ல் அனுப்பு" : "Send on WhatsApp"}
           </WhatsAppDeskButton>
-          <Link
-            href={contactHref}
-            className="inline-flex items-center rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--foreground)]"
-          >
-            {ta ? "தொடர்பு பக்கம்" : "Contact page"}
-          </Link>
-          <Link
-            href={board.href}
-            className="inline-flex items-center rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--foreground)]"
-          >
-            {board.label}
-          </Link>
+          <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <Link href={contactHref} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
+              {ta ? "தொடர்பு பக்கம்" : "Contact page"}
+            </Link>
+            <Link href={board.href} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
+              {board.label}
+            </Link>
+          </p>
         </div>
       </section>
 

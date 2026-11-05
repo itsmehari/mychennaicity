@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useState, type CSSProperties } from "react";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
@@ -10,6 +12,7 @@ import { SiteSearchForm } from "./site-search-form";
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+  const onJobsDesk = usePathname().startsWith("/chennai-jobs");
 
   return (
     <header
@@ -43,6 +46,14 @@ export function SiteHeader() {
         <MegaNavDesktop />
 
         <div className="flex shrink-0 items-center gap-2">
+          {onJobsDesk ? (
+            <Link
+              href={ADVERTISE_JOBS_PATH}
+              className="mcc-supply-cta mcc-supply-cta--compact mcc-supply-cta--header"
+            >
+              Post a job
+            </Link>
+          ) : null}
           <Link
             href="/contact"
             className="focus-ring inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface))] text-[var(--accent)] transition hover:border-[var(--accent)] lg:min-w-0 lg:px-3.5 lg:py-2"

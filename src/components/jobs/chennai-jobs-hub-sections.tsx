@@ -53,26 +53,17 @@ export function ChennaiJobsHubEmployerCta() {
         <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
           Post a job
         </Link>
-        <Link href="/contact" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline">
-          Contact page
-        </Link>
+      </div>
+      <p className="mcc-jobs-hub__employer-quiet">
+        <Link href="/contact">Contact page</Link>
         {waConfigured ? (
-          <WhatsAppDeskButton
-            text={jobsCopy.prefill}
-            source="jobs_hub"
-            className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline"
-          >
+          <WhatsAppDeskButton text={jobsCopy.prefill} source="jobs_hub">
             WhatsApp
           </WhatsAppDeskButton>
         ) : (
-          <Link
-            href="/contact#jobs"
-            className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--outline"
-          >
-            WhatsApp
-          </Link>
+          <Link href="/contact#jobs">WhatsApp</Link>
         )}
-      </div>
+      </p>
     </section>
   );
 }

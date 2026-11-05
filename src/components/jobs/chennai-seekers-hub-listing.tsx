@@ -298,12 +298,18 @@ export function ChennaiSeekersHubListing({
           <p className="mcc-jobs-hub__summary-value">{immediateCount}</p>
           <p className="mcc-jobs-hub__summary-hint">Available to start soon</p>
         </div>
-        <Link href="/contact#jobs" className="mcc-jobs-hub__summary-card mcc-jobs-hub__summary-card--link">
-          <p className="mcc-jobs-hub__summary-label">Post availability</p>
-          <p className="mcc-jobs-hub__summary-value">List here</p>
-          <p className="mcc-jobs-hub__summary-hint">Reach Chennai employers</p>
-        </Link>
       </div>
+
+      <aside className="mcc-supply-band" aria-label="List your profile">
+        <div>
+          <p className="mcc-supply-band__kicker">Looking for work</p>
+          <p className="mcc-supply-band__title">List your profile</p>
+          <p className="mcc-supply-band__hint">Employers on this page can reach you.</p>
+        </div>
+        <Link href="/contact#jobs" className="mcc-supply-cta">
+          List your profile
+        </Link>
+      </aside>
 
       <div className="mcc-jobs-hub__layout">
         <aside className="mcc-jobs-hub__filter-sidebar" aria-label="Filter profiles">

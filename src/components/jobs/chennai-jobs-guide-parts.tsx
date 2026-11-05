@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 export function ChennaiJobsGuideHero() {
@@ -19,8 +20,8 @@ export function ChennaiJobsGuideHero() {
             <Link href={CHENNAI_JOBS_HUB_PATH} className="mcc-jobs-hub__btn-primary">
               Browse open jobs
             </Link>
-            <Link href="/contact#jobs" className="mcc-jobs-hub__btn-secondary">
-              Post a Chennai job
+            <Link href={ADVERTISE_JOBS_PATH} className="mcc-supply-cta">
+              Post a job
             </Link>
           </div>
         </div>

@@ -46,16 +46,16 @@ export function EventsHubThisWeekDigest({ events }: Props) {
       </p>
 
       {slice.length === 0 ? (
-        <p className="mt-4 text-sm text-[var(--muted)]">
-          No upcoming events are listed right now.{" "}
-          <Link
-            href="/contact#events"
-            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-          >
-            Submit an event
-          </Link>
-          .
-        </p>
+        <>
+          <p className="mt-4 text-sm text-[var(--muted)]">
+            No upcoming events are listed right now.
+          </p>
+          <p className="mt-3">
+            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+              Submit an event
+            </Link>
+          </p>
+        </>
       ) : (
         <ol className="mcc-events-digest__list">
           {slice.map((e, i) => (

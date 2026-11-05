@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { MEGA_NAV_SECTIONS, resolveLivePreviewKind } from "./nav-config";
 import { MegaNavLiveRail } from "./mega-nav-live-rail";
 
@@ -70,6 +71,15 @@ export function MegaNavMobile({ open, onClose }: Props) {
         className="flex-1 overflow-y-auto overscroll-contain px-4 py-4"
         aria-label="Mobile primary"
       >
+        {pathname.startsWith("/chennai-jobs") ? (
+          <Link
+            href={ADVERTISE_JOBS_PATH}
+            className="mcc-supply-cta mb-4 w-full"
+            onClick={onClose}
+          >
+            Post a job
+          </Link>
+        ) : null}
         <ul className="space-y-2">
           {MEGA_NAV_SECTIONS.map((section) => {
             const isExpanded = expanded === section.id;
