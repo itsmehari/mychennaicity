@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { classifiedListings, classifiedPhoneReveals } from "@/db/schema/tables";
 import { formatIndianMobile } from "@/lib/classifieds/phone-gate";
@@ -17,17 +16,6 @@ function whenLabel(date: Date): string {
 }
 
 export default async function ClassifiedPhoneRevealsPage() {
-  const session = await auth();
-  if (!session?.user) {
-    return (
-      <p className="text-sm">
-        <Link href="/api/auth/signin" className="underline">
-          Sign in
-        </Link>{" "}
-        to see classified contact requests.
-      </p>
-    );
-  }
 
   const db = getDb();
   const rows = await db
@@ -48,13 +36,8 @@ export default async function ClassifiedPhoneRevealsPage() {
     .limit(200);
 
   return (
-    <div className="space-y-4">
-      <p className="text-sm">
-        <Link href="/admin" className="underline">
-          Admin home
-        </Link>
-      </p>
-      <h1 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+    <div className="mx-auto w-full max-w-6xl space-y-4 px-4 py-6">
+      <h1 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
         Classified contact requests
       </h1>
       <p className="text-sm text-zinc-600 dark:text-zinc-400">

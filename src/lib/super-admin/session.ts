@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export const SUPER_ADMIN_COOKIE = "mcc_super_admin";
+/** Site-wide so the engagement API can skip a signed-in desk session on public pages. */
+export const SUPER_ADMIN_COOKIE = "mcc_sa";
 const MAX_AGE_MS = 1000 * 60 * 60 * 24 * 14;
 
 type Payload = { email: string; exp: number };

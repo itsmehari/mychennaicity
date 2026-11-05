@@ -63,12 +63,14 @@ export function ClassifiedPhoneGate({
         </p>
         <a
           href={`tel:+91${revealed}`}
+          data-engagement="call"
           className="inline-flex w-full items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3.5 text-sm font-semibold text-[var(--accent-fg)]"
         >
           Call {pretty}
         </a>
         <a
           href={`https://wa.me/91${revealed}`}
+          data-engagement="whatsapp"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-5 py-3.5 text-sm font-semibold text-[var(--foreground)]"

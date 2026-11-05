@@ -41,6 +41,29 @@ export const PARTNER_AD_PLACEMENTS = [
 export type PartnerAdPlacementId = (typeof PARTNER_AD_PLACEMENTS)[number];
 export type PartnerAdPlacement = PartnerAdPlacementId | (string & {});
 
+/** Labels for the super-admin banner desk. Unknown ids fall back to the raw placement. */
+export const PARTNER_AD_PLACEMENT_LABELS: Record<PartnerAdPlacementId, string> = {
+  home_after_areas: "Home",
+  jobs_hub_mid: "Jobs hub",
+  job_detail_square: "Job page",
+  news_hub_mid: "News hub",
+  news_topic: "News topic",
+  article_sidebar: "Article sidebar",
+  article_top: "Article, top",
+  article_mid: "Article, middle",
+  article_end: "Article, end",
+  events_hub_mid: "Events hub",
+  events_detail: "Event page",
+  directory_index: "Directory",
+  classifieds_index: "Classifieds",
+  classifieds_detail: "Classified page",
+  area_hub: "Area page",
+  elections_hub: "Elections",
+  tech_careers: "Tech careers",
+  tn_plus_two: "Plus Two guides",
+  site_band: "Site-wide band",
+};
+
 export type PartnerAdCreative = {
   id: string;
   partner: string;
@@ -341,6 +364,49 @@ const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
   },
 ];
 
+const PARTNER_AD_IDS = new Set(PARTNER_AD_SOURCES.map((ad) => ad.id));
+
+export type PartnerAdRosterEntry = {
+  id: string;
+  partner: string;
+  kicker: string;
+  url: string;
+};
+
+/** Public partner list for click reports. Copy and themes stay on the creative. */
+export function partnerAdRoster(): readonly PartnerAdRosterEntry[] {
+  return PARTNER_AD_SOURCES.map((ad) => ({
+    id: ad.id,
+    partner: ad.partner,
+    kicker: ad.kicker,
+    url: ad.url,
+  }));
+}
+
+export function partnerPlacementLabel(placement: string): string {
+  if ((PARTNER_AD_PLACEMENTS as readonly string[]).includes(placement)) {
+    return PARTNER_AD_PLACEMENT_LABELS[placement as PartnerAdPlacementId];
+  }
+  return placement.replace(/_/g, " ");
+}
+
+/** `{partnerId}--{placement}` stored on `content_engagement_events`. */
+export function bannerClickSlug(partnerId: string, placement: string): string {
+  return `${partnerId}--${placement}`;
+}
+
+export function parseBannerClickSlug(
+  slug: string,
+): { partnerId: string; placement: string } | null {
+  const splitAt = slug.indexOf("--");
+  if (splitAt < 1) return null;
+  const partnerId = slug.slice(0, splitAt);
+  const placement = slug.slice(splitAt + 2);
+  if (!PARTNER_AD_IDS.has(partnerId)) return null;
+  if (!/^[a-z][a-z0-9_]{0,48}$/.test(placement)) return null;
+  return { partnerId, placement };
+}
+
 /** Hostnames (no `www.`) used for outbound click analytics. */
 export const PARTNER_AD_HOSTS = new Set(
   PARTNER_AD_SOURCES.map((ad) => hostnameWithoutWww(ad.url)),
@@ -500,6 +566,7 @@ const BLOCKED_CIVIC_PREVIEW = new Set(CIVIC_TOOL_PREVIEW_PATHS);
 
 const BLOCKED_PREFIXES = [
   "/admin",
+  "/super-admin",
   "/api/auth",
   "/api/",
   "/login",

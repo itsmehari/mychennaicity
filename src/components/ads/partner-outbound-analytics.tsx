@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { sendBannerClick } from "@/lib/analytics/send-engagement";
 import { isPartnerAdHost } from "@/lib/partner-ads";
 
 type GtagFn = (
@@ -38,10 +39,14 @@ export function PartnerOutboundClickTracker() {
       if (!marked && !isPartnerAdHost(parsed.hostname)) return;
       if (parsed.origin === window.location.origin) return;
 
+      const placement = anchor.getAttribute("data-utm-content") ?? undefined;
+      const partnerId = anchor.getAttribute("data-partner-id");
+      if (partnerId && placement) sendBannerClick(partnerId, placement);
+
       gtag()?.("event", "partner_outbound_click", {
         event_category: "partner_ad",
         link_url: parsed.href,
-        utm_content: anchor.getAttribute("data-utm-content") ?? undefined,
+        utm_content: placement,
         partner: anchor.getAttribute("data-partner-link") ?? parsed.hostname,
       });
     }

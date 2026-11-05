@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { SuperAdminDashboard } from "@/components/super-admin/dashboard-view";
+import { emptyBannerClickTotals } from "@/domains/analytics/content-engagement";
 import {
+  buildBannerDesk,
+  emptyTotals,
   loadSuperAdminSnapshot,
   parseDesk,
   type SuperAdminSnapshot,
@@ -26,15 +29,16 @@ function messageFor(error: string | undefined): string | null {
 
 function LoginForm({ message }: { message: string | null }) {
   return (
-    <main className="flex min-h-full flex-1 items-center justify-center px-4 py-16">
+    <main className="flex min-h-screen flex-1 items-center justify-center px-4 py-16">
       <form
         action={superAdminLoginAction}
         className="w-full max-w-sm space-y-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
       >
         <div>
-          <h1 className="text-lg font-semibold">Super admin</h1>
+          <h1 className="text-lg font-semibold">City desk</h1>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            Sign in to see page views and call or WhatsApp clicks.
+            One sign-in for page views, banner clicks, articles, jobs, the WhatsApp queue, and
+            classified contact requests. The admin email works here too.
           </p>
         </div>
         {message ? (
@@ -90,16 +94,20 @@ export default async function SuperAdminPage({
       query: params.q ?? "",
     });
   } catch {
+    const banners = buildBannerDesk({ bySlug: [], byPartner: [] });
     snapshot = {
       desk: parseDesk(params.desk),
       query: params.q ?? "",
       items: [],
       hidden: 0,
-      totals: { posts: 0, views7d: 0, callClicks7d: 0, whatsappClicks7d: 0 },
+      totals: emptyTotals(),
+      bannerPlacements: banners.placements,
+      bannerPartners: banners.partners,
+      bannerTotals: emptyBannerClickTotals(),
       analyticsReady: false,
       databaseError: "Could not read the database.",
     };
   }
 
-  return <SuperAdminDashboard email={session.email} snapshot={snapshot} />;
+  return <SuperAdminDashboard snapshot={snapshot} />;
 }

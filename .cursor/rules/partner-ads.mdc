@@ -13,5 +13,6 @@ When editing partner ads or dropping a unit on a page:
 3. **UTMs:** `utm_source=mychennaicity`, `utm_medium=referral`, `utm_campaign=partner_ad`, `utm_content=<placement>`.
 4. Update `hasDedicatedPartnerAdSlot()` / `shouldShowSiteWideAd()` when you add a new inline slot so the site-wide band does not double up.
 5. This is **not** IAB `src/ads/` (`AdSlot` — do not remount on public pages) and **not** `AdvertisePanel` (sell-side). `ArticleAdRegion` is AdSense-only.
+6. **Clicks:** keep `data-partner-id` and `data-utm-content` on the rotator link. Super admin reads those as banner clicks (SOP O item 6). Dot buttons are not clicks.
 
 SOP K in `docs/AGENT_LEARNINGS_AND_SOPS.md`.

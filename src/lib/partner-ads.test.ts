@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+  bannerClickSlug,
   hasDedicatedPartnerAdSlot,
   isPartnerAdHost,
   isPartnerPhotoAd,
+  parseBannerClickSlug,
   partnerAdWithLine,
   partnerAds,
+  partnerPlacementLabel,
   shouldShowSiteWideAd,
   withPartnerUtm,
 } from "@/lib/partner-ads";
@@ -69,6 +72,24 @@ describe("partnerAds", () => {
   });
 });
 
+describe("banner click slugs", () => {
+  it("keeps a known partner and a placement id", () => {
+    const slug = bannerClickSlug("resumedoctor", "site_band");
+    expect(parseBannerClickSlug(slug)).toEqual({
+      partnerId: "resumedoctor",
+      placement: "site_band",
+    });
+    expect(partnerPlacementLabel("site_band")).toBe("Site-wide band");
+    expect(partnerPlacementLabel("custom_slot")).toBe("custom slot");
+  });
+
+  it("rejects unknown partners and unsafe placement ids", () => {
+    expect(parseBannerClickSlug("not-a-partner--site_band")).toBeNull();
+    expect(parseBannerClickSlug("resumedoctor--../admin")).toBeNull();
+    expect(parseBannerClickSlug("resumedoctor")).toBeNull();
+  });
+});
+
 describe("isPartnerAdHost", () => {
   it("matches partner hosts with or without www", () => {
     expect(isPartnerAdHost("www.resumedoctor.in")).toBe(true);
@@ -88,6 +109,8 @@ describe("shouldShowSiteWideAd", () => {
     expect(shouldShowSiteWideAd("/cookies")).toBe(false);
     expect(shouldShowSiteWideAd("/admin")).toBe(false);
     expect(shouldShowSiteWideAd("/admin/articles")).toBe(false);
+    expect(shouldShowSiteWideAd("/super-admin")).toBe(false);
+    expect(shouldShowSiteWideAd("/super-admin/jobs")).toBe(false);
     expect(shouldShowSiteWideAd("/api/auth/signin")).toBe(false);
     expect(shouldShowSiteWideAd("/contact")).toBe(false);
     expect(shouldShowSiteWideAd("/chennai-local-events/submit")).toBe(false);

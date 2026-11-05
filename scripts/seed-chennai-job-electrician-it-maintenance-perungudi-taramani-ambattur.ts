@@ -44,6 +44,8 @@ const db = drizzle(neon(url), { schema });
 const EMPLOYER_SLUG = "it-company-maintenance-chennai";
 const EMPLOYER_NAME = "IT company maintenance, Chennai";
 const JOB_SLUG = "electrician-it-maintenance-perungudi-taramani-ambattur";
+/** Different role, same printed mobile. Do not treat it as a duplicate of this note. */
+const SISTER_SLUG = "tneb-electrician-apprentice-guindy";
 const PHONE_DISPLAY = "95511 39825";
 const WA_APPLY = `https://wa.me/919551139825?text=${encodeURIComponent(
   "Hi, I saw the electrician — IT company maintenance opening (Perungudi, Taramani, Ambattur) on MyChennaiCity and would like to apply.",
@@ -130,7 +132,9 @@ async function main() {
       ),
     );
 
-  const other = matches.filter((row) => row.slug !== JOB_SLUG);
+  const other = matches.filter(
+    (row) => row.slug !== JOB_SLUG && row.slug !== SISTER_SLUG,
+  );
   if (other.length > 0) {
     console.log("[seed-job] Same phone already on another listing. Skipping.");
     for (const row of other) {

@@ -14,6 +14,7 @@ export const siteModalPolicy: SiteModalPolicy = {
   scrollSettleMs: 280,
   suppressPathPrefixes: [
     "/admin",
+    "/super-admin",
     "/api",
     "/contact",
     "/privacy",

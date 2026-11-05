@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
 import {
@@ -10,16 +9,9 @@ import {
   whatsappJoinWaMeUrl,
 } from "@/lib/whatsapp-join";
 import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
+import { requireSuperAdmin } from "@/lib/super-admin/require";
 
-const QUEUE = "/admin/whatsapp-join-requests";
-
-async function requireAdmin() {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Sign in required");
-  }
-  return session;
-}
+const QUEUE = "/super-admin/whatsapp-join-requests";
 
 function parseStatus(raw: string): WhatsappJoinStatus | null {
   if (
@@ -34,13 +26,13 @@ function parseStatus(raw: string): WhatsappJoinStatus | null {
 }
 
 export async function setWhatsappJoinStatus(formData: FormData) {
-  const session = await requireAdmin();
+  const session = await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   const status = parseStatus(String(formData.get("status") ?? ""));
   if (!id || !status) return;
 
   const now = new Date();
-  const actor = session.user.email ?? session.user.name ?? session.user.id ?? "admin";
+  const actor = session.email;
   await getDb()
     .update(whatsappJoinVerifications)
     .set({
@@ -56,7 +48,7 @@ export async function setWhatsappJoinStatus(formData: FormData) {
 export async function recordWhatsappJoinNudge(
   id: string,
 ): Promise<{ ok: true; url: string } | { ok: false; message: string }> {
-  await requireAdmin();
+  await requireSuperAdmin();
   if (!id) return { ok: false, message: "Missing row." };
 
   const [row] = await getDb()

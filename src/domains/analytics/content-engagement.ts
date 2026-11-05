@@ -1,17 +1,7 @@
-import { and, desc, eq, gt, sql } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import {
-  articles,
-  cities,
-  classifiedListings,
-  contentEngagementEvents,
-  events,
-  jobPostings,
-  jobSeekerPosts,
-} from "@/db/schema/tables";
+import { contentEngagementEvents } from "@/db/schema/tables";
 import type { ContentKind, EngagementEventKind } from "@/lib/analytics/engagement-events";
-
-const CHENNAI = "chennai";
 
 function num(value: unknown): number {
   const n = Number(value ?? 0);
@@ -40,63 +30,6 @@ export function emptyRollup(): EngagementRollup {
   };
 }
 
-async function chennaiCityId(): Promise<string | null> {
-  const db = getDb();
-  const rows = await db
-    .select({ id: cities.id })
-    .from(cities)
-    .where(eq(cities.slug, CHENNAI))
-    .limit(1);
-  return rows[0]?.id ?? null;
-}
-
-export async function trackedContentExists(
-  kind: ContentKind,
-  slug: string,
-): Promise<boolean> {
-  const cityId = await chennaiCityId();
-  if (!cityId) return false;
-  const db = getDb();
-  if (kind === "news") {
-    const rows = await db
-      .select({ id: articles.id })
-      .from(articles)
-      .where(and(eq(articles.cityId, cityId), eq(articles.slug, slug)))
-      .limit(1);
-    return Boolean(rows[0]);
-  }
-  if (kind === "job") {
-    const rows = await db
-      .select({ id: jobPostings.id })
-      .from(jobPostings)
-      .where(and(eq(jobPostings.cityId, cityId), eq(jobPostings.slug, slug)))
-      .limit(1);
-    return Boolean(rows[0]);
-  }
-  if (kind === "event") {
-    const rows = await db
-      .select({ id: events.id })
-      .from(events)
-      .where(and(eq(events.cityId, cityId), eq(events.slug, slug)))
-      .limit(1);
-    return Boolean(rows[0]);
-  }
-  if (kind === "classified") {
-    const rows = await db
-      .select({ id: classifiedListings.id })
-      .from(classifiedListings)
-      .where(and(eq(classifiedListings.cityId, cityId), eq(classifiedListings.slug, slug)))
-      .limit(1);
-    return Boolean(rows[0]);
-  }
-  const rows = await db
-    .select({ id: jobSeekerPosts.id })
-    .from(jobSeekerPosts)
-    .where(and(eq(jobSeekerPosts.cityId, cityId), eq(jobSeekerPosts.slug, slug)))
-    .limit(1);
-  return Boolean(rows[0]);
-}
-
 export async function recordContentEngagement(input: {
   kind: ContentKind;
   slug: string;
@@ -106,27 +39,19 @@ export async function recordContentEngagement(input: {
   const db = getDb();
   const windowMs = input.eventKind === "pageview" ? 30 * 60 * 1000 : 8 * 1000;
   const since = new Date(Date.now() - windowMs);
-  const recent = await db
-    .select({ id: contentEngagementEvents.id })
-    .from(contentEngagementEvents)
-    .where(
-      and(
-        eq(contentEngagementEvents.contentKind, input.kind),
-        eq(contentEngagementEvents.contentSlug, input.slug),
-        eq(contentEngagementEvents.eventKind, input.eventKind),
-        eq(contentEngagementEvents.visitorId, input.visitorId),
-        gt(contentEngagementEvents.createdAt, since),
-      ),
+  await db.execute(sql`
+    INSERT INTO content_engagement_events (content_kind, content_slug, event_kind, visitor_id)
+    SELECT ${input.kind}, ${input.slug}, ${input.eventKind}, ${input.visitorId}
+    WHERE NOT EXISTS (
+      SELECT 1
+      FROM content_engagement_events
+      WHERE content_kind = ${input.kind}
+        AND content_slug = ${input.slug}
+        AND event_kind = ${input.eventKind}
+        AND visitor_id = ${input.visitorId}
+        AND created_at > ${since}
     )
-    .limit(1);
-  if (recent[0]) return { recorded: false };
-
-  await db.insert(contentEngagementEvents).values({
-    contentKind: input.kind,
-    contentSlug: input.slug,
-    eventKind: input.eventKind,
-    visitorId: input.visitorId,
-  });
+  `);
   return { recorded: true };
 }
 
@@ -167,6 +92,7 @@ export type EngagementDay = {
   views: number;
   callClicks: number;
   whatsappClicks: number;
+  bannerClicks: number;
 };
 
 export async function loadEngagementSeries(
@@ -196,11 +122,18 @@ export async function loadEngagementSeries(
   const byDay = new Map<string, EngagementDay>();
   for (const row of rows) {
     const day = String(row.day);
-    const current = byDay.get(day) ?? { day, views: 0, callClicks: 0, whatsappClicks: 0 };
+    const current = byDay.get(day) ?? {
+      day,
+      views: 0,
+      callClicks: 0,
+      whatsappClicks: 0,
+      bannerClicks: 0,
+    };
     const total = num(row.total);
     if (row.eventKind === "pageview") current.views += total;
     if (row.eventKind === "call_click") current.callClicks += total;
     if (row.eventKind === "whatsapp_click") current.whatsappClicks += total;
+    if (row.eventKind === "banner_click") current.bannerClicks += total;
     byDay.set(day, current);
   }
 
@@ -208,13 +141,16 @@ export async function loadEngagementSeries(
   const today = istDay(new Date());
   for (let i = 29; i >= 0; i--) {
     const day = shiftIstDay(today, -i);
-    days.push(byDay.get(day) ?? { day, views: 0, callClicks: 0, whatsappClicks: 0 });
+    days.push(
+      byDay.get(day) ?? { day, views: 0, callClicks: 0, whatsappClicks: 0, bannerClicks: 0 },
+    );
   }
   return days;
 }
 
 export type RecentEngagement = {
   eventKind: string;
+  contentSlug: string;
   visitorId: string;
   createdAt: Date;
 };
@@ -227,6 +163,7 @@ export async function loadRecentEngagement(
   return db
     .select({
       eventKind: contentEngagementEvents.eventKind,
+      contentSlug: contentEngagementEvents.contentSlug,
       visitorId: contentEngagementEvents.visitorId,
       createdAt: contentEngagementEvents.createdAt,
     })
@@ -235,6 +172,138 @@ export async function loadRecentEngagement(
       and(
         eq(contentEngagementEvents.contentKind, kind),
         eq(contentEngagementEvents.contentSlug, slug),
+      ),
+    )
+    .orderBy(desc(contentEngagementEvents.createdAt))
+    .limit(40);
+}
+
+export type BannerSlugStat = {
+  slug: string;
+  clicks: number;
+  clicks7d: number;
+  people: number;
+};
+
+export type BannerPartnerStat = {
+  partnerId: string;
+  clicks: number;
+  clicks7d: number;
+  people: number;
+};
+
+export type BannerClickTotals = {
+  clicks: number;
+  clicks7d: number;
+  people: number;
+};
+
+export function emptyBannerClickTotals(): BannerClickTotals {
+  return { clicks: 0, clicks7d: 0, people: 0 };
+}
+
+const bannerClickWhere = and(
+  eq(contentEngagementEvents.contentKind, "banner"),
+  eq(contentEngagementEvents.eventKind, "banner_click"),
+);
+
+export async function loadBannerClickStats(): Promise<{
+  bySlug: BannerSlugStat[];
+  byPartner: BannerPartnerStat[];
+  totals: BannerClickTotals;
+}> {
+  const db = getDb();
+  const partnerId = sql<string>`split_part(${contentEngagementEvents.contentSlug}, '--', 1)`;
+  const clicks = sql<number>`count(*)::int`;
+  const clicks7d = sql<number>`count(*) filter (where ${contentEngagementEvents.createdAt} > now() - interval '7 days')::int`;
+  const people = sql<number>`count(distinct ${contentEngagementEvents.visitorId})::int`;
+  const [slugRows, partnerRows, totalRows] = await Promise.all([
+    db
+      .select({
+        slug: contentEngagementEvents.contentSlug,
+        clicks,
+        clicks7d,
+        people,
+      })
+      .from(contentEngagementEvents)
+      .where(bannerClickWhere)
+      .groupBy(contentEngagementEvents.contentSlug),
+    db
+      .select({ partnerId, clicks, clicks7d, people })
+      .from(contentEngagementEvents)
+      .where(bannerClickWhere)
+      .groupBy(partnerId),
+    db.select({ clicks, clicks7d, people }).from(contentEngagementEvents).where(bannerClickWhere),
+  ]);
+
+  const total = totalRows[0];
+  return {
+    bySlug: slugRows.map((row) => ({
+      slug: row.slug,
+      clicks: num(row.clicks),
+      clicks7d: num(row.clicks7d),
+      people: num(row.people),
+    })),
+    byPartner: partnerRows.map((row) => ({
+      partnerId: String(row.partnerId),
+      clicks: num(row.clicks),
+      clicks7d: num(row.clicks7d),
+      people: num(row.people),
+    })),
+    totals: {
+      clicks: num(total?.clicks),
+      clicks7d: num(total?.clicks7d),
+      people: num(total?.people),
+    },
+  };
+}
+
+export async function loadBannerSeries(partnerId: string): Promise<EngagementDay[]> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      day: sql<string>`to_char(${contentEngagementEvents.createdAt} at time zone 'Asia/Kolkata', 'YYYY-MM-DD')`,
+      total: sql<number>`count(*)::int`,
+    })
+    .from(contentEngagementEvents)
+    .where(
+      and(
+        eq(contentEngagementEvents.contentKind, "banner"),
+        eq(contentEngagementEvents.eventKind, "banner_click"),
+        sql`${contentEngagementEvents.contentSlug} like ${`${partnerId}--%`}`,
+        sql`${contentEngagementEvents.createdAt} > now() - interval '30 days'`,
+      ),
+    )
+    .groupBy(sql`to_char(${contentEngagementEvents.createdAt} at time zone 'Asia/Kolkata', 'YYYY-MM-DD')`);
+
+  const byDay = new Map<string, number>();
+  for (const row of rows) byDay.set(String(row.day), num(row.total));
+
+  const days: EngagementDay[] = [];
+  const today = istDay(new Date());
+  for (let i = 29; i >= 0; i--) {
+    const day = shiftIstDay(today, -i);
+    const bannerClicks = byDay.get(day) ?? 0;
+    days.push({ day, views: 0, callClicks: 0, whatsappClicks: 0, bannerClicks });
+  }
+  return days;
+}
+
+export async function loadRecentBannerClicks(partnerId: string): Promise<RecentEngagement[]> {
+  const db = getDb();
+  return db
+    .select({
+      eventKind: contentEngagementEvents.eventKind,
+      contentSlug: contentEngagementEvents.contentSlug,
+      visitorId: contentEngagementEvents.visitorId,
+      createdAt: contentEngagementEvents.createdAt,
+    })
+    .from(contentEngagementEvents)
+    .where(
+      and(
+        eq(contentEngagementEvents.contentKind, "banner"),
+        eq(contentEngagementEvents.eventKind, "banner_click"),
+        sql`${contentEngagementEvents.contentSlug} like ${`${partnerId}--%`}`,
       ),
     )
     .orderBy(desc(contentEngagementEvents.createdAt))

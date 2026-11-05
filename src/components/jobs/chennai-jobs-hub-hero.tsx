@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
@@ -6,40 +7,6 @@ type Props = {
   totalJobs: number;
   hasLiveJobs: boolean;
 };
-
-function ChennaiJobsIllustration() {
-  return (
-    <svg
-      viewBox="0 0 320 200"
-      className="h-full w-full max-w-[320px]"
-      aria-hidden
-      role="img"
-    >
-      <defs>
-        <linearGradient id="mcj-sky" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#dff5ec" />
-          <stop offset="100%" stopColor="#f8fffc" />
-        </linearGradient>
-      </defs>
-      <rect width="320" height="200" fill="url(#mcj-sky)" rx="16" />
-      <ellipse cx="70" cy="48" rx="34" ry="14" fill="#fff" opacity="0.85" />
-      <ellipse cx="210" cy="36" rx="42" ry="16" fill="#fff" opacity="0.75" />
-      <rect x="28" y="118" width="36" height="62" rx="4" fill="#b8ddd2" />
-      <rect x="72" y="96" width="44" height="84" rx="4" fill="#8fcec0" />
-      <rect x="126" y="108" width="38" height="72" rx="4" fill="#a8d9cc" />
-      <rect x="174" y="88" width="52" height="92" rx="4" fill="#6fbfad" />
-      <rect x="236" y="104" width="40" height="76" rx="4" fill="#9ad4c6" />
-      <rect x="0" y="168" width="320" height="32" fill="#d4eee6" />
-      <circle cx="48" cy="162" r="18" fill="#7ec4b0" />
-      <circle cx="268" cy="158" r="22" fill="#8fcec0" />
-      <path
-        d="M0 178 Q80 168 160 176 T320 174 L320 200 L0 200 Z"
-        fill="#c5e8dd"
-        opacity="0.6"
-      />
-    </svg>
-  );
-}
 
 export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
   return (
@@ -86,8 +53,15 @@ export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
             </div>
           </div>
         </div>
-        <div className="mcc-jobs-hub__illustration" aria-hidden>
-          <ChennaiJobsIllustration />
+        <div className="mcc-jobs-hub__illustration mcc-jobs-hub__illustration--photo">
+          <Image
+            src="/images/jobs/chennai-jobs-hub-hero.jpg"
+            alt="Colleagues looking over a laptop together in a bright office"
+            fill
+            priority
+            sizes="(min-width: 900px) 420px, 100vw"
+            className="mcc-jobs-hub__hero-photo"
+          />
         </div>
       </div>
     </section>

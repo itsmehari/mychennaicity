@@ -3,12 +3,14 @@ import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { SuperAdminPostDetail } from "@/components/super-admin/post-detail-view";
 import {
+  loadBannerSeries,
   loadEngagementSeries,
+  loadRecentBannerClicks,
   loadRecentEngagement,
   type EngagementDay,
   type RecentEngagement,
 } from "@/domains/analytics/content-engagement";
-import { loadTrackedPost } from "@/domains/analytics/super-admin-catalog";
+import { loadBannerPartner, loadTrackedPost } from "@/domains/analytics/super-admin-catalog";
 import { contentKindFromParam, isTrackedSlug } from "@/lib/analytics/engagement-events";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { readSuperAdminSession, SUPER_ADMIN_COOKIE } from "@/lib/super-admin/session";
@@ -31,6 +33,30 @@ export default async function SuperAdminPostPage({ params }: Props) {
   const kind = contentKindFromParam(kindParam);
   const slug = decodeURIComponent(rawSlug);
   if (!kind || !isTrackedSlug(slug)) notFound();
+
+  if (kind === "banner") {
+    const loaded = await loadBannerPartner(slug);
+    if (!loaded) notFound();
+    let days: EngagementDay[] = [];
+    let recent: RecentEngagement[] = [];
+    try {
+      [days, recent] = await Promise.all([
+        loadBannerSeries(slug),
+        loadRecentBannerClicks(slug),
+      ]);
+    } catch {
+      days = [];
+      recent = [];
+    }
+    return (
+      <SuperAdminPostDetail
+        item={loaded.item}
+        days={days}
+        recent={recent}
+        placements={loaded.placements}
+      />
+    );
+  }
 
   const item = await loadTrackedPost(kind, slug);
   if (!item) notFound();

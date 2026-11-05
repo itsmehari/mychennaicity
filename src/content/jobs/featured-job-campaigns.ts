@@ -147,6 +147,7 @@ export function pageHidesFeaturedJobsCatchAll(pathname: string): boolean {
   if (HIDE_CATCH_ALL_EXACT.has(path)) return true;
   if (
     path.startsWith("/admin") ||
+    path.startsWith("/super-admin") ||
     path.startsWith("/advertise") ||
     path.startsWith("/login") ||
     path.startsWith("/register")

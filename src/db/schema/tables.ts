@@ -338,10 +338,10 @@ export const contentEngagementEvents = pgTable(
   "content_engagement_events",
   {
     id: uuid("id").defaultRandom().primaryKey(),
-    /** news | job | event | classified | job_seeker */
+    /** news | job | event | classified | job_seeker | banner */
     contentKind: text("content_kind").notNull(),
     contentSlug: text("content_slug").notNull(),
-    /** pageview | call_click | whatsapp_click */
+    /** pageview | call_click | whatsapp_click | banner_click */
     eventKind: text("event_kind").notNull(),
     visitorId: text("visitor_id").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

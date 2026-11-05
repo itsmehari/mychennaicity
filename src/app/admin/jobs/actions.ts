@@ -3,21 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { and, eq, ne } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { cities, employers, jobPostings } from "@/db/schema/tables";
 import { closeStaleOpenJobPostings } from "@/domains/jobs/admin";
 import { CHENNAI_CITY_SLUG } from "@/domains/jobs/queries";
 import { revalidateListingsSurfaces } from "@/lib/revalidate-listings-surfaces";
+import { requireSuperAdmin } from "@/lib/super-admin/require";
 
 type JobStatus = "draft" | "open" | "closed";
-
-async function requireAdmin() {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Sign in required");
-  }
-}
 
 function slugify(input: string): string {
   const slug = input
@@ -122,12 +115,12 @@ function fieldsFromForm(formData: FormData) {
 }
 
 function bustJobSurfaces(slug: string) {
-  revalidatePath("/admin/jobs");
+  revalidatePath("/super-admin/jobs");
   revalidateListingsSurfaces({ jobSlug: slug });
 }
 
 export async function setJobStatus(formData: FormData) {
-  await requireAdmin();
+  await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   const status = parseStatus(String(formData.get("status") ?? ""));
   if (!id || !status) return;
@@ -152,14 +145,14 @@ export async function setJobStatus(formData: FormData) {
 }
 
 export async function closeStaleJobsAction() {
-  await requireAdmin();
+  await requireSuperAdmin();
   await closeStaleOpenJobPostings();
-  revalidatePath("/admin/jobs");
+  revalidatePath("/super-admin/jobs");
   revalidateListingsSurfaces();
 }
 
 export async function createJob(formData: FormData) {
-  await requireAdmin();
+  await requireSuperAdmin();
   const fields = fieldsFromForm(formData);
   const status = parseStatus(String(formData.get("status") ?? "draft")) ?? "draft";
   const employerId = await resolveEmployerId(formData);
@@ -185,11 +178,11 @@ export async function createJob(formData: FormData) {
     })
     .returning({ id: jobPostings.id });
   bustJobSurfaces(slug);
-  redirect(`/admin/jobs/${ins.id}`);
+  redirect(`/super-admin/jobs/${ins.id}`);
 }
 
 export async function updateJob(formData: FormData) {
-  await requireAdmin();
+  await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   if (!id) throw new Error("Missing job id");
   const fields = fieldsFromForm(formData);
@@ -236,5 +229,5 @@ export async function updateJob(formData: FormData) {
   if (current.slug !== fields.slug) {
     revalidatePath(`/chennai-jobs/${current.slug}`);
   }
-  redirect(`/admin/jobs/${id}`);
+  redirect(`/super-admin/jobs/${id}`);
 }

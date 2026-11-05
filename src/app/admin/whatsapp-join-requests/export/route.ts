@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { asc } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
+import { readSuperAdminEmail } from "@/lib/super-admin/require";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +13,8 @@ function cell(value: string | null | undefined): string {
 }
 
 export async function GET() {
-  const session = await auth();
-  if (!session?.user) {
+  const email = await readSuperAdminEmail();
+  if (!email) {
     return NextResponse.json({ error: "Sign in required" }, { status: 401 });
   }
 

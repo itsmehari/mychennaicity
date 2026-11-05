@@ -2,19 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { articles } from "@/db/schema/tables";
-
-async function requireAdmin() {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Sign in required");
-  }
-}
+import { requireSuperAdmin } from "@/lib/super-admin/require";
 
 export async function setArticleStatus(formData: FormData) {
-  await requireAdmin();
+  await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   const status = String(formData.get("status") ?? "") as
     | "draft"
@@ -31,13 +24,13 @@ export async function setArticleStatus(formData: FormData) {
       updatedAt: new Date(),
     })
     .where(eq(articles.id, id));
-  revalidatePath("/admin/articles");
+  revalidatePath("/super-admin/articles");
   revalidatePath("/chennai-local-news");
   revalidatePath("/");
 }
 
 export async function toggleArticleFeatured(formData: FormData) {
-  await requireAdmin();
+  await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   const featured = String(formData.get("featured") ?? "") === "true";
   if (!id) return;
@@ -46,6 +39,6 @@ export async function toggleArticleFeatured(formData: FormData) {
     .update(articles)
     .set({ featured: !featured, updatedAt: new Date() })
     .where(eq(articles.id, id));
-  revalidatePath("/admin/articles");
+  revalidatePath("/super-admin/articles");
   revalidatePath("/");
 }

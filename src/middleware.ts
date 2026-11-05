@@ -6,18 +6,10 @@ import {
 } from "@/lib/canonical-site";
 import { markdownTwinPath, prefersMarkdown } from "@/lib/seo/content-markdown";
 
-/**
- * Session cookies for Auth.js v5 (names vary by dev/prod/https).
- * Full session validation happens in Server Components / Route Handlers via `auth()`.
- */
-function hasAuthSessionCookie(request: NextRequest): boolean {
-  const names = request.cookies.getAll().map((c) => c.name);
-  return names.some(
-    (n) =>
-      n === "authjs.session-token" ||
-      n.startsWith("__Secure-authjs") ||
-      n.startsWith("__Host-authjs"),
-  );
+function nextWithPath(request: NextRequest): NextResponse {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-mcc-path", request.nextUrl.pathname);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 function canonicalHostRedirect(request: NextRequest): NextResponse | null {
@@ -37,12 +29,17 @@ export function middleware(request: NextRequest) {
   if (hostRedirect) return hostRedirect;
 
   if (
-    request.nextUrl.pathname.startsWith("/admin") &&
-    !hasAuthSessionCookie(request)
+    request.nextUrl.pathname === "/admin" ||
+    request.nextUrl.pathname.startsWith("/admin/") ||
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname.startsWith("/login/")
   ) {
-    const signIn = new URL("/api/auth/signin", request.nextUrl.origin);
-    signIn.searchParams.set("callbackUrl", request.nextUrl.pathname);
-    return NextResponse.redirect(signIn);
+    const url = request.nextUrl.clone();
+    url.pathname =
+      url.pathname === "/login" || url.pathname.startsWith("/login/")
+        ? "/super-admin"
+        : url.pathname.replace(/^\/admin/, "/super-admin");
+    return NextResponse.redirect(url, 308);
   }
 
   const twin = markdownTwinPath(request.nextUrl.pathname);
@@ -50,11 +47,13 @@ export function middleware(request: NextRequest) {
     if (prefersMarkdown(request.headers.get("accept"))) {
       const url = request.nextUrl.clone();
       url.pathname = twin;
-      const rewritten = NextResponse.rewrite(url);
+      const rewritten = NextResponse.rewrite(url, {
+        request: { headers: new Headers(request.headers) },
+      });
       rewritten.headers.set("Vary", "Accept");
       return rewritten;
     }
-    const next = NextResponse.next();
+    const next = nextWithPath(request);
     const markdownUrl = new URL(twin, request.nextUrl.origin);
     next.headers.set(
       "Link",
@@ -64,7 +63,7 @@ export function middleware(request: NextRequest) {
     return next;
   }
 
-  return NextResponse.next();
+  return nextWithPath(request);
 }
 
 export const config = {

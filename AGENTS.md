@@ -42,13 +42,13 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Paid business listings:** standalone `/business-profile/[slug]` (Visu Iyer is the first ₹365 page). No partner band, no AdSense script, no invented street, fee, or expiry. One footer line to `/contact#advertise`. SOP N in AGENT_LEARNINGS.
 
-**Admin login:** `/login` email + password (`ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`). Google is not required. Never commit the password.
+**Admin login:** `/super-admin` email + password. The same form accepts `SUPER_ADMIN_EMAIL` / `SUPER_ADMIN_PASSWORD_HASH` and the existing `ADMIN_EMAIL` / `ADMIN_PASSWORD_HASH`. `/admin` and `/login` redirect there. Never commit the password.
 
-**Super-admin analytics:** `/super-admin` (`SUPER_ADMIN_EMAIL` + `SUPER_ADMIN_PASSWORD_HASH`, or a `user` row with role `super_admin`). Page views and call / WhatsApp clicks live in `content_engagement_events`. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
+**Super-admin analytics:** `/super-admin` is the only desk. Page views, call / WhatsApp clicks, and partner banner clicks live in `content_engagement_events`. Articles, job listings, the WhatsApp queue, and classified contact requests are in the same shell. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
 
-**Jobs admin + hygiene:** `/admin/jobs` (Auth.js, same gate as articles). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or admin **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
+**Jobs admin + hygiene:** `/super-admin/jobs` (same desk login). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 
-**WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL` and is shown only after the form, plus the admin Message link. Queue: `/admin/whatsapp-join-requests`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Do not put join requests in articles.
+**WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL` and is shown only after the form, plus the desk Message link. Queue: `/super-admin/whatsapp-join-requests`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Do not put join requests in articles.
 
 **Non-negotiables in short:**
 

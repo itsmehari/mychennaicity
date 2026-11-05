@@ -7,9 +7,12 @@
 
 ## Current state (repo)
 
-- **`/admin`** — Auth-gated home: session display, sign-out, links to articles and jobs (`middleware` + Auth.js).
-- **`/admin/articles`** — Phase A: publish / unpublish / feature (new stories still via seeds).
-- **`/admin/jobs`** — Jobs CRUD: list (open/closed/draft/expired), create/edit, publish/unpublish/close, close-expired button. Role is shown on `/admin` but mutations still match articles (any signed-in user).
+- **`/super-admin`** — one desk. Email + password (`SUPER_ADMIN_*` or the existing admin email and hash). `/admin` and `/login` redirect here.
+- **Overview** — page views, calls, WhatsApp clicks, banner clicks.
+- **`/super-admin/articles`** — publish / unpublish / feature (new stories still via seeds).
+- **`/super-admin/jobs`** — list (open/closed/draft/expired), create/edit, publish/unpublish/close, close-expired.
+- **`/super-admin/whatsapp-join-requests`** — join queue, message link, CSV.
+- **`/super-admin/classified-phone-reveals`** — names and mobiles from the classified phone gate.
 
 ## Target model
 

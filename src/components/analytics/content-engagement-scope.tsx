@@ -5,17 +5,7 @@ import {
   engagementEventFromClick,
   type ContentKind,
 } from "@/lib/analytics/engagement-events";
-
-function sendEngagement(kind: ContentKind, slug: string, event: string) {
-  const body = JSON.stringify({ kind, slug, event });
-  void fetch("/api/analytics/engagement", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body,
-    keepalive: true,
-    credentials: "same-origin",
-  }).catch(() => undefined);
-}
+import { sendContentEngagement, sendPageViewWhenVisible } from "@/lib/analytics/send-engagement";
 
 export function ContentEngagementScope({
   kind,
@@ -28,7 +18,7 @@ export function ContentEngagementScope({
 }) {
   useEffect(() => {
     const marker = `${kind}:${slug}`;
-    sendEngagement(kind, slug, "pageview");
+    const stopPageView = sendPageViewWhenVisible(kind, slug);
     const onClick = (event: MouseEvent) => {
       const scope = document.querySelector(
         `[data-engagement-scope="${CSS.escape(marker)}"]`,
@@ -39,10 +29,13 @@ export function ContentEngagementScope({
       const node = target.closest("a, button");
       if (!node || !scope.contains(node)) return;
       const tracked = engagementEventFromClick(node);
-      if (tracked) sendEngagement(kind, slug, tracked);
+      if (tracked) sendContentEngagement(kind, slug, tracked);
     };
     document.addEventListener("click", onClick, true);
-    return () => document.removeEventListener("click", onClick, true);
+    return () => {
+      stopPageView();
+      document.removeEventListener("click", onClick, true);
+    };
   }, [kind, slug]);
 
   return (

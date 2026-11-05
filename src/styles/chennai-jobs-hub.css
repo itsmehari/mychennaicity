@@ -160,6 +160,19 @@
   overflow: hidden;
 }
 
+.mcc-jobs-hub__illustration--photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  background: #d7ebe4;
+}
+
+.mcc-jobs-hub__hero-photo {
+  object-fit: cover;
+  object-position: center 42%;
+}
+
 .mcc-jobs-hub__search-card {
   margin-top: 1.5rem;
   background: var(--mcj-card);

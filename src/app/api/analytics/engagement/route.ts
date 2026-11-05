@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { recordContentEngagement, trackedContentExists } from "@/domains/analytics/content-engagement";
+import { recordContentEngagement } from "@/domains/analytics/content-engagement";
+import { isCrawlerUserAgent } from "@/lib/analytics/crawler-ua";
 import {
   isContentKind,
   isEngagementEventKind,
   isTrackedSlug,
 } from "@/lib/analytics/engagement-events";
+import { parseBannerClickSlug } from "@/lib/partner-ads";
 import { shouldSuppressGoogleMeasurementForRequest } from "@/lib/analytics-ip-exclusion";
 import {
   createVisitorId,
@@ -13,6 +15,7 @@ import {
   isValidVisitorId,
 } from "@/lib/events/event-viewer-cookie";
 import { rateLimitConsume } from "@/lib/rate-limit";
+import { readSuperAdminSession, SUPER_ADMIN_COOKIE } from "@/lib/super-admin/session";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +25,10 @@ function clientIp(headerList: Headers): string {
     headerList.get("x-real-ip")?.trim() ||
     "unknown"
   );
+}
+
+function ok(): NextResponse {
+  return NextResponse.json({ ok: true });
 }
 
 export async function POST(request: NextRequest) {
@@ -37,7 +44,15 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  const limit = rateLimitConsume(`engagement:${clientIp(request.headers)}`, 60, 60_000);
+  if (isCrawlerUserAgent(request.headers.get("user-agent"))) {
+    return ok();
+  }
+  if (readSuperAdminSession(request.cookies.get(SUPER_ADMIN_COOKIE)?.value)) {
+    return ok();
+  }
+  if (shouldSuppressGoogleMeasurementForRequest(request.headers)) return ok();
+
+  const limit = rateLimitConsume(`engagement:${clientIp(request.headers)}`, 40, 60_000);
   if (!limit.ok) {
     return NextResponse.json({ ok: false }, { status: 429 });
   }
@@ -59,17 +74,19 @@ export async function POST(request: NextRequest) {
   if (!isContentKind(kind) || !isEngagementEventKind(event) || !isTrackedSlug(slug)) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
+  if (kind === "banner") {
+    if (event !== "banner_click" || !parseBannerClickSlug(slug)) {
+      return NextResponse.json({ ok: false }, { status: 400 });
+    }
+  } else if (event === "banner_click") {
+    return NextResponse.json({ ok: false }, { status: 400 });
+  }
 
   let visitorId = request.cookies.get(EVENT_VIEWER_COOKIE)?.value ?? null;
   if (!isValidVisitorId(visitorId)) visitorId = createVisitorId();
 
   const response = NextResponse.json({ ok: true });
   response.cookies.set(EVENT_VIEWER_COOKIE, visitorId, eventViewerCookieOptions());
-
-  if (shouldSuppressGoogleMeasurementForRequest(request.headers)) return response;
-  if (!(await trackedContentExists(kind, slug))) {
-    return NextResponse.json({ ok: false }, { status: 404 });
-  }
 
   await recordContentEngagement({ kind, slug, eventKind: event, visitorId });
   return response;

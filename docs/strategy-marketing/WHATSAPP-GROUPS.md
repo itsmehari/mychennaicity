@@ -21,7 +21,7 @@ Join rows live in `whatsapp_join_verifications`. They are not articles.
 | Tamil rules page | https://mychennaicity.in/chennai-whatsapp-group-tamil |
 | Guide | https://mychennaicity.in/chennai-whatsapp-community-guide |
 | Partners (RWAs, colleges) | https://mychennaicity.in/whatsapp-community/partners |
-| **Admin lookup** | https://mychennaicity.in/admin/whatsapp-join-requests |
+| **Admin lookup** | https://mychennaicity.in/super-admin/whatsapp-join-requests |
 | Invite | `WHATSAPP_COMMUNITY_INVITE_URL` only. Shown after a successful submit, and inside the admin Message link. |
 | Bengaluru WhatsApp community group | https://mychennaicity.in/community/mybangalore-whatsapp-community-group — operator-supplied invite for MyBangalore.in only. Do not put that link in the Chennai nav, footer, float, or join form. |
 

@@ -5,6 +5,7 @@ import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { ClassifiedListingMedia } from "@/components/classifieds/classified-listing-media";
 import { classifiedImageUrls, classifiedVideoSrc } from "@/lib/classifieds/images";
 import { normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
+import { engagementAttrForHref } from "@/lib/analytics/engagement-events";
 import Link from "next/link";
 
 function GlanceRow({ label, value }: { label: string; value: string }) {
@@ -50,9 +51,11 @@ function ContactCta({
   className?: string;
 }) {
   const isExternal = href.startsWith("http");
+  const engagement = engagementAttrForHref(href);
   return (
     <a
       href={href}
+      {...(engagement ? { "data-engagement": engagement } : {})}
       {...(isExternal
         ? { target: "_blank", rel: "noopener noreferrer" }
         : {})}

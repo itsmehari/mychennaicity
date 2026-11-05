@@ -118,6 +118,7 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
               target="_blank"
               rel="noopener noreferrer"
               data-partner-link={ad.partner}
+              data-partner-id={ad.id}
               data-utm-content={placement}
               aria-label={
                 isPartnerPhotoAd(ad)

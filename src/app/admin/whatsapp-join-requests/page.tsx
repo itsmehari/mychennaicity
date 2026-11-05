@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
-import { auth } from "@/auth";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
 import { withWhatsappGroupShareUtms } from "@/lib/whatsapp-community";
@@ -51,18 +50,6 @@ export default async function WhatsappJoinRequestsPage({
 }: {
   searchParams: Promise<{ status?: string; q?: string }>;
 }) {
-  const session = await auth();
-  if (!session?.user) {
-    return (
-      <p className="text-sm">
-        <Link href="/api/auth/signin" className="underline">
-          Sign in
-        </Link>{" "}
-        to look up WhatsApp join requests.
-      </p>
-    );
-  }
-
   const params = await searchParams;
   const segment = parseSegment(params.status);
   const q = (params.q ?? "").trim();
@@ -115,16 +102,13 @@ export default async function WhatsappJoinRequestsPage({
     const shareExample = withWhatsappGroupShareUtms("/chennai-local-news");
 
     return (
-      <div className="space-y-4">
+      <div className="mx-auto w-full max-w-6xl space-y-4 px-4 py-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h1 className="text-lg font-semibold">WhatsApp join requests</h1>
           <div className="flex flex-wrap gap-3 text-sm">
-            <a href="/admin/whatsapp-join-requests/export" className="underline">
+            <a href="/super-admin/whatsapp-join-requests/export" className="underline">
               CSV
             </a>
-            <Link href="/admin" className="underline">
-              Admin home
-            </Link>
           </div>
         </div>
         <p className="max-w-3xl text-xs text-zinc-600 dark:text-zinc-400">
@@ -135,7 +119,7 @@ export default async function WhatsappJoinRequestsPage({
         </p>
         <nav className="flex flex-wrap gap-2 text-sm">
           {SEGMENTS.map((item) => {
-            const href = `/admin/whatsapp-join-requests?status=${item.id}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
+            const href = `/super-admin/whatsapp-join-requests?status=${item.id}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
             const active = item.id === segment;
             return (
               <Link
@@ -152,7 +136,7 @@ export default async function WhatsappJoinRequestsPage({
             );
           })}
         </nav>
-        <form className="flex flex-wrap gap-2" action="/admin/whatsapp-join-requests">
+        <form className="flex flex-wrap gap-2" action="/super-admin/whatsapp-join-requests">
           <input type="hidden" name="status" value={segment} />
           <input
             name="q"
