@@ -39,6 +39,8 @@ export async function GET() {
     "approved_by",
     "last_contacted_at",
     "notes",
+    "ip_hash",
+    "user_agent",
   ];
   const lines = [header.join(",")];
   for (const row of rows) {
@@ -59,6 +61,8 @@ export async function GET() {
         row.approvedBy,
         row.lastContactedAt?.toISOString() ?? "",
         row.notes,
+        row.ipHash,
+        row.userAgent,
       ]
         .map((value) => cell(value))
         .join(","),

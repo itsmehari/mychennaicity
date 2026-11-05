@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { whatsappCommunityJoinHref, withWhatsappGroupShareUtms } from "./whatsapp-community";
 import {
+  formatWhatsappJoinPhone,
+  formatWhatsappJoinStamp,
   isWhatsappJoinSpamNumber,
   normalizeIndianMobile,
   openJoinUnlock,
   sealJoinUnlock,
   whatsappJoinFollowupMessage,
+  whatsappJoinQueueHeadline,
   whatsappJoinSavePlan,
   whatsappJoinWaMeUrl,
 } from "./whatsapp-join";
@@ -23,6 +26,21 @@ describe("whatsapp join phone", () => {
   it("rejects short and non-mobile numbers", () => {
     expect(normalizeIndianMobile("12345")).toBeNull();
     expect(normalizeIndianMobile("5123456789")).toBeNull();
+  });
+
+  it("formats the queue phone and the IST stamp", () => {
+    expect(formatWhatsappJoinPhone("919876543210")).toBe("+91 98765 43210");
+    expect(formatWhatsappJoinStamp(new Date("2026-11-04T16:06:00.000Z"))).toBe(
+      "4 Nov, 21:36",
+    );
+  });
+
+  it("puts the intro on the queue row and falls back to the intent chip", () => {
+    expect(whatsappJoinQueueHeadline("jobs", "  Fresher looking for work  ")).toBe(
+      "Fresher looking for work",
+    );
+    expect(whatsappJoinQueueHeadline("jobs", "  ")).toBe("Jobs");
+    expect(whatsappJoinQueueHeadline("custom pitch", null)).toBe("custom pitch");
   });
 
   it("rejects a known spam-list number", () => {

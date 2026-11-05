@@ -4,7 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { recordWhatsappJoinNudge } from "./actions";
 
-export function WhatsappJoinMessageButton({ id }: { id: string }) {
+export function WhatsappJoinMessageButton({
+  id,
+  className = "text-sm font-semibold underline disabled:opacity-60",
+}: {
+  id: string;
+  className?: string;
+}) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +20,7 @@ export function WhatsappJoinMessageButton({ id }: { id: string }) {
       <button
         type="button"
         disabled={pending}
-        className="text-sm font-semibold underline disabled:opacity-60"
+        className={className}
         onClick={async () => {
           setPending(true);
           setError(null);

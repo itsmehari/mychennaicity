@@ -73,3 +73,18 @@ export async function recordWhatsappJoinNudge(
   revalidatePath(QUEUE);
   return { ok: true, url };
 }
+
+export async function saveWhatsappJoinNotes(formData: FormData) {
+  await requireSuperAdmin();
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  const notes = String(formData.get("notes") ?? "").trim().slice(0, 2000);
+  await getDb()
+    .update(whatsappJoinVerifications)
+    .set({
+      notes: notes || null,
+      updatedAt: new Date(),
+    })
+    .where(eq(whatsappJoinVerifications.id, id));
+  revalidatePath(QUEUE);
+}

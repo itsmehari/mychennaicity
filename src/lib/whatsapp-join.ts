@@ -80,6 +80,41 @@ export function whatsappJoinFirstName(displayName: string): string {
   return first.slice(0, 40);
 }
 
+export function formatWhatsappJoinPhone(e164: string): string {
+  const phone = normalizeIndianMobile(e164);
+  if (phone) return phone.display;
+  const digits = e164.replace(/\D/g, "");
+  return digits ? `+${digits}` : e164;
+}
+
+/** Compact IST stamp for the join queue, such as `4 Nov, 21:36`. */
+export function formatWhatsappJoinStamp(date: Date): string {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const pick = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+  return `${pick("day")} ${pick("month")}, ${pick("hour")}:${pick("minute")}`;
+}
+
+export function whatsappJoinIntentLabel(intent: string): string {
+  if (intent in WHATSAPP_JOIN_INTENTS) {
+    return WHATSAPP_JOIN_INTENTS[intent as WhatsappJoinIntent];
+  }
+  return intent;
+}
+
+/** Intro on the row. The intent chip label stands in when the intro was left blank. */
+export function whatsappJoinQueueHeadline(intent: string, intro: string | null): string {
+  const line = intro?.trim() ?? "";
+  return line || whatsappJoinIntentLabel(intent);
+}
+
 /**
  * Ready rows include the tracked invite. Approved rows do not.
  * Declined, spam, spam-list numbers, and invalid phones return null (no Message link).

@@ -3,12 +3,21 @@ import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
 import { withWhatsappGroupShareUtms } from "@/lib/whatsapp-community";
-import { isWhatsappJoinSpamNumber, whatsappJoinWaMeUrl } from "@/lib/whatsapp-join";
+import {
+  formatWhatsappJoinPhone,
+  formatWhatsappJoinStamp,
+  isWhatsappJoinSpamNumber,
+  whatsappJoinIntentLabel,
+  whatsappJoinQueueHeadline,
+  whatsappJoinWaMeUrl,
+  type WhatsappJoinStatus,
+} from "@/lib/whatsapp-join";
 import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
-import { setWhatsappJoinStatus } from "./actions";
-import { WhatsappJoinMessageButton } from "./message-button";
+import { WhatsappJoinQueueRow, type WhatsappJoinQueueRowData } from "./queue-row";
 
 export const dynamic = "force-dynamic";
+
+const PAGE_SIZE = 50;
 
 const SEGMENTS = [
   { id: "submitted", label: "Ready" },
@@ -25,30 +34,33 @@ function parseSegment(raw: string | undefined): Segment {
   return "submitted";
 }
 
+function parsePage(raw: string | undefined): number {
+  const page = Number(raw);
+  if (!Number.isInteger(page) || page < 1) return 1;
+  return page;
+}
+
 function likeTerm(raw: string): string {
   return `%${raw.replace(/[%_]/g, "").slice(0, 80)}%`;
 }
 
-function nudgedLabel(date: Date | null): string | null {
-  if (!date) return null;
-  const minutes = Math.round((Date.now() - date.getTime()) / 60000);
-  if (minutes < 1) return "nudged just now";
-  if (minutes < 60) return `nudged ${minutes} min ago`;
-  const hours = Math.round(minutes / 60);
-  if (hours < 24) return `nudged ${hours} hr ago`;
-  const days = Math.round(hours / 24);
-  if (days < 14) return `nudged ${days} days ago`;
-  return `nudged ${new Intl.DateTimeFormat("en-IN", {
-    timeZone: "Asia/Kolkata",
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date)}`;
+function queueHref(status: Segment, q: string, page: number): string {
+  const params = new URLSearchParams();
+  params.set("status", status);
+  if (q) params.set("q", q);
+  if (page > 1) params.set("page", String(page));
+  return `/super-admin/whatsapp-join-requests?${params.toString()}`;
+}
+
+function blank(value: string | null | undefined): string {
+  const text = value?.trim() ?? "";
+  return text || "—";
 }
 
 export default async function WhatsappJoinRequestsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; q?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; page?: string }>;
 }) {
   const params = await searchParams;
   const segment = parseSegment(params.status);
@@ -90,41 +102,121 @@ export default async function WhatsappJoinRequestsPage({
       const search = or(...parts);
       if (search) filters.push(search);
     }
+    const where = filters.length ? and(...filters) : undefined;
+
+    const [{ total: totalRaw } = { total: 0 }] = await db
+      .select({ total: sql<number>`count(*)::int` })
+      .from(whatsappJoinVerifications)
+      .where(where);
+    const total = Number(totalRaw);
+    const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    const page = Math.min(parsePage(params.page), pageCount);
+
+    const requestNo = sql<number>`(
+      select count(*)::int
+      from whatsapp_join_verifications as older
+      where older.created_at < ${whatsappJoinVerifications.createdAt}
+         or (
+           older.created_at = ${whatsappJoinVerifications.createdAt}
+           and older.id <= ${whatsappJoinVerifications.id}
+         )
+    )`.mapWith(Number);
 
     const rows = await db
-      .select()
+      .select({
+        id: whatsappJoinVerifications.id,
+        displayName: whatsappJoinVerifications.displayName,
+        phoneRaw: whatsappJoinVerifications.phoneRaw,
+        phoneE164: whatsappJoinVerifications.phoneE164,
+        phoneLast4: whatsappJoinVerifications.phoneLast4,
+        locality: whatsappJoinVerifications.locality,
+        intent: whatsappJoinVerifications.intent,
+        intro: whatsappJoinVerifications.intro,
+        status: whatsappJoinVerifications.status,
+        source: whatsappJoinVerifications.source,
+        ipHash: whatsappJoinVerifications.ipHash,
+        userAgent: whatsappJoinVerifications.userAgent,
+        notes: whatsappJoinVerifications.notes,
+        createdAt: whatsappJoinVerifications.createdAt,
+        updatedAt: whatsappJoinVerifications.updatedAt,
+        approvedAt: whatsappJoinVerifications.approvedAt,
+        approvedBy: whatsappJoinVerifications.approvedBy,
+        lastContactedAt: whatsappJoinVerifications.lastContactedAt,
+        requestNo,
+      })
       .from(whatsappJoinVerifications)
-      .where(filters.length ? and(...filters) : undefined)
-      .orderBy(desc(whatsappJoinVerifications.updatedAt))
-      .limit(200);
+      .where(where)
+      .orderBy(desc(whatsappJoinVerifications.updatedAt), desc(whatsappJoinVerifications.createdAt))
+      .limit(PAGE_SIZE)
+      .offset((page - 1) * PAGE_SIZE);
 
     const nudgeInvite = trackedWhatsappCommunityInvite("admin-nudge", "admin");
     const shareExample = withWhatsappGroupShareUtms("/chennai-local-news");
+    const rangeStart = total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+    const rangeEnd = total === 0 ? 0 : rangeStart + rows.length - 1;
+
+    const view: WhatsappJoinQueueRowData[] = rows.map((row) => ({
+      id: row.id,
+      requestNo: Number(row.requestNo),
+      stamp: formatWhatsappJoinStamp(row.createdAt),
+      displayName: row.displayName,
+      headline: whatsappJoinQueueHeadline(row.intent, row.intro),
+      phoneDisplay: formatWhatsappJoinPhone(row.phoneE164),
+      phoneLast4: row.phoneLast4,
+      locality: row.locality,
+      status: row.status as WhatsappJoinStatus,
+      onSpamList: isWhatsappJoinSpamNumber(row.phoneE164),
+      canMessage: Boolean(
+        whatsappJoinWaMeUrl({
+          displayName: row.displayName,
+          status: row.status,
+          phoneE164: row.phoneE164,
+          inviteForNudge: nudgeInvite,
+        }),
+      ),
+      intentLabel: whatsappJoinIntentLabel(row.intent),
+      intro: row.intro?.trim() ?? "",
+      phoneRaw: row.phoneRaw,
+      source: row.source?.trim() || "join-page",
+      createdStamp: formatWhatsappJoinStamp(row.createdAt),
+      updatedStamp: formatWhatsappJoinStamp(row.updatedAt),
+      approved: row.approvedAt
+        ? `${formatWhatsappJoinStamp(row.approvedAt)}${row.approvedBy ? ` by ${row.approvedBy}` : ""}`
+        : "—",
+      lastNudge: row.lastContactedAt ? formatWhatsappJoinStamp(row.lastContactedAt) : "—",
+      notes: row.notes ?? "",
+      ipHash: blank(row.ipHash) === "—" ? "" : (row.ipHash ?? ""),
+      userAgent: row.userAgent?.trim() ?? "",
+    }));
 
     return (
-      <div className="mx-auto w-full max-w-6xl space-y-4 px-4 py-6">
+      <div className="mx-auto w-full max-w-7xl space-y-4 px-4 py-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h1 className="text-lg font-semibold">WhatsApp join requests</h1>
           <div className="flex flex-wrap gap-3 text-sm">
             <a href="/super-admin/whatsapp-join-requests/export" className="underline">
-              CSV
+              Export CSV
+            </a>
+            <a href="/whatsapp-community/join" className="underline">
+              Public form
             </a>
           </div>
         </div>
         <p className="max-w-3xl text-xs text-zinc-600 dark:text-zinc-400">
           Match the last 4 digits with WhatsApp&apos;s pending requests, approve
-          there, then mark the row here. Message opens WhatsApp for Ready and
-          Approved rows. Share site links inside the group with{" "}
+          there, then mark the row here. The number is the order the request was
+          first saved. Open a row for the phone as typed, source, approval, last
+          nudge, and a note. Message opens WhatsApp for Ready and Approved rows.
+          Share site links inside the group with{" "}
           <span className="break-all">{shareExample}</span>
         </p>
         <nav className="flex flex-wrap gap-2 text-sm">
           {SEGMENTS.map((item) => {
-            const href = `/super-admin/whatsapp-join-requests?status=${item.id}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
             const active = item.id === segment;
             return (
               <Link
                 key={item.id}
-                href={href}
+                href={queueHref(item.id, q, 1)}
                 className={
                   active
                     ? "rounded-full bg-zinc-900 px-3 py-1 text-white dark:bg-zinc-100 dark:text-zinc-900"
@@ -136,7 +228,7 @@ export default async function WhatsappJoinRequestsPage({
             );
           })}
         </nav>
-        <form className="flex flex-wrap gap-2" action="/super-admin/whatsapp-join-requests">
+        <form className="flex flex-wrap items-center gap-2" action="/super-admin/whatsapp-join-requests">
           <input type="hidden" name="status" value={segment} />
           <input
             name="q"
@@ -144,71 +236,44 @@ export default async function WhatsappJoinRequestsPage({
             placeholder="Name, area, number, or last 4"
             className="min-w-64 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
           />
-          <button type="submit" className="rounded-lg bg-zinc-900 px-3 py-2 text-sm text-white dark:bg-zinc-100 dark:text-zinc-900">
-            Search
+          <button
+            type="submit"
+            className="rounded-lg bg-zinc-900 px-3 py-2 text-sm text-white dark:bg-zinc-100 dark:text-zinc-900"
+          >
+            Lookup
           </button>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+            {rangeStart}–{rangeEnd} of {total}
+          </p>
         </form>
-        <ul className="space-y-3">
-          {rows.length === 0 ? (
+        <ul className="space-y-2">
+          {view.length === 0 ? (
             <li className="text-sm text-zinc-600">No rows in this segment.</li>
           ) : (
-            rows.map((row) => {
-              const onSpamList = isWhatsappJoinSpamNumber(row.phoneE164);
-              const canMessage = Boolean(
-                whatsappJoinWaMeUrl({
-                  displayName: row.displayName,
-                  status: row.status,
-                  phoneE164: row.phoneE164,
-                  inviteForNudge: nudgeInvite,
-                }),
-              );
-              const nudged = nudgedLabel(row.lastContactedAt);
-              return (
-                <li
-                  key={row.id}
-                  className="rounded-lg border border-zinc-200 bg-white p-3 text-sm dark:border-zinc-800 dark:bg-zinc-900"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="font-medium">
-                      {row.displayName}{" "}
-                      <span className="font-normal text-zinc-500">· {row.locality}</span>
-                    </p>
-                    <p className="text-xs uppercase tracking-wide text-zinc-500">
-                      {row.status === "submitted" ? "Ready" : row.status}
-                      {onSpamList ? " · spam list" : ""}
-                    </p>
-                  </div>
-                  <p className="mt-1 font-mono text-xs">
-                    +{row.phoneE164} · last 4 {row.phoneLast4}
-                    {nudged ? <span className="ml-2 font-sans text-zinc-600">{nudged}</span> : null}
-                  </p>
-                  <p className="mt-1 text-xs text-zinc-600">
-                    {row.intent} · {row.source ?? "join-page"}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {(["approved", "declined", "spam"] as const).map((status) => (
-                      <form key={status} action={setWhatsappJoinStatus}>
-                        <input type="hidden" name="id" value={row.id} />
-                        <input type="hidden" name="status" value={status} />
-                        <button type="submit" className="rounded border border-zinc-300 px-2 py-1 text-xs dark:border-zinc-700">
-                          {status === "approved" ? "Approve" : status === "declined" ? "Decline" : "Spam"}
-                        </button>
-                      </form>
-                    ))}
-                    {canMessage ? <WhatsappJoinMessageButton id={row.id} /> : null}
-                  </div>
-                  <details className="mt-2 text-xs text-zinc-600">
-                    <summary>Row detail</summary>
-                    <p className="mt-1">Last nudge: {row.lastContactedAt ? row.lastContactedAt.toISOString() : "—"}</p>
-                    <p>Approved: {row.approvedAt ? `${row.approvedAt.toISOString()} by ${row.approvedBy ?? ""}` : "—"}</p>
-                    <p>Intro: {row.intro || "—"}</p>
-                    <p>Updated: {row.updatedAt.toISOString()}</p>
-                  </details>
-                </li>
-              );
-            })
+            view.map((row) => <WhatsappJoinQueueRow key={row.id} row={row} />)
           )}
         </ul>
+        {pageCount > 1 ? (
+          <nav className="flex flex-wrap items-center gap-3 text-sm">
+            {page > 1 ? (
+              <Link href={queueHref(segment, q, page - 1)} className="underline">
+                Previous
+              </Link>
+            ) : (
+              <span className="text-zinc-400">Previous</span>
+            )}
+            <span>
+              Page {page} of {pageCount}
+            </span>
+            {page < pageCount ? (
+              <Link href={queueHref(segment, q, page + 1)} className="underline">
+                Next
+              </Link>
+            ) : (
+              <span className="text-zinc-400">Next</span>
+            )}
+          </nav>
+        ) : null}
       </div>
     );
   } catch (err) {
