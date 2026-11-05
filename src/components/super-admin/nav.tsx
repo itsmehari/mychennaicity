@@ -72,6 +72,20 @@ const items: Item[] = [
       pathname === "/super-admin/jobs" || pathname.startsWith("/super-admin/jobs/"),
   },
   {
+    href: "/super-admin/events",
+    label: "Event listings",
+    group: "Publish",
+    active: (pathname) =>
+      pathname === "/super-admin/events" || pathname.startsWith("/super-admin/events/"),
+  },
+  {
+    href: "/super-admin/classifieds",
+    label: "Classifieds",
+    group: "Publish",
+    active: (pathname) =>
+      pathname === "/super-admin/classifieds" || pathname.startsWith("/super-admin/classifieds/"),
+  },
+  {
     href: "/super-admin/whatsapp-join-requests",
     label: "WhatsApp queue",
     group: "Publish",

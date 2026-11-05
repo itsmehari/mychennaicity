@@ -50,10 +50,10 @@ Links pasted **inside** the group later use `withWhatsappGroupShareUtms()` (`utm
 2. They submit name, +91 mobile, Chennai area, an intent chip, an optional intro, and the no-spam checkbox. Server Actions check the origin (this site’s CSRF). A honeypot and an IP rate limit sit in front of the save.
 3. One row is stored. The success screen shows **Join on WhatsApp** and a QR (hidden under 420px) when the invite env var is set.
 4. They tap Join in WhatsApp. **Leave admin approval on.**
-5. Open **WhatsApp join requests**. The row number is the order the request was first saved. The intro is on the row; if they left it blank, the row shows the intent chip. Search the full number or the last 4 digits. The queue pages 50 at a time. Open a row for the phone as typed, source, approval, last nudge, IP hash, browser, and a note you can save.
-   - Match → approve in WhatsApp, then **Approve** here (`approved_at`, `approved_by`).
+5. Open **WhatsApp join requests**. The row number is the order the request was first saved. The intro is on the row; if they left it blank, the row shows the intent chip. Search the full number or the last 4 digits. The queue pages 50 at a time. Click a row for the phone as typed, source, approval, last nudge, IP hash, browser, and a note you can save. **Copy** puts the formatted number on the clipboard. Approve, Decline, Spam, and Save note are ordinary form posts (they reload this list). They do not depend on a client Server Action.
+   - Match → approve in WhatsApp, then **Approve** here (`approved_at`, `approved_by`). The row leaves Ready and the page says “Marked approved.”
    - No match, spam list, or a crypto pitch → decline in WhatsApp and **Decline** or **Spam** here. Do not trust a family photo.
-6. If they never tapped Join, use **Message** on a Ready row. That opens `wa.me` in a new tab with the Ready line and `utm_content=admin-nudge`, and stamps `last_contacted_at`.
+6. If they never tapped Join, use **Message** on a Ready row. That posts into a new tab, which lands on `wa.me` with the Ready line and `utm_content=admin-nudge`, and stamps `last_contacted_at`. Do not open that tab with `window.open` after an await — the browser blocks it and the click looks dead.
 7. The same number submitted again updates the row and returns it to Ready. It does not insert a second row.
 
 ## Apply the table

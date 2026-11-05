@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { whatsappCommunityJoinHref, withWhatsappGroupShareUtms } from "./whatsapp-community";
 import {
+  isWhatsappJoinId,
+  parseWhatsappJoinStatus,
+  safeWhatsappQueueReturn,
+  withQueueFlag,
+} from "./whatsapp-join-desk";
+import {
   formatWhatsappJoinPhone,
   formatWhatsappJoinStamp,
   isWhatsappJoinSpamNumber,
@@ -95,6 +101,29 @@ describe("whatsapp join messages", () => {
         inviteForNudge: invite,
       }),
     ).toBeNull();
+  });
+});
+
+describe("whatsapp join desk redirects", () => {
+  it("keeps only the queue page as the post-save return", () => {
+    expect(safeWhatsappQueueReturn("/super-admin/whatsapp-join-requests?status=spam&q=porur")).toBe(
+      "/super-admin/whatsapp-join-requests?status=spam&q=porur",
+    );
+    expect(safeWhatsappQueueReturn("https://evil.example/super-admin/whatsapp-join-requests")).toBe(
+      "/super-admin/whatsapp-join-requests",
+    );
+    expect(safeWhatsappQueueReturn("//evil.example")).toBe("/super-admin/whatsapp-join-requests");
+    expect(safeWhatsappQueueReturn("/super-admin/jobs")).toBe("/super-admin/whatsapp-join-requests");
+  });
+
+  it("adds one notice and drops the previous flag", () => {
+    expect(
+      withQueueFlag("/super-admin/whatsapp-join-requests?status=submitted&error=save", "notice", "approved"),
+    ).toBe("/super-admin/whatsapp-join-requests?status=submitted&notice=approved");
+    expect(parseWhatsappJoinStatus("approved")).toBe("approved");
+    expect(parseWhatsappJoinStatus("ready")).toBeNull();
+    expect(isWhatsappJoinId("6f1e3c2a-9b7d-4e8a-8c1d-2a4b6c8d0e1f")).toBe(true);
+    expect(isWhatsappJoinId("not-an-id")).toBe(false);
   });
 });
 

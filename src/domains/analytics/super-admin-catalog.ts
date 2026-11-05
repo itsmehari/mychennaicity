@@ -12,6 +12,13 @@ import {
   jobPostings,
   jobSeekerPosts,
 } from "@/db/schema/tables";
+import {
+  EXAM_PROGRAMMES,
+  EXAM_TIMETABLE_BSC_PATH,
+  EXAM_TIMETABLE_HUB_PATH,
+  examProgrammeName,
+  examProgrammePath,
+} from "@/content/exams/madras-university-nov-2026";
 import type { ContentKind } from "@/lib/analytics/engagement-events";
 import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
@@ -447,6 +454,42 @@ export async function loadSuperAdminSnapshot(input: {
         contactRequests7d: revealsFor?.d7 ?? 0,
       };
     }),
+    ...[
+      {
+        slug: "madras-university-exam-timetable-2026",
+        title: "Madras University November 2026 exam timetable",
+        href: EXAM_TIMETABLE_HUB_PATH,
+      },
+      {
+        slug: "madras-university-bsc-nov-2026",
+        title: "Madras University B.Sc. November 2026 timetable",
+        href: EXAM_TIMETABLE_BSC_PATH,
+      },
+      ...EXAM_PROGRAMMES.map((programme) => ({
+        slug: programme.slug,
+        title: examProgrammeName(programme),
+        href: examProgrammePath(programme.slug),
+      })),
+    ].map((row) => {
+      const stats = rollupFor(rollups, "guide", row.slug);
+      return {
+        kind: "guide" as const,
+        kindLabel: "Guide",
+        slug: row.slug,
+        title: row.title,
+        status: "live",
+        when: null,
+        detail: "Exam timetable",
+        href: row.href,
+        views: stats.views,
+        views7d: stats.views7d,
+        uniqueReaders: stats.uniqueViewers,
+        callClicks: stats.callClicks,
+        whatsappClicks: stats.whatsappClicks,
+        contactRequests: null,
+        contactRequests7d: null,
+      };
+    }),
   ];
 
   const deskItems = items.filter((item) => {
@@ -624,13 +667,15 @@ export async function loadTrackedPost(
 ): Promise<CatalogItem | null> {
   if (kind === "banner") return null;
   const desk: SuperAdminDesk =
-    kind === "news"
-      ? "news"
-      : kind === "event"
-        ? "events"
-        : kind === "classified"
-          ? "classifieds"
-          : "jobs";
+    kind === "guide"
+      ? "overview"
+      : kind === "news"
+        ? "news"
+        : kind === "event"
+          ? "events"
+          : kind === "classified"
+            ? "classifieds"
+            : "jobs";
   const snapshot = await loadSuperAdminSnapshot({ desk, query: slug });
   return snapshot.items.find((item) => item.kind === kind && item.slug === slug) ?? null;
 }

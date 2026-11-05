@@ -1,0 +1,1 @@
+Do Prompt 2 only. Point the homepage and /areas/{slug} at MySQL. The twelve area hubs come from seed.sql. If the database is down, the homepage still renders the Prompt 1 empty states without a stack trace.

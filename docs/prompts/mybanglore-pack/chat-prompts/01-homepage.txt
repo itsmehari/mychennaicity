@@ -1,0 +1,7 @@
+Read docs/HOMEPAGE_DESIGN_CONTRACT.md again. Do Prompt 1 only.
+
+Build the sticky header (MB monogram, mega nav, contact, WhatsApp join link, search), the fat footer, and the full homepage in the contract’s section order. Match the tokens, the forest-and-mustard hero, the explore band, the twelve area pills, and the Leaflet map.
+
+Empty jobs, events, and classifieds stay hidden. Directory keeps its dashed empty panel. News bulletin shows the empty line. Stats may be zero. Hero slides use the Bengaluru copy in the contract. Auto-rotate 7s, pause on hover, respect reduced motion.
+
+Check a 390px layout and a desktop layout. No Bootstrap, no Tailwind, no invented numbers.

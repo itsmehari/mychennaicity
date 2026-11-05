@@ -26,7 +26,17 @@ const publishTools = [
   {
     href: "/super-admin/jobs",
     title: "Job listings",
-    body: "Create, edit, publish, or close a role.",
+    body: "Search, edit, publish, or close a role.",
+  },
+  {
+    href: "/super-admin/events",
+    title: "Event listings",
+    body: "Schedule a draft, or cancel one that is live.",
+  },
+  {
+    href: "/super-admin/classifieds",
+    title: "Classifieds",
+    body: "Publish or close an ad.",
   },
   {
     href: "/super-admin/whatsapp-join-requests",
@@ -36,7 +46,7 @@ const publishTools = [
   {
     href: "/super-admin/classified-phone-reveals",
     title: "Contact requests",
-    body: "Names and mobiles from hidden classified numbers.",
+    body: "Search enquiries and mark them followed up.",
   },
 ] as const;
 
@@ -161,7 +171,7 @@ export function SuperAdminDashboard({ snapshot }: { snapshot: SuperAdminSnapshot
       {snapshot.desk === "overview" ? (
         <section className="mt-6" aria-label="Publishing tools">
           <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Publish</h2>
-          <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {publishTools.map((tool) => (
               <Link
                 key={tool.href}

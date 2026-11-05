@@ -224,7 +224,10 @@ function locationMatches(areaId: string, location: string, title: string, body: 
 function experienceMatches(id: string, title: string, body: string): boolean {
   if (!id) return true;
   const hay = `${title} ${body}`.toLowerCase();
-  if (id === "freshers") return /fresher|freshers|entry[\s-]?level|trainee|graduate/i.test(hay);
+  if (id === "freshers")
+    return /fresher|freshers|entry[\s-]?level|\btrainee\b|fresh\s+graduates?/i.test(
+      hay,
+    );
   if (id === "0-1") return /0[\s–-]1|0 to 1|upto 1|up to 1|fresher/i.test(hay);
   if (id === "1-3") return /1[\s–-]3|1 to 3|2[\s–-]4/i.test(hay);
   if (id === "3+") return /3\+|3[\s–-]5|5\+|senior|lead\b/i.test(hay);
@@ -270,7 +273,8 @@ export function buildChennaiJobsHubCard(row: JobPostingWithEmployer): ChennaiJob
   const hasTamil = /tamil/i.test(hay);
   const hasEnglish = /english/i.test(hay);
   const isWalkIn = /walk[\s-]?in/i.test(hay);
-  const isFresherFriendly = /fresher|freshers|entry[\s-]?level|trainee|graduate/i.test(hay);
+  const isFresherFriendly =
+    /fresher|freshers|entry[\s-]?level|\btrainee\b|fresh\s+graduates?/i.test(hay);
 
   let compensation: string | null = null;
   if (job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null) {

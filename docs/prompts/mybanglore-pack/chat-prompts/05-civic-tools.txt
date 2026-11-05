@@ -1,0 +1,1 @@
+Do Prompt 5 only. Five honest civic tools: afford-this-area, commute, water, khata-and-tax, and Bengaluru today. No scraped outage tables, no live traffic, no tanker prices, no khata lookup, and no fake area rents. Afford-this-area uses only numbers the resident types. BESCOM is a link on the today page, not its own tool.

@@ -54,6 +54,10 @@ mcp/production-data/node_modules/
 # TN assembly GeoJSON optional local override; default build fetches remote
 /data/tamil-nadu/
 
+# Local PDF/HTML dumps. Tailwind scans unignored HTML; a saved Next.js
+# response can split class names and break the dev CSS compile.
+.tmp-exam/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

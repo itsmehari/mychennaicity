@@ -1,0 +1,1 @@
+Do Prompt 3 only. Ship news, jobs, events, and directory list and detail pages, site search, and the news RSS excerpt feed. Article pages include the disclaimer and the AI fine print from the phase doc. Homepage spotlights follow the hide-when-empty rules. Add a clearly marked fixture SQL file, separate from seed.sql.

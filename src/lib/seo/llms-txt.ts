@@ -81,6 +81,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Post a job](${base}/advertise/jobs): Employer pitch — we place the listing; Tamil: ${base}/advertise/jobs-tamil
 - [Post a property](${base}/advertise/property): Sale, rent, plot, commercial — we place the ad; Tamil: ${base}/advertise/property-tamil
 - [Classifieds](${base}/chennai-classifieds): Reader listings, including property
+- [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
 - [Chennai local events](${base}/chennai-local-events): Upcoming concerts, comedy, exhibitions, temple and neighbourhood events
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
@@ -277,6 +278,7 @@ Confirm venue and tickets with the organiser before travelling.
 - **Bengaluru WhatsApp community and WhatsApp group for someone in Chennai:** [${base}/community/mybangalore-whatsapp-community-group](${base}/community/mybangalore-whatsapp-community-group) — one independent MyBangalore.in WhatsApp community group. Join link is on that page. Not the Chennai WhatsApp group, and not a BBMP or BMRCL channel. Plain text: [${base}/community/mybangalore-whatsapp-community-group/markdown](${base}/community/mybangalore-whatsapp-community-group/markdown)
 - **Which Plus Two group after Class 10?** [${base}/guides/tn-plus-two](${base}/guides/tn-plus-two) — DGE codes 2502, 2503, 2702, 2708, 2804, 2802; confirm the school offer. Tamil: [${base}/guides/tn-plus-two-tamil](${base}/guides/tn-plus-two-tamil)
 - **Where are TN Plus Two textbook PDFs?** [${base}/guides/tn-plus-two/textbooks](${base}/guides/tn-plus-two/textbooks) — official Textbook Corporation / SCERT links only; this site does not host the books.
+- **When is the University of Madras B.Sc. or B.C.A. November 2026 exam?** [${base}/madras-university-exam-timetable-2026](${base}/madras-university-exam-timetable-2026) — search a paper code or open the course page. Forenoon 10:00 AM–1:00 PM, afternoon 2:00 PM–5:00 PM. Example: 343C5A Evolutionary Biology is 12 November 2026, forenoon. The university PDF wins if a row differs. Plain text: [${base}/madras-university-exam-timetable-2026/markdown](${base}/madras-university-exam-timetable-2026/markdown)
 
 Figures on cost tools are illustrative planning numbers, not official invoices or listings.
 

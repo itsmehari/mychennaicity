@@ -19,7 +19,15 @@ describe("llms.txt builders", () => {
     expect(md).toContain("https://mychennaicity.in/chennai-local-events");
     expect(md).not.toContain("# Live Chennai jobs and events");
     expect(md).toContain("https://mychennaicity.in/guides/tn-plus-two/textbooks");
+    expect(md).toContain("https://mychennaicity.in/madras-university-exam-timetable-2026");
+    expect(md).toContain("https://mychennaicity.in/community/mybangalore-whatsapp-community-group");
+    expect(md).toContain("/advertise/jobs");
     expect(md).toContain("/llms-full.txt");
+    const primary = md.slice(0, md.indexOf("## Optional"));
+    expect(primary).toContain("madras-university-exam-timetable-2026");
+    expect(md.slice(md.indexOf("## Optional"))).not.toContain(
+      "[University of Madras November 2026 exam timetable]",
+    );
   });
 
   it("includes recent digests in llms-full", () => {
@@ -110,6 +118,7 @@ describe("llms.txt builders", () => {
     expect(md).toContain("/guides/chennai-auto-fare");
     expect(md).toContain("/civic-tools/power-feeder-desk");
     expect(md).toContain("/guides/tn-plus-two");
+    expect(md).toContain("https://mychennaicity.in/madras-university-exam-timetable-2026");
     expect(md).toContain("/guides/tn-plus-two/textbooks");
     expect(md).toContain("Who is looking for work in Chennai?");
   });

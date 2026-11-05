@@ -1,0 +1,7 @@
+Read AGENTS.md, .cursor/rules/city-desk.mdc, docs/HOMEPAGE_DESIGN_CONTRACT.md, docs/BUILD_PHASES.md, docs/FILE_MAP.md, docs/MODULES.md, docs/SESSION_RECORD.md, database/schema.sql, and database/seed.sql.
+
+Do Prompt 0 only. Create every file in docs/FILE_MAP.md. Use database/schema.sql and database/seed.sql as given. Do not invent tables, rename columns, or add Node.
+
+Phase-0 pages share one layout (header stub + footer stub + paper background from tokens.css). Routes that belong to a later phase render that layout and one sentence: which phase fills the page. The homepage renders one placeholder block per section in the design-contract order, with the section name visible, and does not yet need the finished hero.
+
+Import the schema into a new database named mybanglore, then import seed.sql. When you finish, list the files you created, the docroot, the local URL, and the exact import commands.

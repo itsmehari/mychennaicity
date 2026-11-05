@@ -87,6 +87,7 @@ All of these are generated on the request. Nothing is written into the repo as a
 | `https://mychennaicity.in/chennai-local-news/[slug]/markdown` | `text/markdown` | That published article |
 | `https://mychennaicity.in/community/mybangalore-whatsapp-community-group` | HTML | Chennai-to-Bengaluru page for the MyBangalore.in WhatsApp community and WhatsApp group |
 | `https://mychennaicity.in/community/mybangalore-whatsapp-community-group/markdown` | `text/markdown` | Plain-text twin of that page |
+| `https://mychennaicity.in/madras-university-exam-timetable-2026/markdown` | `text/markdown` | University of Madras B.Sc. / B.C.A. November 2026 timetable. Course and date pages have the same `/markdown` twin |
 
 Shared response headers on the text files and the twins:
 
@@ -100,7 +101,7 @@ The HTML layout advertises `/llms.txt` and `/llms-full.txt` through `alternates.
 
 `/llms.txt` itself has two parts:
 
-1. A stable map: news, jobs, looking for work, events, areas, gold rate, RSS, the three sitemaps, editorial standards, and the main guides.
+1. A stable map: news, jobs, looking for work, classifieds, the University of Madras November 2026 exam timetable, events, areas, gold rate, RSS, the three sitemaps, editorial standards, and the main guides.
 2. A live catalog, under the heading “Live Chennai jobs and events”, inserted only when the route successfully asks the database.
 
 The map does not list every guide. Open jobs, notices, and upcoming events are the volume. Everything else stays in the sitemap.

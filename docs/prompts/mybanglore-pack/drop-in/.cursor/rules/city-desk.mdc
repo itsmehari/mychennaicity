@@ -1,0 +1,18 @@
+---
+description: Bengaluru city desk — homepage feel, facts, PHP stack
+alwaysApply: true
+---
+
+# City desk
+
+- Host: https://mybanglore.in. City in sentences: Bengaluru. Brand: mybanglore.in. The public site is English only.
+- Stack: PHP 8.2, MySQL, hand-written CSS, Alpine.js. No Node, React, Tailwind, or Bootstrap look.
+- Read `docs/HOMEPAGE_DESIGN_CONTRACT.md` before touching the homepage, header, or footer.
+- Homepage sections stay in that contract’s order.
+- Do not invent phones, salaries, fares, ward numbers, or story counts. Hide empty homepage blocks.
+- JSON-LD only for real published rows.
+- News: disclaimer near the top, AI fine print at the end.
+- WhatsApp invite only after `/whatsapp-community/join` stores name, phone, and area.
+- Escape output. Prepared statements. CSRF on POST. Secrets stay in gitignored config.
+- Photos: operator files or a named free licence (Wikimedia / Unsplash) with credit. No hotlinked Google results.
+- Official bodies (BMRCL, BMTC, BWSSB, BESCOM, city corporations) are sources to link, not names to impersonate.

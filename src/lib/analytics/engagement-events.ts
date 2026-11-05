@@ -5,6 +5,7 @@ export const CONTENT_KINDS = [
   "classified",
   "job_seeker",
   "banner",
+  "guide",
 ] as const;
 
 export type ContentKind = (typeof CONTENT_KINDS)[number];

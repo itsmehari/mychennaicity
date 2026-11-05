@@ -1,3 +1,4 @@
+import { DeskActionForm } from "@/components/super-admin/desk-action-form";
 import type { EmployerRow, JobPostingRow } from "@/domains/jobs";
 
 const EMPLOYMENT_TYPES = [
@@ -28,7 +29,7 @@ export function JobAdminForm({
 }) {
   const status = job?.status ?? defaultStatus ?? "draft";
   return (
-    <form action={action} className="max-w-3xl space-y-4 text-sm">
+    <DeskActionForm action={action} className="max-w-3xl space-y-4 text-sm">
       {job ? <input type="hidden" name="id" value={job.id} /> : null}
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -228,6 +229,6 @@ export function JobAdminForm({
       >
         {job ? "Save job" : "Create job"}
       </button>
-    </form>
+    </DeskActionForm>
   );
 }

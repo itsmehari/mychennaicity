@@ -42,6 +42,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
+  // Server Actions and the WhatsApp queue posts must keep their body.
+  // Rewriting the request headers on those calls drops the form fields, so the
+  // button returns without saving.
+  if (
+    request.headers.has("next-action") ||
+    (request.method === "POST" &&
+      request.nextUrl.pathname.startsWith("/super-admin/whatsapp-join-requests/"))
+  ) {
+    return NextResponse.next();
+  }
+
   const twin = markdownTwinPath(request.nextUrl.pathname);
   if (twin && (request.method === "GET" || request.method === "HEAD")) {
     if (prefersMarkdown(request.headers.get("accept"))) {

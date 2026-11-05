@@ -3,6 +3,7 @@ export {
   countStaleOpenJobPostings,
   getAdminJobById,
   listAdminJobsForChennai,
+  loadJobDesk,
   listEmployersForAdmin,
   type AdminJobListRow,
   type JobPostingStatus,

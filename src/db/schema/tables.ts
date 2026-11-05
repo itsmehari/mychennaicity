@@ -373,6 +373,8 @@ export const classifiedPhoneReveals = pgTable(
       .references(() => classifiedListings.id, { onDelete: "cascade" }),
     enquirerPhone: text("enquirer_phone").notNull(),
     enquirerName: text("enquirer_name"),
+    /** Set when the desk marks the enquiry as followed up. */
+    followedUpAt: timestamp("followed_up_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({

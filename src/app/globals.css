@@ -564,3 +564,67 @@ body {
     border-color: #18181b;
   }
 }
+
+.exam-sheet {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.exam-sheet li {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.exam-sheet small {
+  color: var(--muted);
+}
+
+.exam-find {
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.exam-find h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.exam-find p,
+.exam-find label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.exam-find input {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.exam-find button,
+.exam-find a {
+  display: inline-flex;
+  margin-top: 0.75rem;
+  margin-right: 0.75rem;
+  font-weight: 650;
+  color: var(--accent);
+}
+
+.exam-note {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}

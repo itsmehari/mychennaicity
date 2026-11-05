@@ -34,6 +34,10 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **TN Plus Two education desk (Waves A–E in repo):** hub **`/guides/tn-plus-two`**, textbooks, science/commerce/after-12th, M1/M2, Tamil twins. **Production HEAD 404 as of 2026-09-12** — do not claim live until deploy. Plan: **`.cursor/plans/tn-plus-two-education-desk.plan.md`**. Rule: **`.cursor/rules/tn-plus-two-education.mdc`**. Do not rehost Tamil Nadu textbooks; do not clone the print booklet as one article.
 
+**Sibling city, Bengaluru:** the whole briefing is **`docs/prompts/mybanglore-pack/`**. Move that folder. Copy `drop-in/` onto the new project root. Host lock is **https://mybanglore.in**. Append later Bengaluru decisions to `SESSION_RECORD.md` in the pack. Do not implement the PHP site inside this Next.js repo.
+
+**University of Madras exam lookup:** `/madras-university-exam-timetable-2026` (B.Sc. overview, course pages, date pages, `/markdown` twins). Data is the official November 2026 B.Sc. / B.C.A. PDF. Do not guess a missing paper code. The university file wins. Jobs, classifieds, and the WhatsApp join form come after the lookup.
+
 **TN Council of Ministers desk (in repo):** roster hub **`/guides/tn-council-of-ministers`** — 35 ministers (May 2026, Lok Bhavan PR 40), minister pages, department lookup, Chennai shelf, IAS links, Tamil twin **`/guides/tn-council-of-ministers-tamil`**. Confirm production HEAD 200 after deploy. Public sitemap lists hubs + IAS shelf; minister pages are `noindex`. Plan: **`.cursor/plans/tn-council-of-ministers.plan.md`**. Rule: **`.cursor/rules/tn-government-desk.mdc`**. News: `db:seed:tn-cabinet-expansion-may-2026(:live)`.
 
 **Activity capture + news ops:** **`.cursor/rules/activity-capture-and-news-ops.mdc`** (always on) — write new habits into existing docs; news Disclaimer + AI fine print; see SOP I / SOP J in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
@@ -44,7 +48,7 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Admin login:** `/super-admin` email + password. The same form accepts `SUPER_ADMIN_EMAIL` / `SUPER_ADMIN_PASSWORD_HASH` and the existing `ADMIN_EMAIL` / `ADMIN_PASSWORD_HASH`. `/admin` and `/login` redirect there. Never commit the password.
 
-**Super-admin analytics:** `/super-admin` is the only desk. Page views, call / WhatsApp clicks, and partner banner clicks live in `content_engagement_events`. Articles, job listings, the WhatsApp queue, and classified contact requests are in the same shell. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
+**Super-admin analytics:** `/super-admin` is the only desk. Page views, call / WhatsApp clicks, and partner banner clicks live in `content_engagement_events`. The same shell publishes articles, jobs, event listings, classifieds, the WhatsApp queue, and classified contact requests. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
 
 **Jobs admin + hygiene:** `/super-admin/jobs` (same desk login). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 

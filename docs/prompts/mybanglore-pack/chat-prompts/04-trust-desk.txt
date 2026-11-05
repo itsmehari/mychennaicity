@@ -1,0 +1,1 @@
+Do Prompt 4 only. Legal and about pages, contact, newsletter and WhatsApp join (invite only after the form, invite from config), /desk article publish, sitemap, robots, llms.txt, and JSON-LD only for real rows.

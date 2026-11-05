@@ -40,6 +40,8 @@ Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for Ch
 
 Planned: TN Plus Two education desk pillars (`/guides/tn-plus-two`, `/guides/tn-plus-two/textbooks`) get the same AEO strip + GEO meta + FAQ/Speakable pattern when Wave D ships. Do not list all 31 cluster URLs in `llms.txt` — only P1 and P4. Inventory: [`.cursor/plans/tn-plus-two-education-desk.plan.md`](../.cursor/plans/tn-plus-two-education-desk.plan.md).
 
+University of Madras November 2026 timetable (`/madras-university-exam-timetable-2026`) is a **primary hub** on `llms.txt` and one answer on `/aeo/chennai.md`. Course and date URLs stay in the sitemap. Do not add a page per paper code.
+
 ## On-page AEO modules (code)
 
 | Module | Where |

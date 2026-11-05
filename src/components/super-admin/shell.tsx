@@ -1,5 +1,6 @@
 import { Suspense, type ReactNode } from "react";
 import { superAdminSignOutAction } from "@/app/super-admin/actions";
+import { DeskActionForm } from "./desk-action-form";
 import { SuperAdminNav } from "./nav";
 
 export function SuperAdminShell({
@@ -26,14 +27,14 @@ export function SuperAdminShell({
           <p className="hidden text-sm text-zinc-500 md:block">Signed in</p>
           <div className="flex items-center gap-3">
             <p className="max-w-[14rem] truncate text-sm text-zinc-600 dark:text-zinc-300">{email}</p>
-            <form action={superAdminSignOutAction}>
+            <DeskActionForm action={superAdminSignOutAction}>
               <button
                 type="submit"
-                className="rounded-md border border-zinc-300 px-2.5 py-1 text-xs font-medium hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-900"
+                className="cursor-pointer rounded-md border border-zinc-300 px-2.5 py-1 text-xs font-medium hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-900"
               >
                 Sign out
               </button>
-            </form>
+            </DeskActionForm>
           </div>
         </header>
         <div className="overflow-x-auto border-b border-zinc-200 bg-white px-3 py-2 dark:border-zinc-800 dark:bg-zinc-950 md:hidden">

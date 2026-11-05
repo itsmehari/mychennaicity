@@ -37,6 +37,7 @@ import {
   EDUCATION_TAMIL_SITEMAP_PATHS,
 } from "@/content/education/index";
 import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
+import { examSitemapEntries } from "@/content/exams/madras-university-nov-2026";
 import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
 import {
@@ -287,6 +288,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.66,
     },
+    ...examSitemapEntries().map((entry) => ({
+      url: `${base}${entry.path}`,
+      lastModified: now,
+      changeFrequency: entry.changeFrequency,
+      priority: entry.priority,
+    })),
     ...COMPULSIVE_SITEMAP_ENTRIES.map((entry) => ({
       url: `${base}${entry.path}`,
       lastModified: now,

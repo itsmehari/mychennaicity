@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { withDeskFlag } from "@/lib/super-admin/desk-return";
 import { and, eq, ne } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, employers, jobPostings } from "@/db/schema/tables";
@@ -123,16 +124,16 @@ export async function setJobStatus(formData: FormData) {
   await requireSuperAdmin();
   const id = String(formData.get("id") ?? "");
   const status = parseStatus(String(formData.get("status") ?? ""));
-  if (!id || !status) return;
+  if (!id || !status) throw new Error("Could not update that job.");
   const db = getDb();
   const [current] = await db
     .select({ slug: jobPostings.slug, publishedAt: jobPostings.publishedAt })
     .from(jobPostings)
     .where(eq(jobPostings.id, id))
     .limit(1);
-  if (!current) return;
+  if (!current) throw new Error("That job is no longer in the list.");
   const now = new Date();
-  await db
+  const updated = await db
     .update(jobPostings)
     .set({
       status,
@@ -140,15 +141,28 @@ export async function setJobStatus(formData: FormData) {
         status === "open" ? (current.publishedAt ?? now) : current.publishedAt,
       updatedAt: now,
     })
-    .where(eq(jobPostings.id, id));
+    .where(eq(jobPostings.id, id))
+    .returning({ id: jobPostings.id });
+  if (!updated.length) throw new Error("That job is no longer in the list.");
   bustJobSurfaces(current.slug);
+  redirect(
+    withDeskFlag("/super-admin/jobs", String(formData.get("returnTo") ?? ""), "notice", status),
+  );
 }
 
-export async function closeStaleJobsAction() {
+export async function closeStaleJobsAction(formData: FormData) {
   await requireSuperAdmin();
   await closeStaleOpenJobPostings();
   revalidatePath("/super-admin/jobs");
   revalidateListingsSurfaces();
+  redirect(
+    withDeskFlag(
+      "/super-admin/jobs",
+      String(formData.get("returnTo") ?? ""),
+      "notice",
+      "closed-expired",
+    ),
+  );
 }
 
 export async function createJob(formData: FormData) {

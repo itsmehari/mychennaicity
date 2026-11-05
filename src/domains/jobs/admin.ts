@@ -1,6 +1,7 @@
-import { and, desc, eq, sql } from "drizzle-orm";
+import { and, desc, eq, ilike, or, sql, type SQL } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { cities, employers, jobPostings } from "@/db/schema/tables";
+import { DESK_PAGE_SIZE, deskLikeTerm, deskPage } from "@/lib/super-admin/desk-return";
 import { staleOpenJobSql } from "./public-open";
 import { CHENNAI_CITY_SLUG, type JobPostingWithEmployer } from "./queries";
 
@@ -121,6 +122,85 @@ export async function closeStaleOpenJobPostings(now = new Date()): Promise<{
     .where(staleOpenJobSql(now));
 
   return { closed: stale.length, slugs: stale.map((r) => r.slug) };
+}
+
+export async function loadJobDesk(input: {
+  status: JobPostingStatus | "all" | "expired";
+  q: string;
+  pageRaw?: string;
+  now?: Date;
+}): Promise<{
+  rows: AdminJobListRow[];
+  total: number;
+  counts: Record<string, number>;
+  page: number;
+  pageCount: number;
+}> {
+  const empty = { rows: [], total: 0, counts: { all: 0 }, page: 1, pageCount: 1 };
+  const cityId = await getChennaiCityId();
+  if (!cityId) return empty;
+  const db = getDb();
+  const now = input.now ?? new Date();
+  const countRows = await db
+    .select({ status: jobPostings.status, n: sql<number>`count(*)::int` })
+    .from(jobPostings)
+    .where(eq(jobPostings.cityId, cityId))
+    .groupBy(jobPostings.status);
+  const counts: Record<string, number> = { all: 0, expired: 0 };
+  for (const row of countRows) {
+    counts[row.status] = Number(row.n);
+    counts.all += Number(row.n);
+  }
+  const [expired] = await db
+    .select({ n: sql<number>`count(*)::int` })
+    .from(jobPostings)
+    .where(and(eq(jobPostings.cityId, cityId), staleOpenJobSql(now)));
+  counts.expired = Number(expired?.n ?? 0);
+
+  const filters: SQL[] = [eq(jobPostings.cityId, cityId)];
+  if (input.status === "expired") {
+    const stale = staleOpenJobSql(now);
+    if (stale) filters.push(stale);
+  } else if (input.status !== "all") filters.push(eq(jobPostings.status, input.status));
+  const q = input.q.trim();
+  if (q) {
+    const term = deskLikeTerm(q);
+    const search = or(
+      ilike(jobPostings.title, term),
+      ilike(jobPostings.slug, term),
+      ilike(jobPostings.locationLabel, term),
+      ilike(employers.name, term),
+    );
+    if (search) filters.push(search);
+  }
+  const where = and(...filters);
+  const [{ total: totalRaw } = { total: 0 }] = await db
+    .select({ total: sql<number>`count(*)::int` })
+    .from(jobPostings)
+    .innerJoin(employers, eq(jobPostings.employerId, employers.id))
+    .where(where);
+  const total = Number(totalRaw);
+  const pageCount = Math.max(1, Math.ceil(total / DESK_PAGE_SIZE));
+  const page = deskPage(input.pageRaw, pageCount);
+  const rows = await db
+    .select({
+      id: jobPostings.id,
+      slug: jobPostings.slug,
+      title: jobPostings.title,
+      status: jobPostings.status,
+      validThrough: jobPostings.validThrough,
+      publishedAt: jobPostings.publishedAt,
+      updatedAt: jobPostings.updatedAt,
+      employerName: employers.name,
+      employerSlug: employers.slug,
+    })
+    .from(jobPostings)
+    .innerJoin(employers, eq(jobPostings.employerId, employers.id))
+    .where(where)
+    .orderBy(desc(jobPostings.updatedAt))
+    .limit(DESK_PAGE_SIZE)
+    .offset((page - 1) * DESK_PAGE_SIZE);
+  return { rows: rows as AdminJobListRow[], total, counts, page, pageCount };
 }
 
 export async function countStaleOpenJobPostings(

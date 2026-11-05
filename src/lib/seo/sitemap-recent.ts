@@ -17,6 +17,8 @@ import {
   EDUCATION_TAMIL_SITEMAP_PATHS,
 } from "@/content/education/index";
 import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
+import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
+import { examSitemapEntries } from "@/content/exams/madras-university-nov-2026";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
@@ -25,6 +27,7 @@ import {
   ECR_WEEKEND_PLAN_PATH,
 } from "@/content/tourism";
 import { getSiteUrl } from "@/lib/env";
+import { ADVERTISE_LISTING_PATHS } from "@/lib/routes/advertise-listings";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
 import {
@@ -67,7 +70,7 @@ const DAILY_HUB_PATHS = [
  *
  * Dates below are when the page was shipped or last rewritten, not “today”.
  */
-const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
+export const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
   { path: "/chennai-today-tamil", lastModified: "2026-08-14" },
   { path: CHENNAI_TOURISM_HUB_PATH, lastModified: "2026-08-15" },
   { path: ECR_WEEKEND_PLAN_PATH, lastModified: "2026-08-15" },
@@ -105,6 +108,15 @@ const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
   ...GOVERNMENT_SITEMAP_ENTRIES.map((entry) => ({
     path: entry.path,
     lastModified: "2026-09-04",
+  })),
+  ...examSitemapEntries().map((entry) => ({
+    path: entry.path,
+    lastModified: "2026-11-05",
+  })),
+  { path: MYBANGALORE_COMMUNITY_PATH, lastModified: "2026-11-04" },
+  ...ADVERTISE_LISTING_PATHS.map((path) => ({
+    path,
+    lastModified: "2026-11-05",
   })),
   { path: "/civic-tools", lastModified: "2026-09-12" },
   { path: "/civic-tools/area-sabha", lastModified: "2026-09-12" },

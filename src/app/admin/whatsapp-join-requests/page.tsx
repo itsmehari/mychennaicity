@@ -44,6 +44,20 @@ function likeTerm(raw: string): string {
   return `%${raw.replace(/[%_]/g, "").slice(0, 80)}%`;
 }
 
+function noticeText(code: string | undefined): string | null {
+  if (code === "approved") return "Marked approved.";
+  if (code === "declined") return "Marked declined.";
+  if (code === "spam") return "Marked spam.";
+  if (code === "noted") return "Note saved.";
+  return null;
+}
+
+function errorText(code: string | undefined): string | null {
+  if (code === "missing") return "That row was not updated.";
+  if (code === "save") return "Could not save. Try again.";
+  return null;
+}
+
 function queueHref(status: Segment, q: string, page: number): string {
   const params = new URLSearchParams();
   params.set("status", status);
@@ -60,9 +74,11 @@ function blank(value: string | null | undefined): string {
 export default async function WhatsappJoinRequestsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; q?: string; page?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; page?: string; notice?: string; error?: string }>;
 }) {
   const params = await searchParams;
+  const notice = noticeText(params.notice);
+  const queueError = errorText(params.error);
   const segment = parseSegment(params.status);
   const q = (params.q ?? "").trim();
   const digits = q.replace(/\D/g, "");
@@ -166,14 +182,13 @@ export default async function WhatsappJoinRequestsPage({
       locality: row.locality,
       status: row.status as WhatsappJoinStatus,
       onSpamList: isWhatsappJoinSpamNumber(row.phoneE164),
-      canMessage: Boolean(
-        whatsappJoinWaMeUrl({
-          displayName: row.displayName,
-          status: row.status,
-          phoneE164: row.phoneE164,
-          inviteForNudge: nudgeInvite,
-        }),
-      ),
+      messageUrl: whatsappJoinWaMeUrl({
+        displayName: row.displayName,
+        status: row.status,
+        phoneE164: row.phoneE164,
+        inviteForNudge: nudgeInvite,
+      }),
+      returnTo: queueHref(segment, q, page),
       intentLabel: whatsappJoinIntentLabel(row.intent),
       intro: row.intro?.trim() ?? "",
       phoneRaw: row.phoneRaw,
@@ -206,7 +221,9 @@ export default async function WhatsappJoinRequestsPage({
           Match the last 4 digits with WhatsApp&apos;s pending requests, approve
           there, then mark the row here. The number is the order the request was
           first saved. Open a row for the phone as typed, source, approval, last
-          nudge, and a note. Message opens WhatsApp for Ready and Approved rows.
+          nudge, and a note. Click a row to open it. Copy puts the number on the clipboard.
+          Message opens WhatsApp in a new tab for Ready and Approved rows. Approve, Decline,
+          and Spam save on this list and reload it.
           Share site links inside the group with{" "}
           <span className="break-all">{shareExample}</span>
         </p>
@@ -228,7 +245,21 @@ export default async function WhatsappJoinRequestsPage({
             );
           })}
         </nav>
-        <form className="flex flex-wrap items-center gap-2" action="/super-admin/whatsapp-join-requests">
+        {notice ? (
+          <p className="rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm text-emerald-950">
+            {notice}
+          </p>
+        ) : null}
+        {queueError ? (
+          <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-900">
+            {queueError}
+          </p>
+        ) : null}
+        <form
+          className="flex flex-wrap items-center gap-2"
+          method="get"
+          action="/super-admin/whatsapp-join-requests"
+        >
           <input type="hidden" name="status" value={segment} />
           <input
             name="q"

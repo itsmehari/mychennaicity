@@ -42,10 +42,22 @@ export function DeskTable({ children }: { children: ReactNode }) {
 
 export function statusPill(status: string): string {
   const base = "inline-flex rounded-full px-2 py-0.5 text-xs font-medium capitalize";
-  if (status === "published" || status === "open" || status === "approved") {
+  if (
+    status === "published" ||
+    status === "open" ||
+    status === "approved" ||
+    status === "scheduled"
+  ) {
     return `${base} bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200`;
   }
-  if (status === "closed" || status === "declined" || status === "spam" || status === "archived") {
+  if (
+    status === "closed" ||
+    status === "declined" ||
+    status === "spam" ||
+    status === "archived" ||
+    status === "cancelled" ||
+    status === "completed"
+  ) {
     return `${base} bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300`;
   }
   return `${base} bg-amber-50 text-amber-900 dark:bg-amber-950 dark:text-amber-100`;

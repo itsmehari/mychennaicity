@@ -1,23 +1,53 @@
 import Link from "next/link";
+import { setArticleStatus, toggleArticleFeatured } from "@/app/admin/articles/actions";
+import { DeskActionForm } from "@/components/super-admin/desk-action-form";
 import {
-  setArticleStatus,
-  toggleArticleFeatured,
-} from "@/app/admin/articles/actions";
-import {
-  DeskPageHeader,
-  DeskTable,
-  deskGhostButton,
-  statusPill,
-} from "@/components/super-admin/desk-ui";
-import { listAdminArticlesForChennai } from "@/domains/news";
+  DeskDisclosure,
+  DeskLookup,
+  DeskNotice,
+  DeskPager,
+  DeskSegments,
+} from "@/components/super-admin/desk-queue";
+import { DeskPageHeader, deskGhostButton, statusPill } from "@/components/super-admin/desk-ui";
+import { loadArticleDesk, type ArticleDeskSegment } from "@/domains/news/admin-desk";
+import { formatDeskStamp } from "@/lib/super-admin/desk-format";
+import { deskHref } from "@/lib/super-admin/desk-return";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminArticlesPage() {
+const PATH = "/super-admin/articles";
+const SEGMENTS = [
+  { id: "published", label: "Published" },
+  { id: "draft", label: "Drafts" },
+  { id: "archived", label: "Archived" },
+  { id: "all", label: "All" },
+] as const;
 
-  let rows: Awaited<ReturnType<typeof listAdminArticlesForChennai>> = [];
+function parseSegment(raw: string | undefined): ArticleDeskSegment {
+  if (raw && SEGMENTS.some((item) => item.id === raw)) return raw as ArticleDeskSegment;
+  return "published";
+}
+
+function noticeText(code: string | undefined): string | null {
+  if (code === "published") return "Published.";
+  if (code === "draft") return "Unpublished. It is off the news hub.";
+  if (code === "archived") return "Archived.";
+  if (code === "featured") return "Featured on the home page.";
+  if (code === "unfeatured") return "Removed from featured.";
+  return null;
+}
+
+export default async function AdminArticlesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string; q?: string; page?: string; notice?: string }>;
+}) {
+  const params = await searchParams;
+  const segment = parseSegment(params.status);
+  const q = (params.q ?? "").trim();
+  let desk: Awaited<ReturnType<typeof loadArticleDesk>>;
   try {
-    rows = await listAdminArticlesForChennai(80);
+    desk = await loadArticleDesk({ segment, q, pageRaw: params.page });
   } catch (err) {
     return (
       <p className="p-4 text-sm text-red-700">
@@ -25,88 +55,132 @@ export default async function AdminArticlesPage() {
       </p>
     );
   }
+  const returnTo = deskHref(PATH, {
+    status: segment,
+    q: q || undefined,
+    page: desk.page > 1 ? desk.page : undefined,
+  });
+  const rangeStart = desk.total === 0 ? 0 : (desk.page - 1) * 40 + 1;
+  const rangeEnd = desk.total === 0 ? 0 : rangeStart + desk.rows.length - 1;
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-4 px-4 py-6">
       <DeskPageHeader
         title="Articles"
-        lede="Publish, unpublish, or feature a story. New stories still use seed scripts until a full editor ships."
+        lede="Find a story, then publish, unpublish, archive, or feature it. New stories still use seed scripts. This desk does not edit the body."
       />
-      <DeskTable>
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-zinc-50 text-xs uppercase tracking-wide text-zinc-500 dark:bg-zinc-950">
-            <tr>
-              <th className="px-3 py-2 font-medium">Title</th>
-              <th className="px-3 py-2 font-medium">Status</th>
-              <th className="px-3 py-2 font-medium">Featured</th>
-              <th className="px-3 py-2 font-medium">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 ? (
-              <tr>
-                <td colSpan={4} className="px-3 py-6 text-zinc-500">
-                  No articles in this list.
-                </td>
-              </tr>
-            ) : (
-              rows.map((row) => (
-                <tr key={row.id} className="border-t border-zinc-100 dark:border-zinc-800">
-                  <td className="max-w-md px-3 py-2">
-                    <p className="font-medium">{row.title}</p>
-                    <p className="text-xs text-zinc-500">{row.slug}</p>
-                  </td>
-                  <td className="px-3 py-2">
-                    <span className={statusPill(row.status)}>{row.status}</span>
-                  </td>
-                  <td className="px-3 py-2">{row.featured ? "Yes" : "—"}</td>
-                  <td className="px-3 py-2">
-                    <div className="flex flex-wrap gap-2">
-                      {row.status !== "published" ? (
-                        <form action={setArticleStatus}>
-                          <input type="hidden" name="id" value={row.id} />
-                          <input type="hidden" name="status" value="published" />
-                          <button type="submit" className={deskGhostButton}>
-                            Publish
-                          </button>
-                        </form>
-                      ) : (
-                        <form action={setArticleStatus}>
-                          <input type="hidden" name="id" value={row.id} />
-                          <input type="hidden" name="status" value="draft" />
-                          <button type="submit" className={deskGhostButton}>
-                            Unpublish
-                          </button>
-                        </form>
-                      )}
-                      <form action={toggleArticleFeatured}>
-                        <input type="hidden" name="id" value={row.id} />
-                        <input
-                          type="hidden"
-                          name="featured"
-                          value={row.featured ? "true" : "false"}
-                        />
-                        <button type="submit" className={deskGhostButton}>
-                          {row.featured ? "Unfeature" : "Feature"}
-                        </button>
-                      </form>
-                      {row.status === "published" ? (
-                        <Link
-                          href={`/chennai-local-news/${row.slug}`}
-                          className={deskGhostButton}
-                          target="_blank"
-                        >
-                          View
-                        </Link>
-                      ) : null}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </DeskTable>
+      <DeskNotice notice={noticeText(params.notice)} error={null} />
+      <DeskSegments
+        items={SEGMENTS.map((item) => ({
+          href: deskHref(PATH, { status: item.id, q: q || undefined }),
+          label: item.label,
+          count: desk.counts[item.id] ?? 0,
+          active: item.id === segment,
+        }))}
+      />
+      <DeskLookup
+        action={PATH}
+        status={segment}
+        q={q}
+        placeholder="Title, slug, summary, or category"
+        rangeLabel={`${rangeStart}–${rangeEnd} of ${desk.total}`}
+      />
+      <ul className="space-y-2">
+        {desk.rows.length === 0 ? (
+          <li className="text-sm text-zinc-600">No articles in this segment.</li>
+        ) : (
+          desk.rows.map((row) => (
+            <DeskDisclosure
+              key={row.id}
+              summary={
+                <span className="grid gap-1 sm:grid-cols-[minmax(0,1.6fr)_7rem_6.5rem] sm:items-center">
+                  <span className="min-w-0">
+                    <span className="block font-medium">{row.title}</span>
+                    <span className="block truncate text-xs text-zinc-500">
+                      {[row.category, row.slug].filter(Boolean).join(" · ")}
+                    </span>
+                  </span>
+                  <span className="text-xs text-zinc-500">
+                    {formatDeskStamp(row.publishedAt ?? row.updatedAt)}
+                  </span>
+                  <span className={statusPill(row.status)}>
+                    {row.status}
+                    {row.featured ? " · featured" : ""}
+                  </span>
+                </span>
+              }
+              actions={
+                <>
+                  {row.status !== "published" ? (
+                    <DeskActionForm action={setArticleStatus}>
+                      <input type="hidden" name="id" value={row.id} />
+                      <input type="hidden" name="status" value="published" />
+                      <input type="hidden" name="returnTo" value={returnTo} />
+                      <button type="submit" className={deskGhostButton}>
+                        Publish
+                      </button>
+                    </DeskActionForm>
+                  ) : (
+                    <DeskActionForm action={setArticleStatus}>
+                      <input type="hidden" name="id" value={row.id} />
+                      <input type="hidden" name="status" value="draft" />
+                      <input type="hidden" name="returnTo" value={returnTo} />
+                      <button type="submit" className={deskGhostButton}>
+                        Unpublish
+                      </button>
+                    </DeskActionForm>
+                  )}
+                  {row.status !== "archived" ? (
+                    <DeskActionForm action={setArticleStatus}>
+                      <input type="hidden" name="id" value={row.id} />
+                      <input type="hidden" name="status" value="archived" />
+                      <input type="hidden" name="returnTo" value={returnTo} />
+                      <button type="submit" className={deskGhostButton}>
+                        Archive
+                      </button>
+                    </DeskActionForm>
+                  ) : null}
+                  <DeskActionForm action={toggleArticleFeatured}>
+                    <input type="hidden" name="id" value={row.id} />
+                    <input type="hidden" name="featured" value={row.featured ? "true" : "false"} />
+                    <input type="hidden" name="returnTo" value={returnTo} />
+                    <button type="submit" className={deskGhostButton}>
+                      {row.featured ? "Unfeature" : "Feature"}
+                    </button>
+                  </DeskActionForm>
+                  {row.status === "published" ? (
+                    <Link
+                      href={`/chennai-local-news/${row.slug}`}
+                      className={deskGhostButton}
+                      target="_blank"
+                    >
+                      View
+                    </Link>
+                  ) : null}
+                </>
+              }
+            >
+              <p className="whitespace-pre-wrap text-zinc-800 dark:text-zinc-200">
+                {row.summary?.trim() || "No summary."}
+              </p>
+              <p className="mt-2 text-zinc-500">
+                {row.sourceName ? `${row.sourceName} · ` : ""}
+                updated {formatDeskStamp(row.updatedAt)}
+              </p>
+            </DeskDisclosure>
+          ))
+        )}
+      </ul>
+      <DeskPager
+        page={desk.page}
+        pageCount={desk.pageCount}
+        prevHref={desk.page > 1 ? deskHref(PATH, { status: segment, q: q || undefined, page: desk.page - 1 }) : null}
+        nextHref={
+          desk.page < desk.pageCount
+            ? deskHref(PATH, { status: segment, q: q || undefined, page: desk.page + 1 })
+            : null
+        }
+      />
     </div>
   );
 }
