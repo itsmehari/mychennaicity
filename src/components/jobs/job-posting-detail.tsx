@@ -1,6 +1,7 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { formatJobCompensation } from "@/lib/jobs/format-compensation";
 import { buildChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
+import { JobCallGate } from "@/components/jobs/job-call-gate";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import Link from "next/link";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
@@ -106,20 +107,19 @@ export function JobPostingDetail({
   applyLabel,
   applyLinkProps,
   isWhatsApp,
-  callHref,
-  callLabel,
   uniqueViews,
   languageAlternate,
+  employerPhone,
 }: {
   row: JobPostingWithEmployer;
   applyHref: string | null;
   applyLabel: string;
   applyLinkProps: { target?: string; rel?: string };
   isWhatsApp: boolean;
-  callHref?: string | null;
-  callLabel?: string;
   uniqueViews: number;
   languageAlternate?: { href: string; label: string } | null;
+  /** When set, call uses the phone gate instead of a raw tel: link. */
+  employerPhone?: string | null;
 }) {
   const { job, employer } = row;
   const tamil = isTamilJobSlug(job.slug);
@@ -129,9 +129,19 @@ export function JobPostingDetail({
     job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null;
 
   const isContactForm = !!applyHref && /\/contact#jobs/i.test(applyHref);
+  const applyIsTel = !!applyHref && applyHref.startsWith("tel:");
+  const callGate = employerPhone ? (
+    <JobCallGate slug={job.slug} kind="job" tamil={tamil} compact />
+  ) : null;
+  const primaryHref =
+    applyHref && !applyIsTel ? applyHref : applyIsTel && !employerPhone ? applyHref : null;
+  const primaryLabel =
+    primaryHref != null ? applyLabel : applyIsTel && employerPhone ? null : applyLabel;
+  const showCta = Boolean(primaryHref || callGate);
+
   const ctaHint = tamil
-    ? callHref
-      ? "அழைப்பு இந்த எண்ணைத் திறக்கும். WhatsApp புதிய தாவலில் திறக்கும்."
+    ? callGate
+      ? "அழைப்புக்கு முன் உங்கள் மொபைல் சேமிக்கப்படும். WhatsApp புதிய தாவலில் திறக்கும்."
       : isWhatsApp
       ? "WhatsApp புதிய தாவலில் திறக்கும்."
       : applyHref?.startsWith("tel:")
@@ -139,8 +149,8 @@ export function JobPostingDetail({
         : applyHref?.startsWith("mailto:")
           ? "மின்னஞ்சல் செயலி திறக்கும்."
           : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
-    : callHref
-      ? "Call opens the phone dialler. WhatsApp opens in a new tab."
+    : callGate
+      ? "We save your mobile before the call button appears. WhatsApp still opens in a new tab."
       : isWhatsApp
       ? "Opens WhatsApp in a new tab."
       : applyHref?.startsWith("tel:")
@@ -209,15 +219,14 @@ export function JobPostingDetail({
         ) : null}
       </JobsDetailHero>
 
-      {applyHref ? (
+      {showCta ? (
         <div className="mcc-jobs-detail__mobile-cta">
           <JobsDetailActionCta
-            href={applyHref}
-            label={applyLabel}
+            href={primaryHref}
+            label={primaryLabel}
             isWhatsApp={isWhatsApp}
             linkProps={applyLinkProps}
-            callHref={callHref}
-            callLabel={callLabel}
+            callGate={callGate}
             hint={ctaHint}
           />
         </div>
@@ -243,22 +252,22 @@ export function JobPostingDetail({
               )}
             </JobsDetailBody>
 
-            {applyHref ? (
+            {showCta ? (
               <JobsDetailApplyBand
                 title={tamil ? "விண்ணப்பிக்க தயாரா?" : "Ready to apply?"}
                 description={
                   tamil
-                    ? callHref
-                      ? "அழைக்கவும் அல்லது WhatsApp செய்யவும். எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம்."
+                    ? callGate
+                      ? "WhatsApp அல்லது கீழே அழைப்பு — அழைப்புக்கு முன் உங்கள் மொபைல் சேமிக்கப்படும்."
                       : isWhatsApp
-                      ? "இந்த அறிவிப்பு WhatsApp வழியாக. எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம். நேரடியாக செய்தி அனுப்புங்கள்."
+                      ? "இந்த அறிவிப்பு WhatsApp வழியாக. எங்களிடம் சுயவிவரம் அனுப்ப வேண்டாம்."
                       : "பதவி, சம்பளம், இடம் ஆகியவற்றை உறுதி செய்த பிறகு விண்ணப்பியுங்கள்."
-                    : callHref
-                      ? "Call or WhatsApp the employer. We do not process CVs."
+                    : callGate
+                      ? "WhatsApp or call below — we save your mobile before the call button unlocks."
                       : isWhatsApp
                       ? "This listing uses WhatsApp — message the poster; we do not process CVs."
                       : applyHref?.startsWith("tel:")
-                        ? "This listing uses a phone number — call; we do not process CVs."
+                        ? "Enter your mobile to unlock call — we do not process CVs."
                         : applyHref?.startsWith("mailto:")
                           ? "This listing uses email — send your resume to the address in the note; we do not process CVs."
                           : applyHref && /^https?:\/\/([a-z0-9-]+\.)?facebook\.com\//i.test(applyHref)
@@ -267,27 +276,25 @@ export function JobPostingDetail({
                             ? "The source ad did not include a public phone. Use the form so we can pass on a hiring contact if we get one."
                             : "Use the channel the employer asked for. Confirm role, pay, and location before you share personal details."
                 }
-                href={applyHref}
-                label={applyLabel}
+                href={primaryHref}
+                label={primaryLabel}
                 isWhatsApp={isWhatsApp}
                 linkProps={applyLinkProps}
-                callHref={callHref}
-                callLabel={callLabel}
+                callGate={callGate}
               />
             ) : null}
           </>
         }
         aside={
           <>
-            {applyHref ? (
+            {showCta ? (
               <div className="mcc-jobs-detail__desktop-cta">
                 <JobsDetailActionCta
-                  href={applyHref}
-                  label={applyLabel}
+                  href={primaryHref}
+                  label={primaryLabel}
                   isWhatsApp={isWhatsApp}
                   linkProps={applyLinkProps}
-                  callHref={callHref}
-                  callLabel={callLabel}
+                  callGate={callGate}
                   hint={ctaHint}
                 />
               </div>

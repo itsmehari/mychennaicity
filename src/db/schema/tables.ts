@@ -385,6 +385,43 @@ export const classifiedPhoneReveals = pgTable(
   }),
 );
 
+/** Mobile collected before the employer call button is shown on a job listing. */
+export const jobPhoneReveals = pgTable(
+  "job_phone_reveals",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    jobId: uuid("job_id")
+      .notNull()
+      .references(() => jobPostings.id, { onDelete: "cascade" }),
+    enquirerPhone: text("enquirer_phone").notNull(),
+    followedUpAt: timestamp("followed_up_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    jobPhone: uniqueIndex("job_phone_reveals_job_phone_uidx").on(t.jobId, t.enquirerPhone),
+  }),
+);
+
+/** Mobile collected before a call on a job-seeker profile. */
+export const jobSeekerPhoneReveals = pgTable(
+  "job_seeker_phone_reveals",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    jobSeekerPostId: uuid("job_seeker_post_id")
+      .notNull()
+      .references(() => jobSeekerPosts.id, { onDelete: "cascade" }),
+    enquirerPhone: text("enquirer_phone").notNull(),
+    followedUpAt: timestamp("followed_up_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    postPhone: uniqueIndex("job_seeker_phone_reveals_post_phone_uidx").on(
+      t.jobSeekerPostId,
+      t.enquirerPhone,
+    ),
+  }),
+);
+
 /**
  * WhatsApp community join gate. One row per phone. Not an article.
  * Admins match `phone_last4` to WhatsApp's pending-request list.

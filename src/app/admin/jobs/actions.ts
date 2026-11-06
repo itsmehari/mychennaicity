@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { withDeskFlag } from "@/lib/super-admin/desk-return";
 import { and, eq, ne } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { cities, employers, jobPostings } from "@/db/schema/tables";
+import { cities, employers, jobPhoneReveals, jobPostings, jobSeekerPhoneReveals } from "@/db/schema/tables";
 import { closeStaleOpenJobPostings } from "@/domains/jobs/admin";
 import { CHENNAI_CITY_SLUG } from "@/domains/jobs/queries";
 import { revalidateListingsSurfaces } from "@/lib/revalidate-listings-surfaces";
@@ -244,4 +244,32 @@ export async function updateJob(formData: FormData) {
     revalidatePath(`/chennai-jobs/${current.slug}`);
   }
   redirect(`/super-admin/jobs/${id}`);
+}
+
+const JOB_CALLS = "/super-admin/job-call-requests";
+
+export async function setJobCallFollowed(formData: FormData) {
+  await requireSuperAdmin();
+  const id = String(formData.get("id") ?? "");
+  const source = String(formData.get("source") ?? "");
+  const clear = String(formData.get("clear") ?? "") === "true";
+  const returnTo = String(formData.get("returnTo") ?? "");
+  if (!id) throw new Error("Could not update that request.");
+  const db = getDb();
+  if (source === "job_seeker") {
+    const [row] = await db
+      .update(jobSeekerPhoneReveals)
+      .set({ followedUpAt: clear ? null : new Date() })
+      .where(eq(jobSeekerPhoneReveals.id, id))
+      .returning({ id: jobSeekerPhoneReveals.id });
+    if (!row) throw new Error("That request is no longer in the list.");
+  } else {
+    const [row] = await db
+      .update(jobPhoneReveals)
+      .set({ followedUpAt: clear ? null : new Date() })
+      .where(eq(jobPhoneReveals.id, id))
+      .returning({ id: jobPhoneReveals.id });
+    if (!row) throw new Error("That request is no longer in the list.");
+  }
+  redirect(withDeskFlag(JOB_CALLS, returnTo, "notice", clear ? "cleared" : "followed"));
 }

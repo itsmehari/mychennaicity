@@ -97,6 +97,12 @@ const items: Item[] = [
     group: "Publish",
     active: (pathname) => pathname.startsWith("/super-admin/classified-phone-reveals"),
   },
+  {
+    href: "/super-admin/job-call-requests",
+    label: "Job call requests",
+    group: "Publish",
+    active: (pathname) => pathname.startsWith("/super-admin/job-call-requests"),
+  },
 ];
 
 function linkClass(on: boolean, compact: boolean): string {

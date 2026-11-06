@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { JobSeekerPostRow } from "@/domains/job-seekers";
+import { JobCallGate } from "@/components/jobs/job-call-gate";
 import { buildChennaiSeekerHubCard } from "@/lib/jobs/chennai-seekers-hub-helpers";
+import { extractSeekerContactPhone } from "@/lib/jobs/job-call-phone";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import {
   JobsDetailActionCta,
@@ -82,12 +84,26 @@ function buildGlanceRows(post: JobSeekerPostRow): { label: string; value: string
 
 export function JobSeekerPostDetail({ post }: { post: JobSeekerPostRow }) {
   const contact = resolveContact(post);
+  const seekerPhone = extractSeekerContactPhone(post);
+  const callGate = seekerPhone ? (
+    <JobCallGate slug={post.slug} kind="job_seeker" compact />
+  ) : null;
+  const contactIsTel = contact.href?.startsWith("tel:");
+  const primaryHref =
+    contact.href && !contactIsTel
+      ? contact.href
+      : contactIsTel && !seekerPhone
+        ? contact.href
+        : null;
+  const primaryLabel = primaryHref ? contact.label : null;
+  const showCta = Boolean(primaryHref || callGate);
   const hubCard = buildChennaiSeekerHubCard(post);
   const glanceRows = buildGlanceRows(post);
   const seekerLabel = post.seekerLabel?.trim();
 
-  const ctaHint =
-    contact.href === "/contact#jobs"
+  const ctaHint = callGate
+    ? "We save your mobile before the call button unlocks."
+    : contact.href === "/contact#jobs"
       ? "Opens our Contact form — choose Jobs and mention this listing."
       : contact.isWhatsApp
         ? "Opens WhatsApp in a new tab."
@@ -115,13 +131,14 @@ export function JobSeekerPostDetail({ post }: { post: JobSeekerPostRow }) {
         }
       />
 
-      {contact.href ? (
+      {showCta ? (
         <div className="mcc-jobs-detail__mobile-cta">
           <JobsDetailActionCta
-            href={contact.href}
-            label={contact.label}
+            href={primaryHref}
+            label={primaryLabel}
             isWhatsApp={contact.isWhatsApp}
             linkProps={contact.linkProps}
+            callGate={callGate}
             hint={ctaHint}
           />
         </div>
@@ -134,14 +151,15 @@ export function JobSeekerPostDetail({ post }: { post: JobSeekerPostRow }) {
               <JobPostingProse content={post.body} />
             </JobsDetailBody>
 
-            {contact.href ? (
+            {showCta ? (
               <JobsDetailApplyBand
                 title="Have a vacancy?"
                 description="Reach out directly if you have a matching role. Confirm duties, pay, and accommodation before you hire."
-                href={contact.href}
-                label={contact.label}
+                href={primaryHref}
+                label={primaryLabel}
                 isWhatsApp={contact.isWhatsApp}
                 linkProps={contact.linkProps}
+                callGate={callGate}
               />
             ) : null}
 
@@ -169,13 +187,14 @@ export function JobSeekerPostDetail({ post }: { post: JobSeekerPostRow }) {
                 ))}
               </div>
             ) : null}
-            {contact.href ? (
+            {showCta ? (
               <div className="mcc-jobs-detail__desktop-cta">
                 <JobsDetailActionCta
-                  href={contact.href}
-                  label={contact.label}
+                  href={primaryHref}
+                  label={primaryLabel}
                   isWhatsApp={contact.isWhatsApp}
                   linkProps={contact.linkProps}
+                  callGate={callGate}
                   hint={ctaHint}
                 />
               </div>

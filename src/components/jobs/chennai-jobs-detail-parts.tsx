@@ -64,29 +64,40 @@ export function JobsDetailActionCta({
   hint,
   callHref,
   callLabel,
+  callGate,
   className = "",
 }: {
-  href: string;
-  label: string;
+  href?: string | null;
+  label?: string | null;
   isWhatsApp: boolean;
   linkProps: { target?: string; rel?: string };
   hint?: string;
   callHref?: string | null;
   callLabel?: string;
+  /** Gated call flow — replaces raw tel: links when set. */
+  callGate?: ReactNode;
   className?: string;
 }) {
   return (
     <div className={className}>
       <div className="mcc-jobs-detail__cta-stack">
-        <a
-          href={href}
-          {...linkProps}
-          className={`mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--primary mcc-jobs-detail__cta${isWhatsApp ? " mcc-jobs-detail__cta--whatsapp" : ""}`}
-        >
-          {label}
-        </a>
-        {callHref ? (
-          <a href={callHref} className="mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--ghost mcc-jobs-detail__cta">
+        {href && label ? (
+          <a
+            href={href}
+            {...linkProps}
+            className={`mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--primary mcc-jobs-detail__cta${isWhatsApp ? " mcc-jobs-detail__cta--whatsapp" : ""}`}
+          >
+            {label}
+          </a>
+        ) : null}
+        {callGate ? (
+          callGate
+        ) : callHref ? (
+          <a
+            href={callHref}
+            data-engagement="call"
+            className="mcc-jobs-hub__job-btn mcc-jobs-hub__job-btn--ghost mcc-jobs-detail__cta"
+          >
             {callLabel ?? "Call"}
           </a>
         ) : null}
@@ -105,15 +116,17 @@ export function JobsDetailApplyBand({
   linkProps,
   callHref,
   callLabel,
+  callGate,
 }: {
   title: string;
   description: string;
-  href: string;
-  label: string;
+  href?: string | null;
+  label?: string | null;
   isWhatsApp: boolean;
   linkProps: { target?: string; rel?: string };
   callHref?: string | null;
   callLabel?: string;
+  callGate?: ReactNode;
 }) {
   return (
     <section className="mcc-jobs-detail__apply-band">
@@ -126,6 +139,7 @@ export function JobsDetailApplyBand({
         linkProps={linkProps}
         callHref={callHref}
         callLabel={callLabel}
+        callGate={callGate}
         className="mt-4 max-w-md"
       />
     </section>

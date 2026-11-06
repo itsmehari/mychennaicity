@@ -131,6 +131,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/vibrant-hues-art-cube-gallery-virugambakkam-november-2026.png",
     alt: "Vibrant Hues poster — Art Cube Gallery group exhibition of paintings and sculptures, Virugambakkam, Chennai, 31 October to 7 November 2026, 11 AM to 6 PM",
   },
+  "msme-solar-power-installation-training-guindy-november-2026": {
+    src: "/images/events/msme-solar-power-installation-guindy-november-2026.png",
+    alt: "MSME Technology Development Centre Chennai poster — Solar Power Installation training with Government of India certificate, CFTI Campus Guindy, 13 to 15 November 2026, 10 AM to 5 PM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",
