@@ -7,6 +7,7 @@ import type {
   SuperAdminDesk,
   SuperAdminSnapshot,
 } from "@/domains/analytics/super-admin-catalog";
+import { JobViewsDesk } from "./job-views-desk";
 
 const desks: { id: SuperAdminDesk; label: string }[] = [
   { id: "overview", label: "Overview" },
@@ -99,6 +100,7 @@ function PostLink({ item }: { item: CatalogItem }) {
 
 export function SuperAdminDashboard({ snapshot }: { snapshot: SuperAdminSnapshot }) {
   const classifiedDesk = snapshot.desk === "classifieds";
+  const jobsDesk = snapshot.desk === "jobs";
   const bannerDesk = snapshot.desk === "banners";
   const showBannerSummary = snapshot.desk === "overview" || bannerDesk;
   const showRequests =
@@ -186,6 +188,9 @@ export function SuperAdminDashboard({ snapshot }: { snapshot: SuperAdminSnapshot
         </section>
       ) : null}
 
+      {jobsDesk ? <JobViewsDesk snapshot={snapshot} /> : null}
+
+      {jobsDesk ? null : (
       <form action="/super-admin" method="get" className="mt-4 flex max-w-md gap-2">
         {snapshot.desk !== "overview" ? (
           <input type="hidden" name="desk" value={snapshot.desk} />
@@ -207,6 +212,7 @@ export function SuperAdminDashboard({ snapshot }: { snapshot: SuperAdminSnapshot
           Search
         </button>
       </form>
+      )}
 
       {showBannerSummary ? (
         <section className="mt-6">
@@ -231,7 +237,7 @@ export function SuperAdminDashboard({ snapshot }: { snapshot: SuperAdminSnapshot
         </section>
       ) : null}
 
-      {bannerDesk ? null : (
+      {bannerDesk || jobsDesk ? null : (
       <section className="mt-4">
         <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
           {snapshot.desk === "overview" ? "Busiest posts" : "All posts in this desk"}

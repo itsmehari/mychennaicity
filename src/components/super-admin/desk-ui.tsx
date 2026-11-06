@@ -56,7 +56,8 @@ export function statusPill(status: string): string {
     status === "spam" ||
     status === "archived" ||
     status === "cancelled" ||
-    status === "completed"
+    status === "completed" ||
+    status === "expired"
   ) {
     return `${base} bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300`;
   }

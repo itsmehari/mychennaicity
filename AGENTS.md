@@ -48,7 +48,7 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Admin login:** `/super-admin` email + password. The same form accepts `SUPER_ADMIN_EMAIL` / `SUPER_ADMIN_PASSWORD_HASH` and the existing `ADMIN_EMAIL` / `ADMIN_PASSWORD_HASH`. `/admin` and `/login` redirect there. Never commit the password.
 
-**Super-admin analytics:** `/super-admin` is the only desk. Page views, call / WhatsApp clicks, and partner banner clicks live in `content_engagement_events`. The same shell publishes articles, jobs, event listings, classifieds, the WhatsApp queue, and classified contact requests. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
+**Super-admin analytics:** `/super-admin` is the only desk. Page views, call / WhatsApp clicks, and partner banner clicks live in `content_engagement_events`. Job views (`?desk=jobs`) filters, pages, click-opens a row, and CSV-exports like the WhatsApp queue. The same shell publishes articles, jobs, event listings, classifieds, the WhatsApp queue, and classified contact requests. SOP O in `docs/AGENT_LEARNINGS_AND_SOPS.md`. Never commit the password.
 
 **Jobs admin + hygiene:** `/super-admin/jobs` (same desk login). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 

@@ -37,6 +37,14 @@ import {
   type BannerSlugStat,
   type EngagementRollup,
 } from "./content-engagement";
+import {
+  emptyJobViewsMeta,
+  paginateJobViews,
+  parseJobViewsKind,
+  parseJobViewsSort,
+  parseJobViewsStatus,
+  type JobViewsDeskMeta,
+} from "./job-views";
 
 export type SuperAdminDesk =
   | "overview"
@@ -82,6 +90,11 @@ export type CatalogItem = {
   whatsappClicks: number;
   contactRequests: number | null;
   contactRequests7d: number | null;
+  postingId?: string | null;
+  validThrough?: Date | null;
+  callClicks7d?: number;
+  whatsappClicks7d?: number;
+  legacyReaders?: number;
 };
 
 export type SuperAdminTotals = {
@@ -104,6 +117,7 @@ export type SuperAdminSnapshot = {
   bannerTotals: BannerClickTotals;
   analyticsReady: boolean;
   databaseError: string | null;
+  jobViews: JobViewsDeskMeta;
 };
 
 const DESKS = new Set<SuperAdminDesk>([
@@ -150,6 +164,11 @@ function wantsDesk(desk: SuperAdminDesk, group: SuperAdminDesk | "overview"): bo
 export async function loadSuperAdminSnapshot(input: {
   desk: SuperAdminDesk;
   query: string;
+  status?: string;
+  kind?: string;
+  sort?: string;
+  page?: string;
+  unpaged?: boolean;
 }): Promise<SuperAdminSnapshot> {
   const db = getDb();
   const cityRows = await db
@@ -171,6 +190,7 @@ export async function loadSuperAdminSnapshot(input: {
       bannerTotals: emptyBannerClickTotals(),
       analyticsReady: false,
       databaseError: "Chennai is not in this database yet.",
+      jobViews: emptyJobViewsMeta(),
     };
   }
 
@@ -224,10 +244,12 @@ export async function loadSuperAdminSnapshot(input: {
       wantsDesk(desk, "jobs")
         ? db
             .select({
+              id: jobPostings.id,
               slug: jobPostings.slug,
               title: jobPostings.title,
               status: jobPostings.status,
               publishedAt: jobPostings.publishedAt,
+              validThrough: jobPostings.validThrough,
               location: jobPostings.locationLabel,
               employer: employers.name,
             })
@@ -349,14 +371,17 @@ export async function loadSuperAdminSnapshot(input: {
       };
     }),
     ...(jobs as {
+      id: string;
       slug: string;
       title: string;
       status: string;
       publishedAt: Date | null;
+      validThrough: Date | null;
       location: string | null;
       employer: string | null;
     }[]).map((row) => {
       const stats = rollupFor(rollups, "job", row.slug);
+      const legacyReaders = legacyJobReaders.get(row.slug) ?? 0;
       return {
         kind: "job" as const,
         kindLabel: "Job",
@@ -368,11 +393,16 @@ export async function loadSuperAdminSnapshot(input: {
         href: chennaiJobsDetailPath(row.slug),
         views: stats.views,
         views7d: stats.views7d,
-        uniqueReaders: Math.max(stats.uniqueViewers, legacyJobReaders.get(row.slug) ?? 0),
+        uniqueReaders: Math.max(stats.uniqueViewers, legacyReaders),
         callClicks: stats.callClicks,
         whatsappClicks: stats.whatsappClicks,
         contactRequests: null,
         contactRequests7d: null,
+        postingId: row.id,
+        validThrough: row.validThrough,
+        callClicks7d: stats.callClicks7d,
+        whatsappClicks7d: stats.whatsappClicks7d,
+        legacyReaders,
       };
     }),
     ...(seekers as {
@@ -399,6 +429,8 @@ export async function loadSuperAdminSnapshot(input: {
         whatsappClicks: stats.whatsappClicks,
         contactRequests: null,
         contactRequests7d: null,
+        callClicks7d: stats.callClicks7d,
+        whatsappClicks7d: stats.whatsappClicks7d,
       };
     }),
     ...(eventRows as {
@@ -511,24 +543,40 @@ export async function loadSuperAdminSnapshot(input: {
   }, emptyTotals());
 
   const needle = input.query.trim().toLowerCase();
-  const matched = needle
-    ? deskItems.filter((item) =>
-        `${item.title} ${item.slug} ${item.detail ?? ""}`.toLowerCase().includes(needle),
-      )
-    : deskItems;
-  matched.sort((a, b) => {
-    const aHeat =
-      a.views7d + (a.contactRequests7d ?? 0) + a.callClicks + a.whatsappClicks;
-    const bHeat =
-      b.views7d + (b.contactRequests7d ?? 0) + b.callClicks + b.whatsappClicks;
-    if (bHeat !== aHeat) return bHeat - aHeat;
-    if ((b.contactRequests ?? 0) !== (a.contactRequests ?? 0)) {
-      return (b.contactRequests ?? 0) - (a.contactRequests ?? 0);
-    }
-    if (b.uniqueReaders !== a.uniqueReaders) return b.uniqueReaders - a.uniqueReaders;
-    if (b.views !== a.views) return b.views - a.views;
-    return (b.when?.getTime() ?? 0) - (a.when?.getTime() ?? 0);
-  });
+  const jobViews =
+    desk === "jobs"
+      ? paginateJobViews({
+          items: deskItems,
+          query: input.query,
+          status: parseJobViewsStatus(input.status),
+          kind: parseJobViewsKind(input.kind),
+          sort: parseJobViewsSort(input.sort),
+          pageRaw: input.page,
+          unpaged: input.unpaged,
+        })
+      : null;
+  const matched = jobViews
+    ? []
+    : needle
+      ? deskItems.filter((item) =>
+          `${item.title} ${item.slug} ${item.detail ?? ""}`.toLowerCase().includes(needle),
+        )
+      : deskItems;
+  if (!jobViews) {
+    matched.sort((a, b) => {
+      const aHeat =
+        a.views7d + (a.contactRequests7d ?? 0) + a.callClicks + a.whatsappClicks;
+      const bHeat =
+        b.views7d + (b.contactRequests7d ?? 0) + b.callClicks + b.whatsappClicks;
+      if (bHeat !== aHeat) return bHeat - aHeat;
+      if ((b.contactRequests ?? 0) !== (a.contactRequests ?? 0)) {
+        return (b.contactRequests ?? 0) - (a.contactRequests ?? 0);
+      }
+      if (b.uniqueReaders !== a.uniqueReaders) return b.uniqueReaders - a.uniqueReaders;
+      if (b.views !== a.views) return b.views - a.views;
+      return (b.when?.getTime() ?? 0) - (a.when?.getTime() ?? 0);
+    });
+  }
 
   const builtBanners = buildBannerDesk(bannerStats);
   const bannerNeedle = desk === "banners" ? needle : "";
@@ -542,11 +590,13 @@ export async function loadSuperAdminSnapshot(input: {
   return {
     desk,
     query: input.query,
-    items: desk === "banners" ? [] : matched.slice(0, limit),
+    items: desk === "banners" ? [] : jobViews ? jobViews.items : matched.slice(0, limit),
     hidden:
       desk === "banners"
         ? Math.max(0, bannerMatched.length - bannerLimit)
-        : Math.max(0, matched.length - limit),
+        : jobViews
+          ? jobViews.hidden
+          : Math.max(0, matched.length - limit),
     totals,
     bannerPlacements:
       desk === "banners" ? bannerMatched.slice(0, bannerLimit) : builtBanners.placements,
@@ -554,6 +604,7 @@ export async function loadSuperAdminSnapshot(input: {
     bannerTotals: bannerStats.totals,
     analyticsReady,
     databaseError: null,
+    jobViews: jobViews?.meta ?? emptyJobViewsMeta(),
   };
 }
 
@@ -676,6 +727,6 @@ export async function loadTrackedPost(
           : kind === "classified"
             ? "classifieds"
             : "jobs";
-  const snapshot = await loadSuperAdminSnapshot({ desk, query: slug });
+  const snapshot = await loadSuperAdminSnapshot({ desk, query: slug, unpaged: true });
   return snapshot.items.find((item) => item.kind === kind && item.slug === slug) ?? null;
 }

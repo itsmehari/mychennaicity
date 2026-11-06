@@ -9,6 +9,7 @@ import {
   parseDesk,
   type SuperAdminSnapshot,
 } from "@/domains/analytics/super-admin-catalog";
+import { emptyJobViewsMeta } from "@/domains/analytics/job-views";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { superAdminLoginAction } from "./actions";
 import { readSuperAdminSession, SUPER_ADMIN_COOKIE } from "@/lib/super-admin/session";
@@ -80,7 +81,15 @@ function LoginForm({ message }: { message: string | null }) {
 export default async function SuperAdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ desk?: string; q?: string; error?: string }>;
+  searchParams: Promise<{
+    desk?: string;
+    q?: string;
+    error?: string;
+    status?: string;
+    kind?: string;
+    sort?: string;
+    page?: string;
+  }>;
 }) {
   const params = await searchParams;
   const jar = await cookies();
@@ -92,6 +101,10 @@ export default async function SuperAdminPage({
     snapshot = await loadSuperAdminSnapshot({
       desk: parseDesk(params.desk),
       query: params.q ?? "",
+      status: params.status,
+      kind: params.kind,
+      sort: params.sort,
+      page: params.page,
     });
   } catch {
     const banners = buildBannerDesk({ bySlug: [], byPartner: [] });
@@ -106,6 +119,7 @@ export default async function SuperAdminPage({
       bannerTotals: emptyBannerClickTotals(),
       analyticsReady: false,
       databaseError: "Could not read the database.",
+      jobViews: emptyJobViewsMeta(),
     };
   }
 

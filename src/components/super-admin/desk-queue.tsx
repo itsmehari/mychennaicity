@@ -54,16 +54,21 @@ export function DeskLookup({
   q,
   placeholder,
   rangeLabel,
+  hidden,
 }: {
   action: string;
   status?: string;
   q: string;
   placeholder: string;
   rangeLabel: string;
+  hidden?: Record<string, string | undefined>;
 }) {
   return (
     <form className="flex flex-wrap items-center gap-2" method="get" action={action}>
       {status ? <input type="hidden" name="status" value={status} /> : null}
+      {Object.entries(hidden ?? {}).map(([name, value]) =>
+        value ? <input key={name} type="hidden" name={name} value={value} /> : null,
+      )}
       <input
         name="q"
         defaultValue={q}
