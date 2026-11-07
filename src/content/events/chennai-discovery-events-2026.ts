@@ -524,6 +524,26 @@ export const CHENNAI_DISCOVERY_EVENTS_2026: ChennaiDiscoveryEvent[] = [
     bookingLink: "https://in.bookmyshow.com/explore/home/chennai",
   },
   {
+    slug: "eyes-of-madras-8-the-chennai-photowalk-lalit-kala-akademi-december-2026",
+    title:
+      "Eyes of Madras 8.0 — Chennai PhotoWalk exhibition at Lalit Kala Akademi",
+    category: "Art exhibitions",
+    date: "2026-12-07 to 2026-12-13",
+    time: "All day — confirm daily hours with CPW or at the venue",
+    venueName: "Lalit Kala Akademi, Regional Centre, Chennai",
+    address: "4, Greams Road, Thousand Lights, Chennai, Tamil Nadu 600006",
+    locality: "Thousand Lights",
+    description:
+      "8th annual Eyes of Madras — 103 photographers, 210 frames, 6 themes after 1,100+ submissions. Free public entry. Spirit and Stories of Chennai Through Your Lens.",
+    ticketPrice: "Free — open to the public",
+    targetAudience:
+      "Street photography fans, Chennai residents, gallery visitors, CPW community",
+    bookingLink: "https://www.instagram.com/thechennaiphotowalk/",
+    featured: true,
+    notes:
+      "Organiser: The Chennai PhotoWalk. Email thechennaiphotowalk@gmail.com. Coordinators: Saran 99621 33611, Naveen 99400 13232, Vivek 98842 79501.",
+  },
+  {
     slug: "vibrant-hues-art-cube-gallery-virugambakkam-november-2026",
     title:
       "Vibrant Hues — paintings and sculptures at Art Cube Gallery, Virugambakkam",

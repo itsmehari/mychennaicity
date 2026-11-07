@@ -92,6 +92,8 @@
     "db:seed:event:gojobsync-mega-job-fair:live": "tsx scripts/seed-event-gojobsync-mega-job-fair-december-2026.ts --live",
     "db:seed:event:tiruvallur-farmers-grievance-day": "tsx scripts/seed-event-tiruvallur-farmers-grievance-day-october-2026.ts",
     "db:seed:event:tiruvallur-farmers-grievance-day:live": "tsx scripts/seed-event-tiruvallur-farmers-grievance-day-october-2026.ts --live",
+    "db:seed:event:eyes-of-madras-8": "tsx scripts/seed-event-eyes-of-madras-8-lalit-kala-akademi-december-2026.ts",
+    "db:seed:event:eyes-of-madras-8:live": "tsx scripts/seed-event-eyes-of-madras-8-lalit-kala-akademi-december-2026.ts --live",
     "db:seed:event:vibrant-hues-art-cube": "tsx scripts/seed-event-vibrant-hues-art-cube-november-2026.ts",
     "db:seed:event:vibrant-hues-art-cube:live": "tsx scripts/seed-event-vibrant-hues-art-cube-november-2026.ts --live",
     "db:seed:event:msme-solar-power-installation-guindy": "tsx scripts/seed-event-msme-solar-power-installation-guindy-november-2026.ts",
