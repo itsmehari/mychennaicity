@@ -13,7 +13,7 @@
  * // Compact strip under article / listing body
  * <AdvertisePanel variant="jobs" layout="strip" />
  *
- * // Partner rotator (square rail / rectangle band)
+ * // Partner rotator (square or vertical image, or a wide band)
  * import { PageAdSlot } from "@/components/ads";
  * <PageAdSlot shape="square" placement="job_detail_square" />
  */

@@ -13,6 +13,9 @@ export const PARTNER_AD_ROTATE_MS = 6500;
 
 export type PartnerAdShape = "square" | "rectangle";
 
+/** Finished image file. Square is within 8% of 1:1. Taller than that is vertical. */
+export type PartnerBannerFrame = "square" | "vertical";
+
 export type PartnerAdTheme = "resume" | "covai" | "studio" | "iso" | "solar";
 
 /** Stable placement ids — also used as `utm_content`. */
@@ -20,6 +23,13 @@ export const PARTNER_AD_PLACEMENTS = [
   "home_after_areas",
   "jobs_hub_mid",
   "job_detail_square",
+  "job_detail_rail",
+  "jobs_hub_rail",
+  "seekers_hub_rail",
+  "news_sidebar_rail",
+  "events_sidebar_rail",
+  "classifieds_sidebar_rail",
+  "directory_detail_rail",
   "news_hub_mid",
   "news_topic",
   "article_sidebar",
@@ -46,6 +56,13 @@ export const PARTNER_AD_PLACEMENT_LABELS: Record<PartnerAdPlacementId, string> =
   home_after_areas: "Home",
   jobs_hub_mid: "Jobs hub",
   job_detail_square: "Job page",
+  job_detail_rail: "Job page rail",
+  jobs_hub_rail: "Jobs hub rail",
+  seekers_hub_rail: "Looking for work rail",
+  news_sidebar_rail: "News sidebar",
+  events_sidebar_rail: "Event page rail",
+  classifieds_sidebar_rail: "Classified page rail",
+  directory_detail_rail: "Directory listing",
   news_hub_mid: "News hub",
   news_topic: "News topic",
   article_sidebar: "Article sidebar",
@@ -99,6 +116,13 @@ export type PartnerAdCreative = {
   photoPosition?: string;
   /** Marketing lines for this advertiser. The rotator advances one line per visit. */
   lines?: readonly PartnerAdLine[];
+  /**
+   * Finished banner file. When set with `artworkWidth` and `artworkHeight`,
+   * the slot shows the image itself and follows that aspect ratio.
+   */
+  artworkAlt?: string;
+  artworkWidth?: number;
+  artworkHeight?: number;
 };
 
 export type PartnerAdLine = {
@@ -120,6 +144,7 @@ type PartnerAdSource = Omit<PartnerAdCreative, "href" | "headline" | "body" | "c
 
 /** Photo layout is on only when the image and the four short lines are all set. */
 export function isPartnerPhotoAd(ad: PartnerAdCreative): boolean {
+  if (isPartnerArtwork(ad)) return false;
   return Boolean(
     ad.image &&
       ad.ink &&
@@ -130,6 +155,37 @@ export function isPartnerPhotoAd(ad: PartnerAdCreative): boolean {
       ad.photoCta &&
       ad.ctaShort,
   );
+}
+
+/** The file is the whole banner. The slot uses its pixel ratio. */
+export function isPartnerArtwork(
+  ad: PartnerAdCreative,
+): ad is PartnerAdCreative & {
+  image: string;
+  artworkAlt: string;
+  artworkWidth: number;
+  artworkHeight: number;
+} {
+  return Boolean(
+    ad.image &&
+      ad.artworkAlt &&
+      ad.artworkWidth &&
+      ad.artworkWidth > 0 &&
+      ad.artworkHeight &&
+      ad.artworkHeight > 0,
+  );
+}
+
+export function partnerBannerFrame(width: number, height: number): PartnerBannerFrame {
+  const longest = Math.max(width, height);
+  if (longest <= 0) return "square";
+  if (Math.abs(width - height) / longest <= 0.08) return "square";
+  return height > width ? "vertical" : "square";
+}
+
+export function partnerArtworkAspect(ad: PartnerAdCreative): string | null {
+  if (!isPartnerArtwork(ad)) return null;
+  return `${ad.artworkWidth} / ${ad.artworkHeight}`;
 }
 
 /**
@@ -364,7 +420,97 @@ const PARTNER_AD_SOURCES: readonly PartnerAdSource[] = [
   },
 ];
 
-const PARTNER_AD_IDS = new Set(PARTNER_AD_SOURCES.map((ad) => ad.id));
+export type LayoutImageBanner = {
+  id: string;
+  partner: string;
+  url: string;
+  image: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+/**
+ * Finished files share every layout position. A session picks one per page.
+ * The click is the site printed on the banner.
+ */
+const PARTNER_ARTWORK_SOURCES: readonly LayoutImageBanner[] = [
+  {
+    id: "vacancychennai",
+    partner: "Vacancy Chennai",
+    url: "https://www.vacancychennai.in/",
+    image: "/images/partner-ads/vacancychennai-jobs.webp",
+    width: 1024,
+    height: 1024,
+    alt: "Vacancy Chennai. Your next job is closer than you think. www.vacancychennai.in",
+  },
+  {
+    id: "resumedoctor-work",
+    partner: "ResumeDoctor",
+    url: "https://www.resumedoctor.in/",
+    image: "/images/partner-ads/resumedoctor-work.webp",
+    width: 1024,
+    height: 1024,
+    alt: "ResumeDoctor. Make your resume work harder for you. ₹49 for 14-day full pro. www.resumedoctor.in",
+  },
+  {
+    id: "resumedoctor-doors",
+    partner: "ResumeDoctor",
+    url: "https://www.resumedoctor.in/",
+    image: "/images/partner-ads/resumedoctor-doors.webp",
+    width: 1024,
+    height: 1024,
+    alt: "ResumeDoctor. Your resume should open doors. 14-day pro pass ₹49. www.resumedoctor.in",
+  },
+  {
+    id: "myomr",
+    partner: "MyOMR",
+    url: "https://www.myomr.in/",
+    image: "/images/partner-ads/myomr.webp",
+    width: 1024,
+    height: 1024,
+    alt: "MyOMR.in. One road. A million connections. Old Mahabalipuram Road, Chennai. www.myomr.in",
+  },
+  {
+    id: "bseri-aimsp",
+    partner: "BSERI",
+    url: "https://www.bseriworld.com/",
+    image: "/images/partner-ads/bseri-aimsp.webp",
+    width: 819,
+    height: 1024,
+    alt: "BSERI AIMSP and CAIMSP practitioner certification. Offer fee ₹6,999. Enrol at bseriworld.com.",
+  },
+  {
+    id: "agsunwin-solar",
+    partner: "AG Sunwin",
+    url: "https://agsunwinenergysolutions.com/",
+    image: "/images/partner-ads/agsunwin-solar.webp",
+    width: 819,
+    height: 1024,
+    alt: "AG Sunwin. Your roof could be cutting your electricity bill. Book a site assessment at agsunwinenergysolutions.com.",
+  },
+];
+
+export function layoutImageBanners(): readonly LayoutImageBanner[] {
+  return PARTNER_ARTWORK_SOURCES;
+}
+
+/** Same session and page always get the same file. Another page or session can differ. */
+export function layoutBannerForView(seed: string, pathname: string): LayoutImageBanner {
+  const list = PARTNER_ARTWORK_SOURCES;
+  const key = `${seed}|${normalizeAdPathname(pathname)}`;
+  let hash = 2166136261;
+  for (let i = 0; i < key.length; i += 1) {
+    hash ^= key.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return list[(hash >>> 0) % list.length];
+}
+
+const PARTNER_AD_IDS = new Set([
+  ...PARTNER_AD_SOURCES.map((ad) => ad.id),
+  ...PARTNER_ARTWORK_SOURCES.map((ad) => ad.id),
+]);
 
 export type PartnerAdRosterEntry = {
   id: string;
@@ -375,12 +521,20 @@ export type PartnerAdRosterEntry = {
 
 /** Public partner list for click reports. Copy and themes stay on the creative. */
 export function partnerAdRoster(): readonly PartnerAdRosterEntry[] {
-  return PARTNER_AD_SOURCES.map((ad) => ({
-    id: ad.id,
-    partner: ad.partner,
-    kicker: ad.kicker,
-    url: ad.url,
-  }));
+  return [
+    ...PARTNER_ARTWORK_SOURCES.map((ad) => ({
+      id: ad.id,
+      partner: ad.partner,
+      kicker: hostnameWithoutWww(ad.url),
+      url: ad.url,
+    })),
+    ...PARTNER_AD_SOURCES.map((ad) => ({
+      id: ad.id,
+      partner: ad.partner,
+      kicker: ad.kicker,
+      url: ad.url,
+    })),
+  ];
 }
 
 export function partnerPlacementLabel(placement: string): string {
@@ -409,7 +563,9 @@ export function parseBannerClickSlug(
 
 /** Hostnames (no `www.`) used for outbound click analytics. */
 export const PARTNER_AD_HOSTS = new Set(
-  PARTNER_AD_SOURCES.map((ad) => hostnameWithoutWww(ad.url)),
+  [...PARTNER_ARTWORK_SOURCES, ...PARTNER_AD_SOURCES].map((ad) =>
+    hostnameWithoutWww(ad.url),
+  ),
 );
 
 function hostnameWithoutWww(href: string): string {
@@ -455,26 +611,26 @@ export function partnerAdWithLine(
   };
 }
 
-/** Same creative list for every slot; UTMs change with `placement`. */
+/** Native photo cards only. Finished image banners use `layoutImageBanner`. */
 export function partnerAds(placement: PartnerAdPlacement): PartnerAdCreative[] {
   const slot = placement.trim() || "site_band";
   return PARTNER_AD_SOURCES.map((ad) =>
-    partnerAdWithLine({
-      id: ad.id,
-      partner: ad.partner,
-      eyebrow: ad.eyebrow,
-      kicker: ad.kicker,
-      headline: "",
-      body: "",
-      cta: "",
-      theme: ad.theme,
-      href: withPartnerUtm(ad.url, slot),
-      image: ad.image,
-      ink: ad.ink,
-      accent: ad.accent,
-      photoPosition: ad.photoPosition,
-      lines: ad.lines,
-    }),
+      partnerAdWithLine({
+        id: ad.id,
+        partner: ad.partner,
+        eyebrow: ad.eyebrow,
+        kicker: ad.kicker,
+        headline: "",
+        body: "",
+        cta: "",
+        theme: ad.theme,
+        href: withPartnerUtm(ad.url, slot),
+        image: ad.image,
+        ink: ad.ink,
+        accent: ad.accent,
+        photoPosition: ad.photoPosition,
+        lines: ad.lines,
+      }),
   );
 }
 
@@ -487,6 +643,7 @@ export function normalizeAdPathname(pathname: string): string {
 const DEDICATED_EXACT = new Set([
   "/",
   "/chennai-jobs",
+  "/chennai-jobs/looking-for-work",
   "/chennai-local-news",
   "/chennai-local-events",
   "/directory",
@@ -521,6 +678,8 @@ export function hasDedicatedPartnerAdSlot(pathname: string): boolean {
   }
 
   if (path.startsWith("/chennai-classifieds/")) return true;
+
+  if (path.startsWith("/directory/")) return true;
 
   if (path.startsWith("/areas/") && path !== "/areas") return true;
 

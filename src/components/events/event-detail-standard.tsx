@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
-import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
 import {
@@ -212,7 +211,6 @@ export function EventDetailStandard({
           <FeaturedJobsRail placement="events_detail" className="mt-10" />
 
           <div className="mt-10 space-y-6">
-            <PageAdSlot shape="rectangle" placement="events_detail" />
             <AdvertisePanel variant="events" layout="strip" />
             <BusinessWhatsAppCta variant="events" />
           </div>

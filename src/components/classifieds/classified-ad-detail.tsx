@@ -6,6 +6,7 @@ import { ClassifiedListingMedia } from "@/components/classifieds/classified-list
 import { classifiedImageUrls, classifiedVideoSrc } from "@/lib/classifieds/images";
 import { normalizeIndianMobile } from "@/lib/classifieds/phone-gate";
 import { engagementAttrForHref } from "@/lib/analytics/engagement-events";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import Link from "next/link";
 
 function GlanceRow({ label, value }: { label: string; value: string }) {
@@ -252,6 +253,7 @@ export function ClassifiedAdDetail({ listing }: { listing: ClassifiedListingRow 
                 />
               </div>
             ) : null}
+            <LayoutImageBanner placement="classifieds_sidebar_rail" />
           </div>
         </aside>
       </div>

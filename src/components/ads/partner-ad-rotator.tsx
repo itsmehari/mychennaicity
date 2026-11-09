@@ -4,8 +4,11 @@ import dynamic from "next/dynamic";
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import {
   PARTNER_AD_ROTATE_MS,
+  isPartnerArtwork,
   isPartnerPhotoAd,
   partnerAdWithLine,
+  partnerArtworkAspect,
+  partnerBannerFrame,
   type PartnerAdCreative,
   type PartnerAdPlacement,
   type PartnerAdShape,
@@ -85,10 +88,20 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
   const active = shown[index] ?? shown[0];
   const shapeClass =
     shape === "square" ? "partner-ad--square" : "partner-ad--rectangle";
+  const artwork = isPartnerArtwork(active);
+  const artworkAspect = artwork ? partnerArtworkAspect(active) : null;
+  const frameClass = artwork
+    ? ` partner-ad--artwork partner-ad--frame-${partnerBannerFrame(active.artworkWidth ?? 1, active.artworkHeight ?? 1)}`
+    : "";
 
   return (
     <div
-      className={`partner-ad ${shapeClass} partner-ad--theme-${active.theme}${className ? ` ${className}` : ""}`}
+      className={`partner-ad ${shapeClass}${frameClass} partner-ad--theme-${active.theme}${className ? ` ${className}` : ""}`}
+      style={
+        artworkAspect
+          ? ({ "--partner-ad-aspect": artworkAspect } as CSSProperties)
+          : undefined
+      }
       aria-roledescription="carousel"
       aria-labelledby={titleId}
       onMouseEnter={() => setPaused(true)}
@@ -113,7 +126,7 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
             <a
               key={ad.id}
               href={ad.href}
-              className={`partner-ad__slide partner-ad--theme-${ad.theme}${isPartnerPhotoAd(ad) ? " partner-ad__slide--photo" : ""}${isActive ? " is-active" : ""}`}
+              className={`partner-ad__slide partner-ad--theme-${ad.theme}${isPartnerArtwork(ad) ? " partner-ad__slide--artwork" : ""}${isPartnerPhotoAd(ad) ? " partner-ad__slide--photo" : ""}${isActive ? " is-active" : ""}`}
               style={photoSlideStyle(ad)}
               target="_blank"
               rel="noopener noreferrer"
@@ -121,14 +134,25 @@ export function PartnerAdRotator({ ads, shape, placement, className = "" }: Prop
               data-partner-id={ad.id}
               data-utm-content={placement}
               aria-label={
-                isPartnerPhotoAd(ad)
-                  ? `${ad.offer}. ${ad.support} ${ad.photoCta}`
-                  : `${ad.headline}. ${ad.cta}`
+                isPartnerArtwork(ad)
+                  ? ad.artworkAlt
+                  : isPartnerPhotoAd(ad)
+                    ? `${ad.offer}. ${ad.support} ${ad.photoCta}`
+                    : `${ad.headline}. ${ad.cta}`
               }
               aria-hidden={isActive ? undefined : true}
               tabIndex={isActive ? 0 : -1}
             >
-              {isPartnerPhotoAd(ad) ? (
+              {isPartnerArtwork(ad) ? (
+                <img
+                  className="partner-ad__art"
+                  src={ad.image}
+                  alt=""
+                  width={ad.artworkWidth}
+                  height={ad.artworkHeight}
+                  decoding="async"
+                />
+              ) : isPartnerPhotoAd(ad) ? (
                 <PartnerAdPhotoBody ad={ad} />
               ) : (
                 <>

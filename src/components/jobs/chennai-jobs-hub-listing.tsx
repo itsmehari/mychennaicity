@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { useEffect, useMemo, useState } from "react";
 import { ChennaiJobsHubCardView } from "@/components/jobs/chennai-jobs-hub-card";
@@ -328,7 +329,8 @@ export function ChennaiJobsHubListing({
       </aside>
 
       <div className="mcc-jobs-hub__layout">
-        <aside className="mcc-jobs-hub__filter-sidebar" aria-label="Filter jobs">
+        <aside className="mcc-jobs-hub__rail" aria-label="Filter jobs">
+          <div className="mcc-jobs-hub__filter-sidebar">
           <FilterPanel
             filters={filters}
             onChange={(next) => {
@@ -338,6 +340,8 @@ export function ChennaiJobsHubListing({
             onReset={resetFilters}
             idPrefix="desktop"
           />
+          </div>
+          <LayoutImageBanner placement="jobs_hub_rail" />
         </aside>
 
         <div>

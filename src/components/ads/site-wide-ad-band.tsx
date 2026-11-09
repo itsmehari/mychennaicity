@@ -1,23 +1,20 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { partnerAds, shouldShowSiteWideAd } from "@/lib/partner-ads";
-import { PartnerAdRotator } from "@/components/ads/partner-ad-rotator";
+import { shouldShowSiteWideAd } from "@/lib/partner-ads";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 
 /**
- * Catch-all rectangle after `<main>`. Hidden on legal/auth/admin and on pages
- * that already mount `<PageAdSlot />`.
+ * Catch-all after `<main>` on pages without their own column banner.
+ * Hidden on legal/auth/admin and on pages that already have a slot.
  */
 export function SiteWideAdBand() {
   const pathname = usePathname() ?? "/";
   if (!shouldShowSiteWideAd(pathname)) return null;
 
-  const ads = partnerAds("site_band");
-  if (ads.length === 0) return null;
-
   return (
     <div className="partner-ad-band">
-      <PartnerAdRotator ads={ads} shape="rectangle" placement="site_band" />
+      <LayoutImageBanner placement="site_band" />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ChennaiSeekersHubCardView } from "@/components/jobs/chennai-seekers-hub-card";
@@ -312,7 +313,8 @@ export function ChennaiSeekersHubListing({
       </aside>
 
       <div className="mcc-jobs-hub__layout">
-        <aside className="mcc-jobs-hub__filter-sidebar" aria-label="Filter profiles">
+        <aside className="mcc-jobs-hub__rail" aria-label="Filter profiles">
+          <div className="mcc-jobs-hub__filter-sidebar">
           <FilterPanel
             filters={filters}
             onChange={(next) => {
@@ -322,6 +324,8 @@ export function ChennaiSeekersHubListing({
             onReset={resetFilters}
             idPrefix="desktop"
           />
+          </div>
+          <LayoutImageBanner placement="seekers_hub_rail" />
         </aside>
 
         <div>

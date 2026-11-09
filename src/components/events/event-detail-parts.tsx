@@ -1,3 +1,4 @@
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import Link from "next/link";
 import type { PublicEventRow } from "@/domains/events";
 import { EventShareButton } from "@/components/events/event-share-button";
@@ -207,11 +208,9 @@ export function EventDesktopSidebar({ ev }: { ev: PublicEventRow }) {
   const enquire = eventEnquireDesk();
 
   return (
-    <aside
-      className="mcc-event-desktop-sidebar hidden lg:block"
-      aria-label="Event actions"
-    >
-      <div className="sticky top-24 flex flex-col gap-4">
+    <aside className="mcc-event-desktop-sidebar" aria-label="Event actions">
+      <div className="flex flex-col gap-4 lg:sticky lg:top-24">
+        <div className="hidden flex-col gap-4 lg:flex">
         <EventSummaryCard ev={ev} />
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--accent)]">
@@ -253,6 +252,8 @@ export function EventDesktopSidebar({ ev }: { ev: PublicEventRow }) {
           </div>
         </div>
         <EventPostCta />
+        </div>
+        <LayoutImageBanner placement="events_sidebar_rail" />
       </div>
     </aside>
   );

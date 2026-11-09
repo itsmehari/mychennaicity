@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { PublicArticleRow } from "@/domains/news";
 import { categoryToTopicSlug } from "@/lib/news-topics";
-import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 
@@ -119,7 +119,7 @@ export function ArticleRightSidebar({
         className="civic-sidebar-module"
       />
       <div className="civic-sidebar-ad">
-        <PageAdSlot shape="square" placement="article_sidebar" />
+        <LayoutImageBanner placement="article_sidebar" />
       </div>
       <SidebarArticleList
         kicker="Live desk"

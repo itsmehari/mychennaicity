@@ -3,10 +3,14 @@ import {
   bannerClickSlug,
   hasDedicatedPartnerAdSlot,
   isPartnerAdHost,
+  isPartnerArtwork,
   isPartnerPhotoAd,
+  layoutBannerForView,
+  layoutImageBanners,
   parseBannerClickSlug,
   partnerAdWithLine,
   partnerAds,
+  partnerBannerFrame,
   partnerPlacementLabel,
   shouldShowSiteWideAd,
   withPartnerUtm,
@@ -34,9 +38,12 @@ describe("partnerAds", () => {
       "bseri",
       "agsunwin",
     ]);
+    expect(ads.some(isPartnerArtwork)).toBe(false);
     for (const ad of ads) {
       expect(ad.href).toContain("utm_content=home_after_areas");
       expect(ad.href).toContain("utm_source=mychennaicity");
+    }
+    for (const ad of ads) {
       expect(isPartnerPhotoAd(ad)).toBe(true);
       expect(ad.lines?.length).toBeGreaterThanOrEqual(3);
       const seen = new Set<string>();
@@ -53,7 +60,8 @@ describe("partnerAds", () => {
   });
 
   it("wraps to the next marketing line for the same advertiser", () => {
-    const [ad] = partnerAds("site_band");
+    const ad = partnerAds("site_band").find((item) => item.id === "resumedoctor");
+    if (!ad) throw new Error("missing resumedoctor");
     const second = partnerAdWithLine(ad, 1);
     const wrapped = partnerAdWithLine(ad, ad.lines!.length);
     expect(second.offer).toBe(ad.lines?.[1]?.offer);
@@ -62,13 +70,43 @@ describe("partnerAds", () => {
   });
 
   it("keeps the gradient banner when a record has no photo", () => {
-    const [ad] = partnerAds("site_band");
+    const ad = partnerAds("site_band").find((item) => item.id === "resumedoctor");
+    if (!ad) throw new Error("missing resumedoctor");
     expect(
       isPartnerPhotoAd({
         ...ad,
         image: undefined,
       }),
     ).toBe(false);
+  });
+});
+
+describe("layout image banners", () => {
+  it("picks from the shared pool and stays put for one session and page", () => {
+    const pool = layoutImageBanners();
+    expect(pool.map((banner) => banner.id)).toEqual([
+      "vacancychennai",
+      "resumedoctor-work",
+      "resumedoctor-doors",
+      "myomr",
+      "bseri-aimsp",
+      "agsunwin-solar",
+    ]);
+    const first = layoutBannerForView("user-a", "/chennai-jobs");
+    expect(layoutBannerForView("user-a", "/chennai-jobs").id).toBe(first.id);
+    expect(pool.some((banner) => banner.id === first.id)).toBe(true);
+    const seen = new Set(
+      Array.from({ length: 24 }, (_, index) =>
+        layoutBannerForView(`user-${index}`, "/chennai-gold-rate").id,
+      ),
+    );
+    expect(seen.size).toBeGreaterThan(1);
+    expect(partnerBannerFrame(1024, 1024)).toBe("square");
+    expect(partnerBannerFrame(819, 1024)).toBe("vertical");
+    expect(parseBannerClickSlug("myomr--site_band")).toEqual({
+      partnerId: "myomr",
+      placement: "site_band",
+    });
   });
 });
 
@@ -96,8 +134,10 @@ describe("isPartnerAdHost", () => {
     expect(isPartnerAdHost("mycovai.in")).toBe(true);
     expect(isPartnerAdHost("colourchemist.co.in")).toBe(true);
     expect(isPartnerAdHost("bseri.net")).toBe(true);
+    expect(isPartnerAdHost("www.bseriworld.com")).toBe(true);
     expect(isPartnerAdHost("agsunwinenergysolutions.com")).toBe(true);
-    expect(isPartnerAdHost("vacancychennai.in")).toBe(false);
+    expect(isPartnerAdHost("www.vacancychennai.in")).toBe(true);
+    expect(isPartnerAdHost("myomr.in")).toBe(true);
     expect(isPartnerAdHost("mychennaicity.in")).toBe(false);
   });
 });
@@ -159,10 +199,10 @@ describe("shouldShowSiteWideAd", () => {
   });
 
   it("shows on public pages without a dedicated slot", () => {
-    expect(shouldShowSiteWideAd("/directory/restaurant/example")).toBe(true);
+    expect(shouldShowSiteWideAd("/directory/restaurant/example")).toBe(false);
     expect(shouldShowSiteWideAd("/chennai-gold-rate")).toBe(true);
     expect(shouldShowSiteWideAd("/guides/chennai-auto-fare")).toBe(true);
-    expect(shouldShowSiteWideAd("/chennai-jobs/looking-for-work")).toBe(true);
+    expect(shouldShowSiteWideAd("/chennai-jobs/looking-for-work")).toBe(false);
     expect(shouldShowSiteWideAd("/areas")).toBe(true);
   });
 });

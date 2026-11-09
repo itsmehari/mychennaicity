@@ -349,19 +349,29 @@
   }
 }
 
+.mcc-jobs-hub__rail {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
 .mcc-jobs-hub__filter-sidebar {
   display: none;
 }
 
 @media (min-width: 960px) {
-  .mcc-jobs-hub__filter-sidebar {
-    display: block;
+  .mcc-jobs-hub__rail {
     position: sticky;
     top: 90px;
     align-self: start;
+    justify-items: stretch;
     max-height: calc(100vh - 110px);
     overflow-y: auto;
     padding-right: 0.25rem;
+  }
+
+  .mcc-jobs-hub__filter-sidebar {
+    display: block;
   }
 }
 

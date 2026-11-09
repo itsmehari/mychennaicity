@@ -1,3 +1,4 @@
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import Image from "next/image";
 import Link from "next/link";
 import type { DirectoryEntryView } from "@/domains/directory";
@@ -107,7 +108,8 @@ export function DirectoryEntryDetail({ entry }: { entry: DirectoryEntryView }) {
           ) : null}
         </div>
 
-        <aside className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-sm lg:sticky lg:top-24">
+        <div className="flex flex-col gap-4 lg:sticky lg:top-24">
+        <aside className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-sm">
           <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--accent)]">
             At a glance
           </h2>
@@ -141,6 +143,8 @@ export function DirectoryEntryDetail({ entry }: { entry: DirectoryEntryView }) {
             .
           </p>
         </aside>
+        <LayoutImageBanner placement="directory_detail_rail" />
+        </div>
       </div>
     </article>
   );

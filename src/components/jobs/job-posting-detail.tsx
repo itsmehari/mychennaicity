@@ -4,7 +4,7 @@ import { buildChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
 import { JobCallGate } from "@/components/jobs/job-call-gate";
 import { JobPostingProse } from "@/components/jobs/job-posting-prose";
 import Link from "next/link";
-import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import { JobReaderViews } from "@/components/jobs/job-reader-views";
 import { isTamilJobSlug } from "@/lib/jobs/job-language";
 import {
@@ -299,7 +299,7 @@ export function JobPostingDetail({
                 />
               </div>
             ) : null}
-            <PageAdSlot shape="square" placement="job_detail_square" />
+            <LayoutImageBanner placement="job_detail_rail" />
             <JobsDetailGlance
               title={tamil ? "சுருக்கம்" : "At a glance"}
               rows={glanceRows}

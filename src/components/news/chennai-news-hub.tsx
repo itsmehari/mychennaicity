@@ -12,6 +12,7 @@ import {
 } from "@/lib/article-reading-time";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { areaHubSlugForArticle } from "@/lib/news-area-hint";
+import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { CHENNAI_NEWS_TOPIC_NAV } from "@/lib/news-topics";
 import {
@@ -417,6 +418,8 @@ export function NewsSidebar({
           ))}
         </ol>
       </div>
+
+      <LayoutImageBanner placement="news_sidebar_rail" />
 
       <div className="mcc-news-panel mcc-news-jobs-panel">
         <h2 className="mcc-news-panel__title">Work in Chennai</h2>
