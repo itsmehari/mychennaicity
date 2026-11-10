@@ -57,7 +57,7 @@ export function ChennaiJobsHubTabs({
       aria-label="Jobs hub sections"
     >
       <div
-        className="grid grid-cols-2 gap-2 rounded-2xl border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_92%,var(--foreground)_2%)] p-1.5 shadow-sm sm:gap-2.5"
+        className="grid grid-cols-2 gap-2 rounded-[22px] border border-[#eceaf3] bg-white p-1.5 shadow-[0_10px_30px_rgba(22,22,29,0.04)] sm:gap-2.5"
         role="tablist"
       >
         {TABS.map((tab) => {
@@ -70,10 +70,10 @@ export function ChennaiJobsHubTabs({
               role="tab"
               aria-selected={selected}
               aria-current={selected ? "page" : undefined}
-              className={`flex min-h-[3.25rem] flex-col justify-center rounded-xl px-3 py-2.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:min-h-[3.5rem] sm:px-4 sm:py-3 ${
+              className={`flex min-h-[3.25rem] flex-col justify-center rounded-2xl px-3 py-2.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5b4dff] sm:min-h-[3.5rem] sm:px-4 sm:py-3 ${
                 selected
-                  ? "bg-[var(--surface)] text-[var(--foreground)] shadow-sm ring-1 ring-[color-mix(in_srgb,var(--accent)_35%,var(--border))]"
-                  : "text-[var(--muted)] hover:bg-[color-mix(in_srgb,var(--surface)_70%,transparent)] hover:text-[var(--foreground)]"
+                  ? "bg-[#16161d] text-white shadow-sm"
+                  : "text-[#5c5872] hover:bg-[#f7f6fb] hover:text-[#16161d]"
               }`}
             >
               <span className="flex items-center gap-2">
@@ -85,8 +85,8 @@ export function ChennaiJobsHubTabs({
                   <span
                     className={`inline-flex min-w-[1.35rem] items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-bold tabular-nums ${
                       selected
-                        ? "bg-[color-mix(in_srgb,var(--accent)_14%,var(--surface))] text-[var(--accent)]"
-                        : "bg-[color-mix(in_srgb,var(--foreground)_6%,var(--surface))] text-[var(--muted)]"
+                        ? "bg-white/15 text-white"
+                        : "bg-[#f4f1ff] text-[#3d348f]"
                     }`}
                   >
                     {n}

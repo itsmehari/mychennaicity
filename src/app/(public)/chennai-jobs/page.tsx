@@ -18,12 +18,11 @@ import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
-import { ChennaiJobsHubHero } from "@/components/jobs/chennai-jobs-hub-hero";
+import { ChennaiJobsHubStage } from "@/components/jobs/chennai-jobs-hub-stage";
 import { ChennaiJobsHubFaq } from "@/components/jobs/chennai-jobs-hub-faq";
 import { ChennaiJobsHubAeoStrip } from "@/components/jobs/chennai-jobs-hub-aeo-strip";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ChennaiJobsHubListing } from "@/components/jobs/chennai-jobs-hub-listing";
-import { ChennaiJobsHubScrollCue } from "@/components/jobs/chennai-jobs-hub-scroll-cue";
 import {
   ChennaiJobsHubEmployerCta,
   ChennaiJobsHubResources,
@@ -116,8 +115,13 @@ export default async function ChennaiJobsHubPage() {
         items={[{ label: "Home", href: "/" }, { label: "Jobs in Chennai" }]}
       />
 
-      <ChennaiJobsHubHero totalJobs={total} hasLiveJobs={useDb} />
-      {useDb ? <ChennaiJobsHubScrollCue totalJobs={total} /> : null}
+      <ChennaiJobsHubStage
+        cards={hubCards}
+        totalJobs={total}
+        fresherCount={countFresherJobs(hubCards)}
+        walkInCount={countWalkInJobs(hubCards)}
+        seekingCount={seekingTotal}
+      />
 
       <ChennaiJobsHubAeoStrip openJobsCount={total} />
 

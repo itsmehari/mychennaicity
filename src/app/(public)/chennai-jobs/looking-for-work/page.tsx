@@ -7,7 +7,7 @@ import {
 import { ChennaiJobsHubTabs } from "@/components/jobs/chennai-jobs-hub-tabs";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
-import { ChennaiSeekersHubHero } from "@/components/jobs/chennai-seekers-hub-hero";
+import { ChennaiSeekersHubStage } from "@/components/jobs/chennai-seekers-hub-stage";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ChennaiSeekersHubListing } from "@/components/jobs/chennai-seekers-hub-listing";
 import {
@@ -116,7 +116,12 @@ export default async function ChennaiJobsLookingForWorkPage() {
         ]}
       />
 
-      <ChennaiSeekersHubHero totalProfiles={total} hasLiveProfiles={useDb} />
+      <ChennaiSeekersHubStage
+        cards={hubCards}
+        totalProfiles={total}
+        accommodationCount={countAccommodationSeekers(hubCards)}
+        immediateCount={countImmediateSeekers(hubCards)}
+      />
 
       <ChennaiJobsHubTabs
         active="seeking"

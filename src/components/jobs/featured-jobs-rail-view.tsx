@@ -164,6 +164,10 @@ export function FeaturedJobsRailView({
   }
 
   const compact = variant === "aside";
+  const desk =
+    placement === "jobs_hub" ||
+    placement === "looking_for_work" ||
+    placement === "job_detail";
 
   return (
     <section
@@ -171,7 +175,13 @@ export function FeaturedJobsRailView({
       aria-labelledby={`featured-jobs-${placement}`}
       className={className}
     >
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
+      <p
+        className={
+          desk
+            ? "text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5b4dff]"
+            : "text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]"
+        }
+      >
         {copy.eyebrow}
       </p>
       <h2
@@ -179,7 +189,9 @@ export function FeaturedJobsRailView({
         className={
           compact
             ? "mt-1 text-base font-bold text-[var(--foreground)]"
-            : "mt-1 text-xl font-bold tracking-tight text-[var(--foreground)] sm:text-2xl"
+            : desk
+              ? "mt-1 text-2xl font-semibold tracking-tight text-[#16161d] sm:text-3xl"
+              : "mt-1 text-xl font-bold tracking-tight text-[var(--foreground)] sm:text-2xl"
         }
       >
         {copy.title}
@@ -198,9 +210,19 @@ export function FeaturedJobsRailView({
           <li key={card.slug}>
             <Link
               href={card.href}
-              className="flex h-full flex-col rounded-2xl border border-[color-mix(in_srgb,var(--accent)_32%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-4 no-underline shadow-sm transition-shadow hover:shadow-md"
+              className={
+                desk
+                  ? "flex h-full flex-col rounded-[22px] border border-[#eceaf3] bg-white p-4 no-underline shadow-[0_10px_30px_rgba(22,22,29,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(22,22,29,0.08)]"
+                  : "flex h-full flex-col rounded-2xl border border-[color-mix(in_srgb,var(--accent)_32%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_5%,var(--surface))] p-4 no-underline shadow-sm transition-shadow hover:shadow-md"
+              }
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
+              <span
+                className={
+                  desk
+                    ? "inline-flex w-fit rounded-full bg-[#f4f1ff] px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#3d348f] uppercase"
+                    : "text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]"
+                }
+              >
                 Featured · {openingsLabel(card.openings, language)}
               </span>
               <span className="mt-1 text-base font-semibold text-[var(--foreground)]">
@@ -215,7 +237,13 @@ export function FeaturedJobsRailView({
                   {card.context}
                 </span>
               )}
-              <span className="mt-3 text-xs font-semibold text-[var(--accent)]">
+              <span
+                className={
+                  desk
+                    ? "mt-3 text-xs font-semibold text-[#5b4dff]"
+                    : "mt-3 text-xs font-semibold text-[var(--accent)]"
+                }
+              >
                 {language === "ta" ? "வேலையைப் படிக்க →" : "View listing →"}
               </span>
             </Link>

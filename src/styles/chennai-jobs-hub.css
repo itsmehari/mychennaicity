@@ -1,14 +1,14 @@
 /* Chennai jobs hub — core listing redesign */
 
 .mcc-jobs-hub {
-  --mcj-primary: #008f6b;
-  --mcj-primary-dark: #05624d;
-  --mcj-primary-soft: #e8f7f2;
-  --mcj-text: #111827;
-  --mcj-muted: #667085;
-  --mcj-bg: #faf9f6;
+  --mcj-primary: #5b4dff;
+  --mcj-primary-dark: #3d348f;
+  --mcj-primary-soft: #f4f1ff;
+  --mcj-text: #16161d;
+  --mcj-muted: #5c5872;
+  --mcj-bg: #f7f6fb;
   --mcj-card: #ffffff;
-  --mcj-border: #e4e7e5;
+  --mcj-border: #eceaf3;
   --mcj-warning-bg: #fff8e7;
   --mcj-warning-border: #eed8a4;
 }
@@ -1449,5 +1449,143 @@
       var(--surface) 70%
     );
     border-color: var(--border);
+  }
+}
+
+/* Desk skin: jobs hub, job pages, and looking-for-work share one palette. */
+.mcc-jobs-hub__search-card,
+.mcc-jobs-hub__filter-panel,
+.mcc-jobs-hub__job-card,
+.mcc-jobs-hub__summary-card,
+.mcc-jobs-detail__body,
+.mcc-jobs-detail__glance {
+  border-color: #eceaf3;
+  box-shadow: 0 10px 30px rgba(22, 22, 29, 0.04);
+}
+
+.mcc-jobs-hub__search-btn,
+.mcc-jobs-hub__job-btn--primary,
+.mcc-jobs-hub__employer-btn--solid {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6d5efc, #8a5cff);
+}
+
+.mcc-jobs-hub__search-btn:hover,
+.mcc-jobs-hub__job-btn--primary:hover,
+.mcc-jobs-hub__employer-btn--solid:hover {
+  background: linear-gradient(90deg, #5b4dff, #7a4dff);
+}
+
+.mcc-jobs-hub__chip.is-active {
+  border-color: #d9d4ff;
+  background: #f4f1ff;
+  color: #3d348f;
+}
+
+.mcc-jobs-hub__job-card:hover {
+  transform: translateY(-2px);
+  border-color: #d9d4ff;
+}
+
+.mcc-jobs-hub__job-card--featured {
+  border-color: #c9c2ff;
+  box-shadow: 0 12px 28px rgba(91, 77, 255, 0.12);
+}
+
+.mcc-jobs-hub__job-badge {
+  border-color: #e4defc;
+  background: #f4f1ff;
+  color: #3d348f;
+}
+
+.mcc-jobs-detail__hero {
+  border: 0;
+  border-radius: 28px;
+  background: #0e1324;
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(14, 19, 36, 0.18);
+}
+
+.mcc-jobs-detail__eyebrow {
+  color: #b7b4ff;
+}
+
+.mcc-jobs-detail__title {
+  color: #fff;
+  letter-spacing: -0.03em;
+}
+
+.mcc-jobs-detail__meta,
+.mcc-jobs-detail__meta span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.mcc-jobs-detail__meta a {
+  color: #c9c2ff;
+}
+
+.mcc-jobs-detail__hero .mcc-jobs-hub__job-badge {
+  background: #2a2558;
+  border-color: transparent;
+  color: #fff;
+}
+
+.mcc-jobs-detail__glance {
+  border-radius: 22px;
+}
+
+.mcc-jobs-detail__glance-title {
+  color: #3d348f;
+  background: #f4f1ff;
+  border-bottom-color: #eceaf3;
+}
+
+.mcc-jobs-detail__apply-band {
+  border: 0;
+  border-radius: 22px;
+  background: #0e1324;
+  color: #fff;
+}
+
+.mcc-jobs-detail__apply-band h2 {
+  color: #fff;
+}
+
+.mcc-jobs-detail__apply-band p,
+.mcc-jobs-detail__cta-hint {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mcc-jobs-hub__safety {
+  border-radius: 22px;
+  border-color: #eadfb8;
+  background: #fffaf0;
+}
+
+.mcc-jobs-hub__employer-cta {
+  border-radius: 28px;
+  background: #0e1324;
+}
+
+.mcc-jobs-hub__employer-btn--solid {
+  color: #0e1324;
+  background: #fff;
+}
+
+.mcc-jobs-hub__employer-btn--solid:hover {
+  background: #f3f0ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mcc-jobs-detail__hero,
+  .mcc-jobs-detail__apply-band,
+  .mcc-jobs-hub__employer-cta {
+    background: #0e1324;
+    color: #fff;
+  }
+
+  .mcc-jobs-detail__title,
+  .mcc-jobs-detail__apply-band h2 {
+    color: #fff;
   }
 }
