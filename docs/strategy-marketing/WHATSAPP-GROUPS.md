@@ -3,7 +3,7 @@
 **Canonical record.** When anyone asks how the city WhatsApp group, the join form, or the admin queue works, read this file first.
 
 **Public site:** https://mychennaicity.in  
-**Last updated:** 5 November 2026  
+**Last updated:** 8 November 2026  
 **Weekly ops:** `docs/strategy-marketing/WHATSAPP-COMMUNITY-PLAYBOOK.md`
 
 ## What the group is
@@ -43,6 +43,7 @@ Links pasted **inside** the group later use `withWhatsappGroupShareUtms()` (`utm
 | Spam | `src/content/whatsapp-community/spammers.ts`, plus status `spam` | Rejected on submit and on resubmit |
 | Mail | No outbound mailer in this repo | Saving the row does not wait on email |
 | Old `/api/community/whatsapp` | Redirects to the form | It used to send people straight to the invite |
+| Status tags and new WhatsApp buttons | Forbidden until the rules page allows them | A mention notifies members. Admins cannot delete another person’s Status. See the playbook |
 
 ## Operator steps
 

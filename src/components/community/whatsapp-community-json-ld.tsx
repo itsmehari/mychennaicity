@@ -76,7 +76,7 @@ export function WhatsAppCommunityJsonLd({
       inLanguage: page === "ta" ? "ta-IN" : "en-IN",
       isPartOf: { "@id": `${base}/#website` },
       about: CHENNAI_PLACE_GRAPH,
-      dateModified: "2026-06-18",
+      dateModified: "2026-11-08",
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: `${base}${WHATSAPP_COMMUNITY_OG_IMAGE}`,

@@ -53,6 +53,16 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
       "Yes. Numbers flagged from invite-link join floods on the my chennai city group are listed at mychennaicity.in/chennai-whatsapp-spammers so other Chennai WhatsApp admins can stay wary. The list is a public-interest moderation aid, not a police or court finding.",
   },
   {
+    question: "Someone tagged me in a WhatsApp Status with this group. Can an admin remove it?",
+    answer:
+      "No. Admins can delete only a Status they posted. The person who tagged you has to delete that Status. Mentioning this group or its members in Status, or adding this group to a Status audience, is not allowed. Tell the poster, or tell an admin the poster's name so we can ask them. Posting more statuses does not remove the tag.",
+  },
+  {
+    question: "Which WhatsApp buttons are not allowed in this group?",
+    answer:
+      "Do not use a control that notifies every member or exposes someone who did not agree: group voice or video calls, @everyone, group Events, polls unless an admin posts one, @Meta AI, UPI collect requests and payment QR codes, view-once media, another person's live location, adding members, copying the member list, and attaching this group to a Community, Channel, or broadcast. Admins will never ask for your OTP, PIN, or a QR code, including after a WhatsApp update. If a new button does any of this, leave it unused and ask an admin.",
+  },
+  {
     question: "Is mychennaicity.in affiliated with WhatsApp?",
     answer:
       "No. mychennaicity.in is an independent Chennai local site. WhatsApp is a product of Meta. We use WhatsApp as a channel; we are not affiliated with WhatsApp LLC or Meta.",

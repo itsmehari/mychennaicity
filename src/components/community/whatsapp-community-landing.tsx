@@ -3,7 +3,11 @@ import {
   WHATSAPP_COMMUNITY_BENEFITS,
   WHATSAPP_COMMUNITY_LOCALITIES,
 } from "@/content/whatsapp-community/localities";
-import { WHATSAPP_COMMUNITY_RULES } from "@/content/whatsapp-community/rules";
+import {
+  WHATSAPP_COMMUNITY_RULES,
+  WHATSAPP_FEATURE_LIMITS,
+  WHATSAPP_STATUS_TAG_RULE,
+} from "@/content/whatsapp-community/rules";
 import { getPublicContactEmail } from "@/lib/env";
 import {
   WHATSAPP_COMMUNITY_GROUP_NAME,
@@ -202,6 +206,11 @@ export function WhatsAppCommunityLanding() {
           </Link>{" "}
           for numbers we reject from invite-link floods.
         </p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+          WhatsApp keeps adding buttons that notify the whole group or tag
+          people who never agreed. If a control does that, do not use it here.
+          The person who taps it is the one who must undo it.
+        </p>
         <ul className="mt-5 grid gap-2 sm:grid-cols-2">
           {WHATSAPP_COMMUNITY_RULES.map((rule) => (
             <li
@@ -215,6 +224,22 @@ export function WhatsAppCommunityLanding() {
             </li>
           ))}
         </ul>
+        <div className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 sm:px-5">
+          <h3 className="text-sm font-semibold text-[var(--foreground)]">
+            {WHATSAPP_STATUS_TAG_RULE.title}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+            {WHATSAPP_STATUS_TAG_RULE.body}
+          </p>
+          <ul className="mt-4 space-y-3">
+            {WHATSAPP_FEATURE_LIMITS.map((item) => (
+              <li key={item.title}>
+                <p className="text-sm font-semibold text-[var(--foreground)]">{item.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* Tamil summary */}

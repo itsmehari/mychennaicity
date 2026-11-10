@@ -19,7 +19,7 @@ export const WA_ADMIN_PLAYBOOK = [
   },
   {
     title: "Pin community rules",
-    body: "No forwards of unverified crime/medical rumours; no political spam; no job-scam PDFs.",
+    body: "No forwards of unverified crime/medical rumours; no political spam; no job-scam PDFs. No Status tags of the group, group calls, @everyone, or UPI collect requests.",
   },
   {
     title: "Separate announce vs chat",

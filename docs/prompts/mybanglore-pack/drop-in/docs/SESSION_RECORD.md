@@ -66,7 +66,7 @@ One front controller. A repository reads MySQL. A view renders. The homepage onl
 
 ## Database
 
-One database, `mybanglore`. Eighteen tables. `seed.sql` inserts the city and ten area hubs only.
+One database, `mybanglore`. Eighteen tables. `seed.sql` inserts the city and twelve area hubs only.
 
 | Group | Tables |
 | --- | --- |
@@ -114,7 +114,7 @@ Not yet right if left unchanged:
 - Lakes and storm drains are the monsoon story. A Chennai flood-street tool does not transfer.
 - The city economy is split: IT and GCC hiring, and informal work (construction, delivery, autos, domestic work, pourakarmikas). The hero line “IT, offices, retail” only covers the first.
 - PG and shared housing are a main reason people open a city site. Classifieds are in the database and easy to hide for too long.
-- Old Bengaluru (Basavanagudi, Chamarajpet, Gandhi Bazaar) and the Sarjapur–Bellandur belt are thin in the first ten hubs.
+- Old Bengaluru and the Sarjapur–Bellandur belt were thin in the first ten hubs. That gap is closed: the seed now has twelve hubs, including Basavanagudi · Chamarajpet and Sarjapur · Bellandur.
 - A “moved here” door matters more than it did as a Chennai extra, because so many readers are new.
 
 No build file was changed on this review. Change the homepage contract and the five tools before Prompt 1 if the desk should feel local.

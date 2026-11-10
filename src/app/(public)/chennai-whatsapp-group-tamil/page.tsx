@@ -114,6 +114,52 @@ export default function ChennaiWhatsappGroupTamilPage() {
           </p>
         </section>
 
+        <section className="mt-12">
+          <h2 className="type-display text-xl text-[var(--foreground)]">
+            WhatsApp புதிய பட்டன்கள்
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+            குழு முழுவதற்கும் அறிவிப்பு அனுப்பும், அல்லது சம்மதம் இல்லாத உறுப்பினரைக்
+            காட்டும் பட்டனை இங்கே பயன்படுத்த வேண்டாம். அந்த பட்டனை அழுத்தியவர்தான் அதைத்
+            திரும்பப் பெற வேண்டும்.
+          </p>
+          <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--muted)]">
+            <li>
+              <strong className="text-[var(--foreground)]">Status டேக்.</strong> இந்த
+              குழுவையோ உறுப்பினர்களையோ உங்கள் Status-ல் mention செய்ய வேண்டாம். குழுவை
+              Status audience-ல் சேர்க்க வேண்டாம். நீங்கள் போட்ட Status-ஐ நீங்கள்தான்
+              அழிக்க முடியும். அட்மின் வேறொருவரின் Status-ஐ அழிக்க முடியாது. மேலும் Status
+              போடுவதால் டேக் நீங்காது. கேட்டவுடன் அந்த Status-ஐ அழியுங்கள்.
+            </li>
+            <li>
+              <strong className="text-[var(--foreground)]">அழைப்பு, @everyone, Event, poll.</strong>{" "}
+              இவை எல்லா தொலைபேசிகளுக்கும் அறிவிப்பு அனுப்பும். அட்மின் போடும் உண்மையான
+              சென்னை அறிவிப்பைத் தவிர வேண்டாம்.
+            </li>
+            <li>
+              <strong className="text-[var(--foreground)]">@Meta AI, UPI, view-once.</strong>{" "}
+              குழுவில் @Meta AI அனுப்ப வேண்டாம். UPI collect, payment QR, request money
+              வேண்டாம். view-once மீடியா வேண்டாம். மற்றவரின் live location பகிர வேண்டாம்.
+            </li>
+            <li>
+              <strong className="text-[var(--foreground)]">உறுப்பினர் சேர்ப்பு.</strong>{" "}
+              நேரடியாக யாரையும் சேர்க்க வேண்டாம். சேர கோரிக்கை படிவத்தை அனுப்புங்கள்.
+              உறுப்பினர் பட்டியலை நகலெடுக்க வேண்டாம். இந்த குழுவை வேறு Community, Channel,
+              அல்லது broadcast-ல் இணைக்க வேண்டாம்.
+            </li>
+            <li>
+              <strong className="text-[var(--foreground)]">OTP / QR.</strong> WhatsApp
+              அப்டேட் வந்தாலும் அட்மின் OTP, PIN, அல்லது QR கேட்க மாட்டார். கேட்டால் அது
+              மோசடி.
+            </li>
+            <li>
+              <strong className="text-[var(--foreground)]">திருத்தம்.</strong> வேலை, விலை,
+              அல்லது தொலைபேசி எண்ணைப் போட்ட பிறகு அந்த செய்தியை edit செய்ய வேண்டாம். புதிய
+              திருத்தம் அனுப்புங்கள்.
+            </li>
+          </ul>
+        </section>
+
         <WhatsAppCommunityStickyBar />
       </div>
     </>

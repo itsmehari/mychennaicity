@@ -34,7 +34,7 @@ export const WHATSAPP_COMMUNITY_BADGE_IMAGE =
 
 export const WHATSAPP_COMMUNITY_GROUP_NAME = "my chennai city";
 
-export const WHATSAPP_COMMUNITY_LAST_UPDATED = "18 June 2026";
+export const WHATSAPP_COMMUNITY_LAST_UPDATED = "8 November 2026";
 
 export function siteWhatsappCommunityPageUrl(
   query?: Record<string, string>,

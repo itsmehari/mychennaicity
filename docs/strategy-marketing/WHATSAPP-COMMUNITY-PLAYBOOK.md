@@ -27,6 +27,21 @@ Use `dev-tools/whatsapp-community-pinned-message.txt`.
 - A business may post once a week, and only if it is relevant to Chennai
 - No cold DMs
 - English, Tamil, and Tanglish are welcome
+- No Status tags of this group or its members. No group calls, @everyone, UPI collect requests, or @Meta AI
+
+## Status tags and new WhatsApp buttons
+
+November 2026: a member was mentioned in other people’s Status via this group and asked for the tag to be removed. WhatsApp notifies members when someone mentions the group. Admins cannot delete another person’s Status. Posting more statuses does not delete the tag.
+
+When someone asks:
+
+1. If we posted it, delete that Status now.
+2. Message the person who posted it and ask them to delete it. Do not send the tagged member to chase other members as the first reply.
+3. Do not say the tag will clear after more statuses are posted. That is not removal.
+4. Reply in one plain sentence: we deleted our Status, and we have asked the people who posted the others to delete theirs. Do not open by restating their request.
+5. Point them at the rules on https://mychennaicity.in/chennai-whatsapp-group
+
+If WhatsApp ships a control that notifies every member, adds people without the join form, or exposes a name, photo, number, or location, leave it unused until the rules page names it. Current blocks: Status mentions and Status audience, group calls, @everyone, group Events, member polls, @Meta AI, UPI collect requests, view-once media, another person’s live location, Communities / Channels / broadcasts, copying the member list, OTP / PIN / QR “verification” after an app update, and editing a job or phone number after people have used it.
 
 ## When the group is full
 
