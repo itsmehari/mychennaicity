@@ -232,6 +232,8 @@
     "db:seed:chennai-job:hecs-eia-proposal:live": "tsx scripts/seed-chennai-job-hecs-senior-eia-expert-proposal-engineer.ts --live",
     "db:seed:chennai-job:zavin-hr-clinic": "tsx scripts/seed-chennai-job-zavin-hr-healthcare-aesthetics-clinic.ts",
     "db:seed:chennai-job:zavin-hr-clinic:live": "tsx scripts/seed-chennai-job-zavin-hr-healthcare-aesthetics-clinic.ts --live",
+    "db:seed:chennai-job:madras-cafe-thanjavur": "tsx scripts/seed-chennai-job-madras-cafe-thanjavur.ts",
+    "db:seed:chennai-job:madras-cafe-thanjavur:live": "tsx scripts/seed-chennai-job-madras-cafe-thanjavur.ts --live",
     "db:seed:chennai-job:setu-quality-line-inspector": "tsx scripts/seed-chennai-job-setu-quality-line-inspector-thirumudivakkam.ts",
     "db:seed:chennai-job:setu-quality-line-inspector:live": "tsx scripts/seed-chennai-job-setu-quality-line-inspector-thirumudivakkam.ts --live",
     "db:seed:chennai-job:nyx-ar-caller": "tsx scripts/seed-chennai-job-nyx-ar-caller-fresher-triplicane.ts",
