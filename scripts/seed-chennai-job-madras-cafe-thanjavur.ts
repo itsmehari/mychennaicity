@@ -47,8 +47,13 @@ const EMPLOYER_SLUG = "madras-cafe";
 const EMPLOYER_NAME = "Madras Cafe";
 const EMAIL = "amloofoundation@gmail.com";
 const PHONE_DISPLAY = "8126188375";
+/**
+ * Same file as `public/images/listings/madras-cafe-biryani-thanjavur-hiring-2026.png`.
+ * The live page uses the GitHub copy because the Vercel production deploy
+ * for this commit failed, so `/images/listings/...` 404s until a deploy lands.
+ */
 const FLYER =
-  "/images/listings/madras-cafe-biryani-thanjavur-hiring-2026.png";
+  "https://raw.githubusercontent.com/itsmehari/mychennaicity/a1c94f2b9697d9d864625c4b48255eee832fb193/public/images/listings/madras-cafe-biryani-thanjavur-hiring-2026.png";
 
 type RoleSeed = {
   slug: string;
