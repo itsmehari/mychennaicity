@@ -5,6 +5,8 @@ import {
   pageHidesFeaturedJobsCatchAll,
 } from "./featured-job-campaigns";
 
+const CAST =
+  "male-models-south-style-casting-studio-ponneri-minjur-thiruvallur-chennai";
 const OFFICE = "male-office-assistant-guindy-race-course";
 const AC = "ac-technician-helper-50-vacancies-madipakkam-chennai";
 const HR = "hr-recruiter-10-vacancies-sembakkam-chennai";
@@ -32,12 +34,25 @@ describe("featured job campaigns", () => {
     const lastGuindyEvening = new Date("2026-12-01T18:29:00.000Z");
     const afterGuindy = new Date("2026-12-01T18:30:00.000Z");
     expect(activeFeaturedJobCampaigns(afterVv).map((c) => c.englishSlug)).toEqual([
+      CAST,
       OFFICE,
     ]);
     expect(isActiveFeaturedJobSlug(HR, afterVv)).toBe(false);
+    expect(isActiveFeaturedJobSlug(CAST, afterVv)).toBe(true);
     expect(isActiveFeaturedJobSlug(OFFICE, lastGuindyEvening)).toBe(true);
-    expect(activeFeaturedJobCampaigns(afterGuindy)).toEqual([]);
+    expect(activeFeaturedJobCampaigns(afterGuindy).map((c) => c.englishSlug)).toEqual([
+      CAST,
+    ]);
     expect(isActiveFeaturedJobSlug(OFFICE, afterGuindy)).toBe(false);
+    expect(isActiveFeaturedJobSlug(CAST, afterGuindy)).toBe(true);
+  });
+
+  it("drops the casting studio pin on 14 Dec 2026 IST", () => {
+    const lastEvening = new Date("2026-12-13T18:29:00.000Z");
+    const nextMorning = new Date("2026-12-13T18:30:00.000Z");
+    expect(isActiveFeaturedJobSlug(CAST, lastEvening)).toBe(true);
+    expect(activeFeaturedJobCampaigns(nextMorning)).toEqual([]);
+    expect(isActiveFeaturedJobSlug(CAST, nextMorning)).toBe(false);
   });
 
   it("hides the footer band where a page already features the roles", () => {

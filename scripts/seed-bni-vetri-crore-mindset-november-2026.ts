@@ -75,110 +75,79 @@ async function main() {
 
   const reportBody = `## Disclaimer
 
-This is a MyChennaiCity report on a business visitors morning called by BNI Vetri. The date, the clock, the contact name, and the wording are taken from two invitations and a short note the chapter shared with this desk. It is not an official notice from BNI or from BNI Vetri. The hall is not on those pages. Confirm the place, the close, and any fee with the organiser before you travel.
+This is a MyChennaiCity report on a visitors morning called by BNI Vetri. The date, the time, and the contact come from the chapter’s invitations. It is not an official BNI notice. The hall has not been announced. Confirm the place with the organiser before you travel.
 
 ## Summary
 
-**Chennai, 13 November 2026** — BNI Vetri has invited business owners to a visitors morning it is calling **The Crore Mindset**. The date on both posters is **Wednesday, 25 November 2026**. The time printed on both is **7:29 AM**.
+**Chennai, 13 November 2026** — BNI Vetri will bring business owners together on **Wednesday, 25 November 2026**, for a visitors morning it has named **The Crore Mindset**. The sitting starts at **7:29 AM**.
 
-The place is given only as **Chennai**. Neither poster names a hall, a street, or a hotel. Neither poster prints a ticket price or a finish time.
+The chapter is inviting entrepreneurs who want new relationships and referral work. Women who run businesses have a direct invitation to the same morning. People who want to attend can call **Riyaz Ahamed** on **77088 37509**.
 
-Enquiries and registration are directed to **Riyaz Ahamed** on **77088 37509**.
+The gathering is in Chennai. A hall has not been named yet.
 
-A practical listing is on the [events page](${EVENT}).
+![BNI Vetri Business Visitors Day, The Crore Mindset, Chennai, 25 November 2026](${HERO})
 
-![BNI Vetri poster for The Crore Mindset Business Visitors Day, 25 November 2026 at 7:29 AM](${HERO})
+*BNI Vetri’s visitors morning, The Crore Mindset, is set for 25 November at 7:29 AM.*
 
-*The visitors-day poster. It names the morning, the date, and Riyaz Ahamed. It does not name a hall.*
+## A morning for referrals
 
-## What the invitation is asking people to do
+BNI, Business Network International, is a referral network. Members meet so that business owners and professionals can pass work to one another. The line the chapter uses for that habit is **Givers Gain**: help someone else’s business, and your own chances grow with it.
 
-The visitors-day poster is addressed to entrepreneurs. Its own line under the title is **BNI Vetri Business Visitors Day**. The sentence underneath is short: build connections, unlock opportunities, grow your business.
+BNI Vetri says that is the work of its regular meetings, its business presentations, and its visitor sessions. The Crore Mindset is the next of those visitor mornings. The chapter’s own words for the day are to build connections, unlock opportunities, and grow a business, and to **connect, collaborate, and grow together**.
 
-The chapter’s note, sent with the posters, describes the morning as a chance to meet business owners, look for referrals, and build relationships. The close it wants remembered is **Connect. Collaborate. Grow together.**
+No speaker list has been released, and the chapter has not said how many people it expects in the room.
 
-That is the whole public programme. There is no speaker list, no agenda of presentations, and no count of members or visitors.
+## Women entrepreneurs are invited
 
-## A second poster, for women entrepreneurs
+The chapter has also addressed the morning to women entrepreneurs, under the line **She leads. She connects. She grows.**
 
-The same date and the same 7:29 AM appear on a second poster. The line at the top is **An invitation to women entrepreneurs**. The headline under that is **She leads. She connects. She grows.** The red band repeats the event name, The Crore Mindset, and the black band under it again says BNI Vetri Business Visitors Day.
+The invitation tells them their ambition deserves a stronger network: meet other business owners, look for referrals, and build relationships that help the business grow. It closes with a plain ask. Step forward. Build connections. Grow your business.
 
-The body copy on that poster is more specific than the first. It says a person’s ambition deserves a stronger network, then: connect with business owners, discover referral opportunities, and build relationships that help the business grow. The last line is **Step forward. Build connections. Grow your business.**
+Registration for that invitation is the same call, to Riyaz Ahamed on 77088 37509. The chapter has put both invitations on one date and one clock, so they are one morning.
 
-The phone number at the foot is the same: Riyaz Ahamed, 77088 37509.
+![Women entrepreneurs are invited to BNI Vetri’s Crore Mindset morning on 25 November](${WOMEN})
 
-This desk is treating the two posters as one morning. Nothing on them says the women-entrepreneurs invitation is a separate sitting, a different hall, or a different fee.
+*Women entrepreneurs are invited to the same visitors morning.*
 
-![BNI Vetri invitation to women entrepreneurs for The Crore Mindset, 25 November 2026 at 7:29 AM](${WOMEN})
+## How to attend
 
-*The women-entrepreneurs poster. Same morning, same phone, a different headline.*
+Call **77088 37509** and ask Riyaz Ahamed for the building. Also ask whether a visitor pays, and what time the morning ends. Neither has been announced. The name of the morning is The Crore Mindset. The chapter has not tied that name to any figure for turnover or income.
 
-## What the chapter says it is
-
-The note that came with the posters introduces BNI, Business Network International, as a referral network for entrepreneurs, business owners, and professionals. The philosophy it prints is **Givers Gain**: help other people grow their businesses, and opportunities for one’s own business follow.
-
-On BNI Vetri itself, the note does not give a founding year, a member count, or a rupee total of referrals passed. It says the chapter regularly holds structured networking meetings, business presentations, visitor sessions, and networking events, and that those meetings are where people connect, look for collaborations, and exchange referrals.
-
-That is a description of the chapter’s usual work. It is not a dated list of past meetings. No earlier date was supplied with these posters, so this report does not invent one.
-
-## What the posters do not say
-
-Three things a visitor usually needs are missing.
-
-**The hall.** “Chennai” is the only place name. Until Riyaz Ahamed gives a building, the morning cannot be mapped.
-
-**The close.** 7:29 AM is the start. There is no end. The [events listing](${EVENT}) holds the calendar to **10:00 AM** so the row does not vanish at the start time. That 10:00 AM is this site’s hold. It is not printed on the invitation.
-
-**The fee.** Nothing on either poster says the morning is free, and nothing prints a price. Ask before you treat it as an open house.
-
-The title needs the same care. **The Crore Mindset** is the name of the visitors day. The posters do not say that attendance produces a crore in turnover, referrals, or income. A crore is a unit of money. Here it is a slogan.
+A listing, with the date and the phone number, is on the [events page](${EVENT}).
 
 ## Fact box
 
-| Detail | What is printed |
+| Detail | As announced |
 | --- | --- |
-| Event | The Crore Mindset — BNI Vetri Business Visitors Day |
+| What | The Crore Mindset, BNI Vetri Business Visitors Day |
 | When | Wednesday 25 November 2026, 7:29 AM |
-| Where | Chennai. No hall or street is printed |
-| Finish | Not printed. This site’s calendar hold is 10:00 AM |
-| Fee | Not printed |
+| Where | Chennai. Hall yet to be announced |
+| Who | Business owners, with a direct invitation to women entrepreneurs |
 | Contact | Riyaz Ahamed, 77088 37509 |
-| Second poster | Invitation to women entrepreneurs, same date and time |
 
 ## Key takeaways
 
-- BNI Vetri has called a visitors morning for Wednesday 25 November 2026 at 7:29 AM.
-- Both posters say Chennai and do not name a hall.
-- A second poster invites women entrepreneurs to the same clock and the same phone.
-- No fee and no finish time are printed. The 10:00 AM on the events page is ours.
-- “Crore Mindset” is the title of the morning, not a published income figure.
-
-## Before you go
-
-Call **77088 37509** and ask for the building, whether a visitor pays, what time the morning ends, and whether the women-entrepreneurs poster is the same sitting. The name on the poster for that call is **Riyaz Ahamed**.
+- BNI Vetri’s visitors morning, The Crore Mindset, is on Wednesday 25 November 2026 at 7:29 AM.
+- The chapter wants business owners in the room to exchange referrals and build relationships.
+- Women entrepreneurs have their own invitation to that same morning.
+- Register with Riyaz Ahamed on 77088 37509, and ask him for the hall.
 
 ## Fine print
 
-This report was drafted with AI assistance and checked against the two BNI Vetri invitations and the note shared with MyChennaiCity. AI can miss a line or smooth a claim. Read the posters and confirm the hall with the organiser before you act on it.`.trim();
+This report was drafted with AI assistance and checked against the BNI Vetri invitations shared with MyChennaiCity. AI can miss a line. Confirm the hall with the organiser before you go.`.trim();
 
-  const analysisBody = `## Analysis
+  const analysisBody = "";
 
-The invitations are doing two jobs at once. One poster is a general visitors call. The other speaks to women who run businesses, with the same morning and the same registration number. The chapter’s note supplies the idea it wants associated with that morning: Givers Gain, which it explains as growth that comes from helping someone else’s business first.
-
-What the pages do not do is turn that idea into a programme. There is no timetable, no list of trades in the room, and no figure for referrals the chapter has passed. The strongest commercial phrase on the posters, The Crore Mindset, is a title. A reader who arrives expecting a priced workshop, or a promise of a crore, is reading something the invitation does not actually say.
-
-The useful question is the practical one. A 7:29 AM start is specific. A city with no hall is not. Until the address is given, this is a reported invitation, not a set of directions.`.trim();
-
-  const body = `BNI Vetri has invited business owners to The Crore Mindset, a visitors morning on Wednesday 25 November 2026 at 7:29 AM in Chennai. The hall, the fee, and the finish time are not on the posters. Enquiries: Riyaz Ahamed, 77088 37509.`;
+  const body = `BNI Vetri will host The Crore Mindset, a business visitors morning, in Chennai on Wednesday 25 November 2026 at 7:29 AM. Women entrepreneurs are invited to the same sitting. Enquiries: Riyaz Ahamed, 77088 37509.`;
 
   const values = {
     cityId: city.id,
     slug: SLUG,
     title:
-      "BNI Vetri calls a 7:29 AM visitors morning on 25 November. The hall is not on the invitation",
+      "BNI Vetri invites Chennai business owners to The Crore Mindset on 25 November",
     summary:
-      "The Crore Mindset is BNI Vetri’s business visitors day in Chennai on Wednesday 25 November 2026. A second poster invites women entrepreneurs to the same time. No hall, fee, or finish time is printed.",
-    dek: "Both invitations name Riyaz Ahamed on 77088 37509. The chapter’s note describes the morning as a referral meeting under its Givers Gain line.",
+      "The chapter’s visitors morning starts at 7:29 AM on Wednesday 25 November 2026. Women entrepreneurs are invited to the same sitting. Call Riyaz Ahamed on 77088 37509.",
+    dek: "BNI Vetri is opening the morning to visitors who want referrals and new business relationships. The hall is still to be announced.",
     body,
     reportBody,
     analysisBody,
@@ -196,22 +165,22 @@ The useful question is the practical one. A 7:29 AM start is specific. A city wi
         {
           question: "When is BNI Vetri’s Crore Mindset visitors day?",
           answer:
-            "Wednesday 25 November 2026 at 7:29 AM. The invitations do not print a finish time.",
+            "Wednesday 25 November 2026 at 7:29 AM in Chennai. Ask Riyaz Ahamed what time it ends.",
         },
         {
           question: "Where is it?",
           answer:
-            "The posters say Chennai. They do not name a hall, a street, or a hotel. Ask Riyaz Ahamed on 77088 37509 before you travel.",
+            "Chennai. The hall has not been announced. Call Riyaz Ahamed on 77088 37509 before you travel.",
         },
         {
-          question: "Is there a fee?",
+          question: "Who can attend?",
           answer:
-            "Neither poster prints a price, and neither says the morning is free.",
+            "Business owners and professionals. Women entrepreneurs have a direct invitation to the same morning.",
         },
         {
-          question: "Is the women-entrepreneurs poster a different event?",
+          question: "How do I register?",
           answer:
-            "It uses the same date, the same 7:29 AM, the same event name, and the same phone number. This report treats it as one morning.",
+            "Call Riyaz Ahamed on 77088 37509. Ask for the hall, and whether a visitor pays.",
         },
       ],
     } as Record<string, unknown>,

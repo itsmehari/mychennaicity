@@ -40,6 +40,7 @@ Paste the next file only after you have looked at the page and accepted it.
 | 5 | `chat-prompts\04-trust-desk.txt` | About, contact, and `/desk` login |
 | 6 | `chat-prompts\05-civic-tools.txt` | The five tool pages |
 | 7 | `chat-prompts\06-acceptance.txt` | A check of desktop and a narrow phone width |
+| after the jobs list exists | `chat-prompts\07-jobs-hub.txt` | Full jobs hub: both boards, detail, apply gate, advertise pitch, desk |
 
 The prompt files live in `docs\mybanglore-pack\chat-prompts\`.
 

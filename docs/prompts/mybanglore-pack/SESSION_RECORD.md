@@ -130,6 +130,10 @@ Applied in `drop-in/`:
 - Jobs line names offices, shops, IT, sites, and daily work together.
 - Further ideas that are not in the build yet: `SUGGESTIONS.md`.
 
+## Jobs hub prompt (10 November 2026)
+
+`chat-prompts/07-jobs-hub.txt` is the paste-ready brief for bringing the mychennaicity.in jobs module across: open-jobs hub, looking-for-work hub, detail pages, call gate, advertise pitch, featured list, and desk hygiene. It keeps this pack’s PHP stack and English-only rule. The homepage stays forest and teal. The jobs module uses the current Chennai jobs desk skin: night panels `#0e1324`, violet gradient buttons, lilac chips, shared by the hub, detail page, looking-for-work, and the featured rail on those pages. It does not copy Chennai listings. Run it after the basic `/bengaluru-jobs` list from prompt 3 exists. The existing `job_postings` and `job_seeker_posts` tables stay; `field` on `remote_policy` and a `job_phone_reveals` table are the only additions named in that prompt.
+
 ## This folder (third answer)
 
 All of the above now lives in `mybanglore-pack`, including the drop-in files and the chat prompts. Move the folder whole. Append the next mybanglore decision under a new date heading in this file.

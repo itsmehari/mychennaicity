@@ -18,8 +18,20 @@ export type FeaturedJobCampaign = {
   contextTa: string;
 };
 
-/** Guindy office assistant through 1 Dec 2026. VV Placement roles through 12 Nov 2026. */
+/** Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. VV Placement roles through 12 Nov 2026. */
 export const FEATURED_JOB_CAMPAIGNS: readonly FeaturedJobCampaign[] = [
+  {
+    id: "south-style-casting-studio-2026-11",
+    englishSlug:
+      "male-models-south-style-casting-studio-ponneri-minjur-thiruvallur-chennai",
+    from: "2026-11-13",
+    until: "2026-12-13",
+    areaHubSlugs: ["tiruvottiyur-manali-belt"],
+    contextEn:
+      "Male models, ages 20–30, for fashion and commercial photoshoots. Ponneri, Minjur, Thiruvallur, and Chennai. Local talent welcome. Pay is per shoot.",
+    contextTa:
+      "ஆண் மாடல்கள், வயது 20–30. ஃபேஷன் மற்றும் கமர்ஷியல் போட்டோஷூட். பொன்னேரி, மிஞ்சூர், திருவள்ளூர், சென்னை. உள்ளூர் திறமை வரவேற்கப்படுகிறது. பணம் ஷூட் ஒன்றுக்கு.",
+  },
   {
     id: "guindy-male-office-assistant-2026-11",
     englishSlug: "male-office-assistant-guindy-race-course",

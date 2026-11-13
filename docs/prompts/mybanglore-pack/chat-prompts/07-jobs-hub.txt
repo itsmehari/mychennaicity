@@ -1,0 +1,165 @@
+Build the Bengaluru jobs hub to the depth of mychennaicity.in’s jobs module. Keep this site’s stack and rules: PHP 8.2, MySQL, hand-written CSS, Alpine.js, English only, host https://mybanglore.in, city name Bengaluru in sentences. Do not add a Kannada UI, a second database, React, Tailwind, or a Node build. Do not copy Chennai listings, Chennai area names, Chennai partner posters, or one-off Chennai pages.
+
+Read AGENTS.md, docs/FILE_MAP.md, and database/schema.sql before writing. Use the existing `employers`, `job_postings`, and `job_seeker_posts` tables. A public job is open only when `status = 'open'` and `valid_through` is null or still in the future. Hide expired rows from the hub, sitemap, search, area pages, and JSON-LD. Do not invent an employer name, street, phone, vacancy count, work mode, or salary. `salary_disclosed` stays 0 and salary columns stay NULL unless the source printed a rupee figure. `openings_count` stays NULL when the note gave no count. `remote_policy` stays NULL when the note did not say office, hybrid, remote, or field. If the enum has no `field` value, add only that value so field jobs are not stored as office.
+
+The homepage stays forest green and teal. The jobs module does not. Hub, job detail, looking-for-work, and the featured rail on those three pages share one desk skin, separate from the homepage:
+
+- Night panels `#0e1324` with shadow `0 24px 60px rgba(14,19,36,0.18)`: hub stage, seeker stage, job detail hero, apply band, employer CTA. Radius 28px on stage, hero, and employer block; 22px on the apply band.
+- On those night panels: eyebrow in `#b7b4ff`, 11px, semibold, wide tracking, uppercase. Body copy at about 75% white. Primary button on the stage is a white pill with night-ink text. The in-card “Open this role” button and the board’s search, “View job”, and solid employer buttons are pills with gradient `#6d5efc` to `#8a5cff` (hover `#5b4dff` to `#7a4dff`). The employer CTA button is the exception: white pill, night-ink text.
+- Ink `#16161d`, muted `#5c5872`, hairline `#eceaf3`, white cards, soft shadow `0 10px 30px rgba(22,22,29,0.04)`. Selected chips and initials tiles: background `#f4f1ff`, text `#3d348f`, active chip border `#d9d4ff`. Card hover lifts 2px and the border goes `#d9d4ff`. Featured card border `#c9c2ff` and a violet shadow.
+- Glance title is a lilac bar: text `#3d348f`, background `#f4f1ff`.
+- Safety block is warm paper: background `#fffaf0`, border `#eadfb8`, radius 22px.
+- Featured rail on the jobs hub, looking-for-work, and job detail uses this same desk card (22px, lilac “Featured” pill, violet “View listing” link). Sidebars elsewhere on the site may keep the normal accent. Do not restyle the jobs desk into the homepage teal.
+
+Geist Sans. One italic accent word in the stage headline, in `#7aa2ff` on the night panel and `#5b4dff` on the paper page. Plain resident language. No “marketplace”, “talent”, or “AI-powered” copy.
+
+## Routes
+
+- `/bengaluru-jobs` — open jobs hub
+- `/bengaluru-jobs/looking-for-work` — people available for hire
+- `/bengaluru-jobs/{slug}` — one employer listing
+- `/bengaluru-jobs/looking-for-work/{slug}` — one seeker profile
+- `/bengaluru-jobs/feed.xml` — RSS of open jobs only
+- `/bengaluru-jobs/{slug}/markdown` and `/bengaluru-jobs/looking-for-work/{slug}/markdown` — plain markdown of that open row, for readers and agents
+- `/advertise/jobs` — employer pitch. No login. Sends people to `/contact#jobs` and WhatsApp only after the existing join or desk rules
+- `/desk` jobs screens — list, create, edit, close expired, and call-unlock requests
+
+Register the looking-for-work paths before the `{slug}` path so “looking-for-work” is never treated as a job slug. Closed, draft, and expired rows 404. Unknown slugs 404.
+
+## Shared chrome
+
+Every jobs page uses the public header and footer. Breadcrumbs: Home → Jobs in Bengaluru → (Looking for work) → title. A two-tab switcher sits under the stage on both hubs:
+
+1. Open jobs — “Employers hiring now” — count of open roles — links to `/bengaluru-jobs`
+2. Looking for work — “People looking for jobs” — count of open seeker posts — links to `/bengaluru-jobs/looking-for-work`
+
+Selected tab is ink on white-card track. Unselected is muted. Count pill only when the count is above zero. On a phone the labels shorten to “Jobs” and “Looking for work”.
+
+Below the tabs: a short “post a job” band (we place the listing; there is no login) and the existing community strip if the site already has one. Do not add a second WhatsApp invite URL in the page HTML.
+
+## Page 1 — Open jobs hub
+
+Top to bottom:
+
+1. Dark forest stage, two columns from large screens.
+   Left: eyebrow “Currently hiring”. H1 “Work that is actually in Bengaluru”, with Bengaluru in italic teal-on-dark. One sentence: local openings, walk-ins, and office roles; read the notice here; apply only on the employer’s own page, mail, or phone. Buttons: “See open roles” (jumps to the board) and “Post a job”.
+   Right: a white picker. Left half lists up to 8 open roles. Each row: initials tile, title, employer. Hover, focus, or click selects the row. Right half previews the selected role: location, pay if disclosed otherwise “Pay on the listing”, employer, title, a three-line excerpt, and “Open this role”. Empty picker copy: no open listings yet; employers can post and it shows after a check.
+2. Four stat tiles: Open roles, Fresher-friendly, Walk-ins, People looking. Zero open roles shows an em dash for the first tile, not a fake number.
+3. Comparison table “Why read a job here”. Columns: This board (marked Recommended) and A forwarded post. Rows: Where (a named Bengaluru area vs only “Bengaluru” or no place), Apply (employer’s page, mail, or phone vs a personal number with no company), Money (free to read; we do not charge to show a role vs a registration or training fee), Check (published after a basic editorial check vs anyone can forward it), Hiring (the employer hires; we do not collect a CV vs the sender may be collecting CVs). Horizontal scroll on small screens. Do not hide the table.
+4. Lane scroller “Browse by the kind of work”. Pills: All openings, Freshers, Walk-in, Office, Featured. Each pill shows a count. The strip shows up to 12 cards for that lane (260px, snap). Card: pill (pay, else Walk-in, else Freshers, else Open), title, employer, location. Empty lane: “Nothing in this lane right now. Try All openings.” A text link “Jobs updates on WhatsApp” goes to the existing join form, not to a raw invite.
+5. Short answer strip for search and assistants, only when at least one job is open: one paragraph that states the live count and that candidates apply on the employer’s channel. No invented salary averages.
+6. Search card, then the board (`id="bengaluru-jobs-board"`).
+   Search fields: keyword (title, company, skill), location with a datalist of the twelve seeded areas, job type (Any, Full-time, Part-time, Internship, Work from home, Walk-in, Field). Button “Search jobs”. Keyword and location apply on button or Enter. Type applies with the button.
+   Popular chips, toggle on and off: Freshers, Women-friendly, Walk-in, Work from home, Kannada & English, Office jobs, Sales, IT jobs. “Kannada & English” matches body text that names both languages. It is not a second interface language.
+   Link under the search: a local “how to read a Bengaluru job ad” guide if that page exists; otherwise omit the link. Do not link to a Chennai guide.
+7. Three summary cards: Open now, Freshers, Walk-ins, each with a one-line hint.
+8. Supply band: “Post a job on this board. We place the listing. There is no login.”
+9. Two-column board. Left rail (desktop): radio filters that apply immediately — Location (All Bengaluru plus the twelve areas, matching `location_label`, title, and body), Job type, Experience (Any, Freshers, 0–1 year, 1–3 years, 3+ years; inferred from the text, not a required column), Work mode (Any, Office, Field, Hybrid, Work from home), Language mentioned (Any, Kannada, English, Kannada & English). Reset and Clear all. Under the filters, one partner image only if this site already has a partner-banner component. Do not hardcode a Chennai advertiser.
+   Phone: the rail is hidden. A “Filter jobs” button opens a full-height drawer, locks body scroll, and closes with “Show N jobs”. Badge shows how many filters are active.
+10. List header: “Showing N Bengaluru job listings”. Sort: Latest, Location, Freshers first, Walk-in first. Page size 20, Previous / Next, “Page X of Y”.
+11. Job card: initials badge, optional “Featured” kicker, title linking to the detail URL, employer, “Checked by us” only when `employers.verified = 1`, meta line (area, employment type, work mode, “Freshers can apply”, language mention), 140-character excerpt, up to five tags, disclosed pay if any, “View job”. Featured cards get a stronger border. The card does not contain the employer phone.
+12. Empty board: “No job listings yet” plus Post a job. Filter miss: “No jobs match these filters” plus reset.
+13. Safety block “Before you apply”: verify the employer before documents or payment; do not pay anyone for a job; check location, salary, role, and hours; corrections and fake-job reports go to `/contact#jobs`.
+14. Employer block “Hiring in Bengaluru?” with Post a job, a quiet contact link, and WhatsApp only through the existing desk button.
+15. Resource cards only for pages that exist on this site (editorial standards, community guidelines, areas). Omit missing links.
+16. FAQ accordion from a small content file of real desk answers (how to apply, whether the site takes a fee, how a listing is checked). FAQ JSON-LD only for those written answers, and only on this page.
+17. One mid-page ad slot if the ad component exists. Then the normal interior cross links.
+
+A visually hidden list of every open job title and URL stays in the HTML for crawlers. Client filters must not be the only copy of the titles.
+
+Hero lanes and filters run in the browser on the rows already rendered (cap the query at 200 open jobs, newest first, verified employers first). Do not add a search-engine-only duplicate of the list.
+
+## Page 2 — Looking for work
+
+Same breadcrumbs, tab switcher (second tab selected), advertise band, and community strip.
+
+Stage is the same forest layout, written for employers who are hiring a person rather than for candidates:
+
+- Eyebrow “Available for work”
+- H1 that names Bengaluru
+- Sentence: residents posting that they can start; watchman, caretaker, household, site, and shop work when that is what the posts say
+- Primary button jumps to the profile board. Secondary button is “Post a job” (employers), not a public “upload your CV” form
+- Picker of up to 8 profiles: initials, title, seeker label
+- Stats: Profiles, Needs a place to stay (`needs_accommodation`), Can start soon (availability text that says immediate or an equivalent), Open jobs
+- Lanes: All, Needs stay, Can start soon, Household, Site and shop — only the lanes you can infer from `role_sought`, title, and body. Do not invent a category column.
+
+Board filters: keyword, area, needs stay, immediate, role family inferred from text. Sort: Latest, Area, Needs stay first. Page size 20. Cards show title, seeker label, area, role, stay and availability tags, excerpt, and “View profile”. No phone on the card.
+
+Safety copy for this hub is different: confirm who you are calling, do not ask for money to “release” a job, do not publish someone else’s number in a comment. Employer CTA stays. Resource links only if the pages exist. No FAQ unless you have real written answers.
+
+Empty state: no profiles yet. Do not seed fictional people.
+
+## Page 3 — Job detail
+
+Breadcrumbs end on the job title. Then, if the site has them, a community strip and one relevant house or partner strip. Do not stack two of the same banner.
+
+Article, max width about 1180px:
+
+- Hero: eyebrow “Bengaluru job”, initials badge, H1 = listing title (do not clip the role to fit the employer), employer name, “Checked by us” only when verified, location or “Bengaluru”, employer site link only when `website_url` is set. Reader count if you store anonymous views. Pay row only when salary is disclosed: “Pay disclosed” plus the formatted INR band. Missing pay is omitted, not written as “competitive”.
+- Apply control appears twice on desktop (top of the rail, and a band under the body) and once above the body on a phone.
+  Label follows `application_url`: WhatsApp → “Apply via WhatsApp”; `tel:` → call flow below; `mailto:` → “Email your resume”; Facebook profile → “Message on Facebook”; a link to `/contact#jobs` → “Ask us for the hiring contact”; any other http(s) URL → “Apply on employer site”. External links open in a new tab with `noopener`. Mail and tel do not.
+  Hint under the button says where it opens, and that this site does not take the CV.
+- Call gate: when the apply URL is `tel:` or contains a phone you would otherwise print as the call button, do not put that number in the first HTML. Show a form: “Enter your 10-digit mobile to unlock the call button. We store it with this listing.” POST stores the visitor mobile against this job, then returns the employer number and swaps in “Call {formatted}”. WhatsApp apply stays a direct link beside that gate. A number with fewer than 10 digits is printed as written in the body and is not turned into `tel:` or `wa.me`. Inline phone links inside the markdown body stay as the source wrote them.
+- Body heading “Role details”. Render the markdown body (headings, lists, links, bold). Escape raw HTML. One listing can hold two titles from one poster; do not split them.
+- “At a glance” rail, only rows that exist: Role type, Work mode, Location, Pay band, Openings (only if count is greater than 1, or if you stored an explicit count), Apply by (`valid_through` in Asia/Kolkata), Listed (`published_at`). Tags under the glance.
+- Apply band “Ready to apply?” repeats the same control. Copy changes with the channel and always says the site does not process CVs.
+- Featured-jobs rail of other open featured roles, excluding this slug. If none are in date, omit the rail.
+- Same “Before you apply” block.
+- Back link “All jobs in Bengaluru”.
+- Advertise strip and the business WhatsApp component, if they exist.
+
+JSON-LD on this page only: `JobPosting` for this open row, `BreadcrumbList`, and `FAQPage` only when the body itself contains a real FAQ. `datePosted` is `published_at`. `validThrough` only when set. `hiringOrganization` is the employer name on the row, even when the name is a person and there is no company. No `baseSalary` unless disclosed. No street address that was not printed. `employmentType` only when the column is set. Do not mark a 6-hour or 12-hour day as full-time or part-time unless the note said so.
+
+Record a page view with the same anonymous visitor cookie the news pages use, if that table exists. Do not store an IP. Skip signed-in desk sessions and obvious crawlers.
+
+## Page 4 — Seeker profile
+
+Breadcrumbs: Home → Jobs in Bengaluru → Looking for work → title. Hero eyebrow “Looking for work”. Title, seeker label, area, role, stay, availability. Body markdown. Glance uses only filled columns.
+
+Contact: WhatsApp and email can be direct links when the columns are set. A phone uses the same call gate, stored against the seeker post, not against a job. The number is absent from the first HTML. If no contact channel was printed, say so and link to contact. Do not invent a number.
+
+JSON-LD: a profile or person-shaped object only from printed fields, plus breadcrumb. No `JobPosting` on a seeker page. 404 when not open.
+
+Back link to the looking-for-work hub. Safety block from that hub.
+
+## Page 5 — Post a job
+
+`/advertise/jobs` is a pitch, not a form that publishes. Title “Post a job in Bengaluru”. Lede: send the role, company or person, area, and the link or number where candidates should apply. We place the listing. There is no employer login. Candidates apply on your link.
+
+Checklist: job title and employer or person name; area and work mode if known; apply link, email, or phone; salary only if they want it shown; last date if they have one. Three sample cards pulled from real open jobs on this site. If there are none, omit the samples. Do not use Chennai samples. Buttons: contact form anchor `/contact#jobs`, WhatsApp through the existing desk helper, and “Open jobs”. One line that listing is free to read and that we do not charge the candidate. No package price unless the operator has written one in config.
+
+## Featured jobs
+
+Featured is a dated list in a PHP config file: slug, inclusive last day in Asia/Kolkata, and which area hubs may show it. The rail and the Featured lane read open rows whose date has not passed, and disappear the next morning. Do not hardcode slugs in templates. Do not pin a featured job on legal, contact, or advertise pages. The footer band skips a page that already shows the rail.
+
+## Desk
+
+On `/desk`, add a jobs list: status, title, employer, area, valid through, open or closed. Create and edit the real columns. Publishing sets `status = open` and `published_at` if empty. “Close expired” sets `closed` on rows that are still `open` but past `valid_through`. A dry view lists the slugs before the write.
+
+A separate view lists call-unlock rows: when, which listing, the visitor mobile. It is not a public page. Do not put publish buttons on an analytics view if you split views and editing the way Chennai does.
+
+If `job_phone_reveals` does not exist, add only that table: id, job_posting_id nullable, job_seeker_post_id nullable, visitor_phone, created_at. One of the two listing ids is required.
+
+## Editorial rules (do these on every listing)
+
+- Quote a male-only or female-only line as written. Do not add the other group to be polite.
+- “Best in industry”, “as per market”, or “23K gross” with no pay period is body text. It is not a JobPosting salary.
+- A stated monthly figure under ₹1.2 lakh may be stored as monthly min and max when the note states the period or the desk treats a shop band that way. Say the basis in the body.
+- Do not turn an email domain into a company name. The employer is the name on the poster or note.
+- A person may list without a company or GST number.
+- Keep every trade and every named neighbourhood that the note put on one poster on one listing.
+- Point the apply button at the company’s public careers page when one exists. Otherwise use the channel the note printed, in this order when several exist: the channel the note tells the candidate to use. Do not add WhatsApp when the note only says call.
+- Re-saving a listing whose `valid_through` is already past must save it as `closed`.
+- Area hubs may list open jobs whose `area_id` or location text matches that hub. Expired jobs disappear there too.
+
+## SEO
+
+Title pattern `{Segment} · mybanglore.in`. Hub title segment: “Jobs in Bengaluru”. Description includes the live open count when it is above zero, and says to apply on the employer’s own page. Canonical is the apex URL. Hub alternates include the RSS feed. Detail title uses the listing headline, not a shortened role. Open Graph image is the site default. No JSON-LD on an empty hub. Sitemap lists only open, unexpired job and seeker URLs.
+
+## Empty and error states
+
+Database failure renders the empty hub, not a stack trace. Zero jobs hides the homepage jobs block, as the homepage contract already says. The jobs hub itself still renders, with the empty copy, so employers can find Post a job.
+
+## Done when
+
+A resident can open `/bengaluru-jobs`, filter and sort, open a job, and apply only through the printed channel. A phone apply stays hidden until they submit their own mobile. `/bengaluru-jobs/looking-for-work` lists only real seeker rows. Expired jobs 404 and are absent from the feed, sitemap, and schema. `/advertise/jobs` does not publish by itself. The desk can close expired rows. No Chennai name, area, phone, or partner creative remains on these pages.
