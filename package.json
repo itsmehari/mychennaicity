@@ -367,6 +367,8 @@
     "db:seed:chennai-reservoirs-october-17-2026:live": "tsx scripts/seed-chennai-reservoirs-october-17-2026.ts --live",
     "db:seed:easwari-startup-peravai-october-2026": "tsx scripts/seed-easwari-startup-peravai-october-2026.ts",
     "db:seed:easwari-startup-peravai-october-2026:live": "tsx scripts/seed-easwari-startup-peravai-october-2026.ts --live",
+    "db:seed:bni-vetri-crore-mindset-november-2026": "tsx scripts/seed-bni-vetri-crore-mindset-november-2026.ts",
+    "db:seed:bni-vetri-crore-mindset-november-2026:live": "tsx scripts/seed-bni-vetri-crore-mindset-november-2026.ts --live",
     "db:seed:vibrant-hues-art-exhibition-november-2026": "tsx scripts/seed-vibrant-hues-art-exhibition-november-2026.ts",
     "db:seed:vibrant-hues-art-exhibition-november-2026:live": "tsx scripts/seed-vibrant-hues-art-exhibition-november-2026.ts --live",
     "db:seed:vithya-ramraj-asian-games-2026": "tsx scripts/seed-vithya-ramraj-asian-games-2026.ts",

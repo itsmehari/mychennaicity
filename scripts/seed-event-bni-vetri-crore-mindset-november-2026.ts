@@ -27,6 +27,10 @@ const db = drizzle(neon(requireDatabaseUrl(live)), { schema });
 
 const DESCRIPTION = `**Organiser:** BNI Vetri
 
+![BNI Vetri poster for The Crore Mindset Business Visitors Day, 25 November 2026 at 7:29 AM](https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/events/bni-vetri-crore-mindset-visitors-day-november-2026.jpg)
+
+![BNI Vetri invitation to women entrepreneurs for the same morning](https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/events/bni-vetri-crore-mindset-women-entrepreneurs-november-2026.jpg)
+
 BNI (Business Network International) is a business referral network. It brings entrepreneurs, business owners, and professionals together to build relationships, exchange referrals, and grow. The organisation’s line is **Givers Gain**: help others grow their businesses, and opportunities come back.
 
 BNI Vetri holds structured networking meetings, business presentations, visitor sessions, and networking events. Members connect, look for collaborations, exchange referrals, and support one another.
@@ -46,6 +50,8 @@ A second poster on this page invites **women entrepreneurs**: She leads. She con
 ### Enquiries and registration
 
 **Riyaz Ahamed** — [77088 37509](tel:+917708837509)
+
+A reported account of the same morning is on [MyChennaiCity](/chennai-local-news/bni-vetri-crore-mindset-visitors-day-november-2026).
 
 This listing is compiled from the BNI Vetri invitation shared with MyChennaiCity. It is not an official BNI page. Confirm the hall, entry, and any change of time with the organiser before you go.`.trim();
 
