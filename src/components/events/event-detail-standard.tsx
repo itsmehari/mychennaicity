@@ -28,6 +28,7 @@ import {
   splitDescriptionIntro,
 } from "@/lib/events/event-detail-helpers";
 import {
+  getEventExtraPosters,
   getEventPosterImage,
   type EventPosterSpec,
 } from "@/lib/events/event-poster-image";
@@ -94,7 +95,13 @@ function EventHeroMeta({ ev }: { ev: PublicEventRow }) {
   );
 }
 
-function EventPosterFigure({ poster }: { poster: EventPosterSpec }) {
+function EventPosterFigure({
+  poster,
+  priority = true,
+}: {
+  poster: EventPosterSpec;
+  priority?: boolean;
+}) {
   return (
     <figure className="mcc-event-poster">
       <Image
@@ -103,8 +110,8 @@ function EventPosterFigure({ poster }: { poster: EventPosterSpec }) {
         width={960}
         height={1200}
         className="mcc-event-poster__img w-full"
-        sizes="(max-width: 1024px) 100vw, 320px"
-        priority
+        sizes="(max-width: 1024px) 100vw, 480px"
+        priority={priority}
       />
       <figcaption className="sr-only">{poster.alt}</figcaption>
     </figure>
@@ -158,6 +165,7 @@ export function EventDetailStandard({
   const desc = ev.description ?? "";
   const { intro, rest } = splitDescriptionIntro(desc);
   const poster = getEventPosterImage(ev.slug);
+  const extraPosters = getEventExtraPosters(ev.slug);
 
   return (
     <div className={`mcc-event-page ${interiorMainClassName}`}>
@@ -192,6 +200,17 @@ export function EventDetailStandard({
               {rest ? (
                 <div className="mcc-event-content mt-8">
                   <ArticleProse content={rest} />
+                </div>
+              ) : null}
+              {extraPosters.length ? (
+                <div className="mt-8 max-w-md">
+                  {extraPosters.map((item) => (
+                    <EventPosterFigure
+                      key={item.src}
+                      poster={item}
+                      priority={false}
+                    />
+                  ))}
                 </div>
               ) : null}
             </>

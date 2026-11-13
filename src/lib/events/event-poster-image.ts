@@ -139,6 +139,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/msme-solar-power-installation-guindy-november-2026.png",
     alt: "MSME Technology Development Centre Chennai poster — Solar Power Installation training with Government of India certificate, CFTI Campus Guindy, 13 to 15 November 2026, 10 AM to 5 PM",
   },
+  "bni-vetri-crore-mindset-visitors-day-november-2026": {
+    src: "/images/events/bni-vetri-crore-mindset-visitors-day-november-2026.jpg",
+    alt: "BNI Vetri poster — The CRORE MINDSET Business Visitors Day, Chennai, Wednesday 25 November 2026, 7:29 AM",
+  },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
     alt: "Baking workshop mood — Baking for Beginners at Cake Mall, Nungambakkam, Chennai",
@@ -353,8 +357,22 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   },
 };
 
+/** Extra flyers shown under the description. The hub and hero use POSTERS_BY_SLUG. */
+const EXTRA_POSTERS_BY_SLUG: Record<string, EventPosterSpec[]> = {
+  "bni-vetri-crore-mindset-visitors-day-november-2026": [
+    {
+      src: "/images/events/bni-vetri-crore-mindset-women-entrepreneurs-november-2026.jpg",
+      alt: "BNI Vetri invitation to women entrepreneurs — She Leads, She Connects, She Grows, The CRORE MINDSET, Wednesday 25 November 2026, 7:29 AM",
+    },
+  ],
+};
+
 export function getRegisteredEventPoster(slug: string): EventPosterSpec | null {
   return POSTERS_BY_SLUG[slug.trim()] ?? null;
+}
+
+export function getEventExtraPosters(slug: string): EventPosterSpec[] {
+  return EXTRA_POSTERS_BY_SLUG[slug.trim()] ?? [];
 }
 
 /** Returns a poster only when one is explicitly registered for the slug. */

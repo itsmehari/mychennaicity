@@ -98,6 +98,8 @@
     "db:seed:event:vibrant-hues-art-cube:live": "tsx scripts/seed-event-vibrant-hues-art-cube-november-2026.ts --live",
     "db:seed:event:msme-solar-power-installation-guindy": "tsx scripts/seed-event-msme-solar-power-installation-guindy-november-2026.ts",
     "db:seed:event:msme-solar-power-installation-guindy:live": "tsx scripts/seed-event-msme-solar-power-installation-guindy-november-2026.ts --live",
+    "db:seed:event:bni-vetri-crore-mindset": "tsx scripts/seed-event-bni-vetri-crore-mindset-november-2026.ts",
+    "db:seed:event:bni-vetri-crore-mindset:live": "tsx scripts/seed-event-bni-vetri-crore-mindset-november-2026.ts --live",
     "db:seed:meetup-chennai-aug-sep": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts",
     "db:seed:meetup-chennai-aug-sep:live": "tsx scripts/seed-meetup-chennai-aug-sep-2026.ts --live",
     "db:seed:chennai-discovery-events": "tsx scripts/seed-chennai-discovery-events-2026.ts",
