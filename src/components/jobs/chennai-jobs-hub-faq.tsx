@@ -12,7 +12,7 @@ const FAQ_GROUPS = [
 export function ChennaiJobsHubFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [group, setGroup] = useState<(typeof FAQ_GROUPS)[number]["id"]>("finding");
-  const visible = new Set(
+  const visible = new Set<number>(
     FAQ_GROUPS.find((item) => item.id === group)?.indexes ?? [],
   );
 
