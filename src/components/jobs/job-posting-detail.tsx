@@ -141,7 +141,9 @@ export function JobPostingDetail({
 
   const ctaHint = tamil
     ? callGate
-      ? "அழைப்புக்கு முன் உங்கள் மொபைல் சேமிக்கப்படும். WhatsApp புதிய தாவலில் திறக்கும்."
+      ? isWhatsApp
+        ? "அழைப்புக்கு முன் உங்கள் மொபைல் சேமிக்கப்படும். WhatsApp புதிய தாவலில் திறக்கும்."
+        : "அழைப்புக்கு முன் உங்கள் மொபைல் சேமிக்கப்படும்."
       : isWhatsApp
       ? "WhatsApp புதிய தாவலில் திறக்கும்."
       : applyHref?.startsWith("tel:")
@@ -150,7 +152,9 @@ export function JobPostingDetail({
           ? "மின்னஞ்சல் செயலி திறக்கும்."
           : "விண்ணப்பப் பக்கம் புதிய தாவலில் திறக்கும்."
     : callGate
-      ? "We save your mobile before the call button appears. WhatsApp still opens in a new tab."
+      ? isWhatsApp
+        ? "We save your mobile before the call button appears. WhatsApp still opens in a new tab."
+        : "We save your mobile before the call button appears."
       : isWhatsApp
       ? "Opens WhatsApp in a new tab."
       : applyHref?.startsWith("tel:")
