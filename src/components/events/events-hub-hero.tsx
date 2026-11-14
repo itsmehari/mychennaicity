@@ -1,4 +1,8 @@
 import Link from "next/link";
+import {
+  EVENTS_ORGANISER_PASSAGE,
+  EVENTS_SEARCHER_PASSAGE,
+} from "@/content/aeo/jobs-events-passages";
 import type { PublicEventRow } from "@/domains/events";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 
@@ -55,10 +59,11 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
           >
             <span className="mcc-events-hub-hero__answer-label">
               In short
-            </span>
-            {hasEvents
-              ? ` mychennaicity.in/chennai-local-events currently lists ${eventCount} upcoming event${eventCount === 1 ? "" : "s"}. Browsing is free; tickets stay with each organiser — confirm on their page before you pay or travel.`
-              : " mychennaicity.in/chennai-local-events lists upcoming Chennai concerts, comedy, exhibitions, and meetups when organisers share dates. Browsing is free; we are not the ticket seller."}
+            </span>{" "}
+            {EVENTS_SEARCHER_PASSAGE}
+          </p>
+          <p className="mcc-events-hub-hero__answer" data-speakable="hub-aeo-poster">
+            {EVENTS_ORGANISER_PASSAGE}
           </p>
 
           <div className="mt-4">
@@ -116,7 +121,7 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
           {nextEvents.length === 0 ? (
             <p className="mcc-events-hub-hero__next-empty">
               No upcoming listings yet.{" "}
-              <Link href="/contact#events">Share a date and venue</Link>.
+              <Link href="/chennai-local-events/submit">Submit an event</Link>.
             </p>
           ) : (
             <ol className="mcc-events-hub-hero__next-list">

@@ -1,5 +1,12 @@
 /** Shared answer-first AEO content for major hubs. */
 
+import {
+  EVENTS_ORGANISER_PASSAGE,
+  EVENTS_SEARCHER_PASSAGE,
+  JOBS_POSTER_PASSAGE,
+  JOBS_SEEKER_PASSAGE,
+} from "@/content/aeo/jobs-events-passages";
+
 export type AeoFact = {
   term: string;
   definition: string;
@@ -21,16 +28,13 @@ export const CHENNAI_JOBS_HUB_AEO: HubAeoContent = {
   eyebrow: "Jobs in Chennai",
   title: "Who this board is for",
   dek: "Plain summary for jobseekers and employers.",
-  directAnswer:
-    "mychennaicity.in/chennai-jobs is a Chennai-focused community job notice board. Browse open local roles here, then apply only on the employer’s own page or form. We publish notices; we do not process CVs, run interviews, or collect application fees.",
-  contextParagraphs: [
-    "Listings cover walk-ins, office roles, field jobs, fresher openings and internships across Greater Chennai. Prefer verified employers, match the apply URL to the company, and never pay a recruiter fee for a standard job ad on this board.",
-  ],
+  directAnswer: JOBS_SEEKER_PASSAGE,
+  contextParagraphs: [JOBS_POSTER_PASSAGE],
   facts: [
     {
       term: "Who should use it",
       definition:
-        "Jobseekers looking for Chennai roles, and local employers posting free qualifying openings via Contact → Jobs.",
+        "Jobseekers search https://mychennaicity.in/chennai-jobs. Employers post a vacancy at https://mychennaicity.in/advertise/jobs.",
     },
     {
       term: "What we are not",
@@ -52,11 +56,8 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
   eyebrow: "Chennai local events",
   title: "Where to find what’s on",
   dek: "Plain summary for residents planning a weekend in Chennai.",
-  directAnswer:
-    "mychennaicity.in/chennai-local-events lists upcoming concerts, comedy, exhibitions, temple and neighbourhood events across Greater Chennai. Browsing is free; tickets and registration are handled by each organiser — confirm on their booking page before you pay or travel.",
-  contextParagraphs: [
-    "Open any listing for venue, locality, start time (Asia/Kolkata), and organiser notes. Use category filters for festivals, culture and arts, community, or business talks. Prefer the live ticket or RSVP link on the organiser’s own page.",
-  ],
+  directAnswer: EVENTS_SEARCHER_PASSAGE,
+  contextParagraphs: [EVENTS_ORGANISER_PASSAGE],
   facts: [
     {
       term: "Coverage",
@@ -80,8 +81,7 @@ export const CHENNAI_EVENTS_HUB_AEO: HubAeoContent = {
     },
     {
       term: "Submit",
-      definition:
-        "Organisers can suggest a listing via Contact → Local events with date, venue, and booking link.",
+      definition: EVENTS_ORGANISER_PASSAGE,
     },
   ],
   disclaimer:

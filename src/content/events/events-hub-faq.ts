@@ -1,45 +1,44 @@
+import {
+  EVENTS_ORGANISER_PASSAGE,
+  EVENTS_SEARCHER_PASSAGE,
+} from "@/content/aeo/jobs-events-passages";
 import type { FaqItem } from "@/lib/seo/faq-jsonld";
 
 /** Visible FAQ text must match JSON-LD on /chennai-local-events. */
 export const EVENTS_HUB_FAQ: FaqItem[] = [
   {
-    question: "Where can I find Chennai Meetup workshops and tech talks?",
-    answer:
-      "mychennaicity.in/chennai-local-events lists Meetup-style workshops, tech talks, networking circles and wellness gatherings alongside concerts and festivals. Use the Business & talks or Community filters, then open each listing for venue notes, fees and the organiser Meetup link. Always confirm RSVP and building access on Meetup before you travel.",
+    question: "What local events are happening in Chennai this week?",
+    answer: EVENTS_SEARCHER_PASSAGE,
   },
   {
-    question: "Where can I find Chennai events this week?",
-    answer:
-      "mychennaicity.in/chennai-local-events lists upcoming concerts, stand-up comedy, exhibitions, Meetup workshops, and meetups across Greater Chennai — from Mylapore and T Nagar to OMR, Porur, and Egmore. Use Browse listings for filters, or read the Next up and plain-list sections for a quick scan. Open any event for venue, time, and booking links.",
+    question: "What’s on in Chennai this weekend?",
+    answer: EVENTS_SEARCHER_PASSAGE,
   },
   {
-    question: "How do I find concerts and comedy nights in Chennai?",
-    answer:
-      "On the Chennai local events hub, choose the Culture & arts filter to surface concerts, comedy, theatre and music listings. Each card links to a detail page with venue and organiser notes — confirm tickets on the organiser or aggregator page before you pay.",
+    question: "Where can I find Chennai concerts, comedy, sabhas, and exhibitions?",
+    answer: EVENTS_SEARCHER_PASSAGE,
   },
   {
-    question: "Are Chennai event listings on mychennaicity.in free to browse?",
-    answer:
-      "Yes. Browsing the calendar and event detail pages is free. Ticket prices and registration are set by each organiser — always confirm on their booking page before you pay.",
+    question: "How do I post a local event in Chennai?",
+    answer: EVENTS_ORGANISER_PASSAGE,
   },
   {
-    question: "How do I post my event on mychennaicity.in?",
-    answer:
-      "Use the contact page to suggest a listing. We publish Chennai-relevant events with venue, date, and organiser details. Submission is free for qualifying local events.",
+    question: "I have a neighbourhood workshop in Chennai. Where do I submit it?",
+    answer: EVENTS_ORGANISER_PASSAGE,
   },
   {
-    question: "Do you sell tickets for Chennai events?",
+    question: "Does mychennaicity.in sell tickets for Chennai events?",
     answer:
-      "No. We link to organiser or aggregator booking pages (for example BookMyShow or Ticket9) when provided. We are not the ticket seller.",
+      "mychennaicity.in lists the event and does not sell tickets. Confirm price, RSVP, and entry on the organiser’s own page before you pay or travel. The calendar is https://mychennaicity.in/chennai-local-events.",
   },
   {
     question: "Which areas of Chennai are covered?",
     answer:
-      "Listings cover Greater Chennai including Mylapore, Adyar, T Nagar, Anna Nagar, Velachery, OMR, Sholinganallur, Porur, Guindy, Egmore, Nungambakkam, Kodambakkam, Royapettah, Alwarpet, and nearby suburbs.",
+      "Listings cover Chennai when organisers share a venue or locality, including Mylapore, Adyar, T Nagar, Anna Nagar, Velachery, OMR, Sholinganallur, Porur, Guindy, Egmore, and nearby suburbs. Browse https://mychennaicity.in/chennai-local-events.",
   },
   {
     question: "Is there an RSS feed for Chennai events?",
     answer:
-      "Yes. Subscribe at mychennaicity.in/chennai-local-events/feed.xml for upcoming Chennai event listings.",
+      "Yes. Subscribe at https://mychennaicity.in/chennai-local-events/feed.xml for upcoming Chennai event listings.",
   },
 ];

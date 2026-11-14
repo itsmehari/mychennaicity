@@ -31,6 +31,7 @@ export function buildEventsHubJsonLdGraph(events: PublicEventRow[]) {
           "[data-speakable='events-hub-title']",
           "[data-speakable='events-hub-lede']",
           '[data-speakable="hub-aeo-answer"]',
+          '[data-speakable="hub-aeo-poster"]',
           "#events-this-week",
           "#events-hub-faq",
         ],

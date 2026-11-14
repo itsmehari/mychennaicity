@@ -16,7 +16,9 @@ import {
   JobsDetailLayout,
 } from "@/components/jobs/chennai-jobs-detail-parts";
 import { ShakzOdcCallSheet } from "@/components/jobs/shakz-odc-call-sheet";
+import { jobListingCitation } from "@/content/aeo/jobs-events-passages";
 import { SHAKZ_ODC_SLUG } from "@/content/jobs/shakz-events-odc-boys";
+import { formatIndiaLongDate } from "@/lib/presentation-dates";
 
 function employmentTypeLabel(raw: string | null, tamil: boolean): string | null {
   if (!raw?.trim()) return null;
@@ -199,6 +201,15 @@ export function JobPostingDetail({
           </>
         }
       >
+        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]" data-speakable="job-listing-answer">
+          {jobListingCitation({
+            title: job.title,
+            employer: employer.name,
+            place: job.locationLabel?.trim() || "Chennai",
+            pay: showPay ? formatJobCompensation(job.salaryMin!, job.salaryMax!) : null,
+            applyBy: job.validThrough ? formatIndiaLongDate(job.validThrough) : null,
+          })}
+        </p>
         <JobReaderViews slug={job.slug} initialCount={uniqueViews} className="mt-2" />
         {languageAlternate ? (
           <p className="mt-2 text-sm">

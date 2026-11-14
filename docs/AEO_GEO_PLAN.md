@@ -52,6 +52,19 @@ University of Madras November 2026 timetable (`/madras-university-exam-timetable
 | Article context cluster | News articles via `ArticleChennaiContextCluster` (related news + area + jobs + events) |
 | SWM Quick answers | SWM Rules article series (unchanged specialty block) |
 
+## Operating prompts
+
+Paste these into a fresh chat. Run the audit phase before any edit.
+
+| Vertical | Who must be cited | Prompt |
+| --- | --- | --- |
+| Jobs | Searchers on `/chennai-jobs`; employers posting on `/advertise/jobs` | [`docs/prompts/AEO_GEO_CHENNAI_JOBS.md`](prompts/AEO_GEO_CHENNAI_JOBS.md) |
+| Events | Searchers on `/chennai-local-events`; organisers on `/chennai-local-events/submit` | [`docs/prompts/AEO_GEO_CHENNAI_EVENTS.md`](prompts/AEO_GEO_CHENNAI_EVENTS.md) |
+
+Passages live in `src/content/aeo/jobs-events-passages.ts` and are rendered on the hero, the AEO strip, the FAQ (and FAQPage JSON-LD), the supply page, `llms.txt`, and `/aeo/chennai.md`. Checklist: [`docs/product-prd/PRD-AEO-GEO-JOBS-EVENTS.md`](product-prd/PRD-AEO-GEO-JOBS-EVENTS.md).
+
+The jobs FAQ names `/advertise/jobs`. The events FAQ and the empty Next up state name `/chennai-local-events/submit`. A WhatsApp alternative remains on the events nav as “Events desk (WhatsApp)” at `/contact#events`.
+
 ## Ops after deploy
 
 1. Confirm `https://mychennaicity.in/llms.txt` returns `text/plain` 200.

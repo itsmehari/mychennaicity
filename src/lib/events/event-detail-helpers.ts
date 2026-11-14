@@ -1,8 +1,8 @@
 import type { PublicEventRow } from "@/domains/events";
 import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 
-/** Dedicated public submission route — not live yet; use contact/WhatsApp flow. */
-export const EVENT_POST_SUBMIT_PATH = "/contact";
+/** Public organiser form. Drafts stay off the hub until an editor schedules them. */
+export const EVENT_POST_SUBMIT_PATH = "/chennai-local-events/submit";
 
 export type EventDetailRow = { label: string; value: string };
 

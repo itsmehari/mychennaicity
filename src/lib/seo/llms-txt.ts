@@ -7,6 +7,12 @@ import {
   CHENNAI_JOBS_HUB_PATH,
   CHENNAI_JOBS_LOOKING_PATH,
 } from "@/lib/routes/chennai-jobs";
+import {
+  EVENTS_ORGANISER_PASSAGE,
+  EVENTS_SEARCHER_PASSAGE,
+  JOBS_POSTER_PASSAGE,
+  JOBS_SEEKER_PASSAGE,
+} from "@/content/aeo/jobs-events-passages";
 
 export type LlmsDigestItem = {
   title: string;
@@ -76,13 +82,13 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 ## Primary hubs
 
 - [Chennai local news](${base}/chennai-local-news): Civic, neighbourhood, transport, and public-interest reporting for Greater Chennai
-- [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): Open local jobs, walk-ins, and office roles — apply on the employer’s own channel
+- [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): ${JOBS_SEEKER_PASSAGE}
 - [Looking for work](${base}${CHENNAI_JOBS_LOOKING_PATH}): People in Chennai who have posted that they are available to hire
-- [Post a job](${base}/advertise/jobs): Employer pitch — we place the listing; Tamil: ${base}/advertise/jobs-tamil
+- [Post a job](${base}/advertise/jobs): ${JOBS_POSTER_PASSAGE}
 - [Post a property](${base}/advertise/property): Sale, rent, plot, commercial — we place the ad; Tamil: ${base}/advertise/property-tamil
 - [Classifieds](${base}/chennai-classifieds): Reader listings, including property
 - [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
-- [Chennai local events](${base}/chennai-local-events): Upcoming concerts, comedy, exhibitions, temple and neighbourhood events
+- [Chennai local events](${base}/chennai-local-events): ${EVENTS_SEARCHER_PASSAGE}
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
 - [Site search](${base}/search): Search news, jobs, events, and directory entries
@@ -115,7 +121,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk, [power/feeder](${base}/civic-tools/power-feeder-desk), [Metro Water](${base}/civic-tools/metro-water-schedule), [flood street-score](${base}/civic-tools/flood-street-score)
 - [Auto fare cards](${base}/guides/chennai-auto-fare): Official 2013 meter vs July 2026 proposals
 - [Dengue week desk](${base}/guides/chennai-dengue-week): GCC 2026 city totals + household checklist
-- [Submit a Chennai event](${base}/chennai-local-events/submit): Public draft form (moderated)
+- [Submit a Chennai event](${base}/chennai-local-events/submit): ${EVENTS_ORGANISER_PASSAGE}
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
 - [Tamil Nadu Plus Two group guide](${base}/guides/tn-plus-two): Class 11–12 group codes 2502, 2503, 2702, 2708 and humanities — confirm the school offer
@@ -239,6 +245,10 @@ ${bullets(input.news, "Open the news hub for the current list.")}
 
 ## Where are Chennai jobs listed?
 
+${JOBS_SEEKER_PASSAGE}
+
+${JOBS_POSTER_PASSAGE}
+
 Browse open roles: [${base}${CHENNAI_JOBS_HUB_PATH}](${base}${CHENNAI_JOBS_HUB_PATH})
 
 ${bullets(input.jobs, "Open the jobs hub for current openings.")}
@@ -254,6 +264,10 @@ ${bullets(input.seekers ?? [], "Open the looking-for-work board for current noti
 Contact details stay on each notice. These posts are not employer vacancies.
 
 ## What events are on in Chennai?
+
+${EVENTS_SEARCHER_PASSAGE}
+
+${EVENTS_ORGANISER_PASSAGE}
 
 Upcoming listings: [${base}/chennai-local-events](${base}/chennai-local-events)
 

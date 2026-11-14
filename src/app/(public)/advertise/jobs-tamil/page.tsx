@@ -10,7 +10,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "சென்னையில் வேலை விளம்பரம் போட";
 const description =
-  "பதவி விவரத்தை அனுப்புங்கள். MyChennaiCity வேலைப் பலகையில் வைக்கும். முதலாளி உள்நுழைவு இல்லை. விண்ணப்பம் உங்கள் இணைப்பில்.";
+  "சென்னை வேலை காலியிடத்தை https://mychennaicity.in/advertise/jobs-tamil வழியாக அனுப்புங்கள். முதலாளி உள்நுழைவு இல்லை. விண்ணப்பம் உங்கள் இணைப்பில்.";
 
 export const metadata: Metadata = {
   title: titleSegment,

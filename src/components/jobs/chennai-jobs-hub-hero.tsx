@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
+import {
+  JOBS_POSTER_PASSAGE,
+  JOBS_SEEKER_PASSAGE,
+} from "@/content/aeo/jobs-events-passages";
 import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 
 type Props = {
@@ -17,9 +21,11 @@ export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
           <h1 id="chennai-jobs-hero-title" className="mcc-jobs-hub__hero-title">
             Jobs in Chennai
           </h1>
-          <p className="mcc-jobs-hub__hero-lede">
-            Local openings, walk-ins, and internships — we list them; employers
-            handle applications.
+          <p className="mcc-jobs-hub__hero-lede" data-speakable="hub-aeo-answer">
+            {JOBS_SEEKER_PASSAGE}
+          </p>
+          <p className="mcc-jobs-hub__hero-lede mt-3" data-speakable="hub-aeo-poster">
+            {JOBS_POSTER_PASSAGE}
           </p>
           <div className="mcc-jobs-hub__hero-actions">
             <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__btn-primary">

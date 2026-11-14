@@ -20,6 +20,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { eventListingCitation } from "@/content/aeo/jobs-events-passages";
 import type { PublicEventRow } from "@/domains/events";
 import {
   formatEventDate,
@@ -134,6 +135,18 @@ function EventHero({
         <h1 className="mcc-event-title type-display mt-2 text-[var(--foreground)]">
           {ev.title}
         </h1>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]" data-speakable="event-listing-answer">
+          {eventListingCitation({
+            title: ev.title,
+            place: [ev.venueName?.trim(), ev.localityLabel?.trim()].filter(Boolean).join(", ") || "Chennai",
+            whenLabel: [
+              formatEventDate(ev.startsAt, ev.endsAt, ev.allDay),
+              formatEventTime(ev.startsAt, ev.endsAt, ev.allDay),
+            ]
+              .filter(Boolean)
+              .join(", "),
+          })}
+        </p>
         <EventHeroMeta ev={ev} />
         <EventReaderViews
           slug={ev.slug}

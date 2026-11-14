@@ -30,6 +30,7 @@ export function buildJobsHubJsonLd(rows: JobPostingWithEmployer[]) {
           ".mcc-jobs-hub__hero-title",
           ".mcc-jobs-hub__hero-lede",
           '[data-speakable="hub-aeo-answer"]',
+          '[data-speakable="hub-aeo-poster"]',
           "#jobs-hub-faq",
         ],
       },

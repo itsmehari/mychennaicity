@@ -346,9 +346,9 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Subscribe for upcoming listings.",
           },
           {
-            href: "/contact#events",
-            label: "Submit an event",
-            description: "Send date, venue and booking link.",
+            href: "/chennai-local-events/submit",
+            label: "Post a local event",
+            description: "Organiser form. Draft until editors schedule it.",
           },
           {
             href: "/guides/how-to-use-mychennaicity",

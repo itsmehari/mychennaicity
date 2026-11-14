@@ -221,9 +221,9 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
         hint: "Hub of upcoming programmes",
       },
       {
-        href: "/contact#events",
+        href: "/chennai-local-events/submit",
         label: "Submit an event",
-        hint: "Public listings for organisers",
+        hint: "Organiser form for a public Chennai listing",
       },
       {
         href: "/chennai-whatsapp-group",

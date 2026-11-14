@@ -5,6 +5,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { EVENTS_ORGANISER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
@@ -12,8 +13,7 @@ const path = "/chennai-local-events/submit";
 
 export const metadata: Metadata = {
   title: "Submit a Chennai event",
-  description:
-    "Propose a Greater Chennai concert, workshop, or neighbourhood listing. Drafts stay off the public hub until editors schedule them.",
+  description: EVENTS_ORGANISER_PASSAGE,
   alternates: { canonical: `${getSiteUrl()}${path}` },
   openGraph: {
     title: fullSiteTitle("Submit a Chennai event"),
@@ -37,13 +37,7 @@ export default function SubmitChennaiEventPage() {
         Submit a Chennai event
       </h1>
       <p className="type-lede mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        Free for qualifying public listings. We do not sell tickets. Submissions
-        land as <strong className="text-[var(--foreground)]">drafts</strong> and
-        appear on the hub only after an editor schedules them. You can also use{" "}
-        <a href="/contact#events" className="font-semibold text-[var(--accent)] hover:underline">
-          Contact → Events
-        </a>
-        .
+        {EVENTS_ORGANISER_PASSAGE}
       </p>
       <EventSubmitForm />
       <InteriorCrossNav />

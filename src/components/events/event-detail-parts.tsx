@@ -170,7 +170,6 @@ export function EventPostCta({ className = "" }: { className?: string }) {
         businesses, trainers, communities, schools, colleges, startups, and local
         groups publish events and reach people across the city.
       </p>
-      {/* TODO: dedicated /chennai-local-events/submit route when public submission form ships */}
       <Link href={EVENT_POST_SUBMIT_PATH} className="mcc-event-btn mcc-event-btn--primary mt-4 inline-flex">
         Post your event
       </Link>

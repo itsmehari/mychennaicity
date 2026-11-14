@@ -56,7 +56,7 @@ const workLinks = [
   { href: ADVERTISE_JOBS_PATH, label: "Post a job" },
   { href: ADVERTISE_PROPERTY_PATH, label: "Post a property" },
   { href: "/contact#directory", label: "List your business" },
-  { href: "/contact#events", label: "Submit an event" },
+  { href: "/chennai-local-events/submit", label: "Submit an event" },
 ];
 
 const companyLinks = [

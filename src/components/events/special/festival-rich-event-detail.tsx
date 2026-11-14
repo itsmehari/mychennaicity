@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { eventListingCitation } from "@/content/aeo/jobs-events-passages";
 import type { FestivalRichPageProps } from "@/domains/events/presentations/types";
+import { formatEventDate, formatEventTime } from "@/lib/events/event-detail-helpers";
 import { formatEventWhen } from "@/components/events/event-detail-standard";
 import { EventReaderViews } from "@/components/events/event-reader-views";
 import {
@@ -30,6 +32,20 @@ export function FestivalRichEventDetail({
       <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
         {event.title}
       </h1>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        {eventListingCitation({
+          title: event.title,
+          place:
+            [event.venueName?.trim(), event.localityLabel?.trim()].filter(Boolean).join(", ") ||
+            "Chennai",
+          whenLabel: [
+            formatEventDate(event.startsAt, event.endsAt, event.allDay),
+            formatEventTime(event.startsAt, event.endsAt, event.allDay),
+          ]
+            .filter(Boolean)
+            .join(", "),
+        })}
+      </p>
       <p className="type-lede mt-4 text-sm text-[var(--muted)]">
         {formatEventWhen(event.startsAt, event.endsAt, event.allDay)}
         {event.venueName ? ` · ${event.venueName}` : null}

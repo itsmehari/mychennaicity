@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
+import { JOBS_POSTER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 import { isWhatsAppBusinessConfigured } from "@/lib/whatsapp-server";
@@ -45,9 +46,7 @@ export function ChennaiJobsHubEmployerCta() {
     <section className="mcc-jobs-hub__employer-cta" aria-labelledby="chennai-jobs-employer-title">
       <h2 id="chennai-jobs-employer-title">Hiring in Chennai?</h2>
       <p>
-        Post your vacancy on mychennaicity.in and reach local candidates across Chennai
-        areas. Suitable for office staff, sales roles, field jobs, internships,
-        walk-ins and local business hiring.
+        {JOBS_POSTER_PASSAGE}
       </p>
       <div className="mcc-jobs-hub__employer-actions">
         <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">

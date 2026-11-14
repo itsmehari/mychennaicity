@@ -10,7 +10,7 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const titleSegment = "Post a job in Chennai";
 const description =
-  "Send a Chennai job and MyChennaiCity places it on the jobs board. No employer login. Candidates apply on your link.";
+  "Post a Chennai job vacancy or recruitment notice at https://mychennaicity.in/advertise/jobs. Send the role, location, and apply link. No employer login. Candidates apply on your channel.";
 
 export const metadata: Metadata = {
   title: titleSegment,

@@ -5,6 +5,10 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import {
+  JOBS_POSTER_PASSAGE,
+  JOBS_POSTER_PASSAGE_TA,
+} from "@/content/aeo/jobs-events-passages";
+import {
   propertyPackageSentence,
   type ListingPitchSample,
 } from "@/content/advertise-listings";
@@ -73,8 +77,8 @@ export function ListingPitchPage({
   const lede =
     kind === "jobs"
       ? ta
-        ? "பதவி, நிறுவனம், பகுதி, விண்ணப்ப இணைப்பு ஆகியவற்றை அனுப்புங்கள். நாங்களே பதிவை வைக்கிறோம். முதலாளி உள்நுழைவு இல்லை. விண்ணப்பம் உங்கள் இணைப்பிலேயே நடக்கும்."
-        : "Send the role, company, area, and the link where candidates should apply. We place the listing. There is no employer login. Candidates apply on your link."
+        ? JOBS_POSTER_PASSAGE_TA
+        : JOBS_POSTER_PASSAGE
       : ta
         ? "விற்பனை, வாடகை, மனை, வணிக இடம். புகைப்படம், பகுதி, விலை, அளவு, தொலைபேசி எண் அனுப்புங்கள். நாங்களே விளம்பரத்தை வைக்கிறோம். உள்நுழைவு இல்லை."
         : "Sale, rent, plot, or commercial. Send photos, area, price, size, and a phone number. We place the ad. There is no login.";

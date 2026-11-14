@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EVENTS_SEARCHER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import type { PublicEventRow } from "@/domains/events";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 
@@ -41,8 +42,7 @@ export function EventsHubThisWeekDigest({ events }: Props) {
         Upcoming in Chennai — plain list
       </h2>
       <p className="type-lede mt-2 max-w-2xl text-sm text-[var(--muted)]">
-        Same calendar as the cards above, in plain text for quick scanning and
-        citation. Confirm with the organiser before you travel.
+        {EVENTS_SEARCHER_PASSAGE}
       </p>
 
       {slice.length === 0 ? (
