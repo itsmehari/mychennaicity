@@ -46,6 +46,8 @@ Links pasted **inside** the group later use `withWhatsappGroupShareUtms()` (`utm
 | Mail | No outbound mailer in this repo | Saving the row does not wait on email |
 | Old `/api/community/whatsapp` | Redirects to the form | It used to send people straight to the invite |
 | Status tags and new WhatsApp buttons | Forbidden until the rules page allows them | A mention notifies members. Admins cannot delete another person’s Status. See the playbook |
+| Waitlist (16 Nov 2026) | On until `WHATSAPP_COMMUNITY_ACCEPTING=true` | Group treated as full. Form still saves. Invite hidden except for already-approved numbers |
+| Approval wait | 12 hours, daytime IST 08:00–20:00 | Owner: desk hours |
 
 ## Operator steps
 

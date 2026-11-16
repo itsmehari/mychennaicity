@@ -20,7 +20,11 @@ import {
   sanitizeWhatsappJoinSource,
   whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
-import { whatsappApprovalHours } from "@/lib/whatsapp-community-flags";
+import {
+  whatsappApprovalHours,
+  whatsappCommunityAccepting,
+} from "@/lib/whatsapp-community-flags";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 import { whatsappJoinLocalities } from "@/lib/whatsapp-join";
 import { readJoinUnlock } from "@/lib/whatsapp-join-session";
 import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
@@ -93,7 +97,7 @@ export default async function WhatsappCommunityJoinPage({
   const source = sanitizeWhatsappJoinSource(params.src);
   const unlocked = params.ok === "1" ? await readJoinUnlock() : null;
   const alreadyApproved = params.already === "1";
-  const waitlist = params.waitlist === "1";
+  const waitlist = params.waitlist === "1" && !alreadyApproved;
   const invite =
     unlocked && !waitlist
       ? trackedWhatsappCommunityInvite("join-verified", "join_form")
@@ -112,7 +116,7 @@ export default async function WhatsappCommunityJoinPage({
             label: ta ? "விதிகள்" : "Group rules",
             href: WHATSAPP_COMMUNITY_PAGE_PATH,
           },
-          { label: ta ? "சேர கோரிக்கை" : "Request to join" },
+          { label: whatsappRequestCtaLabel(ta ? "ta" : "en") },
         ]}
       />
       <p className="type-eyebrow text-[#128C7E]">
@@ -132,12 +136,29 @@ export default async function WhatsappCommunityJoinPage({
                 ? "குழு இணைப்பு தயார்"
                 : "Your group link is ready"
           : ta
-            ? "சென்னை குழுவில் சேர கோரிக்கை"
-            : "Request to join the Chennai group"}
+            ? whatsappCommunityAccepting()
+              ? "சென்னை குழுவில் சேர கோரிக்கை"
+              : "சென்னை குழு காத்திருப்பு பட்டியல்"
+            : whatsappCommunityAccepting()
+              ? "Request to join the Chennai group"
+              : "Join the Chennai WhatsApp waitlist"}
       </h1>
       <p id="wa-join-lede" className="type-lede mt-4 max-w-2xl text-base text-[var(--muted)]">
         {unlocked ? (
-          ta ? (
+          waitlist ? (
+            ta ? (
+              <>
+                வணக்கம் {unlocked.name}. குழு இப்போது நிறைந்துள்ளது. உங்கள் எண்
+                காத்திருப்பு பட்டியலில் உள்ளது. இடம் கிடைத்ததும் நிர்வாகி தொடர்பு
+                கொள்வார்.
+              </>
+            ) : (
+              <>
+                Hello {unlocked.name}. The group is full right now. Your number is
+                on the waitlist. An admin will write when a seat opens.
+              </>
+            )
+          ) : ta ? (
             <>
               வணக்கம் {unlocked.name}. அடுத்து வாட்ஸ்அப்பில் Join தட்டவும். நிர்வாகி
               உங்கள் எண்ணைப் பார்த்து அனுமதிப்பார்.
@@ -194,6 +215,7 @@ export default async function WhatsappCommunityJoinPage({
             lang={lang}
             invite={invite}
             alreadyApproved={alreadyApproved}
+            waitlist={waitlist}
             name={unlocked.name}
             approvalHours={whatsappApprovalHours()}
           />

@@ -8,6 +8,7 @@ import {
 } from "@/lib/whatsapp-join";
 import {
   WA_NUDGE_DAILY_CAP,
+  isWhatsappDeskDaytimeIst,
   whatsappApprovalHours,
 } from "@/lib/whatsapp-community-flags";
 import {
@@ -67,6 +68,7 @@ export async function applyWhatsappJoinNudge(id: string): Promise<string | null>
       lastContactedAt: row.lastContactedAt,
       createdAt: row.createdAt,
       approvalHours: whatsappApprovalHours(),
+      daytime: isWhatsappDeskDaytimeIst(),
     })
   ) {
     return null;

@@ -18,6 +18,7 @@ import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
 import { todaysWhatsappNudgeCount } from "@/lib/whatsapp-join-desk-db";
 import {
   WA_NUDGE_DAILY_CAP,
+  isWhatsappDeskDaytimeIst,
   whatsappApprovalHours,
 } from "@/lib/whatsapp-community-flags";
 import { WHATSAPP_PARTNER_CODES } from "@/content/whatsapp-community/partner-codes";
@@ -201,6 +202,7 @@ export default async function WhatsappJoinRequestsPage({
           lastContactedAt: row.lastContactedAt,
           createdAt: row.createdAt,
           approvalHours: hours,
+          daytime: isWhatsappDeskDaytimeIst(),
         })
           ? whatsappJoinWaMeUrl({
               displayName: row.displayName,

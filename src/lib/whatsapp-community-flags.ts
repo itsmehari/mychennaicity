@@ -2,8 +2,8 @@
  * WhatsApp community feature switches. New reach and funnel behaviour defaults
  * off until verified on live. Join-path bug fixes are not gated.
  *
- * TODO_OWNER: set approval hours and member count in env when you want them
- * shown. Waitlist is off while WHATSAPP_COMMUNITY_ACCEPTING is unset/true.
+ * Owner 16 Nov 2026: group is on waitlist; approval promise is 12 hours in the day.
+ * Set WHATSAPP_COMMUNITY_ACCEPTING=true to open joins again.
  */
 
 function truthy(raw: string | undefined): boolean {
@@ -26,18 +26,30 @@ export function waFunnelEventsEnabled(): boolean {
   return truthy(process.env.NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED);
 }
 
-/** When false, the form saves waitlist rows and every Request label changes. Default: accepting. */
+/** When false, the form saves waitlist rows and every Request label changes. Default: waitlist. */
 export function whatsappCommunityAccepting(): boolean {
-  if (falsey(process.env.WHATSAPP_COMMUNITY_ACCEPTING)) return false;
-  if (falsey(process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_ACCEPTING)) return false;
-  return true;
+  if (truthy(process.env.WHATSAPP_COMMUNITY_ACCEPTING)) return true;
+  if (truthy(process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_ACCEPTING)) return true;
+  return false;
 }
 
-/** TODO_OWNER: hours before a waiting row may get one reply-first nudge. Default 24. */
+/** Hours before a waiting row may get one reply-first nudge. Default 12 (daytime desk). */
 export function whatsappApprovalHours(): number {
   const n = Number(process.env.WHATSAPP_COMMUNITY_APPROVAL_HOURS);
   if (Number.isFinite(n) && n > 0 && n < 24 * 14) return Math.round(n);
-  return 24;
+  return 12;
+}
+
+/** IST desk hours for the optional Message nudge: 08:00–20:00. */
+export function isWhatsappDeskDaytimeIst(now = new Date()): boolean {
+  const hour = Number(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(now).find((part) => part.type === "hour")?.value,
+  );
+  return Number.isFinite(hour) && hour >= 8 && hour < 20;
 }
 
 /** Optional public member count. Hidden when unset. TODO_OWNER: who updates this. */

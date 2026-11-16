@@ -16,6 +16,7 @@ export function WhatsappJoinSuccessExtras({
   lang,
   invite,
   alreadyApproved,
+  waitlist = false,
   name,
   locality,
   approvalHours,
@@ -23,6 +24,7 @@ export function WhatsappJoinSuccessExtras({
   lang: "en" | "ta";
   invite: string | null;
   alreadyApproved: boolean;
+  waitlist?: boolean;
   name: string;
   locality?: string;
   approvalHours: number;
@@ -62,9 +64,13 @@ export function WhatsappJoinSuccessExtras({
           ? ta
             ? "நீங்கள் ஏற்கனவே குழுவில் உள்ளீர்கள். தேவைப்பட்டால் மீண்டும் Join தட்டவும்."
             : "You are already in the group. Tap Join again if you need the link on this phone."
-          : ta
-            ? `அனுமதி பொதுவாக ${approvalHours} மணி நேரத்துக்குள்.`
-            : `Approval usually within ${approvalHours} hours.`}
+          : waitlist
+            ? ta
+              ? "இடம் திறந்ததும் பகல் நேரத்தில் எழுதுவோம்."
+              : "We will write during the day when a seat opens."
+            : ta
+            ? `அனுமதி பொதுவாக பகல் நேரத்தில் ${approvalHours} மணி நேரத்துக்குள்.`
+            : `Approval usually within ${approvalHours} hours during the day.`}
       </p>
       <div className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
         <p className="font-semibold text-[var(--foreground)]">

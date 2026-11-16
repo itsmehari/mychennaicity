@@ -15,6 +15,7 @@ import {
   sealJoinUnlock,
   whatsappJoinFollowupMessage,
   whatsappJoinQueueHeadline,
+  whatsappJoinNudgeEligible,
   whatsappJoinSavePlan,
   whatsappJoinWaMeUrl,
 } from "./whatsapp-join";
@@ -101,6 +102,43 @@ describe("whatsapp join messages", () => {
         inviteForNudge: invite,
       }),
     ).toBeNull();
+  });
+});
+
+describe("whatsapp join nudge window", () => {
+  const created = new Date("2026-11-16T00:00:00.000Z");
+
+  it("waits 12 hours and only during IST daytime", () => {
+    expect(
+      whatsappJoinNudgeEligible({
+        status: "submitted",
+        lastContactedAt: null,
+        createdAt: created,
+        approvalHours: 12,
+        now: new Date("2026-11-16T04:30:00.000Z"),
+        daytime: true,
+      }),
+    ).toBe(false);
+    expect(
+      whatsappJoinNudgeEligible({
+        status: "submitted",
+        lastContactedAt: null,
+        createdAt: created,
+        approvalHours: 12,
+        now: new Date("2026-11-16T13:00:00.000Z"),
+        daytime: false,
+      }),
+    ).toBe(false);
+    expect(
+      whatsappJoinNudgeEligible({
+        status: "submitted",
+        lastContactedAt: null,
+        createdAt: created,
+        approvalHours: 12,
+        now: new Date("2026-11-16T13:00:00.000Z"),
+        daytime: true,
+      }),
+    ).toBe(true);
   });
 });
 

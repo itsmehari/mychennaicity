@@ -29,8 +29,8 @@ export async function WhatsAppProofStrip({ lang = "en" }: { lang?: "en" | "ta" }
       </p>
       <p className="mt-2 text-sm text-[var(--muted)]">
         {ta
-          ? `அனுமதி பொதுவாக ${hours} மணி நேரத்துக்குள்.`
-          : `Approval usually within ${hours} hours.`}
+          ? `அனுமதி பொதுவாக பகல் நேரத்தில் ${hours} மணி நேரத்துக்குள்.`
+          : `Approval usually within ${hours} hours during the day.`}
         {members ? (
           <>
             {" "}

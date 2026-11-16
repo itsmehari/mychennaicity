@@ -160,12 +160,15 @@ export function whatsappJoinNudgeEligible(input: {
   createdAt: Date;
   approvalHours: number;
   now?: Date;
+  daytime?: boolean;
 }): boolean {
   if (input.status !== "submitted") return false;
   if (input.lastContactedAt) return false;
   const now = input.now ?? new Date();
   const waitMs = input.approvalHours * 60 * 60 * 1000;
-  return now.getTime() - input.createdAt.getTime() >= waitMs;
+  if (now.getTime() - input.createdAt.getTime() < waitMs) return false;
+  if (input.daytime === false) return false;
+  return true;
 }
 
 export type WhatsappJoinSavePlan =

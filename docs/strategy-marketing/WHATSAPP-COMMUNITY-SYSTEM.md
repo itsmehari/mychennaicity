@@ -23,8 +23,8 @@ Inventory every `wa.me`, `api.whatsapp.com`, and `chat.whatsapp.com`. Classify e
 | Request | `/whatsapp-community/join` | found |
 | Admin | `/super-admin` login; `/super-admin/whatsapp-join-requests` | found |
 | Phone pattern | Indian mobile `91` + 10 digits 6–9 | fixed, not a parameter |
-| Approval hours | `WHATSAPP_COMMUNITY_APPROVAL_HOURS` default 24 | TODO_OWNER |
-| Member count | `WHATSAPP_COMMUNITY_MEMBER_COUNT` | TODO_OWNER (hidden if unset) |
+| Approval hours | 12, daytime IST 08:00–20:00 | found; owner 16 Nov 2026 |
+| Member count | `WHATSAPP_COMMUNITY_MEMBER_COUNT` | hidden (unset) |
 | Admin email | `SUPER_ADMIN_EMAIL` / `ADMIN_EMAIL` | found env |
 | Analytics | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | found env |
 | Localities | `src/content/whatsapp-community/localities.ts` | found |
@@ -59,7 +59,7 @@ Resubmit of an **approved** number keeps approved.
 
 Login `/super-admin` → dashboard widget pending count → queue last-4 search → Approve / Decline / Spam / Restore / Notes / capped Message (no invite) / CSV (logged). Scorecard on the queue page. Partner codes issued in `src/content/whatsapp-community/partner-codes.ts`.
 
-SQL pack: `drizzle/0013_whatsapp_join_verifications.sql` + `drizzle/0019_whatsapp_join_attribution.sql` (do not apply 0019 live until the owner says so).
+SQL pack: `drizzle/0013_whatsapp_join_verifications.sql` + `drizzle/0019_whatsapp_join_attribution.sql` (applied live 16 Nov 2026).
 
 ## Events (no personal data)
 
@@ -81,7 +81,7 @@ Registry: `config/whatsapp/placements.json`. Component: `WhatsAppPlacementCta`. 
 | --- | --- | --- |
 | `NEXT_PUBLIC_WA_REACH_ENABLED` | off | New contextual slots, QR, suppression, neighbour invite |
 | `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` | off | New GA4 event names |
-| `WHATSAPP_COMMUNITY_ACCEPTING` | on | When false: waitlist rows + Request labels |
+| `WHATSAPP_COMMUNITY_ACCEPTING` | **off (waitlist)** | Set true when the group has seats again |
 
 ## Retrofit protocol
 
