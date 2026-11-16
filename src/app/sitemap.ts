@@ -26,7 +26,7 @@ import {
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
-  WHATSAPP_SPAMMERS_PAGE_PATH,
+  WHATSAPP_COMMUNITY_THIS_WEEK_PATH,
 } from "@/lib/whatsapp-community";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
@@ -439,10 +439,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
-      url: `${base}${WHATSAPP_SPAMMERS_PAGE_PATH}`,
+      url: `${base}${WHATSAPP_COMMUNITY_THIS_WEEK_PATH}`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.65,
     },
     {
       url: `${base}${WHATSAPP_ADMINS_TOOLKIT_PATH}`,

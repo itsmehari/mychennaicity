@@ -14,8 +14,8 @@ import {
   WHATSAPP_COMMUNITY_LAST_UPDATED,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
-  WHATSAPP_SPAMMERS_PAGE_PATH,
 } from "@/lib/whatsapp-community";
+import { WhatsAppProofStrip } from "./whatsapp-proof-strip";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
@@ -24,6 +24,7 @@ import {
 import { WhatsAppCommunityFaq } from "./whatsapp-community-faq";
 import { WhatsAppCommunityStickyBar } from "./whatsapp-community-sticky-bar";
 import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 const joinBtnClass =
   "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]";
@@ -36,7 +37,7 @@ const JOIN_STEPS = [
   "Read the pinned rules. Mute the chat if the volume is high.",
 ];
 
-export function WhatsAppCommunityLanding() {
+export async function WhatsAppCommunityLanding() {
   const contactEmail = getPublicContactEmail();
 
   return (
@@ -85,7 +86,7 @@ export function WhatsAppCommunityLanding() {
         </div>
         <p className="mt-6 flex flex-wrap items-center gap-4">
           <WhatsAppCommunityJoinLink utmContent="hero" className={joinBtnClass}>
-            Request to join
+            {whatsappRequestCtaLabel("en")}
           </WhatsAppCommunityJoinLink>
           <Link
             href={WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL}
@@ -98,6 +99,7 @@ export function WhatsAppCommunityLanding() {
           Last updated {WHATSAPP_COMMUNITY_LAST_UPDATED}
         </p>
       </section>
+      <WhatsAppProofStrip lang="en" />
 
       {/* What you get */}
       <section className="mt-14" aria-labelledby="wa-benefits-heading">
@@ -196,15 +198,8 @@ export function WhatsAppCommunityLanding() {
           Same rules are pinned in WhatsApp. Also see our{" "}
           <Link href="/community-guidelines" className="font-semibold text-[var(--accent)] hover:underline">
             community guidelines
-          </Link>{" "}
-          and the{" "}
-          <Link
-            href={WHATSAPP_SPAMMERS_PAGE_PATH}
-            className="font-semibold text-[var(--accent)] hover:underline"
-          >
-            WhatsApp spammers list
-          </Link>{" "}
-          for numbers we reject from invite-link floods.
+          </Link>
+          . Group admins match join-form numbers; invite-link floods are rejected.
         </p>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
           WhatsApp keeps adding buttons that notify the whole group or tag
@@ -338,7 +333,7 @@ export function WhatsAppCommunityLanding() {
             utmContent="final"
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-bold text-[#128C7E] shadow-md transition hover:bg-white/95"
           >
-            Request to join
+            {whatsappRequestCtaLabel("en")}
           </WhatsAppCommunityJoinLink>
         </p>
         <p className="mt-6 text-xs text-white/75">
@@ -348,13 +343,6 @@ export function WhatsAppCommunityLanding() {
             className="underline underline-offset-2 hover:text-white"
           >
             How to find trusted local groups
-          </Link>
-          {" · "}
-          <Link
-            href={WHATSAPP_SPAMMERS_PAGE_PATH}
-            className="underline underline-offset-2 hover:text-white"
-          >
-            Spammers list for admins
           </Link>
         </p>
       </section>

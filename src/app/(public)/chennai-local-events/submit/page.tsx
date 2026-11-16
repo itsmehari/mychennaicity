@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { EventSubmitForm } from "@/components/events/event-submit-form";
 import {
   InteriorCrossNav,
@@ -40,6 +41,9 @@ export default function SubmitChennaiEventPage() {
         {EVENTS_ORGANISER_PASSAGE}
       </p>
       <EventSubmitForm />
+      <div className="mt-10">
+        <WhatsAppPlacementCta pageType="thank_you" slot="post_conversion" />
+      </div>
       <InteriorCrossNav />
     </div>
   );

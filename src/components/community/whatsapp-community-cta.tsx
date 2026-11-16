@@ -5,6 +5,7 @@ import {
   WhatsAppCommunityJoinLink,
   WhatsAppCommunityPageLink,
 } from "./whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -103,7 +104,7 @@ export function WhatsAppCommunityCta({
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
           <WhatsAppCommunityJoinLink utmContent={utmContent} className={joinBtnClass}>
             <WhatsAppMark className="h-5 w-5" />
-            Request to join
+            {whatsappRequestCtaLabel("en")}
           </WhatsAppCommunityJoinLink>
           <WhatsAppCommunityPageLink src={src} className={outlineBtnClass}>
             About the group

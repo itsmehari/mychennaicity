@@ -4,6 +4,7 @@ import {
   whatsappCommunityJoinRedirectPath,
   WHATSAPP_COMMUNITY_PAGE_PATH,
 } from "@/lib/whatsapp-community";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 declare global {
   interface Window {
@@ -34,6 +35,9 @@ export function WhatsAppCommunityJoinLink({
     <a
       href={whatsappCommunityJoinRedirectPath(utmContent)}
       className={className}
+      data-wa-type="request"
+      data-wa-placement={utmContent}
+      data-wa-content={utmContent}
       onClick={() => {
         trackJoinClick(utmContent);
         onClick?.();
@@ -42,6 +46,10 @@ export function WhatsAppCommunityJoinLink({
       {children}
     </a>
   );
+}
+
+export function WhatsAppRequestLabel({ lang = "en" }: { lang?: "en" | "ta" }) {
+  return <>{whatsappRequestCtaLabel(lang)}</>;
 }
 
 /** Text link to the canonical landing page (not raw invite). */
@@ -59,7 +67,13 @@ export function WhatsAppCommunityPageLink({
     ? `${WHATSAPP_COMMUNITY_PAGE_PATH}?src=${encodeURIComponent(src)}`
     : WHATSAPP_COMMUNITY_PAGE_PATH;
   return (
-    <a href={href} className={className}>
+    <a
+      href={href}
+      className={className}
+      data-wa-type="learn"
+      data-wa-placement={src || "learn"}
+      data-wa-content={src || "learn"}
+    >
       {children}
     </a>
   );

@@ -9,7 +9,7 @@ export type WhatsappJoinQueueRowData = {
   phoneDisplay: string;
   phoneLast4: string;
   locality: string;
-  status: "submitted" | "approved" | "declined" | "spam";
+  status: "submitted" | "approved" | "declined" | "spam" | "waitlist";
   onSpamList: boolean;
   messageUrl: string | null;
   returnTo: string;
@@ -31,6 +31,7 @@ const STATUS_PILL: Record<WhatsappJoinQueueRowData["status"], string> = {
   approved: "bg-emerald-100 text-emerald-950",
   declined: "bg-red-100 text-red-900",
   spam: "bg-red-100 text-red-900",
+  waitlist: "bg-sky-100 text-sky-950",
 };
 
 function statusLabel(status: WhatsappJoinQueueRowData["status"]): string {
@@ -125,6 +126,7 @@ export function WhatsappJoinQueueRow({ row }: { row: WhatsappJoinQueueRowData })
           returnTo={row.returnTo}
           messageUrl={row.messageUrl}
           phoneDisplay={row.phoneDisplay}
+          status={row.status}
         />
       </div>
     </li>

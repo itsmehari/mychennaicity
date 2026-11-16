@@ -20,7 +20,7 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
   {
     question: "How do I join the my chennai city WhatsApp group?",
     answer:
-      "Open this page on your phone, tap Join on WhatsApp, and confirm in the WhatsApp app. If the group is full, use the waitlist section on this page — email us or message the admin WhatsApp listed on the contact page.",
+      "Open https://mychennaicity.in/whatsapp-community/join on your phone. Enter your WhatsApp name, 10-digit Indian mobile, and Chennai area. After you submit, tap Join on WhatsApp. An admin matches that number to the pending list. The site cannot approve you by itself.",
   },
   {
     question: "Is this the official mychennaicity.in WhatsApp group?",
@@ -40,7 +40,7 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
   {
     question: "What happens when the WhatsApp group is full?",
     answer:
-      "WhatsApp caps group size. When the group is full, the join link stops accepting new members. Join the waitlist via the contact email on mychennaicity.in/contact or the admin WhatsApp for 1:1 help — we will share the next slot or a vetted overflow channel.",
+      "WhatsApp caps group size. When the group is full, keep using https://mychennaicity.in/whatsapp-community/join — the form becomes the waitlist. The desk on mychennaicity.in/contact is for 1:1 help, not a second invite. We share the next slot or a vetted overflow only after the rules page says so.",
   },
   {
     question: "How is the group moderated?",
@@ -50,7 +50,7 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
   {
     question: "Do you publish a WhatsApp spammers list?",
     answer:
-      "Yes. Numbers flagged from invite-link join floods on the my chennai city group are listed at mychennaicity.in/chennai-whatsapp-spammers so other Chennai WhatsApp admins can stay wary. The list is a public-interest moderation aid, not a police or court finding.",
+      "We keep a flagged-number list for group admins. It is not linked from the public landing, nav, or sitemap. It is a moderation aid, not a police or court finding.",
   },
   {
     question: "Someone tagged me in a WhatsApp Status with this group. Can an admin remove it?",

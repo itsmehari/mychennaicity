@@ -5,7 +5,7 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
-import { getSiteUrl } from "@/lib/env";
+import { getPublicContactEmail, getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
 const path = "/privacy";
@@ -198,8 +198,26 @@ export default function PrivacyPage() {
           logs may include a coarse IP-based location used for hosting, security,
           and approximate analytics.
         </p>
+        <p id="whatsapp-join">
+          <strong className="text-[var(--foreground)]">WhatsApp join form.</strong>{" "}
+          If you request to join the city WhatsApp group we store your WhatsApp
+          name, Indian mobile number, Chennai area, optional intro, and a hash of
+          your IP. We use this only to match WhatsApp pending requests and to
+          refuse known spam numbers. We do not publish the number on the site or
+          send it to analytics. Declined rows are deleted after 12 months. Spam
+          rows are reduced to a phone hash and reason. Email{" "}
+          {getPublicContactEmail()} via{" "}
+          <Link
+            href="/contact"
+            className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            Contact
+          </Link>{" "}
+          to ask for deletion at any time. CSV export of these rows is
+          admin-only and logged.
+        </p>
         <p className="text-xs text-[var(--muted)]">
-          Last updated: November 2026.
+          Last updated: 16 November 2026.
         </p>
       </div>
       <InteriorCrossNav />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
+import { HubCommunityStrip } from "@/components/community/hub-community-strip";
 import { ClassifiedHubListingCards } from "@/components/classifieds/classified-hub-cards";
 import { ClassifiedsHubCategoryNav } from "@/components/classifieds/classifieds-hub-category-nav";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
@@ -171,6 +172,8 @@ export default async function ChennaiClassifiedsHubPage({
         cover sale, rent, plot, commercial, and buyer requirements. We place
         the ad after you send the details.
       </p>
+
+      <HubCommunityStrip businessVariant="directory" className="mt-8" />
 
       <ClassifiedsHubCategoryNav activeCategory={category} />
 

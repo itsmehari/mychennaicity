@@ -26,7 +26,12 @@ export const WHATSAPP_SPAMMERS_PAGE_PATH = "/chennai-whatsapp-spammers";
 /** Neighbourhood admin toolkit (rules, spam workflow, links) */
 export const WHATSAPP_ADMINS_TOOLKIT_PATH = "/chennai-whatsapp-group-admins";
 
+export const WHATSAPP_COMMUNITY_THIS_WEEK_PATH = "/whatsapp-community/this-week";
+
 export const WHATSAPP_COMMUNITY_OG_IMAGE =
+  "/images/mychennaicity-whatsapp-community-og.jpg";
+
+export const WHATSAPP_COMMUNITY_OG_IMAGE_FALLBACK =
   "/images/mychennaicity-whatsapp-community-og.svg";
 
 export const WHATSAPP_COMMUNITY_BADGE_IMAGE =
@@ -34,7 +39,7 @@ export const WHATSAPP_COMMUNITY_BADGE_IMAGE =
 
 export const WHATSAPP_COMMUNITY_GROUP_NAME = "my chennai city";
 
-export const WHATSAPP_COMMUNITY_LAST_UPDATED = "8 November 2026";
+export const WHATSAPP_COMMUNITY_LAST_UPDATED = "16 November 2026";
 
 export function siteWhatsappCommunityPageUrl(
   query?: Record<string, string>,

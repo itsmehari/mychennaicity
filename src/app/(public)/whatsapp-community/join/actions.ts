@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
@@ -23,6 +23,9 @@ import {
   WHATSAPP_COMMUNITY_JOIN_PATH,
   sanitizeWhatsappJoinSource,
 } from "@/lib/whatsapp-community";
+import { whatsappCommunityAccepting } from "@/lib/whatsapp-community-flags";
+import { applyWhatsappJoinAttribution } from "@/lib/whatsapp-join-attribution";
+import { sanitizeWhatsappPartnerCode } from "@/content/whatsapp-community/partner-codes";
 
 export type WhatsappJoinFormState = {
   ok: boolean;
@@ -99,8 +102,8 @@ export async function submitWhatsappJoin(
 
   const headerList = await headers();
   const ip = clientIpFromHeaders(headerList) ?? "unknown";
-  const limit = rateLimitConsume(`wa-join:${ip}`, 5, 10 * 60 * 1000);
-  if (!limit.ok) {
+  const ipLimit = rateLimitConsume(`wa-join-ip:${ip}`, 30, 60 * 60 * 1000);
+  if (!ipLimit.ok) {
     return { ok: false, message: blocked };
   }
 
@@ -111,6 +114,11 @@ export async function submitWhatsappJoin(
   const phoneRaw = String(formData.get("phone") ?? "").trim();
   const agree = formData.get("agree") === "on" || formData.get("agree") === "1";
   const source = sanitizeWhatsappJoinSource(String(formData.get("source") ?? ""));
+  const placement = String(formData.get("placement") ?? "").trim().slice(0, 40) || null;
+  const partnerCode = sanitizeWhatsappPartnerCode(String(formData.get("partner") ?? ""));
+  const utmSource = String(formData.get("utm_source") ?? "").trim().slice(0, 80) || null;
+  const utmMedium = String(formData.get("utm_medium") ?? "").trim().slice(0, 80) || null;
+  const utmCampaign = String(formData.get("utm_campaign") ?? "").trim().slice(0, 80) || null;
   const phone = normalizeIndianMobile(phoneRaw);
   const kept = {
     displayName,
@@ -180,6 +188,10 @@ export async function submitWhatsappJoin(
       ),
     );
   }
+  const phoneLimit = rateLimitConsume(`wa-join-phone:${phone.e164}`, 5, 60 * 60 * 1000);
+  if (!phoneLimit.ok) {
+    return { ok: false, message: blocked };
+  }
 
   const contact = getPublicContactEmail();
   const spamMessage = copy(
@@ -196,6 +208,7 @@ export async function submitWhatsappJoin(
   const db = getDb();
 
   let duplicate = false;
+  let alreadyApproved = false;
   try {
     const [existing] = await db
       .select({
@@ -214,34 +227,59 @@ export async function submitWhatsappJoin(
       return fail(spamMessage);
     }
 
-    const values = {
+    const nextStatus = "submitted" as const;
+    if (plan === "keep-approved") alreadyApproved = true;
+    const contactFields = {
       displayName,
       phoneRaw: phone.raw.slice(0, 32),
       phoneLast4: phone.last4,
       locality,
       intent,
       intro: intro || null,
-      status: "submitted" as const,
       source,
       ipHash: hashJoinIp(ip),
       userAgent: ua || null,
       updatedAt: now,
-      approvedAt: null,
-      approvedBy: null,
     };
 
-    if (plan === "update" && existing) {
+    if (plan === "keep-approved" && existing) {
       duplicate = true;
       await db
         .update(whatsappJoinVerifications)
-        .set(values)
+        .set(contactFields)
+        .where(eq(whatsappJoinVerifications.id, existing.id));
+    } else if (plan === "update" && existing) {
+      duplicate = true;
+      await db
+        .update(whatsappJoinVerifications)
+        .set({
+          ...contactFields,
+          status: nextStatus,
+          approvedAt: null,
+          approvedBy: null,
+        })
         .where(eq(whatsappJoinVerifications.id, existing.id));
     } else {
       await db.insert(whatsappJoinVerifications).values({
-        ...values,
+        ...contactFields,
         phoneE164: phone.e164,
+        status: nextStatus,
+        approvedAt: null,
+        approvedBy: null,
       });
     }
+
+    await applyWhatsappJoinAttribution({
+      phoneE164: phone.e164,
+      isInsert: plan === "insert",
+      source,
+      placement,
+      partnerCode,
+      lang,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+    });
   } catch (err) {
     if (!isUniqueViolation(err)) {
       return { ok: false, message: blocked };
@@ -258,6 +296,8 @@ export async function submitWhatsappJoin(
       return fail(spamMessage);
     }
     duplicate = true;
+    const keepApproved = existing.status === "approved";
+    if (keepApproved) alreadyApproved = true;
     await db
       .update(whatsappJoinVerifications)
       .set({
@@ -267,15 +307,42 @@ export async function submitWhatsappJoin(
         locality,
         intent,
         intro: intro || null,
-        status: "submitted",
+        ...(keepApproved
+          ? {}
+          : {
+              status: "submitted",
+              approvedAt: null,
+              approvedBy: null,
+            }),
         source,
         ipHash: hashJoinIp(ip),
         userAgent: ua || null,
         updatedAt: now,
-        approvedAt: null,
-        approvedBy: null,
       })
       .where(eq(whatsappJoinVerifications.id, existing.id));
+    await applyWhatsappJoinAttribution({
+      phoneE164: phone.e164,
+      isInsert: false,
+      source,
+      placement,
+      partnerCode,
+      lang,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+    });
+  }
+
+  if (!whatsappCommunityAccepting() && !alreadyApproved) {
+    try {
+      await db.execute(sql`
+        UPDATE whatsapp_join_verifications
+        SET status = 'waitlist'
+        WHERE phone_e164 = ${phone.e164}
+      `);
+    } catch {
+      // Enum value missing until 0019 is applied; row stays submitted.
+    }
   }
 
   try {
@@ -298,5 +365,7 @@ export async function submitWhatsappJoin(
   }
 
   const next = new URLSearchParams({ ok: "1", lang, src: source });
+  if (alreadyApproved) next.set("already", "1");
+  if (!whatsappCommunityAccepting()) next.set("waitlist", "1");
   redirect(`${WHATSAPP_COMMUNITY_JOIN_PATH}?${next.toString()}`);
 }

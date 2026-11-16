@@ -12,7 +12,7 @@ import {
   WHATSAPP_COMMUNITY_GEO_META,
   WHATSAPP_COMMUNITY_GUIDE_PATH,
   WHATSAPP_COMMUNITY_JOIN_PATH,
-  WHATSAPP_SPAMMERS_PAGE_PATH,
+  WHATSAPP_COMMUNITY_OG_IMAGE,
   siteWhatsappCommunityJoinUrl,
 } from "@/lib/whatsapp-community";
 
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Chennai neighbourhood WhatsApp groups: what to check before you join.",
     url: `${getSiteUrl()}${path}`,
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    images: [{ url: WHATSAPP_COMMUNITY_OG_IMAGE, width: 1200, height: 630 }],
   },
   other: { ...WHATSAPP_COMMUNITY_GEO_META },
 };
@@ -49,7 +49,7 @@ const SECTIONS = [
   },
   {
     title: "Watch for spam patterns",
-    body: "Repeated crypto schemes, gambling links, adult content, and cold DMs are red flags. Leave or mute groups that tolerate them — WhatsApp cannot moderate content for you. Group admins: check our public WhatsApp spammers list for numbers already flagged from invite-link floods.",
+    body: "Repeated crypto schemes, gambling links, adult content, and cold DMs are red flags. Leave or mute groups that tolerate them — WhatsApp cannot moderate content for you. Official mychennaicity.in admins keep a flagged-number list for matching pending requests. It is a moderation aid, not a public directory.",
   },
   {
     title: "Prefer one city-wide group over many splinters",
@@ -84,8 +84,10 @@ export default function ChennaiWhatsappCommunityGuidePage() {
           /whatsapp-community/join
         </Link>
         . Neighbourhood WhatsApp groups can be genuinely useful — for civic alerts, job leads,
-        and event tips. They can also be spam traps. This guide helps Chennai residents
-        evaluate a group before joining.
+        and event tips. They can also be spam traps. This is mychennaicity.in&apos;s first-hand
+        anti-spam story, dated 16 November 2026: we keep admin approval on, hide the invite
+        until a form row exists, and still get invite-link floods. The hidden link is not the
+        security control. The admin match is.
       </p>
 
       <div className="mt-10 space-y-10">
@@ -106,14 +108,8 @@ export default function ChennaiWhatsappCommunityGuidePage() {
       </div>
 
       <p className="mt-8 max-w-2xl text-sm text-[var(--muted)]">
-        Running a Chennai WhatsApp group? See the{" "}
-        <Link
-          href={WHATSAPP_SPAMMERS_PAGE_PATH}
-          className="font-semibold text-[var(--accent)] hover:underline"
-        >
-          WhatsApp spammers list
-        </Link>{" "}
-        for numbers we have rejected from invite-link floods.
+        Running a Chennai WhatsApp group? Keep admin approval on, and only
+        approve numbers that match a join-form row.
       </p>
 
       <p className="mt-8 text-xs text-[var(--muted)]">

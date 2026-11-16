@@ -8,6 +8,7 @@ import {
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
 import { WHATSAPP_COMMUNITY_GROUP_NAME } from "@/lib/whatsapp-community";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 function WhatsAppIcon() {
   return (
@@ -198,7 +199,7 @@ export function ContactServiceGrid() {
                     utmContent="contact"
                     className="mcc-corp-btn mcc-corp-btn--wa mcc-corp-btn--sm"
                   >
-                    Request to join
+                    {whatsappRequestCtaLabel("en")}
                   </WhatsAppCommunityJoinLink>
                   <WhatsAppCommunityPageLink
                     className="mcc-corp-btn mcc-corp-btn--ghost mcc-corp-btn--sm"

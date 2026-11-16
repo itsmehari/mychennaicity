@@ -87,7 +87,7 @@ const items: Item[] = [
   },
   {
     href: "/super-admin/whatsapp-join-requests",
-    label: "WhatsApp queue",
+    label: "WhatsApp joins",
     group: "Publish",
     active: (pathname) => pathname.startsWith("/super-admin/whatsapp-join-requests"),
   },

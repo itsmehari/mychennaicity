@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   if (!posted.ok) return posted.response;
   const id = String(posted.form.get("id") ?? "");
   const status = parseWhatsappJoinStatus(String(posted.form.get("status") ?? ""));
-  if (!isWhatsappJoinId(id) || !status || status === "submitted") {
+  if (!isWhatsappJoinId(id) || !status) {
     return queueRedirect(request, posted.back, "error", "missing");
   }
   try {

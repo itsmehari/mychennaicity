@@ -43,6 +43,7 @@ export const metadata: Metadata = {
       "Flagged WhatsApp join-request numbers for Chennai group owners.",
     images: ["/twitter-image"],
   },
+  robots: { index: false, follow: false },
   other: { ...WHATSAPP_COMMUNITY_GEO_META },
 };
 

@@ -18,6 +18,9 @@ export async function GET() {
     return NextResponse.json({ error: "Sign in required" }, { status: 401 });
   }
 
+  console.info(
+    `[wa-join-csv] exported by ${email} at ${new Date().toISOString()}`,
+  );
   const rows = await getDb()
     .select()
     .from(whatsappJoinVerifications)

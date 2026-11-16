@@ -44,6 +44,7 @@ describe("whatsapp queue row", () => {
     expect(html).toContain('value="spam"');
     expect(html).toContain(">Approve<");
     expect(html).toContain(">Message<");
+    expect(html).not.toContain(">Restore<");
     const detailsEnd = html.indexOf("</details>");
     const statusAt = html.indexOf('action="/super-admin/whatsapp-join-requests/status"');
     const messageAt = html.indexOf('action="/super-admin/whatsapp-join-requests/message"');

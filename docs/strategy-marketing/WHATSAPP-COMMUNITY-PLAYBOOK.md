@@ -4,6 +4,8 @@
 **Join form (share this):** https://mychennaicity.in/whatsapp-community/join  
 **Rules:** https://mychennaicity.in/chennai-whatsapp-group  
 **Decision log:** `docs/strategy-marketing/WHATSAPP-GROUPS.md`  
+**System:** `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`  
+**Welcome text:** `dev-tools/whatsapp-community-welcome-message.txt`  
 **Scope:** One city-wide group (not per-topic splinters)
 
 ## Weekly share cadence
@@ -57,7 +59,22 @@ If WhatsApp ships a control that notifies every member, adds people without the 
 3. Approve in WhatsApp and in the queue, or decline both.
 4. If there is no row, they have not used the form. Do not approve them from a profile photo.
 
+## Welcome and first week
+
+Paste `dev-tools/whatsapp-community-welcome-message.txt` (English or Tamil) after you approve someone in WhatsApp. First 7 days: mute reminder, pin, one useful site link with group UTMs, no invite in the chat.
+
+Monthly: one re-engagement post with the five links from `/whatsapp-community/this-week` once the editor fills them.
+
+## Matching when WhatsApp hides the number
+
+Match the WhatsApp display name from the form plus the Chennai area. If that is not enough, ask the requester (in the pending flow) to message the official desk from that account. Never approve on a profile photo.
+
+## Scorecard
+
+`/super-admin/whatsapp-join-requests` shows last-30-day verified, approved, declined, approval rate, median hours, and counts by first source. Nudge cap: 10 reply-first Messages a day.
+
 ## 1:1 desk vs group
 
-- **Group:** `/whatsapp-community/join` → success screen → env invite.
+- **Group:** `/whatsapp-community/join` → success screen → env invite. That tap is the join. Do not work the Ready queue as a list of 20 identical invite texts a day.
 - **Desk:** a click POSTs to `/api/contact/whatsapp`. A normal visit to that address returns to `/contact` and does not reveal the desk number.
+- **Nudges:** a human may message someone who never tapped Join. Use their name and area, ask for a reply before the invite, and pause between sends. No scripts or fixed-interval clickers on the personal app. Full rule: `docs/strategy-marketing/WHATSAPP-GROUPS.md` § Account safety.

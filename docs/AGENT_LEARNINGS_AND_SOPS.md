@@ -35,7 +35,7 @@ When unsure what “done” means for a thread, check the matching plan file in 
 
 ### Technical
 
-- **WhatsApp city group:** every public join control uses `whatsappCommunityJoinHref()`. The invite env var is rendered only on the post-submit success screen and in the admin Message action. Join requests are their own table. See `docs/strategy-marketing/WHATSAPP-GROUPS.md`.
+- **WhatsApp city group:** every public join control uses `whatsappCommunityJoinHref()`. The invite env var is rendered only on the post-submit success screen and in the admin Message action. Join requests are their own table. The success-screen Join tap is the path; Message is a rare human nudge, with no scripts or identical invite blasts. See `docs/strategy-marketing/WHATSAPP-GROUPS.md`.
 - **Next.js in this repo may differ from training cutoffs.** Before unfamiliar APIs, check `node_modules/next/dist/docs/` (see `AGENTS.md`).
 - **`DATABASE_URL` at build time vs runtime:** Production empty home/news was traced to static generation without DB at build. Routes that list DB content should use **`dynamic = "force-dynamic"`** where the codebase already does—do not reintroduce static shells for those pages.
 - **News list freshness:** Home bulletin and article pages read Neon **per request** (no `unstable_cache` on article lists). After live seeds, optional **`REVALIDATE_SECRET`** + `POST /api/revalidate/news` busts edge HTML; see `scripts/lib/revalidate-news-after-seed.ts`.
@@ -241,6 +241,9 @@ Three layers — do **not** paste one-off partner markup on a page:
 
 ## 6. Changelog
 
+- **2026-11-16:** WhatsApp `drizzle/0019_whatsapp_join_attribution.sql` applied on production Neon (`db:whatsapp:0019:live`). Extras: placement, partner, lang, utm, first_source, verified_at, declined_at, waitlist enum. **Rule:** join still try/catches extras; do not drop those columns.
+- **2026-11-16:** WhatsApp community system retrofit (existing site). Public CTAs stay on `/whatsapp-community/join`. Admin Message is reply-first with no invite. Approved numbers stay approved on resubmit. New reach/funnel flags default off. Attribution SQL `drizzle/0019_whatsapp_join_attribution.sql` is **not** applied live. Portable doc: `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`. Rule: `.cursor/rules/whatsapp-community.mdc`. **Rule:** do not put `chat.whatsapp.com` on public pages; do not apply 0019 or rotate the invite until the owner says so; keep the live join path.
+- **2026-11-16:** WhatsApp join — cold nudges are the ban risk. The success-screen **Join on WhatsApp** stays the path. Admin **Message** (`whatsappJoinFollowupMessage`, same sentence plus the invite) is a rare human nudge: name and area in the line, reply before the invite, short batches with long pauses, WhatsApp Business app on the phone. No browser scripts, auto-clickers, or timed sends on a personal account. A Report or Block from someone who filled the form can still restrict the number. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md` § Account safety.
 - **2026-11-15:** AEO / GEO passages implemented for jobs and events. Shared copy: `src/content/aeo/jobs-events-passages.ts`. PRD checklist: `docs/product-prd/PRD-AEO-GEO-JOBS-EVENTS.md`. Searchers stay on `/chennai-jobs` and `/chennai-local-events`. Employers post at `/advertise/jobs`. Organisers submit at `/chennai-local-events/submit`. **Rule:** new hub FAQ or `llms.txt` lines for these intents import the passage constants. The events nav item “Events desk (WhatsApp)” may still point at `/contact#events`.
 - **2026-11-15:** AEO / GEO prompts reinforced. Each target question needs a 40–70 word passage with the full canonical URL, repeated on the hero, AEO strip, FAQ and FAQPage JSON-LD, the supply page (`/advertise/jobs` or `/chennai-local-events/submit`), `llms.txt`, and `/aeo/chennai.md`. Score 0–5. The empty events Next up state still linking to `/contact#events` is part of the events audit. **Rule:** if `llms.txt` and the FAQ name different URLs, fix the FAQ; assistants quote the FAQ.
 - **2026-11-15:** AEO / GEO operating prompts for the two-sided jobs and events queries. Searchers stay on `/chennai-jobs` and `/chennai-local-events`. Employers post at `/advertise/jobs`. Organisers submit at `/chennai-local-events/submit`. Paste [`docs/prompts/AEO_GEO_CHENNAI_JOBS.md`](prompts/AEO_GEO_CHENNAI_JOBS.md) or [`docs/prompts/AEO_GEO_CHENNAI_EVENTS.md`](prompts/AEO_GEO_CHENNAI_EVENTS.md) and stop after the audit scorecard. **Rule:** the FAQ, the AEO strip, and `llms.txt` must name the same URL; “Contact → Jobs” and “Contact → Local events” are drift when the form already exists. Pointer: `docs/AEO_GEO_PLAN.md`.
@@ -432,6 +435,29 @@ Three layers — do **not** paste one-off partner markup on a page:
 ## 7. Daily work logs
 
 Cross-chat day summaries. Source: git commits on `main` + Cursor agent transcripts under this project. Keep entries factual; link live URLs with the `.in` host only.
+
+### 2026-11-16
+
+**Focus:** WhatsApp community system retrofit on mychennaicity.in (classified **existing**). Next.js + Neon. No PHP in this repo.
+
+#### Chats
+
+| Chat | Transcript | Focus |
+| --- | --- | --- |
+| [WhatsApp community system](ae4483a5-9386-4055-ba41-7b0a2982d4a7) | `ae4483a5-…` | Plan executor phases 0–8, retrofit, reports |
+
+#### In repo (not live until commit/push + owner schema/deploy)
+
+1. Join form keeps approved status; IP 30/hour + phone 5/hour; waitlist via env + try/catch SQL
+2. Admin queue: waitlist tab, Restore, scorecard, reply-first Message (no invite), dashboard widget
+3. `waLink` helper; one Request float; spammers `noindex`; Tamil FAQ + proof strip; this-week page
+4. Feature flags `NEXT_PUBLIC_WA_REACH_ENABLED` / `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` default off
+5. `drizzle/0019_whatsapp_join_attribution.sql` written, **not applied**
+6. System doc + cursor rule + playbook welcome / 7-day / scorecard
+
+#### Operator still owns
+
+Live 0019 apply; Vercel deploy; invite value/rotation; approval hours; member count; waitlist now vs later; reach/funnel flags on live; Search Console 90-day evidence
 
 ### 2026-08-15
 

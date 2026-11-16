@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { SuperAdminDashboard } from "@/components/super-admin/dashboard-view";
+import { WhatsappJoinDashboardWidget } from "@/components/super-admin/whatsapp-join-widget";
 import { emptyBannerClickTotals } from "@/domains/analytics/content-engagement";
 import {
   buildBannerDesk,
@@ -123,5 +124,11 @@ export default async function SuperAdminPage({
     };
   }
 
-  return <SuperAdminDashboard snapshot={snapshot} />;
+  const overview = !params.desk || params.desk === "overview";
+  return (
+    <>
+      {overview ? <WhatsappJoinDashboardWidget /> : null}
+      <SuperAdminDashboard snapshot={snapshot} />
+    </>
+  );
 }

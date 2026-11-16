@@ -3,6 +3,10 @@ import Link from "next/link";
 import { WhatsappJoinForm } from "@/components/community/whatsapp-join-form";
 import { WhatsappJoinQr } from "@/components/community/whatsapp-join-qr";
 import {
+  WhatsappInviteClickTracker,
+  WhatsappJoinSuccessExtras,
+} from "@/components/community/whatsapp-join-success-extras";
+import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
@@ -11,17 +15,30 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 import {
   WHATSAPP_COMMUNITY_GROUP_NAME,
   WHATSAPP_COMMUNITY_JOIN_PATH,
+  WHATSAPP_COMMUNITY_OG_IMAGE,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   sanitizeWhatsappJoinSource,
   whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
+import { whatsappApprovalHours } from "@/lib/whatsapp-community-flags";
 import { whatsappJoinLocalities } from "@/lib/whatsapp-join";
 import { readJoinUnlock } from "@/lib/whatsapp-join-session";
 import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
 
 export const dynamic = "force-dynamic";
 
-type Search = { lang?: string; ok?: string; src?: string };
+type Search = {
+  lang?: string;
+  ok?: string;
+  src?: string;
+  already?: string;
+  waitlist?: string;
+  partner?: string;
+  placement?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+};
 
 export async function generateMetadata({
   searchParams,
@@ -30,6 +47,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const params = await searchParams;
   const ta = params.lang === "ta";
+  const queryNoindex = Boolean(
+    params.ok ||
+      params.lang ||
+      params.src ||
+      params.partner ||
+      params.placement ||
+      params.utm_source ||
+      params.utm_medium ||
+      params.utm_campaign ||
+      params.already ||
+      params.waitlist,
+  );
   const title = ta
     ? "சென்னை வாட்ஸ்அப் குழுவில் சேர கோரிக்கை"
     : "Request to join the Chennai WhatsApp group";
@@ -45,8 +74,11 @@ export async function generateMetadata({
       description,
       url: `${getSiteUrl()}${WHATSAPP_COMMUNITY_JOIN_PATH}`,
       locale: ta ? "ta_IN" : "en_IN",
+      images: [{ url: WHATSAPP_COMMUNITY_OG_IMAGE, width: 1200, height: 630 }],
     },
-    robots: { index: true, follow: true },
+    robots: queryNoindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
   };
 }
 
@@ -60,9 +92,12 @@ export default async function WhatsappCommunityJoinPage({
   const ta = lang === "ta";
   const source = sanitizeWhatsappJoinSource(params.src);
   const unlocked = params.ok === "1" ? await readJoinUnlock() : null;
-  const invite = unlocked
-    ? trackedWhatsappCommunityInvite("join-verified", "join_form")
-    : null;
+  const alreadyApproved = params.already === "1";
+  const waitlist = params.waitlist === "1";
+  const invite =
+    unlocked && !waitlist
+      ? trackedWhatsappCommunityInvite("join-verified", "join_form")
+      : null;
   const switchHref = whatsappCommunityJoinHref(source).replace(
     "?",
     ta ? "?lang=en&" : "?lang=ta&",
@@ -85,9 +120,17 @@ export default async function WhatsappCommunityJoinPage({
       </p>
       <h1 className="type-display mt-2 text-3xl text-[var(--foreground)] sm:text-4xl">
         {unlocked
-          ? ta
-            ? "குழு இணைப்பு தயார்"
-            : "Your group link is ready"
+          ? waitlist
+            ? ta
+              ? "குழு நிறைந்துள்ளது"
+              : "The group is full"
+            : alreadyApproved
+              ? ta
+                ? "நீங்கள் ஏற்கனவே உள்ளீர்கள்"
+                : "You are already in"
+              : ta
+                ? "குழு இணைப்பு தயார்"
+                : "Your group link is ready"
           : ta
             ? "சென்னை குழுவில் சேர கோரிக்கை"
             : "Request to join the Chennai group"}
@@ -125,12 +168,17 @@ export default async function WhatsappCommunityJoinPage({
           <p className="text-sm text-[var(--muted)]">{unlocked.phone}</p>
           {invite ? (
             <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <a
-                href={invite}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white"
-              >
-                {ta ? "வாட்ஸ்அப்பில் சேருங்கள்" : "Join on WhatsApp"}
-              </a>
+              <WhatsappInviteClickTracker>
+                <a
+                  href={invite}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white"
+                  data-wa-type="invite"
+                  data-wa-placement="join-success"
+                  data-wa-content="join-verified"
+                >
+                  {ta ? "வாட்ஸ்அப்பில் சேருங்கள்" : "Join on WhatsApp"}
+                </a>
+              </WhatsappInviteClickTracker>
               <div className="hidden min-[420px]:block">
                 <WhatsappJoinQr url={invite} />
               </div>
@@ -142,6 +190,13 @@ export default async function WhatsappCommunityJoinPage({
                 : "Your request is saved. The group link is not on this page yet. An admin can message you on WhatsApp once it is turned on."}
             </p>
           )}
+          <WhatsappJoinSuccessExtras
+            lang={lang}
+            invite={invite}
+            alreadyApproved={alreadyApproved}
+            name={unlocked.name}
+            approvalHours={whatsappApprovalHours()}
+          />
           <p className="mt-4 flex flex-wrap gap-4 text-sm">
             <Link
               href={`${WHATSAPP_COMMUNITY_JOIN_PATH}?ok=1&lang=${ta ? "en" : "ta"}&src=${source}`}
@@ -163,6 +218,11 @@ export default async function WhatsappCommunityJoinPage({
           source={source}
           localities={whatsappJoinLocalities()}
           switchHref={switchHref}
+          partner={params.partner}
+          placement={params.placement}
+          utmSource={params.utm_source}
+          utmMedium={params.utm_medium}
+          utmCampaign={params.utm_campaign}
         />
       )}
     </div>

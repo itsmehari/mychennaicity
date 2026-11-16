@@ -53,7 +53,8 @@ describe("whatsapp join phone", () => {
     expect(isWhatsappJoinSpamNumber("919717718323")).toBe(true);
     expect(whatsappJoinSavePlan(null, "919717718323")).toBe("reject-spam");
     expect(whatsappJoinSavePlan("spam", "919876543210")).toBe("reject-spam");
-    expect(whatsappJoinSavePlan("approved", "919876543210")).toBe("update");
+    expect(whatsappJoinSavePlan("approved", "919876543210")).toBe("keep-approved");
+    expect(whatsappJoinSavePlan("declined", "919876543210")).toBe("update");
     expect(whatsappJoinSavePlan(null, "919876543210")).toBe("insert");
   });
 });
@@ -61,16 +62,17 @@ describe("whatsapp join phone", () => {
 describe("whatsapp join messages", () => {
   const invite = "https://example.test/group?utm_content=admin-nudge";
 
-  it("writes the Ready line with the invite and the Approved line without it", () => {
+  it("writes a reply-first Ready line with no invite, and none for approved rows", () => {
     expect(
       whatsappJoinFollowupMessage({
         displayName: "Meera Nair",
         status: "submitted",
         phoneE164: "919876543210",
+        locality: "Velachery",
         inviteForNudge: invite,
       }),
     ).toBe(
-      `Hi Meera, we have your MyChennai join request. Open the group link and tap Join so we can approve you. ${invite}`,
+      "Hi Meera, we got your MyChennai request for Velachery. If WhatsApp did not open the group, reply here and we will help.",
     );
     expect(
       whatsappJoinFollowupMessage({
@@ -79,9 +81,7 @@ describe("whatsapp join messages", () => {
         phoneE164: "919876543210",
         inviteForNudge: invite,
       }),
-    ).toBe(
-      "Hi Meera, you're in the MyChennai Chennai community. Open the group from the link we sent.",
-    );
+    ).toBeNull();
   });
 
   it("hides Message for declined, spam, and spam-list numbers", () => {

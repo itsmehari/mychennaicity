@@ -5,7 +5,8 @@
 **Invite (env):** `WHATSAPP_COMMUNITY_INVITE_URL` — success screen and admin Message only  
 **Public join:** `/whatsapp-community/join`  
 **Group name:** my chennai city  
-**Operator record:** `docs/strategy-marketing/WHATSAPP-GROUPS.md`
+**Operator record:** `docs/strategy-marketing/WHATSAPP-GROUPS.md`  
+**System:** `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`
 
 ## 18-step implementation checklist
 
@@ -14,7 +15,7 @@
 | 1 | Landing page at `/chennai-whatsapp-group` | Done |
 | 2 | Config constants + URL helpers (`src/lib/whatsapp-community.ts`) | Done |
 | 3 | FAQ + full JSON-LD stack (WebPage, FAQPage, Organization, WebSite, BreadcrumbList, Speakable) | Done |
-| 4 | GEO meta + custom OG image (`public/images/mychennaicity-whatsapp-community-og.svg`) | Done |
+| 4 | GEO meta + custom OG image (`public/images/mychennaicity-whatsapp-community-og.jpg`) | Done |
 | 5 | hreflang en/ta + Tamil page `/chennai-whatsapp-group-tamil` | Done |
 | 6 | Reusable CTA component (`WhatsAppCommunityCta` — banner, compact, inline) | Done |
 | 7 | Homepage banner + float → landing | Done |
@@ -24,7 +25,7 @@
 | 11 | Main nav links | Done |
 | 12 | Footer link + prefooter mention | Done |
 | 13 | About + directory page CTAs | Done |
-| 14 | Unified join links go to `/whatsapp-community/join` (old `/api/community/whatsapp` redirects there) | Done |
+| 14 | Unified join links go to `/whatsapp-community/join` (old `/api/community/whatsapp` redirects there). No public `chat.whatsapp.com`. | Done |
 | 15 | Global float → community page (`?src=float`) | Done |
 | 16 | SEO guide `/chennai-whatsapp-community-guide` | Done |
 | 17 | Partner badge/embed `/whatsapp-community/partners` | Done |

@@ -26,7 +26,12 @@ export const WHATSAPP_JOIN_INTENTS_TA = {
 } as const;
 
 export type WhatsappJoinIntent = keyof typeof WHATSAPP_JOIN_INTENTS;
-export type WhatsappJoinStatus = "submitted" | "approved" | "declined" | "spam";
+export type WhatsappJoinStatus =
+  | "submitted"
+  | "approved"
+  | "declined"
+  | "spam"
+  | "waitlist";
 
 export type NormalizedIndianMobile = {
   ok: true;
@@ -116,34 +121,31 @@ export function whatsappJoinQueueHeadline(intent: string, intro: string | null):
 }
 
 /**
- * Ready rows include the tracked invite. Approved rows do not.
- * Declined, spam, spam-list numbers, and invalid phones return null (no Message link).
+ * Reply-first nudge only. Never include the group invite. Never for approved rows.
  */
 export function whatsappJoinFollowupMessage(input: {
   displayName: string;
   status: string;
   phoneE164: string;
-  inviteForNudge: string | null;
+  locality?: string;
+  inviteForNudge?: string | null;
 }): string | null {
-  if (input.status !== "submitted" && input.status !== "approved") return null;
+  if (input.status !== "submitted") return null;
   const phone = normalizeIndianMobile(input.phoneE164);
   if (!phone) return null;
   if (isWhatsappJoinSpamNumber(phone.e164)) return null;
   const first = whatsappJoinFirstName(input.displayName);
   const hi = first ? `Hi ${first}, ` : "Hi, ";
-  if (input.status === "approved") {
-    return `${hi}you're in the MyChennai Chennai community. Open the group from the link we sent.`;
-  }
-  const invite = input.inviteForNudge?.trim() ?? "";
-  const line = `${hi}we have your MyChennai join request. Open the group link and tap Join so we can approve you.`;
-  return invite ? `${line} ${invite}` : line;
+  const area = input.locality?.trim() || "Chennai";
+  return `${hi}we got your MyChennai request for ${area}. If WhatsApp did not open the group, reply here and we will help.`;
 }
 
 export function whatsappJoinWaMeUrl(input: {
   displayName: string;
   status: string;
   phoneE164: string;
-  inviteForNudge: string | null;
+  locality?: string;
+  inviteForNudge?: string | null;
 }): string | null {
   const text = whatsappJoinFollowupMessage(input);
   if (!text) return null;
@@ -152,7 +154,25 @@ export function whatsappJoinWaMeUrl(input: {
   return `https://wa.me/${phone.e164}?text=${encodeURIComponent(text)}`;
 }
 
-export type WhatsappJoinSavePlan = "reject-spam" | "insert" | "update";
+export function whatsappJoinNudgeEligible(input: {
+  status: string;
+  lastContactedAt: Date | null;
+  createdAt: Date;
+  approvalHours: number;
+  now?: Date;
+}): boolean {
+  if (input.status !== "submitted") return false;
+  if (input.lastContactedAt) return false;
+  const now = input.now ?? new Date();
+  const waitMs = input.approvalHours * 60 * 60 * 1000;
+  return now.getTime() - input.createdAt.getTime() >= waitMs;
+}
+
+export type WhatsappJoinSavePlan =
+  | "reject-spam"
+  | "insert"
+  | "update"
+  | "keep-approved";
 
 export function whatsappJoinSavePlan(
   existingStatus: WhatsappJoinStatus | null,
@@ -161,6 +181,7 @@ export function whatsappJoinSavePlan(
   if (isWhatsappJoinSpamNumber(e164) || existingStatus === "spam") {
     return "reject-spam";
   }
+  if (existingStatus === "approved") return "keep-approved";
   return existingStatus ? "update" : "insert";
 }
 

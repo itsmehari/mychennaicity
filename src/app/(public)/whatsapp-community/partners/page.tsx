@@ -6,8 +6,10 @@ import {
 } from "@/components/site/interior-chrome";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { WHATSAPP_PARTNER_CODES } from "@/content/whatsapp-community/partner-codes";
 import {
   WHATSAPP_COMMUNITY_BADGE_IMAGE,
+  WHATSAPP_COMMUNITY_OG_IMAGE,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PARTNERS_PATH,
   siteWhatsappCommunityJoinUrl,
@@ -22,6 +24,11 @@ export const metadata: Metadata = {
     "Badge for RWAs, colleges, and neighbourhood sites. It links to the Chennai join form, not a raw group invite.",
   alternates: { canonical: `${getSiteUrl()}${path}` },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: fullSiteTitle("WhatsApp community partner badge"),
+    url: `${getSiteUrl()}${path}`,
+    images: [{ url: WHATSAPP_COMMUNITY_OG_IMAGE, width: 1200, height: 630 }],
+  },
 };
 
 const embedCode = `<a href="${joinUrl}" title="Request to join my chennai city on WhatsApp" rel="noopener">
@@ -77,6 +84,39 @@ export default function WhatsappCommunityPartnersPage() {
         </p>
       </section>
 
+      <section className="mt-10" aria-labelledby="partner-kit">
+        <h2 id="partner-kit" className="text-lg font-semibold text-[var(--foreground)]">
+          Partner kit
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+          Codes are issued by an admin. Unknown codes on the join form are ignored.
+          Share the tracked join URL, never a group invite.
+        </p>
+        {WHATSAPP_PARTNER_CODES.length === 0 ? (
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            No partner codes have been issued yet.
+          </p>
+        ) : (
+          <ul className="mt-4 space-y-4">
+            {WHATSAPP_PARTNER_CODES.map((row) => {
+              const href = `${joinUrl}${joinUrl.includes("?") ? "&" : "?"}partner=${encodeURIComponent(row.code)}`;
+              return (
+                <li key={row.code} className="rounded-xl border border-[var(--border)] p-4">
+                  <p className="font-semibold">{row.organisation}</p>
+                  <p className="mt-1 font-mono text-xs">{row.code}</p>
+                  <p className="mt-2 break-all text-xs">{href}</p>
+                  <p className="mt-3 text-sm">
+                    English: Request to join the official Chennai WhatsApp group — {href}
+                  </p>
+                  <p className="mt-1 text-sm">
+                    தமிழ்: அதிகாரப்பூர்வ சென்னை வாட்ஸ்அப் குழுவில் சேர கோரிக்கை — {href}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </section>
       <InteriorCrossNav />
     </div>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { ContactServiceGrid } from "@/components/contact/contact-service-grid";
 import {
   InteriorCrossNav,
@@ -39,6 +40,9 @@ export default function ContactPage() {
       </div>
 
       <ContactServiceGrid />
+      <div className="mx-auto max-w-3xl px-4 pb-8">
+        <WhatsAppPlacementCta pageType="contact" slot="split" />
+      </div>
 
       <div className="mcc-corp-note" role="note">
         <p>

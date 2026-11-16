@@ -1,10 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import type { FaqItem } from "@/lib/seo/faq-jsonld";
 import { WHATSAPP_COMMUNITY_FAQ } from "@/content/whatsapp-community/faq";
-import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
+import { WhatsAppCommunityJoinLink, WhatsAppRequestLabel } from "./whatsapp-community-join-link";
 
-export function WhatsAppCommunityFaq() {
+export function WhatsAppCommunityFaq({
+  items = WHATSAPP_COMMUNITY_FAQ,
+  lang = "en",
+}: {
+  items?: FaqItem[];
+  lang?: "en" | "ta";
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -13,14 +20,15 @@ export function WhatsAppCommunityFaq() {
         id="wa-faq-heading"
         className="type-display text-2xl text-[var(--foreground)] sm:text-3xl"
       >
-        Frequently asked questions
+        {lang === "ta" ? "அடிக்கடி கேட்கப்படும் கேள்விகள்" : "Frequently asked questions"}
       </h2>
       <p className="type-lede mt-2 max-w-2xl text-sm text-[var(--muted)]">
-        Answers about the official my chennai city WhatsApp group — same text
-        search engines and AI assistants read in our structured data.
+        {lang === "ta"
+          ? "அதிகாரப்பூர்வ my chennai city வாட்ஸ்அப் குழு — structured data-லும் இதே உரை."
+          : "Answers about the official my chennai city WhatsApp group — same text search engines and AI assistants read in our structured data."}
       </p>
       <div className="mt-6 divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-        {WHATSAPP_COMMUNITY_FAQ.map((item, i) => {
+        {items.map((item, i) => {
           const open = openIndex === i;
           const panelId = `wa-faq-panel-${i}`;
           const btnId = `wa-faq-btn-${i}`;
@@ -55,7 +63,7 @@ export function WhatsAppCommunityFaq() {
                       utmContent="faq"
                       className="font-semibold text-[#128C7E] underline-offset-4 hover:underline"
                     >
-                      Request to join →
+                      <WhatsAppRequestLabel lang={lang} /> →
                     </WhatsAppCommunityJoinLink>
                   </p>
                 ) : null}

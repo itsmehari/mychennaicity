@@ -8,6 +8,8 @@ const STATUS_ACTION = {
   declined:
     "cursor-pointer rounded border border-red-400 px-2 py-1 text-xs font-semibold text-red-700 disabled:opacity-60",
   spam: "cursor-pointer rounded border border-red-400 px-2 py-1 text-xs font-semibold text-red-700 disabled:opacity-60",
+  submitted:
+    "cursor-pointer rounded border border-zinc-400 px-2 py-1 text-xs font-semibold text-zinc-800 disabled:opacity-60 dark:text-zinc-100",
 } as const;
 
 function StatusForm({
@@ -43,11 +45,13 @@ export function WhatsappQueueActions({
   returnTo,
   messageUrl,
   phoneDisplay,
+  status,
 }: {
   id: string;
   returnTo: string;
   messageUrl: string | null;
   phoneDisplay: string;
+  status: "submitted" | "approved" | "declined" | "spam" | "waitlist";
 }) {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
@@ -98,9 +102,18 @@ export function WhatsappQueueActions({
             </button>
           </form>
         ) : null}
-        <StatusForm id={id} returnTo={returnTo} status="approved" label="Approve" />
-        <StatusForm id={id} returnTo={returnTo} status="declined" label="Decline" />
-        <StatusForm id={id} returnTo={returnTo} status="spam" label="Spam" />
+        {status !== "approved" ? (
+          <StatusForm id={id} returnTo={returnTo} status="approved" label="Approve" />
+        ) : null}
+        {status !== "declined" ? (
+          <StatusForm id={id} returnTo={returnTo} status="declined" label="Decline" />
+        ) : null}
+        {status !== "spam" ? (
+          <StatusForm id={id} returnTo={returnTo} status="spam" label="Spam" />
+        ) : null}
+        {status === "declined" || status === "spam" || status === "waitlist" ? (
+          <StatusForm id={id} returnTo={returnTo} status="submitted" label="Restore" />
+        ) : null}
       </div>
       {copyError ? <p className="text-xs text-red-700">{copyError}</p> : null}
     </div>

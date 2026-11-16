@@ -1,8 +1,19 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
-import { whatsappJoinWaMeUrl, type WhatsappJoinStatus } from "@/lib/whatsapp-join";
-import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
+import {
+  whatsappJoinNudgeEligible,
+  whatsappJoinWaMeUrl,
+  type WhatsappJoinStatus,
+} from "@/lib/whatsapp-join";
+import {
+  WA_NUDGE_DAILY_CAP,
+  whatsappApprovalHours,
+} from "@/lib/whatsapp-community-flags";
+import {
+  clearWhatsappJoinDeclinedAt,
+  stampWhatsappJoinDeclinedAt,
+} from "@/lib/whatsapp-join-attribution";
 
 export async function applyWhatsappJoinStatus(
   id: string,
@@ -20,7 +31,14 @@ export async function applyWhatsappJoinStatus(
     })
     .where(eq(whatsappJoinVerifications.id, id))
     .returning({ id: whatsappJoinVerifications.id });
-  return rows.length > 0;
+  if (rows.length === 0) return false;
+  if (status === "declined" || status === "spam") {
+    await stampWhatsappJoinDeclinedAt(id);
+  }
+  if (status === "submitted" || status === "approved") {
+    await clearWhatsappJoinDeclinedAt(id);
+  }
+  return true;
 }
 
 export async function applyWhatsappJoinNotes(id: string, notes: string): Promise<boolean> {
@@ -43,11 +61,23 @@ export async function applyWhatsappJoinNudge(id: string): Promise<string | null>
     .where(eq(whatsappJoinVerifications.id, id))
     .limit(1);
   if (!row) return null;
+  if (
+    !whatsappJoinNudgeEligible({
+      status: row.status,
+      lastContactedAt: row.lastContactedAt,
+      createdAt: row.createdAt,
+      approvalHours: whatsappApprovalHours(),
+    })
+  ) {
+    return null;
+  }
+  const today = await todaysWhatsappNudgeCount();
+  if (today >= WA_NUDGE_DAILY_CAP) return null;
   const url = whatsappJoinWaMeUrl({
     displayName: row.displayName,
     status: row.status,
     phoneE164: row.phoneE164,
-    inviteForNudge: trackedWhatsappCommunityInvite("admin-nudge", "admin"),
+    locality: row.locality,
   });
   if (!url) return null;
   await getDb()
@@ -55,4 +85,19 @@ export async function applyWhatsappJoinNudge(id: string): Promise<string | null>
     .set({ lastContactedAt: new Date() })
     .where(eq(whatsappJoinVerifications.id, id));
   return url;
+}
+
+export async function todaysWhatsappNudgeCount(): Promise<number> {
+  try {
+    const raw = await getDb().execute(sql`
+      SELECT COUNT(*)::int AS n
+      FROM whatsapp_join_verifications
+      WHERE last_contacted_at >= (NOW() AT TIME ZONE 'Asia/Kolkata')::date
+        AT TIME ZONE 'Asia/Kolkata'
+    `);
+    const rows = Array.isArray(raw) ? raw : ((raw as { rows?: { n?: number }[] }).rows ?? []);
+    return Number(rows[0]?.n ?? 0);
+  } catch {
+    return 0;
+  }
 }

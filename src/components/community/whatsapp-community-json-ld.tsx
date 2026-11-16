@@ -1,4 +1,5 @@
 import { WHATSAPP_COMMUNITY_FAQ } from "@/content/whatsapp-community/faq";
+import { WHATSAPP_COMMUNITY_FAQ_TA } from "@/content/whatsapp-community/faq-ta";
 import { getSiteUrl } from "@/lib/env";
 import { CHENNAI_PLACE_GRAPH } from "@/lib/seo/chennai-place";
 import { buildFaqPageJsonLdFromItems } from "@/lib/seo/faq-jsonld";
@@ -43,7 +44,9 @@ export function WhatsAppCommunityJsonLd({
   if (sameAs.length) org.sameAs = sameAs;
   if (address) org.address = address;
 
-  const faq = buildFaqPageJsonLdFromItems(WHATSAPP_COMMUNITY_FAQ);
+  const faq = buildFaqPageJsonLdFromItems(
+    page === "ta" ? WHATSAPP_COMMUNITY_FAQ_TA : WHATSAPP_COMMUNITY_FAQ,
+  );
 
   const graph: Record<string, unknown>[] = [
     {
@@ -76,7 +79,7 @@ export function WhatsAppCommunityJsonLd({
       inLanguage: page === "ta" ? "ta-IN" : "en-IN",
       isPartOf: { "@id": `${base}/#website` },
       about: CHENNAI_PLACE_GRAPH,
-      dateModified: "2026-11-08",
+      dateModified: "2026-11-16",
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: `${base}${WHATSAPP_COMMUNITY_OG_IMAGE}`,

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { BusinessWhatsAppCta } from "@/components/community/business-whatsapp-cta";
+import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 import {
   EventAudienceBlock,
   EventDesktopSidebar,
@@ -244,6 +245,7 @@ export function EventDetailStandard({
 
           <div className="mt-10 space-y-6">
             <AdvertisePanel variant="events" layout="strip" />
+            <JoinWhatsAppCommunityCard layout="card" />
             <BusinessWhatsAppCta variant="events" />
           </div>
 

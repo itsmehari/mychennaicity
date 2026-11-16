@@ -2,6 +2,10 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { openJoinUnlock, sealJoinUnlock } from "@/lib/whatsapp-join";
+import {
+  WA_JOIN_STATE_COOKIE,
+  WA_JOIN_STATE_MAX_AGE_SEC,
+} from "@/lib/whatsapp-community-flags";
 
 const COOKIE = "wa_join_ok";
 const MAX_AGE_SEC = 60 * 60 * 24;
@@ -25,6 +29,13 @@ export async function setJoinUnlockCookie(
     secure: process.env.NODE_ENV === "production",
     path: "/whatsapp-community/join",
     maxAge: MAX_AGE_SEC,
+  });
+  jar.set(WA_JOIN_STATE_COOKIE, "verified", {
+    httpOnly: false,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: WA_JOIN_STATE_MAX_AGE_SEC,
   });
   return true;
 }

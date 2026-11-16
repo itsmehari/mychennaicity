@@ -1,0 +1,158 @@
+{
+  "home": [
+    {
+      "slot": "hero_secondary",
+      "variant": "inline",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Join the Chennai WhatsApp group", "body": "Local news, jobs, and weekend picks — same standards as this site." },
+      "ta": { "title": "சென்னை வாட்ஸ்அப் குழுவில் சேர", "body": "செய்தி, வேலை, வார இறுதி நிகழ்வுகள் — இந்த தளத்தின் அதே தரம்." }
+    },
+    {
+      "slot": "community_band",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 2,
+      "en": { "title": "Join the mychennaicity.in reader group", "body": "Weekly digest and the official Chennai WhatsApp community." },
+      "ta": { "title": "வாசகர் குழுவில் சேர", "body": "வாராந்திர தொகுப்பு மற்றும் அதிகாரப்பூர்வ சென்னை வாட்ஸ்அப் சமூகம்." }
+    }
+  ],
+  "news_list": [
+    {
+      "slot": "after_sixth",
+      "variant": "strip",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Chennai civic notes on WhatsApp", "body": "One Monday story from the news hub, then the group." },
+      "ta": { "title": "சென்னை செய்திகள் வாட்ஸ்அப்பில்", "body": "திங்கள் ஒன்று செய்தி, பிறகு குழுவில்." }
+    }
+  ],
+  "article": [
+    {
+      "slot": "inline_mid",
+      "variant": "compact",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Get Chennai civic updates on WhatsApp", "body": "Short notes and civil discussion — same standards as the site." },
+      "ta": { "title": "சென்னை அறிவிப்புகள் வாட்ஸ்அப்பில்", "body": "குறுகிய குறிப்புகள், அதே தளத் தரம்." }
+    },
+    {
+      "slot": "end",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 2,
+      "en": { "title": "Join the reader group", "body": "The group link appears after you send your name and number." },
+      "ta": { "title": "வாசகர் குழுவில் சேர", "body": "பெயர் மற்றும் எண் அனுப்பிய பிறகு இணைப்பு தெரியும்." }
+    }
+  ],
+  "jobs_list": [
+    {
+      "slot": "hub_strip",
+      "variant": "strip",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "New Chennai jobs every Wednesday in the group", "body": "Verified roles from the jobs hub, shared on WhatsApp." },
+      "ta": { "title": "புதிய சென்னை வேலைகள் புதன்கிழமை குழுவில்", "body": "வேலை மையத்திலிருந்து சரிபார்க்கப்பட்ட பதவிகள்." }
+    }
+  ],
+  "job_detail": [
+    {
+      "slot": "detail_strip",
+      "variant": "strip",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "More Chennai jobs like this, on WhatsApp", "body": "Fresh roles every Wednesday in the reader group." },
+      "ta": { "title": "இதுபோன்ற வேலைகள் வாட்ஸ்அப்பில்", "body": "புதன் தோறும் புதிய பதவிகள்." }
+    }
+  ],
+  "events_list": [
+    {
+      "slot": "hub_strip",
+      "variant": "strip",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "This weekend in Chennai, every Friday on WhatsApp", "body": "Picks from the events hub, shared in the group." },
+      "ta": { "title": "இந்த வார இறுதி சென்னை, வெள்ளி வாட்ஸ்அப்பில்", "body": "நிகழ்வு மையத்திலிருந்து தேர்வுகள்." }
+    }
+  ],
+  "event_detail": [
+    {
+      "slot": "detail_strip",
+      "variant": "compact",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Weekend Chennai events on WhatsApp", "body": "Friday picks, same standards as this listing." },
+      "ta": { "title": "வார இறுதி நிகழ்வுகள் வாட்ஸ்அப்பில்", "body": "வெள்ளி தேர்வுகள்." }
+    }
+  ],
+  "property": [
+    {
+      "slot": "footer_compact",
+      "variant": "compact",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Neighbourhood ads on WhatsApp", "body": "Listing contacts stay on this page. The group is for city updates." },
+      "ta": { "title": "அண்டை விளம்பரங்கள் வாட்ஸ்அப்பில்", "body": "இந்தப் பக்கத் தொடர்பு முதன்மை." }
+    }
+  ],
+  "directory": [
+    {
+      "slot": "compact",
+      "variant": "compact",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Get this area’s updates in the Chennai WhatsApp group", "body": "Directory contacts stay on the listing." },
+      "ta": { "title": "இந்தப் பகுதி அறிவிப்புகள் குழுவில்", "body": "அடைவுத் தொடர்பு இந்தப் பக்கத்தில்." }
+    }
+  ],
+  "locality": [
+    {
+      "slot": "compact",
+      "variant": "compact",
+      "linkType": "learn",
+      "priority": 1,
+      "en": { "title": "Get {locality} updates in the Chennai WhatsApp group", "body": "Rules and how to request a join." },
+      "ta": { "title": "{locality} அறிவிப்புகள் சென்னை குழுவில்", "body": "விதிகள் மற்றும் சேர கோரிக்கை." }
+    }
+  ],
+  "city_guide": [
+    {
+      "slot": "end",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Join the Chennai reader group", "body": "Guides stay on the site. Alerts go to WhatsApp after you request." },
+      "ta": { "title": "சென்னை வாசகர் குழுவில் சேர", "body": "வழிகாட்டிகள் தளத்தில். அறிவிப்புகள் கோரிக்கைக்குப் பிறகு." }
+    }
+  ],
+  "thank_you": [
+    {
+      "slot": "post_conversion",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Get updates like this on WhatsApp", "body": "Name, number, and area — then Join on WhatsApp." },
+      "ta": { "title": "இதுபோன்ற அறிவிப்புகள் வாட்ஸ்அப்பில்", "body": "பெயர், எண், பகுதி — பிறகு வாட்ஸ்அப்பில் சேர." }
+    }
+  ],
+  "404": [
+    {
+      "slot": "card",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "Can't find it? Ask neighbours in the Chennai WhatsApp group", "body": "Request to join. Admins match your number." },
+      "ta": { "title": "கிடைக்கவில்லையா? அண்டை குழுவில் கேளுங்கள்", "body": "சேர கோரிக்கை. நிர்வாகி எண்ணைப் பொருத்துவார்." }
+    }
+  ],
+  "contact": [
+    {
+      "slot": "split",
+      "variant": "card",
+      "linkType": "request",
+      "priority": 1,
+      "en": { "title": "For local updates, join the group; for help, use Contact", "body": "The desk chat is separate from the group invite." },
+      "ta": { "title": "அறிவிப்புகளுக்கு குழு; உதவிக்கு தொடர்பு", "body": "மேசை அரட்டை குழு இணைப்பிலிருந்து வேறு." }
+    }
+  ]
+}

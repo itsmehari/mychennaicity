@@ -2,6 +2,7 @@ import {
   WhatsAppCommunityJoinLink,
   WhatsAppCommunityPageLink,
 } from "@/components/community/whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -50,15 +51,15 @@ export function JobDetailWhatsAppCommunityStrip({
               Join our WhatsApp group
             </h2>
             <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
-              Fresh Chennai job alerts, hiring tips, and civil discussion — same
-              standards as the site. Request with your name and number.
+              New Chennai jobs every Wednesday in the group. Same standards as
+              this listing. Request with your name and number.
             </p>
           </div>
         </div>
         <p className="sm:shrink-0">
           <WhatsAppCommunityJoinLink utmContent="job-detail" className={joinBtnClass}>
             <WhatsAppMark className="h-4 w-4" />
-            Join group
+            {whatsappRequestCtaLabel("en")}
           </WhatsAppCommunityJoinLink>
           <WhatsAppCommunityPageLink
             src="job-detail"

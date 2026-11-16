@@ -27,6 +27,7 @@ import { ArticleProse } from "./article-prose";
 import { ArticleAdRegion } from "@/ads/article-ad-region";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { ArticleCommunityBand } from "@/components/community/article-community-band";
+import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { ArticleDetailLayout } from "./article-detail-layouts";
 import { ArticleHeroImage } from "./article-hero-image";
 import {
@@ -337,11 +338,14 @@ export async function EditorialArticle({
           ),
           main: mainBody,
           adMid: (
-            <div className="civic-ad-slot">
-              <ArticleAdRegion
-                adsenseSlotEnvKey="ARTICLE_MID"
-                placement="article_mid"
-              />
+            <div className="space-y-5">
+              <WhatsAppPlacementCta pageType="article" slot="inline_mid" />
+              <div className="civic-ad-slot">
+                <ArticleAdRegion
+                  adsenseSlotEnvKey="ARTICLE_MID"
+                  placement="article_mid"
+                />
+              </div>
             </div>
           ),
           sources: (

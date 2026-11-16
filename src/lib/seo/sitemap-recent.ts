@@ -39,7 +39,7 @@ import {
 import { directoryDetailPath } from "@/lib/routes/directory";
 import {
   WHATSAPP_ADMINS_TOOLKIT_PATH,
-  WHATSAPP_SPAMMERS_PAGE_PATH,
+  WHATSAPP_COMMUNITY_THIS_WEEK_PATH,
 } from "@/lib/whatsapp-community";
 
 export const RECENT_SITEMAP_WINDOW_DAYS = 30;
@@ -78,7 +78,7 @@ export const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
   { path: CHENNAI_SALARY_GUIDE_PATH, lastModified: "2026-08-11" },
   { path: CHENNAI_EV_GUIDE_PATH, lastModified: "2026-08-11" },
   { path: WHATSAPP_ADMINS_TOOLKIT_PATH, lastModified: "2026-08-11" },
-  { path: WHATSAPP_SPAMMERS_PAGE_PATH, lastModified: "2026-08-08" },
+  { path: WHATSAPP_COMMUNITY_THIS_WEEK_PATH, lastModified: "2026-11-16" },
   { path: "/guides/how-to-use-mychennaicity", lastModified: "2026-08-08" },
   { path: "/guides/bulk-waste-generator-readiness-checklist-2026", lastModified: "2026-08-08" },
   { path: "/civic-tools/address-form-fixer", lastModified: "2026-08-12" },

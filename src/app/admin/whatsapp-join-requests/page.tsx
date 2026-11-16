@@ -8,12 +8,19 @@ import {
   formatWhatsappJoinStamp,
   isWhatsappJoinSpamNumber,
   whatsappJoinIntentLabel,
+  whatsappJoinNudgeEligible,
   whatsappJoinQueueHeadline,
   whatsappJoinWaMeUrl,
   type WhatsappJoinStatus,
 } from "@/lib/whatsapp-join";
-import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
 import { WhatsappJoinQueueRow, type WhatsappJoinQueueRowData } from "./queue-row";
+import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
+import { todaysWhatsappNudgeCount } from "@/lib/whatsapp-join-desk-db";
+import {
+  WA_NUDGE_DAILY_CAP,
+  whatsappApprovalHours,
+} from "@/lib/whatsapp-community-flags";
+import { WHATSAPP_PARTNER_CODES } from "@/content/whatsapp-community/partner-codes";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +31,7 @@ const SEGMENTS = [
   { id: "approved", label: "Approved" },
   { id: "declined", label: "Declined" },
   { id: "spam", label: "Spam" },
+  { id: "waitlist", label: "Waitlist" },
   { id: "all", label: "All" },
 ] as const;
 
@@ -48,6 +56,7 @@ function noticeText(code: string | undefined): string | null {
   if (code === "approved") return "Marked approved.";
   if (code === "declined") return "Marked declined.";
   if (code === "spam") return "Marked spam.";
+  if (code === "submitted") return "Restored to Ready.";
   if (code === "noted") return "Note saved.";
   return null;
 }
@@ -166,10 +175,13 @@ export default async function WhatsappJoinRequestsPage({
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE);
 
-    const nudgeInvite = trackedWhatsappCommunityInvite("admin-nudge", "admin");
     const shareExample = withWhatsappGroupShareUtms("/chennai-local-news");
     const rangeStart = total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
     const rangeEnd = total === 0 ? 0 : rangeStart + rows.length - 1;
+    const scorecard = await loadWhatsappJoinScorecard();
+    const nudgeToday = await todaysWhatsappNudgeCount();
+    const hours = whatsappApprovalHours();
+    const nudgesLeft = Math.max(0, WA_NUDGE_DAILY_CAP - nudgeToday);
 
     const view: WhatsappJoinQueueRowData[] = rows.map((row) => ({
       id: row.id,
@@ -182,12 +194,21 @@ export default async function WhatsappJoinRequestsPage({
       locality: row.locality,
       status: row.status as WhatsappJoinStatus,
       onSpamList: isWhatsappJoinSpamNumber(row.phoneE164),
-      messageUrl: whatsappJoinWaMeUrl({
-        displayName: row.displayName,
-        status: row.status,
-        phoneE164: row.phoneE164,
-        inviteForNudge: nudgeInvite,
-      }),
+      messageUrl:
+        nudgesLeft > 0 &&
+        whatsappJoinNudgeEligible({
+          status: row.status,
+          lastContactedAt: row.lastContactedAt,
+          createdAt: row.createdAt,
+          approvalHours: hours,
+        })
+          ? whatsappJoinWaMeUrl({
+              displayName: row.displayName,
+              status: row.status,
+              phoneE164: row.phoneE164,
+              locality: row.locality,
+            })
+          : null,
       returnTo: queueHref(segment, q, page),
       intentLabel: whatsappJoinIntentLabel(row.intent),
       intro: row.intro?.trim() ?? "",
@@ -222,11 +243,55 @@ export default async function WhatsappJoinRequestsPage({
           there, then mark the row here. The number is the order the request was
           first saved. Open a row for the phone as typed, source, approval, last
           nudge, and a note. Click a row to open it. Copy puts the number on the clipboard.
-          Message opens WhatsApp in a new tab for Ready and Approved rows. Approve, Decline,
-          and Spam save on this list and reload it.
+          Message is reply-first, no invite, only for Ready rows older than the approval wait,
+          once per row, cap {WA_NUDGE_DAILY_CAP}/day ({nudgeToday} used today). If WhatsApp hid
+          the number, match the display name plus area, or ask them to message the official
+          desk from that account. Never approve on a profile photo.
           Share site links inside the group with{" "}
           <span className="break-all">{shareExample}</span>
         </p>
+        <div className="grid gap-2 rounded-xl border border-zinc-200 p-3 text-xs sm:grid-cols-4 dark:border-zinc-800">
+          <p>
+            Pending Ready: <strong>{scorecard.submittedNow}</strong>
+          </p>
+          <p>
+            Approved 30d: <strong>{scorecard.approved30d}</strong>
+          </p>
+          <p>
+            Declined 30d: <strong>{scorecard.declined30d}</strong>
+          </p>
+          <p>
+            Approval rate:{" "}
+            <strong>{scorecard.approvalRate == null ? "—" : `${scorecard.approvalRate}%`}</strong>
+          </p>
+          <p>
+            Median hours:{" "}
+            <strong>
+              {scorecard.medianHours == null ? "—" : scorecard.medianHours.toFixed(1)}
+            </strong>
+          </p>
+          <p>
+            Waitlist: <strong>{scorecard.waitlistNow}</strong>
+          </p>
+          <p className="sm:col-span-2">
+            By source:{" "}
+            {scorecard.byFirstSource.length
+              ? scorecard.byFirstSource.map((row) => `${row.key} ${row.count}`).join(" · ")
+              : "—"}
+          </p>
+        </div>
+        {WHATSAPP_PARTNER_CODES.length > 0 ? (
+          <p className="text-xs text-zinc-600">
+            Issued partner codes:{" "}
+            {WHATSAPP_PARTNER_CODES.map((row) => `${row.code} (${row.organisation})`).join(" · ")}
+          </p>
+        ) : (
+          <p className="text-xs text-zinc-600">
+            Partner codes are issued in{" "}
+            <code>src/content/whatsapp-community/partner-codes.ts</code>. Public partners page
+            only shows issued codes.
+          </p>
+        )}
         <nav className="flex flex-wrap gap-2 text-sm">
           {SEGMENTS.map((item) => {
             const active = item.id === segment;

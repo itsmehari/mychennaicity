@@ -50,6 +50,7 @@ export const whatsappJoinStatusEnum = pgEnum("whatsapp_join_status", [
   "approved",
   "declined",
   "spam",
+  "waitlist",
 ]);
 
 export const cities = pgTable("cities", {

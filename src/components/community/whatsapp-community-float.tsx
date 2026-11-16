@@ -1,12 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   WHATSAPP_COMMUNITY_JOIN_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH,
   WHATSAPP_COMMUNITY_PAGE_PATH_TAMIL,
+  whatsappCommunityJoinHref,
 } from "@/lib/whatsapp-community";
+import {
+  WA_JOIN_STATE_COOKIE,
+  waReachEnabled,
+} from "@/lib/whatsapp-community-flags";
 import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -33,23 +40,49 @@ const HIDE_FLOAT_PREFIXES = [
 
 export function WhatsAppCommunityFloat() {
   const pathname = usePathname() ?? "";
+  const [joined, setJoined] = useState(false);
+  const [qr, setQr] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!waReachEnabled()) return;
+    setJoined(
+      document.cookie.split(";").some((part) => part.trim() === `${WA_JOIN_STATE_COOKIE}=verified`),
+    );
+    void import("qrcode").then((QRCode) =>
+      QRCode.toString(`https://mychennaicity.in${whatsappCommunityJoinHref("float-qr")}`, {
+        type: "svg",
+        margin: 1,
+        width: 120,
+        errorCorrectionLevel: "M",
+      }).then(setQr),
+    );
+  }, []);
+
   const hide = HIDE_FLOAT_PREFIXES.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
-  if (hide) return null;
+  if (hide || joined) return null;
 
   return (
     <div
       className="fixed bottom-5 right-4 z-50 sm:bottom-6 sm:right-6"
       aria-label="WhatsApp community shortcut"
     >
-      <WhatsAppCommunityJoinLink
-        utmContent="float"
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-[color-mix(in_srgb,#25D366_25%,transparent)] transition hover:scale-105 hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
-      >
-        <span className="sr-only">Request to join the Chennai WhatsApp group</span>
-        <WhatsAppMark className="h-7 w-7" />
-      </WhatsAppCommunityJoinLink>
+      <div className="group relative">
+        <WhatsAppCommunityJoinLink
+          utmContent="float"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-[color-mix(in_srgb,#25D366_25%,transparent)] transition hover:scale-105 hover:brightness-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
+        >
+          <span className="sr-only">{whatsappRequestCtaLabel("en")} the Chennai WhatsApp group</span>
+          <WhatsAppMark className="h-7 w-7" />
+        </WhatsAppCommunityJoinLink>
+        {waReachEnabled() && qr ? (
+          <div className="pointer-events-none absolute bottom-16 right-0 hidden w-40 rounded-xl border border-[var(--border)] bg-white p-2 text-center text-[11px] text-zinc-700 shadow-lg group-hover:block group-focus-within:block">
+            <p className="mb-1 font-semibold">Scan on your phone</p>
+            <div dangerouslySetInnerHTML={{ __html: qr.replace(/<\?xml[^>]*>/, "") }} />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

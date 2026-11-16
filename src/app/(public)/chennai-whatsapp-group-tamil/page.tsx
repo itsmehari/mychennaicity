@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { WhatsAppCommunityJsonLd } from "@/components/community/whatsapp-community-json-ld";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 import { WhatsAppCommunityStickyBar } from "@/components/community/whatsapp-community-sticky-bar";
 import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
+import { WHATSAPP_COMMUNITY_FAQ_TA } from "@/content/whatsapp-community/faq-ta";
 import { WHATSAPP_COMMUNITY_RULES } from "@/content/whatsapp-community/rules";
+import { WhatsAppCommunityFaq } from "@/components/community/whatsapp-community-faq";
+import { WhatsAppProofStrip } from "@/components/community/whatsapp-proof-strip";
 import { getSiteUrl } from "@/lib/env";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 import {
@@ -50,7 +55,7 @@ export const metadata: Metadata = {
 const joinBtnClass =
   "inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md";
 
-export default function ChennaiWhatsappGroupTamilPage() {
+export default async function ChennaiWhatsappGroupTamilPage() {
   return (
     <>
       <WhatsAppCommunityJsonLd page="ta" />
@@ -72,9 +77,18 @@ export default function ChennaiWhatsappGroupTamilPage() {
         </p>
         <p className="mt-6">
           <WhatsAppCommunityJoinLink utmContent="hero-ta" className={joinBtnClass}>
-            சேர கோரிக்கை
+            {whatsappRequestCtaLabel("ta")}
           </WhatsAppCommunityJoinLink>
         </p>
+        <WhatsAppProofStrip lang="ta" />
+        <section className="mt-12">
+          <h2 className="type-display text-xl text-[var(--foreground)]">எப்படி சேர்வது</h2>
+          <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-[var(--muted)]">
+            <li>படிவத்தில் பெயர், இந்திய மொபைல், சென்னை பகுதியை அனுப்புங்கள்.</li>
+            <li>சமர்ப்பித்த பிறகு Join on WhatsApp தட்டவும்.</li>
+            <li>நிர்வாகி எண்ணைப் பொருத்தி அனுமதிக்கும் வரை காத்திருங்கள்.</li>
+          </ol>
+        </section>
         <p className="mt-4 text-sm">
           <Link
             href={WHATSAPP_COMMUNITY_PAGE_PATH}
@@ -160,6 +174,7 @@ export default function ChennaiWhatsappGroupTamilPage() {
           </ul>
         </section>
 
+        <WhatsAppCommunityFaq items={WHATSAPP_COMMUNITY_FAQ_TA} lang="ta" />
         <WhatsAppCommunityStickyBar />
       </div>
     </>

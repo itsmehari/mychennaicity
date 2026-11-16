@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { NewsletterModalHost } from "@/components/newsletter/newsletter-modal-host";
 import { SiteModalHost } from "@/components/site-modals";
 import { WhatsAppCommunityFloat } from "@/components/community/whatsapp-community-float";
+import { WhatsAppFunnelRoot } from "@/components/community/whatsapp-funnel-root";
 import { AlertBar } from "@/components/site/alert-bar";
 import { SiteWideAdBand } from "@/components/ads/site-wide-ad-band";
 import { FeaturedJobsCatchAll } from "@/components/jobs/featured-jobs-rail";
@@ -22,6 +23,7 @@ export default function PublicLayout({
       <SiteWideAdBand />
       <SiteFooter />
       <WhatsAppCommunityFloat />
+      <WhatsAppFunnelRoot />
       <Suspense fallback={null}>
         <SiteModalHost />
       </Suspense>

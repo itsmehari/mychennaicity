@@ -1,0 +1,18 @@
+---
+description: Chennai WhatsApp community — join form, invite secrecy, admin queue, Indian mobiles only.
+globs: src/lib/whatsapp-*.ts,src/lib/whatsapp-*.tsx,src/components/community/**,src/app/(public)/whatsapp-community/**,src/app/(public)/chennai-whatsapp-*/**,src/app/admin/whatsapp-join-requests/**,src/app/super-admin/whatsapp-join-requests/**,src/content/whatsapp-community/**,docs/strategy-marketing/WHATSAPP-*.md
+alwaysApply: false
+---
+
+# WhatsApp community (mychennaicity.in)
+
+Read **`docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`** and **`docs/strategy-marketing/WHATSAPP-GROUPS.md`** before changing join, invite, or queue behaviour.
+
+1. Public CTAs use `whatsappCommunityJoinHref()` or `waLink('request'|'learn'|'chat'|'share'|'listing')`. `waLink` refuses `invite`.
+2. `chat.whatsapp.com` belongs in env, server invite helper, tests, and docs — not public pages, JSON-LD, sitemaps, floats, or first outbound messages.
+3. Indian mobiles only: `91` + 10 digits starting 6–9.
+4. Admin approval is the gate. Keep approved status on resubmit. Admin Message is reply-first, capped, no invite in the text.
+5. Queue: `/super-admin/whatsapp-join-requests`. Do not ship a public form without this desk.
+6. New reach/funnel behaviour stays behind `NEXT_PUBLIC_WA_REACH_ENABLED` and `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` until verified on live.
+7. Do not apply `drizzle/0019_whatsapp_join_attribution.sql` to production until the owner says so.
+8. The Bengaluru invite on `/community/mybangalore-whatsapp-community-group` is a different city. Do not put it in the Chennai nav, footer, float, or join form.

@@ -1,4 +1,5 @@
 import { WhatsAppCommunityJoinLink, WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
+import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 
 const joinBtnClass =
   "inline-flex min-h-[44px] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--foreground)_12%,var(--border))] bg-[var(--background)] px-5 py-2.5 text-sm font-semibold text-[var(--foreground)] transition hover:border-[#128C7E] hover:text-[#128C7E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]";
@@ -62,7 +63,7 @@ export function JoinWhatsAppCommunityCard({
           utmContent={layout === "inline" ? "inline" : "card"}
           className={joinBtnClass}
         >
-          Request to join
+          {whatsappRequestCtaLabel("en")}
         </WhatsAppCommunityJoinLink>
         {layout !== "inline" ? (
           <>

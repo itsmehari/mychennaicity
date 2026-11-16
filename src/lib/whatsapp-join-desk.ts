@@ -5,7 +5,13 @@ const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function parseWhatsappJoinStatus(raw: string): WhatsappJoinStatus | null {
-  if (raw === "submitted" || raw === "approved" || raw === "declined" || raw === "spam") {
+  if (
+    raw === "submitted" ||
+    raw === "approved" ||
+    raw === "declined" ||
+    raw === "spam" ||
+    raw === "waitlist"
+  ) {
     return raw;
   }
   return null;

@@ -1,6 +1,6 @@
 "use client";
 
-import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
+import { WhatsAppCommunityJoinLink, WhatsAppRequestLabel } from "./whatsapp-community-join-link";
 
 function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
@@ -28,7 +28,7 @@ export function WhatsAppCommunityStickyBar() {
         className="flex w-full min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white shadow-md"
       >
         <WhatsAppMark className="h-5 w-5" />
-        Request to join
+        <WhatsAppRequestLabel />
       </WhatsAppCommunityJoinLink>
     </div>
   );

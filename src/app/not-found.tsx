@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { AlertBar } from "@/components/site/alert-bar";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -25,6 +26,9 @@ export default function NotFound() {
             The URL may have changed or the story may have moved. Try the local
             news section, the area map on the home page, or a topic below.
           </p>
+          <div className="mt-10">
+            <WhatsAppPlacementCta pageType="404" slot="card" />
+          </div>
           <ul className="mt-10 space-y-3 text-sm font-medium">
             <li>
               <Link

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContentEngagementScope } from "@/components/analytics/content-engagement-scope";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
+import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 import { ClassifiedAdDetail } from "@/components/classifieds/classified-ad-detail";
 import {
   InteriorCrossNav,
@@ -104,7 +105,8 @@ export default async function ChennaiClassifiedDetailPage({ params }: Props) {
             <ClassifiedAdDetail listing={listing} />
           </ContentEngagementScope>
         </div>
-        <div className="mt-10 max-w-2xl">
+        <div className="mt-10 max-w-2xl space-y-6">
+          <JoinWhatsAppCommunityCard layout="card" />
           <AdvertisePanel variant="classifieds" layout="strip" />
         </div>
         <InteriorCrossNav />

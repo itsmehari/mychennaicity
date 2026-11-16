@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import {
   submitWhatsappJoin,
   type WhatsappJoinFormState,
 } from "@/app/(public)/whatsapp-community/join/actions";
+import { waFunnelEventsEnabled } from "@/lib/whatsapp-community-flags";
 
 const INTENTS = [
   ["news", "Local news", "உள்ளூர் செய்தி"],
@@ -24,14 +25,47 @@ export function WhatsappJoinForm({
   source,
   localities,
   switchHref,
+  partner,
+  placement,
+  utmSource,
+  utmMedium,
+  utmCampaign,
 }: {
   lang: "en" | "ta";
   source: string;
   localities: string[];
   switchHref: string;
+  partner?: string;
+  placement?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }) {
   const [state, action, pending] = useActionState(submitWhatsappJoin, initial);
   const ta = lang === "ta";
+
+  useEffect(() => {
+    if (!state.message || !waFunnelEventsEnabled()) return;
+    if (typeof window.gtag !== "function") return;
+    const blocked = /blocked|தடுக்கப்பட்டது/i.test(state.message);
+    window.gtag("event", "wa_join_submit_error", {
+      event_category: "whatsapp_community",
+      error_key: blocked ? "blocked" : "validation",
+    });
+  }, [state.message]);
+
+  function markFormStart() {
+    if (!waFunnelEventsEnabled()) return;
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("wa_join_form_started") === "1") return;
+    sessionStorage.setItem("wa_join_form_started", "1");
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "wa_join_form_start", {
+        event_category: "whatsapp_community",
+        language: lang,
+      });
+    }
+  }
 
   return (
     <form key={state.message} action={action} className="mt-6 space-y-5">
@@ -43,6 +77,11 @@ export function WhatsappJoinForm({
       </div>
       <input type="hidden" name="lang" value={lang} />
       <input type="hidden" name="source" value={source} />
+      {placement ? <input type="hidden" name="placement" value={placement} /> : null}
+      {partner ? <input type="hidden" name="partner" value={partner} /> : null}
+      {utmSource ? <input type="hidden" name="utm_source" value={utmSource} /> : null}
+      {utmMedium ? <input type="hidden" name="utm_medium" value={utmMedium} /> : null}
+      {utmCampaign ? <input type="hidden" name="utm_campaign" value={utmCampaign} /> : null}
 
       <p className="text-sm">
         <a href={switchHref} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
@@ -65,6 +104,7 @@ export function WhatsappJoinForm({
           maxLength={120}
           defaultValue={state.displayName ?? ""}
           className={fieldClass}
+          onFocus={markFormStart}
         />
       </label>
 
@@ -78,7 +118,17 @@ export function WhatsappJoinForm({
           placeholder="98765 43210"
           defaultValue={state.phone ?? ""}
           className={fieldClass}
+          onFocus={markFormStart}
         />
+        <span className="mt-2 block text-xs font-normal text-[var(--muted)]">
+          {ta
+            ? "சேர கோரிக்கையை அனுமதிக்க மட்டும். தளத்தில் காட்டப்படாது. நீக்க கேட்க "
+            : "Used only to approve your join request. Never shown on the site. Ask us to delete it any time — "}
+          <a href="/privacy#whatsapp-join" className="font-semibold text-[var(--accent)] hover:underline">
+            {ta ? "தனியுரிமை" : "privacy"}
+          </a>
+          {ta ? "." : "."}
+        </span>
       </label>
 
       <label className="block text-sm font-semibold text-[var(--foreground)]">
