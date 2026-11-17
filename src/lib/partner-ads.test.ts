@@ -91,6 +91,7 @@ describe("layout image banners", () => {
       "myomr",
       "bseri-aimsp",
       "agsunwin-solar",
+      "print-offer",
     ]);
     const first = layoutBannerForView("user-a", "/chennai-jobs");
     expect(layoutBannerForView("user-a", "/chennai-jobs").id).toBe(first.id);
@@ -103,6 +104,7 @@ describe("layout image banners", () => {
     expect(seen.size).toBeGreaterThan(1);
     expect(partnerBannerFrame(1024, 1024)).toBe("square");
     expect(partnerBannerFrame(819, 1024)).toBe("vertical");
+    expect(partnerBannerFrame(1024, 576)).toBe("landscape");
     expect(parseBannerClickSlug("myomr--site_band")).toEqual({
       partnerId: "myomr",
       placement: "site_band",

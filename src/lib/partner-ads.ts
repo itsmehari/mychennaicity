@@ -14,7 +14,7 @@ export const PARTNER_AD_ROTATE_MS = 6500;
 export type PartnerAdShape = "square" | "rectangle";
 
 /** Finished image file. Square is within 8% of 1:1. Taller than that is vertical. */
-export type PartnerBannerFrame = "square" | "vertical";
+export type PartnerBannerFrame = "square" | "vertical" | "landscape";
 
 export type PartnerAdTheme = "resume" | "covai" | "studio" | "iso" | "solar";
 
@@ -180,7 +180,7 @@ export function partnerBannerFrame(width: number, height: number): PartnerBanner
   const longest = Math.max(width, height);
   if (longest <= 0) return "square";
   if (Math.abs(width - height) / longest <= 0.08) return "square";
-  return height > width ? "vertical" : "square";
+  return height > width ? "vertical" : "landscape";
 }
 
 export function partnerArtworkAspect(ad: PartnerAdCreative): string | null {
@@ -489,6 +489,15 @@ const PARTNER_ARTWORK_SOURCES: readonly LayoutImageBanner[] = [
     height: 1024,
     alt: "AG Sunwin. Your roof could be cutting your electricity bill. Book a site assessment at agsunwinenergysolutions.com.",
   },
+  {
+    id: "print-offer",
+    partner: "Print offer",
+    url: "https://mychennaicity.in/contact#advertise",
+    image: "/images/partner-ads/print-offer.webp",
+    width: 1024,
+    height: 576,
+    alt: "Multicolor single-side print offer. 20% off. 90–130 GSM art paper. 1000 copies ₹2,000–₹2,160. 3000 copies ₹3,600–₹4,800. 24-hour delivery within Chennai when the design file is ready. Enquiry.",
+  },
 ];
 
 export function layoutImageBanners(): readonly LayoutImageBanner[] {
@@ -563,9 +572,9 @@ export function parseBannerClickSlug(
 
 /** Hostnames (no `www.`) used for outbound click analytics. */
 export const PARTNER_AD_HOSTS = new Set(
-  [...PARTNER_ARTWORK_SOURCES, ...PARTNER_AD_SOURCES].map((ad) =>
-    hostnameWithoutWww(ad.url),
-  ),
+  [...PARTNER_ARTWORK_SOURCES, ...PARTNER_AD_SOURCES]
+    .map((ad) => hostnameWithoutWww(ad.url))
+    .filter((host) => host && host !== "mychennaicity.in"),
 );
 
 function hostnameWithoutWww(href: string): string {

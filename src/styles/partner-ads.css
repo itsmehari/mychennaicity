@@ -787,6 +787,10 @@
   margin-inline: auto;
 }
 
+.layout-banner--landscape {
+  width: min(100%, 42rem);
+}
+
 .layout-banner__label {
   margin: 0;
   padding: 0.38rem 0.75rem;

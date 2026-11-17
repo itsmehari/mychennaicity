@@ -44,8 +44,11 @@ export function LayoutImageBanner({ placement, className = "" }: Props) {
   }, [pathname]);
 
   const shown = banner;
+  const landscape = Boolean(shown && shown.width > shown.height * 1.08);
   return (
-    <div className={`layout-banner${className ? ` ${className}` : ""}`}>
+    <div
+      className={`layout-banner${landscape ? " layout-banner--landscape" : ""}${className ? ` ${className}` : ""}`}
+    >
       <p className="layout-banner__label">Advertisement</p>
       {shown ? (
         <a

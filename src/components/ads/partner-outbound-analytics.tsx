@@ -37,11 +37,11 @@ export function PartnerOutboundClickTracker() {
 
       const marked = anchor.hasAttribute("data-partner-link");
       if (!marked && !isPartnerAdHost(parsed.hostname)) return;
-      if (parsed.origin === window.location.origin) return;
 
       const placement = anchor.getAttribute("data-utm-content") ?? undefined;
       const partnerId = anchor.getAttribute("data-partner-id");
       if (partnerId && placement) sendBannerClick(partnerId, placement);
+      if (parsed.origin === window.location.origin) return;
 
       gtag()?.("event", "partner_outbound_click", {
         event_category: "partner_ad",
