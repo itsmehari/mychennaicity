@@ -105,6 +105,9 @@ describe("layout image banners", () => {
     expect(partnerBannerFrame(1024, 1024)).toBe("square");
     expect(partnerBannerFrame(819, 1024)).toBe("vertical");
     expect(partnerBannerFrame(1024, 576)).toBe("landscape");
+    const printOffer = pool.find((banner) => banner.id === "print-offer");
+    expect(printOffer?.url).toBe("https://mychennaicity.in/contact");
+    expect(printOffer?.url ?? "").not.toMatch(/wa\.me|\d{10}/);
     expect(parseBannerClickSlug("myomr--site_band")).toEqual({
       partnerId: "myomr",
       placement: "site_band",

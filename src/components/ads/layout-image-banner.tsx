@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import {
   layoutBannerForView,
@@ -15,6 +15,40 @@ type Props = {
   placement: string;
   className?: string;
 };
+
+function isPrintEnquiry(id: string): boolean {
+  return id === "print-offer";
+}
+
+async function openPrintEnquiry(event: MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  try {
+    const res = await fetch("/api/partner-ads/print-enquiry", {
+      method: "POST",
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) {
+      window.location.assign("/contact");
+      return;
+    }
+    const data = (await res.json()) as { url?: unknown };
+    const url = typeof data.url === "string" ? data.url : "";
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" || parsed.hostname !== "wa.me") {
+      window.location.assign("/contact");
+      return;
+    }
+    const link = document.createElement("a");
+    link.href = parsed.toString();
+    link.target = "_blank";
+    link.rel = "noreferrer noopener nofollow";
+    link.click();
+  } catch {
+    window.location.assign("/contact");
+  }
+}
 
 function sessionSeed(): string {
   try {
@@ -53,14 +87,19 @@ export function LayoutImageBanner({ placement, className = "" }: Props) {
       {shown ? (
         <a
           className="layout-banner__link"
-          href={withPartnerUtm(shown.url, placement)}
+          href={isPrintEnquiry(shown.id) ? shown.url : withPartnerUtm(shown.url, placement)}
           style={{ aspectRatio: `${shown.width} / ${shown.height}` }}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={
+            isPrintEnquiry(shown.id)
+              ? "nofollow noreferrer noopener"
+              : "noopener noreferrer"
+          }
           data-partner-link={shown.partner}
           data-partner-id={shown.id}
           data-utm-content={placement}
           aria-label={shown.alt}
+          onClick={isPrintEnquiry(shown.id) ? openPrintEnquiry : undefined}
         >
           <img
             src={shown.image}

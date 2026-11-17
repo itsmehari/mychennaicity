@@ -3,6 +3,7 @@
  */
 
 const BUSINESS_ENV = "WHATSAPP_BUSINESS_E164";
+const PRINT_ENQUIRY_ENV = "WHATSAPP_PRINT_ENQUIRY_E164";
 const COMMUNITY_INVITE_ENV = "WHATSAPP_COMMUNITY_INVITE_URL";
 
 /** Max length for optional `text` query passed to wa.me. */
@@ -88,6 +89,17 @@ export function buildWaMeRedirectUrl(prefill: string | null): string | null {
   if (!prefill?.trim()) return base;
   const t = prefill.trim().slice(0, MAX_PREFILL);
   return `${base}?text=${encodeURIComponent(t)}`;
+}
+
+/** Print-offer banner. Digits stay in the env var. No campaign tags on the wa.me link. */
+export function buildPrintEnquiryWaUrl(): string | null {
+  const digits = normalizeBusinessDigits(
+    process.env[PRINT_ENQUIRY_ENV]?.trim() ?? "",
+  );
+  if (!digits) return null;
+  const text =
+    "Hi, I saw the multicolor single-side print offer on mychennaicity.in. I would like an enquiry.";
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 
 export function sanitizeWaPrefillParam(value: string | null): string | null {

@@ -492,7 +492,7 @@ const PARTNER_ARTWORK_SOURCES: readonly LayoutImageBanner[] = [
   {
     id: "print-offer",
     partner: "Print offer",
-    url: "https://mychennaicity.in/contact#advertise",
+    url: "https://mychennaicity.in/contact",
     image: "/images/partner-ads/print-offer.webp",
     width: 1024,
     height: 576,
