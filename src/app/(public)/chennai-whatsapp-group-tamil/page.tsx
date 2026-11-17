@@ -3,7 +3,6 @@ import Link from "next/link";
 import { WhatsAppCommunityJsonLd } from "@/components/community/whatsapp-community-json-ld";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
-import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 import { WhatsAppCommunityStickyBar } from "@/components/community/whatsapp-community-sticky-bar";
 import {
   PageBreadcrumbs,

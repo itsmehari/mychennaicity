@@ -53,6 +53,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const joinPath = "/whatsapp-community/join";
+  if (
+    request.nextUrl.pathname === joinPath &&
+    request.nextUrl.search.length > 0 &&
+    (request.method === "GET" || request.method === "HEAD")
+  ) {
+    const response = nextWithPath(request);
+    response.headers.set("X-Robots-Tag", "noindex, follow");
+    return response;
+  }
+
   const twin = markdownTwinPath(request.nextUrl.pathname);
   if (twin && (request.method === "GET" || request.method === "HEAD")) {
     if (prefersMarkdown(request.headers.get("accept"))) {

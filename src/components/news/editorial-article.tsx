@@ -362,11 +362,14 @@ export async function EditorialArticle({
           ),
           related: contextCluster,
           adEnd: (
-            <div className="civic-ad-slot">
-              <ArticleAdRegion
-                adsenseSlotEnvKey="ARTICLE_END"
-                placement="article_end"
-              />
+            <div className="space-y-5">
+              <WhatsAppPlacementCta pageType="article" slot="end" />
+              <div className="civic-ad-slot">
+                <ArticleAdRegion
+                  adsenseSlotEnvKey="ARTICLE_END"
+                  placement="article_end"
+                />
+              </div>
             </div>
           ),
           back,

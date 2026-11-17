@@ -10,6 +10,7 @@ import {
   WA_JOIN_STATE_COOKIE,
   waReachEnabled,
 } from "@/lib/whatsapp-community-flags";
+import { claimWaReachImpression } from "@/lib/whatsapp-reach-frequency";
 import { memberInviteShareHref, waLink, whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 import { WhatsAppCommunityJoinLink } from "./whatsapp-community-join-link";
 import { WhatsAppCommunityPageLink } from "./whatsapp-community-join-link";
@@ -34,15 +35,19 @@ export function WhatsAppPlacementCta({
 }) {
   const [joined, setJoined] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [impressionAllowed, setImpressionAllowed] = useState(false);
   const row = placementFor(pageType, slot);
 
   useEffect(() => {
     setJoined(readJoinState());
     const key = `wa_cta_dismissed_${slot}`;
     setDismissed(document.cookie.includes(`${key}=1`));
-  }, [slot]);
+    if (waReachEnabled() && row && !document.cookie.includes(`${key}=1`)) {
+      setImpressionAllowed(claimWaReachImpression());
+    }
+  }, [slot, row]);
 
-  if (!waReachEnabled() || !row || dismissed) return null;
+  if (!waReachEnabled() || !row || dismissed || !impressionAllowed) return null;
 
   const copy = lang === "ta" ? row.ta : row.en;
   const title = interpolateLocality(copy.title, locality);

@@ -12,7 +12,7 @@ export const WHATSAPP_COMMUNITY_RULES: string[] = [
   "English, Tamil, Tanglish welcome",
   "Admins may warn/remove without notice",
   "Official group only via mychennaicity.in or links we publish",
-  "Admins: reject invite-flood numbers listed on mychennaicity.in/chennai-whatsapp-spammers",
+  "Admins: reject invite-flood numbers on the moderators-only spammers list (see the admin toolkit page)",
   "No Status tags of this group or its members, and do not add this group to your Status audience",
   "No group calls, @everyone, group Events, or member polls — they notify every phone",
   "Do not message @Meta AI in the group",

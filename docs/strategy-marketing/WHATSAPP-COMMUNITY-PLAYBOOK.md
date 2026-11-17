@@ -73,6 +73,16 @@ Match the WhatsApp display name from the form plus the Chennai area. If that is 
 
 `/super-admin/whatsapp-join-requests` shows last-30-day verified, approved, declined, approval rate, median hours, and counts by first source. Nudge cap: 10 reply-first Messages a day.
 
+## Live smoke (after deploy)
+
+```bash
+npm run smoke:whatsapp:live
+```
+
+Optional base: `SMOKE_BASE_URL=https://mychennaicity.in`. Checks HEAD 200 on join and landings, no `chat.whatsapp.com` in join HTML, and `X-Robots-Tag: noindex` on join URLs with query strings.
+
+Article bodies with raw invite links: `npm run audit:whatsapp:article-links:live` (owner: fix slugs before enabling reach).
+
 ## 1:1 desk vs group
 
 - **Group:** `/whatsapp-community/join` → success screen → env invite. That tap is the join. Do not work the Ready queue as a list of 20 identical invite texts a day.

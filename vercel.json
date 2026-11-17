@@ -8,6 +8,10 @@
     {
       "path": "/api/cron/gold-rate",
       "schedule": "30 12 * * *"
+    },
+    {
+      "path": "/api/cron/whatsapp-join-retention",
+      "schedule": "30 3 1 * *"
     }
   ],
   "headers": [

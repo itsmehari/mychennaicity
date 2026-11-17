@@ -112,6 +112,23 @@ Stages 1–6 as in the merged plan. Decision log for this site:
 3. Redeploy. Do not print the new link on the site.
 4. Leave admin approval on. A forwarded old invite still hits pending.
 
+## Gap status (Chennai, 17 Nov 2026)
+
+| Gap / item | Status |
+| --- | --- |
+| Join query noindex + `X-Robots-Tag` | Shipped |
+| gtag funnel queue | Shipped |
+| Proof strip + DB timeout | Shipped |
+| Home hero + article end placements (registry) | Wired; flag off until owner sets `NEXT_PUBLIC_WA_REACH_ENABLED` |
+| Reach session cap (2 / session) | Shipped |
+| Smoke `npm run smoke:whatsapp:live` | Shipped |
+| Article invite audit script | Shipped |
+| Retention cron (`/api/cron/whatsapp-join-retention`, 1st 03:30 UTC) | Shipped; confirm `CRON_SECRET` on Vercel |
+| Partner code admin UI | File-based (`partner-codes.ts`) |
+| Weekly digest editor workflow | Route exists; content manual |
+| 7-day admin onboarding UI | Playbook + welcome txt only |
+| Modal vs reach frequency (shared cap) | Site modal cap 2; reach placements cap 2 — separate systems |
+
 ## Executor / stop conditions
 
-Stop for live DB, production deploy, invite changes, or removing a public URL with traffic. Coverage IDs `R1–R9`, `A1–A6`, `S1–S6`, gaps 1–53 live in the plan file `whatsapp_community_system_8e181ac0.plan.md`.
+Stop for live DB, production deploy, invite changes, or removing a public URL with traffic. Coverage IDs `R1–R9`, `A1–A6`, `S1–S6`, gaps 1–53 live in the plan file `whatsapp_community_system_8e181ac0.plan.md`. Legacy product PRD: `docs/archive/whatsapp-community-PRD-superseded.md`.

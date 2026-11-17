@@ -14,5 +14,5 @@ Read **`docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`** and **`docs/stra
 4. Admin approval is the gate. Keep approved status on resubmit. Admin Message is reply-first, capped, no invite in the text.
 5. Queue: `/super-admin/whatsapp-join-requests`. Do not ship a public form without this desk.
 6. New reach/funnel behaviour stays behind `NEXT_PUBLIC_WA_REACH_ENABLED` and `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` until verified on live.
-7. Do not apply `drizzle/0019_whatsapp_join_attribution.sql` to production until the owner says so.
+7. Attribution `drizzle/0019` is live on Neon. After deploy, run `npm run smoke:whatsapp:live`. Post-migration checks only unless schema changes again.
 8. The Bengaluru invite on `/community/mybangalore-whatsapp-community-group` is a different city. Do not put it in the Chennai nav, footer, float, or join form.

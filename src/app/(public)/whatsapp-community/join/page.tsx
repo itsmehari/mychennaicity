@@ -27,6 +27,7 @@ import {
 import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
 import { whatsappJoinLocalities } from "@/lib/whatsapp-join";
 import { readJoinUnlock } from "@/lib/whatsapp-join-session";
+import { whatsappJoinQueryNoindex } from "@/lib/whatsapp-join-seo";
 import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
 
 export const dynamic = "force-dynamic";
@@ -51,18 +52,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const params = await searchParams;
   const ta = params.lang === "ta";
-  const queryNoindex = Boolean(
-    params.ok ||
-      params.lang ||
-      params.src ||
-      params.partner ||
-      params.placement ||
-      params.utm_source ||
-      params.utm_medium ||
-      params.utm_campaign ||
-      params.already ||
-      params.waitlist,
-  );
+  const queryNoindex = whatsappJoinQueryNoindex(params);
   const title = ta
     ? "சென்னை வாட்ஸ்அப் குழுவில் சேர கோரிக்கை"
     : "Request to join the Chennai WhatsApp group";

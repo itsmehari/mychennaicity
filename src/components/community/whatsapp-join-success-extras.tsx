@@ -5,12 +5,7 @@ import { WA_JOIN_STATE_COOKIE, WA_JOIN_STATE_MAX_AGE_SEC } from "@/lib/whatsapp-
 import { memberInviteShareHref } from "@/lib/whatsapp-link";
 import { waFunnelEventsEnabled } from "@/lib/whatsapp-community-flags";
 import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
+import { waGtagEvent } from "@/lib/whatsapp-gtag-client";
 
 export function WhatsappJoinSuccessExtras({
   lang,
@@ -37,14 +32,11 @@ export function WhatsappJoinSuccessExtras({
     if (!waFunnelEventsEnabled()) return;
     if (sessionStorage.getItem("wa_join_event_sent") === "1") return;
     sessionStorage.setItem("wa_join_event_sent", "1");
-    if (typeof window.gtag === "function") {
-      window.gtag("event", "wa_join_verified", {
-        event_category: "whatsapp_community",
-        locality: (locality ?? "").slice(0, 40),
-        language: lang,
-        already_approved: alreadyApproved ? "1" : "0",
-      });
-    }
+    waGtagEvent("wa_join_verified", {
+      locality: (locality ?? "").slice(0, 40),
+      language: lang,
+      already_approved: alreadyApproved ? "1" : "0",
+    });
   }, [alreadyApproved, lang, locality]);
 
   async function copyInvite() {

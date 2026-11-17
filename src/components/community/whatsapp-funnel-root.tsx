@@ -2,19 +2,10 @@
 
 import { useEffect } from "react";
 import { waFunnelEventsEnabled } from "@/lib/whatsapp-community-flags";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
+import { waGtagEvent } from "@/lib/whatsapp-gtag-client";
 
 function fire(name: string, params: Record<string, string>) {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", name, {
-    event_category: "whatsapp_community",
-    ...params,
-  });
+  waGtagEvent(name, params);
 }
 
 /** Delegated funnel events. Never send name or phone. */

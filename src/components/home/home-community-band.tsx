@@ -1,6 +1,7 @@
 import { HomeNewsletterSignup } from "@/components/newsletter/home-newsletter-signup";
 import { JoinWhatsAppCommunityCard } from "@/components/community/join-whatsapp-community";
 import { WhatsAppCommunityCta } from "@/components/community/whatsapp-community-cta";
+import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { Section } from "@/components/home/section";
 import { SiteUsageAudienceSection } from "@/components/site/site-usage-audience-section";
 
@@ -13,6 +14,7 @@ export function HomeCommunityBand() {
         title="Stay in the loop"
         subtitle="Weekly digest and our official Chennai WhatsApp community."
       >
+        <WhatsAppPlacementCta pageType="home" slot="community_band" className="mb-6" />
         <div className="mb-8">
           <WhatsAppCommunityCta
             variant="banner"
