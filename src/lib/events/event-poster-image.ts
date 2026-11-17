@@ -47,6 +47,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/sj-jananiy-carnatic-narada-gana-sabha-august-2026.jpg",
     alt: "Carnatic vocal concert mood — Kalaimamani S. J. Jananiy at Narada Gana Sabha, Chennai, 15 August 2026",
   },
+  "kartik-fine-arts-bharat-sundar-trichur-brothers-narada-december-2026": {
+    src: "/images/events/kartik-fine-arts-52nd-art-festival-narada-gana-sabha-december-2026.png",
+    alt: "Kartik Fine Arts 52nd Year Art Festival poster — K. Bharat Sundar and Trichur Brothers vocal concerts at Narada Gana Sabha Main Hall, Chennai, Monday 7 December 2026",
+  },
   "sukoon-baithak-utkarsh-sharma-mathsya-adyar-september-2026": {
     src: "/images/events/sukoon-baithak-utkarsh-sharma-adyar-september-2026.jpg",
     alt: "Sukoon Baithak mood — Utkarsh Sharma ghazals at Mathsya Adyar, Chennai, 5 September 2026",

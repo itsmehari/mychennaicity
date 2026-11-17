@@ -1,5 +1,6 @@
 import { EXAM_SESSION_LABEL } from "@/content/exams/madras-university-nov-2026";
 import { getSiteUrl } from "@/lib/env";
+import { waLink } from "@/lib/whatsapp-link";
 
 export function ExamTimetableFinder({
   pagePath,
@@ -25,7 +26,14 @@ export function ExamTimetableFinder({
       </form>
       <p>
         <a
-          href={`https://wa.me/?text=${encodeURIComponent(`University of Madras November 2026 timetable: ${shareUrl}`)}`}
+          href={waLink("share", {
+            url: shareUrl,
+            text: "University of Madras November 2026 timetable",
+            placement: "exam-share",
+          })}
+          data-wa-type="share"
+          data-wa-placement="exam-share"
+          data-wa-content="exam-timetable"
         >
           Share on WhatsApp
         </a>
