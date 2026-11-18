@@ -12,7 +12,7 @@ Read **`docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`** and **`docs/stra
 2. `chat.whatsapp.com` belongs in env, server invite helper, tests, and docs — not public pages, JSON-LD, sitemaps, floats, or first outbound messages.
 3. Indian mobiles only: `91` + 10 digits starting 6–9.
 4. Admin approval is the gate. Keep approved status on resubmit. Admin Message is reply-first, capped, no invite in the text.
-5. Queue: `/super-admin/whatsapp-join-requests`. Do not ship a public form without this desk.
+5. Queue: `/super-admin/whatsapp-join-requests`. One list. Ready, Approved, Declined, Spam, Waitlist, All, and Lookup all filter that list. Do not add a second unfiltered list on the same page.
 6. New reach/funnel behaviour stays behind `NEXT_PUBLIC_WA_REACH_ENABLED` and `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` until verified on live.
 7. Attribution `drizzle/0019` is live on Neon. After deploy, run `npm run smoke:whatsapp:live`. Post-migration checks only unless schema changes again.
 8. The Bengaluru invite on `/community/mybangalore-whatsapp-community-group` is a different city. Do not put it in the Chennai nav, footer, float, or join form.

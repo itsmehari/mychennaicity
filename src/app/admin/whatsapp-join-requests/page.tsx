@@ -18,7 +18,6 @@ import {
   type WhatsappJoinStatus,
 } from "@/lib/whatsapp-join";
 import { WhatsappJoinQueueRow, type WhatsappJoinQueueRowData } from "./queue-row";
-import { WhatsappJoinRecentList } from "@/components/super-admin/whatsapp-join-recent";
 import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
 import { todaysWhatsappNudgeCount } from "@/lib/whatsapp-join-desk-db";
 import {
@@ -290,8 +289,7 @@ export default async function WhatsappJoinRequestsPage({
             only shows issued codes.
           </p>
         )}
-        <WhatsappJoinRecentList returnTo={queueHref(segment, q, page)} />
-        <nav className="flex flex-wrap gap-2 text-sm">
+        <nav className="flex flex-wrap gap-2 text-sm" aria-label="Join request status">
           {SEGMENTS.map((item) => {
             const active = item.id === segment;
             return (
