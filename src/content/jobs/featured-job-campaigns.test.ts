@@ -10,6 +10,14 @@ const CAST =
 const OFFICE = "male-office-assistant-guindy-race-course";
 const AC = "ac-technician-helper-50-vacancies-madipakkam-chennai";
 const HR = "hr-recruiter-10-vacancies-sembakkam-chennai";
+const ASSETOWNS = [
+  "senior-telecaller-female-assetowns-padur-omr",
+  "business-development-executive-male-assetowns-padur-omr",
+  "hr-manager-assetowns-padur-omr",
+  "sales-executive-male-assetowns-padur-omr",
+  "customer-relationship-executive-female-assetowns-padur-omr",
+  "customer-relationship-manager-assetowns-padur-omr",
+] as const;
 
 describe("featured job campaigns", () => {
   it("keeps the VV Placement roles live on 23 Oct and through 12 Nov 2026 IST", () => {
@@ -41,6 +49,7 @@ describe("featured job campaigns", () => {
     expect(isActiveFeaturedJobSlug(CAST, afterVv)).toBe(true);
     expect(isActiveFeaturedJobSlug(OFFICE, lastGuindyEvening)).toBe(true);
     expect(activeFeaturedJobCampaigns(afterGuindy).map((c) => c.englishSlug)).toEqual([
+      ...ASSETOWNS,
       CAST,
     ]);
     expect(isActiveFeaturedJobSlug(OFFICE, afterGuindy)).toBe(false);
@@ -51,7 +60,9 @@ describe("featured job campaigns", () => {
     const lastEvening = new Date("2026-12-13T18:29:00.000Z");
     const nextMorning = new Date("2026-12-13T18:30:00.000Z");
     expect(isActiveFeaturedJobSlug(CAST, lastEvening)).toBe(true);
-    expect(activeFeaturedJobCampaigns(nextMorning)).toEqual([]);
+    expect(activeFeaturedJobCampaigns(nextMorning).map((c) => c.englishSlug)).toEqual([
+      ...ASSETOWNS,
+    ]);
     expect(isActiveFeaturedJobSlug(CAST, nextMorning)).toBe(false);
   });
 

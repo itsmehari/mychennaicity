@@ -241,6 +241,7 @@ Three layers — do **not** paste one-off partner markup on a page:
 
 ## 6. Changelog
 
+- **2026-11-18:** Jobs — **Assetowns Property Solutions**, six Padur OMR roles (telecaller, BDE, HR manager, sales, CRM exec, CRM manager) from MyOMR jobs 87–92. Shared flyer `public/images/listings/assetowns-property-solutions-hiring-padur-omr-2026.jpg`. Seed `db:seed:chennai-job:assetowns-padur-omr(:live)`. Featured through **17 Jan 2027** on `omr-perungudi-sholinganallur` in `featured-job-campaigns.ts`. Apply WhatsApp **76390 01400**.
 - **2026-11-18:** BNI Vetri **The Crore Mindset** now **Wednesday 9 December 2026, 7:29 AM** (was 25 Nov, then 2 Dec on site). Same slugs. Printed posters still show 25 November. Reseed `db:seed:event:bni-vetri-crore-mindset:live` and `db:seed:bni-vetri-crore-mindset-november-2026:live`.
 - **2026-11-18:** WhatsApp join desk showed two lists. “Requests since 17 Nov” ignored Ready / Approved / Lookup; those controls only changed a second list below it. **Rule:** one list on `/super-admin/whatsapp-join-requests`. Do not mount `WhatsappJoinRecentList` on that page or the overview.
 - **2026-11-18:** WhatsApp desk serials all showed the table size (117). The count subquery used the same table name as the outer query, so Postgres compared each row with itself. **Rule:** alias the outer join row (`current_join`) before counting earlier `whatsapp_join_verifications` rows. Live in `0bf0317`.

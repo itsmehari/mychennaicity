@@ -18,8 +18,74 @@ export type FeaturedJobCampaign = {
   contextTa: string;
 };
 
-/** Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. VV Placement roles through 12 Nov 2026. */
+/** Assetowns Padur OMR six-pack through 17 Jan 2027. Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. */
 export const FEATURED_JOB_CAMPAIGNS: readonly FeaturedJobCampaign[] = [
+  {
+    id: "assetowns-senior-telecaller-padur-2026-11",
+    englishSlug: "senior-telecaller-female-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "Senior telecaller (female) at Assetowns Property Solutions, Padur OMR. Real-estate leads — WhatsApp CV.",
+    contextTa:
+      "Assetowns Property Solutions — சீனியர் டெலிகேல்லர் (பெண்), பாதூர் OMR. ரியல் எஸ்டேட் லீட்ஸ் — வாட்ஸ்அப் சீவி.",
+  },
+  {
+    id: "assetowns-bde-male-padur-2026-11",
+    englishSlug: "business-development-executive-male-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "Business development executive (male), Padur OMR. Property / smart-asset sales — field role on the corridor.",
+    contextTa:
+      "பிசினஸ் டெவலப்மென்ட் எக்ஸிக்யூட்டிவ் (ஆண்), பாதூர் OMR. ப்ராபர்டி விற்பனை — OMR தெருவில் ஃபீல்ட் வேலை.",
+  },
+  {
+    id: "assetowns-hr-manager-padur-2026-11",
+    englishSlug: "hr-manager-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "HR manager at Assetowns, Padur OMR. Recruitment and employee coordination for a growing property desk.",
+    contextTa:
+      "Assetowns எச்ஆர் மேனேஜர், பாதூர் OMR. ரெக்ரூட்மென்ட் மற்றும் ஊழியர் ஒருங்கிணைப்பு.",
+  },
+  {
+    id: "assetowns-sales-exec-male-padur-2026-11",
+    englishSlug: "sales-executive-male-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "Sales executive (male), Padur OMR. Client-facing property sales with telecaller and CRM support.",
+    contextTa:
+      "சேல்ஸ் எக்ஸிக்யூட்டிவ் (ஆண்), பாதூர் OMR. வாடிக்கையாளர் முன் ரியல் எஸ்டேட் விற்பனை.",
+  },
+  {
+    id: "assetowns-crm-exec-female-padur-2026-11",
+    englishSlug: "customer-relationship-executive-female-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "Customer relationship executive (female), Padur OMR. Post-sale client updates and documentation.",
+    contextTa:
+      "கஸ்டமர் ரிலேஷன்ஷிப் எக்ஸிக்யூட்டிவ் (பெண்), பாதூர் OMR. விற்பனைக்குப் பிறகு வாடிக்கையாளர் ஒருங்கிணைப்பு.",
+  },
+  {
+    id: "assetowns-crm-manager-padur-2026-11",
+    englishSlug: "customer-relationship-manager-assetowns-padur-omr",
+    from: "2026-11-18",
+    until: "2027-01-17",
+    areaHubSlugs: ["omr-perungudi-sholinganallur"],
+    contextEn:
+      "Customer relationship manager, Padur OMR. End-to-end client accounts for property solutions.",
+    contextTa:
+      "கஸ்டமர் ரிலேஷன்ஷிப் மேனேஜர், பாதூர் OMR. முழு வாடிக்கையாளர் கணக்கு மேலாண்மை.",
+  },
   {
     id: "south-style-casting-studio-2026-11",
     englishSlug:
