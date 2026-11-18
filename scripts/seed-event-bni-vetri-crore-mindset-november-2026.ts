@@ -1,5 +1,6 @@
 /**
- * BNI Vetri — The CRORE MINDSET Business Visitors Day (Chennai, 25 Nov 2026).
+ * BNI Vetri — The CRORE MINDSET Business Visitors Day (Chennai, 9 Dec 2026).
+ * Poster: single invitation (9 Dec 2026).
  * Hall and finish time are not on the invitation. Calendar held to 10:00 AM IST.
  *
  * Dev:  `npm run db:seed:event:bni-vetri-crore-mindset`
@@ -27,9 +28,7 @@ const db = drizzle(neon(requireDatabaseUrl(live)), { schema });
 
 const DESCRIPTION = `**Organiser:** BNI Vetri
 
-![BNI Vetri poster for The Crore Mindset Business Visitors Day, 25 November 2026 at 7:29 AM](https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/events/bni-vetri-crore-mindset-visitors-day-november-2026.jpg)
-
-![BNI Vetri invitation to women entrepreneurs for the same morning](https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/events/bni-vetri-crore-mindset-women-entrepreneurs-november-2026.jpg)
+![BNI Vetri invitation — The Crore Mindset Business Visitors Day, Wednesday 9 December 2026, 7:29 AM](/images/events/bni-vetri-crore-mindset-visitors-day-november-2026.jpg)
 
 BNI (Business Network International) is a business referral network. It brings entrepreneurs, business owners, and professionals together to build relationships, exchange referrals, and grow. The organisation’s line is **Givers Gain**: help others grow their businesses, and opportunities come back.
 
@@ -39,11 +38,11 @@ BNI Vetri holds structured networking meetings, business presentations, visitor 
 
 BNI Vetri invites entrepreneurs to **The CRORE MINDSET**, a Business Visitors Day.
 
-**When:** Wednesday, **25 November 2026**, **7:29 AM** IST. The invitation does not print a finish time. This calendar is held to **10:00 AM** so the listing stays up through the morning. Confirm the close with the organiser.
+**When:** Wednesday, **9 December 2026**, **7:29 AM** IST. The invitation does not print a finish time. This calendar is held to **10:00 AM** so the listing stays up through the morning. Confirm the close with the organiser.
 
 **Where:** **Chennai**. The invitation does not print a hall or street. Ask before you travel.
 
-A second poster on this page invites **women entrepreneurs**: She leads. She connects. She grows.
+The invitation is also addressed to **women entrepreneurs**: She leads. She connects. She grows.
 
 **Connect. Collaborate. Grow together.**
 
@@ -61,8 +60,8 @@ async function main() {
     slug: BNI_VETRI_CRORE_MINDSET_SLUG,
     title: "The CRORE MINDSET — BNI Vetri Business Visitors Day",
     description: DESCRIPTION,
-    startsAt: istToUtcDate(2026, 11, 25, 7, 29),
-    endsAt: istToUtcDate(2026, 11, 25, 10, 0),
+    startsAt: istToUtcDate(2026, 12, 9, 7, 29),
+    endsAt: istToUtcDate(2026, 12, 9, 10, 0),
     allDay: false,
     venueName: "Chennai",
     venueAddress: null,

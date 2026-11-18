@@ -145,7 +145,7 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   },
   "bni-vetri-crore-mindset-visitors-day-november-2026": {
     src: "/images/events/bni-vetri-crore-mindset-visitors-day-november-2026.jpg",
-    alt: "BNI Vetri poster — The CRORE MINDSET Business Visitors Day, Chennai, Wednesday 25 November 2026, 7:29 AM",
+    alt: "BNI Vetri invitation to women entrepreneurs — She leads, She connects, She grows, The Crore Mindset Business Visitors Day, Chennai, Wednesday 9 December 2026, 7:29 AM",
   },
   "meetup-baking-for-beginners-cake-mall-nungambakkam-aug-2026": {
     src: "/images/events/meetup-baking-workshop-chennai.jpg",
@@ -362,14 +362,7 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
 };
 
 /** Extra flyers shown under the description. The hub and hero use POSTERS_BY_SLUG. */
-const EXTRA_POSTERS_BY_SLUG: Record<string, EventPosterSpec[]> = {
-  "bni-vetri-crore-mindset-visitors-day-november-2026": [
-    {
-      src: "/images/events/bni-vetri-crore-mindset-women-entrepreneurs-november-2026.jpg",
-      alt: "BNI Vetri invitation to women entrepreneurs — She Leads, She Connects, She Grows, The CRORE MINDSET, Wednesday 25 November 2026, 7:29 AM",
-    },
-  ],
-};
+const EXTRA_POSTERS_BY_SLUG: Record<string, EventPosterSpec[]> = {};
 
 export function getRegisteredEventPoster(slug: string): EventPosterSpec | null {
   return POSTERS_BY_SLUG[slug.trim()] ?? null;

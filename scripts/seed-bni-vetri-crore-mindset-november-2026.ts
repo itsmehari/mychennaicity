@@ -4,7 +4,7 @@
  * Dev:  `npm run db:seed:bni-vetri-crore-mindset-november-2026`
  * Live: `npm run db:seed:bni-vetri-crore-mindset-november-2026:live`
  *
- * Source is the chapter note and the two posters shared with this desk.
+ * Source is the chapter note and the current invitation poster.
  * Do not turn “Crore Mindset” into a published income figure.
  * Hall, fee, and finish time are not on the invitations.
  */
@@ -19,14 +19,8 @@ import { revalidateNewsAfterSeed } from "./lib/revalidate-news-after-seed";
 const SLUG = "bni-vetri-crore-mindset-visitors-day-november-2026";
 const EVENT =
   "/chennai-local-events/bni-vetri-crore-mindset-visitors-day-november-2026";
-/**
- * Same files as `public/images/articles/…`. The live page uses the GitHub
- * copy because the Vercel production deploy is failing, so `/images/…` 404s.
- */
 const HERO =
-  "https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/articles/bni-vetri-crore-mindset-visitors-day-november-2026.jpg";
-const WOMEN =
-  "https://raw.githubusercontent.com/itsmehari/mychennaicity/main/public/images/articles/bni-vetri-crore-mindset-women-entrepreneurs-november-2026.jpg";
+  "/images/articles/bni-vetri-crore-mindset-visitors-day-november-2026.jpg";
 
 const live =
   process.env.SEED_LIVE === "1" || process.argv.includes("--live");
@@ -69,8 +63,8 @@ async function main() {
     .where(and(eq(articles.cityId, city.id), eq(articles.slug, SLUG)))
     .limit(1);
 
-  /** 13 Nov 2026, 2:40 p.m. IST */
-  const publishedAt = new Date("2026-11-13T09:10:00.000Z");
+  /** 18 Nov 2026 evening — rescheduled to 9 December */
+  const publishedAt = new Date("2026-11-18T07:45:00.000Z");
   const now = new Date();
 
   const reportBody = `## Disclaimer
@@ -79,15 +73,13 @@ This is a MyChennaiCity report on a visitors morning called by BNI Vetri. The da
 
 ## Summary
 
-**Chennai, 13 November 2026** — BNI Vetri will bring business owners together on **Wednesday, 25 November 2026**, for a visitors morning it has named **The Crore Mindset**. The sitting starts at **7:29 AM**.
+**Chennai, 18 November 2026** — BNI Vetri has set its visitors morning, **The Crore Mindset**, for **Wednesday, 9 December 2026**. The sitting starts at **7:29 AM**.
 
 The chapter is inviting entrepreneurs who want new relationships and referral work. Women who run businesses have a direct invitation to the same morning. People who want to attend can call **Riyaz Ahamed** on **77088 37509**.
 
 The gathering is in Chennai. A hall has not been named yet.
 
-![BNI Vetri Business Visitors Day, The Crore Mindset, Chennai, 25 November 2026](${HERO})
-
-*BNI Vetri’s visitors morning, The Crore Mindset, is set for 25 November at 7:29 AM.*
+![BNI Vetri invitation to women entrepreneurs — The Crore Mindset, Wednesday 9 December 2026, 7:29 AM](${HERO})
 
 ## A morning for referrals
 
@@ -103,11 +95,7 @@ The chapter has also addressed the morning to women entrepreneurs, under the lin
 
 The invitation tells them their ambition deserves a stronger network: meet other business owners, look for referrals, and build relationships that help the business grow. It closes with a plain ask. Step forward. Build connections. Grow your business.
 
-Registration for that invitation is the same call, to Riyaz Ahamed on 77088 37509. The chapter has put both invitations on one date and one clock, so they are one morning.
-
-![Women entrepreneurs are invited to BNI Vetri’s Crore Mindset morning on 25 November](${WOMEN})
-
-*Women entrepreneurs are invited to the same visitors morning.*
+Registration is the same call, to Riyaz Ahamed on 77088 37509.
 
 ## How to attend
 
@@ -120,14 +108,14 @@ A listing, with the date and the phone number, is on the [events page](${EVENT})
 | Detail | As announced |
 | --- | --- |
 | What | The Crore Mindset, BNI Vetri Business Visitors Day |
-| When | Wednesday 25 November 2026, 7:29 AM |
+| When | Wednesday 9 December 2026, 7:29 AM |
 | Where | Chennai. Hall yet to be announced |
 | Who | Business owners, with a direct invitation to women entrepreneurs |
 | Contact | Riyaz Ahamed, 77088 37509 |
 
 ## Key takeaways
 
-- BNI Vetri’s visitors morning, The Crore Mindset, is on Wednesday 25 November 2026 at 7:29 AM.
+- BNI Vetri’s visitors morning, The Crore Mindset, is on Wednesday 9 December 2026 at 7:29 AM.
 - The chapter wants business owners in the room to exchange referrals and build relationships.
 - Women entrepreneurs have their own invitation to that same morning.
 - Register with Riyaz Ahamed on 77088 37509, and ask him for the hall.
@@ -138,15 +126,15 @@ This report was drafted with AI assistance and checked against the BNI Vetri inv
 
   const analysisBody = "";
 
-  const body = `BNI Vetri will host The Crore Mindset, a business visitors morning, in Chennai on Wednesday 25 November 2026 at 7:29 AM. Women entrepreneurs are invited to the same sitting. Enquiries: Riyaz Ahamed, 77088 37509.`;
+  const body = `BNI Vetri will host The Crore Mindset, its business visitors morning in Chennai, on Wednesday 9 December 2026 at 7:29 AM. Women entrepreneurs are invited to the same sitting. Enquiries: Riyaz Ahamed, 77088 37509.`;
 
   const values = {
     cityId: city.id,
     slug: SLUG,
     title:
-      "BNI Vetri invites Chennai business owners to The Crore Mindset on 25 November",
+      "BNI Vetri sets The Crore Mindset visitors morning for 9 December",
     summary:
-      "The chapter’s visitors morning starts at 7:29 AM on Wednesday 25 November 2026. Women entrepreneurs are invited to the same sitting. Call Riyaz Ahamed on 77088 37509.",
+      "The chapter’s visitors morning starts at 7:29 AM on Wednesday 9 December 2026. Women entrepreneurs are invited to the same sitting. Call Riyaz Ahamed on 77088 37509.",
     dek: "BNI Vetri is opening the morning to visitors who want referrals and new business relationships. The hall is still to be announced.",
     body,
     reportBody,
@@ -165,7 +153,7 @@ This report was drafted with AI assistance and checked against the BNI Vetri inv
         {
           question: "When is BNI Vetri’s Crore Mindset visitors day?",
           answer:
-            "Wednesday 25 November 2026 at 7:29 AM in Chennai. Ask Riyaz Ahamed what time it ends.",
+            "Wednesday 9 December 2026 at 7:29 AM in Chennai. Ask Riyaz Ahamed what time it ends.",
         },
         {
           question: "Where is it?",
