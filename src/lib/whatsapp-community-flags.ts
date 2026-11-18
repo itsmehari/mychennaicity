@@ -2,8 +2,9 @@
  * WhatsApp community feature switches. New reach and funnel behaviour defaults
  * off until verified on live. Join-path bug fixes are not gated.
  *
- * Owner 16 Nov 2026: group is on waitlist; approval promise is 12 hours in the day.
- * Set WHATSAPP_COMMUNITY_ACCEPTING=true to open joins again.
+ * A form always records a request and shows the group link. Approve, decline,
+ * message, and spam stay manual on the desk. The accepting switch no longer
+ * files people onto a waitlist or hides the invite.
  */
 
 function truthy(raw: string | undefined): boolean {
@@ -26,11 +27,9 @@ export function waFunnelEventsEnabled(): boolean {
   return truthy(process.env.NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED);
 }
 
-/** When false, the form saves waitlist rows and every Request label changes. Default: waitlist. */
+/** The public form always accepts a request. The desk decides afterwards. */
 export function whatsappCommunityAccepting(): boolean {
-  if (truthy(process.env.WHATSAPP_COMMUNITY_ACCEPTING)) return true;
-  if (truthy(process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_ACCEPTING)) return true;
-  return false;
+  return true;
 }
 
 /** Hours before a waiting row may get one reply-first nudge. Default 12 (daytime desk). */

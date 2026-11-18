@@ -3,7 +3,7 @@
 **Canonical record.** When anyone asks how the city WhatsApp group, the join form, or the admin queue works, read this file first.
 
 **Public site:** https://mychennaicity.in  
-**Last updated:** 16 November 2026  
+**Last updated:** 18 November 2026  
 **System (portable):** `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`  
 **Weekly ops:** `docs/strategy-marketing/WHATSAPP-COMMUNITY-PLAYBOOK.md`
 
@@ -46,7 +46,7 @@ Links pasted **inside** the group later use `withWhatsappGroupShareUtms()` (`utm
 | Mail | No outbound mailer in this repo | Saving the row does not wait on email |
 | Old `/api/community/whatsapp` | Redirects to the form | It used to send people straight to the invite |
 | Status tags and new WhatsApp buttons | Forbidden until the rules page allows them | A mention notifies members. Admins cannot delete another person’s Status. See the playbook |
-| Waitlist (16 Nov 2026) | On until `WHATSAPP_COMMUNITY_ACCEPTING=true` | Group treated as full. Form still saves. Invite hidden except for already-approved numbers |
+| Invite after the form (18 Nov 2026) | Shown after every successful submit | The accepting switch no longer files a waitlist or hides the invite. Approve, decline, message, and spam stay on the desk |
 | Approval wait | 12 hours, daytime IST 08:00–20:00 | Owner: desk hours |
 
 ## Operator steps

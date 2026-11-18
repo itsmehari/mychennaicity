@@ -59,6 +59,7 @@ describe("contact WhatsApp desk route", () => {
     const json = (await res.json()) as { url: string };
     expect(json.url.startsWith(`https://wa.me/${FAKE_LINE}?`)).toBe(true);
     expect(json.url).toContain("Story");
+    expect(decodeURIComponent(json.url)).toContain("[mychennaicity ref:news]");
     expect(res.headers.get("cache-control")).toContain("no-store");
   });
 });

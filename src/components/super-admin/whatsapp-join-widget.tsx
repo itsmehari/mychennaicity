@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
+import { WhatsappJoinRecentList } from "@/components/super-admin/whatsapp-join-recent";
 
 export async function WhatsappJoinDashboardWidget() {
   const card = await loadWhatsappJoinScorecard();
@@ -17,6 +18,9 @@ export async function WhatsappJoinDashboardWidget() {
           >
             Open queue
           </Link>
+        </div>
+        <div className="mt-4">
+          <WhatsappJoinRecentList returnTo="/super-admin" />
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <p className="text-sm">

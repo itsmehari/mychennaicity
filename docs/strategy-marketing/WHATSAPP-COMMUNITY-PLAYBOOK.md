@@ -48,8 +48,8 @@ If WhatsApp ships a control that notifies every member, adds people without the 
 ## When the group is full
 
 1. WhatsApp stops accepting new members on the invite.
-2. Keep the public join form. It becomes the waitlist. Do not paste the invite on the homepage, news, footer, or the rules page.
-3. Tell people who submit that the group is full and that the queue is the waitlist. Email from the contact page if you need a 1:1 reply. The desk WhatsApp on `/contact` is separate from the group invite.
+2. Keep the public join form. From 18 Nov 2026 the success screen still shows the group link. Do not paste the invite on the homepage, news, footer, or the rules page.
+3. If WhatsApp itself rejects new members, tell the person from the queue. Email from the contact page if you need a 1:1 reply. The desk WhatsApp on `/contact` is separate from the group invite.
 4. Open an overflow group only after the rules page says so, and still collect the form before sharing that invite.
 
 ## Moderation lookup

@@ -87,7 +87,7 @@ export default async function WhatsappCommunityJoinPage({
   const source = sanitizeWhatsappJoinSource(params.src);
   const unlocked = params.ok === "1" ? await readJoinUnlock() : null;
   const alreadyApproved = params.already === "1";
-  const waitlist = params.waitlist === "1" && !alreadyApproved;
+  const waitlist = false;
   const invite =
     unlocked && !waitlist
       ? trackedWhatsappCommunityInvite("join-verified", "join_form")

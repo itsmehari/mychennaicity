@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
@@ -23,7 +23,6 @@ import {
   WHATSAPP_COMMUNITY_JOIN_PATH,
   sanitizeWhatsappJoinSource,
 } from "@/lib/whatsapp-community";
-import { whatsappCommunityAccepting } from "@/lib/whatsapp-community-flags";
 import { applyWhatsappJoinAttribution } from "@/lib/whatsapp-join-attribution";
 import { sanitizeWhatsappPartnerCode } from "@/content/whatsapp-community/partner-codes";
 
@@ -333,18 +332,6 @@ export async function submitWhatsappJoin(
     });
   }
 
-  if (!whatsappCommunityAccepting() && !alreadyApproved) {
-    try {
-      await db.execute(sql`
-        UPDATE whatsapp_join_verifications
-        SET status = 'waitlist'
-        WHERE phone_e164 = ${phone.e164}
-      `);
-    } catch {
-      // Enum value missing until 0019 is applied; row stays submitted.
-    }
-  }
-
   try {
     await notifyOwner({
       name: displayName,
@@ -366,6 +353,5 @@ export async function submitWhatsappJoin(
 
   const next = new URLSearchParams({ ok: "1", lang, src: source });
   if (alreadyApproved) next.set("already", "1");
-  if (!whatsappCommunityAccepting()) next.set("waitlist", "1");
   redirect(`${WHATSAPP_COMMUNITY_JOIN_PATH}?${next.toString()}`);
 }

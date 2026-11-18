@@ -22,7 +22,8 @@ describe("waLink", () => {
     );
   });
 
-  it("labels Request vs waitlist from the accepting switch", () => {
-    expect(whatsappRequestCtaLabel("en")).toMatch(/Request|waitlist/i);
+  it("labels the form as a join request", () => {
+    expect(whatsappRequestCtaLabel("en")).toBe("Request to join");
+    expect(whatsappRequestCtaLabel("ta")).toBe("சேர கோரிக்கை");
   });
 });

@@ -87,10 +87,8 @@ export async function POST(request: NextRequest) {
     source = null;
   }
 
-  if (source) {
-    const tag = `[ref:${source}]`;
-    text = text ? `${text} ${tag}` : `Hi — enquiry from mychennaicity.in ${tag}`;
-  }
+  const marker = source ? `[mychennaicity ref:${source}]` : "[mychennaicity]";
+  text = text ? `${marker} ${text}` : `Hi — enquiry from mychennaicity.in ${marker}`;
 
   const target = buildWaMeRedirectUrl(text);
   if (!target) {

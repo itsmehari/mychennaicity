@@ -81,7 +81,7 @@ Registry: `config/whatsapp/placements.json`. Component: `WhatsAppPlacementCta`. 
 | --- | --- | --- |
 | `NEXT_PUBLIC_WA_REACH_ENABLED` | off | New contextual slots, QR, suppression, neighbour invite |
 | `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` | off | New GA4 event names |
-| `WHATSAPP_COMMUNITY_ACCEPTING` | **off (waitlist)** | Set true when the group has seats again |
+| `WHATSAPP_COMMUNITY_ACCEPTING` | unused | The form always records a request and shows the invite after submit. The desk still approves in WhatsApp |
 
 ## Retrofit protocol
 
