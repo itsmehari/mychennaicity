@@ -1,6 +1,9 @@
-import { desc, gte, sql } from "drizzle-orm";
+import { desc, gte } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { whatsappJoinVerifications } from "@/db/schema/tables";
+import {
+  whatsappJoinCurrent,
+  whatsappJoinRequestNo,
+} from "@/lib/whatsapp-join-request-no";
 import {
   formatWhatsappJoinPhone,
   formatWhatsappJoinStamp,
@@ -27,41 +30,33 @@ export const WHATSAPP_JOIN_VISIBLE_FROM = new Date("2026-11-17T00:00:00+05:30");
 
 export async function WhatsappJoinRecentList({ returnTo }: { returnTo: string }) {
   const db = getDb();
-  const requestNo = sql<number>`(
-    select count(*)::int
-    from whatsapp_join_verifications as older
-    where older.created_at < ${whatsappJoinVerifications.createdAt}
-       or (
-         older.created_at = ${whatsappJoinVerifications.createdAt}
-         and older.id <= ${whatsappJoinVerifications.id}
-       )
-  )`.mapWith(Number);
+  const join = whatsappJoinCurrent;
 
   const rows = await db
     .select({
-      id: whatsappJoinVerifications.id,
-      displayName: whatsappJoinVerifications.displayName,
-      phoneRaw: whatsappJoinVerifications.phoneRaw,
-      phoneE164: whatsappJoinVerifications.phoneE164,
-      phoneLast4: whatsappJoinVerifications.phoneLast4,
-      locality: whatsappJoinVerifications.locality,
-      intent: whatsappJoinVerifications.intent,
-      intro: whatsappJoinVerifications.intro,
-      status: whatsappJoinVerifications.status,
-      source: whatsappJoinVerifications.source,
-      ipHash: whatsappJoinVerifications.ipHash,
-      userAgent: whatsappJoinVerifications.userAgent,
-      notes: whatsappJoinVerifications.notes,
-      createdAt: whatsappJoinVerifications.createdAt,
-      updatedAt: whatsappJoinVerifications.updatedAt,
-      approvedAt: whatsappJoinVerifications.approvedAt,
-      approvedBy: whatsappJoinVerifications.approvedBy,
-      lastContactedAt: whatsappJoinVerifications.lastContactedAt,
-      requestNo,
+      id: join.id,
+      displayName: join.displayName,
+      phoneRaw: join.phoneRaw,
+      phoneE164: join.phoneE164,
+      phoneLast4: join.phoneLast4,
+      locality: join.locality,
+      intent: join.intent,
+      intro: join.intro,
+      status: join.status,
+      source: join.source,
+      ipHash: join.ipHash,
+      userAgent: join.userAgent,
+      notes: join.notes,
+      createdAt: join.createdAt,
+      updatedAt: join.updatedAt,
+      approvedAt: join.approvedAt,
+      approvedBy: join.approvedBy,
+      lastContactedAt: join.lastContactedAt,
+      requestNo: whatsappJoinRequestNo,
     })
-    .from(whatsappJoinVerifications)
-    .where(gte(whatsappJoinVerifications.createdAt, WHATSAPP_JOIN_VISIBLE_FROM))
-    .orderBy(desc(whatsappJoinVerifications.createdAt), desc(whatsappJoinVerifications.id));
+    .from(join)
+    .where(gte(join.createdAt, WHATSAPP_JOIN_VISIBLE_FROM))
+    .orderBy(desc(join.createdAt), desc(join.id));
 
   const nudgeToday = await todaysWhatsappNudgeCount();
   const hours = whatsappApprovalHours();

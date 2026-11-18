@@ -2,6 +2,10 @@ import Link from "next/link";
 import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
+import {
+  whatsappJoinCurrent,
+  whatsappJoinRequestNo,
+} from "@/lib/whatsapp-join-request-no";
 import { withWhatsappGroupShareUtms } from "@/lib/whatsapp-community";
 import {
   formatWhatsappJoinPhone,
@@ -110,20 +114,21 @@ export default async function WhatsappJoinRequestsPage({
       counts.all += Number(row.n);
     }
 
+    const join = whatsappJoinCurrent;
     const filters = [];
     if (segment !== "all") {
-      filters.push(eq(whatsappJoinVerifications.status, segment));
+      filters.push(eq(join.status, segment));
     }
     if (q) {
       const parts = [
-        ilike(whatsappJoinVerifications.displayName, likeTerm(q)),
-        ilike(whatsappJoinVerifications.locality, likeTerm(q)),
-        ilike(whatsappJoinVerifications.phoneRaw, likeTerm(q)),
+        ilike(join.displayName, likeTerm(q)),
+        ilike(join.locality, likeTerm(q)),
+        ilike(join.phoneRaw, likeTerm(q)),
       ];
       if (digits) {
-        parts.push(ilike(whatsappJoinVerifications.phoneE164, likeTerm(digits)));
+        parts.push(ilike(join.phoneE164, likeTerm(digits)));
         if (digits.length >= 4) {
-          parts.push(eq(whatsappJoinVerifications.phoneLast4, digits.slice(-4)));
+          parts.push(eq(join.phoneLast4, digits.slice(-4)));
         }
       }
       const search = or(...parts);
@@ -133,47 +138,37 @@ export default async function WhatsappJoinRequestsPage({
 
     const [{ total: totalRaw } = { total: 0 }] = await db
       .select({ total: sql<number>`count(*)::int` })
-      .from(whatsappJoinVerifications)
+      .from(join)
       .where(where);
     const total = Number(totalRaw);
     const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
     const page = Math.min(parsePage(params.page), pageCount);
 
-    const requestNo = sql<number>`(
-      select count(*)::int
-      from whatsapp_join_verifications as older
-      where older.created_at < ${whatsappJoinVerifications.createdAt}
-         or (
-           older.created_at = ${whatsappJoinVerifications.createdAt}
-           and older.id <= ${whatsappJoinVerifications.id}
-         )
-    )`.mapWith(Number);
-
     const rows = await db
       .select({
-        id: whatsappJoinVerifications.id,
-        displayName: whatsappJoinVerifications.displayName,
-        phoneRaw: whatsappJoinVerifications.phoneRaw,
-        phoneE164: whatsappJoinVerifications.phoneE164,
-        phoneLast4: whatsappJoinVerifications.phoneLast4,
-        locality: whatsappJoinVerifications.locality,
-        intent: whatsappJoinVerifications.intent,
-        intro: whatsappJoinVerifications.intro,
-        status: whatsappJoinVerifications.status,
-        source: whatsappJoinVerifications.source,
-        ipHash: whatsappJoinVerifications.ipHash,
-        userAgent: whatsappJoinVerifications.userAgent,
-        notes: whatsappJoinVerifications.notes,
-        createdAt: whatsappJoinVerifications.createdAt,
-        updatedAt: whatsappJoinVerifications.updatedAt,
-        approvedAt: whatsappJoinVerifications.approvedAt,
-        approvedBy: whatsappJoinVerifications.approvedBy,
-        lastContactedAt: whatsappJoinVerifications.lastContactedAt,
-        requestNo,
+        id: join.id,
+        displayName: join.displayName,
+        phoneRaw: join.phoneRaw,
+        phoneE164: join.phoneE164,
+        phoneLast4: join.phoneLast4,
+        locality: join.locality,
+        intent: join.intent,
+        intro: join.intro,
+        status: join.status,
+        source: join.source,
+        ipHash: join.ipHash,
+        userAgent: join.userAgent,
+        notes: join.notes,
+        createdAt: join.createdAt,
+        updatedAt: join.updatedAt,
+        approvedAt: join.approvedAt,
+        approvedBy: join.approvedBy,
+        lastContactedAt: join.lastContactedAt,
+        requestNo: whatsappJoinRequestNo,
       })
-      .from(whatsappJoinVerifications)
+      .from(join)
       .where(where)
-      .orderBy(desc(whatsappJoinVerifications.createdAt), desc(whatsappJoinVerifications.id))
+      .orderBy(desc(join.createdAt), desc(join.id))
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE);
 
