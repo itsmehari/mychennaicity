@@ -73,7 +73,7 @@ describe("whatsapp join messages", () => {
         inviteForNudge: invite,
       }),
     ).toBe(
-      "Hi Meera, we got your MyChennai request for Velachery. If WhatsApp did not open the group, reply here and we will help.",
+      "[mychennaicity] Hi Meera, you asked to join the Chennai WhatsApp group from Velachery. Reply here and we will send the link.",
     );
     expect(
       whatsappJoinFollowupMessage({

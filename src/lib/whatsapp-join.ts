@@ -137,7 +137,7 @@ export function whatsappJoinFollowupMessage(input: {
   const first = whatsappJoinFirstName(input.displayName);
   const hi = first ? `Hi ${first}, ` : "Hi, ";
   const area = input.locality?.trim() || "Chennai";
-  return `${hi}we got your MyChennai request for ${area}. If WhatsApp did not open the group, reply here and we will help.`;
+  return `[mychennaicity] ${hi}you asked to join the Chennai WhatsApp group from ${area}. Reply here and we will send the link.`;
 }
 
 export function whatsappJoinWaMeUrl(input: {
