@@ -41,6 +41,31 @@ export type ChennaiJobsFilters = {
   quickChip: string;
 };
 
+const HUB_FILTER_TYPES = new Set(["walk-in", "fresher", "part-time", "intern"]);
+
+/** Query-string slices stay noindex and canonical to the hub. */
+export function hubQueryIsFiltered(area?: string, type?: string): boolean {
+  const knownArea = CHENNAI_JOBS_LOCATIONS.some((item) => item.id === area);
+  return Boolean((area && knownArea && area !== "all") || (type && HUB_FILTER_TYPES.has(type)));
+}
+
+export function filtersFromHubQuery(area?: string, type?: string): ChennaiJobsFilters {
+  const knownArea = CHENNAI_JOBS_LOCATIONS.some((item) => item.id === area);
+  const location = area && knownArea && area !== "all" ? area : "";
+  let jobType = "";
+  let quickChip = "";
+  if (type === "walk-in") jobType = "walk-in";
+  if (type === "fresher") quickChip = "freshers";
+  if (type === "part-time") jobType = "PART_TIME";
+  if (type === "intern") jobType = "INTERN";
+  return {
+    ...CHENNAI_JOBS_DEFAULT_FILTERS,
+    location,
+    jobType,
+    quickChip,
+  };
+}
+
 export const CHENNAI_JOBS_DEFAULT_FILTERS: ChennaiJobsFilters = {
   keyword: "",
   locationQuery: "",
@@ -55,14 +80,15 @@ export const CHENNAI_JOBS_DEFAULT_FILTERS: ChennaiJobsFilters = {
 
 export const CHENNAI_JOBS_LOCATIONS = [
   { id: "all", label: "All Chennai" },
-  { id: "omr", label: "OMR", match: ["omr", "perungudi", "sholinganallur", "thoraipakkam"] },
+  { id: "omr", label: "OMR", match: ["omr", "perungudi", "sholinganallur", "thoraipakkam", "navalur", "siruseri", "pallikaranai"] },
   { id: "t-nagar", label: "T. Nagar", match: ["t. nagar", "t nagar", "tnagar"] },
   { id: "anna-nagar", label: "Anna Nagar", match: ["anna nagar"] },
   { id: "velachery", label: "Velachery", match: ["velachery"] },
-  { id: "tambaram", label: "Tambaram", match: ["tambaram"] },
-  { id: "porur", label: "Porur", match: ["porur", "maduravoyal"] },
-  { id: "guindy", label: "Guindy", match: ["guindy"] },
+  { id: "tambaram", label: "Tambaram", match: ["tambaram", "chromepet"] },
+  { id: "porur", label: "Porur", match: ["porur", "maduravoyal", "valasaravakkam"] },
+  { id: "guindy", label: "Guindy", match: ["guindy", "alandur", "saidapet"] },
   { id: "ambattur", label: "Ambattur", match: ["ambattur"] },
+  { id: "adyar", label: "Adyar", match: ["adyar", "thiruvanmiyur"] },
 ] as const;
 
 export const CHENNAI_JOBS_TYPES = [
@@ -278,7 +304,11 @@ export function buildChennaiJobsHubCard(row: JobPostingWithEmployer): ChennaiJob
 
   let compensation: string | null = null;
   if (job.salaryDisclosed && job.salaryMin != null && job.salaryMax != null) {
-    compensation = formatJobCompensation(job.salaryMin, job.salaryMax);
+    compensation = formatJobCompensation(
+      job.salaryMin,
+      job.salaryMax,
+      job.salaryUnit,
+    );
   }
 
   return {

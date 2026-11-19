@@ -30,10 +30,13 @@ import {
 } from "@/lib/jobs/job-search-meta";
 import { CHENNAI_GEO_META } from "@/lib/seo/chennai-geo-meta";
 import { buildFaqPageJsonLdFromItems } from "@/lib/seo/faq-jsonld";
+import { localityForText } from "@/content/jobs/job-localities";
 import {
   CHENNAI_JOBS_HUB_PATH,
   chennaiJobsDetailPath,
+  chennaiJobsLocationPath,
 } from "@/lib/routes/chennai-jobs";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
 import {
   buildJobBreadcrumbJsonLd,
   buildJobPostingJsonLd,
@@ -42,6 +45,34 @@ import { fullSiteTitle } from "@/lib/seo/site-titles";
 import { withMarkdownAlternate } from "@/lib/seo/content-markdown";
 
 type Props = { params: Promise<{ slug: string }> };
+
+function JobDetailPlaceLinks({
+  locationLabel,
+  title,
+}: {
+  locationLabel: string | null;
+  title: string;
+}) {
+  const locality = localityForText(`${locationLabel ?? ""} ${title}`);
+  if (!locality) return null;
+  return (
+    <p className="mt-4 text-sm font-semibold">
+      <a
+        href={chennaiJobsLocationPath(locality.slug)}
+        className="text-[#3d348f] underline-offset-4 hover:underline"
+      >
+        Jobs in {locality.label}
+      </a>
+      <span className="mx-2 text-[#8b87a8]">·</span>
+      <a
+        href={ADVERTISE_JOBS_PATH}
+        className="text-[#3d348f] underline-offset-4 hover:underline"
+      >
+        Post a job vacancy in Chennai
+      </a>
+    </p>
+  );
+}
 
 export const dynamic = "force-dynamic";
 
@@ -171,10 +202,12 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobLd) }}
-      />
+      {jobLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobLd) }}
+        />
+      ) : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbLd) }}
@@ -230,6 +263,10 @@ export default async function ChennaiJobDetailPage({ params }: Props) {
         <JobsDetailBackLink
           href={CHENNAI_JOBS_HUB_PATH}
           label={tamil ? "சென்னை வேலைகள் அனைத்தும்" : "All jobs in Chennai"}
+        />
+        <JobDetailPlaceLinks
+          locationLabel={row.job.locationLabel}
+          title={row.job.title}
         />
         <div className="mt-8 max-w-2xl space-y-6">
           <AdvertisePanel variant="jobs" layout="strip" />

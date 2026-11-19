@@ -16,6 +16,8 @@ describe("jobs and events AEO passages", () => {
   it("keeps the seeker, poster, searcher, and organiser URLs in the shared passages", () => {
     expect(JOBS_SEEKER_PASSAGE).toContain("https://mychennaicity.in/chennai-jobs");
     expect(JOBS_POSTER_PASSAGE).toContain("https://mychennaicity.in/advertise/jobs");
+    expect(JOBS_POSTER_PASSAGE).toContain("free job posting in Chennai");
+    expect(JOBS_POSTER_PASSAGE).toContain("hire local staff in Chennai");
     expect(JOBS_POSTER_PASSAGE).not.toContain("Contact → Jobs");
     expect(EVENTS_SEARCHER_PASSAGE).toContain("https://mychennaicity.in/chennai-local-events");
     expect(EVENTS_ORGANISER_PASSAGE).toContain("https://mychennaicity.in/chennai-local-events/submit");

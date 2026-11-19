@@ -41,6 +41,7 @@ type Props = {
   totalOpen: number;
   fresherCount: number;
   walkInCount: number;
+  initialFilters?: ChennaiJobsFilters;
 };
 
 function FilterPanel({
@@ -155,9 +156,10 @@ export function ChennaiJobsHubListing({
   totalOpen,
   fresherCount,
   walkInCount,
+  initialFilters = CHENNAI_JOBS_DEFAULT_FILTERS,
 }: Props) {
-  const [filters, setFilters] = useState<ChennaiJobsFilters>(CHENNAI_JOBS_DEFAULT_FILTERS);
-  const [draft, setDraft] = useState<ChennaiJobsFilters>(CHENNAI_JOBS_DEFAULT_FILTERS);
+  const [filters, setFilters] = useState<ChennaiJobsFilters>(initialFilters);
+  const [draft, setDraft] = useState<ChennaiJobsFilters>(initialFilters);
   const [sort, setSort] = useState<ChennaiJobsSort>("latest");
   const [page, setPage] = useState(1);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);

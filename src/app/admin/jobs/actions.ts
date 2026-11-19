@@ -8,6 +8,7 @@ import { getDb } from "@/db/client";
 import { cities, employers, jobPhoneReveals, jobPostings, jobSeekerPhoneReveals } from "@/db/schema/tables";
 import { closeStaleOpenJobPostings } from "@/domains/jobs/admin";
 import { CHENNAI_CITY_SLUG } from "@/domains/jobs/queries";
+import { notifyJobIndexing, notifyJobIndexingBatch } from "@/lib/jobs/google-indexing";
 import { revalidateListingsSurfaces } from "@/lib/revalidate-listings-surfaces";
 import { requireSuperAdmin } from "@/lib/super-admin/require";
 
@@ -112,7 +113,26 @@ function fieldsFromForm(formData: FormData) {
     applicationUrl: String(formData.get("applicationUrl") ?? "").trim() || null,
     employmentType:
       String(formData.get("employmentType") ?? "").trim() || null,
+    salaryUnit: parseSalaryUnit(formData.get("salaryUnit")),
+    schemaEligible: String(formData.get("schemaEligible") ?? "") === "on",
   };
+}
+
+function parseSalaryUnit(raw: FormDataEntryValue | null): "MONTH" | "YEAR" | null {
+  const value = String(raw ?? "").trim();
+  if (value === "MONTH" || value === "YEAR") return value;
+  return null;
+}
+
+async function pingJobIndex(slug: string, type: "URL_UPDATED" | "URL_DELETED") {
+  try {
+    await Promise.race([
+      notifyJobIndexing(slug, type),
+      new Promise((resolve) => setTimeout(resolve, 4000)),
+    ]);
+  } catch (error) {
+    console.error("job indexing notify", error);
+  }
 }
 
 function bustJobSurfaces(slug: string) {
@@ -145,6 +165,7 @@ export async function setJobStatus(formData: FormData) {
     .returning({ id: jobPostings.id });
   if (!updated.length) throw new Error("That job is no longer in the list.");
   bustJobSurfaces(current.slug);
+  await pingJobIndex(current.slug, status === "open" ? "URL_UPDATED" : "URL_DELETED");
   redirect(
     withDeskFlag("/super-admin/jobs", String(formData.get("returnTo") ?? ""), "notice", status),
   );
@@ -152,7 +173,10 @@ export async function setJobStatus(formData: FormData) {
 
 export async function closeStaleJobsAction(formData: FormData) {
   await requireSuperAdmin();
-  await closeStaleOpenJobPostings();
+  const closed = await closeStaleOpenJobPostings();
+  await notifyJobIndexingBatch(closed.slugs, "URL_DELETED").catch((error) => {
+    console.error("job indexing notify", error);
+  });
   revalidatePath("/super-admin/jobs");
   revalidateListingsSurfaces();
   redirect(
@@ -192,6 +216,7 @@ export async function createJob(formData: FormData) {
     })
     .returning({ id: jobPostings.id });
   bustJobSurfaces(slug);
+  if (status === "open") await pingJobIndex(slug, "URL_UPDATED");
   redirect(`/super-admin/jobs/${ins.id}`);
 }
 
@@ -242,7 +267,9 @@ export async function updateJob(formData: FormData) {
   bustJobSurfaces(fields.slug);
   if (current.slug !== fields.slug) {
     revalidatePath(`/chennai-jobs/${current.slug}`);
+    if (current.publishedAt) await pingJobIndex(current.slug, "URL_DELETED");
   }
+  await pingJobIndex(fields.slug, status === "open" ? "URL_UPDATED" : "URL_DELETED");
   redirect(`/super-admin/jobs/${id}`);
 }
 

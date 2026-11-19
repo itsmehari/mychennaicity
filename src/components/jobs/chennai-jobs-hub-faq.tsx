@@ -4,9 +4,9 @@ import { useState } from "react";
 import { CHENNAI_JOBS_HUB_FAQ } from "@/content/jobs/chennai-jobs-hub-faq";
 
 const FAQ_GROUPS = [
-  { id: "finding", label: "Finding work", indexes: [0, 1, 5] },
-  { id: "employers", label: "Employers", indexes: [2, 3] },
-  { id: "safety", label: "Safety", indexes: [4] },
+  { id: "finding", label: "Finding work", indexes: [0, 5, 7] },
+  { id: "employers", label: "Employers", indexes: [1, 2, 3] },
+  { id: "safety", label: "Safety", indexes: [4, 6] },
 ] as const;
 
 export function ChennaiJobsHubFaq() {

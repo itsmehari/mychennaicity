@@ -28,7 +28,12 @@ import { classifiedCoverSrc } from "@/lib/classifieds/images";
 import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
-import { chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
+import { localitiesForAreaHub } from "@/content/jobs/job-localities";
+import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import {
+  chennaiJobsDetailPath,
+  chennaiJobsLocationPath,
+} from "@/lib/routes/chennai-jobs";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
 
 // ---------------------------------------------------------------------------
@@ -543,6 +548,20 @@ export function RichAreaHubPage({
               </li>
             ))}
           </ul>
+          <p className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
+            {localitiesForAreaHub(zone.slug).map((locality) => (
+              <Link
+                key={locality.slug}
+                href={chennaiJobsLocationPath(locality.slug)}
+                className="text-[var(--accent)] hover:underline"
+              >
+                Jobs in {locality.label}
+              </Link>
+            ))}
+            <Link href={ADVERTISE_JOBS_PATH} className="text-[var(--accent)] hover:underline">
+              Post a local job
+            </Link>
+          </p>
         </Section>
       ) : null}
 

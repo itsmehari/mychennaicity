@@ -5,7 +5,7 @@ import { getRichAreaHubContent } from "@/content/area-hubs";
 import {
   listArticlesByAreaHubForChennai,
   listClassifiedsByAreaHubForChennai,
-  listOmrCorridorJobsForChennai,
+  listJobsForAreaHub,
 } from "@/domains/areas";
 import { chennaiZones } from "@/lib/chennai-zones";
 import { getSiteUrl } from "@/lib/env";
@@ -64,15 +64,13 @@ export default async function AreaPage({ params }: Props) {
   let classifieds: Awaited<
     ReturnType<typeof listClassifiedsByAreaHubForChennai>
   > = [];
-  let jobs: Awaited<ReturnType<typeof listOmrCorridorJobsForChennai>> = [];
+  let jobs: Awaited<ReturnType<typeof listJobsForAreaHub>> = [];
 
   try {
     [articles, classifieds, jobs] = await Promise.all([
       listArticlesByAreaHubForChennai(slug, 6),
       listClassifiedsByAreaHubForChennai(slug, 6),
-      slug === "omr-perungudi-sholinganallur"
-        ? listOmrCorridorJobsForChennai(6)
-        : Promise.resolve([]),
+      listJobsForAreaHub(slug, 6),
     ]);
   } catch {
     articles = [];

@@ -1,7 +1,8 @@
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { getSiteUrl } from "@/lib/env";
 import { extractJobBenefits } from "@/lib/jobs/job-faq";
-import { isMonthlyJobSalary } from "@/lib/jobs/format-compensation";
+import { salaryUnitText } from "@/lib/jobs/format-compensation";
+import { jobPostingSchemaEligible } from "@/lib/jobs/job-schema-eligibility";
 import { jobInLanguage } from "@/lib/jobs/job-language";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
 
@@ -48,7 +49,10 @@ function plainBody(body: string, max = 8000): string {
     .slice(0, max);
 }
 
-export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
+export function buildJobPostingJsonLd(
+  data: JobPostingWithEmployer,
+): Record<string, unknown> | null {
+  if (!jobPostingSchemaEligible(data.job)) return null;
   const base = getSiteUrl();
   const { job, employer } = data;
   const url = `${base}${chennaiJobsDetailPath(job.slug)}`;
@@ -107,12 +111,19 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
     jp.validThrough = job.validThrough.toISOString();
   }
 
+  if (job.remotePolicy === "remote") {
+    jp.jobLocationType = "TELECOMMUTE";
+    jp.applicantLocationRequirements = {
+      "@type": "Country",
+      name: "India",
+    };
+  }
+
   if (
     job.salaryDisclosed &&
     job.salaryMin != null &&
     job.salaryMax != null
   ) {
-    const monthly = isMonthlyJobSalary(job.salaryMin, job.salaryMax);
     jp.baseSalary = {
       "@type": "MonetaryAmount",
       currency: "INR",
@@ -120,7 +131,7 @@ export function buildJobPostingJsonLd(data: JobPostingWithEmployer) {
         "@type": "QuantitativeValue",
         minValue: job.salaryMin,
         maxValue: job.salaryMax,
-        unitText: monthly ? "MONTH" : "YEAR",
+        unitText: salaryUnitText(job.salaryMin, job.salaryMax, job.salaryUnit),
       },
     };
   }

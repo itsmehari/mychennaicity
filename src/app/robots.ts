@@ -44,6 +44,7 @@ export default function robots(): MetadataRoute.Robots {
       `${base}/sitemap.xml`,
       `${base}/news-sitemap.xml`,
       `${base}/sitemap-recent.xml`,
+      `${base}/jobs-sitemap.xml`,
     ],
     host: base.replace(/^https?:\/\//, ""),
   };

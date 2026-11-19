@@ -28,19 +28,28 @@ import {
   ChennaiJobsHubResources,
   ChennaiJobsHubSafety,
 } from "@/components/jobs/chennai-jobs-hub-sections";
+import { ChennaiJobsDiscoveryGrid } from "@/components/jobs/chennai-jobs-discovery-grid";
 import {
   buildChennaiJobsHubCards,
   countFresherJobs,
   countWalkInJobs,
+  filtersFromHubQuery,
+  hubQueryIsFiltered,
 } from "@/lib/jobs/chennai-jobs-hub-helpers";
 
 const hubTitleSegment = "Jobs in Chennai";
 
 const ALL_JOBS_LIMIT = 200;
 
-export async function generateMetadata(): Promise<Metadata> {
+type HubProps = {
+  searchParams: Promise<{ area?: string; type?: string }>;
+};
+
+export async function generateMetadata({ searchParams }: HubProps): Promise<Metadata> {
+  const params = await searchParams;
   const base = getSiteUrl();
   const hubUrl = `${base}${CHENNAI_JOBS_HUB_PATH}`;
+  const filtered = hubQueryIsFiltered(params.area, params.type);
   let total = 0;
   try {
     total = await countOpenJobPostingsForChennaiHub();
@@ -57,6 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: hubTitleSegment,
     description,
+    robots: filtered ? { index: false, follow: true } : undefined,
     alternates: {
       canonical,
       types: {
@@ -85,7 +95,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const dynamic = "force-dynamic";
 
-export default async function ChennaiJobsHubPage() {
+export default async function ChennaiJobsHubPage({ searchParams }: HubProps) {
+  const params = await searchParams;
+  const initialFilters = filtersFromHubQuery(params.area, params.type);
   let total = 0;
   let seekingTotal = 0;
   let dbJobs: Awaited<ReturnType<typeof listOpenJobPostingsForChennaiHub>> =
@@ -137,11 +149,14 @@ export default async function ChennaiJobsHubPage() {
 
       <FeaturedJobsRail placement="jobs_hub" className="mt-8" />
 
+      <ChennaiJobsDiscoveryGrid cards={hubCards} />
+
       <ChennaiJobsHubListing
         cards={hubCards}
         totalOpen={total}
         fresherCount={countFresherJobs(hubCards)}
         walkInCount={countWalkInJobs(hubCards)}
+        initialFilters={initialFilters}
       />
 
       {useDb ? (

@@ -8,9 +8,9 @@ import {
 } from "@/lib/routes/advertise-listings";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
-const titleSegment = "Post a job in Chennai";
+const titleSegment = "Post a job vacancy in Chennai";
 const description =
-  "Post a Chennai job vacancy or recruitment notice at https://mychennaicity.in/advertise/jobs. Send the role, location, and apply link. No employer login. Candidates apply on your channel.";
+  "Post a job vacancy in Chennai at https://mychennaicity.in/advertise/jobs. Free job posting for a local shop or company. Send the role, location, and apply link. No employer login.";
 
 export const metadata: Metadata = {
   title: titleSegment,

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listClassifiedListingsForSitemap } from "@/domains/classifieds";
 import { listEventsForSitemap } from "@/domains/events";
-import { listJobsForSitemap } from "@/domains/jobs";
+import { listIndexableJobLandings, listJobsForSitemap } from "@/domains/jobs";
 import { listJobSeekerPostsForSitemap } from "@/domains/job-seekers";
 import { listDirectoryEntriesForSitemap } from "@/domains/directory";
 import {
@@ -85,6 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let topicKeys: string[] = [];
   let eventRows: { slug: string; lastModified: Date }[] = [];
   let jobRows: { slug: string; lastModified: Date }[] = [];
+  let jobLandingRows: { path: string; lastModified: Date }[] = [];
   let jobSeekerRows: { slug: string; lastModified: Date }[] = [];
   let classifiedRows: { slug: string; lastModified: Date }[] = [];
   let directoryRows: {
@@ -98,6 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     topicKeys = await listTopicKeysForChennai();
     eventRows = await listEventsForSitemap();
     jobRows = await listJobsForSitemap();
+    jobLandingRows = await listIndexableJobLandings();
     jobSeekerRows = await listJobSeekerPostsForSitemap();
     classifiedRows = await listClassifiedListingsForSitemap();
     directoryRows = await listDirectoryEntriesForSitemap();
@@ -520,6 +522,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.62,
   }));
 
+  const jobLandingEntries: MetadataRoute.Sitemap = jobLandingRows.map((landing) => ({
+    url: `${base}${landing.path}`,
+    lastModified: landing.lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
+
   const jobSeekerEntries: MetadataRoute.Sitemap = jobSeekerRows.map((j) => ({
     url: `${base}${chennaiJobSeekerDetailPath(j.slug)}`,
     lastModified: j.lastModified,
@@ -541,6 +550,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...topicEntries,
     ...eventEntries,
     ...jobEntries,
+    ...jobLandingEntries,
     ...jobSeekerEntries,
     ...classifiedEntries,
     ...directoryEntries,

@@ -1,4 +1,8 @@
 import Link from "next/link";
+import {
+  EmployerCtaBeacon,
+  JobDraftForm,
+} from "@/components/advertise/job-draft-form";
 import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
   PageBreadcrumbs,
@@ -60,7 +64,7 @@ export function ListingPitchPage({
     kind === "jobs"
       ? ta
         ? "சென்னையில் வேலை விளம்பரம் போட"
-        : "Post a job in Chennai"
+        : "Post a job vacancy in Chennai"
       : ta
         ? "சென்னையில் சொத்து விளம்பரம் போட"
         : "Post a property in Chennai";
@@ -68,7 +72,7 @@ export function ListingPitchPage({
     kind === "jobs"
       ? ta
         ? "வேலை விளம்பரம் போட"
-        : "Post a job in"
+        : "Post a job vacancy in"
       : ta
         ? "சொத்து விளம்பரம் போட"
         : "Post a property in";
@@ -125,13 +129,25 @@ export function ListingPitchPage({
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">{lede}</p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <WhatsAppDeskButton
-            text={wa.prefill}
-            source={kind === "jobs" ? "advertise_jobs" : "advertise_property"}
-            className="mcc-supply-cta mcc-supply-cta--on-dark"
-          >
-            {ta ? "WhatsApp-ல் அனுப்பு" : "Send on WhatsApp"}
-          </WhatsAppDeskButton>
+          {kind === "jobs" ? (
+            <EmployerCtaBeacon>
+              <WhatsAppDeskButton
+                text={wa.prefill}
+                source="advertise_jobs"
+                className="mcc-supply-cta mcc-supply-cta--on-dark"
+              >
+                {ta ? "WhatsApp-ல் அனுப்பு" : "Send on WhatsApp"}
+              </WhatsAppDeskButton>
+            </EmployerCtaBeacon>
+          ) : (
+            <WhatsAppDeskButton
+              text={wa.prefill}
+              source="advertise_property"
+              className="mcc-supply-cta mcc-supply-cta--on-dark"
+            >
+              {ta ? "WhatsApp-ல் அனுப்பு" : "Send on WhatsApp"}
+            </WhatsAppDeskButton>
+          )}
           <Link
             href={contactHref}
             className="inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/60"
@@ -181,6 +197,8 @@ export function ListingPitchPage({
           ))}
         </ul>
       </section>
+
+      {kind === "jobs" ? <JobDraftForm locale={locale} /> : null}
 
       <section className="mt-10" aria-labelledby="pitch-samples">
         <h2 id="pitch-samples" className="text-2xl font-semibold tracking-tight text-[#16161d]">

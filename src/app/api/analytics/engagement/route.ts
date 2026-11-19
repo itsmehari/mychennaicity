@@ -80,6 +80,14 @@ export async function POST(request: NextRequest) {
     }
   } else if (event === "banner_click") {
     return NextResponse.json({ ok: false }, { status: 400 });
+  } else if (
+    event === "employer_cta_click" ||
+    event === "employer_form_start" ||
+    event === "employer_form_submit"
+  ) {
+    if (kind !== "guide" || slug !== "advertise-jobs") {
+      return NextResponse.json({ ok: false }, { status: 400 });
+    }
   }
 
   let visitorId = request.cookies.get(EVENT_VIEWER_COOKIE)?.value ?? null;

@@ -4,7 +4,28 @@ import {
   CANONICAL_SITE_HOST,
   isWrongSiteHost,
 } from "@/lib/canonical-site";
+import { lookupJobAvailability } from "@/lib/jobs/job-availability-lookup";
 import { markdownTwinPath, prefersMarkdown } from "@/lib/seo/content-markdown";
+
+const JOB_PATH_RESERVED = new Set([
+  "looking-for-work",
+  "locations",
+  "categories",
+  "feed.xml",
+]);
+
+function closedJobSlug(pathname: string): string | null {
+  const match = pathname.match(/^\/chennai-jobs\/([^/]+)$/);
+  if (!match) return null;
+  let slug = match[1];
+  try {
+    slug = decodeURIComponent(slug);
+  } catch {
+    return null;
+  }
+  if (JOB_PATH_RESERVED.has(slug)) return null;
+  return slug;
+}
 
 function nextWithPath(request: NextRequest): NextResponse {
   const requestHeaders = new Headers(request.headers);
@@ -24,7 +45,7 @@ function canonicalHostRedirect(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url, 308);
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const hostRedirect = canonicalHostRedirect(request);
   if (hostRedirect) return hostRedirect;
 
@@ -62,6 +83,20 @@ export function middleware(request: NextRequest) {
     const response = nextWithPath(request);
     response.headers.set("X-Robots-Tag", "noindex, follow");
     return response;
+  }
+
+  if (request.method === "GET" || request.method === "HEAD") {
+    const closedSlug = closedJobSlug(request.nextUrl.pathname);
+    if (closedSlug) {
+      const availability = await lookupJobAvailability(closedSlug);
+      if (availability === "gone") {
+        const url = request.nextUrl.clone();
+        url.pathname = `/job-closed/${encodeURIComponent(closedSlug)}`;
+        const rewritten = NextResponse.rewrite(url);
+        rewritten.headers.set("X-Robots-Tag", "noindex, follow");
+        return rewritten;
+      }
+    }
   }
 
   const twin = markdownTwinPath(request.nextUrl.pathname);

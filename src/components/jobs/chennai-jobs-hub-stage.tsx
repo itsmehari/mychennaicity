@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { JOBS_SEEKER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 import type { ChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
 import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
@@ -84,12 +85,13 @@ export function ChennaiJobsHubStage({
               id="jobs-stage-title"
               className="mt-3 max-w-xl text-4xl leading-[1.05] font-semibold tracking-tight text-white sm:text-5xl"
             >
-              Work that is actually in{" "}
-              <span className="text-[#7aa2ff] italic">Chennai</span>
+              Jobs in <span className="text-[#7aa2ff] italic">Chennai</span>
             </h1>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75 sm:text-base">
-              Local openings, walk-ins, and office roles. Read the full notice
-              here, then apply only on the employer’s own page or phone.
+            <p
+              className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base"
+              data-speakable="hub-aeo-answer"
+            >
+              {JOBS_SEEKER_PASSAGE}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -102,7 +104,7 @@ export function ChennaiJobsHubStage({
                 href={ADVERTISE_JOBS_PATH}
                 className="inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/60"
               >
-                Post a job
+                Post a job vacancy in Chennai
               </Link>
             </div>
           </div>

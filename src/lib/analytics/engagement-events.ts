@@ -15,6 +15,9 @@ export const ENGAGEMENT_EVENT_KINDS = [
   "call_click",
   "whatsapp_click",
   "banner_click",
+  "employer_cta_click",
+  "employer_form_start",
+  "employer_form_submit",
 ] as const;
 
 export type EngagementEventKind = (typeof ENGAGEMENT_EVENT_KINDS)[number];

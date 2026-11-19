@@ -5,6 +5,16 @@ export function isMonthlyJobSalary(min: number, max: number): boolean {
   return max < MONTHLY_SALARY_MAX_THRESHOLD;
 }
 
+/** Stored unit wins. Null keeps the historical threshold. */
+export function salaryUnitText(
+  min: number,
+  max: number,
+  unit: string | null | undefined,
+): "MONTH" | "YEAR" {
+  if (unit === "MONTH" || unit === "YEAR") return unit;
+  return isMonthlyJobSalary(min, max) ? "MONTH" : "YEAR";
+}
+
 export function formatInrAmount(amount: number): string {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -24,8 +34,12 @@ function formatAnnualLpa(min: number, max: number): string {
 }
 
 /** Human-readable compensation for job sidebar, cards, and metadata. */
-export function formatJobCompensation(min: number, max: number): string {
-  if (isMonthlyJobSalary(min, max)) {
+export function formatJobCompensation(
+  min: number,
+  max: number,
+  unit?: string | null,
+): string {
+  if (salaryUnitText(min, max, unit) === "MONTH") {
     if (min === max) return `${formatInrAmount(min)} / month`;
     return `${formatInrAmount(min)} – ${formatInrAmount(max)} / month`;
   }

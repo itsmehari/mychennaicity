@@ -27,8 +27,7 @@ export function buildJobsHubJsonLd(rows: JobPostingWithEmployer[]) {
       speakable: {
         "@type": "SpeakableSpecification",
         cssSelector: [
-          ".mcc-jobs-hub__hero-title",
-          ".mcc-jobs-hub__hero-lede",
+          "#jobs-stage-title",
           '[data-speakable="hub-aeo-answer"]',
           '[data-speakable="hub-aeo-poster"]',
           "#jobs-hub-faq",

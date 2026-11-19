@@ -197,6 +197,18 @@ export function JobAdminForm({
               className="w-full rounded border border-zinc-300 bg-white px-2 py-1.5 dark:border-zinc-700 dark:bg-zinc-900"
             />
           </label>
+          <label className="block space-y-1 sm:col-span-2">
+            <span>Pay period</span>
+            <select
+              name="salaryUnit"
+              defaultValue={job?.salaryUnit ?? ""}
+              className="w-full rounded border border-zinc-300 bg-white px-2 py-1.5 dark:border-zinc-700 dark:bg-zinc-900"
+            >
+              <option value="">Use the existing monthly/yearly guess</option>
+              <option value="MONTH">MONTH — employer stated a monthly figure</option>
+              <option value="YEAR">YEAR — employer stated an annual figure</option>
+            </select>
+          </label>
           <label className="block space-y-1">
             <span>Max (INR)</span>
             <input
@@ -209,6 +221,19 @@ export function JobAdminForm({
           </label>
         </div>
       </fieldset>
+
+      <label className="flex items-start gap-2">
+        <input
+          type="checkbox"
+          name="schemaEligible"
+          defaultChecked={job?.schemaEligible !== false}
+          className="mt-1"
+        />
+        <span>
+          Eligible for JobPosting markup. Turn this off when one notice lists
+          several different roles.
+        </span>
+      </label>
 
       <label className="block space-y-1">
         <span className="font-medium">Status</span>

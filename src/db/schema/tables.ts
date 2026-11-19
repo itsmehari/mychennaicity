@@ -200,6 +200,10 @@ export const jobPostings = pgTable(
     salaryMin: integer("salary_min"),
     salaryMax: integer("salary_max"),
     salaryDisclosed: boolean("salary_disclosed").notNull().default(true),
+    /** MONTH or YEAR when the employer stated the unit. Null keeps the display heuristic. */
+    salaryUnit: text("salary_unit"),
+    /** False for a poster that lists several roles, so the page stays up without JobPosting. */
+    schemaEligible: boolean("schema_eligible").notNull().default(true),
     remotePolicy: text("remote_policy").notNull().default("onsite"),
     openingsCount: integer("openings_count").notNull().default(1),
     status: jobPostingStatusEnum("status").notNull().default("draft"),

@@ -18,3 +18,11 @@ export function chennaiJobsDetailPath(slug: string): string {
 export function chennaiJobSeekerDetailPath(slug: string): string {
   return `${CHENNAI_JOBS_LOOKING_PATH}/${encodeURIComponent(slug)}`;
 }
+
+export function chennaiJobsLocationPath(slug: string): string {
+  return `${CHENNAI_JOBS_HUB_PATH}/locations/${slug}`;
+}
+
+export function chennaiJobsCategoryPath(slug: string): string {
+  return `${CHENNAI_JOBS_HUB_PATH}/categories/${slug}`;
+}
