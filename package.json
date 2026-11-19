@@ -161,6 +161,8 @@
     "db:seed:chennai-job:top-mnc-tech-roles:live": "tsx scripts/seed-chennai-job-top-mnc-tech-roles.ts --live",
     "db:seed:chennai-job:publicis-sapient-tech-roles": "tsx scripts/seed-chennai-job-publicis-sapient-tech-roles.ts",
     "db:seed:chennai-job:publicis-sapient-tech-roles:live": "tsx scripts/seed-chennai-job-publicis-sapient-tech-roles.ts --live",
+    "db:seed:chennai-job:pulikachal-nanganallur": "tsx scripts/seed-chennai-job-pulikachal-nanganallur.ts",
+    "db:seed:chennai-job:pulikachal-nanganallur:live": "tsx scripts/seed-chennai-job-pulikachal-nanganallur.ts --live",
     "db:seed:chennai-job:unique-business-solutions-telecaller": "tsx scripts/seed-chennai-job-unique-business-solutions-telecaller.ts",
     "db:seed:chennai-job:unique-business-solutions-telecaller:live": "tsx scripts/seed-chennai-job-unique-business-solutions-telecaller.ts --live",
     "db:seed:chennai-job:top-telecom-installation-engineer": "tsx scripts/seed-chennai-job-top-telecom-installation-engineer.ts",
