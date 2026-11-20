@@ -17,7 +17,7 @@ export const WHATSAPP_COMMUNITY_GUIDE_PATH = "/chennai-whatsapp-community-guide"
 /** Partner badge / embed */
 export const WHATSAPP_COMMUNITY_PARTNERS_PATH = "/whatsapp-community/partners";
 
-/** Form gate. The invite is shown only after a successful submit. */
+/** Form gate. After submit, the person messages the desk. The invite is the reply. */
 export const WHATSAPP_COMMUNITY_JOIN_PATH = "/whatsapp-community/join";
 
 /** Flagged invite-flood / spam numbers for group admins */

@@ -18,6 +18,11 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
       "Anyone living, working, or studying in Greater Chennai who wants useful local updates — residents in OMR, Adyar, T Nagar, Anna Nagar, Velachery, Tambaram, and suburbs included. The group is English-first with Tamil and Tanglish welcome.",
   },
   {
+    question: "What behaviour is expected in the Chennai WhatsApp group?",
+    answer:
+      "Post only what is useful in Chennai. Be respectful. No hate, harassment, or political campaigning. No crypto, MLM, gambling, or unrelated ads. Jobs need a role, an area, and a contact. A business may promote once a week. Do not cold-sell in direct messages, and do not share someone else's number or photo. English, Tamil, and Tanglish are welcome. Leave group calls, @everyone, payment requests, and Status tags unused.",
+  },
+  {
     question: "How do I join the my chennai city WhatsApp group?",
     answer:
       "Open https://mychennaicity.in/whatsapp-community/join on your phone. Enter your WhatsApp name, 10-digit Indian mobile, and Chennai area. After you submit, the required step is to message us on WhatsApp. The group link comes only in that reply. Then tap Join. An admin matches that number to the pending list. The site cannot approve you by itself.",

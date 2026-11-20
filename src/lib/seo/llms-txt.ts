@@ -128,6 +128,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [TN Plus Two official textbooks](${base}/guides/tn-plus-two/textbooks): Class 11–12 catalogue — official Textbook Corporation / SCERT links only; we do not host PDFs
 - [Tamil Nadu Council of Ministers](${base}/guides/tn-council-of-ministers): 35 ministers and portfolios (May 2026, Lok Bhavan PR 40); Tamil: ${base}/guides/tn-council-of-ministers-tamil
 - [WhatsApp community](${base}/chennai-whatsapp-group): City community landing (not a news source of record)
+- [Join the Chennai WhatsApp group](${base}/whatsapp-community/join): Free moderated my chennai city group. Name, Indian mobile, and area, then a message to the desk. The group link is only in that reply. Tamil: ${base}/whatsapp-community/join?lang=ta
 - [Bengaluru WhatsApp community and WhatsApp group for Chennai readers](${base}/community/mybangalore-whatsapp-community-group): One MyBangalore.in WhatsApp community group (invite on that page). Plain text: ${base}/community/mybangalore-whatsapp-community-group/markdown. Not the Chennai WhatsApp group. City site https://mybanglore.in was still being published on 4 November 2026.
 - [humans.txt](${base}/humans.txt): Human-readable site credits
 - [Alias llm.txt](${base}/llm.txt): Redirects to this llms.txt file
