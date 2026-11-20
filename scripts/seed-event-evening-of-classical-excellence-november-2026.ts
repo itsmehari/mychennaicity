@@ -48,7 +48,7 @@ The Yamaha listing on AllEvents names the artists the flyer leaves off the type:
 
 **Register:** [An Evening of Classical Excellence on AllEvents](${OFFICIAL})
 
-That is the organiser page the poster’s Register Now button points people toward. It does not print a ticket price. The page says to use its notify control if you need to know whether tickets are required. Do not treat this note as a rate card, and do not assume the evening is free.
+The poster says Register Now and does not print a web address. The public organiser listing is the Yamaha Music India page on AllEvents. That page does not print a ticket price. It says to use its notify control if you need to know whether tickets are required. Do not treat this note as a rate card, and do not assume the evening is free.
 
 ### Who is named
 
