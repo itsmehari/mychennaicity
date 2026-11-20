@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WhatsappJoinForm } from "@/components/community/whatsapp-join-form";
-import { WhatsappJoinQr } from "@/components/community/whatsapp-join-qr";
-import {
-  WhatsappInviteClickTracker,
-  WhatsappJoinSuccessExtras,
-} from "@/components/community/whatsapp-join-success-extras";
+import { WhatsappJoinSuccessExtras } from "@/components/community/whatsapp-join-success-extras";
+import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import {
   PageBreadcrumbs,
   interiorMainClassName,
@@ -25,10 +22,9 @@ import {
   whatsappCommunityAccepting,
 } from "@/lib/whatsapp-community-flags";
 import { whatsappRequestCtaLabel } from "@/lib/whatsapp-link";
-import { whatsappJoinLocalities } from "@/lib/whatsapp-join";
+import { whatsappJoinDeskPrefill, whatsappJoinLocalities } from "@/lib/whatsapp-join";
 import { readJoinUnlock } from "@/lib/whatsapp-join-session";
 import { whatsappJoinQueryNoindex } from "@/lib/whatsapp-join-seo";
-import { trackedWhatsappCommunityInvite } from "@/lib/whatsapp-server";
 
 export const dynamic = "force-dynamic";
 
@@ -57,8 +53,8 @@ export async function generateMetadata({
     ? "சென்னை வாட்ஸ்அப் குழுவில் சேர கோரிக்கை"
     : "Request to join the Chennai WhatsApp group";
   const description = ta
-    ? "பெயர், வாட்ஸ்அப் எண், சென்னை பகுதியைப் பதிவு செய்த பிறகு குழு இணைப்பு கிடைக்கும்."
-    : "Share your name, WhatsApp number, and Chennai area. The group link appears only after you submit.";
+    ? "பெயர், வாட்ஸ்அப் எண், சென்னை பகுதியைப் பதிவு செய்யுங்கள். பிறகு எங்களுக்கு மெசேஜ் அனுப்புங்கள். குழு இணைப்பு அந்தப் பதிலில் மட்டுமே வரும்."
+    : "Share your name, WhatsApp number, and Chennai area. Then message us on WhatsApp. The group link comes only in that reply.";
   return {
     title,
     description,
@@ -88,10 +84,6 @@ export default async function WhatsappCommunityJoinPage({
   const unlocked = params.ok === "1" ? await readJoinUnlock() : null;
   const alreadyApproved = params.already === "1";
   const waitlist = false;
-  const invite =
-    unlocked && !waitlist
-      ? trackedWhatsappCommunityInvite("join-verified", "join_form")
-      : null;
   const switchHref = whatsappCommunityJoinHref(source).replace(
     "?",
     ta ? "?lang=en&" : "?lang=ta&",
@@ -123,8 +115,8 @@ export default async function WhatsappCommunityJoinPage({
                 ? "நீங்கள் ஏற்கனவே உள்ளீர்கள்"
                 : "You are already in"
               : ta
-                ? "குழு இணைப்பு தயார்"
-                : "Your group link is ready"
+                ? "குழு இணைப்புக்கு மெசேஜ் அனுப்புங்கள்"
+                : "Message us for the group link"
           : ta
             ? whatsappCommunityAccepting()
               ? "சென்னை குழுவில் சேர கோரிக்கை"
@@ -150,26 +142,31 @@ export default async function WhatsappCommunityJoinPage({
             )
           ) : ta ? (
             <>
-              வணக்கம் {unlocked.name}. அடுத்து வாட்ஸ்அப்பில் Join தட்டவும். நிர்வாகி
-              உங்கள் எண்ணைப் பார்த்து அனுமதிப்பார்.
+              வணக்கம் {unlocked.name}. இந்தப் படி கட்டாயம். கீழே உள்ள பொத்தானைத்
+              தட்டி, திறக்கும் செய்தியை அனுப்புங்கள். குழு இணைப்பு அந்த அரட்டையில்
+              மட்டுமே வரும். பிறகு Join தட்டவும். நிர்வாகி வாட்ஸ்அப்பில் அனுமதிப்பார்.
             </>
           ) : (
             <>
-              Hello {unlocked.name}. Open WhatsApp and tap Join. An admin matches
-              your number, then approves you inside WhatsApp.
+              Hello {unlocked.name}. This step is required. Tap the button, send
+              the message that opens, and keep the chat open. The group link
+              comes only in our reply. Then tap Join. An admin approves you
+              inside WhatsApp.
             </>
           )
         ) : ta ? (
           <>
             <strong className="text-[var(--foreground)]">{WHATSAPP_COMMUNITY_GROUP_NAME}</strong>{" "}
-            குழு இணைப்பு, பெயர், எண், பகுதி ஆகியவற்றை அனுப்பிய பிறகு மட்டுமே தெரியும்.
+            குழு இணைப்பு இந்தப் பக்கத்தில் வராது. பெயர், எண், பகுதியை அனுப்பிய
+            பிறகு எங்கள் எண்ணுக்கு மெசேஜ் அனுப்ப வேண்டும்.
           </>
         ) : (
           <>
             The{" "}
             <strong className="text-[var(--foreground)]">{WHATSAPP_COMMUNITY_GROUP_NAME}</strong>{" "}
-            link stays hidden until you send your name, number, and area. Admins
-            approve real neighbours. This page does not approve you by itself.
+            link is not on this page. After you send your name, number, and area,
+            you must message us on WhatsApp. Admins approve real neighbours. This
+            page does not approve you by itself.
           </>
         )}
       </p>
@@ -177,36 +174,39 @@ export default async function WhatsappCommunityJoinPage({
       {unlocked ? (
         <div className="mt-8 max-w-xl rounded-2xl border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,var(--surface)_88%,#25D366_8%)] p-5 sm:p-6">
           <p className="text-sm text-[var(--muted)]">{unlocked.phone}</p>
-          {invite ? (
-            <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <WhatsappInviteClickTracker>
-                <a
-                  href={invite}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white"
-                  data-wa-type="invite"
-                  data-wa-placement="join-success"
-                  data-wa-content="join-verified"
-                >
-                  {ta ? "வாட்ஸ்அப்பில் சேருங்கள்" : "Join on WhatsApp"}
-                </a>
-              </WhatsappInviteClickTracker>
-              <div className="hidden min-[420px]:block">
-                <WhatsappJoinQr url={invite} />
-              </div>
-            </div>
-          ) : (
+          {waitlist ? (
             <p className="mt-4 text-sm text-[var(--foreground)]">
               {ta
-                ? "கோரிக்கை சேமிக்கப்பட்டது. குழு இணைப்பு இன்னும் இந்தப் பக்கத்தில் இல்லை. நிர்வாகி வாட்ஸ்அப்பில் தொடர்பு கொள்வார்."
-                : "Your request is saved. The group link is not on this page yet. An admin can message you on WhatsApp once it is turned on."}
+                ? "கோரிக்கை சேமிக்கப்பட்டது. இடம் திறந்ததும் பதில் வரும்."
+                : "Your request is saved. We reply when a seat opens."}
             </p>
+          ) : (
+            <div className="mt-4">
+              <p className="text-sm font-semibold text-[var(--foreground)]">
+                {ta ? "கட்டாயப் படி" : "Required step"}
+              </p>
+              <div className="mt-3">
+                <WhatsAppDeskButton
+                  source="join_required"
+                  text={whatsappJoinDeskPrefill(unlocked.name, unlocked.locality)}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white"
+                >
+                  {ta ? "குழு இணைப்புக்கு மெசேஜ் அனுப்புங்கள்" : "Message us for the group link"}
+                </WhatsAppDeskButton>
+              </div>
+              <p className="mt-3 text-sm text-[var(--foreground)]">
+                {ta
+                  ? "செய்தியை அனுப்புங்கள். அரட்டையை மூடாதீர்கள். இணைப்பை அந்தப் பதிலில் மட்டுமே அனுப்புவோம்."
+                  : "Send the message. Keep the chat open. We send the link only in that reply."}
+              </p>
+            </div>
           )}
           <WhatsappJoinSuccessExtras
             lang={lang}
-            invite={invite}
             alreadyApproved={alreadyApproved}
             waitlist={waitlist}
             name={unlocked.name}
+            locality={unlocked.locality}
             approvalHours={whatsappApprovalHours()}
           />
           <p className="mt-4 flex flex-wrap gap-4 text-sm">

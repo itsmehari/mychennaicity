@@ -34,8 +34,8 @@ Phone pattern is **not** a parameter.
 ## Core rules
 
 1. Admin approval is the gate.
-2. Invite only on the verified success screen, or in a **reply** after they write first. Never on public pages.
-3. Confirmation button **Join on WhatsApp** stays.
+2. Invite only in a **reply** after they message the desk. Never on the success screen or other public pages.
+3. Confirmation button **Message us for the group link** is required. It opens a chat to `WHATSAPP_BUSINESS_E164`. The group link is the reply.
 4. No blasting. Reply-first nudge capped at 10/day.
 5. No OTP / invite rotation unless the owner asks.
 6. Hidden-number fallback: display name + area, or they message the official desk.
@@ -51,7 +51,7 @@ One float per page, default **Request**. Join + landing hide the float.
 
 ## Join workflow
 
-Discover → learn or request → form (IN mobile) → success + Join on WhatsApp → WhatsApp pending → admin matches row → welcome.
+Discover → learn or request → form (IN mobile) → success + required desk message → reply with the invite → WhatsApp pending → admin matches row → welcome.
 
 Resubmit of an **approved** number keeps approved.
 

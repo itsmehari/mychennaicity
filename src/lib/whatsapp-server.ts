@@ -33,10 +33,11 @@ export function getWhatsAppCommunityInviteUrl(): string | null {
 /**
  * TODO(owner): set WHATSAPP_COMMUNITY_INVITE_URL to the Chennai group invite.
  * Do not paste another city's invite and do not generate a new one here.
- * Until the env var is set, the success screen hides "Join on WhatsApp".
+ * The success screen does not show this URL. An admin pastes it only when replying
+ * to someone who messaged the desk first.
  */
 export const WHATSAPP_COMMUNITY_INVITE_TODO =
-  "Set WHATSAPP_COMMUNITY_INVITE_URL to the Chennai group invite before the success screen can show Join on WhatsApp.";
+  "Set WHATSAPP_COMMUNITY_INVITE_URL to the Chennai group invite. The success screen does not show it. Paste it only in a reply after they message the desk.";
 
 /**
  * Invite UTMs. `utm_content=join-verified` after the form; `admin-nudge` on the admin Message link.

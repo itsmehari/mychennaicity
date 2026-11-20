@@ -61,6 +61,8 @@ If WhatsApp ships a control that notifies every member, adds people without the 
 
 ## Welcome and first week
 
+When a join-form chat arrives on the desk, reply in that chat with the group link. One WhatsApp Business Quick Reply is enough: “Hi {name}. Here is the Chennai group link. Tap Join and wait for approval.” Paste `WHATSAPP_COMMUNITY_INVITE_URL` after that sentence. Do not message them first.
+
 Paste `dev-tools/whatsapp-community-welcome-message.txt` (English or Tamil) after you approve someone in WhatsApp. First 7 days: mute reminder, pin, one useful site link with group UTMs, no invite in the chat.
 
 Monthly: one re-engagement post with the five links from `/whatsapp-community/this-week` once the editor fills them.

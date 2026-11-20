@@ -56,7 +56,7 @@ export function JoinWhatsAppCommunityCard({
           mychennaicity.in reader group
         </strong>{" "}
         on WhatsApp — short updates and civil discussion, same standards as the
-        site. The group link appears after you send your name and number.
+        site. After the form, you must message us on WhatsApp. The group link comes only in that reply.
       </p>
       <p className={layout === "inline" ? "mt-3" : "mt-4"}>
         <WhatsAppCommunityJoinLink

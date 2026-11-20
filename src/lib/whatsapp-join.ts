@@ -190,17 +190,27 @@ export function whatsappJoinSavePlan(
 
 const UNLOCK_TTL_MS = 24 * 60 * 60 * 1000;
 
+/** Incoming desk chat after the form. The group invite stays out of this line. */
+export function whatsappJoinDeskPrefill(name: string, locality?: string): string {
+  const who = name.trim().slice(0, 80) || "a neighbour";
+  const area = locality?.trim().slice(0, 80);
+  const from = area ? ` from ${area}` : "";
+  return `I submitted the Chennai group form as ${who}${from}. Please reply with the group link.`;
+}
+
 export function sealJoinUnlock(
   secret: string,
   name: string,
   phoneDisplay: string,
   now = Date.now(),
+  locality = "",
 ): string {
   const body = Buffer.from(
     JSON.stringify({
       exp: now + UNLOCK_TTL_MS,
       name: name.slice(0, 80),
       phone: phoneDisplay.slice(0, 32),
+      locality: locality.trim().slice(0, 80),
     }),
     "utf8",
   ).toString("base64url");
@@ -212,7 +222,7 @@ export function openJoinUnlock(
   secret: string,
   token: string,
   now = Date.now(),
-): { name: string; phone: string } | null {
+): { name: string; phone: string; locality: string } | null {
   const dot = token.lastIndexOf(".");
   if (dot <= 0) return null;
   const body = token.slice(0, dot);
@@ -226,10 +236,15 @@ export function openJoinUnlock(
       exp?: number;
       name?: string;
       phone?: string;
+      locality?: string;
     };
     if (!parsed.exp || parsed.exp < now) return null;
     if (!parsed.name || !parsed.phone) return null;
-    return { name: parsed.name, phone: parsed.phone };
+    return {
+      name: parsed.name,
+      phone: parsed.phone,
+      locality: typeof parsed.locality === "string" ? parsed.locality : "",
+    };
   } catch {
     return null;
   }

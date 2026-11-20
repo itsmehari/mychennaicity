@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { WA_JOIN_STATE_COOKIE, WA_JOIN_STATE_MAX_AGE_SEC } from "@/lib/whatsapp-community-flags";
 import { memberInviteShareHref } from "@/lib/whatsapp-link";
 import { waFunnelEventsEnabled } from "@/lib/whatsapp-community-flags";
-import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
 import { waGtagEvent } from "@/lib/whatsapp-gtag-client";
 
 export function WhatsappJoinSuccessExtras({
   lang,
-  invite,
   alreadyApproved,
   waitlist = false,
   name,
@@ -17,7 +15,6 @@ export function WhatsappJoinSuccessExtras({
   approvalHours,
 }: {
   lang: "en" | "ta";
-  invite: string | null;
   alreadyApproved: boolean;
   waitlist?: boolean;
   name: string;
@@ -25,7 +22,6 @@ export function WhatsappJoinSuccessExtras({
   approvalHours: number;
 }) {
   const ta = lang === "ta";
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     document.cookie = `${WA_JOIN_STATE_COOKIE}=verified; path=/; max-age=${WA_JOIN_STATE_MAX_AGE_SEC}; SameSite=Lax`;
@@ -39,60 +35,21 @@ export function WhatsappJoinSuccessExtras({
     });
   }, [alreadyApproved, lang, locality]);
 
-  async function copyInvite() {
-    if (!invite) return;
-    try {
-      await navigator.clipboard.writeText(invite);
-      setCopied(true);
-    } catch {
-      setCopied(false);
-    }
-  }
-
   return (
     <div className="mt-4 space-y-4 text-sm text-[var(--muted)]">
       <p>
         {alreadyApproved
           ? ta
-            ? "நீங்கள் ஏற்கனவே குழுவில் உள்ளீர்கள். தேவைப்பட்டால் மீண்டும் Join தட்டவும்."
-            : "You are already in the group. Tap Join again if you need the link on this phone."
+            ? "நீங்கள் ஏற்கனவே குழுவில் உள்ளீர்கள். இந்தத் தொலைபேசியில் இணைப்பு வேண்டுமானால் மேலே உள்ள மெசேஜை அனுப்புங்கள்."
+            : "You are already in the group. Send the message above if you need the link on this phone."
           : waitlist
             ? ta
               ? "இடம் திறந்ததும் பகல் நேரத்தில் எழுதுவோம்."
               : "We will write during the day when a seat opens."
             : ta
-            ? `அனுமதி பொதுவாக பகல் நேரத்தில் ${approvalHours} மணி நேரத்துக்குள்.`
-            : `Approval usually within ${approvalHours} hours during the day.`}
+              ? `அனுமதி பொதுவாக பகல் நேரத்தில் ${approvalHours} மணி நேரத்துக்குள். இணைப்பு இந்தப் பக்கத்தில் இல்லை.`
+              : `Approval usually within ${approvalHours} hours during the day. The group link is not on this page.`}
       </p>
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
-        <p className="font-semibold text-[var(--foreground)]">
-          {ta ? "வாட்ஸ்அப் திறக்கவில்லையா?" : "WhatsApp did not open?"}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-3">
-          {invite ? (
-            <button
-              type="button"
-              onClick={() => void copyInvite()}
-              className="rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold"
-            >
-              {copied
-                ? ta
-                  ? "நகலெடுக்கப்பட்டது"
-                  : "Copied"
-                : ta
-                  ? "இணைப்பை நகலெடு"
-                  : "Copy link"}
-            </button>
-          ) : null}
-          <WhatsAppDeskButton
-            source="join_fallback"
-            text={`I submitted the join form as ${name}${locality ? `, ${locality}` : ""}.`}
-            className="rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--foreground)]"
-          >
-            {ta ? "mychennaicity உடன் அரட்டை" : "Chat with mychennaicity"}
-          </WhatsAppDeskButton>
-        </div>
-      </div>
       <p>
         <a
           href={memberInviteShareHref()}
@@ -106,26 +63,5 @@ export function WhatsappJoinSuccessExtras({
       </p>
       <span className="sr-only">{name}</span>
     </div>
-  );
-}
-
-export function WhatsappInviteClickTracker({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <span
-      onClick={() => {
-        if (!waFunnelEventsEnabled()) return;
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "wa_invite_click", {
-            event_category: "whatsapp_community",
-          });
-        }
-      }}
-    >
-      {children}
-    </span>
   );
 }

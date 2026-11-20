@@ -52,7 +52,7 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Jobs admin + hygiene:** `/super-admin/jobs` (same desk login). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 
-**WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` / `waLink('request')` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL` and is shown only after the form. Admin Message is reply-first, capped, no invite in the text. Queue: `/super-admin/whatsapp-join-requests`. System: `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Indian mobiles only. Do not put join requests or `chat.whatsapp.com` on public pages.
+**WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` / `waLink('request')` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL`. After the form, the required step messages the desk; the invite is sent only as a reply in that chat. Admin Message is reply-first, capped, no invite in the text. Queue: `/super-admin/whatsapp-join-requests`. System: `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Indian mobiles only. Do not put join requests or `chat.whatsapp.com` on public pages.
 
 **Non-negotiables in short:**
 

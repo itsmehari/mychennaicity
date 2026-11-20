@@ -20,7 +20,7 @@ export const WHATSAPP_COMMUNITY_FAQ: FaqItem[] = [
   {
     question: "How do I join the my chennai city WhatsApp group?",
     answer:
-      "Open https://mychennaicity.in/whatsapp-community/join on your phone. Enter your WhatsApp name, 10-digit Indian mobile, and Chennai area. After you submit, tap Join on WhatsApp. An admin matches that number to the pending list. The site cannot approve you by itself.",
+      "Open https://mychennaicity.in/whatsapp-community/join on your phone. Enter your WhatsApp name, 10-digit Indian mobile, and Chennai area. After you submit, the required step is to message us on WhatsApp. The group link comes only in that reply. Then tap Join. An admin matches that number to the pending list. The site cannot approve you by itself.",
   },
   {
     question: "Is this the official mychennaicity.in WhatsApp group?",

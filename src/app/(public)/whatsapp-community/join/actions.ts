@@ -346,7 +346,7 @@ export async function submitWhatsappJoin(
     // Mail must not block the success screen.
   }
 
-  const unlocked = await setJoinUnlockCookie(displayName, phone.display);
+  const unlocked = await setJoinUnlockCookie(displayName, phone.display, locality);
   if (!unlocked) {
     return { ok: false, message: blocked };
   }

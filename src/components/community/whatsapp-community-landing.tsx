@@ -31,8 +31,8 @@ const joinBtnClass =
 
 const JOIN_STEPS = [
   "Open the request form and add your name, WhatsApp number, and Chennai area.",
-  "After you submit, the group link appears on that screen.",
-  "Tap Join on WhatsApp, then tap Join inside the app.",
+  "After you submit, message us on WhatsApp. That step is required. The group link is not on the page.",
+  "We reply in that chat with the link. Tap Join inside the app.",
   "Wait for an admin to match your number and approve you. The site cannot approve the group for you.",
   "Read the pinned rules. Mute the chat if the volume is high.",
 ];
@@ -326,7 +326,7 @@ export async function WhatsAppCommunityLanding() {
           Ready to join Chennai&apos;s reader group?
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-sm text-white/90">
-          Send your name, number, and area. The group link appears after that.
+          Send your name, number, and area, then message us on WhatsApp. The group link comes only in that reply.
         </p>
         <p className="mt-6">
           <WhatsAppCommunityJoinLink

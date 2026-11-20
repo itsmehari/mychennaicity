@@ -19,11 +19,12 @@ function joinCookieSecret(): string | null {
 export async function setJoinUnlockCookie(
   name: string,
   phoneDisplay: string,
+  locality = "",
 ): Promise<boolean> {
   const secret = joinCookieSecret();
   if (!secret) return false;
   const jar = await cookies();
-  jar.set(COOKIE, sealJoinUnlock(secret, name, phoneDisplay), {
+  jar.set(COOKIE, sealJoinUnlock(secret, name, phoneDisplay, Date.now(), locality), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -40,7 +41,11 @@ export async function setJoinUnlockCookie(
   return true;
 }
 
-export async function readJoinUnlock(): Promise<{ name: string; phone: string } | null> {
+export async function readJoinUnlock(): Promise<{
+  name: string;
+  phone: string;
+  locality: string;
+} | null> {
   const secret = joinCookieSecret();
   if (!secret) return null;
   const token = (await cookies()).get(COOKIE)?.value;

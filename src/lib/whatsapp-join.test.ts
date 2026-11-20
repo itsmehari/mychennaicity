@@ -13,6 +13,7 @@ import {
   normalizeIndianMobile,
   openJoinUnlock,
   sealJoinUnlock,
+  whatsappJoinDeskPrefill,
   whatsappJoinFollowupMessage,
   whatsappJoinQueueHeadline,
   whatsappJoinNudgeEligible,
@@ -180,12 +181,21 @@ describe("whatsapp join urls", () => {
   });
 
   it("seals the success cookie for 24 hours", () => {
-    const token = sealJoinUnlock("test-secret", "Meera", "+91 98765 43210", 1_000);
+    const token = sealJoinUnlock("test-secret", "Meera", "+91 98765 43210", 1_000, "Adyar");
     expect(openJoinUnlock("test-secret", token, 1_000)).toEqual({
       name: "Meera",
       phone: "+91 98765 43210",
+      locality: "Adyar",
     });
     expect(openJoinUnlock("test-secret", token, 1_000 + 25 * 60 * 60 * 1000)).toBeNull();
     expect(openJoinUnlock("other-secret", token, 1_000)).toBeNull();
+  });
+
+  it("asks for a reply and keeps the group invite out of the desk prefill", () => {
+    const line = whatsappJoinDeskPrefill("Meera", "Adyar");
+    expect(line).toBe(
+      "I submitted the Chennai group form as Meera from Adyar. Please reply with the group link.",
+    );
+    expect(line).not.toMatch(/whatsapp\.com/i);
   });
 });

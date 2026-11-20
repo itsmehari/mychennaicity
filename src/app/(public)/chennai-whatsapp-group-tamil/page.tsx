@@ -84,7 +84,7 @@ export default async function ChennaiWhatsappGroupTamilPage() {
           <h2 className="type-display text-xl text-[var(--foreground)]">எப்படி சேர்வது</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-[var(--muted)]">
             <li>படிவத்தில் பெயர், இந்திய மொபைல், சென்னை பகுதியை அனுப்புங்கள்.</li>
-            <li>சமர்ப்பித்த பிறகு Join on WhatsApp தட்டவும்.</li>
+            <li>சமர்ப்பித்த பிறகு எங்களுக்கு வாட்ஸ்அப்பில் மெசேஜ் அனுப்புங்கள். இணைப்பு அந்தப் பதிலில் வரும்.</li>
             <li>நிர்வாகி எண்ணைப் பொருத்தி அனுமதிக்கும் வரை காத்திருங்கள்.</li>
           </ol>
         </section>
