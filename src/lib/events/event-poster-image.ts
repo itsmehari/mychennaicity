@@ -123,6 +123,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png",
     alt: "An Evening of Classical Excellence poster — Yamaha Music India and KM Music Conservatory, Arumbakkam, Chennai, Wednesday 25 November 2026, 5 PM onwards",
   },
+  "roots-resonance-gems-margazhi-ms-subbulakshmi-taramani-november-2026": {
+    src: "/images/events/roots-resonance-gems-margazhi-taramani-november-2026.png",
+    alt: "Roots & Resonance poster — Gems of Margazhi music and dance festival at M S Subbulakshmi Auditorium, Taramani, 27 to 29 November 2026",
+  },
   "tricku-or-murukku-halloween-curious-korner-october-2026": {
     src: "/images/events/tricku-or-murukku-halloween-curious-korner-october-2026.jpg",
     alt: "Tricku or Murukku poster — Curious Korner Halloween ghost party for ages 5 to 12, Saturday 31 October 2026, 10 AM to 1 PM",

@@ -149,6 +149,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-india-retail-investors-expo-october-2026.ts` | `db:seed:event:india-retail-investors-expo:live` |
 | `seed-event-strings-of-rasa-siruseri-november-2026.ts` | `db:seed:event:strings-of-rasa:live` |
 | `seed-event-evening-of-classical-excellence-november-2026.ts` | `db:seed:event:classical-excellence:live` |
+| `seed-event-roots-resonance-gems-margazhi-november-2026.ts` | `db:seed:event:roots-resonance-gems-margazhi:live` |
 | `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
 | `seed-event-gojobsync-mega-job-fair-december-2026.ts` | `db:seed:event:gojobsync-mega-job-fair:live` |
 | `seed-event-tiruvallur-farmers-grievance-day-october-2026.ts` | `db:seed:event:tiruvallur-farmers-grievance-day:live` |
@@ -167,6 +168,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 | Date | Change |
 |------|--------|
+| 2026-11-20 | Roots & Resonance (Gems of Margazhi; Meenu Subbiah / Adithi Ganeshan; M S Subbulakshmi Auditorium, Taramani; Fri–Sun 27–29 Nov 2026; three-day line-up on poster; no time or fare printed; MDND mark only) via `db:seed:event:roots-resonance-gems-margazhi(:live)`. Poster `public/images/events/roots-resonance-gems-margazhi-taramani-november-2026.png`. Deploy poster for CDN. |
 | 2026-11-20 | An Evening of Classical Excellence (Yamaha Music India; violinist Nandini and the KM Conservatory Orchestra, named on the AllEvents listing; KM Music Conservatory, Arumbakkam; Wed 25 Nov 2026, 5:00 PM onwards; calendar held to 8:30 PM because no finish is printed; no fare printed; register on AllEvents) via `db:seed:event:classical-excellence(:live)`. Poster `public/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png`. Poster is on the live CDN only after this file is deployed. |
 | 2026-06-10 | Hub: kynhood-style discovery cards + category filter. Detail: mobile-first summary, sticky actions, share/calendar/maps. Docs + `ADD_CHENNAI_EVENT` prompt + Cursor rule + `seed-event-shared.ts`. |
 | 2026-08-10 | Four music listings: Jananiy Carnatic (Narada Gana Sabha), Frangipani/Kaber (enrich Ticket9), Sukoon baithak (Mathsya Adyar), Tabla Poetry (Music Academy Mini Hall). Self-hosted posters + live seeds. |
