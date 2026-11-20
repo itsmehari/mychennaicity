@@ -119,6 +119,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/strings-of-rasa-ramana-balachandhran-siruseri-november-2026.png",
     alt: "Strings of Rasa poster — Ramana Balachandhran veena evening at Mohamad Satak Auditorium, Siruseri, Sunday 1 November 2026, 5:30 PM",
   },
+  "evening-of-classical-excellence-km-music-conservatory-november-2026": {
+    src: "/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png",
+    alt: "An Evening of Classical Excellence poster — Yamaha Music India and KM Music Conservatory, Arumbakkam, Chennai, Wednesday 25 November 2026, 5 PM onwards",
+  },
   "tricku-or-murukku-halloween-curious-korner-october-2026": {
     src: "/images/events/tricku-or-murukku-halloween-curious-korner-october-2026.jpg",
     alt: "Tricku or Murukku poster — Curious Korner Halloween ghost party for ages 5 to 12, Saturday 31 October 2026, 10 AM to 1 PM",
