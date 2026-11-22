@@ -18,8 +18,23 @@ export type FeaturedJobCampaign = {
   contextTa: string;
 };
 
-/** Assetowns Padur OMR six-pack through 17 Jan 2027. Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. */
+/** Assetowns Padur OMR six-pack through 17 Jan 2027. Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. Lenskart walk-in through 27 Nov 2026. */
 export const FEATURED_JOB_CAMPAIGNS: readonly FeaturedJobCampaign[] = [
+  {
+    id: "lenskart-sales-associate-walk-in-2026-11",
+    englishSlug: "sales-associate-lenskart-walk-in-chennai-november-2026",
+    from: "2026-11-22",
+    until: "2026-11-27",
+    areaHubSlugs: [
+      "omr-perungudi-sholinganallur",
+      "ambattur-annanagar",
+      "valasaravakkam-porur",
+    ],
+    contextEn:
+      "Lenskart Sales Associate walk-in — Thoraipakkam 24 Nov, Anna Nagar 26 Nov, Porur 27 Nov. 11 AM–5 PM. ₹2.5–4 LPA + incentive. Freshers welcome.",
+    contextTa:
+      "Lenskart சேல்ஸ் அசோசியேட் வாக்-இன் — தோரப்பாக்கம் 24 நவ, அண்ணா நகர் 26 நவ, போரூர் 27 நவ. காலை 11 – மாலை 5. ₹2.5–4 LPA + இன்சென்டிவ். புதிதாக வேலை தேடுபவரும் வரவேற்பு.",
+  },
   {
     id: "assetowns-senior-telecaller-padur-2026-11",
     englishSlug: "senior-telecaller-female-assetowns-padur-omr",
