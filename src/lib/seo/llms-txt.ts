@@ -95,7 +95,6 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Chennai classifieds](${base}/chennai-classifieds): ${CLASSIFIEDS_BROWSE_PASSAGE}
 - [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
 - [Chennai local events](${base}/chennai-local-events): ${EVENTS_SEARCHER_PASSAGE}
-- [Music artists](${base}/music/artist): Season sheets for musicians. Chennai dates link to the events calendar. First page: ${base}/music/artist/charumathi-raghuraman
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
 - [Site search](${base}/search): Search news, jobs, events, and directory entries

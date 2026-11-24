@@ -9,7 +9,6 @@ import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { compulsivePath } from "@/content/compulsive/index";
-import { MUSIC_ARTISTS_PATH } from "@/content/music";
 import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
@@ -320,11 +319,6 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             href: "/post-free",
             label: "Events desk (WhatsApp)",
             description: "How to list an event. The button opens WhatsApp.",
-          },
-          {
-            href: MUSIC_ARTISTS_PATH,
-            label: "Music artists",
-            description: "Season sheets linked to the Chennai dates.",
           },
           {
             href: CHENNAI_FESTIVALS_GUIDE_PATH,

@@ -124,17 +124,6 @@ export default async function ChennaiLocalEventsPage() {
         </div>
       )}
 
-      <p className="mt-6 text-sm text-[var(--muted)]">
-        Season sheets by musician:{" "}
-        <Link
-          href="/music/artist"
-          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
-        >
-          Music artists
-        </Link>
-        .
-      </p>
-
       <EventsHubThisWeekDigest events={dbEvents} />
 
       <EventsHubAeoStrip eventCount={dbEvents.length} />

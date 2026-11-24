@@ -26,7 +26,6 @@ import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
 } from "@/content/tourism";
-import { MUSIC_ARTISTS_LAUNCHED, musicSitemapEntries } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
 import { FREE_POST_SITEMAP_PATHS } from "@/content/free-posting";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
@@ -171,10 +170,6 @@ export async function listRecentSitemapUrls(
 
   for (const entry of RECENT_LAUNCH_PATHS) {
     add(abs(base, entry.path), parseDay(entry.lastModified));
-  }
-
-  for (const entry of musicSitemapEntries()) {
-    add(abs(base, entry.path), parseDay(MUSIC_ARTISTS_LAUNCHED));
   }
 
   try {

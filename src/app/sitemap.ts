@@ -44,7 +44,6 @@ import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
 import { examSitemapEntries } from "@/content/exams/madras-university-nov-2026";
 import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
-import { musicSitemapEntries } from "@/content/music";
 import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
@@ -253,12 +252,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.68,
     },
-    ...musicSitemapEntries().map((entry) => ({
-      url: `${base}${entry.path}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: entry.priority,
-    })),
     {
       url: `${base}/guides/chennai-tech-careers`,
       lastModified: now,
