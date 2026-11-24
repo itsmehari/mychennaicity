@@ -1,4 +1,3 @@
-import { posterForEventSlug } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
 
 export type EventPosterSpec = {
@@ -389,13 +388,13 @@ export function getEventExtraPosters(slug: string): EventPosterSpec[] {
   return EXTRA_POSTERS_BY_SLUG[slug.trim()] ?? [];
 }
 
-/** Registered flyer, or the artist schedule sheet when the slug is on a music page. */
+/** Registered flyer for this event slug. */
 export function getEventPosterImage(
   slug: string,
   _fallbackTitle?: string,
   _description?: string | null,
 ): EventPosterSpec | null {
-  return getRegisteredEventPoster(slug) ?? posterForEventSlug(slug);
+  return getRegisteredEventPoster(slug);
 }
 
 export function hasEventPosterImage(slug: string): boolean {
