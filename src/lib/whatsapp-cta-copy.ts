@@ -5,6 +5,7 @@ export type BusinessWhatsAppCtaVariant =
   | "events"
   | "news"
   | "property"
+  | "classifieds"
   | "default";
 
 export type BusinessWhatsAppCopy = {
@@ -52,6 +53,14 @@ const copy: Record<BusinessWhatsAppCtaVariant, BusinessWhatsAppCopy> = {
     buttonFallback: "Contact page",
     prefill:
       "Hi — I would like to post a property ad on mychennaicity.in.\nType (sale / rent / plot / commercial):\nArea:\nPrice:\nSize:\nPhone:\nPhotos: I will send them in this chat.",
+  },
+  classifieds: {
+    title: "Post a Chennai classified ad",
+    body: "Wanted post, service, flatmate, tuition, or vehicle — send the title, area, category, and phone. We place it on the classifieds board after a quick check.",
+    buttonWhatsApp: "Message us on WhatsApp",
+    buttonFallback: "Contact page",
+    prefill:
+      "Hi — I would like to post a classified ad on mychennaicity.in.\nCategory (services / wanted / tuition / flatmates / vehicles / property / other):\nTitle:\nArea in Chennai:\nPhone for readers:\nPay or price (if any):\nPhotos: I will send them in this chat.",
   },
   news: {
     title: "Tip the Chennai desk",

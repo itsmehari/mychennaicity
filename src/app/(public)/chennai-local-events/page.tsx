@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
 import { HubCommunityStrip } from "@/components/community/hub-community-strip";
@@ -116,12 +117,23 @@ export default async function ChennaiLocalEventsPage() {
         >
           No events are listed yet. Share a date, venue, and ticket link.
           <span className="mt-3 block">
-            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+            <DeskPostAnchor kind="event" className="mcc-supply-cta">
               Submit an event
-            </Link>
+            </DeskPostAnchor>
           </span>
         </div>
       )}
+
+      <p className="mt-6 text-sm text-[var(--muted)]">
+        Season sheets by musician:{" "}
+        <Link
+          href="/music/artist"
+          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          Music artists
+        </Link>
+        .
+      </p>
 
       <EventsHubThisWeekDigest events={dbEvents} />
 
@@ -148,13 +160,13 @@ export default async function ChennaiLocalEventsPage() {
           </li>
           <li>
             <strong className="text-[var(--foreground)]">Submit yours.</strong>{" "}
-            Drafts stay off the hub until an editor schedules them.
+            Drafts stay off the calendar until the desk checks the WhatsApp message.
           </li>
         </ul>
         <p className="mt-4">
-          <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+          <DeskPostAnchor kind="event" className="mcc-supply-cta">
             Submit an event
-          </Link>
+          </DeskPostAnchor>
         </p>
         <p className="mt-4 text-sm text-[var(--muted)]">
           Area guides:{" "}

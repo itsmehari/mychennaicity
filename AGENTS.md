@@ -28,7 +28,9 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Site modals (campaign / top-story / WhatsApp):** **`docs/SITE_MODAL_SYSTEM.md`** — `data-site-cta`, homepage auto + session cap, flag `NEXT_PUBLIC_SITE_MODAL_AUTO`.
 
-**Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`.
+**Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`. Musician season sheets live at **`/music/artist`** and **`/music/artist/[slug]`** (`src/content/music/`). Chennai dates are still event rows.
+
+**Chennai classifieds (post / seed / growth):** hub **`/chennai-classifieds`**; supply **`/advertise/classifieds`** (+ Tamil); SEO guide **`/guides/post-classified-ad-chennai`**; PRD **`docs/CHENNAI_CLASSIFIEDS_GROWTH_PRD.md`**. Unnamed hirer wanted posts → classifieds `services`; named employer → jobs. SOP M for phone gate and privacy takedown.
 
 **Compulsive / connective hubs (calculators, quizzes, culture desks):** registry **`src/content/compulsive/index.ts`** — Wave A–F paths (F = power/feeder, Metro Water, auto fare, dengue week, flood street-score), sitemap wiring, Disclaimer + AI fine print on money/civic pages. Tamil twins (`-tamil` + `hreflang`): today / afford / which-Chennai / petrol / AC / property-tax / slang / PG. Time-boxed weekend watch pin: `WeekendWatchPin` on home tools strip + `/chennai-today` (EN/TA). Event submit: `/chennai-local-events/submit` (draft + IP rate limit).
 
@@ -53,6 +55,8 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 **Jobs admin + hygiene:** `/super-admin/jobs` (same desk login). Public listings hide expired `valid_through`. Close stale rows with `npm run db:jobs:close-stale` or **Close expired**. SOP L in AGENT_LEARNINGS. Do not invent employer phones or JobPosting salary. Featured roles are a dated list in `src/content/jobs/featured-job-campaigns.ts` (SOP L item 8).
 
 **WhatsApp group join:** public CTAs use `whatsappCommunityJoinHref()` / `waLink('request')` → `/whatsapp-community/join`. The invite stays in `WHATSAPP_COMMUNITY_INVITE_URL`. After the form, the required step messages the desk; the invite is sent only as a reply in that chat. Admin Message is reply-first, capped, no invite in the text. Queue: `/super-admin/whatsapp-join-requests`. System: `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`. Record: `docs/strategy-marketing/WHATSAPP-GROUPS.md`. Indian mobiles only. Do not put join requests or `chat.whatsapp.com` on public pages.
+
+**Free posting:** public post buttons are `wa.me` to `WHATSAPP_BUSINESS_E164` with a `[MyChennaiCity]` starter. Hub `/post-free`. Anonymous visitors to old post URLs see a noindex handoff. SOP P in `docs/AGENT_LEARNINGS_AND_SOPS.md`.
 
 **Non-negotiables in short:**
 

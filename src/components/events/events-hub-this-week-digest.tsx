@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { EVENTS_SEARCHER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import type { PublicEventRow } from "@/domains/events";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
@@ -51,9 +52,9 @@ export function EventsHubThisWeekDigest({ events }: Props) {
             No upcoming events are listed right now.
           </p>
           <p className="mt-3">
-            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+            <DeskPostAnchor kind="event" className="mcc-supply-cta">
               Submit an event
-            </Link>
+            </DeskPostAnchor>
           </p>
         </>
       ) : (

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
+import { freePostKindForLegacyPath } from "@/content/free-posting";
 import { resolveLivePreviewKind, type MegaNavSection } from "./nav-config";
 import { MegaNavLiveRail } from "./mega-nav-live-rail";
 
@@ -32,13 +34,12 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
             {col.heading}
           </p>
           <ul className="mt-4 space-y-1">
-            {col.links.map((link) => (
-              <li key={link.href + link.label}>
-                <Link
-                  href={link.href}
-                  onClick={onNavigate}
-                  className="group flex min-h-11 flex-col justify-center rounded-xl px-3 py-2.5 transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-                >
+            {col.links.map((link) => {
+              const postKind = freePostKindForLegacyPath(link.href);
+              const className =
+                "group flex min-h-11 flex-col justify-center rounded-xl px-3 py-2.5 transition-colors hover:bg-[color-mix(in_srgb,var(--accent)_10%,var(--surface))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
+              const body = (
+                <>
                   <span className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
                     {link.label}
                   </span>
@@ -47,9 +48,26 @@ export function MegaNavPanel({ section, onNavigate }: Props) {
                       {link.description}
                     </span>
                   ) : null}
+                </>
+              );
+              return (
+              <li key={link.href + link.label}>
+                {postKind ? (
+                  <DeskPostAnchor kind={postKind} className={className} onClick={onNavigate}>
+                    {body}
+                  </DeskPostAnchor>
+                ) : (
+                <Link
+                  href={link.href}
+                  onClick={onNavigate}
+                  className={className}
+                >
+                  {body}
                 </Link>
+                )}
               </li>
-            ))}
+              );
+            })}
           </ul>
         </div>
       ))}

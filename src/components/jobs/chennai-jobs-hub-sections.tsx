@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { WhatsAppDeskButton } from "@/components/contact/whatsapp-desk-button";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
 import { JOBS_POSTER_PASSAGE } from "@/content/aeo/jobs-events-passages";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
-import { getBusinessWhatsAppCopy } from "@/lib/whatsapp-cta-copy";
-import { isWhatsAppBusinessConfigured } from "@/lib/whatsapp-server";
 
 export function ChennaiJobsHubSafety() {
   return (
@@ -39,9 +36,6 @@ export function ChennaiJobsHubSafety() {
 }
 
 export function ChennaiJobsHubEmployerCta() {
-  const jobsCopy = getBusinessWhatsAppCopy("jobs");
-  const waConfigured = isWhatsAppBusinessConfigured();
-
   return (
     <section className="mcc-jobs-hub__employer-cta" aria-labelledby="chennai-jobs-employer-title">
       <h2 id="chennai-jobs-employer-title">Hiring in Chennai?</h2>
@@ -49,19 +43,13 @@ export function ChennaiJobsHubEmployerCta() {
         {JOBS_POSTER_PASSAGE}
       </p>
       <div className="mcc-jobs-hub__employer-actions">
-        <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
+        <DeskPostAnchor kind="job" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
           Post a job
-        </Link>
+        </DeskPostAnchor>
       </div>
       <p className="mcc-jobs-hub__employer-quiet">
         <Link href="/contact">Contact page</Link>
-        {waConfigured ? (
-          <WhatsAppDeskButton text={jobsCopy.prefill} source="jobs_hub">
-            WhatsApp
-          </WhatsAppDeskButton>
-        ) : (
-          <Link href="/contact#jobs">WhatsApp</Link>
-        )}
+        <DeskPostAnchor kind="job">WhatsApp</DeskPostAnchor>
       </p>
     </section>
   );

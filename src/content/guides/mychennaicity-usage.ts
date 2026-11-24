@@ -148,9 +148,9 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
       "Post jobs, list your business, and reach Chennai readers without cold-spamming WhatsApp groups.",
     startHere: [
       {
-        href: "/contact#jobs",
+        href: "/post-a-job-in-chennai",
         label: "Post a job",
-        hint: "Reach Chennai candidates",
+        hint: "WhatsApp the desk. No public form.",
       },
       {
         href: "/contact#directory",
@@ -221,9 +221,9 @@ export const MYCHENNAICITY_USAGE_AUDIENCES: UsageAudience[] = [
         hint: "Hub of upcoming programmes",
       },
       {
-        href: "/chennai-local-events/submit",
-        label: "Submit an event",
-        hint: "Organiser form for a public Chennai listing",
+        href: "/list-an-event-in-chennai",
+        label: "List an event",
+        hint: "WhatsApp the name, date, and place",
       },
       {
         href: "/chennai-whatsapp-group",

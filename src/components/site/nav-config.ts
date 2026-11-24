@@ -9,6 +9,7 @@ import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { compulsivePath } from "@/content/compulsive/index";
+import { MUSIC_ARTISTS_PATH } from "@/content/music";
 import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
@@ -242,7 +243,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/advertise/jobs",
             label: "Post a job",
-            description: "Free qualifying local listings.",
+            description: "WhatsApp the desk. We publish after a check.",
           },
           {
             href: "/chennai-jobs/feed.xml",
@@ -313,12 +314,17 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/chennai-local-events/submit",
             label: "Submit an event",
-            description: "Draft listing — goes live after editors schedule it.",
+            description: "WhatsApp the desk. We publish after a check.",
           },
           {
-            href: "/contact#events",
+            href: "/post-free",
             label: "Events desk (WhatsApp)",
-            description: "Same intake via Contact if you prefer chat.",
+            description: "How to list an event. The button opens WhatsApp.",
+          },
+          {
+            href: MUSIC_ARTISTS_PATH,
+            label: "Music artists",
+            description: "Season sheets linked to the Chennai dates.",
           },
           {
             href: CHENNAI_FESTIVALS_GUIDE_PATH,
@@ -348,7 +354,7 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
           {
             href: "/chennai-local-events/submit",
             label: "Post a local event",
-            description: "Organiser form. Draft until editors schedule it.",
+            description: "WhatsApp the name, date, and place.",
           },
           {
             href: "/guides/how-to-use-mychennaicity",

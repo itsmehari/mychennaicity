@@ -1,30 +1,20 @@
 import type { Metadata } from "next";
 import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
 import { EventSubmitForm } from "@/components/events/event-submit-form";
+import { PublicPostGate } from "@/components/free-posting/public-post-gate";
 import {
   InteriorCrossNav,
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { EVENTS_ORGANISER_PASSAGE } from "@/content/aeo/jobs-events-passages";
-import { getSiteUrl } from "@/lib/env";
-import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { freePostHandoffMetadata } from "@/lib/free-posting-metadata";
 
-const path = "/chennai-local-events/submit";
-
-export const metadata: Metadata = {
-  title: "Submit a Chennai event",
-  description: EVENTS_ORGANISER_PASSAGE,
-  alternates: { canonical: `${getSiteUrl()}${path}` },
-  openGraph: {
-    title: fullSiteTitle("Submit a Chennai event"),
-    url: `${getSiteUrl()}${path}`,
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-  },
-};
+export const metadata: Metadata = freePostHandoffMetadata("event");
 
 export default function SubmitChennaiEventPage() {
   return (
+    <PublicPostGate kind="event">
     <div className={interiorMainClassName}>
       <PageBreadcrumbs
         items={[
@@ -46,5 +36,6 @@ export default function SubmitChennaiEventPage() {
       </div>
       <InteriorCrossNav />
     </div>
+    </PublicPostGate>
   );
 }

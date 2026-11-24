@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
-import { ADVERTISE_LISTING_PATHS } from "@/lib/routes/advertise-listings";
+import { FREE_POST_SITEMAP_PATHS } from "@/content/free-posting";
 import { RECENT_LAUNCH_PATHS } from "./sitemap-recent";
 
 describe("recent sitemap launches", () => {
@@ -10,8 +10,8 @@ describe("recent sitemap launches", () => {
     );
 
     expect(byPath.get(MYBANGALORE_COMMUNITY_PATH)).toBe("2026-11-04");
-    for (const path of ADVERTISE_LISTING_PATHS) {
-      expect(byPath.get(path)).toBe("2026-11-05");
+    for (const path of FREE_POST_SITEMAP_PATHS) {
+      expect(byPath.get(path)).toBe("2026-11-24");
     }
     expect(byPath.get("/madras-university-exam-timetable-2026")).toBe(
       "2026-11-05",

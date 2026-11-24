@@ -34,7 +34,7 @@ export const CHENNAI_JOBS_HUB_AEO: HubAeoContent = {
     {
       term: "Who should use it",
       definition:
-        "Jobseekers search https://mychennaicity.in/chennai-jobs. Employers post a vacancy at https://mychennaicity.in/advertise/jobs.",
+        "Jobseekers search https://mychennaicity.in/chennai-jobs. Employers post a vacancy at https://mychennaicity.in/post-a-job-in-chennai.",
     },
     {
       term: "What we are not",

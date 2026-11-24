@@ -3,10 +3,8 @@ import { NewsletterFooterTrigger } from "@/components/newsletter/newsletter-foot
 import { chennaiZones } from "@/lib/chennai-zones";
 import { getOrgSocialLinks } from "@/lib/env";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
-import {
-  ADVERTISE_JOBS_PATH,
-  ADVERTISE_PROPERTY_PATH,
-} from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
+import type { FreePostKind } from "@/content/free-posting";
 import {
   WHATSAPP_ADMINS_TOOLKIT_PATH,
   whatsappCommunityJoinHref,
@@ -50,13 +48,17 @@ const discoverLinks = [
   { href: "/#areas", label: "Area map (home)" },
 ];
 
-const workLinks = [
+const workLinks: { href: string; label: string; postKind?: FreePostKind }[] = [
   { href: CHENNAI_JOBS_HUB_PATH, label: "Browse Chennai jobs" },
   { href: CHENNAI_SALARY_GUIDE_PATH, label: "Salary guide 2026" },
-  { href: ADVERTISE_JOBS_PATH, label: "Post a job" },
-  { href: ADVERTISE_PROPERTY_PATH, label: "Post a property" },
+  { href: "/post-free", label: "Post for free" },
+  { href: "/advertise/jobs", label: "Post a job", postKind: "job" },
+  { href: "/advertise/property", label: "Post a property", postKind: "home" },
+  { href: "/advertise/classifieds", label: "Post a classified", postKind: "classified" },
+  { href: "/sell-in-chennai", label: "Sell an item", postKind: "sell" },
+  { href: "/list-a-pg-in-chennai", label: "List a PG", postKind: "pg" },
   { href: "/contact#directory", label: "List your business" },
-  { href: "/chennai-local-events/submit", label: "Submit an event" },
+  { href: "/chennai-local-events/submit", label: "Submit an event", postKind: "event" },
 ];
 
 const companyLinks = [
@@ -92,7 +94,7 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: { href: string; label: string }[];
+  links: { href: string; label: string; postKind?: FreePostKind }[];
 }) {
   return (
     <div className="min-w-0">
@@ -102,12 +104,21 @@ function FooterColumn({
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.href + l.label}>
+            {l.postKind ? (
+              <DeskPostAnchor
+                kind={l.postKind}
+                className="text-sm leading-snug text-[var(--footer-link)] transition hover:text-[var(--footer-link-hover)]"
+              >
+                {l.label}
+              </DeskPostAnchor>
+            ) : (
             <Link
               href={l.href}
               className="text-sm leading-snug text-[var(--footer-link)] transition hover:text-[var(--footer-link-hover)]"
             >
               {l.label}
             </Link>
+            )}
           </li>
         ))}
       </ul>

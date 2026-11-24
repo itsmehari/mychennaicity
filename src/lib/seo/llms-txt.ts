@@ -13,6 +13,10 @@ import {
   JOBS_POSTER_PASSAGE,
   JOBS_SEEKER_PASSAGE,
 } from "@/content/aeo/jobs-events-passages";
+import {
+  CLASSIFIEDS_BROWSE_PASSAGE,
+  CLASSIFIEDS_POSTER_PASSAGE,
+} from "@/content/aeo/classifieds-passages";
 
 export type LlmsDigestItem = {
   title: string;
@@ -84,11 +88,14 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Chennai local news](${base}/chennai-local-news): Civic, neighbourhood, transport, and public-interest reporting for Greater Chennai
 - [Jobs in Chennai](${base}${CHENNAI_JOBS_HUB_PATH}): ${JOBS_SEEKER_PASSAGE}
 - [Looking for work](${base}${CHENNAI_JOBS_LOOKING_PATH}): People in Chennai who have posted that they are available to hire
-- [Post a job](${base}/advertise/jobs): ${JOBS_POSTER_PASSAGE}
-- [Post a property](${base}/advertise/property): Sale, rent, plot, commercial — we place the ad; Tamil: ${base}/advertise/property-tamil
-- [Classifieds](${base}/chennai-classifieds): Reader listings, including property
+- [Post for free](${base}/post-free): Send a WhatsApp message to the MyChennaiCity desk. No public form.
+- [Post a job](${base}/post-a-job-in-chennai): ${JOBS_POSTER_PASSAGE}
+- [List a home](${base}/list-a-home-in-chennai): House or flat. WhatsApp the type, area, rent, and deposit.
+- [Post a classified ad](${base}/post-a-classified-in-chennai): ${CLASSIFIEDS_POSTER_PASSAGE}
+- [Chennai classifieds](${base}/chennai-classifieds): ${CLASSIFIEDS_BROWSE_PASSAGE}
 - [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
 - [Chennai local events](${base}/chennai-local-events): ${EVENTS_SEARCHER_PASSAGE}
+- [Music artists](${base}/music/artist): Season sheets for musicians. Chennai dates link to the events calendar. First page: ${base}/music/artist/charumathi-raghuraman
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
 - [Site search](${base}/search): Search news, jobs, events, and directory entries
@@ -121,7 +128,7 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Civic tools](${base}/civic-tools): Zone & ward finder, address form fixer, streetlight desk, [power/feeder](${base}/civic-tools/power-feeder-desk), [Metro Water](${base}/civic-tools/metro-water-schedule), [flood street-score](${base}/civic-tools/flood-street-score)
 - [Auto fare cards](${base}/guides/chennai-auto-fare): Official 2013 meter vs July 2026 proposals
 - [Dengue week desk](${base}/guides/chennai-dengue-week): GCC 2026 city totals + household checklist
-- [Submit a Chennai event](${base}/chennai-local-events/submit): ${EVENTS_ORGANISER_PASSAGE}
+- [List a Chennai event](${base}/list-an-event-in-chennai): ${EVENTS_ORGANISER_PASSAGE}
 - [Bulk waste generator checklist 2026](${base}/guides/bulk-waste-generator-readiness-checklist-2026): Interactive SWM Rules compliance guide
 - [Chennai tech careers guide](${base}/guides/chennai-tech-careers): Career context for Chennai tech hiring
 - [Tamil Nadu Plus Two group guide](${base}/guides/tn-plus-two): Class 11–12 group codes 2502, 2503, 2702, 2708 and humanities — confirm the school offer
@@ -263,6 +270,14 @@ Open notices: [${base}${CHENNAI_JOBS_LOOKING_PATH}](${base}${CHENNAI_JOBS_LOOKIN
 ${bullets(input.seekers ?? [], "Open the looking-for-work board for current notices.")}
 
 Contact details stay on each notice. These posts are not employer vacancies.
+
+## How do I post a classified ad in Chennai?
+
+${CLASSIFIEDS_POSTER_PASSAGE}
+
+Browse live ads: [${base}/chennai-classifieds](${base}/chennai-classifieds)
+
+${CLASSIFIEDS_BROWSE_PASSAGE}
 
 ## What events are on in Chennai?
 

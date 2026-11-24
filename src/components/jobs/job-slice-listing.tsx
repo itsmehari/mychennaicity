@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { JobPostingWithEmployer } from "@/domains/jobs";
 import { CHENNAI_JOBS_HUB_PATH, chennaiJobsDetailPath } from "@/lib/routes/chennai-jobs";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 
 export function JobSliceListing({
   heading,
@@ -58,9 +58,9 @@ export function JobSliceListing({
         <Link href={CHENNAI_JOBS_HUB_PATH} className="text-[#3d348f] underline-offset-4 hover:underline">
           Jobs in Chennai
         </Link>
-        <Link href={ADVERTISE_JOBS_PATH} className="text-[#3d348f] underline-offset-4 hover:underline">
+        <DeskPostAnchor kind="job" className="text-[#3d348f] underline-offset-4 hover:underline">
           Post a job vacancy in Chennai
-        </Link>
+        </DeskPostAnchor>
         {areaHref ? (
           <Link href={areaHref} className="text-[#3d348f] underline-offset-4 hover:underline">
             Area guide

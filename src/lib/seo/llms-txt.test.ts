@@ -21,7 +21,7 @@ describe("llms.txt builders", () => {
     expect(md).toContain("https://mychennaicity.in/guides/tn-plus-two/textbooks");
     expect(md).toContain("https://mychennaicity.in/madras-university-exam-timetable-2026");
     expect(md).toContain("https://mychennaicity.in/community/mybangalore-whatsapp-community-group");
-    expect(md).toContain("/advertise/jobs");
+    expect(md).toContain("/post-a-job-in-chennai");
     expect(md).toContain("/llms-full.txt");
     const primary = md.slice(0, md.indexOf("## Optional"));
     expect(primary).toContain("madras-university-exam-timetable-2026");

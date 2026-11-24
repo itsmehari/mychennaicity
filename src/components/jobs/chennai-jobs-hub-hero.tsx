@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 import {
   JOBS_POSTER_PASSAGE,
   JOBS_SEEKER_PASSAGE,
 } from "@/content/aeo/jobs-events-passages";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 
 type Props = {
   totalJobs: number;
@@ -28,9 +27,9 @@ export function ChennaiJobsHubHero({ totalJobs, hasLiveJobs }: Props) {
             {JOBS_POSTER_PASSAGE}
           </p>
           <div className="mcc-jobs-hub__hero-actions">
-            <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__btn-primary">
+            <DeskPostAnchor kind="job" className="mcc-jobs-hub__btn-primary">
               Post a Chennai Job
-            </Link>
+            </DeskPostAnchor>
             <WhatsAppCommunityJoinLink
               utmContent="jobs-hub-hero"
               className="mcc-jobs-hub__btn-secondary mcc-jobs-hub__btn-whatsapp"

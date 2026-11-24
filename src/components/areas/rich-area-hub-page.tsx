@@ -29,7 +29,7 @@ import { formatClassifiedCategoryLabel } from "@/lib/classifieds/categories";
 import { chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { FeaturedJobsRail } from "@/components/jobs/featured-jobs-rail";
 import { localitiesForAreaHub } from "@/content/jobs/job-localities";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import {
   chennaiJobsDetailPath,
   chennaiJobsLocationPath,
@@ -558,9 +558,9 @@ export function RichAreaHubPage({
                 Jobs in {locality.label}
               </Link>
             ))}
-            <Link href={ADVERTISE_JOBS_PATH} className="text-[var(--accent)] hover:underline">
+            <DeskPostAnchor kind="job" className="text-[var(--accent)] hover:underline">
               Post a local job
-            </Link>
+            </DeskPostAnchor>
           </p>
         </Section>
       ) : null}

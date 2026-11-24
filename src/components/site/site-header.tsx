@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useState, type CSSProperties } from "react";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
-import { whatsappCommunityJoinHref } from "@/lib/whatsapp-community";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
+import { headerLangFromPathname } from "@/lib/header-lang";
+import {
+  WHATSAPP_COMMUNITY_JOIN_PATH,
+  whatsappCommunityJoinHref,
+} from "@/lib/whatsapp-community";
+import { whatsappHeaderJoinLabel } from "@/lib/whatsapp-link";
+import { HeaderWhatsAppMark } from "./header-whatsapp-mark";
 import { MegaNavDesktop } from "./mega-nav-desktop";
 import { MegaNavMobile } from "./mega-nav-mobile";
 import { SiteSearchForm } from "./site-search-form";
@@ -12,7 +18,11 @@ import { SiteSearchForm } from "./site-search-form";
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeMobile = useCallback(() => setMobileOpen(false), []);
-  const onJobsDesk = usePathname().startsWith("/chennai-jobs");
+  const pathname = usePathname() ?? "";
+  const onJobsDesk = pathname.startsWith("/chennai-jobs");
+  const onJoinForm = pathname.startsWith(WHATSAPP_COMMUNITY_JOIN_PATH);
+  const headerLang = headerLangFromPathname(pathname);
+  const headerWaLabel = whatsappHeaderJoinLabel(headerLang);
 
   return (
     <header
@@ -47,12 +57,13 @@ export function SiteHeader() {
 
         <div className="flex shrink-0 items-center gap-2">
           {onJobsDesk ? (
-            <Link
-              href={ADVERTISE_JOBS_PATH}
+            <DeskPostAnchor
+              kind="job"
               className="mcc-supply-cta mcc-supply-cta--compact mcc-supply-cta--header"
+              onClick={closeMobile}
             >
               Post a job
-            </Link>
+            </DeskPostAnchor>
           ) : null}
           <Link
             href="/contact"
@@ -77,13 +88,22 @@ export function SiteHeader() {
             </svg>
             <span className="hidden text-xs font-bold lg:inline">Contact</span>
           </Link>
-          <Link
-            href={whatsappCommunityJoinHref("nav")}
-            data-site-cta="whatsapp"
-            className="focus-ring hidden min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,#25D366_35%,var(--border))] bg-[color-mix(in_srgb,#25D366_8%,var(--surface))] px-3.5 py-2 text-xs font-bold text-[#128C7E] transition hover:border-[#25D366] xl:inline-flex"
-          >
-            WhatsApp
-          </Link>
+          {onJoinForm ? null : (
+            <Link
+              href={whatsappCommunityJoinHref("nav")}
+              data-site-cta="whatsapp"
+              data-wa-type="request"
+              data-wa-placement="header"
+              data-wa-content="nav"
+              className="focus-ring inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-[#25D366] px-3 py-2 text-xs font-bold text-white shadow-[0_8px_20px_-10px_rgba(37,211,102,0.9)] ring-2 ring-[color-mix(in_srgb,#25D366_35%,transparent)] transition hover:bg-[#1ebe5d] sm:min-w-0 sm:px-4"
+              aria-label={headerWaLabel}
+              title={headerWaLabel}
+              onClick={closeMobile}
+            >
+              <HeaderWhatsAppMark className="h-[1.125rem] w-[1.125rem] sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{headerWaLabel}</span>
+            </Link>
+          )}
           <SiteSearchForm />
           <button
             type="button"

@@ -87,6 +87,14 @@ export function whatsappRequestCtaLabel(lang: "en" | "ta" = "en"): string {
   return lang === "ta" ? "சேர கோரிக்கை" : "Request to join";
 }
 
+/** Short label for the sticky site header (mobile + desktop). */
+export function whatsappHeaderJoinLabel(lang: "en" | "ta" = "en"): string {
+  if (!whatsappCommunityAccepting()) {
+    return lang === "ta" ? "காத்திருப்பு" : "Waitlist";
+  }
+  return lang === "ta" ? "வாட்ஸ்அப்பில் சேர" : "Join WhatsApp";
+}
+
 export function memberInviteShareHref(): string {
   const learn = `${getSiteUrl()}${WHATSAPP_COMMUNITY_PAGE_PATH}`;
   const u = new URL(learn);

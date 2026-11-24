@@ -26,8 +26,9 @@ import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
 } from "@/content/tourism";
+import { MUSIC_ARTISTS_LAUNCHED, musicSitemapEntries } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
-import { ADVERTISE_LISTING_PATHS } from "@/lib/routes/advertise-listings";
+import { FREE_POST_SITEMAP_PATHS } from "@/content/free-posting";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
 import { CHENNAI_GOLD_RATE_HUB_PATH } from "@/lib/routes/chennai-gold-rate";
 import {
@@ -114,9 +115,9 @@ export const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
     lastModified: "2026-11-05",
   })),
   { path: MYBANGALORE_COMMUNITY_PATH, lastModified: "2026-11-04" },
-  ...ADVERTISE_LISTING_PATHS.map((path) => ({
+  ...FREE_POST_SITEMAP_PATHS.map((path) => ({
     path,
-    lastModified: "2026-11-05",
+    lastModified: "2026-11-24",
   })),
   { path: "/civic-tools", lastModified: "2026-09-12" },
   { path: "/civic-tools/area-sabha", lastModified: "2026-09-12" },
@@ -170,6 +171,10 @@ export async function listRecentSitemapUrls(
 
   for (const entry of RECENT_LAUNCH_PATHS) {
     add(abs(base, entry.path), parseDay(entry.lastModified));
+  }
+
+  for (const entry of musicSitemapEntries()) {
+    add(abs(base, entry.path), parseDay(MUSIC_ARTISTS_LAUNCHED));
   }
 
   try {

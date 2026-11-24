@@ -1,40 +1,18 @@
 import type { Metadata } from "next";
 import { ListingPitchPage } from "@/components/advertise/listing-pitch-page";
+import { PublicPostGate } from "@/components/free-posting/public-post-gate";
 import { loadJobPitchSamples } from "@/lib/advertise-listing-samples";
-import { getSiteUrl } from "@/lib/env";
-import {
-  ADVERTISE_JOBS_PATH,
-  ADVERTISE_JOBS_TAMIL_PATH,
-} from "@/lib/routes/advertise-listings";
-import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { freePostHandoffMetadata } from "@/lib/free-posting-metadata";
 
-const titleSegment = "Post a job vacancy in Chennai";
-const description =
-  "Post a job vacancy in Chennai at https://mychennaicity.in/advertise/jobs. Free job posting for a local shop or company. Send the role, location, and apply link. No employer login.";
-
-export const metadata: Metadata = {
-  title: titleSegment,
-  description,
-  alternates: {
-    canonical: `${getSiteUrl()}${ADVERTISE_JOBS_PATH}`,
-    languages: {
-      "en-IN": `${getSiteUrl()}${ADVERTISE_JOBS_PATH}`,
-      "ta-IN": `${getSiteUrl()}${ADVERTISE_JOBS_TAMIL_PATH}`,
-      "x-default": `${getSiteUrl()}${ADVERTISE_JOBS_PATH}`,
-    },
-  },
-  openGraph: {
-    title: fullSiteTitle(titleSegment),
-    description,
-    url: `${getSiteUrl()}${ADVERTISE_JOBS_PATH}`,
-    locale: "en_IN",
-    alternateLocale: ["ta_IN"],
-  },
-};
+export const metadata: Metadata = freePostHandoffMetadata("job");
 
 export const dynamic = "force-dynamic";
 
 export default async function AdvertiseJobsPage() {
   const samples = await loadJobPitchSamples();
-  return <ListingPitchPage kind="jobs" locale="en" samples={samples} />;
+  return (
+    <PublicPostGate kind="job">
+      <ListingPitchPage kind="jobs" locale="en" samples={samples} />
+    </PublicPostGate>
+  );
 }

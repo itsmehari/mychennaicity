@@ -26,7 +26,7 @@ export const CHENNAI_JOBS_HUB_FAQ: FaqItem[] = [
   {
     question: "Is mychennaicity.in a Chennai recruitment agency?",
     answer:
-      "mychennaicity.in publishes the job notice. The employer hires. The site does not run interviews or collect a fee from candidates for a standard listing. Post a vacancy at https://mychennaicity.in/advertise/jobs.",
+      "mychennaicity.in publishes the job notice. The employer hires. The site does not run interviews or collect a fee from candidates for a standard listing. Post a vacancy at https://mychennaicity.in/post-a-job-in-chennai.",
   },
   {
     question: "Are there walk-in and fresher jobs in Chennai on this board?",

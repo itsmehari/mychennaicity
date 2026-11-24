@@ -10,7 +10,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 const AUTO_MS = 7000;
@@ -176,7 +176,7 @@ const SLIDES: Slide[] = [
     hrefOnSubmit: CHENNAI_JOBS_HUB_PATH,
     primaryCta: { href: CHENNAI_JOBS_HUB_PATH, label: "Go to Chennai jobs" },
     secondaryCta: {
-      href: ADVERTISE_JOBS_PATH,
+      href: "/post-a-job-in-chennai",
       label: "Post a job",
       emphasis: true,
     },
@@ -489,7 +489,14 @@ export function HomeHero() {
                 {slide.primaryCta.label}
               </Link>
               <span className="hidden text-white/25 sm:inline">|</span>
-              {slide.secondaryCta.emphasis ? (
+              {slide.key === "jobs" ? (
+                <DeskPostAnchor
+                  kind="job"
+                  className="mcc-supply-cta mcc-supply-cta--on-dark"
+                >
+                  {slide.secondaryCta.label}
+                </DeskPostAnchor>
+              ) : slide.secondaryCta.emphasis ? (
                 <Link
                   href={slide.secondaryCta.href}
                   className="mcc-supply-cta mcc-supply-cta--on-dark"

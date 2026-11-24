@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 export function ChennaiSeekersHubSafety() {
@@ -45,9 +45,9 @@ export function ChennaiSeekersHubEmployerCta() {
         sales, field jobs, walk-ins and local business hiring.
       </p>
       <div className="mcc-jobs-hub__employer-actions">
-        <Link href={ADVERTISE_JOBS_PATH} className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
+        <DeskPostAnchor kind="job" className="mcc-jobs-hub__employer-btn mcc-jobs-hub__employer-btn--solid">
           Post a job
-        </Link>
+        </DeskPostAnchor>
       </div>
       <p className="mcc-jobs-hub__employer-quiet">
         <Link href={CHENNAI_JOBS_HUB_PATH}>Browse open jobs</Link>

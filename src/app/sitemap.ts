@@ -15,7 +15,7 @@ import { categoryToTopicSlug } from "@/lib/news-topics";
 import { getGoldRateLastModifiedForSitemap } from "@/domains/gold-rate";
 import { CHENNAI_GOLD_RATE_HUB_PATH, CHENNAI_GOLD_RATE_HISTORY_PATH, CHENNAI_BUYING_GOLD_GUIDE_PATH } from "@/lib/routes/chennai-gold-rate";
 import { CHENNAI_CLASSIFIEDS_HUB_PATH, chennaiClassifiedDetailPath } from "@/lib/routes/chennai-classifieds";
-import { ADVERTISE_LISTING_PATHS } from "@/lib/routes/advertise-listings";
+import { FREE_POST_SITEMAP_PATHS } from "@/content/free-posting";
 import { bilingualJobSitemapLanguages } from "@/lib/jobs/job-language";
 import { CHENNAI_JOBS_HUB_PATH, CHENNAI_JOBS_LOOKING_PATH, chennaiJobsDetailPath, chennaiJobSeekerDetailPath } from "@/lib/routes/chennai-jobs";
 import { directoryDetailPath } from "@/lib/routes/directory";
@@ -30,6 +30,10 @@ import {
 } from "@/lib/whatsapp-community";
 import { CHENNAI_FESTIVALS_GUIDE_PATH } from "@/content/guides/chennai-festivals-calendar";
 import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide-2026";
+import {
+  POST_CLASSIFIED_AD_CHENNAI_PATH,
+  POST_CLASSIFIED_AD_CHENNAI_TAMIL_PATH,
+} from "@/content/guides/post-classified-ad-chennai";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { COMPULSIVE_SITEMAP_ENTRIES, COMPULSIVE_TAMIL_SITEMAP_PATHS } from "@/content/compulsive/index";
 import {
@@ -40,6 +44,7 @@ import { GOVERNMENT_SITEMAP_ENTRIES } from "@/content/government/index";
 import { examSitemapEntries } from "@/content/exams/madras-university-nov-2026";
 import { MYBANGALORE_COMMUNITY_PATH } from "@/content/community/mybangalore-whatsapp";
 import { CIVIC_TOOL_SITEMAP_PATHS } from "@/lib/routes/civic-tools";
+import { musicSitemapEntries } from "@/content/music";
 import {
   CHENNAI_TOURISM_HUB_PATH,
   ECR_WEEKEND_PLAN_PATH,
@@ -224,11 +229,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.66,
     },
-    ...ADVERTISE_LISTING_PATHS.map((path) => ({
+    ...FREE_POST_SITEMAP_PATHS.map((path) => ({
       url: `${base}${path}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: path === "/post-free" ? 0.72 : 0.66,
     })),
     {
       url: `${base}${CHENNAI_GOLD_RATE_HUB_PATH}`,
@@ -248,12 +253,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.68,
     },
-    {
-      url: `${base}/chennai-local-events/submit`,
+    ...musicSitemapEntries().map((entry) => ({
+      url: `${base}${entry.path}`,
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
+      changeFrequency: "weekly" as const,
+      priority: entry.priority,
+    })),
     {
       url: `${base}/guides/chennai-tech-careers`,
       lastModified: now,
@@ -264,6 +269,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${base}${CHENNAI_SALARY_GUIDE_PATH}`,
       lastModified: now,
       changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${base}${POST_CLASSIFIED_AD_CHENNAI_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.72,
+    },
+    {
+      url: `${base}${POST_CLASSIFIED_AD_CHENNAI_TAMIL_PATH}`,
+      lastModified: now,
+      changeFrequency: "weekly",
       priority: 0.7,
     },
     {

@@ -36,7 +36,7 @@ import {
   chennaiJobsDetailPath,
   chennaiJobsLocationPath,
 } from "@/lib/routes/chennai-jobs";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import {
   buildJobBreadcrumbJsonLd,
   buildJobPostingJsonLd,
@@ -64,12 +64,12 @@ function JobDetailPlaceLinks({
         Jobs in {locality.label}
       </a>
       <span className="mx-2 text-[#8b87a8]">·</span>
-      <a
-        href={ADVERTISE_JOBS_PATH}
+      <DeskPostAnchor
+        kind="job"
         className="text-[#3d348f] underline-offset-4 hover:underline"
       >
         Post a job vacancy in Chennai
-      </a>
+      </DeskPostAnchor>
     </p>
   );
 }

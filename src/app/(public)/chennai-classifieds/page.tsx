@@ -26,10 +26,13 @@ import {
 } from "@/lib/routes/chennai-classifieds";
 import { buildClassifiedsHubJsonLd } from "@/lib/seo/classified-jsonld";
 import { formatIndiaLongDate } from "@/lib/presentation-dates";
-import { ADVERTISE_PROPERTY_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
+import { postKindForClassifiedCategory } from "@/content/free-posting";
+import { POST_CLASSIFIED_AD_CHENNAI_PATH } from "@/content/guides/post-classified-ad-chennai";
+import { CLASSIFIEDS_BROWSE_PASSAGE } from "@/content/aeo/classifieds-passages";
 import { fullSiteTitle } from "@/lib/seo/site-titles";
 
-const hubTitleBase = "Chennai classified ads";
+const hubTitleBase = "Chennai local classified ads";
 
 const PAGE_SIZE = 20;
 
@@ -54,8 +57,8 @@ export async function generateMetadata({
   }
   const description =
     total > 0
-      ? `${total} reader-submitted classified ads in Chennai — ${categoryMeta.description} Contact advertisers directly.`
-      : categoryMeta.description;
+      ? `${total} free local classified ads in Chennai — ${categoryMeta.description} Contact advertisers directly. Post yours at mychennaicity.in/post-a-classified-in-chennai.`
+      : `${categoryMeta.description} Post a free Chennai classified ad at mychennaicity.in/post-a-classified-in-chennai.`;
 
   const titleSegment =
     category && categoryMeta.id !== "all"
@@ -121,6 +124,16 @@ export default async function ChennaiClassifiedsHubPage({
       ? categoryMeta.label
       : "Chennai classified ads";
 
+  const postKind = postKindForClassifiedCategory(category);
+  const postLabel =
+    postKind === "home"
+      ? "List a home"
+      : postKind === "sell"
+        ? "Sell an item"
+        : postKind === "pg"
+          ? "List a PG"
+          : "Post a classified ad";
+
   return (
     <div className={interiorMainClassName}>
       {hubLd ? (
@@ -156,21 +169,29 @@ export default async function ChennaiClassifiedsHubPage({
             broker deals.
           </p>
         </div>
-        <Link href={ADVERTISE_PROPERTY_PATH} className="mcc-supply-cta">
-          Post a property
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <DeskPostAnchor kind={postKind} className="mcc-supply-cta">
+            {postLabel}
+          </DeskPostAnchor>
+        </div>
       </header>
 
       <p className="mt-4 max-w-3xl text-sm text-[var(--muted)]">
+        {CLASSIFIEDS_BROWSE_PASSAGE}{" "}
+        <Link
+          href={POST_CLASSIFIED_AD_CHENNAI_PATH}
+          className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          How to post classified ads in Chennai
+        </Link>
+        .{" "}
         <Link
           href={chennaiClassifiedsHubPath({ category: "property" })}
           className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
         >
           Property ads
-        </Link>
-        {" "}
-        cover sale, rent, plot, commercial, and buyer requirements. We place
-        the ad after you send the details.
+        </Link>{" "}
+        cover sale, rent, plot, commercial, and buyer requirements.
       </p>
 
       <HubCommunityStrip businessVariant="directory" className="mt-8" />
@@ -241,13 +262,20 @@ export default async function ChennaiClassifiedsHubPage({
               or use our{" "}
             </>
           ) : null}
+          <DeskPostAnchor
+            kind={postKind}
+            className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            {postLabel.toLowerCase()}
+          </DeskPostAnchor>{" "}
+          or message the desk on{" "}
           <Link
-            href="/contact"
+            href="/contact#classifieds"
             className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
           >
             Contact
-          </Link>{" "}
-          page to suggest a listing.
+          </Link>
+          .
         </p>
       )}
 

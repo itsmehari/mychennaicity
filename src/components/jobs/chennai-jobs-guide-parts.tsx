@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CHENNAI_JOBS_CAREER_RESOURCES } from "@/lib/jobs/chennai-jobs-hub-helpers";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { CHENNAI_JOBS_HUB_PATH } from "@/lib/routes/chennai-jobs";
 
 export function ChennaiJobsGuideHero() {
@@ -20,9 +20,9 @@ export function ChennaiJobsGuideHero() {
             <Link href={CHENNAI_JOBS_HUB_PATH} className="mcc-jobs-hub__btn-primary">
               Browse open jobs
             </Link>
-            <Link href={ADVERTISE_JOBS_PATH} className="mcc-supply-cta">
+            <DeskPostAnchor kind="job" className="mcc-supply-cta">
               Post a job
-            </Link>
+            </DeskPostAnchor>
           </div>
         </div>
         <div className="mcc-jobs-hub__illustration flex items-center justify-center p-8" aria-hidden>

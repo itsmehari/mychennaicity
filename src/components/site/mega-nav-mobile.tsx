@@ -3,8 +3,15 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
+import { headerLangFromPathname } from "@/lib/header-lang";
+import {
+  WHATSAPP_COMMUNITY_JOIN_PATH,
+  whatsappCommunityJoinHref,
+} from "@/lib/whatsapp-community";
+import { whatsappHeaderJoinLabel } from "@/lib/whatsapp-link";
 import { MEGA_NAV_SECTIONS, resolveLivePreviewKind } from "./nav-config";
+import { HeaderWhatsAppMark } from "./header-whatsapp-mark";
 import { MegaNavLiveRail } from "./mega-nav-live-rail";
 
 type Props = {
@@ -72,12 +79,26 @@ export function MegaNavMobile({ open, onClose }: Props) {
         aria-label="Mobile primary"
       >
         {pathname.startsWith("/chennai-jobs") ? (
-          <Link
-            href={ADVERTISE_JOBS_PATH}
+          <DeskPostAnchor
+            kind="job"
             className="mcc-supply-cta mb-4 w-full"
             onClick={onClose}
           >
             Post a job
+          </DeskPostAnchor>
+        ) : null}
+        {!pathname.startsWith(WHATSAPP_COMMUNITY_JOIN_PATH) ? (
+          <Link
+            href={whatsappCommunityJoinHref("nav-mobile")}
+            data-site-cta="whatsapp"
+            data-wa-type="request"
+            data-wa-placement="header"
+            data-wa-content="nav-mobile"
+            className="mb-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-bold text-white shadow-md"
+            onClick={onClose}
+          >
+            <HeaderWhatsAppMark className="h-5 w-5" />
+            {whatsappHeaderJoinLabel(headerLangFromPathname(pathname))}
           </Link>
         ) : null}
         <ul className="space-y-2">

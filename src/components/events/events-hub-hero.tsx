@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import {
   EVENTS_ORGANISER_PASSAGE,
   EVENTS_SEARCHER_PASSAGE,
@@ -67,9 +68,9 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
           </p>
 
           <div className="mt-4">
-            <Link href="/chennai-local-events/submit" className="mcc-supply-cta">
+            <DeskPostAnchor kind="event" className="mcc-supply-cta">
               Submit an event
-            </Link>
+            </DeskPostAnchor>
           </div>
 
           <nav className="mcc-events-hub-hero__jumps" aria-label="On this page">
@@ -121,7 +122,9 @@ export function EventsHubHero({ eventCount, nextEvents }: Props) {
           {nextEvents.length === 0 ? (
             <p className="mcc-events-hub-hero__next-empty">
               No upcoming listings yet.{" "}
-              <Link href="/chennai-local-events/submit">Submit an event</Link>.
+              <DeskPostAnchor kind="event" className="underline-offset-4 hover:underline">
+                List an event
+              </DeskPostAnchor>.
             </p>
           ) : (
             <ol className="mcc-events-hub-hero__next-list">

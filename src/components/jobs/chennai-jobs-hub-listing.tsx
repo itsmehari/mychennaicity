@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { LayoutImageBanner } from "@/components/ads/layout-image-banner";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 import { useEffect, useMemo, useState } from "react";
 import { ChennaiJobsHubCardView } from "@/components/jobs/chennai-jobs-hub-card";
 import {
@@ -209,9 +209,9 @@ export function ChennaiJobsHubListing({
     return (
       <div className="mcc-jobs-hub__empty mt-10">
         No job listings yet. Employers can{" "}
-        <Link href={ADVERTISE_JOBS_PATH} className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
+        <DeskPostAnchor kind="job" className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline">
           post a job
-        </Link>
+        </DeskPostAnchor>
         .
       </div>
     );
@@ -325,9 +325,9 @@ export function ChennaiJobsHubListing({
           <p className="mcc-supply-band__title">Post a job on this board</p>
           <p className="mcc-supply-band__hint">We place the listing. There is no login.</p>
         </div>
-        <Link href={ADVERTISE_JOBS_PATH} className="mcc-supply-cta">
+        <DeskPostAnchor kind="job" className="mcc-supply-cta">
           Post a job
-        </Link>
+        </DeskPostAnchor>
       </aside>
 
       <div className="mcc-jobs-hub__layout">

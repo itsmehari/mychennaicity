@@ -29,3 +29,16 @@ export async function loadPropertyPitchSamples(): Promise<ListingPitchSample[]> 
     return [];
   }
 }
+
+export async function loadClassifiedPitchSamples(): Promise<ListingPitchSample[]> {
+  try {
+    const rows = await listOpenClassifiedListingsForChennaiHub(6, 0);
+    return rows.map((row) => ({
+      href: chennaiClassifiedDetailPath(row.slug),
+      title: row.title,
+      meta: [row.locationLabel, row.category].filter(Boolean).join(" · ") || "Chennai",
+    }));
+  } catch {
+    return [];
+  }
+}

@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import { DeskPostProvider } from "@/components/free-posting/desk-post-context";
+import { buildFreePostHrefs } from "@/lib/free-posting-desk";
 import { NewsletterModalHost } from "@/components/newsletter/newsletter-modal-host";
 import { SiteModalHost } from "@/components/site-modals";
 import { WhatsAppCommunityFloat } from "@/components/community/whatsapp-community-float";
@@ -14,8 +16,9 @@ export default function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const freePostHrefs = buildFreePostHrefs();
   return (
-    <>
+    <DeskPostProvider hrefs={freePostHrefs}>
       <AlertBar />
       <SiteHeader />
       <main className="flex-1">{children}</main>
@@ -28,6 +31,6 @@ export default function PublicLayout({
         <SiteModalHost />
       </Suspense>
       <NewsletterModalHost />
-    </>
+    </DeskPostProvider>
   );
 }

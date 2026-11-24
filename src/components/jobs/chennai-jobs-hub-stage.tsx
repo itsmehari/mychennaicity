@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { JOBS_SEEKER_PASSAGE } from "@/content/aeo/jobs-events-passages";
 import { WhatsAppCommunityJoinLink } from "@/components/community/whatsapp-community-join-link";
 import type { ChennaiJobsHubCard } from "@/lib/jobs/chennai-jobs-hub-helpers";
-import { ADVERTISE_JOBS_PATH } from "@/lib/routes/advertise-listings";
+import { DeskPostAnchor } from "@/components/free-posting/desk-post-context";
 
 type Lane = "all" | "freshers" | "walk-in" | "office" | "featured";
 
@@ -100,12 +100,12 @@ export function ChennaiJobsHubStage({
               >
                 See open roles
               </a>
-              <Link
-                href={ADVERTISE_JOBS_PATH}
+              <DeskPostAnchor
+                kind="job"
                 className="inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/60"
               >
                 Post a job vacancy in Chennai
-              </Link>
+              </DeskPostAnchor>
             </div>
           </div>
 
