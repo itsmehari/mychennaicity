@@ -1,3 +1,4 @@
+import { posterForEventSlug } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
 
 export type EventPosterSpec = {
@@ -50,6 +51,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   "kartik-fine-arts-bharat-sundar-trichur-brothers-narada-december-2026": {
     src: "/images/events/kartik-fine-arts-52nd-art-festival-narada-gana-sabha-december-2026.png",
     alt: "Kartik Fine Arts 52nd Year Art Festival poster — K. Bharat Sundar and Trichur Brothers vocal concerts at Narada Gana Sabha Main Hall, Chennai, Monday 7 December 2026",
+  },
+  "carnatica-parthasarathy-swami-sabha-muralidharan-ramprasad-december-2026": {
+    src: "/images/events/carnatica-parthasarathy-swami-sabha-muralidharan-ramprasad-december-2026.png",
+    alt: "Carnatica and Sri Parthasarathy Swami Sabha Margazhi poster — Nagai R. Muralidharan violin at 4:30 PM and Palghat Ramprasad vocal at 6:45 PM, Sri Sankara Vidhyashramam Auditorium, Chennai, Tuesday 15 December 2026",
   },
   "sukoon-baithak-utkarsh-sharma-mathsya-adyar-september-2026": {
     src: "/images/events/sukoon-baithak-utkarsh-sharma-adyar-september-2026.jpg",
@@ -146,6 +151,10 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
   "vibrant-hues-art-cube-gallery-virugambakkam-november-2026": {
     src: "/images/events/vibrant-hues-art-cube-gallery-virugambakkam-november-2026.png",
     alt: "Vibrant Hues poster — Art Cube Gallery group exhibition of paintings and sculptures, Virugambakkam, Chennai, 31 October to 7 November 2026, 11 AM to 6 PM",
+  },
+  "flipkart-seller-summit-sathyabama-chennai-november-2026": {
+    src: "/images/events/flipkart-seller-summit-sathyabama-chennai-november-2026.png",
+    alt: "Flipkart Seller Summit 2026 poster — StartupTN and Sathyabama Institute of Science and Technology, Chennai, 28 November 2026",
   },
   "msme-solar-power-installation-training-guindy-november-2026": {
     src: "/images/events/msme-solar-power-installation-guindy-november-2026.png",
@@ -380,17 +389,17 @@ export function getEventExtraPosters(slug: string): EventPosterSpec[] {
   return EXTRA_POSTERS_BY_SLUG[slug.trim()] ?? [];
 }
 
-/** Returns a poster only when one is explicitly registered for the slug. */
+/** Registered flyer, or the artist schedule sheet when the slug is on a music page. */
 export function getEventPosterImage(
   slug: string,
   _fallbackTitle?: string,
   _description?: string | null,
 ): EventPosterSpec | null {
-  return getRegisteredEventPoster(slug);
+  return getRegisteredEventPoster(slug) ?? posterForEventSlug(slug);
 }
 
 export function hasEventPosterImage(slug: string): boolean {
-  return getRegisteredEventPoster(slug) !== null;
+  return getEventPosterImage(slug) !== null;
 }
 
 export function eventPosterAbsoluteUrl(
