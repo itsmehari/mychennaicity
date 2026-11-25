@@ -42,6 +42,7 @@ export default function ChennaiMargazhiDeskPage() {
       dek="Evergreen how-to for Chennai’s Music Season, plus a seasonal pack. Outside ~15 Dec–15 Jan IST we say so plainly — use events and festivals for dated listings."
       related={[
         { href: "/chennai-local-events", label: "Chennai local events" },
+        { href: "/music/artist", label: "Music artists" },
         { href: CHENNAI_FESTIVALS_GUIDE_PATH, label: "Festivals calendar" },
         { href: compulsivePath("temple-quiet"), label: "Temple quiet hours" },
         { href: compulsivePath("filter-coffee"), label: "Filter coffee map" },

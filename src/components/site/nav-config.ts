@@ -326,6 +326,11 @@ export const MEGA_NAV_SECTIONS: MegaNavSection[] = [
             description: "Pongal to Margazhi — year-round seasons.",
           },
           {
+            href: "/music/artist",
+            label: "Music artists",
+            description: "Season sheets for one musician, with each Chennai date.",
+          },
+          {
             href: ECR_WEEKEND_PLAN_PATH,
             label: "This weekend ECR plan",
             description: "TTDC coastal loop — kites, temple, biryani.",

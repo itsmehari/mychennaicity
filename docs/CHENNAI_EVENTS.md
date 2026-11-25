@@ -149,7 +149,10 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-india-retail-investors-expo-october-2026.ts` | `db:seed:event:india-retail-investors-expo:live` |
 | `seed-event-strings-of-rasa-siruseri-november-2026.ts` | `db:seed:event:strings-of-rasa:live` |
 | `seed-event-evening-of-classical-excellence-november-2026.ts` | `db:seed:event:classical-excellence:live` |
+| `seed-event-naada-inbam-mylai-karthikeyan-november-2026.ts` | `db:seed:event:naada-inbam-mylai-karthikeyan:live` |
 | `seed-event-roots-resonance-gems-margazhi-november-2026.ts` | `db:seed:event:roots-resonance-gems-margazhi:live` |
+| `seed-event-charumathi-raghuraman-margazhi-2026.ts` | `db:seed:event:charumathi-raghuraman-margazhi:live` (eight Chennai dates; artist page is code, not a DB row) |
+| `seed-event-jayanthi-kumaresh-margazhi-2026.ts` | `db:seed:event:jayanthi-kumaresh-margazhi:live` (nine Chennai dates; artist page is code, not a DB row) |
 | `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
 | `seed-event-gojobsync-mega-job-fair-december-2026.ts` | `db:seed:event:gojobsync-mega-job-fair:live` |
 | `seed-event-tiruvallur-farmers-grievance-day-october-2026.ts` | `db:seed:event:tiruvallur-farmers-grievance-day:live` |
@@ -157,17 +160,34 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 ---
 
-## 7. Roadmap (not built)
+## 7. Music artist pages
+
+**Routes:** `/music/artist` (directory) · `/music/artist/[slug]` (one musician)
+
+**Registry:** `src/content/music/` — add a file under `artists/`, export it from `index.ts`. The directory, sitemap, nav, and event-detail “season sheet” link all read that list.
+
+**Chennai dates** are normal `events` rows. Put `eventSlug` on each concert in the artist file and seed with `upsertEvent` from that file so the hub and the artist page stay the same facts. A date outside Chennai (another city, or a time marked TBD with no hall in the city) stays on the artist page with `eventSlug: null`.
+
+**Do not invent** a fare, a closing time, a street, or a biography the sheet does not print. Calendar end times are three-hour holds and the description says so. Ticket URL only when the sheet names one.
+
+**Poster:** one self-hosted sheet under `public/images/music/`. `getEventPosterImage` uses it for every linked event slug.
+
+**Interlinks:** artist page → each Chennai event, Margazhi desk, festivals calendar. Event detail and the events hub → `/music/artist`. Nav: Local events → Music artists.
+
+## 8. Roadmap (not built)
 
 - DB columns for organiser, category, ticket URL, hero image (would simplify hub cards and JSON-LD).
 - Home “Featured events” strip reuse of hub card components (home already has a DB-backed featured strip).
 
 ---
 
-## 8. Changelog
+## 9. Changelog
 
 | Date | Change |
 |------|--------|
+| 2026-11-25 | Dr Jayanthi Kumaresh Margazhi sheet (Saraswati veena; nine Chennai dates 9 Dec 2026–3 Jan 2027; Vani Mahal, Music Academy, Mylapore Fine Arts, Charsur, Kalakshetra; 3 Jan with Anil Srinivasan; tickets www.jayanthikumaresh.com/schedule; no fare, finish, or street printed; calendar hold +3 hours) via `db:seed:event:jayanthi-kumaresh-margazhi(:live)`. Artist page `/music/artist/jayanthi-kumaresh`. Poster `public/images/music/jayanthi-kumaresh-margazhi-concert-schedule-2026-27.png`. |
+| 2026-11-25 | Naada Inbam memorial nadaswaram (Mylai Karthikeyan, violin B. Ananthakrishnan, mridangam Vijay Ganesh, kanjira S. Sunil Kumar; in memory of Dr (Smt) Andal Ananthanarayanan and Sri V. Ananthanarayanan; Ragasudha Hall, Mylapore; Wed 25 Nov 2026, 6:15 PM; no fare or finish printed; calendar hold to 9:15 PM) via `db:seed:event:naada-inbam-mylai-karthikeyan(:live)`. No poster supplied. |
+| 2026-11-21 | Charumathi Raghuraman Margazhi sheet (violin; eight Chennai dates 23 Nov 2026–12 Jan 2027; Hyderabad Sankeertanotsav 4 Jan 2027 time TBD stays off the city calendar; tickets www.charuraghu.com; no fare or finish printed; calendar hold +3 hours) via `db:seed:event:charumathi-raghuraman-margazhi(:live)`. Artist pages `/music/artist` and `/music/artist/charumathi-raghuraman`. Poster `public/images/music/charumathi-raghuraman-margazhi-concert-schedule-2026-27.png`. |
 | 2026-11-20 | Roots & Resonance (Gems of Margazhi; Meenu Subbiah / Adithi Ganeshan; M S Subbulakshmi Auditorium, Taramani; Fri–Sun 27–29 Nov 2026; three-day line-up on poster; no time or fare printed; MDND mark only) via `db:seed:event:roots-resonance-gems-margazhi(:live)`. Poster `public/images/events/roots-resonance-gems-margazhi-taramani-november-2026.png`. Deploy poster for CDN. |
 | 2026-11-20 | An Evening of Classical Excellence (Yamaha Music India; violinist Nandini and the KM Conservatory Orchestra, named on the AllEvents listing; KM Music Conservatory, Arumbakkam; Wed 25 Nov 2026, 5:00 PM onwards; calendar held to 8:30 PM because no finish is printed; no fare printed; register on AllEvents) via `db:seed:event:classical-excellence(:live)`. Poster `public/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png`. Poster is on the live CDN only after this file is deployed. |
 | 2026-06-10 | Hub: kynhood-style discovery cards + category filter. Detail: mobile-first summary, sticky actions, share/calendar/maps. Docs + `ADD_CHENNAI_EVENT` prompt + Cursor rule + `seed-event-shared.ts`. |

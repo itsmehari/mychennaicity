@@ -36,6 +36,7 @@ import {
 } from "@/content/guides/post-classified-ad-chennai";
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { COMPULSIVE_SITEMAP_ENTRIES, COMPULSIVE_TAMIL_SITEMAP_PATHS } from "@/content/compulsive/index";
+import { musicSitemapEntries } from "@/content/music";
 import {
   EDUCATION_SITEMAP_ENTRIES,
   EDUCATION_TAMIL_SITEMAP_PATHS,
@@ -210,6 +211,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    ...musicSitemapEntries().map((entry) => ({
+      url: `${base}${entry.path}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: entry.priority,
+    })),
     {
       url: `${base}${CHENNAI_JOBS_HUB_PATH}`,
       lastModified: jobsLastModified,

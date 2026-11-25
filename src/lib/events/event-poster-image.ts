@@ -1,3 +1,4 @@
+import { posterForEventSlug } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
 
 export type EventPosterSpec = {
@@ -394,7 +395,7 @@ export function getEventPosterImage(
   _fallbackTitle?: string,
   _description?: string | null,
 ): EventPosterSpec | null {
-  return getRegisteredEventPoster(slug);
+  return getRegisteredEventPoster(slug) ?? posterForEventSlug(slug);
 }
 
 export function hasEventPosterImage(slug: string): boolean {

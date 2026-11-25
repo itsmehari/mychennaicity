@@ -22,6 +22,7 @@ import {
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
 import { eventListingCitation } from "@/content/aeo/jobs-events-passages";
+import { artistForEventSlug, musicArtistPath } from "@/content/music";
 import type { PublicEventRow } from "@/domains/events";
 import {
   formatEventDate,
@@ -180,6 +181,7 @@ export function EventDetailStandard({
   const { intro, rest } = splitDescriptionIntro(desc);
   const poster = getEventPosterImage(ev.slug);
   const extraPosters = getEventExtraPosters(ev.slug);
+  const linkedArtist = artistForEventSlug(ev.slug);
 
   return (
     <div className={`mcc-event-page ${interiorMainClassName}`}>
@@ -237,6 +239,19 @@ export function EventDetailStandard({
               <EventHostingCta className="mt-8" />
             </>
           )}
+
+          {linkedArtist ? (
+            <p className="mt-8 text-sm leading-relaxed text-[var(--muted)]">
+              Season sheet:{" "}
+              <Link
+                href={musicArtistPath(linkedArtist.slug)}
+                className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+              >
+                {linkedArtist.name}
+              </Link>
+              .
+            </p>
+          ) : null}
 
           <EventDetailsTable ev={ev} />
           <EventAudienceBlock ev={ev} />

@@ -1,6 +1,6 @@
 ---
 description: Chennai local events — read ADD_CHENNAI_EVENT.md when seeding, publishing, or editing hub/detail event UI.
-globs: scripts/seed-event*.ts,scripts/seed-*event*.ts,scripts/lib/seed-event-shared.ts,src/**/events/**,src/app/(public)/chennai-local-events/**,src/lib/events/**,src/styles/event*.css,docs/CHENNAI_EVENTS.md,docs/prompts/ADD_CHENNAI_EVENT.md
+globs: scripts/seed-event*.ts,scripts/seed-*event*.ts,scripts/lib/seed-event-shared.ts,src/**/events/**,src/app/(public)/chennai-local-events/**,src/app/(public)/music/**,src/content/music/**,src/components/music/**,src/lib/events/**,src/styles/event*.css,docs/CHENNAI_EVENTS.md,docs/prompts/ADD_CHENNAI_EVENT.md
 alwaysApply: false
 ---
 
@@ -16,5 +16,6 @@ When the user asks to **add**, **seed**, **publish**, or **list** a Chennai even
 6. **SEO:** Real Event JSON-LD only for DB rows; no fake pricing or organizer URLs. See `src/lib/seo/event-jsonld.ts`.
 7. **Production:** Live seed via `npm run db:seed:event:*:live` and `.env.production.local`; confirm Vercel `DATABASE_URL` target per `docs/DATABASE_AND_VERCEL.md`.
 8. **Images:** Register new remote hosts in `next.config.ts` before `next/image`.
+9. **Several dates for one musician:** registry in `src/content/music/` and pages at `/music/artist` and `/music/artist/[slug]`. Chennai dates are still `events` rows. Out-of-city dates stay on the artist page. See `docs/CHENNAI_EVENTS.md` §7.
 
 Do not remove existing event content when improving templates.
