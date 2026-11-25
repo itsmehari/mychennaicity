@@ -14,7 +14,8 @@ import {
   JOBS_SEEKER_PASSAGE,
   MUSIC_SEASON_PASSAGE,
 } from "@/content/aeo/jobs-events-passages";
-import { listMusicArtists, MUSIC_ARTISTS_PATH, musicArtistPath } from "@/content/music";
+import { listMusicArtists, listMusicSabhas, MUSIC_ARTISTS_PATH, MUSIC_SABHAS_PATH, musicArtistPath, musicSabhaPath } from "@/content/music";
+import { SABHAS_PASSAGE } from "@/content/music/sabha-copy";
 import {
   CLASSIFIEDS_BROWSE_PASSAGE,
   CLASSIFIEDS_POSTER_PASSAGE,
@@ -102,6 +103,13 @@ ${listMusicArtists()
   .map(
     (artist) =>
       `- [${artist.name}](${base}${musicArtistPath(artist.slug)}): ${artist.role}. ${artist.concerts.length} dates on the sheet.`,
+  )
+  .join("\n")}
+- [Sabhas](${base}${MUSIC_SABHAS_PATH}): ${SABHAS_PASSAGE}
+${listMusicSabhas()
+  .map(
+    (sabha) =>
+      `- [${sabha.name}](${base}${musicSabhaPath(sabha.slug)}): ${sabha.role}. ${sabha.sessions.length} sessions on the sheet.`,
   )
   .join("\n")}
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
@@ -307,6 +315,17 @@ ${listMusicArtists()
   .map(
     (artist) =>
       `- [${artist.name}](${base}${musicArtistPath(artist.slug)}): ${artist.role}. ${artist.concerts.length} dates on the sheet.`,
+  )
+  .join("\n")}
+
+## Where are Chennai sabha programmes?
+
+${SABHAS_PASSAGE}
+
+${listMusicSabhas()
+  .map(
+    (sabha) =>
+      `- [${sabha.name}](${base}${musicSabhaPath(sabha.slug)}): ${sabha.hall}. ${sabha.sessions.length} sessions.`,
   )
   .join("\n")}
 

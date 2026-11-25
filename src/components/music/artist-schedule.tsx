@@ -2,7 +2,9 @@ import { Fraunces } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  concertHoldEndLabel,
+  concertFinishInstant,
+  concertFinishLabel,
+  concertPrintsFinish,
   concertStartLabel,
   formatConcertDate,
 } from "@/content/music/format";
@@ -10,6 +12,8 @@ import {
   listMusicArtists,
   MUSIC_ARTISTS_PATH,
   musicArtistPath,
+  musicSabhaPath,
+  sabhasMatchingArtist,
   type MusicArtist,
   type MusicConcert,
 } from "@/content/music";
@@ -107,9 +111,10 @@ function groupBy<T>(
 }
 
 function listingHref(concert: MusicConcert): string | null {
-  return concert.eventSlug
-    ? `/chennai-local-events/${concert.eventSlug}`
-    : null;
+  if (!concert.eventSlug) return null;
+  const finish = concertFinishInstant(concert);
+  if (finish && finish.getTime() < Date.now()) return null;
+  return `/chennai-local-events/${concert.eventSlug}`;
 }
 
 function DateMark({ concert }: { concert: MusicConcert }) {
@@ -133,15 +138,18 @@ function ConcertFacts({
   concert: MusicConcert;
   light?: boolean;
 }) {
-  const hold = concertHoldEndLabel(concert);
+  const finish = concertFinishLabel(concert);
+  const printed = concertPrintsFinish(concert);
   const programme = programmeLine(concert);
   const muted = light ? "text-[#d9cbb6]" : "text-[var(--muted)]";
   return (
     <div className="mt-3 space-y-1.5 text-sm">
       <p className={light ? "text-[#f4efe4]" : "text-[var(--foreground)]"}>
         {concertStartLabel(concert)}
-        {hold ? (
-          <span className={muted}> · held to {hold}</span>
+        {finish ? (
+          <span className={muted}>
+            {printed ? ` · to ${finish}` : ` · held to ${finish}`}
+          </span>
         ) : null}
       </p>
       <p className={muted}>{concert.venueAddress}</p>
@@ -226,6 +234,10 @@ export function ArtistStage({ artist }: { artist: MusicArtist }) {
   const siblings = listMusicArtists().filter((item) => item.slug !== artist.slug);
   const related = [
     { href: MUSIC_ARTISTS_PATH, label: "Music season" },
+    ...sabhasMatchingArtist(artist).map((sabha) => ({
+      href: musicSabhaPath(sabha.slug),
+      label: `${sabha.name} sabha`,
+    })),
     ...siblings.map((item) => ({
       href: musicArtistPath(item.slug),
       label: `${item.name} concert schedule`,
@@ -268,9 +280,11 @@ export function ArtistStage({ artist }: { artist: MusicArtist }) {
           </div>
           <figcaption className="mt-3 text-xs leading-relaxed text-[#d9cbb6]">
             {artist.poster.src.startsWith("http")
-              ? `Photo of ${artist.name} from ${artist.ticketLabel}.`
+              ? `Photo of ${artist.name}${artist.ticketLabel ? ` from ${artist.ticketLabel}` : ""}.`
               : `Sheet published for ${artist.name}.`}{" "}
-            Tickets: {artist.ticketLabel}.
+            {artist.ticketLabel
+              ? `Tickets: ${artist.ticketLabel}.`
+              : "The sheet does not print a ticket link."}
           </figcaption>
         </figure>
         <div className="lg:col-span-7 lg:pb-8">
@@ -285,13 +299,19 @@ export function ArtistStage({ artist }: { artist: MusicArtist }) {
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#d9cbb6] sm:text-base">
             {artist.summary}
           </p>
-          <a
-            href={artist.ticketUrl}
-            className="mt-6 inline-flex rounded-full bg-[#e7c98a] px-4 py-2 text-sm font-semibold text-[#10241c]"
-            rel="noopener noreferrer"
-          >
-            Tickets on {artist.ticketLabel}
-          </a>
+          {artist.ticketUrl && artist.ticketLabel ? (
+            <a
+              href={artist.ticketUrl}
+              className="mt-6 inline-flex rounded-full bg-[#e7c98a] px-4 py-2 text-sm font-semibold text-[#10241c]"
+              rel="noopener noreferrer"
+            >
+              Tickets on {artist.ticketLabel}
+            </a>
+          ) : (
+            <p className="mt-6 text-sm text-[#d9cbb6]">
+              The sheet does not print a ticket link.
+            </p>
+          )}
           <dl className="mt-8 grid grid-cols-3 gap-3 text-[#f4efe4]">
             <div>
               <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#e7c98a]">
@@ -465,8 +485,10 @@ export function ArtistStage({ artist }: { artist: MusicArtist }) {
       </section>
 
       <p className="mt-10 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">
-        {artist.sourceNote} Closing times on the Chennai listings are calendar
-        holds of three hours after the printed start.
+        {artist.sourceNote}{" "}
+        {artist.concerts.some((concert) => !concertPrintsFinish(concert))
+          ? "Where the sheet does not print a close, the Chennai listing keeps a three-hour calendar hold."
+          : "The finish on each date is the time printed on the sheet."}
       </p>
 
       <section className="mt-10" aria-labelledby="artist-faq">

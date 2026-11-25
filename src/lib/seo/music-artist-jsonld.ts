@@ -33,6 +33,17 @@ function musicEventPlace(concert: MusicConcert): Record<string, unknown> {
   };
 }
 
+function printedEndIso(concert: MusicConcert): string | null {
+  if (concert.printedEndHour == null || concert.printedEndMinute == null) return null;
+  let date = concert.date;
+  if (concert.printedEndNextDay) {
+    const [year, month, day] = concert.date.split("-").map(Number);
+    const next = new Date(Date.UTC(year, month - 1, day + 1));
+    date = next.toISOString().slice(0, 10);
+  }
+  return isoDateTime(date, concert.printedEndHour, concert.printedEndMinute);
+}
+
 function isoDateTime(
   date: string,
   hour: number | null,
@@ -54,7 +65,7 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
     description: artistAnswer(artist),
     url: pageUrl,
     image,
-    sameAs: [artist.ticketUrl],
+    ...(artist.ticketUrl ? { sameAs: [artist.ticketUrl] } : {}),
     subjectOf: {
       "@type": "ItemList",
       name: `${artist.name} concert schedule`,
@@ -62,6 +73,7 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
         const eventUrl = concert.eventSlug
           ? `${base}/chennai-local-events/${concert.eventSlug}`
           : pageUrl;
+        const endDate = printedEndIso(concert);
         return {
           "@type": "ListItem",
           position: index + 1,
@@ -73,9 +85,12 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
               concert.startHour,
               concert.startMinute,
             ),
+            ...(endDate ? { endDate } : {}),
             description:
               concert.note ??
-              "The schedule sheet does not print a closing time.",
+              (endDate
+                ? "The sheet prints this finish."
+                : "The schedule sheet does not print a closing time."),
             eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
             eventStatus: "https://schema.org/EventScheduled",
             url: eventUrl,

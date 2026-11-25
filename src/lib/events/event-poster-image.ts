@@ -124,6 +124,18 @@ const POSTERS_BY_SLUG: Record<string, EventPosterSpec> = {
     src: "/images/events/strings-of-rasa-ramana-balachandhran-siruseri-november-2026.png",
     alt: "Strings of Rasa poster — Ramana Balachandhran veena evening at Mohamad Satak Auditorium, Siruseri, Sunday 1 November 2026, 5:30 PM",
   },
+  "music-academy-madras-academic-sessions-december-2026": {
+    src: "/images/events/music-academy-madras-academic-sessions-december-2026.jpg",
+    alt: "Music Academy Madras academic sessions sheet, 16 December 2026 to 1 January 2027, Kasturi Srinivasan Hall",
+  },
+  "kolkata-padmavathi-saranathan-music-academy-december-2026": {
+    src: "/images/events/kolkata-padmavathi-saranathan-music-academy-december-2026.png",
+    alt: "Music Academy Madras poster — Kolkata Padmavathi Saranathan vocal concert, T.T. Krishnamachari Auditorium, Monday 21 December 2026, 1:30 PM to 3:30 PM",
+  },
+  "sriranjani-tapasya-santhanagopalan-music-academy-december-2026": {
+    src: "/images/events/sriranjani-tapasya-santhanagopalan-music-academy-december-2026.png",
+    alt: "Music Academy Madras poster — Sriranjani Tapasya Santhanagopalan vocal concert, T.T. Krishnamachari Auditorium, Thursday 24 December 2026, 4:00 PM to 6:30 PM",
+  },
   "evening-of-classical-excellence-km-music-conservatory-november-2026": {
     src: "/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png",
     alt: "An Evening of Classical Excellence poster — Yamaha Music India and KM Music Conservatory, Arumbakkam, Chennai, Wednesday 25 November 2026, 5 PM onwards",

@@ -45,10 +45,18 @@ export function artistAnswer(artist: MusicArtist): string {
   const awayLine =
     away.length > 0
       ? ` ${away
-          .map((concert) => `${formatConcertDate(concert.date)} is in ${concert.city}`)
-          .join(" ")} and stays on this page.`
+          .map((concert) => {
+            const when = formatConcertDate(concert.date);
+            return concert.city
+              ? `${when} is in ${concert.city}`
+              : `${when} does not name a city`;
+          })
+          .join(". ")}. These dates stay on this page.`
       : "";
-  return `${artist.name}, ${artist.role}, has ${dates.length || span.length} Chennai concert dates${range}, across ${halls.length} halls.${awayLine} Tickets are on ${artist.ticketLabel}. mychennaicity.in does not sell these tickets.`;
+  const tickets = artist.ticketLabel
+    ? `Tickets are on ${artist.ticketLabel}.`
+    : "The sheet does not print a ticket link.";
+  return `${artist.name}, ${artist.role}, has ${dates.length || span.length} Chennai concert dates${range}, across ${halls.length} halls.${awayLine} ${tickets} mychennaicity.in does not sell these tickets.`;
 }
 
 export function artistPageTitle(artist: MusicArtist): string {
@@ -79,7 +87,9 @@ export function artistFaq(artist: MusicArtist): MusicFaqItem[] {
     },
     {
       question: `Where do I buy tickets for ${artist.name}?`,
-      answer: `Tickets are on ${artist.ticketUrl}. mychennaicity.in does not sell these tickets.`,
+      answer: artist.ticketUrl
+        ? `Tickets are on ${artist.ticketUrl}. mychennaicity.in does not sell these tickets.`
+        : "The sheet does not print a ticket link. mychennaicity.in does not sell these tickets.",
     },
   ];
 }

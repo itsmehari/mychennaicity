@@ -16,6 +16,7 @@ import { CHENNAI_SALARY_GUIDE_PATH } from "@/content/guides/chennai-salary-guide
 import { CHENNAI_EV_GUIDE_PATH } from "@/content/guides/chennai-ev-charging";
 import { compulsivePath } from "@/content/compulsive/index";
 import { CHENNAI_TOURISM_HUB_PATH, ECR_WEEKEND_PLAN_PATH } from "@/content/tourism";
+import { SABHAS_FOOTER_LINK } from "@/content/music/sabha-copy";
 import { MUSIC_SEASON_FOOTER_LINK } from "@/content/music/search-copy";
 
 const newsLinks = [
@@ -35,6 +36,7 @@ const discoverLinks = [
   { href: CHENNAI_GOLD_RATE_HUB_PATH, label: "Chennai gold & silver rate" },
   { href: "/chennai-local-events", label: "Chennai local events" },
   MUSIC_SEASON_FOOTER_LINK,
+  SABHAS_FOOTER_LINK,
   { href: "/chennai-local-events#events-weekend", label: "Events this weekend" },
   { href: CHENNAI_JOBS_HUB_PATH, label: "Chennai jobs" },
   { href: CHENNAI_FESTIVALS_GUIDE_PATH, label: "Festivals calendar" },

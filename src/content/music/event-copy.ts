@@ -1,5 +1,6 @@
 import {
-  concertHoldEndLabel,
+  concertFinishLabel,
+  concertPrintsFinish,
   concertStartLabel,
   formatConcertDate,
 } from "@/content/music/format";
@@ -26,20 +27,29 @@ export function concertEventDescription(
 ): string {
   const when = formatConcertDate(concert.date);
   const start = concertStartLabel(concert);
-  const hold = concertHoldEndLabel(concert);
+  const finish = concertFinishLabel(concert);
+  const printedFinish = concertPrintsFinish(concert);
   const organiser = concert.organiser
     ? `**Organiser:** ${concert.organiser}\n\n`
     : "";
   const note = concert.note ? `\n\n${concert.note}` : "";
   const withLine = concert.withLine ? `\n\n**With:** ${concert.withLine}` : "";
+  const booking =
+    artist.ticketUrl && artist.ticketLabel
+      ? `**Booking:** [${artist.ticketLabel}](${artist.ticketUrl}) — the sheet says to visit that site for tickets. It does not print a fare.`
+      : "**Booking:** The sheet does not print a ticket link or a fare.";
 
   return `${artist.name} is on the bill for **${concert.title}**.
 
-${organiser}**When:** ${when}, **${start} IST**. The schedule sheet does not print a closing time. This listing keeps the calendar open until **${hold}** so a listener can block the slot. That finish is a hold on this page, not a time the sheet printed.
+${organiser}**When:** ${when}, **${start}${finish ? ` to ${finish}` : ""} IST**. ${
+    printedFinish
+      ? "The sheet prints that finish."
+      : `The schedule sheet does not print a closing time. This listing keeps the calendar open until **${finish}** so a listener can block the slot. That finish is a hold on this page, not a time the sheet printed.`
+  }
 
 **Where:** ${concert.venueAddress}${withLine}
 
-**Booking:** [${artist.ticketLabel}](${artist.ticketUrl}) — the sheet says to visit that site for tickets. It does not print a fare.
+${booking}
 
 **Artist schedule:** [${artist.name}](${musicArtistPath(artist.slug)})
 

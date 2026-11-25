@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { charumathiRaghuraman } from "@/content/music/artists/charumathi-raghuraman";
 import { jayanthiKumaresh } from "@/content/music/artists/jayanthi-kumaresh";
+import { ramanaBalachandran } from "@/content/music/artists/ramana-balachandran";
+import { sreeranjaneKaushik } from "@/content/music/artists/sreeranjane-kaushik";
 import { concertEventDescription, concertEventTitle } from "@/content/music/event-copy";
 import {
   artistAnswer,
@@ -43,7 +45,7 @@ describe("music artists", () => {
         .filter((slug): slug is string => Boolean(slug)),
     );
     expect(new Set(eventSlugs).size).toBe(eventSlugs.length);
-    expect(eventSlugs).toHaveLength(17);
+    expect(eventSlugs).toHaveLength(40);
     expect(artistForEventSlug(eventSlugs[0])?.slug).toBe("charumathi-raghuraman");
     expect(getMusicArtist("jayanthi-kumaresh")?.name).toBe("Dr Jayanthi Kumaresh");
   });
@@ -151,9 +153,57 @@ describe("music artists", () => {
     expect(hub).toContain("CollectionPage");
     expect(hub).toContain("/music/artist/jayanthi-kumaresh");
     expect(hub).toContain("/music/artist/charumathi-raghuraman");
+    expect(hub).toContain("/music/artist/ramana-balachandran");
     expect(MUSIC_SEASON_FOOTER_LINK).toEqual({
       href: "/music/artist",
       label: "Music season",
     });
+  });
+
+  it("keeps Ramana’s sheet facts and leaves out-of-city dates off the calendar", () => {
+    expect(ramanaBalachandran.concerts).toHaveLength(19);
+    expect(ramanaBalachandran.ticketUrl).toBeNull();
+    const chennai = ramanaBalachandran.concerts.filter((concert) => concert.eventSlug);
+    expect(chennai).toHaveLength(13);
+    expect(chennai.every((concert) => concert.city === "Chennai")).toBe(true);
+    const away = ramanaBalachandran.concerts.filter((concert) => !concert.eventSlug);
+    expect(away.map((concert) => concert.city)).toEqual([
+      "Hyderabad",
+      "Thiruvisanallur",
+      "Varanasi",
+      "",
+      "Kolkata",
+      "Mumbai",
+    ]);
+    const mumbai = ramanaBalachandran.concerts.find((concert) => concert.id === "banyan-tree");
+    expect(mumbai?.startHour).toBeNull();
+    const description = concertEventDescription(ramanaBalachandran, chennai[0]);
+    expect(description).toContain("does not print a ticket link");
+    expect(description).not.toMatch(/₹/);
+    expect(artistAnswer(ramanaBalachandran)).toContain("does not print a ticket link");
+    expect(musicSitemapEntries().map((entry) => entry.path)).toContain(
+      "/music/artist/ramana-balachandran",
+    );
+  });
+
+  it("uses the printed 2025–26 finishes on Sreeranjane’s sheet", () => {
+    expect(sreeranjaneKaushik.concerts).toHaveLength(10);
+    expect(sreeranjaneKaushik.ticketUrl).toBeNull();
+    const first = sreeranjaneKaushik.concerts[0];
+    expect(first?.date).toBe("2025-12-04");
+    expect(first?.printedEndHour).toBe(12);
+    expect(first?.printedEndMinute).toBe(40);
+    const midnight = sreeranjaneKaushik.concerts.find((concert) => concert.id === "naadabrahmam");
+    expect(midnight?.printedEndNextDay).toBe(true);
+    const description = concertEventDescription(sreeranjaneKaushik, first!);
+    expect(description).toContain("prints that finish");
+    expect(description).not.toContain("does not print a closing time");
+    const swaranjali = sreeranjaneKaushik.concerts.find(
+      (concert) => concert.id === "swaranjali-delhi-parampara",
+    );
+    expect(concertEventDescription(sreeranjaneKaushik, swaranjali!)).toContain("Millenium");
+    const json = JSON.stringify(buildMusicArtistJsonLd(sreeranjaneKaushik));
+    expect(json).toContain("endDate");
+    expect(json).not.toContain("Offer");
   });
 });
