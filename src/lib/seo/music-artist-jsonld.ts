@@ -1,10 +1,37 @@
-import { concertHoldEnd, concertStartLabel } from "@/content/music/format";
+import { listMusicArtists } from "@/content/music";
+import { MUSIC_SEASON_PASSAGE } from "@/content/aeo/jobs-events-passages";
+import { artistAnswer, artistFaq, MUSIC_SEASON_HUB_TITLE } from "@/content/music/search-copy";
 import {
   MUSIC_ARTISTS_PATH,
   musicArtistPath,
   type MusicArtist,
+  type MusicConcert,
 } from "@/content/music/types";
 import { getSiteUrl } from "@/lib/env";
+
+function musicEventPlace(concert: MusicConcert): Record<string, unknown> {
+  const address: Record<string, string> = {
+    "@type": "PostalAddress",
+    addressLocality: concert.localityLabel || concert.city,
+  };
+  if (concert.city === "Chennai") {
+    address.addressRegion = "Tamil Nadu";
+    address.addressCountry = "IN";
+  }
+  const bare = `${concert.venueName}, ${concert.city}`;
+  if (
+    concert.venueAddress &&
+    concert.venueAddress !== bare &&
+    !concert.note?.includes("does not print a street")
+  ) {
+    address.streetAddress = concert.venueAddress;
+  }
+  return {
+    "@type": "Place",
+    name: concert.venueName,
+    address,
+  };
+}
 
 function isoDateTime(
   date: string,
@@ -24,7 +51,7 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
     "@context": "https://schema.org",
     "@type": "Person",
     name: artist.name,
-    description: artist.summary,
+    description: artistAnswer(artist),
     url: pageUrl,
     image,
     sameAs: [artist.ticketUrl],
@@ -32,7 +59,6 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
       "@type": "ItemList",
       name: `${artist.name} concert schedule`,
       itemListElement: artist.concerts.map((concert, index) => {
-        const hold = concertHoldEnd(concert);
         const eventUrl = concert.eventSlug
           ? `${base}/chennai-local-events/${concert.eventSlug}`
           : pageUrl;
@@ -47,20 +73,9 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
               concert.startHour,
               concert.startMinute,
             ),
-            ...(hold
-              ? {
-                  endDate: isoDateTime(concert.date, hold.hour, hold.minute),
-                  description: `Calendar hold until ${concertStartLabel({
-                    ...concert,
-                    startHour: hold.hour,
-                    startMinute: hold.minute,
-                  })}. The schedule sheet does not print a closing time.`,
-                }
-              : {
-                  description:
-                    concert.note ??
-                    "Time printed as TBD on the schedule sheet.",
-                }),
+            description:
+              concert.note ??
+              "The schedule sheet does not print a closing time.",
             eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
             eventStatus: "https://schema.org/EventScheduled",
             url: eventUrl,
@@ -68,14 +83,46 @@ export function buildMusicArtistJsonLd(artist: MusicArtist): Record<string, unkn
             ...(concert.organiser
               ? { organizer: { "@type": "Organization", name: concert.organiser } }
               : {}),
-            location: {
-              "@type": "Place",
-              name: concert.venueName,
-              address: concert.venueAddress,
-            },
+            location: musicEventPlace(concert),
           },
         };
       }),
+    },
+  };
+}
+
+export function buildMusicArtistFaqJsonLd(
+  artist: MusicArtist,
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: artistFaq(artist).map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
+export function buildMusicHubJsonLd(): Record<string, unknown> {
+  const base = getSiteUrl().replace(/\/$/, "");
+  const artists = listMusicArtists();
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: MUSIC_SEASON_HUB_TITLE,
+    description: MUSIC_SEASON_PASSAGE,
+    url: `${base}${MUSIC_ARTISTS_PATH}`,
+    mainEntity: {
+      "@type": "ItemList",
+      name: MUSIC_SEASON_HUB_TITLE,
+      itemListElement: artists.map((artist, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: artist.name,
+        url: `${base}${musicArtistPath(artist.slug)}`,
+      })),
     },
   };
 }
@@ -92,7 +139,7 @@ export function buildMusicArtistBreadcrumbJsonLd(
       {
         "@type": "ListItem",
         position: 2,
-        name: "Music artists",
+        name: "Music season",
         item: `${base}${MUSIC_ARTISTS_PATH}`,
       },
       {

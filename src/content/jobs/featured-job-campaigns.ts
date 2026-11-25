@@ -18,8 +18,20 @@ export type FeaturedJobCampaign = {
   contextTa: string;
 };
 
-/** Assetowns Padur OMR six-pack through 17 Jan 2027. Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. Lenskart walk-in through 27 Nov 2026. */
+/** Assetowns Padur OMR six-pack through 17 Jan 2027. Casting studio through 13 Dec 2026. Guindy office assistant through 1 Dec 2026. Lenskart walk-in through 27 Nov 2026. Wedding Assist Guindy telesales through 23 Feb 2027. */
 export const FEATURED_JOB_CAMPAIGNS: readonly FeaturedJobCampaign[] = [
+  {
+    id: "wedding-assist-tele-sales-guindy-2026-11",
+    englishSlug:
+      "tele-sales-executive-wedding-assist-guindy-walk-in-november-2026",
+    from: "2026-11-25",
+    until: "2027-02-23",
+    areaHubSlugs: ["saidapet-guindy-alandur"],
+    contextEn:
+      "Tele Sales Executive — Wedding Assist, Guindy walk-in (RR Tower 3). Full-time on-roll; Mon–Sat 9:30 AM–6:30 PM. 1–8 yrs telesales. Call HR Rahman.",
+    contextTa:
+      "டெலி சேல்ஸ் எக்ஸிக்யூட்டிவ் — Wedding Assist, கிண்டி வாக்-இன் (RR Tower 3). புல் டைம் ஆன்-ரோல்; திங்கள்–சனி காலை 9:30 – மாலை 6:30. டெலிசேல்ஸில் 1–8 வருடம். HR ரஹ்மானை அழைக்கவும்.",
+  },
   {
     id: "lenskart-sales-associate-walk-in-2026-11",
     englishSlug: "sales-associate-lenskart-walk-in-chennai-november-2026",

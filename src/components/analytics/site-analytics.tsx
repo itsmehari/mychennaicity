@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { resolveAdsenseClientId } from "@/lib/adsense-config";
 import { AdSensePathGate } from "./adsense-path-gate";
 import { PartnerOutboundClickTracker } from "@/components/ads/partner-outbound-analytics";
 import { GoogleAnalyticsRouteTracker } from "./google-analytics-route-tracker";
 import { GoogleAnalyticsScripts } from "./google-analytics-scripts";
+import { VercelAnalyticsGate } from "./vercel-analytics-gate";
 
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
 const adsenseClientId = resolveAdsenseClientId(
@@ -18,8 +18,9 @@ type Props = {
 };
 
 /**
- * Single entry for all site-wide measurement. Mounted once in `app/layout.tsx`
- * so every route (public, admin, API error pages, etc.) is covered.
+ * Single entry for all site-wide measurement. Mounted once in `app/layout.tsx`.
+ * `/super-admin` (and the old `/admin` and `/login` URLs) do not send a GA4
+ * page view. IP exclusion still skips Google tags entirely.
  */
 export function SiteAnalytics({
   suppressGoogleMeasurement = false,
@@ -39,7 +40,7 @@ export function SiteAnalytics({
         <AdSensePathGate clientId={adsenseClientId} />
       ) : null}
       <PartnerOutboundClickTracker />
-      <Analytics />
+      <VercelAnalyticsGate />
       <SpeedInsights />
     </>
   );

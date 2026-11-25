@@ -23,7 +23,7 @@ import {
 import { HomeClassifiedsSpotlight } from "@/components/home/home-classifieds-spotlight";
 import { HomeListingPitchLinks } from "@/components/home/home-listing-pitch-links";
 import { HomeCommunityBand } from "@/components/home/home-community-band";
-import { WhatsAppPlacementCta } from "@/components/community/whatsapp-placement-cta";
+import { HomeWhatsAppPromoBand } from "@/components/home/home-whatsapp-promo-band";
 import { HomeToolsStrip } from "@/components/home/home-tools-strip";
 import { AdvertisePanel } from "@/components/ads/advertise-panel";
 import { PageAdSlot } from "@/components/ads/page-ad-slot";
@@ -86,8 +86,8 @@ export default async function Home() {
       <HomeJsonLd />
       <div className="px-3 pt-4 sm:px-4 sm:pt-6 lg:px-6 xl:px-8">
         <HomeHero />
-        <div className="mx-auto mt-4 max-w-[1280px] px-1 sm:px-2">
-          <WhatsAppPlacementCta pageType="home" slot="hero_secondary" />
+        <div className="mx-auto px-1 sm:px-2">
+          <HomeWhatsAppPromoBand />
         </div>
       </div>
       <div className="mx-auto max-w-[1280px] px-4 py-10 sm:py-14">
@@ -96,6 +96,9 @@ export default async function Home() {
         </div>
         <HomeSectionFrame>
           <HomeTrustStrip />
+        </HomeSectionFrame>
+        <HomeSectionFrame id="community">
+          <HomeCommunityBand />
         </HomeSectionFrame>
         <HomeSectionFrame>
           <HomeToolsStrip />
@@ -162,9 +165,6 @@ export default async function Home() {
         </HomeSectionFrame>
         <HomeSectionFrame>
           <HomeSponsoredRow />
-        </HomeSectionFrame>
-        <HomeSectionFrame className="border-b border-[var(--home-section-border)] pb-12 sm:pb-16">
-          <HomeCommunityBand />
         </HomeSectionFrame>
       </div>
     </>

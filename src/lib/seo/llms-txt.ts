@@ -12,7 +12,9 @@ import {
   EVENTS_SEARCHER_PASSAGE,
   JOBS_POSTER_PASSAGE,
   JOBS_SEEKER_PASSAGE,
+  MUSIC_SEASON_PASSAGE,
 } from "@/content/aeo/jobs-events-passages";
+import { listMusicArtists, MUSIC_ARTISTS_PATH, musicArtistPath } from "@/content/music";
 import {
   CLASSIFIEDS_BROWSE_PASSAGE,
   CLASSIFIEDS_POSTER_PASSAGE,
@@ -95,6 +97,13 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Chennai classifieds](${base}/chennai-classifieds): ${CLASSIFIEDS_BROWSE_PASSAGE}
 - [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
 - [Chennai local events](${base}/chennai-local-events): ${EVENTS_SEARCHER_PASSAGE}
+- [Music season](${base}${MUSIC_ARTISTS_PATH}): ${MUSIC_SEASON_PASSAGE}
+${listMusicArtists()
+  .map(
+    (artist) =>
+      `- [${artist.name}](${base}${musicArtistPath(artist.slug)}): ${artist.role}. ${artist.concerts.length} dates on the sheet.`,
+  )
+  .join("\n")}
 - [Chennai areas](${base}/areas): Neighbourhood hubs from coastal belts to OMR and suburban corridors
 - [Chennai gold rate](${base}/chennai-gold-rate): Local gold rate snapshot, Tamil summary, [history](${base}/chennai-gold-rate/history), [buying guide](${base}/guides/buying-gold-in-chennai)
 - [Site search](${base}/search): Search news, jobs, events, and directory entries
@@ -289,6 +298,17 @@ Upcoming listings: [${base}/chennai-local-events](${base}/chennai-local-events)
 ${bullets(input.events, "Open the events hub for the current calendar.")}
 
 Confirm venue and tickets with the organiser before travelling.
+
+## Where are Chennai concert schedules?
+
+${MUSIC_SEASON_PASSAGE}
+
+${listMusicArtists()
+  .map(
+    (artist) =>
+      `- [${artist.name}](${base}${musicArtistPath(artist.slug)}): ${artist.role}. ${artist.concerts.length} dates on the sheet.`,
+  )
+  .join("\n")}
 
 ## Everyday Chennai tools
 

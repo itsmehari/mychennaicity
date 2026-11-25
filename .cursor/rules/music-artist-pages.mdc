@@ -1,0 +1,17 @@
+---
+description: Music artist pages — shared season-sheet layout. Read MUSIC_ARTIST_PAGE.md before designing or editing /music/artist.
+globs: src/app/(public)/music/**,src/components/music/**,src/content/music/**
+alwaysApply: false
+---
+
+# Music artist pages
+
+When you add a musician or change the artist page layout:
+
+1. **Read first:** `docs/prompts/MUSIC_ARTIST_PAGE.md` and `docs/CHENNAI_EVENTS.md` §7.
+2. **One stage for every artist.** Use `ArtistStage` in `src/components/music/artist-schedule.tsx`. Do not add a per-slug page or a vertical date list.
+3. **Five readings of the same concerts:** magazine hero, staggered season path, content-aware bento, month boards, hall masonry. Featured cards follow the guide (sheet “event” marks, else the out-of-city date plus the first and last concert).
+4. **Facts stay on the sheet.** No invented fare, finish, street, PIN, or biography. The street/fare caveat is one source note, not a line on every card.
+5. **Chennai dates** stay `events` rows with `eventSlug`. A date outside the city keeps `eventSlug: null` and no listing link.
+6. **Check both artists** after a layout change. Jayanthi and Charumathi must show the same sections.
+7. **Search is automatic.** Use `musicArtistMetadata`, the shared answer, and `artistFaq`. JSON-LD stays in `src/lib/seo/music-artist-jsonld.ts`: no `Offer`, no hold `endDate`, Chennai `PostalAddress`. Footer links the hub once via `MUSIC_SEASON_FOOTER_LINK`. `llms.txt` lists every artist from the registry.

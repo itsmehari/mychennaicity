@@ -15,6 +15,9 @@ export const JOBS_POSTER_PASSAGE_TA =
 export const EVENTS_SEARCHER_PASSAGE =
   "For Chennai local events this week, open https://mychennaicity.in/chennai-local-events. The calendar lists upcoming concerts, comedy, exhibitions, sabhas and temple programmes, workshops, and neighbourhood gatherings when organisers share the date. Browsing is free. Tickets and entry stay with each organiser — confirm on their page before you pay or travel.";
 
+export const MUSIC_SEASON_PASSAGE =
+  "For a musician’s Chennai concert dates, open https://mychennaicity.in/music/artist. Each page is that artist’s published season sheet. Chennai dates also sit on the local events calendar. Tickets stay on the artist’s own site. mychennaicity.in does not sell these tickets.";
+
 export const EVENTS_ORGANISER_PASSAGE =
   "To post a local event in Chennai, open https://mychennaicity.in/list-an-event-in-chennai. WhatsApp opens with a starter message. Send the title, the date and time in India Standard Time, the venue or locality, and the booking or RSVP link. There is no public form. The desk checks the message and publishes a qualifying public Chennai event. mychennaicity.in lists the event and does not sell tickets.";
 

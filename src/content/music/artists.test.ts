@@ -2,6 +2,13 @@ import { describe, expect, it } from "vitest";
 import { charumathiRaghuraman } from "@/content/music/artists/charumathi-raghuraman";
 import { jayanthiKumaresh } from "@/content/music/artists/jayanthi-kumaresh";
 import { concertEventDescription, concertEventTitle } from "@/content/music/event-copy";
+import {
+  artistAnswer,
+  artistFaq,
+  artistPageTitle,
+  MUSIC_SEASON_FOOTER_LINK,
+  musicArtistMetadata,
+} from "@/content/music/search-copy";
 import { concertHoldEnd } from "@/content/music/format";
 import {
   artistForEventSlug,
@@ -11,7 +18,11 @@ import {
   musicSitemapEntries,
   MUSIC_ARTISTS_PATH,
 } from "@/content/music";
-import { buildMusicArtistJsonLd } from "@/lib/seo/music-artist-jsonld";
+import {
+  buildMusicArtistFaqJsonLd,
+  buildMusicArtistJsonLd,
+  buildMusicHubJsonLd,
+} from "@/lib/seo/music-artist-jsonld";
 
 describe("music artists", () => {
   it("keeps unique artist slugs and Chennai event slugs", () => {
@@ -106,5 +117,43 @@ describe("music artists", () => {
     expect(concertEventDescription(jayanthiKumaresh, withAnil!)).toContain(
       "Anil Srinivasan",
     );
+  });
+
+  it("builds Chennai titles, answers, and FAQ from the sheet", () => {
+    const title = artistPageTitle(jayanthiKumaresh);
+    const answer = artistAnswer(jayanthiKumaresh);
+    const faq = artistFaq(jayanthiKumaresh);
+    expect(title).toBe("Dr Jayanthi Kumaresh — concert schedule, Chennai");
+    expect(answer).toContain("Chennai");
+    expect(answer).toContain("does not sell these tickets");
+    expect(answer).not.toMatch(/₹/);
+    expect(faq.map((item) => item.question)).toEqual([
+      "When is Dr Jayanthi Kumaresh performing in Chennai?",
+      "Where are Dr Jayanthi Kumaresh's Chennai concerts?",
+      "Where do I buy tickets for Dr Jayanthi Kumaresh?",
+    ]);
+    expect(JSON.stringify(buildMusicArtistFaqJsonLd(jayanthiKumaresh))).toContain(
+      faq[0]?.answer,
+    );
+
+    const meta = musicArtistMetadata(jayanthiKumaresh);
+    expect(meta.description).toBe(answer);
+    expect(meta.title).toBe(title);
+
+    const json = JSON.stringify(buildMusicArtistJsonLd(jayanthiKumaresh));
+    expect(json).toContain("PostalAddress");
+    expect(json).toContain('"addressCountry":"IN"');
+    expect(json).not.toContain("endDate");
+    expect(json).not.toContain("Offer");
+    expect(json).not.toContain("streetAddress");
+
+    const hub = JSON.stringify(buildMusicHubJsonLd());
+    expect(hub).toContain("CollectionPage");
+    expect(hub).toContain("/music/artist/jayanthi-kumaresh");
+    expect(hub).toContain("/music/artist/charumathi-raghuraman");
+    expect(MUSIC_SEASON_FOOTER_LINK).toEqual({
+      href: "/music/artist",
+      label: "Music season",
+    });
   });
 });

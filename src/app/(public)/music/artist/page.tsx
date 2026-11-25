@@ -6,25 +6,15 @@ import {
   PageBreadcrumbs,
   interiorMainClassName,
 } from "@/components/site/interior-chrome";
-import { listMusicArtists, MUSIC_ARTISTS_PATH } from "@/content/music";
-import { getSiteUrl } from "@/lib/env";
-import { fullSiteTitle } from "@/lib/seo/site-titles";
+import { MUSIC_SEASON_PASSAGE } from "@/content/aeo/jobs-events-passages";
+import { listMusicArtists } from "@/content/music";
+import {
+  MUSIC_SEASON_HUB_TITLE,
+  musicHubMetadata,
+} from "@/content/music/search-copy";
+import { buildMusicHubJsonLd } from "@/lib/seo/music-artist-jsonld";
 
-const titleSegment = "Music artists";
-const description =
-  "Musician schedule pages for Chennai concerts. Each artist page lists the dates we have on file and links the Chennai ones to the local events calendar.";
-
-export const metadata: Metadata = {
-  title: titleSegment,
-  description,
-  alternates: { canonical: `${getSiteUrl()}${MUSIC_ARTISTS_PATH}` },
-  openGraph: {
-    title: fullSiteTitle(titleSegment),
-    description,
-    url: `${getSiteUrl()}${MUSIC_ARTISTS_PATH}`,
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-  },
-};
+export const metadata: Metadata = musicHubMetadata();
 
 export default function MusicArtistsPage() {
   const artists = listMusicArtists();
@@ -34,25 +24,31 @@ export default function MusicArtistsPage() {
       <PageBreadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Music artists" },
+          { label: "Music season" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildMusicHubJsonLd()) }}
       />
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--accent-warm)]">
         Music
       </p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--foreground)] sm:text-4xl">
-        Music artists
+      <h1 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-[var(--foreground)] sm:text-4xl">
+        {MUSIC_SEASON_HUB_TITLE}
       </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--muted)]">
-        Season sheets for musicians playing in Chennai. Open an artist for the
-        full list of dates. City concerts also sit on the{" "}
+      <p className="mt-4 max-w-3xl text-base leading-relaxed text-[var(--foreground)]">
+        {MUSIC_SEASON_PASSAGE}
+      </p>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+        Open an artist for the dates on that sheet. City concerts also sit on the{" "}
         <Link
           href="/chennai-local-events"
           className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
         >
           Chennai local events
         </Link>{" "}
-        calendar. Tickets stay with the artist or the sabha.
+        calendar.
       </p>
       <ArtistDirectoryList artists={artists} />
       <p className="mt-8 text-sm text-[var(--muted)]">

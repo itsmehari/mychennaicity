@@ -28,7 +28,7 @@ Full narrative, agent habits, and **SOPs** (DB deploy, live empty home, ads/lega
 
 **Site modals (campaign / top-story / WhatsApp):** **`docs/SITE_MODAL_SYSTEM.md`** — `data-site-cta`, homepage auto + session cap, flag `NEXT_PUBLIC_SITE_MODAL_AUTO`.
 
-**Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`. Musician season sheets live at **`/music/artist`** and **`/music/artist/[slug]`** (`src/content/music/`). Chennai dates are still event rows.
+**Chennai local events (add / seed / hub UI):** read **`docs/prompts/ADD_CHENNAI_EVENT.md`** and **`docs/CHENNAI_EVENTS.md`**; Cursor rule **`.cursor/rules/chennai-events.mdc`** applies to event routes, components, and `scripts/seed-event-*.ts`. Musician season sheets live at **`/music/artist`** and **`/music/artist/[slug]`** (`src/content/music/`). Chennai dates are still event rows. Layout for every artist: **`docs/prompts/MUSIC_ARTIST_PAGE.md`** and **`.cursor/rules/music-artist-pages.mdc`**.
 
 **Chennai classifieds (post / seed / growth):** hub **`/chennai-classifieds`**; supply **`/advertise/classifieds`** (+ Tamil); SEO guide **`/guides/post-classified-ad-chennai`**; PRD **`docs/CHENNAI_CLASSIFIEDS_GROWTH_PRD.md`**. Unnamed hirer wanted posts → classifieds `services`; named employer → jobs. SOP M for phone gate and privacy takedown.
 

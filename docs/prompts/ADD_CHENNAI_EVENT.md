@@ -20,7 +20,7 @@
 8. **Idempotent seeds:** skip insert when `(city_id, slug)` exists; log and exit cleanly.
 9. After **live** seed, verify hub card + detail page on production URL.
 10. **Rich festival?** Only use `presentation_key: "festival_rich"` when you will add the full content bundle (schedule, PDF, FAQ). Otherwise use standard prose layout.
-11. **Artist sheet with several dates?** Add the musician under `src/content/music/artists/`, link each Chennai date with `eventSlug`, and leave out-of-city dates off the events table. See `docs/CHENNAI_EVENTS.md` §7. One seed can upsert every Chennai row from that file.
+11. **Artist sheet with several dates?** Add the musician under `src/content/music/artists/`, link each Chennai date with `eventSlug`, and leave out-of-city dates off the events table. See `docs/CHENNAI_EVENTS.md` §7 and the layout guide `docs/prompts/MUSIC_ARTIST_PAGE.md`. One seed can upsert every Chennai row from that file. Do not design a separate page per artist.
 
 ---
 

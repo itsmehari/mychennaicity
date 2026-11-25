@@ -2,6 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { isInternalMeasurementPath } from "@/lib/analytics/measurement-paths";
 
 type Props = {
   measurementId: string;
@@ -20,6 +21,11 @@ export function GoogleAnalyticsRouteTracker({ measurementId }: Props) {
   const isFirst = useRef(true);
 
   useEffect(() => {
+    if (isInternalMeasurementPath(pathname)) {
+      // The tag suppressed the first hit. The next public page must be sent.
+      isFirst.current = false;
+      return;
+    }
     if (isFirst.current) {
       isFirst.current = false;
       return;

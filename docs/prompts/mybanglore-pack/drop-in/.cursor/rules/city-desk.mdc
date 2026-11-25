@@ -12,7 +12,7 @@ alwaysApply: true
 - Do not invent phones, salaries, fares, ward numbers, or story counts. Hide empty homepage blocks.
 - JSON-LD only for real published rows.
 - News: disclaimer near the top, AI fine print at the end.
-- WhatsApp invite only after `/whatsapp-community/join` stores name, phone, and area.
+- WhatsApp: after `/whatsapp-community/join` stores name, phone, and area, the visitor messages the desk. The invite is the reply in that chat. It is not on the success screen.
 - Escape output. Prepared statements. CSRF on POST. Secrets stay in gitignored config.
 - Photos: operator files or a named free licence (Wikimedia / Unsplash) with credit. No hotlinked Google results.
 - Official bodies (BMRCL, BMTC, BWSSB, BESCOM, city corporations) are sources to link, not names to impersonate.

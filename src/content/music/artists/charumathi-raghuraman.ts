@@ -3,8 +3,8 @@ import { MARGAZHI_DESK_PATH } from "@/content/compulsive/margazhi-desk";
 import type { MusicArtist } from "@/content/music/types";
 
 const POSTER = {
-  src: "/images/music/charumathi-raghuraman-margazhi-concert-schedule-2026-27.png",
-  alt: "Margazhi Concert Schedule 2026–27 for Charumathi Raghuraman, with Chennai dates from 23 November 2026 to 12 January 2027 and a Hyderabad date on 4 January",
+  src: "https://static.wixstatic.com/media/878306_89e45484a0074b3dbed7845e6c272d8b~mv2.jpg",
+  alt: "Charumathi Raghuraman with a violin. Photo from charuraghu.com.",
 };
 
 /**

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { isInternalMeasurementPath } from "@/lib/analytics/measurement-paths";
 import { GoogleAdSenseScripts } from "./google-adsense-scripts";
 
 function isPaidBusinessProfilePath(pathname: string): boolean {
@@ -11,6 +12,6 @@ function isPaidBusinessProfilePath(pathname: string): boolean {
 /** Paid listing pages stay clear of Auto ads. The script is omitted on those routes. */
 export function AdSensePathGate({ clientId }: { clientId: string }) {
   const pathname = usePathname() || "/";
-  if (isPaidBusinessProfilePath(pathname)) return null;
+  if (isPaidBusinessProfilePath(pathname) || isInternalMeasurementPath(pathname)) return null;
   return <GoogleAdSenseScripts clientId={clientId} />;
 }

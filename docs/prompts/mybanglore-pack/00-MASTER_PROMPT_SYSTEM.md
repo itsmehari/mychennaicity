@@ -140,7 +140,7 @@ Title template: `{Segment} · mybanglore.in`. Do not put the domain inside the s
 - Job salary appears only when the source printed a figure. Apply links go to the employer. Do not invent a company name.
 - Map pins and GeoJSON are editorial browsing aids. Say so on the map. They are not a legal boundary survey.
 - Greater Bengaluru’s municipal map changed after BBMP. Residents still say BBMP. Glossary may record that. Do not publish a ward finder until a file from an official source is in the repo.
-- WhatsApp: public buttons go to `/whatsapp-community/join`. Store name, phone, and area, then show the invite. The invite lives in config outside git. Do not print `chat.whatsapp.com` in the header, footer, homepage, or JSON-LD.
+- WhatsApp: public buttons go to `/whatsapp-community/join`. Store name, phone, and area. The success screen asks them to message the desk. The invite is the reply in that chat, and it lives in config outside git. Do not print `chat.whatsapp.com` in the header, footer, homepage, JSON-LD, or on the success screen.
 - Canonical host is `https://mybanglore.in`. `www` 301s to the apex. No other TLD in copy, links, or schema.
 - Time zone `Asia/Kolkata`. Rupees as INR. Dates in Indian English.
 
@@ -572,7 +572,7 @@ Add one fixture SQL file the operator can import on a staging database, clearly 
 
 - Pages: about, contact (anchors `#directory`, `#events`, `#advertise`), editorial standards, privacy, terms, cookies, community guidelines, humans.txt.
 - Contact form stores a message or, if you only have email, `mailto` the desk address from config. Do not invent a phone number.
-- Newsletter POST and WhatsApp join POST with CSRF. WhatsApp success page shows the invite from config. If the invite is empty, say the group link is not configured.
+- Newsletter POST and WhatsApp join POST with CSRF. The WhatsApp success page asks them to message the desk. It does not show the invite. If the desk number is missing, hide the button.
 - `/desk` login. Publish, unpublish, and feature an article. Edit title, dek, body, topic, source name, source URL. Password from config.
 - `/sitemap.xml` lists only 200-class public URLs (published articles, open jobs, upcoming events, published directory rows, area hubs, static pages).
 - `/robots.txt` allows the public site and disallows `/desk`.

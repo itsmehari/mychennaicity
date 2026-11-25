@@ -49,7 +49,7 @@ Title template: `{Segment} · mybanglore.in`. Do not put the domain inside the s
 - Job salary appears only when the source printed a figure. Apply links go to the employer. Do not invent a company name.
 - Map pins and GeoJSON are editorial browsing aids. Say so on the map. They are not a legal boundary survey.
 - Greater Bengaluru’s municipal map changed after BBMP. Residents still say BBMP. Glossary may record that. Do not publish a ward finder until a file from an official source is in the repo.
-- WhatsApp: public buttons go to `/whatsapp-community/join`. Store name, phone, and area, then show the invite. The invite lives in config outside git. Do not print `chat.whatsapp.com` in the header, footer, homepage, or JSON-LD.
+- WhatsApp: public buttons go to `/whatsapp-community/join`. Store name, phone, and area. The success screen asks them to message the desk. The invite is the reply in that chat, and it lives in config outside git. Do not print `chat.whatsapp.com` in the header, footer, homepage, JSON-LD, or on the success screen.
 - Canonical host is `https://mybanglore.in`. `www` 301s to the apex. No other TLD in copy, links, or schema.
 - Time zone `Asia/Kolkata`. Rupees as INR. Dates in Indian English.
 

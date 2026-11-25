@@ -8,7 +8,7 @@ Written 5 November 2026 so the chat answers travel with the folder. The new proj
 - That spelling is already published on mychennaicity.in (4 November 2026). Do not rename it to mybangalore.in or mybengaluru.in.
 - In sentences the city is **Bengaluru**. “Bangalore” only when quoting search language or a printed source.
 - Same family as mychennaicity.in and mycovai.in. Independent of BBMP, the Greater Bengaluru Authority, BMRCL, BMTC, BWSSB, BESCOM, and the Karnataka government.
-- The WhatsApp invite already exists. It stays in server config. Public buttons go to `/whatsapp-community/join`, store name, phone, and area, then show the invite.
+- The WhatsApp invite already exists. It stays in server config. Public buttons go to `/whatsapp-community/join`. The form stores name, phone, and area. The success screen asks them to message the desk. The invite is the reply in that chat.
 
 ## What to copy from Chennai, and what to leave
 

@@ -17,6 +17,10 @@ describe("llms.txt builders", () => {
     expect(md).toContain("https://mychennaicity.in/chennai-jobs");
     expect(md).toContain("https://mychennaicity.in/chennai-jobs/looking-for-work");
     expect(md).toContain("https://mychennaicity.in/chennai-local-events");
+    expect(md).toContain("https://mychennaicity.in/music/artist");
+    expect(md).toContain("https://mychennaicity.in/music/artist/jayanthi-kumaresh");
+    expect(md).toContain("https://mychennaicity.in/music/artist/charumathi-raghuraman");
+    expect(md).toContain("does not sell these tickets");
     expect(md).not.toContain("# Live Chennai jobs and events");
     expect(md).toContain("https://mychennaicity.in/guides/tn-plus-two/textbooks");
     expect(md).toContain("https://mychennaicity.in/madras-university-exam-timetable-2026");

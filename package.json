@@ -320,6 +320,8 @@
     "db:seed:chennai-job:mentory-solutions-trainers:live": "tsx scripts/seed-chennai-job-mentory-solutions-trainers-september-2026.ts --live",
     "db:seed:chennai-job:vips-tech-internship": "tsx scripts/seed-chennai-job-vips-tech-one-month-internship.ts",
     "db:seed:chennai-job:vips-tech-internship:live": "tsx scripts/seed-chennai-job-vips-tech-one-month-internship.ts --live",
+    "db:seed:chennai-job:wedding-assist-tele-sales-guindy": "tsx scripts/seed-chennai-job-wedding-assist-tele-sales-guindy.ts",
+    "db:seed:chennai-job:wedding-assist-tele-sales-guindy:live": "tsx scripts/seed-chennai-job-wedding-assist-tele-sales-guindy.ts --live",
     "db:seed:chennai-job:earthen-studio-architects": "tsx scripts/seed-chennai-job-earthen-studio-architects-interns.ts",
     "db:seed:chennai-job:earthen-studio-architects:live": "tsx scripts/seed-chennai-job-earthen-studio-architects-interns.ts --live",
     "db:seed:chennai-job:hr-recruiter-sembakkam": "tsx scripts/seed-chennai-job-hr-recruiter-sembakkam.ts",

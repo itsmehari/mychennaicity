@@ -5,6 +5,7 @@ import {
   extractPerformerFromTitle,
 } from "@/lib/events/event-detail-helpers";
 import { eventPosterAbsoluteUrl } from "@/lib/events/event-poster-image";
+import { artistForEventSlug, musicArtistPath } from "@/content/music";
 import { getSiteUrl } from "@/lib/env";
 import { defaultOgImageAbsoluteUrl } from "@/lib/seo/site-defaults";
 
@@ -100,12 +101,13 @@ export function buildEventSchemaNode(event: PublicEventRow): Record<string, unkn
   const bookingUrl = extractBookingUrlFromDescription(event.description);
   const organizerName = extractOrganizerFromDescription(event.description);
   const performerName = extractPerformerFromTitle(event.title);
+  const linkedArtist = artistForEventSlug(event.slug);
   const imageUrl =
     eventPosterAbsoluteUrl(event.slug, event.title, event.description) ??
     defaultOgImageAbsoluteUrl();
 
   const payload: Record<string, unknown> = {
-    "@type": "Event",
+    "@type": linkedArtist ? "MusicEvent" : "Event",
     "@id": `${url}#event`,
     name: event.title,
     description: plainDescription(event.description) || event.title,
@@ -126,14 +128,20 @@ export function buildEventSchemaNode(event: PublicEventRow): Record<string, unkn
     };
   }
 
-  if (performerName) {
+  if (linkedArtist) {
+    payload.performer = {
+      "@type": "Person",
+      name: linkedArtist.name,
+      url: `${base}${musicArtistPath(linkedArtist.slug)}`,
+    };
+  } else if (performerName) {
     payload.performer = {
       "@type": "Person",
       name: performerName,
     };
   }
 
-  if (bookingUrl) {
+  if (bookingUrl && !linkedArtist) {
     payload.offers = {
       "@type": "Offer",
       url: bookingUrl,

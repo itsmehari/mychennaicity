@@ -75,7 +75,7 @@ Add one fixture SQL file the operator can import on a staging database, clearly 
 - Pages: about, contact (anchors `#directory`, `#events`, `#advertise`), editorial standards, privacy, terms, cookies, community guidelines, humans.txt.
 - About says, in English, that Kannada is the language of the city and that this desk publishes in English. Do not add a second-language page.
 - Contact form stores a message or, if you only have email, `mailto` the desk address from config. Do not invent a phone number.
-- Newsletter POST and WhatsApp join POST with CSRF. WhatsApp success page shows the invite from config. If the invite is empty, say the group link is not configured.
+- Newsletter POST and WhatsApp join POST with CSRF. The WhatsApp success page asks them to message the desk. It does not show the invite. If the desk number is missing, hide the button.
 - `/desk` login. Publish, unpublish, and feature an article. Edit title, dek, body, topic, source name, source URL. Password from config.
 - `/sitemap.xml` lists only 200-class public URLs (published articles, open jobs, upcoming events, published directory rows, area hubs, static pages).
 - `/robots.txt` allows the public site and disallows `/desk`.

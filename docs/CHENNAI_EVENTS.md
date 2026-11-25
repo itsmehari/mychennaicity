@@ -174,6 +174,10 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 **Interlinks:** artist page → each Chennai event, Margazhi desk, festivals calendar. Event detail and the events hub → `/music/artist`. Nav: Local events → Music artists.
 
+**Layout:** every artist uses `ArtistStage` (magazine hero, staggered path, bento, month boards, hall masonry). Do not give one musician a custom page. Guide: [`docs/prompts/MUSIC_ARTIST_PAGE.md`](prompts/MUSIC_ARTIST_PAGE.md). Rule: `.cursor/rules/music-artist-pages.mdc`.
+
+**Search:** title, answer, FAQ, JSON-LD, sitemap, `llms.txt`, and the footer “Music season” link all read the artist registry. A new file under `artists/` is enough. No `Offer` and no calendar-hold `endDate` in the season-sheet schema.
+
 ## 8. Roadmap (not built)
 
 - DB columns for organiser, category, ticket URL, hero image (would simplify hub cards and JSON-LD).
@@ -185,9 +189,10 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 | Date | Change |
 |------|--------|
+| 2026-11-25 | Artist page layout is one shared stage for every musician. Guide `docs/prompts/MUSIC_ARTIST_PAGE.md`. Rule `.cursor/rules/music-artist-pages.mdc`. |
 | 2026-11-25 | Dr Jayanthi Kumaresh Margazhi sheet (Saraswati veena; nine Chennai dates 9 Dec 2026–3 Jan 2027; Vani Mahal, Music Academy, Mylapore Fine Arts, Charsur, Kalakshetra; 3 Jan with Anil Srinivasan; tickets www.jayanthikumaresh.com/schedule; no fare, finish, or street printed; calendar hold +3 hours) via `db:seed:event:jayanthi-kumaresh-margazhi(:live)`. Artist page `/music/artist/jayanthi-kumaresh`. Poster `public/images/music/jayanthi-kumaresh-margazhi-concert-schedule-2026-27.png`. |
 | 2026-11-25 | Naada Inbam memorial nadaswaram (Mylai Karthikeyan, violin B. Ananthakrishnan, mridangam Vijay Ganesh, kanjira S. Sunil Kumar; in memory of Dr (Smt) Andal Ananthanarayanan and Sri V. Ananthanarayanan; Ragasudha Hall, Mylapore; Wed 25 Nov 2026, 6:15 PM; no fare or finish printed; calendar hold to 9:15 PM) via `db:seed:event:naada-inbam-mylai-karthikeyan(:live)`. No poster supplied. |
-| 2026-11-21 | Charumathi Raghuraman Margazhi sheet (violin; eight Chennai dates 23 Nov 2026–12 Jan 2027; Hyderabad Sankeertanotsav 4 Jan 2027 time TBD stays off the city calendar; tickets www.charuraghu.com; no fare or finish printed; calendar hold +3 hours) via `db:seed:event:charumathi-raghuraman-margazhi(:live)`. Artist pages `/music/artist` and `/music/artist/charumathi-raghuraman`. Poster `public/images/music/charumathi-raghuraman-margazhi-concert-schedule-2026-27.png`. |
+| 2026-11-21 | Charumathi Raghuraman Margazhi sheet (violin; eight Chennai dates 23 Nov 2026–12 Jan 2027; Hyderabad Sankeertanotsav 4 Jan 2027 time TBD stays off the city calendar; tickets www.charuraghu.com; no fare or finish printed; calendar hold +3 hours) via `db:seed:event:charumathi-raghuraman-margazhi(:live)`. Artist pages `/music/artist` and `/music/artist/charumathi-raghuraman`. The saved poster file is not a valid image, so the page uses her portrait from charuraghu.com: `https://static.wixstatic.com/media/878306_89e45484a0074b3dbed7845e6c272d8b~mv2.jpg`. |
 | 2026-11-20 | Roots & Resonance (Gems of Margazhi; Meenu Subbiah / Adithi Ganeshan; M S Subbulakshmi Auditorium, Taramani; Fri–Sun 27–29 Nov 2026; three-day line-up on poster; no time or fare printed; MDND mark only) via `db:seed:event:roots-resonance-gems-margazhi(:live)`. Poster `public/images/events/roots-resonance-gems-margazhi-taramani-november-2026.png`. Deploy poster for CDN. |
 | 2026-11-20 | An Evening of Classical Excellence (Yamaha Music India; violinist Nandini and the KM Conservatory Orchestra, named on the AllEvents listing; KM Music Conservatory, Arumbakkam; Wed 25 Nov 2026, 5:00 PM onwards; calendar held to 8:30 PM because no finish is printed; no fare printed; register on AllEvents) via `db:seed:event:classical-excellence(:live)`. Poster `public/images/events/evening-of-classical-excellence-km-music-conservatory-november-2026.png`. Poster is on the live CDN only after this file is deployed. |
 | 2026-06-10 | Hub: kynhood-style discovery cards + category filter. Detail: mobile-first summary, sticky actions, share/calendar/maps. Docs + `ADD_CHENNAI_EVENT` prompt + Cursor rule + `seed-event-shared.ts`. |

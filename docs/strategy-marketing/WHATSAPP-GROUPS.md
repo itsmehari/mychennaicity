@@ -4,6 +4,7 @@
 
 **Public site:** https://mychennaicity.in  
 **Last updated:** 20 November 2026  
+**Userflow map:** `docs/strategy-marketing/WHATSAPP-JOIN-USERFLOW.md`  
 **System (portable):** `docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`  
 **Weekly ops:** `docs/strategy-marketing/WHATSAPP-COMMUNITY-PLAYBOOK.md`
 
@@ -36,7 +37,7 @@ Links pasted **inside** the group later use `withWhatsappGroupShareUtms()` (`utm
 | Decision | Choice | Why |
 |----------|--------|-----|
 | Public CTA destination | `/whatsapp-community/join` | Strangers should not skip the list |
-| When the invite is shown | Only after a successful submit, for 24 hours in an httpOnly cookie | The gate is the product |
+| When the invite is shown | Only in a human reply after they message the desk. The 24-hour cookie unlocks the success screen, which does not show the invite | The gate is the product |
 | OTP / SMS | No | Not requested |
 | Invite value | Env `WHATSAPP_COMMUNITY_INVITE_URL` | Do not invent or rotate a link. The success screen never shows it. Paste it only in a reply after they message the desk. |
 | Languages | English / Tamil on the same join page | Mobile-first |
