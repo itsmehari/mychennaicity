@@ -43,3 +43,4 @@ export function musicSitemapEntries(): { path: string; priority: number }[] {
 }
 
 export { MUSIC_ARTISTS_PATH, musicArtistPath };
+export type { MusicArtist, MusicConcert, MusicPoster } from "@/content/music/types";
