@@ -19,6 +19,7 @@ import {
 } from "@/lib/whatsapp-join";
 import { WhatsappJoinQueueRow, type WhatsappJoinQueueRowData } from "./queue-row";
 import { loadWhatsappJoinCardExtras } from "@/lib/whatsapp-join-attribution";
+import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
 import { todaysWhatsappNudgeCount } from "@/lib/whatsapp-join-desk-db";
 import {
   WA_NUDGE_DAILY_CAP,
