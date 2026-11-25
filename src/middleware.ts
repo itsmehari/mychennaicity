@@ -6,6 +6,10 @@ import {
 } from "@/lib/canonical-site";
 import { lookupJobAvailability } from "@/lib/jobs/job-availability-lookup";
 import { markdownTwinPath, prefersMarkdown } from "@/lib/seo/content-markdown";
+import {
+  shouldStampFirstLand,
+  WHATSAPP_FIRST_LAND_COOKIE,
+} from "@/lib/whatsapp-join-land";
 
 const JOB_PATH_RESERVED = new Set([
   "looking-for-work",
@@ -25,6 +29,29 @@ function closedJobSlug(pathname: string): string | null {
   }
   if (JOB_PATH_RESERVED.has(slug)) return null;
   return slug;
+}
+
+function rememberFirstLand(request: NextRequest, response: NextResponse): NextResponse {
+  const value = shouldStampFirstLand({
+    method: request.method,
+    existing: request.cookies.get(WHATSAPP_FIRST_LAND_COOKIE)?.value,
+    pathname: request.nextUrl.pathname,
+    search: request.nextUrl.search,
+    prefetch:
+      request.headers.has("next-router-prefetch") ||
+      request.headers.get("purpose") === "prefetch",
+    rsc: request.headers.has("rsc"),
+    dest: request.headers.get("sec-fetch-dest"),
+  });
+  if (!value) return response;
+  response.cookies.set(WHATSAPP_FIRST_LAND_COOKIE, value, {
+    path: "/",
+    maxAge: 60 * 60 * 24 * 180,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: request.nextUrl.protocol === "https:",
+  });
+  return response;
 }
 
 function nextWithPath(request: NextRequest): NextResponse {
@@ -82,7 +109,7 @@ export async function middleware(request: NextRequest) {
   ) {
     const response = nextWithPath(request);
     response.headers.set("X-Robots-Tag", "noindex, follow");
-    return response;
+    return rememberFirstLand(request, response);
   }
 
   if (request.method === "GET" || request.method === "HEAD") {
@@ -94,7 +121,7 @@ export async function middleware(request: NextRequest) {
         url.pathname = `/job-closed/${encodeURIComponent(closedSlug)}`;
         const rewritten = NextResponse.rewrite(url);
         rewritten.headers.set("X-Robots-Tag", "noindex, follow");
-        return rewritten;
+        return rememberFirstLand(request, rewritten);
       }
     }
   }
@@ -108,7 +135,7 @@ export async function middleware(request: NextRequest) {
         request: { headers: new Headers(request.headers) },
       });
       rewritten.headers.set("Vary", "Accept");
-      return rewritten;
+      return rememberFirstLand(request, rewritten);
     }
     const next = nextWithPath(request);
     const markdownUrl = new URL(twin, request.nextUrl.origin);
@@ -117,10 +144,10 @@ export async function middleware(request: NextRequest) {
       `<${markdownUrl.href}>; rel="alternate"; type="text/markdown"`,
     );
     next.headers.set("Vary", "Accept");
-    return next;
+    return rememberFirstLand(request, next);
   }
 
-  return nextWithPath(request);
+  return rememberFirstLand(request, nextWithPath(request));
 }
 
 export const config = {

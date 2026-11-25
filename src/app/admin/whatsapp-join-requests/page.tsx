@@ -18,7 +18,7 @@ import {
   type WhatsappJoinStatus,
 } from "@/lib/whatsapp-join";
 import { WhatsappJoinQueueRow, type WhatsappJoinQueueRowData } from "./queue-row";
-import { loadWhatsappJoinScorecard } from "@/lib/whatsapp-join-scorecard";
+import { loadWhatsappJoinCardExtras } from "@/lib/whatsapp-join-attribution";
 import { todaysWhatsappNudgeCount } from "@/lib/whatsapp-join-desk-db";
 import {
   WA_NUDGE_DAILY_CAP,
@@ -179,7 +179,14 @@ export default async function WhatsappJoinRequestsPage({
     const hours = whatsappApprovalHours();
     const nudgesLeft = Math.max(0, WA_NUDGE_DAILY_CAP - nudgeToday);
 
-    const view: WhatsappJoinQueueRowData[] = rows.map((row) => ({
+    const extras = await loadWhatsappJoinCardExtras(rows.map((row) => row.id));
+
+    const view: WhatsappJoinQueueRowData[] = rows.map((row) => {
+      const extra = extras.get(row.id);
+      const utm = [extra?.utmSource, extra?.utmMedium, extra?.utmCampaign]
+        .filter((part): part is string => Boolean(part))
+        .join(" / ");
+      return {
       id: row.id,
       requestNo: Number(row.requestNo),
       stamp: formatWhatsappJoinStamp(row.createdAt),
@@ -220,7 +227,17 @@ export default async function WhatsappJoinRequestsPage({
       notes: row.notes ?? "",
       ipHash: blank(row.ipHash) === "—" ? "" : (row.ipHash ?? ""),
       userAgent: row.userAgent?.trim() ?? "",
-    }));
+      firstSource: extra?.firstSource ?? "",
+      lang: extra?.lang ?? "",
+      partner: extra?.partner ?? "",
+      placement: extra?.placement ?? "",
+      utm,
+      firstSite: extra?.firstSite ?? "",
+      firstPage: extra?.firstPage ?? "",
+      verified: extra?.verifiedAt ? formatWhatsappJoinStamp(extra.verifiedAt) : "",
+      declined: extra?.declinedAt ? formatWhatsappJoinStamp(extra.declinedAt) : "",
+    };
+    });
 
     return (
       <div className="mx-auto w-full max-w-7xl space-y-4 px-4 py-6">

@@ -14,7 +14,7 @@ Read **`docs/strategy-marketing/WHATSAPP-COMMUNITY-SYSTEM.md`** and **`docs/stra
 4. Admin approval is the gate. Keep approved status on resubmit. Admin Message is reply-first, capped, no invite in the text.
 5. Queue: `/super-admin/whatsapp-join-requests`. One list. Ready, Approved, Declined, Spam, Waitlist, All, and Lookup all filter that list. Do not add a second unfiltered list on the same page.
 6. New reach/funnel behaviour stays behind `NEXT_PUBLIC_WA_REACH_ENABLED` and `NEXT_PUBLIC_WA_FUNNEL_EVENTS_ENABLED` until verified on live.
-7. Attribution `drizzle/0019` is live on Neon. After deploy, run `npm run smoke:whatsapp:live`. Post-migration checks only unless schema changes again.
+7. Attribution `drizzle/0019` is live on Neon. `drizzle/0020` adds `first_site` and `first_page`. The queue card shows those plus first source, language, partner, placement, UTM, verified, and declined. A resubmit does not replace the first site, first page, or first source.
 8. The Bengaluru invite on `/community/mybangalore-whatsapp-community-group` is a different city. Do not put it in the Chennai nav, footer, float, or join form.
 9. The public form always saves the request. The success screen does not show the group invite. The required step is **Message us for the group link**, which opens a chat to the desk. Send the invite only as a reply in that chat. Do not hide the form behind `WHATSAPP_COMMUNITY_ACCEPTING`.
 10. Free posting is separate. Public post buttons use `wa.me` and a `[MyChennaiCity]` starter (`src/content/free-posting.ts`). Do not send those clicks through the join form, and do not put the group invite on `/post-free`.

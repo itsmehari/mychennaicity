@@ -1,12 +1,12 @@
 "use server";
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
 import { clientIpFromHeaders } from "@/lib/analytics-ip-exclusion";
-import { getPublicContactEmail } from "@/lib/env";
+import { getPublicContactEmail, getSiteUrl } from "@/lib/env";
 import { rateLimitConsume } from "@/lib/rate-limit";
 import {
   WHATSAPP_JOIN_INTENTS,
@@ -24,6 +24,12 @@ import {
   sanitizeWhatsappJoinSource,
 } from "@/lib/whatsapp-community";
 import { applyWhatsappJoinAttribution } from "@/lib/whatsapp-join-attribution";
+import {
+  absoluteFirstSite,
+  firstLandPathFromCookie,
+  firstPageFromReferer,
+  WHATSAPP_FIRST_LAND_COOKIE,
+} from "@/lib/whatsapp-join-land";
 import { sanitizeWhatsappPartnerCode } from "@/content/whatsapp-community/partner-codes";
 
 export type WhatsappJoinFormState = {
@@ -203,6 +209,10 @@ export async function submitWhatsappJoin(
   }
 
   const ua = (headerList.get("user-agent") ?? "").slice(0, 255);
+  const landCookie = (await cookies()).get(WHATSAPP_FIRST_LAND_COOKIE)?.value;
+  const siteOrigin = getSiteUrl();
+  const firstSite = absoluteFirstSite(siteOrigin, firstLandPathFromCookie(landCookie));
+  const firstPage = firstPageFromReferer(headerList.get("referer"), siteOrigin);
   const now = new Date();
   const db = getDb();
 
@@ -278,6 +288,8 @@ export async function submitWhatsappJoin(
       utmSource,
       utmMedium,
       utmCampaign,
+      firstSite,
+      firstPage,
     });
   } catch (err) {
     if (!isUniqueViolation(err)) {
@@ -329,6 +341,8 @@ export async function submitWhatsappJoin(
       utmSource,
       utmMedium,
       utmCampaign,
+      firstSite,
+      firstPage,
     });
   }
 

@@ -3,6 +3,7 @@ import { asc } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { whatsappJoinVerifications } from "@/db/schema/tables";
 import { readSuperAdminEmail } from "@/lib/super-admin/require";
+import { loadWhatsappJoinCardExtras } from "@/lib/whatsapp-join-attribution";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +37,17 @@ export async function GET() {
     "intro",
     "status",
     "source",
+    "first_source",
+    "first_site",
+    "first_page",
+    "lang",
+    "partner_code",
+    "placement",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "verified_at",
+    "declined_at",
     "created_at",
     "updated_at",
     "approved_at",
@@ -45,8 +57,10 @@ export async function GET() {
     "ip_hash",
     "user_agent",
   ];
+  const extras = await loadWhatsappJoinCardExtras(rows.map((row) => row.id));
   const lines = [header.join(",")];
   for (const row of rows) {
+    const extra = extras.get(row.id);
     lines.push(
       [
         row.displayName,
@@ -58,6 +72,17 @@ export async function GET() {
         row.intro,
         row.status,
         row.source,
+        extra?.firstSource ?? "",
+        extra?.firstSite ?? "",
+        extra?.firstPage ?? "",
+        extra?.lang ?? "",
+        extra?.partner ?? "",
+        extra?.placement ?? "",
+        extra?.utmSource ?? "",
+        extra?.utmMedium ?? "",
+        extra?.utmCampaign ?? "",
+        extra?.verifiedAt?.toISOString() ?? "",
+        extra?.declinedAt?.toISOString() ?? "",
         row.createdAt.toISOString(),
         row.updatedAt.toISOString(),
         row.approvedAt?.toISOString() ?? "",

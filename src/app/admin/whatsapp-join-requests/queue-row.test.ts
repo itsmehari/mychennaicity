@@ -31,6 +31,15 @@ const row: WhatsappJoinQueueRowData = {
   notes: "",
   ipHash: "",
   userAgent: "",
+  firstSource: "hero",
+  lang: "en",
+  partner: "",
+  placement: "hero",
+  utm: "",
+  firstSite: "https://mychennaicity.in/chennai-whatsapp-group",
+  firstPage: "/whatsapp-community/join?src=hero",
+  verified: "4 Nov, 13:27",
+  declined: "",
 };
 
 describe("whatsapp queue row", () => {
@@ -43,7 +52,11 @@ describe("whatsapp queue row", () => {
     expect(html).toContain('value="declined"');
     expect(html).toContain('value="spam"');
     expect(html).toContain(">Approve<");
-    expect(html).toContain(">Message<");
+    expect(html).toContain(">First site<");
+    expect(html).toContain("https://mychennaicity.in/chennai-whatsapp-group");
+    expect(html).toContain("/whatsapp-community/join?src=hero");
+    expect(html).toContain(">First source<");
+    expect(html).toContain(">Lang<");
     expect(html).not.toContain(">Restore<");
     const detailsEnd = html.indexOf("</details>");
     const statusAt = html.indexOf('action="/super-admin/whatsapp-join-requests/status"');

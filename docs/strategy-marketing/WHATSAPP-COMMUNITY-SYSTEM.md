@@ -59,7 +59,7 @@ Resubmit of an **approved** number keeps approved.
 
 Login `/super-admin` → dashboard widget pending count → queue last-4 search → Approve / Decline / Spam / Restore / Notes / capped Message (no invite) / CSV (logged). Scorecard on the queue page. Partner codes issued in `src/content/whatsapp-community/partner-codes.ts`.
 
-SQL pack: `drizzle/0013_whatsapp_join_verifications.sql` + `drizzle/0019_whatsapp_join_attribution.sql` (applied live 16 Nov 2026).
+SQL pack: `drizzle/0013_whatsapp_join_verifications.sql` + `drizzle/0019_whatsapp_join_attribution.sql` (applied live 16 Nov 2026) + `drizzle/0020_whatsapp_join_land.sql` (first site and first page).
 
 ## Events (no personal data)
 

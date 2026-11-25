@@ -60,7 +60,7 @@ English and Tamil are the same page (`?lang=ta`). The form shows a four-step pro
 | No-spam | Required checkbox |
 | Website | Honeypot. Any value blocks the submit |
 
-Hidden fields ride along: language, source, placement, partner code, UTM. They are for the row, not for the visitor.
+Hidden fields ride along: language, source, placement, partner code, UTM. The first page on this site is stored in an httpOnly cookie (`mcc_first_land`) and saved as the first site. The join URL that posted the form is the first page. A later submit fills a blank and does not replace either value.
 
 ## 3. Server gate
 
@@ -195,7 +195,7 @@ One list. These chips filter that same list. Default is Ready.
 
 Fifty rows a page. The row number is the order the request was first saved. The line on the row is the intro, or the intent label if the intro was blank.
 
-Open a row: phone as typed, source, approval time and actor, last nudge, IP hash, browser, notes (2,000 characters).
+Open a row: phone as typed, source, first source, language, partner, placement, UTM, first site, first page, verified time, approval time and actor, declined time, last nudge, IP hash, browser, notes (2,000 characters).
 
 | Action | Effect |
 | --- | --- |

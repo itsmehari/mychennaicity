@@ -24,6 +24,15 @@ export type WhatsappJoinQueueRowData = {
   notes: string;
   ipHash: string;
   userAgent: string;
+  firstSource: string;
+  lang: string;
+  partner: string;
+  placement: string;
+  utm: string;
+  firstSite: string;
+  firstPage: string;
+  verified: string;
+  declined: string;
 };
 
 const STATUS_PILL: Record<WhatsappJoinQueueRowData["status"], string> = {
@@ -83,9 +92,18 @@ export function WhatsappJoinQueueRow({ row }: { row: WhatsappJoinQueueRowData })
             <Field label="Intent" value={row.intentLabel} />
             <Field label="Phone as typed" value={row.phoneRaw} />
             <Field label="Source" value={row.source} />
+            <Field label="First source" value={row.firstSource} />
+            <Field label="Lang" value={row.lang} />
+            <Field label="Partner" value={row.partner} />
+            <Field label="Placement" value={row.placement} />
+            <Field label="UTM" value={row.utm} />
+            <Field label="First site" value={row.firstSite} />
+            <Field label="First page" value={row.firstPage} />
             <Field label="Created" value={row.createdStamp} />
             <Field label="Updated" value={row.updatedStamp} />
+            <Field label="Verified" value={row.verified} />
             <Field label="Approved" value={row.approved} />
+            <Field label="Declined" value={row.declined} />
             <Field label="Last nudge" value={row.lastNudge} />
             <div className="min-w-0 sm:col-span-2">
               <dt className="font-semibold uppercase tracking-wide text-zinc-500">Intro</dt>
