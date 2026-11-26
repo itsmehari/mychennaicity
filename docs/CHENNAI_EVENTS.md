@@ -153,6 +153,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-roots-resonance-gems-margazhi-november-2026.ts` | `db:seed:event:roots-resonance-gems-margazhi:live` |
 | `seed-event-charumathi-raghuraman-margazhi-2026.ts` | `db:seed:event:charumathi-raghuraman-margazhi:live` (eight Chennai dates; artist page is code, not a DB row) |
 | `seed-event-jayanthi-kumaresh-margazhi-2026.ts` | `db:seed:event:jayanthi-kumaresh-margazhi:live` (nine Chennai dates; artist page is code, not a DB row) |
+| `seed-event-spoorthi-rao-margazhi-2026.ts` | `db:seed:event:spoorthi-rao-margazhi:live` (sixteen Chennai dates; 3 Dec links the existing Margazhi Maha Utsavam row and is not reseeded; artist page is code, not a DB row) |
 | `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
 | `seed-event-gojobsync-mega-job-fair-december-2026.ts` | `db:seed:event:gojobsync-mega-job-fair:live` |
 | `seed-event-tiruvallur-farmers-grievance-day-october-2026.ts` | `db:seed:event:tiruvallur-farmers-grievance-day:live` |
@@ -180,6 +181,8 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 **Sabhas:** `/music/sabha` and `/music/sabha/[slug]`. The spelling is sabha. A hall’s own programme, such as the Music Academy academic sessions, is a file under `sabhas/`. Named concerts stay on the artist sheet or the events calendar. The footer has one “Sabhas” link.
 
+**Season system:** [`docs/MUSIC_SEASON_SYSTEM.md`](MUSIC_SEASON_SYSTEM.md) is the only plan file. It holds the page map, the 24 prompts, the progress lines, and the version log.
+
 ## 8. Roadmap (not built)
 
 - DB columns for organiser, category, ticket URL, hero image (would simplify hub cards and JSON-LD).
@@ -191,6 +194,8 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 | Date | Change |
 |------|--------|
+| 2026-11-27 | Spoorthi Rao Margazhi 2026–27 sheet (portrait shows a veena; the sheet does not print a role word; 17 Chennai lines 29 Nov 2026–24 Jan 2027; Kerala, Bangalore, Moodbidri, and Manjakkudi stay off the city calendar; two awards name no hall; 13 Dec SoulFest 10:30 PM hold crosses midnight; no fare, finish, accompanists, or ticket link; spellings kept: Kasargod, Kartik, Vidya Bharathi, Paddhathi, Bangalore, Thumbai) via `db:seed:event:spoorthi-rao-margazhi(:live)`. Artist page `/music/artist/spoorthi-rao`. Poster `public/images/music/spoorthi-rao-margazhi-concert-schedule-2026-27.png`. The 3 Dec line on her sheet prints Youth Hostel Auditorium, Adyar. The existing Margazhi Maha Utsavam row keeps Vaishnavam, Indra Nagar, and free entry and is not overwritten. |
+| 2026-11-25 | Music season system is one file, `docs/MUSIC_SEASON_SYSTEM.md` version 1.0. The prompts and the version log live there. |
 | 2026-11-25 | Sabhas — spelling is sabha. Hub `/music/sabha`. The Music Academy academic sessions (Kasturi Srinivasan Hall, 16 Dec 2026–1 Jan 2027, presided by Vidushi Dr. Jayanthi Kumaresh, convenor Sri.Sriram V) are the sabha programme at `/music/sabha/music-academy`, not one concert. The events row `music-academy-madras-academic-sessions-december-2026` only points at that page. Sunday row stays printed as 20 Dec 2025. |
 | 2026-11-25 | Sreeranjane Kaushik Music season 2025–26 (veena portrait; ten Chennai dates 4 Dec 2025–5 Jan 2026; every row prints a finish, including 30 Dec 10:00 pm–12:00 am at Sudarshan Mahal, Nanganallur; no fare or ticket link; spellings kept: PSBB Millenium, Sree Sarvah, Paddhathi) via `db:seed:event:sreeranjane-kaushik(:live)`. Artist page `/music/artist/sreeranjane-kaushik`. Poster `public/images/music/sreeranjane-kaushik-music-season-2025-26.jpg`. The public events calendar hides rows after they end. |
 | 2026-11-25 | Music Academy Madras academic sessions (Kasturi Srinivasan Hall; 16 Dec 2026–1 Jan 2027; presided by Vidushi Dr. Jayanthi Kumaresh; convenor Sri.Sriram V; admission open, first come first served; no fare or street; one row printed “20 Dec 2025”) via `db:seed:event:music-academy-academic-sessions(:live)`. Poster `public/images/events/music-academy-madras-academic-sessions-december-2026.jpg`. |

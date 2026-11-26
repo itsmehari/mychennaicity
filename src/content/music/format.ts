@@ -35,8 +35,8 @@ export function concertHoldEnd(
 
 export function concertHoldEndLabel(concert: MusicConcert): string | null {
   const end = concertHoldEnd(concert);
-  if (!end || end.hour > 23) return null;
-  return formatConcertClock(end.hour, end.minute);
+  if (!end) return null;
+  return formatConcertClock(end.hour % 24, end.minute);
 }
 
 export function concertPrintsFinish(concert: MusicConcert): boolean {
@@ -74,9 +74,15 @@ export function concertFinishInstant(concert: MusicConcert): Date | null {
     }
   } else {
     const hold = concertHoldEnd(concert);
-    if (hold && hold.hour <= 23) {
-      hour = hold.hour;
+    if (hold) {
+      hour = hold.hour % 24;
       minute = hold.minute;
+      if (hold.hour > 23) {
+        const next = new Date(Date.UTC(year, month - 1, day + 1));
+        endYear = next.getUTCFullYear();
+        endMonth = next.getUTCMonth() + 1;
+        endDay = next.getUTCDate();
+      }
     }
   }
   return new Date(Date.UTC(endYear, endMonth - 1, endDay, hour - 5, minute - 30));

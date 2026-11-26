@@ -2,13 +2,14 @@
 
 This is the only music-season plan file. The prompts, the progress lines, and the version log are in this document. Do not open a second plan.
 
-Current version: **1.8**  
-Last updated: **2026-11-26 19:40 IST**
+Current version: **1.9**  
+Last updated: **2026-11-27 00:40 IST**
 
 ## Version log
 
 Add a new row at the top when this file changes. Bump the minor number for a prompt or a progress note. Bump the major number when the file is restructured.
 
+- **1.9** — 2026-11-27 00:40 IST — Spoorthi Rao’s Margazhi 2026–27 sheet is an artist page at `/music/artist/spoorthi-rao`. Her 3 December line prints Youth Hostel Auditorium, Adyar, and does not print a programme. The Margazhi Maha Utsavam row for that slot stays Vaishnavam at Indra Nagar, with free entry, and is not seeded again from her sheet.
 - **1.8** — 2026-11-26 19:40 IST — `/music` opens one hall at a time. A new sheet picks the next colour, a unique switcher label, and a sheet link when the printed name matches one artist page. Counts come from the rows, not from a fixed hall total.
 - **1.7** — 2026-11-26 19:30 IST — `/music` is a season booklet for the three printed sheets already listed: cover, next four, date rail, hall colour, name filter, and concert rows with the printed start time. Same anchors, same event links. Madhuradhwani stays off the page.
 - **1.6** — 2026-11-26 18:30 IST — Collected the Madhuradhwani concerts page: 122 slots at Arkay Convention Center, Mylapore, from 21 November 2026 through 31 December 2026. Draft only. No page and no event seed.

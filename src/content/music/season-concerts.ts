@@ -76,7 +76,7 @@ export const SEASON_SERIES: SeasonSeries[] = [
       slot("gayathri-venkatraghavan-thamizh-tehllamudhu-indra-nagar-1-dec-2026", "2026-12-01", 18, 45, "Gayathri Venkatraghavan", "MSS 110 - Thamizh Tehllamudhu", "DEC 1, 2026 TUESDAY"),
       slot("s-mahathi-varnamalika-indra-nagar-2-dec-2026", "2026-12-02", 16, 45, "S Mahathi", "Varnamalika", "DEC 2, 2026 WEDNESDAY"),
       slot("vignesh-ishwar-ore-ragam-indra-nagar-2-dec-2026", "2026-12-02", 18, 45, "Vignesh Ishwar", "Ore Ragam Orayiram Bhaavam", "DEC 2, 2026 WEDNESDAY"),
-      slot("spoorthi-rao-vaishnavam-indra-nagar-3-dec-2026", "2026-12-03", 16, 45, "Spoorthi Rao", "Vaishnavam", "DEC 3, 2026 THURSDAY"),
+      slot("spoorthi-rao-vaishnavam-indra-nagar-3-dec-2026", "2026-12-03", 16, 45, "Spoorthi Rao", "Vaishnavam", "DEC 3, 2026 THURSDAY", "", true, "Spoorthi Rao’s own sheet lists this date at Youth Hostel Auditorium, Adyar, at 4:45 PM, and does not print a programme. This poster row keeps Vaishnavam, Indra Nagar, and free entry."),
       slot("trichur-brothers-aval-indra-nagar-3-dec-2026", "2026-12-03", 18, 45, "Trichur Brothers", "அவள் - The all powerful women", "DEC 3, 2026 THURSDAY"),
       slot("ramana-balachandar-one-with-sivan-indra-nagar-4-dec-2026", "2026-12-04", 16, 45, "Ramana Balachandar", "One with Sivan, a tribute to Papananasam Sivan", "DEC 4, 2026 FRIDAY"),
       slot("sikkil-gurucharan-indra-nagar-4-dec-2026", "2026-12-04", 18, 45, "Sikkil Gurucharan", "தென்மேற்கு பக்தி காற்று", "DEC 4, 2026 FRIDAY"),

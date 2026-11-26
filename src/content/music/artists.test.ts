@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { charumathiRaghuraman } from "@/content/music/artists/charumathi-raghuraman";
 import { jayanthiKumaresh } from "@/content/music/artists/jayanthi-kumaresh";
 import { ramanaBalachandran } from "@/content/music/artists/ramana-balachandran";
+import { spoorthiRao, SPOORTHI_MAHA_UTSAVAM_EVENT_SLUG } from "@/content/music/artists/spoorthi-rao";
 import { sreeranjaneKaushik } from "@/content/music/artists/sreeranjane-kaushik";
 import { concertEventDescription, concertEventTitle } from "@/content/music/event-copy";
 import {
@@ -11,7 +12,7 @@ import {
   MUSIC_SEASON_FOOTER_LINK,
   musicArtistMetadata,
 } from "@/content/music/search-copy";
-import { concertHoldEnd } from "@/content/music/format";
+import { concertHoldEnd, concertHoldEndLabel } from "@/content/music/format";
 import {
   artistForEventSlug,
   getMusicArtist,
@@ -45,7 +46,7 @@ describe("music artists", () => {
         .filter((slug): slug is string => Boolean(slug)),
     );
     expect(new Set(eventSlugs).size).toBe(eventSlugs.length);
-    expect(eventSlugs).toHaveLength(40);
+    expect(eventSlugs).toHaveLength(57);
     expect(artistForEventSlug(eventSlugs[0])?.slug).toBe("charumathi-raghuraman");
     expect(getMusicArtist("jayanthi-kumaresh")?.name).toBe("Dr Jayanthi Kumaresh");
   });
@@ -204,6 +205,50 @@ describe("music artists", () => {
     expect(concertEventDescription(sreeranjaneKaushik, swaranjali!)).toContain("Millenium");
     const json = JSON.stringify(buildMusicArtistJsonLd(sreeranjaneKaushik));
     expect(json).toContain("endDate");
+    expect(json).not.toContain("Offer");
+  });
+
+  it("keeps Spoorthi’s sheet facts and leaves out-of-city dates and awards off the calendar", () => {
+    expect(spoorthiRao.concerts).toHaveLength(23);
+    expect(spoorthiRao.ticketUrl).toBeNull();
+    expect(spoorthiRao.role).toBe("Veena");
+    const chennai = spoorthiRao.concerts.filter((concert) => concert.eventSlug);
+    expect(chennai).toHaveLength(17);
+    expect(chennai.every((concert) => concert.city === "Chennai")).toBe(true);
+    const utsavam = spoorthiRao.concerts.find((concert) => concert.id === "margazhi-maha-utsavam");
+    expect(utsavam?.eventSlug).toBe(SPOORTHI_MAHA_UTSAVAM_EVENT_SLUG);
+    expect(utsavam?.localityLabel).toBe("Adyar");
+    expect(utsavam?.note).toContain("Vaishnavam");
+    const soulfest = spoorthiRao.concerts.find((concert) => concert.id === "soulfest");
+    expect(soulfest?.startHour).toBe(22);
+    expect(concertHoldEnd(soulfest!).hour).toBe(25);
+    expect(concertHoldEndLabel(soulfest!)).toBe("1:30 AM");
+    expect(concertEventDescription(spoorthiRao, soulfest!)).toContain("1:30 AM");
+    expect(concertEventDescription(spoorthiRao, soulfest!)).not.toContain("null");
+    const away = spoorthiRao.concerts.filter((concert) => !concert.eventSlug);
+    expect(away.map((concert) => concert.city)).toEqual([
+      "Kerala",
+      "Bangalore",
+      "",
+      "",
+      "Moodbidri",
+      "Manjakkudi",
+    ]);
+    expect(away.filter((concert) => concert.note?.includes("event label"))).toHaveLength(2);
+    expect(spoorthiRao.concerts.find((concert) => concert.id === "kasargod-edneer-mutt")?.title).toBe(
+      "Kasargod Edneer Mutt",
+    );
+    expect(spoorthiRao.concerts.find((concert) => concert.id === "thumbai")?.title).toBe(
+      "Thumbai Centre for Arts",
+    );
+    const description = concertEventDescription(spoorthiRao, chennai[0]);
+    expect(description).toContain("does not print a ticket link");
+    expect(description).not.toMatch(/₹/);
+    expect(musicSitemapEntries().map((entry) => entry.path)).toContain(
+      "/music/artist/spoorthi-rao",
+    );
+    const json = JSON.stringify(buildMusicArtistJsonLd(spoorthiRao));
+    expect(json).not.toContain("streetAddress");
     expect(json).not.toContain("Offer");
   });
 });

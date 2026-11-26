@@ -1,6 +1,7 @@
 import { charumathiRaghuraman } from "@/content/music/artists/charumathi-raghuraman";
 import { jayanthiKumaresh } from "@/content/music/artists/jayanthi-kumaresh";
 import { ramanaBalachandran } from "@/content/music/artists/ramana-balachandran";
+import { spoorthiRao } from "@/content/music/artists/spoorthi-rao";
 import { sreeranjaneKaushik } from "@/content/music/artists/sreeranjane-kaushik";
 import { musicAcademy } from "@/content/music/sabhas/music-academy";
 import {
@@ -20,6 +21,7 @@ const ARTISTS: MusicArtist[] = [
   charumathiRaghuraman,
   ramanaBalachandran,
   jayanthiKumaresh,
+  spoorthiRao,
   sreeranjaneKaushik,
 ];
 
