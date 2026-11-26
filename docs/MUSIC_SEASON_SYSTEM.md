@@ -2,13 +2,16 @@
 
 This is the only music-season plan file. The prompts, the progress lines, and the version log are in this document. Do not open a second plan.
 
-Current version: **1.5**  
-Last updated: **2026-11-26 16:20 IST**
+Current version: **1.8**  
+Last updated: **2026-11-26 19:40 IST**
 
 ## Version log
 
 Add a new row at the top when this file changes. Bump the minor number for a prompt or a progress note. Bump the major number when the file is restructured.
 
+- **1.8** — 2026-11-26 19:40 IST — `/music` opens one hall at a time. A new sheet picks the next colour, a unique switcher label, and a sheet link when the printed name matches one artist page. Counts come from the rows, not from a fixed hall total.
+- **1.7** — 2026-11-26 19:30 IST — `/music` is a season booklet for the three printed sheets already listed: cover, next four, date rail, hall colour, name filter, and concert rows with the printed start time. Same anchors, same event links. Madhuradhwani stays off the page.
+- **1.6** — 2026-11-26 18:30 IST — Collected the Madhuradhwani concerts page: 122 slots at Arkay Convention Center, Mylapore, from 21 November 2026 through 31 December 2026. Draft only. No page and no event seed.
 - **1.5** — 2026-11-26 16:20 IST — The three collected sheets are event rows, listed at `/music`. Music sitemap: `/music-sitemap.xml`. Plain text: `/music/llms.txt`. Ramana’s 19 December Vani Mahal row and Jayanthi’s 2 January Strings Attached row are not reseeded.
 - **1.4** — 2026-11-26 13:20 IST — Collected the Kartik Fine Arts 12 December 2026 poster: two slots at Narada Gana Sabha Main Hall. Draft only. No page and no event seed.
 - **1.3** — 2026-11-26 13:16 IST — Collected the Sri Thyaga Brahma Gana Sabha Isai Vizha sheet: 39 slots at Vani Mahal, T-Nagar. Draft only. No page and no event seed.
@@ -200,6 +203,167 @@ Printed once for the whole sheet:
 The names under each artist are printed as a list. The poster does not print the word `with`.
 
 Desk check: other sheets already use this hall on other days. Charumathi Raghuraman is 24 December 2026. Ramana Balachandran is 29 December 2026. Those rows are not this date, so they are not merged.
+
+### Madhuradhwani, Arkay Convention Center
+
+- **Status:** collected
+- **Collected:** 2026-11-26, Cursor, this section. Source page: https://madhuradhwani.in/public/concerts.php. Snapshot of the page script: `docs/music-season-sources/madhuradhwani-concerts-2026-11-26.json`
+- **Implemented:**
+- **Live URL:**
+
+The concerts page keeps the full list in a script, `const events=`, 122 objects. Ids run from 34 to 156. Id 80 is absent. Dates run from `2026-11-21` through `2026-12-31`. The dates `2026-12-25` through `2026-12-30` are absent.
+
+The Past Events block on the fetched page shows six cards, 23 to 25 November 2026. The calendar and the list read the same 122 objects. `series_title` is empty on every object. The series name sits inside `title`.
+
+Printed once for the whole page:
+
+- sabha: Madhuradhwani
+- also printed: `CARNATIC MUSIC` and `© 2026 Madhuradhwani. All rights reserved.`
+- hall: `Arkay Convention Center` on every `venue`
+- locality: Mylapore
+- city: Chennai
+- address line, quoted: `Arkay Convention Center` and `Mylapore, Chennai – 600004`
+- phone, quoted: `+91 99625 54080`
+- email, quoted: `asrk@arkay.co.in`
+- YouTube, quoted: `https://www.youtube.com/@ArkayRamakrishnan`
+- Facebook, quoted: `https://www.facebook.com/arkayconvention`
+- Instagram, quoted: `https://www.instagram.com/arkayconven/`
+- finish: blank. No finish is stored.
+- ticket URL: blank. No fare is stored.
+- no street is printed on this page
+
+A slash joins stored lines in `description`. Spellings stay as stored. A live URL is filled only where `live_url` is non-empty. Ids 34 through 55 have one. Later ids leave it blank.
+
+Rows below: 122.
+
+| # | id | Date | Start | Title as stored | Lines as stored | Live URL |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 34 | 2026-11-21 | 3:45 PM | 16th Anniversary Concerts - Vannai A N Balamurugan – Nagaswaram | Vannai A N Balamurugan Nagaswaram / Vannai B Kishorekumar B E Nagaswaram / Mangalam M K Asan Tavil / Solavaram S Loganathan Tavil | https://www.youtube.com/watch?v=sTQfApDddu0 |
+| 2 | 35 | 2026-11-21 | 5:15 PM | 16th Anniversary Inauguration | Sri Nalli Kuppuswamy Chettiar / Cleveland V V Sundaram / Dr Ritha Rajan / Nagai Muralidharan | https://www.youtube.com/watch?v=w_KOzENAmk8 |
+| 3 | 36 | 2026-11-21 | 6:30 PM | 16th Anniversary Concerts - Inaugural Concert – Thoppur Sairam – Vocal | Programme:  / Inaugural Concert | https://www.youtube.com/watch?v=uSb9Jkgl-zU |
+| 4 | 55 | 2026-11-22 | 10:00 AM | Arangetram –Akshay K Vocal |  | https://www.youtube.com/watch?v=eDNzhSRc_iI |
+| 5 | 37 | 2026-11-22 | 4:15 PM | 16th Anniversary Concerts - Deepika & Nandhika  – Vocal Duet | Deepika & Nandhika Vocal / Bombay R Madhavan Violin / Kishore Ramesh Mridangam / Sunil Kumar Kanjira | https://www.youtube.com/watch?v=fV37eZhitFk |
+| 6 | 38 | 2026-11-22 | 6:30 PM | 16th Anniversary Concerts - A S Murali – Vocal | A S Murali Vocal / B U Ganesh Prasad Violin / Mannargudi Easwaran Mridangam / B S Purushotham Kanjira | https://www.youtube.com/watch?v=n9fgM3okn6Q |
+| 7 | 39 | 2026-11-23 | 4:15 PM | 16th Anniversary Concerts - Swarathmika Srikanth – Vocal | Swarathmika Srikanth Vocal / Shradda Ravindran Violin / Thirucherai Kaushik Mridangam / Harihara Subramanian Ghatam | https://www.youtube.com/watch?v=j2qrFNIJ5Us |
+| 8 | 40 | 2026-11-23 | 6:30 PM | 16th Anniversary Concerts - K S Vishnudev – Vocal | K S Vishnudev Vocal / Vittal Rangan Violin / Patri Satish Kumar Mridangam / K V Gopalakrishnan Kanjira | https://www.youtube.com/watch?v=Om2KQLrHyB4 |
+| 9 | 41 | 2026-11-24 | 4:15 PM | 16th Anniversary Concerts - Niranjan Dindodi – Vocal | Niranjan Dindodi Vocal / Thirucherai Karthik Violin / Aduthurai Guruprasad Mridangam / Giridhari Prasad Kanjira | https://www.youtube.com/watch?v=vWS0xJok0R0 |
+| 10 | 42 | 2026-11-24 | 6:30 PM | 16th Anniversary Concerts - Amrutha Venkatesh – Vocal | Amrutha Venkatesh Vocal / Bombay R Madhavan Violin / S J Arjun Ganesh Mridangam / G Chandrasekara Sharma Ghatam | https://www.youtube.com/watch?v=9MVdqJA3vVk |
+| 11 | 43 | 2026-11-25 | 4:15 PM | 16th Anniversary Concerts - Malavika Sundar – Vocal | Malavika Sundar – Vocal / M. Vijay – Violin / Guru Raghavendra – Mridangam / Nerkunam Dr. S. Sankar – Kanjira | https://www.youtube.com/watch?v=AGnY397T7iU |
+| 12 | 44 | 2026-11-25 | 6:30 PM | 16th Anniversary Concerts - Shertallay Dr K N Renganatha Sharma – Vocal | Shertallay Dr K N Renganatha Sharma Vocal / S Varadarajan Violin / Thanjavur Murugaboopathy Mridangam / B S Purushotham Kanjira | https://www.youtube.com/watch?v=0GDL1M6N1eM |
+| 13 | 45 | 2026-11-26 | 4:15 PM | 16th Anniversary Concerts - V Navaneet Krishnan – Vocal | V Navaneet Krishnan Vocal / Madan Mohan Violin / Kallidai Sivakumar Mridangam | https://www.youtube.com/watch?v=Cnx09xGXNKA |
+| 14 | 46 | 2026-11-26 | 6:30 PM | 16th Anniversary Concerts - A Kanyakumari – Violin | A Kanyakumari Violin / Rajeev Mukundan Violin / Patri Satishkumar Mridangam / Anirudh Athreya Kanjira | https://www.youtube.com/watch?v=G2Z68MYumOU |
+| 15 | 47 | 2026-11-27 | 4:15 PM | 16th Anniversary Concerts - Akshay Padmanabhan – Vocal | Akshay Padmanabhan Vocal / Arunachala Karthik Violin / Vijay Ganesh Mridangam / K R Sivaramakrishnan Kanjira | https://www.youtube.com/watch?v=zaiYamyp50M |
+| 16 | 48 | 2026-11-27 | 6:30 PM | 16th Anniversary Concerts - Kruthi Vittal – Vocal | Kruthi Vittal Vocal / Kamalakiran Vinjamuri Violin / Delhi Sairam Mridangam / N Guruprasad Ghatam | https://www.youtube.com/watch?v=zIaoz6qyHJ4 |
+| 17 | 49 | 2026-11-28 | 4:15 PM | 16th Anniversary Concerts - Hamzini Vytheeshwaran – Vocal | Hamzini Vytheeshwaran Vocal / Gayathri Vibhavari Violin / Punnur Arvind Kaushik Mridangam / Adambakam Sankar Ghatam | https://www.youtube.com/watch?v=iyWj85EJPcU |
+| 18 | 50 | 2026-11-28 | 6:30 PM | 16th Anniversary Concerts - Sruti Sagar – Flute | Sruti Sagar Flute / Kamalakiran Violin / Srimushnam Rajarao Mridangam / Sai Subramaniam Morsing | https://www.youtube.com/watch?v=awVwtKeknCE |
+| 19 | 51 | 2026-11-29 | 4:15 PM | 16th Anniversary Concerts - Spoorthi Rao – Vocal | Spoorthi Rao Vocal / Siva Teja Violin / S Hariharan Mridangam / Shri Sainath Ghatam | https://www.youtube.com/watch?v=iQ2wjcNhzK0 |
+| 20 | 52 | 2026-11-29 | 6:30 PM | 16th Anniversary Concerts - B V Balasai – Flute | B V Balasai Flute / B Raghavendra Rao Violin / V G Vigneshwar Keyboards / Calcutta Aravind Mridangam / Dr V Suresh Ghatam | https://www.youtube.com/watch?v=DjwKF2aRAx0 |
+| 21 | 53 | 2026-11-30 | 4:15 PM | 16th Anniversary Concerts - Shruthi Shankar Kumar – Vocal | Shruthi Shankar Kumar Vocal / G Badrinath Violin / Palani V Balaji Mridangam / Ganapathy Ghatam | https://www.youtube.com/watch?v=v91LaWeZl-c |
+| 22 | 54 | 2026-11-30 | 6:30 PM | 16th Anniversary Concerts - Kalyanapuram S Aravind – Vocal | Kalyanapuram S Aravind Vocal / R Raghul Violin / N C Bharadwaj Mridangam / Anirudh Athreya Kanjira | https://www.youtube.com/watch?v=RKqvXjg3TT4 |
+| 23 | 56 | 2026-12-01 | 4:15 PM | ACC 16th Anniversary Concert - Shruthi Bhat – Vocal | Shruthi Bhat Vocal / Madurai Vijay Ganesh Violin / Kaushik Sridhar Mridangam / N Rajaraman Ghatam |  |
+| 24 | 57 | 2026-12-01 | 6:30 PM | ACC 16th Anniversary Concert - Kunnakudi Balamuralikrishna – Vocal | Kunnakudi Balamuralikrishna Vocal / Alakkode V S Gokul Violin / Mannargudi R Vasudevan Tavil / Shree Sunderkumar Mridangam |  |
+| 25 | 58 | 2026-12-02 | 4:15 PM | ACC 16th Anniversary Concert - Santhosh Subramaniam – Vocal | Santhosh Subramaniam Vocal / Pappy Gyandev Violin / R Akashy Ram Mridangam / Nerkunam Sankar Kanjira |  |
+| 26 | 59 | 2026-12-02 | 6:30 PM | ACC 16th Anniversary Concert - Mylai Karthikeyan – Nagaswaram | Mylai Karthikeyan Nagaswaram / B Ananthakrishnan Violin / Vijay Ganesh Mridangam / Sunil Kumar Kanjira |  |
+| 27 | 60 | 2026-12-03 | 4:15 PM | ACC 16th Anniversary Concert - Bhavya Hari – Vocal | Bhavya Hari – Vocal / Haritha Narayanan – Violin / A. Rohit – Mridangam |  |
+| 28 | 61 | 2026-12-03 | 6:30 PM | ACC 16th Anniversary Concert - Carnatica Brothers – Vocal | K N Shashikiran – Vocal / P Ganesh – Vocal / Bombay R Madhavan – Violin / Trivandram Balaji – Mridangam / K. V. Gopalakrishnan – Kanjira |  |
+| 29 | 62 | 2026-12-04 | 4:15 PM | ACC 16th Anniversary Concert - Dr R Lakshmi Priya – Vocal | Dr R Lakshmi Priya – Vocal / Srimaya Mantha – Violin / Ambur Padmanabhan – Mridangam |  |
+| 30 | 63 | 2026-12-04 | 6:30 PM | ACC 16th Anniversary Concert - Palghat R Ramprasad – Vocal | Palghat R Ramprasad – Vocal / S Varadarajan – Violin / Neyveli Narayanan – Mridangam / Dr V Suresh – Ghatam |  |
+| 31 | 64 | 2026-12-05 | 4:15 PM | ACC 16th Anniversary Concert - Abhiram Bode – Vocal | Abhiram Bode – Vocal / C S Chinmayi – Violin / Adharsah Devarajan – Mridangam / Hari Kishore – Kanjira |  |
+| 32 | 65 | 2026-12-05 | 6:30 PM | ACC 16th Anniversary Concert - K Gayathri – Vocal | K Gayathri – Vocal / B U Ganesh Prasad – Violin / Manoj Siva – Mridangam / B S Purushotham – Kanjira |  |
+| 33 | 66 | 2026-12-06 | 4:15 PM | ACC 16th Anniversary Concert - Adithyanarayanan – Vocal | Adithyanarayanan – Vocal / Shree Lakshmi Bhat – Violin / N Anirudh Raj – Mridangam / K R Sivaramakrishnan – Kanjira |  |
+| 34 | 67 | 2026-12-06 | 6:30 PM | ACC 16th Anniversary Concert - R Surya Prakash – Vocal | R Surya Prakash – Vocal / Nagai Muralidharan – Violin / Muruga Bhoopathy – Mridangam / Dr S Karthick – Ghatam |  |
+| 35 | 68 | 2026-12-07 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Vivek Sadhasivam – Vocal | Vivek Sadhasivam – Vocal / Ananthakrishnan – Violin / Vijay Ganesh – Mridangam / Payyannur Govinda Prasad – Morsing |  |
+| 36 | 69 | 2026-12-07 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Delhi P Sunder Rajan – Vocal | Delhi P Sunder Rajan – Vocal / R Raghul – Violin / K V Prasad – Mridangam / Dr V Suresh – Ghatam |  |
+| 37 | 70 | 2026-12-08 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Archana & Aarathi – Vocal Duet | Archana – Vocal / Aarathi – Vocal / G Badrinath – Violin / Kumbakonam Swaminathan – Mridangam |  |
+| 38 | 71 | 2026-12-08 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Dr V Balaji & B Anantha Krishnan– Violin Duet | Dr V Balaji – Violin / B Anantha Krishnan – Violin / Sarvesh Kartick – Mridangam / Praveen Narayanaswami – Tabla / Payyanur Govind Prasad – Morsing |  |
+| 39 | 72 | 2026-12-09 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Iyer Brothers Veena Duet | Iyer Brothers Veena Duet / Ramnath Iyer – Veena / Gopinath Iyer – Veena / T R Sundaresan – Mridangam / Vaikom Gopalakrishnan – Ghatam |  |
+| 40 | 73 | 2026-12-09 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Amritha Murali – Vocal | Amritha Murali – Vocal / Dr R Hemalatha – Violin / Manoj Siva – Mridangam / B S Purushotham – Kanjira |  |
+| 41 | 74 | 2026-12-10 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Sangeetha Swaminathan – Vocal | Sangeetha Swaminathan – Vocal / V V Srinivasarao – Violin / Nellai Balaji – Mridangam / H Sivaramakrishnan – Ghatam |  |
+| 42 | 75 | 2026-12-10 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Jugalbandi - Malladi Suri Babu & K S Vishnudev | Malladi Suri Babu – Vocal / K S Vishnudev – Vocal / Embar Kannan – Violin / Malladi Aravind Karthik – Mridangam / S Ganapathy – Tabla |  |
+| 43 | 76 | 2026-12-11 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - B U Ganesh Prasad – Vocal | B U Ganesh Prasad – Vocal / H K Venkatram – Violin / J Vaidhyanathan – Mridangam / K V Gopalakrishnan – Kanjira |  |
+| 44 | 77 | 2026-12-11 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Dr M Chandrashekaran – Violin | Dr M Chandrashekaran – Violin / Bharathi – Violin / Srimushnam Rajarao – Mridangam / Dr V Suresh – Ghatam |  |
+| 45 | 78 | 2026-12-12 | 4:15 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Abhishek Ravi Shankar – Vocal | Abhishek Ravi Shankar – Vocal / M Vijay – Violin / Akashay Anand – Mridangam |  |
+| 46 | 79 | 2026-12-12 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 - Dr T V Gopalakrishnan – Vocal | Dr T V Gopalakrishnan – Vocal / S Varadrajan – Violin / Patri Satish Kumar – Mridangam |  |
+| 47 | 81 | 2026-12-13 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Swathi Srikrishna – Vocal | Swathi Srikrishna – Vocal / Madurai M. Vijayaganesh – Violin / Punnur Arvind Kaushik – Mridangam |  |
+| 48 | 82 | 2026-12-13 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Jayalakshmi Sekhar – Veena | Jayalakshmi Sekhar – Veena / Shertalai R Aanathakrishnan – Mridangam / Trichy Murali – Ghatam |  |
+| 49 | 83 | 2026-12-13 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Ahi Ajayan – Vocal | Ahi Ajayan – Vocal / T. Kishore – Violin / Ram Siva – Mridangam |  |
+| 50 | 84 | 2026-12-13 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Rakshita Ramesh – Veena | Rakshita Ramesh – Veena / Kaushik Sridhar – Mridangam |  |
+| 51 | 85 | 2026-12-13 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sunil Gargyan – Vocal | Sunil Gargyan – Vocal / R. Raghul – Violin / Sai Raghavan – Mridangam / Nerkunam Dr Sankar – Kanjira |  |
+| 52 | 86 | 2026-12-13 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Gayathri Girish – Vocal | Gayathri Girish – Vocal / Sruti Sarathy – Violin / R. Sankaranarayanan – Mridangam / N. Rajaraman – Ghatam |  |
+| 53 | 87 | 2026-12-14 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Nithyashree – Veena | Nithyashree – Veena / Sarvajit – Mridangam |  |
+| 54 | 88 | 2026-12-14 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Nandhitha Kannan – Vocal | Nandhitha Kannan – Vocal / Srinidhi Pennathur – Violin / T. Karthik – Mridangam |  |
+| 55 | 89 | 2026-12-14 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Vignesh Shankar Carnatic – Guitar | Vignesh Shankar Carnatic – Guitar / Nandan Kashyap – Mridangam / Sarvesh Shankar – Ghatam |  |
+| 56 | 90 | 2026-12-14 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Kanthi Swaroop – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 57 | 91 | 2026-12-14 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Srirangam Venkata Nagarajan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 58 | 92 | 2026-12-14 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dr Baby Sreeram – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 59 | 93 | 2026-12-15 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dhanya Rudrapatnam – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 60 | 94 | 2026-12-15 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Raga Sudha – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 61 | 95 | 2026-12-15 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sri Sri Sisters (Sriya & Sreeja Srinivas) Vocal Duet | Programme:  / Madhuradhwani Season Concert |  |
+| 62 | 96 | 2026-12-15 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Vishwas Hari – Mandolin | Programme:  / Madhuradhwani Season Concert |  |
+| 63 | 97 | 2026-12-15 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Archana and Samanvi – Vocal Duet | Programme:  / Madhuradhwani Season Concert |  |
+| 64 | 98 | 2026-12-15 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Nisha Rajagopalan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 65 | 99 | 2026-12-16 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Madurai Sisters (Subasri and Jayasri) Vocal Duet | Artists: / Madurai Sisters / Brahmadathan N M – Violin / G N Bhuvan – Mridangam / Janardhan Sivarupan – Kanjira |  |
+| 66 | 100 | 2026-12-16 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Samanvitha Sridharan – Vocal | Artists: / Samanvitha Sridharan – Vocal / Bhargava Vignesh – Violin / Mumbai Rohit Prasad – Mridangam |  |
+| 67 | 101 | 2026-12-16 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Bala Lavanya – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 68 | 102 | 2026-12-16 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Gayatri Satya – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 69 | 103 | 2026-12-16 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dr. S V Sahana – Veena | Programme:  / Madhuradhwani Season Concert |  |
+| 70 | 104 | 2026-12-16 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dr S Sunder – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 71 | 105 | 2026-12-17 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Medha Manjunath – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 72 | 106 | 2026-12-17 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Balu Raghuraman – Violin | Programme:  / Madhuradhwani Season Concert |  |
+| 73 | 107 | 2026-12-17 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Aditi Prahalad – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 74 | 108 | 2026-12-17 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Harikrishnan Moozhikulam – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 75 | 109 | 2026-12-17 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – R Prasanna – Guitar | Programme:  / Madhuradhwani Season Concert |  |
+| 76 | 110 | 2026-12-17 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – O S Arun – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 77 | 111 | 2026-12-18 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Palakkad Sisters Vocal Duet | Programme:  / Madhuradhwani Season Concert |  |
+| 78 | 112 | 2026-12-18 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Cotah Sisters (Purva Dhanashree and Paavani) Vocal Duet | Programme:  / Madhuradhwani Season Concert |  |
+| 79 | 113 | 2026-12-18 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sowmya Subramaniam – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 80 | 114 | 2026-12-18 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Subhadra Sridharan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 81 | 115 | 2026-12-18 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Adithya Madhavan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 82 | 116 | 2026-12-18 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Jugalbandhi | Programme:  / Madhuradhwani Season Concert |  |
+| 83 | 117 | 2026-12-19 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Smruthi Bhaskar – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 84 | 118 | 2026-12-19 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Gokul Chandramouli – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 85 | 119 | 2026-12-19 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dhanush Anantharaman – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 86 | 120 | 2026-12-19 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Akshara Samskriti – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 87 | 121 | 2026-12-19 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Balu Masti – Veena | Programme:  / Madhuradhwani Season Concert |  |
+| 88 | 122 | 2026-12-19 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Prince Rama Varma – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 89 | 123 | 2026-12-20 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Shashank Ganeshan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 90 | 124 | 2026-12-20 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Shankar Ramani – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 91 | 125 | 2026-12-20 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Preethi Sethuraman – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 92 | 126 | 2026-12-20 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Bhargavi Balasubramanian – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 93 | 127 | 2026-12-20 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Chandana Bala Kalyan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 94 | 128 | 2026-12-20 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Charumathi Raghuraman – Violin | Programme:  / Madhuradhwani Season Concert |  |
+| 95 | 129 | 2026-12-21 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sakthi Muralidharan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 96 | 130 | 2026-12-21 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Uma Ranganathan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 97 | 131 | 2026-12-21 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Vidyut Prasad – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 98 | 132 | 2026-12-21 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Madhuri Kaushik – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 99 | 133 | 2026-12-21 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – D B Ashvin – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 100 | 134 | 2026-12-21 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – N Ravikiran – Chitravina | Programme:  / Madhuradhwani Season Concert |  |
+| 101 | 135 | 2026-12-22 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Akshay Sridhar – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 102 | 136 | 2026-12-22 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sahana Sivakumar – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 103 | 137 | 2026-12-22 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Kanmony – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 104 | 138 | 2026-12-22 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Savitha Namuduri – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 105 | 139 | 2026-12-22 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dr. Brindha Manickavasakan – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 106 | 140 | 2026-12-22 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Dr Sriram Parasuram Violin Solo | Programme:  / Madhuradhwani Season Concert |  |
+| 107 | 141 | 2026-12-23 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Lakshmi Teja Surya – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 108 | 142 | 2026-12-23 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Shruthi Raj – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 109 | 143 | 2026-12-23 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Shivaani Komanduri – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 110 | 144 | 2026-12-23 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sruti Ravali Manda – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 111 | 145 | 2026-12-23 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – J B Keerthana – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 112 | 146 | 2026-12-23 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – T N S Krishna – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 113 | 147 | 2026-12-24 | 10:00 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Sutikshna Veeravalli – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 114 | 148 | 2026-12-24 | 11:30 AM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Manickam Yogeswaran – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 115 | 149 | 2026-12-24 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Supriya Raja – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 116 | 150 | 2026-12-24 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Srividya Vadlamani – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 117 | 151 | 2026-12-24 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Kiranavali – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 118 | 152 | 2026-12-24 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – D Raghavachari – Vocal | Programme:  / Madhuradhwani Season Concert |  |
+| 119 | 153 | 2026-12-31 | 1:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Pavan Keikkeri – Vocal | Artists: / Pavan Keikkeri – Vocal / Visvesh Uppoor – Violin / Sreeram Madhavan – Mridangam |  |
+| 120 | 154 | 2026-12-31 | 3:00 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Madhu Iyer – Vocal | Artists: / Madhu Iyer – Vocal / R S Sudha Iyer – Violin / Guru Raghavendra – Mridangam |  |
+| 121 | 155 | 2026-12-31 | 4:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Ananya Ashok – Vocal | Artists: / Ananya Ashok – Vocal / Thirucherai Karthik – Violin / B. S. Prasanth – Mridangam / Sukkanya Ramgopal – Ghatam |  |
+| 122 | 156 | 2026-12-31 | 6:30 PM | MADHURADHWANI'S SEASON CONCERT SERIES 2026 – by Madhusudhanan Kalaiselvan | Programme:  / MADHURADHWANI'S SEASON CONCERT SERIES 2026 / Additional notes:  / Talk on "Thyagesar Kuravanji (தியாகேச குறவஞ்சி)" |  |
+
+Where `description` is only `Programme:` and `Madhuradhwani Season Concert`, no accompanist is stored. Id 36 stores `Programme:` and `Inaugural Concert`. Id 55, `Arangetram –Akshay K Vocal`, stores an empty description. Id 116 stores the title `Jugalbandhi` and the same programme placeholder. Id 156 stores a talk line, `Thyagesar Kuravanji`, with the Tamil title in parentheses.
+
+Desk check before any page: Charumathi Raghuraman’s sheet already lists 20 December 2026 at 6:30 pm at Arkay Convention Centre, with K. Vishnuvardhana (mridangam) and Sumukh Karanth (kanjira), and the street Royapettah High Rd. This page stores id 128, `MADHURADHWANI'S SEASON CONCERT SERIES 2026 – Charumathi Raghuraman – Violin`, date `2026-12-20`, time `6:30 PM`, venue `Arkay Convention Center`, and the programme placeholder. The hall spelling differs: `Centre` on her sheet, `Center` here. The street is absent here. The two sheets are not merged.
 
 ## What is already live
 
