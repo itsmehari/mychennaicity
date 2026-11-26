@@ -71,6 +71,8 @@ const DAILY_HUB_PATHS = [
  * Dates below are when the page was shipped or last rewritten, not “today”.
  */
 export const RECENT_LAUNCH_PATHS: { path: string; lastModified: string }[] = [
+  { path: "/music", lastModified: "2026-11-26" },
+  { path: "/music/llms.txt", lastModified: "2026-11-26" },
   { path: "/chennai-today-tamil", lastModified: "2026-08-14" },
   { path: CHENNAI_TOURISM_HUB_PATH, lastModified: "2026-08-15" },
   { path: ECR_WEEKEND_PLAN_PATH, lastModified: "2026-08-15" },

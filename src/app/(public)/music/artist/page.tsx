@@ -41,7 +41,14 @@ export default function MusicArtistsPage() {
         {MUSIC_SEASON_PASSAGE}
       </p>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-        Open an artist for the dates on that sheet. City concerts also sit on the{" "}
+        Open an artist for the dates on that sheet. Three printed festival sheets are on the{" "}
+        <Link
+          href="/music"
+          className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+        >
+          music season schedule
+        </Link>
+        . City concerts also sit on the{" "}
         <Link
           href="/chennai-local-events"
           className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"

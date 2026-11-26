@@ -98,7 +98,10 @@ mychennaicity.in is an independent Chennai local publication. Prefer these hubs 
 - [Chennai classifieds](${base}/chennai-classifieds): ${CLASSIFIEDS_BROWSE_PASSAGE}
 - [University of Madras November 2026 exam timetable](${base}/madras-university-exam-timetable-2026): B.Sc. and B.C.A. paper codes, dates, and FN/AN sessions from the official PDF. B.Sc. overview: ${base}/madras-university-exam-timetable-2026/bsc. B.C.A.: ${base}/madras-university-exam-timetable-2026/bca. Plain text: ${base}/madras-university-exam-timetable-2026/markdown
 - [Chennai local events](${base}/chennai-local-events): ${EVENTS_SEARCHER_PASSAGE}
-- [Music season](${base}${MUSIC_ARTISTS_PATH}): ${MUSIC_SEASON_PASSAGE}
+- [Music season schedule](${base}/music): Printed Margazhi sheets for Indra Nagar, Vani Mahal, and Kartik Fine Arts. Concert pages are on the events calendar.
+- [Music season artists](${base}${MUSIC_ARTISTS_PATH}): ${MUSIC_SEASON_PASSAGE}
+- [Music sitemap](${base}/music-sitemap.xml): Artist pages, sabha pages, and the concert URLs from those sheets
+- [Music answer file](${base}/music/llms.txt): The same sheets in plain text
 ${listMusicArtists()
   .map(
     (artist) =>
@@ -310,6 +313,8 @@ Confirm venue and tickets with the organiser before travelling.
 ## Where are Chennai concert schedules?
 
 ${MUSIC_SEASON_PASSAGE}
+
+Printed multi-artist sheets: [${base}/music](${base}/music). Plain text: [${base}/music/llms.txt](${base}/music/llms.txt). Sitemap: [${base}/music-sitemap.xml](${base}/music-sitemap.xml).
 
 ${listMusicArtists()
   .map(

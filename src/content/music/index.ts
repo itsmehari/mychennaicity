@@ -86,6 +86,8 @@ export function concertsAtSabha(
 
 export function musicSitemapEntries(): { path: string; priority: number }[] {
   return [
+    { path: "/music", priority: 0.7 },
+    { path: "/music/llms.txt", priority: 0.4 },
     { path: MUSIC_ARTISTS_PATH, priority: 0.64 },
     ...ARTISTS.map((artist) => ({
       path: musicArtistPath(artist.slug),
