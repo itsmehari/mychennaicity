@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { charumathiRaghuraman } from "@/content/music/artists/charumathi-raghuraman";
 import { jayanthiKumaresh } from "@/content/music/artists/jayanthi-kumaresh";
 import { ramanaBalachandran } from "@/content/music/artists/ramana-balachandran";
+import { kiranNivi } from "@/content/music/artists/kiran-nivi";
 import { spoorthiRao, SPOORTHI_MAHA_UTSAVAM_EVENT_SLUG } from "@/content/music/artists/spoorthi-rao";
 import { sreeranjaneKaushik } from "@/content/music/artists/sreeranjane-kaushik";
 import { concertEventDescription, concertEventTitle } from "@/content/music/event-copy";
@@ -46,7 +47,7 @@ describe("music artists", () => {
         .filter((slug): slug is string => Boolean(slug)),
     );
     expect(new Set(eventSlugs).size).toBe(eventSlugs.length);
-    expect(eventSlugs).toHaveLength(57);
+    expect(eventSlugs).toHaveLength(65);
     expect(artistForEventSlug(eventSlugs[0])?.slug).toBe("charumathi-raghuraman");
     expect(getMusicArtist("jayanthi-kumaresh")?.name).toBe("Dr Jayanthi Kumaresh");
   });
@@ -250,5 +251,46 @@ describe("music artists", () => {
     const json = JSON.stringify(buildMusicArtistJsonLd(spoorthiRao));
     expect(json).not.toContain("streetAddress");
     expect(json).not.toContain("Offer");
+  });
+
+  it("keeps Kiran & Nivi’s sheet facts and leaves Mumbai and the unplaced date off the calendar", () => {
+    expect(kiranNivi.concerts).toHaveLength(10);
+    expect(kiranNivi.role).toBe("Sai Sisters");
+    expect(kiranNivi.ticketUrl).toBeNull();
+    const chennai = kiranNivi.concerts.filter((concert) => concert.eventSlug);
+    expect(chennai).toHaveLength(8);
+    expect(chennai.every((concert) => concert.city === "Chennai")).toBe(true);
+    expect(chennai.every((concert) => concert.withLine === null)).toBe(true);
+    const mumbai = kiranNivi.concerts.find((concert) => concert.id === "nmacc-mumbai");
+    expect(mumbai?.eventSlug).toBeNull();
+    expect(mumbai?.city).toBe("Mumbai");
+    expect(mumbai?.startHour).toBe(19);
+    expect(mumbai?.startMinute).toBe(30);
+    const mdnd = kiranNivi.concerts.find((concert) => concert.id === "mdnd");
+    expect(mdnd?.eventSlug).toBeNull();
+    expect(mdnd?.city).toBe("");
+    expect(mdnd?.venueName).toBe("Location TBD");
+    expect(kiranNivi.concerts.find((concert) => concert.id === "vani-mahal")?.title).toBe(
+      "Vani mahal (mini hall)",
+    );
+    expect(kiranNivi.concerts.find((concert) => concert.id === "omr-margazhi")?.localityLabel).toBe(
+      "Shollinganallur",
+    );
+    expect(kiranNivi.concerts.find((concert) => concert.id === "chrompet-margazhi")?.title).toBe(
+      "Chrompet Margazhi Festival",
+    );
+    const description = concertEventDescription(kiranNivi, chennai[0]!);
+    expect(description).toContain("does not print a ticket link");
+    expect(description).toContain("does not print a street");
+    expect(description).not.toMatch(/₹/);
+    expect(artistAnswer(kiranNivi)).toContain("12 December 2026 is in Mumbai");
+    expect(artistAnswer(kiranNivi)).toContain("26 December 2026 does not name a city");
+    const json = JSON.stringify(buildMusicArtistJsonLd(kiranNivi));
+    expect(json).not.toContain("streetAddress");
+    expect(json).not.toContain("Offer");
+    expect(json).not.toContain("endDate");
+    expect(musicSitemapEntries().map((entry) => entry.path)).toContain(
+      "/music/artist/kiran-nivi",
+    );
   });
 });

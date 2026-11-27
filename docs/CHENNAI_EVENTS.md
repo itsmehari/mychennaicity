@@ -154,6 +154,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 | `seed-event-charumathi-raghuraman-margazhi-2026.ts` | `db:seed:event:charumathi-raghuraman-margazhi:live` (eight Chennai dates; artist page is code, not a DB row) |
 | `seed-event-jayanthi-kumaresh-margazhi-2026.ts` | `db:seed:event:jayanthi-kumaresh-margazhi:live` (nine Chennai dates; artist page is code, not a DB row) |
 | `seed-event-spoorthi-rao-margazhi-2026.ts` | `db:seed:event:spoorthi-rao-margazhi:live` (sixteen Chennai dates; 3 Dec links the existing Margazhi Maha Utsavam row and is not reseeded; artist page is code, not a DB row) |
+| `seed-event-kiran-nivi-margazhi-2026.ts` | `db:seed:event:kiran-nivi-margazhi:live` (eight Chennai dates; Mumbai and the MDND line with no hall stay on the artist page) |
 | `seed-event-tricku-or-murukku-october-2026.ts` | `db:seed:event:tricku-or-murukku:live` |
 | `seed-event-gojobsync-mega-job-fair-december-2026.ts` | `db:seed:event:gojobsync-mega-job-fair:live` |
 | `seed-event-tiruvallur-farmers-grievance-day-october-2026.ts` | `db:seed:event:tiruvallur-farmers-grievance-day:live` |
@@ -194,6 +195,7 @@ Use `istToUtcDate(y, m, d, hour, minute)` from `seed-event-shared.ts`, or explic
 
 | Date | Change |
 |------|--------|
+| 2026-11-27 | Kiran & Nivi, Sai Sisters, Margazhi Concert Schedule 2026-2027 (eight Chennai lines 14 Dec 2026–5 Jan 2027; 12 Dec NMACC Mumbai at the Cube Auditorium stays off the city calendar; 26 Dec prints MDND — Location TBD and names no hall; no fare, finish, accompanists, or ticket link; spellings kept: Vani mahal, Umadri, Shollinganallur, Sastra Satsangh, Chrompet) via `db:seed:event:kiran-nivi-margazhi:live`. Artist page `/music/artist/kiran-nivi`. Poster `public/images/music/kiran-nivi-margazhi-concert-schedule-2026-27.png`. |
 | 2026-11-27 | Spoorthi Rao Margazhi 2026–27 sheet (portrait shows a veena; the sheet does not print a role word; 17 Chennai lines 29 Nov 2026–24 Jan 2027; Kerala, Bangalore, Moodbidri, and Manjakkudi stay off the city calendar; two awards name no hall; 13 Dec SoulFest 10:30 PM hold crosses midnight; no fare, finish, accompanists, or ticket link; spellings kept: Kasargod, Kartik, Vidya Bharathi, Paddhathi, Bangalore, Thumbai) via `db:seed:event:spoorthi-rao-margazhi(:live)`. Artist page `/music/artist/spoorthi-rao`. Poster `public/images/music/spoorthi-rao-margazhi-concert-schedule-2026-27.png`. The 3 Dec line on her sheet prints Youth Hostel Auditorium, Adyar. The existing Margazhi Maha Utsavam row keeps Vaishnavam, Indra Nagar, and free entry and is not overwritten. |
 | 2026-11-25 | Music season system is one file, `docs/MUSIC_SEASON_SYSTEM.md` version 1.0. The prompts and the version log live there. |
 | 2026-11-25 | Sabhas — spelling is sabha. Hub `/music/sabha`. The Music Academy academic sessions (Kasturi Srinivasan Hall, 16 Dec 2026–1 Jan 2027, presided by Vidushi Dr. Jayanthi Kumaresh, convenor Sri.Sriram V) are the sabha programme at `/music/sabha/music-academy`, not one concert. The events row `music-academy-madras-academic-sessions-december-2026` only points at that page. Sunday row stays printed as 20 Dec 2025. |

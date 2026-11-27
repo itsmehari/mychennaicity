@@ -106,6 +106,8 @@
     "db:seed:event:ramana-balachandran-margazhi:live": "tsx scripts/seed-event-ramana-balachandran-margazhi-2026.ts --live",
     "db:seed:event:spoorthi-rao-margazhi": "tsx scripts/seed-event-spoorthi-rao-margazhi-2026.ts",
     "db:seed:event:spoorthi-rao-margazhi:live": "tsx scripts/seed-event-spoorthi-rao-margazhi-2026.ts --live",
+    "db:seed:event:kiran-nivi-margazhi": "tsx scripts/seed-event-kiran-nivi-margazhi-2026.ts",
+    "db:seed:event:kiran-nivi-margazhi:live": "tsx scripts/seed-event-kiran-nivi-margazhi-2026.ts --live",
     "db:seed:event:music-season-sheets": "tsx scripts/seed-event-music-season-sheets-2026.ts",
     "db:seed:event:music-season-sheets:live": "tsx scripts/seed-event-music-season-sheets-2026.ts --live",
     "db:seed:event:roots-resonance-gems-margazhi": "tsx scripts/seed-event-roots-resonance-gems-margazhi-november-2026.ts",

@@ -2,13 +2,14 @@
 
 This is the only music-season plan file. The prompts, the progress lines, and the version log are in this document. Do not open a second plan.
 
-Current version: **1.9**  
-Last updated: **2026-11-27 00:40 IST**
+Current version: **1.10**  
+Last updated: **2026-11-27 15:00 IST**
 
 ## Version log
 
 Add a new row at the top when this file changes. Bump the minor number for a prompt or a progress note. Bump the major number when the file is restructured.
 
+- **1.10** — 2026-11-27 15:00 IST — Kiran & Nivi, Sai Sisters, have an artist page at `/music/artist/kiran-nivi`. The sheet prints ten lines. Mumbai and the 26 December MDND line (Location TBD, no hall) stay on that page. Eight Chennai lines are event rows.
 - **1.9** — 2026-11-27 00:40 IST — Spoorthi Rao’s Margazhi 2026–27 sheet is an artist page at `/music/artist/spoorthi-rao`. Her 3 December line prints Youth Hostel Auditorium, Adyar, and does not print a programme. The Margazhi Maha Utsavam row for that slot stays Vaishnavam at Indra Nagar, with free entry, and is not seeded again from her sheet.
 - **1.8** — 2026-11-26 19:40 IST — `/music` opens one hall at a time. A new sheet picks the next colour, a unique switcher label, and a sheet link when the printed name matches one artist page. Counts come from the rows, not from a fixed hall total.
 - **1.7** — 2026-11-26 19:30 IST — `/music` is a season booklet for the three printed sheets already listed: cover, next four, date rail, hall colour, name filter, and concert rows with the printed start time. Same anchors, same event links. Madhuradhwani stays off the page.
@@ -29,6 +30,7 @@ Add a new row at the top when this file changes. Bump the minor number for a pro
 Record a published page here and under the prompt that supplied the facts.
 
 - No season page from these prompts has been published yet. The live artist sheets, sabha page, and concert rows listed below were published before this file.
+- **2026-11-27:** Kiran & Nivi, Sai Sisters — `/music/artist/kiran-nivi`. Eight Chennai dates from the Margazhi Concert Schedule 2026-2027. Mumbai and the unplaced MDND line stay on the artist page.
 
 Document this first. Do not build the later waves until the desk has a source for each fact. The live core stays: `/music/artist`, `/music/sabha`, and `/chennai-local-events`. A new idea becomes a page only when it answers one question and links back into that graph.
 
