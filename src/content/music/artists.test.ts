@@ -290,7 +290,7 @@ describe("music artists", () => {
     expect(json).not.toContain("Offer");
     expect(json).not.toContain("endDate");
     expect(musicSitemapEntries().map((entry) => entry.path)).toContain(
-      "/music/artist/kiran-nivi",
+      "/music/artist/sai-sisters-kiran-nivi",
     );
   });
 });

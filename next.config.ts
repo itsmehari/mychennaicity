@@ -134,6 +134,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/music/artist/kiran-nivi",
+        destination: "/music/artist/sai-sisters-kiran-nivi",
+        permanent: true,
+      },
+      {
         source: "/community/mybangalore-whatsapp-community",
         destination: "/community/mybangalore-whatsapp-community-group",
         permanent: true,

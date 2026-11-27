@@ -45,7 +45,7 @@ function otherDate(
  * 12 December is NMACC Mumbai. 26 December prints MDND and Location TBD.
  */
 export const kiranNivi: MusicArtist = {
-  slug: "kiran-nivi",
+  slug: "sai-sisters-kiran-nivi",
   name: "Kiran & Nivi",
   role: "Sai Sisters",
   summary:
