@@ -56,8 +56,14 @@ export function jobPostalAddress(locationLabel: string | null): {
 
 function plainBody(body: string, max = 8000): string {
   return body
+    .replace(/!\[[^\]]*]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/\*\*(.+?)\*\*/g, "$1")
     .replace(/^#+\s+/gm, "")
+    .replace(/^\|?\s*-{3,}.*$/gm, "")
+    .replace(/\|/g, " ")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
     .trim()
     .slice(0, max);
 }

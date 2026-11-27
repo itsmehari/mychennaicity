@@ -4,6 +4,7 @@ import { buildJobPostingJsonLd, jobPostalAddress } from "./job-posting-jsonld";
 
 function sample(patch: {
   slug?: string;
+  body?: string;
   remotePolicy?: string;
   schemaEligible?: boolean;
   salaryDisclosed?: boolean;
@@ -15,7 +16,7 @@ function sample(patch: {
   return {
     job: {
       title: "Billing Staff",
-      body: "Handle counter billing.",
+      body: patch.body ?? "Handle counter billing.",
       slug: patch.slug ?? "billing-staff-guindy",
       publishedAt: posted,
       createdAt: posted,
@@ -69,6 +70,18 @@ describe("jobPostalAddress", () => {
         sample({ slug: "pre-opening-team-cafe-chennai", schemaEligible: true }),
       ),
     ).toBeNull();
+  });
+
+  it("drops flyer markdown from the JobPosting description", () => {
+    const row = buildJobPostingJsonLd(
+      sample({
+        body: "![Flyer](/images/listings/flyer.jpg)\n\n**Billing Staff** at [Example](https://example.com).\n\n| Role | Billing |\n| --- | --- |",
+      }),
+    );
+    const description = String(row?.description ?? "");
+    expect(description).not.toMatch(/!\[|\]\(|\| ---/);
+    expect(description).toContain("Billing Staff");
+    expect(description).toContain("Example");
   });
 
   it("uses a stored monthly unit above the old threshold", () => {
