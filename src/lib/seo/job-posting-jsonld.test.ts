@@ -46,6 +46,17 @@ describe("jobPostalAddress", () => {
       addressLocality: "Chennai",
       streetAddress: "செம்பாக்கம்",
     });
+    expect(
+      jobPostalAddress(
+        "9, Chelliamman Koil Street, Keelkattalai 600117, Chennai",
+      ),
+    ).toMatchObject({
+      streetAddress: "9, Chelliamman Koil Street, Keelkattalai",
+      postalCode: "600117",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN",
+    });
   });
 
   it("marks a remote row and skips a multi-role poster", () => {

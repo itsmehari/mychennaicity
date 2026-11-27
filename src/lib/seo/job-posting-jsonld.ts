@@ -13,10 +13,11 @@ const EMPLOYMENT_MAP: Record<string, string> = {
   INTERN: "https://schema.org/INTERN",
 };
 
-/** City for Google JobPosting. Neighbourhood stays in streetAddress. */
+/** City for Google JobPosting. Neighbourhood stays in streetAddress. A 6-digit PIN becomes postalCode. */
 export function jobPostalAddress(locationLabel: string | null): {
   "@type": "PostalAddress";
   streetAddress?: string;
+  postalCode?: string;
   addressLocality: string;
   addressRegion: string;
   addressCountry: string;
@@ -32,9 +33,21 @@ export function jobPostalAddress(locationLabel: string | null): {
     parts.length >= 2 && lastIsChennai
       ? parts.slice(0, -1).join(", ")
       : undefined;
+  const pin = street?.match(/\b(\d{6})\b/);
+  const streetAddress = pin
+    ? street!
+        .replace(pin[0], "")
+        .replace(/\s+,/g, ",")
+        .replace(/,\s*,/g, ", ")
+        .replace(/,\s*$/g, "")
+        .replace(/^\s*,\s*/g, "")
+        .replace(/\s{2,}/g, " ")
+        .trim()
+    : street;
   return {
     "@type": "PostalAddress",
-    ...(street ? { streetAddress: street } : {}),
+    ...(streetAddress ? { streetAddress } : {}),
+    ...(pin ? { postalCode: pin[1] } : {}),
     addressLocality: "Chennai",
     addressRegion: "Tamil Nadu",
     addressCountry: "IN",

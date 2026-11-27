@@ -342,6 +342,8 @@
     "db:seed:chennai-job:wedding-assist-tele-sales-guindy:live": "tsx scripts/seed-chennai-job-wedding-assist-tele-sales-guindy.ts --live",
     "db:seed:chennai-job:plan-b-fitouts-interior-turnkey": "tsx scripts/seed-chennai-job-plan-b-fitouts-interior-turnkey.ts",
     "db:seed:chennai-job:plan-b-fitouts-interior-turnkey:live": "tsx scripts/seed-chennai-job-plan-b-fitouts-interior-turnkey.ts --live",
+    "db:seed:chennai-job:airfloa-rail-technology": "tsx scripts/seed-chennai-job-airfloa-rail-technology.ts",
+    "db:seed:chennai-job:airfloa-rail-technology:live": "tsx scripts/seed-chennai-job-airfloa-rail-technology.ts --live",
     "db:seed:chennai-job:earthen-studio-architects": "tsx scripts/seed-chennai-job-earthen-studio-architects-interns.ts",
     "db:seed:chennai-job:earthen-studio-architects:live": "tsx scripts/seed-chennai-job-earthen-studio-architects-interns.ts --live",
     "db:seed:chennai-job:hr-recruiter-sembakkam": "tsx scripts/seed-chennai-job-hr-recruiter-sembakkam.ts",
